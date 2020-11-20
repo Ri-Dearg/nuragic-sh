@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %} {% load sass_tags %}
+<html lang="en">
+{% block head %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        
+        <meta name="msapplication-config" content="{% static 'config/browserconfig.xml' %}">
+        <meta name="msapplication-TileColor" content="#2b384c">
+        <meta name="msapplication-TileImage" content="{% static 'favicons/ms-icon-144x144.png' %}">
+        <meta name="theme-color" content="#2b384c">
+
+        <link rel="manifest" href="{% static 'config/manifest.webmanifest' %}">
+
+        <link rel="icon" href="{% static 'favicons/favicon.ico' %}" />
+        <link rel="icon" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}" />
+        <link rel="icon" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}" />
+        <link rel="icon" sizes="96x96" href="{% static 'favicons/favicon-96x96.png' %}" />
+
+        <link rel="icon" sizes="192x192" href="{% static 'favicons//android-icon-192x192.png' %}" />
+
+        <link rel="apple-touch-icon" href="{% static 'favicons/apple-icon.png' %}" />
+        <link rel="apple-touch-icon-precomposed" href="{% static 'favicons/apple-icon-precomposed.png' %}" />
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicons/apple-icon-57x57.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicons/apple-icon-60x60.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicons/apple-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicons/apple-icon-76x76.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicons/apple-icon-114x114.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicons/apple-icon-120x120.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicons/apple-icon-144x144.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicons/apple-icon-152x152.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-icon-180x180.png' %}">
+
+
+        <link rel="stylesheet" type="text/css" href="{% sass_src 'css/main.scss' %}" />
+
+        <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+        <!-- <meta property="fb:app_id" content="" />
+
+        <meta property="og:type" content="{% block og_type %}{% endblock %}" />
+        <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+        <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+        <meta property="og:image" content="{% block og_image %}{% endblock %}" />
+        <meta property="og:image:type" content="{% block og_image_type %}{% endblock %}" />
+        <meta property="og:image:width" content="{% block og_image_width %}{% endblock %}" />
+        <meta property="og:image:height" content="{% block og_image_height %}{% endblock %}" /> -->
+
+        <title>Nuragic Shamanic Healing | {% block head_title %}{% endblock %}</title>
+    </head>
+{% endblock %}
+
+    <body>
+        <!-- <div class="preloader justify-content-center align-items-center">
+            <div class="spinner-border text-secondary bg-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div> -->
+
+        {% include 'base/includes/header.html' %}
+
+        <section class="container-fluid shadow min-vh-100">
+            {% block content %} {% endblock %}
+        </section>
+
+{% block modal%}
+{% endblock %}
+
+{% block postloadjs %}
+{% endblock %}
+
+    </body>
+</html>

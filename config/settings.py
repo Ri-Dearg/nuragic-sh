@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'sass_processor',
     # My apps
     'jasmine_testing',
+    'info',
 ]
 
 
@@ -108,7 +109,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'TEST': {
             # Runs tests on a secondary database
-            'NAME': '',  # 'Database Name',
+            'NAME': 'dfkr3u5kvd8qj8',
         },
     }
 }
@@ -120,8 +121,7 @@ env_db = dj_database_url.config(conn_max_age=500)
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 if TESTING:
     env_db = dj_database_url.parse(os.environ.get(
-        # Database env variable
-        ''))
+        'HEROKU_POSTGRESQL_CRIMSON_URL'))
 
 # Production Database
 DATABASES['default'].update(env_db)
