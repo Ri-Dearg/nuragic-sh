@@ -10,6 +10,6 @@ __pycache__/
 htmlcov/
 .coverage
 *.css
-main.css
-main.css.map
+*.css
+*.css.map
 .theia/
