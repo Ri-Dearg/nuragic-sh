@@ -1,0 +1,15 @@
+core.Microsoft*
+core.mongo*
+core.python*
+env.py
+__pycache__/
+*.py[cod]
+*.pyc
+*.sqlite3
+.gitpod.yml
+htmlcov/
+.coverage
+*.css
+main.css
+main.css.map
+.theia/
