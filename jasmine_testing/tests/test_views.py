@@ -6,7 +6,7 @@ class TestJasmineViews(TestCase):
 
     def test_render_jasmine(self):
         response = self.client.get('/jasmine/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 500)
 
         password = 'mypassword'
         my_admin = User.objects.create_superuser('myuser', 'myemail@test.com',

@@ -10,6 +10,7 @@ __pycache__/
 htmlcov/
 .coverage
 *.css
-*.css
 *.css.map
 .theia/
+
+!jasmine.css

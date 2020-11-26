@@ -3,7 +3,7 @@ from django.test import TestCase
 from info.apps import InfoConfig
 
 
-class TestJasmineConfig(TestCase):
+class TestInfoConfig(TestCase):
 
     def test_app(self):
         self.assertEqual('info', InfoConfig.name)
