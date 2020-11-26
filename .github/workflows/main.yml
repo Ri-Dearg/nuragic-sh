@@ -48,6 +48,7 @@ jobs:
           
       - name: Run DJango Tests
         env:
+          DEBUG: ${{ secrets.DEBUG }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           HEROKU_POSTGRESQL_CRIMSON_URL: ${{ secrets.HEROKU_POSTGRESQL_CRIMSON_URL }}
