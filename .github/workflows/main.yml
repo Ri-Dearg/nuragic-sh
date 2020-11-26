@@ -52,9 +52,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           HEROKU_POSTGRESQL_CRIMSON_URL: ${{ secrets.HEROKU_POSTGRESQL_CRIMSON_URL }}
-        run: coverage run --source=. --omit=config/*,manage.py manage.py test --keepdb
-        
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}   
+          COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
+        run: |
+          coverage run --source=. --omit=config/*,manage.py manage.py test --keepdb
+          coveralls
