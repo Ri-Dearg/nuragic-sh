@@ -22,6 +22,19 @@
     font-style: normal;
 }
 
+/*Used for the main brand logo in the Navbar*/
+.brand-logo {
+    font-size: 3.2rem;
+    text-decoration: none;
+    color: #ffffff;
+    letter-spacing: 0.8rem;
+}
+
+.brand-sub {
+    letter-spacing: 0.225rem;
+    color: #c5b9a0;
+}
+
 .h-font {
     font-family: Sierra_madre, Arial, sans-serif;
 }
@@ -32,4 +45,15 @@
 
 .l-space {
     letter-spacing: 0.25rem
+}
+
+.nav-item {
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.nav-item.active,
+.nav-tran:hover {
+    background-color: #2b384c
 }
