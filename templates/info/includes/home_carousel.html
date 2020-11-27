@@ -16,7 +16,7 @@ This is done in the view before being passed here. They are ordered by most rece
         <a class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
             <img src="{{ item.image.url }}" class="d-block w-100" alt="{{ item.name }}" />
             <div class="dark-overlay carousel-caption w-100 py-1 py-lg-3">
-                <h5 class="h-font mb-0 mb-md-1">{{ item.name }}</h5>
+                <h5 class="h-font l-space mb-0 mb-md-1">{{ item.name }}</h5>
                 <p class="p-font d-none d-md-block mb-0">{{item.description}}</p>
             </div>
         </a>
