@@ -71,7 +71,7 @@ class HomeInfo(models.Model):
     Images will be resized on upload to 1289x480px square shape.
     I would recommend cropping your images to a 16:10 ratio first."""
     name = models.CharField(max_length=30, null=False)
-    description = models.CharField(max_length=200, null=False, blank=False)
+    description = models.TextField()
     button_text = models.CharField(max_length=30, null=False)
     image = models.ImageField(upload_to='info')
     date_added = models.DateTimeField(default=timezone.now)
@@ -120,4 +120,4 @@ class HomeInfo(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.date_added.strftime("%B")}: {self.name}'
+        return f'{self.name}'
