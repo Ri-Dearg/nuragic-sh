@@ -3,6 +3,7 @@ import sys
 from django.db import models
 from django.utils import timezone
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from PIL import Image
 from io import BytesIO
@@ -16,8 +17,8 @@ class HomeCarousel(models.Model):
     name = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
     image = models.ImageField(upload_to='carousel')
-    date_added = models.DateTimeField(default=timezone.now)
     display = models.BooleanField(default=True)
+    date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         """Image resizing, snippet repurposed from:
@@ -74,8 +75,10 @@ class HomeInfo(models.Model):
     description = models.TextField()
     button_text = models.CharField(max_length=30, null=False)
     image = models.ImageField(upload_to='info')
-    date_added = models.DateTimeField(default=timezone.now)
     display = models.BooleanField(default=True)
+    order = models.SmallIntegerField(validators=[MaxValueValidator(12),
+                                                 MinValueValidator(0)])
+    date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         """Image resizing, snippet repurposed from:
@@ -117,7 +120,7 @@ class HomeInfo(models.Model):
 
     class Meta:
         """Orders by the most recent created by default."""
-        ordering = ['-date_added']
+        ordering = ['order']
 
     def __str__(self):
         return f'{self.name}'
