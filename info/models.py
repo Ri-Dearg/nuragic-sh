@@ -63,7 +63,7 @@ class HomeCarousel(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.date_added.strftime("%B")}: {self.name}'
+        return f'{self.name}'
 
 
 class HomeInfo(models.Model):
