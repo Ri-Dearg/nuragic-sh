@@ -1,4 +1,26 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% block head_title %}Holistic | Courses | Readings{% endblock %}
+
 {% block content %}
 {% include 'info/includes/home_carousel.html' %}
+<article class="">
+    <aside>
+        <div class="row my-2">
+            <div class="col-12">
+                <p class="h-font l-space d-none d-md-block h3 text-center text-secondary mb-0">&bull; SPIRITUALITY &bull; CONNECTIONS &bull; SHARING &bull; ROOTS &bull;</p>
+                <p class="h-font l-space d-md-none h6 text-center text-secondary mb-0">&bull; SPIRITUALITY &bull; CONNECTIONS &bull; SHARING &bull; ROOTS &bull;</p>
+            </div>
+        </div>
+    </aside>
+    <div class="row mb-2">
+        <div class="col-auto col-md">
+            <img src="{% static 'images/IMG_7707.jpg' %}" alt="Alessandro Profile Pic" class="img-fluid">
+        </div>
+        <div class="col-auto col-md bg-white pl-3 pt-3">
+            <h1 class="h-font l-space">ALESSANDRO</h1>
+            <p class="p-font">Tarot Reader & Teacher. Kundalini Reiki Practitioner. Womb Keeper. Spiritual Events and Retreats Organizer. Founder of Nuragic Shamanic Healing Founder of The Path of the Bull : Men's Circle</p>
+        </div>
+    </div>
+</article>
 {% endblock %}
