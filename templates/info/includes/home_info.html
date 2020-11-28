@@ -1,19 +1,19 @@
 {% load static %} {% get_media_prefix as MEDIA_URL %}
 {% for item in info %}
-    <article class="my-2">
+    <section class="my-2">
         <div class="row">
             {% if forloop.counter|divisibleby:"2" %}
                 <div class="col-auto col-md d-flex bg-white">
                     <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid m-auto">
                 </div>
                 <div class="col-auto col-md bg-white px-3 pt-3">
-                    <h1 class="h-font l-space text-primary text-md-right">{{ item.name|upper }}</h1>
+                    <h1 class="h-font l-space-2 text-primary text-md-right">{{ item.name|upper }}</h1>
                     <p class="p-font text-primary">{{ item.description }}</p>
                     <p class="text-center"><a href="#" class="p-font btn-tran btn btn-secondary shadow text-white">{{ item.button_text }}</a></p>
                 </div>
             {% else %}
                 <div class="col-auto col-md order-2 order-md-1 bg-white px-3 pt-3">
-                    <h1 class="h-font l-space text-primary">{{ item.name|upper }}</h1>
+                    <h1 class="h-font l-space-2 text-primary">{{ item.name|upper }}</h1>
                     <p class="p-font text-primary">{{ item.description }}</p>
                     <p class="text-center"><a href="#" class="p-font btn-tran btn btn-secondary shadow text-white">{{ item.button_text }}</a></p>
                 </div>
@@ -22,5 +22,5 @@
                 </div>
             {% endif %}
         </div>
-    </article>
+    </section>
 {% endfor %}
