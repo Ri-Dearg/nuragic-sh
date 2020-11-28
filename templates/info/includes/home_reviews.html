@@ -1,10 +1,10 @@
 {% load static %} {% get_media_prefix as MEDIA_URL %}
 <!-- Displays reviews. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
-<section id="review-carousel" class="carousel slide bg-white py-4 px-5" data-ride="carousel">
+<section id="review-carousel" class="carousel slide bg-white py-4 px-1 px-md-4 px-lg-5" data-ride="carousel">
     <!-- This loops through the items, setting the first as the active one. -->
     {% if review|length > 1 %}
-    <ol class="carousel-indicators d-none d-lg-flex mb-0">
+    <ol class="carousel-indicators d-flex mb-0">
         {% for number in review %}
         <li data-target="#review-carousel" data-slide-to="{{ forloop.counter0 }}" class="bg-primary {% if forloop.first %}active{% endif %}"></li>
         {% endfor %}
@@ -15,7 +15,7 @@ This is done in the view before being passed here. They are ordered by most rece
         {% for item in review %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
             <div class="row carousel-row">
-                <div class="col-10 offset-1 p-1 my-auto">
+                <div class="col-12 col-md-10 offset-md-1 p-1 my-auto">
                     <p class="p-font l-space-1 l-height-1 font-italic h6">"{{ item.text }}"</p>
                     <br>
                     <h5 class="p-font l-space-1 l-height-1 font-italic">- {{ item.reviewer_name }}</h5>
@@ -26,11 +26,11 @@ This is done in the view before being passed here. They are ordered by most rece
     </div>
     {% if review|length > 1 %}
     <!-- This displays the buttons for slide selection. -->
-    <a class="carousel-control-prev" href="#review-carousel" role="button" data-slide="prev">
+    <a class="carousel-control-prev d-none d-md-flex" href="#review-carousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#review-carousel" role="button" data-slide="next">
+    <a class="carousel-control-next d-none d-md-flex" href="#review-carousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
