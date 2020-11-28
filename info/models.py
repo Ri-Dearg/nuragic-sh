@@ -1,4 +1,5 @@
 import sys
+from io import BytesIO
 
 from django.db import models
 from django.utils import timezone
@@ -6,7 +7,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from PIL import Image
-from io import BytesIO
 
 
 class HomeCarousel(models.Model):
@@ -124,3 +124,15 @@ class HomeInfo(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Review(models.Model):
+    """Allows for the creation of reviews."""
+    language = models.CharField(max_length=5, null=False)
+    reviewer_name = models.CharField(max_length=50, null=False)
+    text = models.TextField()
+    display = models.BooleanField(default=True)
+    date_added = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.reviewer_name}'
