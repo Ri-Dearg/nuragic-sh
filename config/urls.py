@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
+    path('contact/', include(('contact.urls', 'contact'),
+                             namespace='contact')),
     path('', include(('info.urls', 'info'), namespace='info')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

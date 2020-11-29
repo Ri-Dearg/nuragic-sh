@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'sass_processor',
     # My apps
     'jasmine_testing',
+    'contact',
     'info',
 ]
 
