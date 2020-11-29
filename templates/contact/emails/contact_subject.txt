@@ -1,0 +1,1 @@
+Nuragic Shamanic Healing Message Received: {{ subject }}

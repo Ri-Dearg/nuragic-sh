@@ -1,3 +1,5 @@
+"""Models for the info module,"""
+
 import sys
 from io import BytesIO
 
