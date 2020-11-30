@@ -7,6 +7,8 @@ from django.utils import timezone
 
 from django.db import models
 
+from django_better_admin_arrayfield.models.fields import ArrayField
+
 from config import settings
 
 
@@ -57,3 +59,13 @@ class Email(models.Model):
 
     def __str__(self):
         return f'{self.email}, {self.subject}'
+
+
+class Newsletter(models.Model):
+    """Model for the creation of different newsletter lists."""
+    name = models.CharField(max_length=60, blank=False, null=False)
+    email_list = ArrayField(models.EmailField(
+        null=False, blank=False), default=list)
+
+    def __str__(self):
+        return f'{self.name}'
