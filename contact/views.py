@@ -1,7 +1,8 @@
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse
 
-from .models import Email
+from .models import Email, Newsletter
 
 
 class CreateEmailView(SuccessMessageMixin, CreateView):
@@ -9,10 +10,10 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     model = Email
     context_object_name = 'email'
     fields = ['email', 'name', 'subject', 'message']
-    success_message = 'Thank you, your message has been sent'
+    success_message = 'Thank you, your message has been sent.'
 
     def get_form(self, form_class=None):
-        """Adds custom placeholders and widgets to form"""
+        """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
         form.fields['email'].widget.attrs = {'placeholder': 'Email Address'}
         form.fields['name'].widget.attrs = {'placeholder': 'Full Name'}
@@ -31,3 +32,17 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
         context['contact_active'] = contact_active
         return context
+
+
+def newsletter_singup(request):
+    """Inserts email into newsletter list."""
+    if request.POST:
+        newsletter = Newsletter.objects.get(name='basic')
+        if request.POST['email'] in newsletter.email_list:
+            return HttpResponse('<h1>not entered</h1>')
+
+        newsletter.email_list.append(request.POST['email'])
+        newsletter.save()
+        return HttpResponse('<h1>okay</h1>')
+
+    return HttpResponse(status=500)
