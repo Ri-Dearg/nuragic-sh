@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Better Array Fields
+    'django_better_admin_arrayfield',
     # Apps for compiling SASS
     'sass_processor',
     # My apps
