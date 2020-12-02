@@ -14,7 +14,8 @@ $navbar-dark-hover-color: #fff;
 $primary: #2b384c;
 $secondary: #c5b9a0;
 $warning: #F5C936;
-$info: #8A3324;
+$info: #47B9FF;
+$success: #2CC968;
 
 $grid-gutter-width: 0;
 
@@ -46,8 +47,8 @@ $grid-gutter-width: 0;
 // @import "bootstrap/progress";
 // @import "bootstrap/media";
 // @import "bootstrap/list-group";
-// @import "bootstrap/close";
-// @import "bootstrap/toasts";
+@import "bootstrap/close";
+@import "bootstrap/toasts";
 // @import "bootstrap/modal";
 // @import "bootstrap/tooltip";
 // @import "bootstrap/popover";

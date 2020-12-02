@@ -1,6 +1,6 @@
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .models import Email, Newsletter
 
@@ -36,13 +36,17 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
 def newsletter_singup(request):
     """Inserts email into newsletter list."""
-    if request.POST:
+    if request.method == "POST":
+        data = {}
         newsletter = Newsletter.objects.get(name='basic')
         if request.POST['email'] in newsletter.email_list:
-            return HttpResponse('<h1>not entered</h1>')
+            data["message"] = "You have already signed up for the newsletter."
+            data["tag"] = "info"
+            return JsonResponse(data)
 
         newsletter.email_list.append(request.POST['email'])
         newsletter.save()
-        return HttpResponse('<h1>okay</h1>')
-
+        data["message"] = "Thank you for signing up!"
+        data["tag"] = "success"
+        return JsonResponse(data)
     return HttpResponse(status=500)

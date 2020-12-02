@@ -30,7 +30,7 @@
 </article>
 {% endblock %}
 {% block postloadjs %}
-{{ super }}
+{{ block.super }}
 <script src="{% static 'js/custom/index.js' %}"></script>
 <script>
 carouselNormalization()

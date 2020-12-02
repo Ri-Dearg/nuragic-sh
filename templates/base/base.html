@@ -140,8 +140,19 @@
 			{% block content %} {% endblock %}
 		</section>
 
-            {% include 'base/includes/footer.html' %}
+        {% include 'base/includes/footer.html' %}
 
-		{% block modal%} {% endblock %} {% block postloadjs %} {% endblock %}
+        <!-- This hold the toasts notifications in position on the page.
+        Can be changed with the toast-position class.-->
+        <div class="toast-position" aria-live="polite" aria-atomic="true">
+            <div class="toast-wrapper">
+                {% if messages %} {% for message in messages %} {% include 'base/includes/messages.html' %} {% endfor %} {% endif %}
+            </div>
+        </div>
+
+		{% block modal%} {% endblock %}
+        {% block postloadjs %}
+        <script src="{% static 'js/custom/base.js' %}"></script>
+        {% endblock %}
 	</body>
 </html>

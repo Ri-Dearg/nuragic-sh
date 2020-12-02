@@ -93,3 +93,28 @@
 .dark-overlay {
     background-color: rgba(38, 30, 46, 0.7);
 }
+
+/*--------------------------------------------------------------------------
+Toasts
+--------------------------------------------------------------------------*/
+/*This allows for multiple toasts to stack.*/
+.toast-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 300px;
+}
+
+/*This positions the toast on the page.*/
+.toast-position {
+position: fixed;
+top: 160px;
+right: 20px;
+min-height: 200px;
+z-index: 1021;
+}
+
+/*It is positioned above the preloader with the z-index.*/
+.toast {
+    z-index: 1022;
+}
