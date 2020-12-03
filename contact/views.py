@@ -49,4 +49,4 @@ def newsletter_singup(request):
         data["message"] = "Thank you for signing up!"
         data["tag"] = "success"
         return JsonResponse(data)
-    return HttpResponse(status=500)
+    return HttpResponse(status=403)
