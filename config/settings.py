@@ -35,13 +35,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEVELOPMENT = os.environ.get('DEVELOPMENT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
-if eval(DEBUG) is True:
+DEBUG = os.environ.get('DEBUG', False)
+if DEBUG == 'True':
     print('Debug mode is on.')
-elif eval(DEBUG) is False:
+elif DEBUG is False:
     print('Debug mode is off.')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'nuragic-sh.herokuapp.com']
 
 
 # Application definition
