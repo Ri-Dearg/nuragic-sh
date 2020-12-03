@@ -16,6 +16,15 @@ $secondary: #c5b9a0;
 $warning: #F5C936;
 $info: #47B9FF;
 $success: #2CC968;
+$danger: #dc3545;
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    "error":      $danger,
+  ),
+  $theme-colors
+);
 
 $grid-gutter-width: 0;
 
@@ -29,7 +38,7 @@ $grid-gutter-width: 0;
 // @import "bootstrap/code";
 @import "bootstrap/grid";
 // @import "bootstrap/tables";
-// @import "bootstrap/forms";
+@import "bootstrap/forms";
 @import "bootstrap/buttons";
 @import "bootstrap/transitions";
 // @import "bootstrap/dropdown";
