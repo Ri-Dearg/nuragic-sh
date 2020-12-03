@@ -2,7 +2,6 @@ function carouselNormalization() {
     var items = $("#review-carousel .carousel-item"), //grab all slides
         heights = [], //create empty array to store height values
         tallest; //create variable to make note of the tallest slide
-    console.log(items)
     var normalizeHeights = function () {
 
         items.each(function () { //add heights to array
