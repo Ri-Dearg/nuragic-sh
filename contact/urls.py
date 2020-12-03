@@ -5,5 +5,5 @@ from .views import CreateEmailView, newsletter_singup
 
 urlpatterns = [
     path('', CreateEmailView.as_view(), name='email-form'),
-    path('newsletter/', newsletter_singup, name='newsletter'),
+    path('f/newsletter/', newsletter_singup, name='newsletter'),
 ]
