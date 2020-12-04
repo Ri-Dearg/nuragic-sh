@@ -10,7 +10,7 @@ from .models import Email, Newsletter, EmailHistory
 class EmailInline(admin.StackedInline):
     model = Email
     readonly_fields = ('email', 'name', 'subject', 'date', 'message',
-                    'email_history')
+                       'email_history')
 
 
 class EmailHistoryAdmin(admin.ModelAdmin):
