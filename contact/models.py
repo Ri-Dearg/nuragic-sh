@@ -37,10 +37,12 @@ class Newsletter(models.Model):
         history_unique = [item for item in history_list
                           if item not in news_list]
         if len(history_unique) > 0:
-            for item in history_unique:
+            history_objs = EmailHistory.objects.filter(
+                email_address__in=history_unique)
+            for item in history_objs:
                 item.newsletter = False
-                item.save()
-        
+            EmailHistory.objects.bulk_update(history_objs, ['newsletter'])
+
         super().save(*args, **kwargs)
 
     def __str__(self):
