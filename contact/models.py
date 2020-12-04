@@ -18,6 +18,31 @@ class Newsletter(models.Model):
     email_list = ArrayField(models.EmailField(
         null=False, blank=False), default=list)
 
+    def save(self, *args, **kwargs):
+        email_history = EmailHistory.objects.values_list(
+            'email_address', flat=True)
+        history_list = list(email_history)
+        history_list.sort()
+
+        news_list = self.email_list
+        news_list.sort()
+
+        news_list_unique = [item for item in news_list
+                            if item not in history_list]
+        if len(news_list_unique) > 0:
+            history_objs = [EmailHistory(email_address=item, newsletter=True)
+                            for item in news_list_unique]
+            EmailHistory.objects.bulk_create(history_objs)
+
+        history_unique = [item for item in history_list
+                          if item not in news_list]
+        if len(history_unique) > 0:
+            for item in history_unique:
+                item.newsletter = False
+                item.save()
+        
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.name}'
 
