@@ -45,6 +45,10 @@ class Newsletter(models.Model):
 
         super().save(*args, **kwargs)
 
+    class Meta:
+        """Orders by alphabetical order."""
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -55,11 +59,18 @@ class EmailHistory(models.Model):
     newsletter = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        newsletter_list = Newsletter.objects.get(name='basic')
-        if self.email_address in newsletter_list.email_list:
+        newsletter = Newsletter.objects.get(name='basic')
+        newsletter_list = newsletter.email_list
+        if self.email_address in newsletter_list:
             self.newsletter = True
+        newsletter_list = sorted(newsletter_list)
 
         super().save(*args, **kwargs)
+
+    class Meta:
+        """Orders by alphabetical order."""
+        ordering = ['email_address']
+        verbose_name = 'Email Histories'
 
     def __str__(self):
         return f'{self.email_address}'
