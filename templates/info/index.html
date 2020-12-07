@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
+{% load i18n %}
 {% load static %}
-{% block head_title %}Holistic | Courses | Readings{% endblock %}
+{% block head_title %}{% trans 'Holistic | Courses | Readings' %}{% endblock %}
 
 {% block content %}
 {% include 'info/includes/home_carousel.html' %}
@@ -8,8 +9,8 @@
     <aside>
         <div class="row my-2">
             <div class="col-12">
-                <p class="h-font l-space-2 d-none d-md-block h3 text-center text-secondary my-2">&bull; SPIRITUALITY &bull; CONNECTIONS &bull; SHARING &bull; ROOTS &bull;</p>
-                <p class="h-font l-space-2 d-md-none h6 text-center text-secondary mb-0">&bull; SPIRITUALITY &bull; CONNECTIONS &bull; SHARING &bull; ROOTS &bull;</p>
+                <p class="h-font l-space-2 d-none d-md-block h3 text-center text-secondary my-2">&bull; {% trans 'SPIRITUALITY' %} &bull; {% trans 'CONNECTIONS' %} &bull; {% trans 'SHARING' %} &bull; {% trans 'ROOTS' %} &bull;</p>
+                <p class="h-font l-space-2 d-md-none h6 text-center text-secondary mb-0">&bull; {% trans 'SPIRITUALITY' %} &bull; {% trans 'CONNECTIONS' %} &bull; {% trans 'SHARING' %} &bull; {% trans 'ROOTS' %} &bull;</p>
             </div>
         </div>
     </aside>
@@ -19,8 +20,8 @@
         </div>
         <div class="col-auto col-md bg-white px-3 pt-3">
             <h1 class="h-font l-space-2 text-center text-primary">ALESSANDRO</h1>
-            <p class="p-font text-primary">Tarot Reader & Teacher. Kundalini Reiki Practitioner. Womb Keeper. Spiritual Events and Retreats Organizer. Founder of Nuragic Shamanic Healing Founder of The Path of the Bull : Men's Circle</p>
-            <p class="text-center"><a href="#" class="p-font btn-tran btn btn-warning shadow text-white">Get to Know Me</a></p>
+            <p class="p-font text-primary">{% trans "Tarot Reader & Teacher. Kundalini Reiki Practitioner. Womb Keeper. Spiritual Events and Retreats Organizer. Founder of Nuragic Shamanic Healing Founder of The Path of the Bull : Men's Circle" %}</p>
+            <p class="text-center"><a href="#" class="p-font btn-tran btn btn-warning shadow text-white">{% trans 'Get to Know Me' %}</a></p>
         </div>
     </section>
 {% include 'info/includes/home_reviews.html' %}
