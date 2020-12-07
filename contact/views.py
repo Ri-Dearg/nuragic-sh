@@ -15,11 +15,18 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': 'Email Address'}
-        form.fields['name'].widget.attrs = {'placeholder': 'Full Name'}
-        form.fields['subject'].widget.attrs = {'placeholder': 'The Topic'}
+        form.fields['email'].widget.attrs = {'placeholder': 'Email*',
+                                             'class': 'form-control'}
+        form.fields['email'].label = 'Email*'
+        form.fields['name'].widget.attrs = {'placeholder': 'Name*',
+                                            'class': 'form-control'}
+        form.fields['name'].label = 'Name*'
+        form.fields['subject'].widget.attrs = {'placeholder': 'Subject*',
+                                               'class': 'form-control'}
+        form.fields['subject'].label = 'Subject*'
         form.fields['message'].widget.attrs = {
-            'placeholder': 'What are your thoughts?*'}
+            'placeholder': 'What are your thoughts?*',
+            'class': 'form-control'}
         form.fields['message'].label = ''
         return form
 
