@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import sys
 
+from django.utils.translation import ugettext_lazy as _
+
 import dj_database_url
+
 
 try:
     import env  # noqa: F401
@@ -41,7 +44,8 @@ if DEBUG == 'True':
 elif DEBUG is False:
     print('Debug mode is off.')
 
-ALLOWED_HOSTS = ['localhost', 'nuragic-sh.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'nuragic-sh.herokuapp.com',
+                 '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']
 
 
 # Application definition
@@ -77,6 +81,7 @@ COMPRESS_ROOT = 'static'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -136,24 +141,28 @@ DATABASES['default'].update(env_db)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa E501
     },
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
+LANGUAGES = (
+    ('en', _('English')),
+    ('it', _('Italian')),
+)
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -163,6 +172,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
