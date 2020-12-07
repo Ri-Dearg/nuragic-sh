@@ -51,6 +51,8 @@ ALLOWED_HOSTS = ['localhost', 'nuragic-sh.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
+    # Multilingual Model FIelds
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -162,7 +164,8 @@ LANGUAGES = (
     ('it', _('Italian')),
 )
 
-LANGUAGE_CODE = 'en-gb'
+
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
