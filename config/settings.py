@@ -162,7 +162,7 @@ LANGUAGES = (
     ('it', _('Italian')),
 )
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 
