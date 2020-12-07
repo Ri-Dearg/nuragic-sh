@@ -1,5 +1,6 @@
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import ugettext as _
 from django.http import HttpResponse, JsonResponse
 
 from .models import Email, Newsletter
@@ -10,7 +11,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     model = Email
     context_object_name = 'email'
     fields = ['email', 'name', 'subject', 'message']
-    success_message = 'Thank you, your message has been sent.'
+    success_message = _('Thank you, your message has been sent.')
 
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
@@ -40,13 +41,17 @@ def newsletter_singup(request):
         data = {}
         newsletter = Newsletter.objects.get(name='basic')
         if request.POST['email'] in newsletter.email_list:
-            data["message"] = "You have already signed up for the newsletter."
+            data["message"] = _(
+                "You have already signed up for the newsletter.")
             data["tag"] = "info"
+            data["tagMessage"] = _('Info')
+
             return JsonResponse(data)
 
         newsletter.email_list.append(request.POST['email'])
         newsletter.save()
-        data["message"] = "Thank you for signing up!"
+        data["message"] = _("Thank you for signing up!")
         data["tag"] = "success"
+        data["tagMessage"] = _('Success')
         return JsonResponse(data)
     return HttpResponse(status=403)
