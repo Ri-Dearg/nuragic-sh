@@ -16,21 +16,21 @@ class TestContactViews(TestCase):
         self.assertTemplateUsed('contact_form.html')
 
     def test_newsletter_signup(self):
-        self.client.post('/contact/f/newsletter/', {'email': 'test@test.com'},
+        self.client.post('/contact/f/newsletter/', {'email_en': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         newsletter = Newsletter.objects.get(name="basic")
 
-        self.assertTrue("test@test.com" in newsletter.email_list)
+        self.assertTrue("test@test.com" in newsletter.email_list_en)
 
         response = self.client.post('/contact/f/newsletter/',
-                                    {'email': 'test@test.com'},
+                                    {'email_en': 'test@test.com'},
                                     HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertTrue(response.content,
-                        {"message": "You have already signed up for the newsletter.", # NOQA E501
+                        {"message": "You have already signed up for the newsletter.",  # NOQA E501
                          "tag": "info"})
 
         response = self.client.get('/contact/f/newsletter/',
-                                   {'email': 'test@test.com'},
+                                   {'email_en': 'test@test.com'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
