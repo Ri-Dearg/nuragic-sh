@@ -39,7 +39,7 @@ class TestCheckoutModels(TestCase):
         new_email = Email.objects.latest('date')
 
         newsletter = Newsletter.objects.get(name='basic')
-        newsletter.email_list.append(new_email.email)
+        newsletter.email_list_en.append(new_email.email)
         newsletter.save()
 
         self.client.post('/contact/', email1)

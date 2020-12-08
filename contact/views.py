@@ -1,5 +1,6 @@
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse, JsonResponse
 
@@ -47,7 +48,11 @@ def newsletter_singup(request):
     if request.method == "POST":
         data = {}
         newsletter = Newsletter.objects.get(name='basic')
-        if request.POST['email'] in newsletter.email_list:
+        if get_language() == 'it':
+            email_list = newsletter.email_list_it
+        if get_language() == 'en':
+            email_list = newsletter.email_list_en
+        if request.POST[f'email_{get_language()}'] in email_list:
             data["message"] = _(
                 "You have already signed up for the newsletter.")
             data["tag"] = "info"
@@ -55,7 +60,7 @@ def newsletter_singup(request):
 
             return JsonResponse(data)
 
-        newsletter.email_list.append(request.POST['email'])
+        email_list.append(request.POST[f'email_{get_language()}'])
         newsletter.save()
         data["message"] = _("Thank you for signing up!")
         data["tag"] = "success"

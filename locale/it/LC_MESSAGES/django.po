@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 20:44+0000\n"
+"POT-Creation-Date: 2020-12-07 22:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings.py:161
+#: config/settings.py:163
 msgid "English"
 msgstr "Inglese"
 
-#: config/settings.py:162
+#: config/settings.py:164
 msgid "Italian"
 msgstr "Italiano"
+
+#: contact/views.py:14
+msgid "Thank you, your message has been sent."
+msgstr "Grazie, il tuo messagio è stato spedito."
+
+#: contact/views.py:19 contact/views.py:21
+msgid "Email*"
+msgstr "Email*"
+
+#: contact/views.py:22 contact/views.py:24
+msgid "Name*"
+msgstr "Nome*"
+
+#: contact/views.py:25 contact/views.py:27
+msgid "Subject*"
+msgstr "Soggetto*"
+
+#: contact/views.py:29
+msgid "What are your thoughts?*"
+msgstr "Cosa pensi?*"
+
+#: contact/views.py:52
+msgid "You have already signed up for the newsletter."
+msgstr "Sei già iscritto alla newsletter."
+
+#: contact/views.py:54
+msgid "Info"
+msgstr "Info"
+
+#: contact/views.py:60
+msgid "Thank you for signing up!"
+msgstr "Grazie per la tua sottoscrizione."
+
+#: contact/views.py:62
+msgid "Success"
+msgstr "Successo"
 
 #: templates/base/includes/footer.html:6
 msgid "Newsletter"
@@ -75,30 +111,34 @@ msgid "Contact Us"
 msgstr "Contattaci"
 
 #: templates/contact/email_form.html:3
-msgid "Reach Out"
-msgstr "Parlaci"
+msgid "REACH OUT"
+msgstr "ENTRA IN CONTATTO"
+
+#: templates/contact/email_form.html:40
+msgid "Send"
+msgstr "Invia"
 
 #: templates/info/index.html:4
 msgid "Holistic | Courses | Readings"
 msgstr "Olisitico | Corsi | Letture"
 
-#: templates/info/index.html:12 templates/info/index.html:13
+#: templates/info/index.html:13 templates/info/index.html:14
 msgid "SPIRITUALITY"
 msgstr "SPIRITUALITÀ"
 
-#: templates/info/index.html:12 templates/info/index.html:13
+#: templates/info/index.html:13 templates/info/index.html:14
 msgid "CONNECTIONS"
 msgstr "CONESSIONI"
 
-#: templates/info/index.html:12 templates/info/index.html:13
+#: templates/info/index.html:13 templates/info/index.html:14
 msgid "SHARING"
 msgstr "CONDIVISIONE"
 
-#: templates/info/index.html:12 templates/info/index.html:13
+#: templates/info/index.html:13 templates/info/index.html:14
 msgid "ROOTS"
 msgstr "RADICI"
 
-#: templates/info/index.html:23
+#: templates/info/index.html:24
 msgid ""
 "Tarot Reader & Teacher. Kundalini Reiki Practitioner. Womb Keeper. Spiritual "
 "Events and Retreats Organizer. Founder of Nuragic Shamanic Healing Founder "
@@ -109,6 +149,6 @@ msgstr ""
 "di Nuragic Shamanic Healing. Fondatore de Il Cammino del Toro : Cerchio di "
 "Uomini Sardegna."
 
-#: templates/info/index.html:24
+#: templates/info/index.html:25
 msgid "Get to Know Me"
 msgstr "Vuoi Conoscermi?"

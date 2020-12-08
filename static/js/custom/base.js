@@ -39,7 +39,7 @@ function newsletterSignup(formData, formUrl) {
             }
         })
         // Fires off a toast notification
-        .then(data => toastMessage(data.tag, data.tagMessage data.message))
+        .then(data => toastMessage(data.tag, data.tagMessage, data.message))
         // Catches any errors and displays their text message
         .catch(error => toastMessage("error", error))
 }
