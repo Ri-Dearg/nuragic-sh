@@ -4,6 +4,7 @@ from django.shortcuts import reverse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.translation import get_language
 
 from django.db import models
 
@@ -15,33 +16,56 @@ from config import settings
 class Newsletter(models.Model):
     """Model for the creation of different newsletter lists."""
     name = models.CharField(max_length=60, blank=False, null=False)
-    email_list = ArrayField(models.EmailField(
+    email_list_en = ArrayField(models.EmailField(
+        null=False, blank=False), default=list)
+    email_list_it = ArrayField(models.EmailField(
         null=False, blank=False), default=list)
 
     def save(self, *args, **kwargs):
-        email_history = EmailHistory.objects.values_list(
-            'email_address', flat=True)
-        history_list = list(email_history)
-        history_list.sort()
+        email_history = EmailHistory.objects.all()
+        history_list = []
+        for item in email_history:
+            history_list.append(str(item))
+        news_list_en = self.email_list_en
+        news_list_it = self.email_list_it
+        history_obj = []
 
-        news_list = self.email_list
-        news_list.sort()
+        for email in news_list_en:
+            for item in email_history:
+                if email == item.email_address and item.newsletter_en is False:
+                    item.newsletter_en = True
+                    if email not in news_list_it:
+                        item.newsletter_it = False
+                    item.save()
+            if email not in history_list:
+                newsletter = {}
+                newsletter['email_address'] = email
+                newsletter['newsletter_en'] = True
+                history_obj.append(EmailHistory(**newsletter))
 
-        news_list_unique = [item for item in news_list
-                            if item not in history_list]
-        if len(news_list_unique) > 0:
-            history_objs = [EmailHistory(email_address=item, newsletter=True)
-                            for item in news_list_unique]
-            EmailHistory.objects.bulk_create(history_objs)
+        for email in news_list_it:
+            for item in email_history:
+                if email == item.email_address and item.newsletter_it is False:
+                    item.newsletter_it = True
+                    if email not in news_list_en:
+                        item.newsletter_en = False
+                    item.save()
+            if email not in history_list:
+                newsletter = {}
+                newsletter['email_address'] = email
+                newsletter['newsletter_it'] = True
+                history_obj.append(EmailHistory(**newsletter))
 
-        history_unique = [item for item in history_list
-                          if item not in news_list]
-        if len(history_unique) > 0:
-            history_objs = EmailHistory.objects.filter(
-                email_address__in=history_unique)
-            for item in history_objs:
-                item.newsletter = False
-            EmailHistory.objects.bulk_update(history_objs, ['newsletter'])
+            if len(history_obj) > 0:
+                EmailHistory.objects.bulk_create(history_obj)
+
+            news_list_total = news_list_en + news_list_it
+
+            for item in email_history:
+                if item.email_address not in (news_list_total):
+                    item.newsletter_en = False
+                    item.newsletter_it = False
+                    item.save()
 
         super().save(*args, **kwargs)
 
@@ -56,11 +80,15 @@ class Newsletter(models.Model):
 class EmailHistory(models.Model):
     """Created a contact history detail for every email address."""
     email_address = models.EmailField(blank=False, null=False)
-    newsletter = models.BooleanField(default=False)
+    newsletter_en = models.BooleanField(default=False)
+    newsletter_it = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         newsletter = Newsletter.objects.get(name='basic')
-        newsletter_list = newsletter.email_list
+        if get_language() == 'en':
+            newsletter_list = newsletter.email_list_en
+        if get_language() == 'it':
+            newsletter_list = newsletter.email_list_it
         if self.email_address in newsletter_list:
             self.newsletter = True
         newsletter_list = sorted(newsletter_list)
