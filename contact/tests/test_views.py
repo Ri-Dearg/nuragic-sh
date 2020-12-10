@@ -18,6 +18,9 @@ class TestContactViews(TestCase):
     def test_newsletter_signup(self):
         self.client.post('/contact/f/newsletter/', {'email_en': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post('/it/contact/f/newsletter/', {'email_it': 'test@test.com'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
         newsletter = Newsletter.objects.get(name="basic")
 
         self.assertTrue("test@test.com" in newsletter.email_list_en)
