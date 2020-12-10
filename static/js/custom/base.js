@@ -1,9 +1,9 @@
-function toastMessage(tag, message) {
+function toastMessage(tag, tagMessage, message) {
     // Sets the toast HTML.
     $(".toast-wrapper").html(
         `<div class="toast" data-delay="5000">
             <div class="toast-header bg-${tag}">
-                <strong class="mr-auto text-white">${tag.charAt(0).toUpperCase() + tag.slice(1)}</strong>
+                <strong class="mr-auto text-white">${tagMessage}</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -39,7 +39,7 @@ function newsletterSignup(formData, formUrl) {
             }
         })
         // Fires off a toast notification
-        .then(data => toastMessage(data.tag, data.message))
+        .then(data => toastMessage(data.tag, data.tagMessage, data.message))
         // Catches any errors and displays their text message
         .catch(error => toastMessage("error", error))
 }

@@ -1,5 +1,7 @@
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import get_language
+from django.utils.translation import ugettext as _
 from django.http import HttpResponse, JsonResponse
 
 from .models import Email, Newsletter
@@ -10,16 +12,24 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     model = Email
     context_object_name = 'email'
     fields = ['email', 'name', 'subject', 'message']
-    success_message = 'Thank you, your message has been sent.'
+    success_message = _('Thank you, your message has been sent.')
 
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': 'Email Address'}
-        form.fields['name'].widget.attrs = {'placeholder': 'Full Name'}
-        form.fields['subject'].widget.attrs = {'placeholder': 'The Topic'}
+        form.fields['email'].widget.attrs = {'placeholder': _('Email*'),
+                                             'class': 'form-control'}
+        form.fields['email'].label = _('Email*')
+
+        form.fields['name'].widget.attrs = {'placeholder': _('Name*'),
+                                            'class': 'form-control'}
+        form.fields['name'].label = _('Name*')
+        form.fields['subject'].widget.attrs = {'placeholder': _('Subject*'),
+                                               'class': 'form-control'}
+        form.fields['subject'].label = _('Subject*')
         form.fields['message'].widget.attrs = {
-            'placeholder': 'What are your thoughts?*'}
+            'placeholder': _('What are your thoughts?*'),
+            'class': 'form-control'}
         form.fields['message'].label = ''
         return form
 
@@ -39,14 +49,22 @@ def newsletter_singup(request):
     if request.method == "POST":
         data = {}
         newsletter = Newsletter.objects.get(name='basic')
-        if request.POST['email'] in newsletter.email_list:
-            data["message"] = "You have already signed up for the newsletter."
+        if get_language() == 'it':
+            email_list = newsletter.email_list_it
+        if get_language() == 'en':
+            email_list = newsletter.email_list_en
+        if request.POST[f'email_{get_language()}'] in email_list:
+            data["message"] = _(
+                "You have already signed up for the newsletter.")
             data["tag"] = "info"
+            data["tagMessage"] = _('Info')
+
             return JsonResponse(data)
 
-        newsletter.email_list.append(request.POST['email'])
+        email_list.append(request.POST[f'email_{get_language()}'])
         newsletter.save()
-        data["message"] = "Thank you for signing up!"
+        data["message"] = _("Thank you for signing up!")
         data["tag"] = "success"
+        data["tagMessage"] = _('Success')
         return JsonResponse(data)
     return HttpResponse(status=403)

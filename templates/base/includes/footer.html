@@ -1,19 +1,21 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <footer class="container-fluid bg-secondary text-center text-primary">
 	<div class="row">
 		<!-- Newsletter sign up -->
 		<div class="col-12 col-md-4 order-md-3 mt-3">
-			<h2 class="p-font l-space-1 h4">Newsletter</h2>
-			<p class="mb-1">Sign up here!</p>
+			<h2 class="p-font l-space-1 h4">{% trans 'Newsletter' %}</h2>
+			<p class="mb-1">{% trans 'Sign Up Here!' %}</p>
 			<!-- Fires function in sendMail.js, sending form to sheridan.rp@gmail.com -->
 			<form action="{% url 'contact:newsletter' %}" method="POST" id="news-form"
 				class="form-row justify-content-center mw-100 mb-1">
 				{% csrf_token %}
 				<div class="col-auto mb-1">
-					<label class="sr-only" for="newsEmail">Email</label>
+					<label class="sr-only" for="newsEmail">{% trans 'Email' %}</label>
 					<input
                             id="newsEmail"
                             type="email"
-                            name="email"
+                            name="email_{{ LANGUAGE_CODE }}"
                             placeholder="Email"
                             class="form-control"
                             required
@@ -24,7 +26,7 @@
                             type="submit"
                             id="news-submit"
                             class="p-font btn-tran btn btn-warning text-primary"
-                        >Join
+                        >{% trans 'Join' %}
                         </button>
 					</div>
 			</form>
@@ -32,7 +34,7 @@
 		<!-- Social Link section -->
 		<!-- HTML layout from Resume Project: https://github.com/Ri-Dearg/resume-project/blob/master/index.html  (Correct link to Code Institute)-->
 		<div class="col-12 col-md-4 mt-3">
-			<h2 class="p-font l-space-1 h4">Social</h2>
+			<h2 class="p-font l-space-1 h4">{% trans 'Social' %}</h2>
 			<ul class="list-inline h4">
 				<li class="list-inline-item">
 					<a target="_blank" href="https://500px.com/horizonrecordblog">
@@ -50,7 +52,7 @@
 		</div>
 		<!-- Links to contact page -->
 		<div class="col-12 col-md-4 mt-3">
-			<h2 class="p-font l-space-1 h4">Contact</h2>
+			<h2 class="p-font l-space-1 h4">{% trans 'Contact' %}</h2>
 			<p class="mb-0">
 				Contact me on whatsapp, messenger or send an email on the
 				<a class="text-primary">Contact Us</a>
