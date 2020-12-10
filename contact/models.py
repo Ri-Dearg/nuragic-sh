@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import get_language
+from django.db import IntegrityError
+
 
 from django.db import models
 
@@ -85,13 +87,14 @@ class EmailHistory(models.Model):
 
     def save(self, *args, **kwargs):
         newsletter = Newsletter.objects.get(name='basic')
-        if get_language() == 'en':
-            newsletter_list = newsletter.email_list_en
-        if get_language() == 'it':
-            newsletter_list = newsletter.email_list_it
-        if self.email_address in newsletter_list:
-            self.newsletter = True
-        newsletter_list = sorted(newsletter_list)
+        newsletter_list_en = newsletter.email_list_en
+        newsletter_list_it = newsletter.email_list_it
+        if self.email_address in newsletter_list_en:
+            self.newsletter_en = True
+        if self.email_address in newsletter_list_it:
+            self.newsletter_it = True
+        newsletter_list_en = sorted(newsletter_list_en)
+        newsletter_list_it = sorted(newsletter_list_it)
 
         super().save(*args, **kwargs)
 
