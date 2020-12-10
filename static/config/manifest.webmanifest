@@ -2,8 +2,7 @@
  "name": "Nuragic Shamanic Healing",
  "short_name": "Nuragic SH",
  "description": "Reflection & Healing",
- "icons": [
-  {
+ "icons": [{
    "src": "../favicons/android-icon-36x36.png",
    "sizes": "36x36",
    "type": "image\/png",
@@ -40,9 +39,9 @@
    "density": "4.0"
   }
  ],
- "start_url": "/",
+ "start_url": "https://nuragic-sh.herokuapp.com/",
  "background_color": "#2b384c",
  "display": "standalone",
- "scope": "/",
+ "scope": "https://nuragic-sh.herokuapp.com/",
  "theme_color": "#2b384c"
 }
