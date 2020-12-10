@@ -6,22 +6,26 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from info.models import HomeCarousel, HomeInfo, Review
 
 
-class ProductTests(TestCase):
+class InfoTests(TestCase):
     """Tests for Product models."""
 
     def setUp(self):
         """Sets up a HomeCarousel model."""
-        valid_carousel = HomeCarousel(name='HC1',
-                                      description='description',
+        valid_carousel = HomeCarousel(name_en='HC1',
+                                      name_it='HC1',
+                                      description_en='description',
+                                      description_it='description',
                                       image=SimpleUploadedFile(
                                           name='default.jpg',
                                           content=open(
-                                           'media/default.jpg', 'rb').read(),
+                                              'media/default.jpg', 'rb').read(),
                                           content_type='image/jpeg',))
         valid_carousel.save()
 
-        valid_info = HomeInfo(name='HI1',
-                              description='description',
+        valid_info = HomeInfo(name_en='HI1',
+                              name_it='HI1',
+                              description_en='description',
+                              description_it='description',
                               image=SimpleUploadedFile(
                                   name='default.jpg',
                                   content=open(
@@ -31,8 +35,7 @@ class ProductTests(TestCase):
                               order=1)
         valid_info.save()
 
-        valid_review = Review(language='en_US',
-                              reviewer_name='abacus',
+        valid_review = Review(reviewer_name='abacus',
                               text='this is a review')
 
         valid_review.save()
