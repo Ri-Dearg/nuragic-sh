@@ -130,7 +130,6 @@ class HomeInfo(models.Model):
 
 class Review(models.Model):
     """Allows for the creation of reviews."""
-    language = models.CharField(max_length=5, null=False)
     reviewer_name = models.CharField(max_length=50, null=False)
     text = models.TextField()
     display = models.BooleanField(default=True)
