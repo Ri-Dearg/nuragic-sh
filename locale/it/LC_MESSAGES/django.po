@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 22:58+0000\n"
+"POT-Creation-Date: 2020-12-10 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,63 +26,63 @@ msgstr "Inglese"
 msgid "Italian"
 msgstr "Italiano"
 
-#: contact/views.py:14
+#: contact/views.py:15
 msgid "Thank you, your message has been sent."
 msgstr "Grazie, il tuo messagio è stato spedito."
 
-#: contact/views.py:19 contact/views.py:21
+#: contact/views.py:20 contact/views.py:22
 msgid "Email*"
 msgstr "Email*"
 
-#: contact/views.py:22 contact/views.py:24
+#: contact/views.py:24 contact/views.py:26
 msgid "Name*"
 msgstr "Nome*"
 
-#: contact/views.py:25 contact/views.py:27
+#: contact/views.py:27 contact/views.py:29
 msgid "Subject*"
 msgstr "Soggetto*"
 
-#: contact/views.py:29
+#: contact/views.py:31
 msgid "What are your thoughts?*"
 msgstr "Cosa pensi?*"
 
-#: contact/views.py:52
+#: contact/views.py:58
 msgid "You have already signed up for the newsletter."
 msgstr "Sei già iscritto alla newsletter."
 
-#: contact/views.py:54
+#: contact/views.py:60
 msgid "Info"
 msgstr "Info"
 
-#: contact/views.py:60
+#: contact/views.py:66
 msgid "Thank you for signing up!"
 msgstr "Grazie per la tua sottoscrizione."
 
-#: contact/views.py:62
+#: contact/views.py:68
 msgid "Success"
 msgstr "Successo"
 
-#: templates/base/includes/footer.html:6
+#: templates/base/includes/footer.html:7
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: templates/base/includes/footer.html:7
+#: templates/base/includes/footer.html:8
 msgid "Sign Up Here!"
 msgstr "Iscriviti!"
 
-#: templates/base/includes/footer.html:13
+#: templates/base/includes/footer.html:14
 msgid "Email"
 msgstr "Email"
 
-#: templates/base/includes/footer.html:28
+#: templates/base/includes/footer.html:29
 msgid "Join"
 msgstr "Unisciti"
 
-#: templates/base/includes/footer.html:36
+#: templates/base/includes/footer.html:37
 msgid "Social"
 msgstr "Social"
 
-#: templates/base/includes/footer.html:54
+#: templates/base/includes/footer.html:55
 msgid "Contact"
 msgstr "Contatti"
 
@@ -117,6 +117,48 @@ msgstr "ENTRA IN CONTATTO"
 #: templates/contact/email_form.html:40
 msgid "Send"
 msgstr "Invia"
+
+#: templates/contact/emails/contact_body.txt:2
+msgid "Nuragic Shamanic Healing has received a message from"
+msgstr "Nuragic Shamanic Healing ha ricevuto un messagio da"
+
+#: templates/contact/emails/contact_body.txt:2
+msgid "at"
+msgstr "a"
+
+#: templates/contact/emails/contact_body.txt:4
+msgid "They have written the following"
+msgstr "Ha scritto"
+
+#: templates/contact/emails/contact_body.txt:8
+msgid "Be Well"
+msgstr "Cordiali Saluti"
+
+#: templates/contact/emails/contact_subject.txt:2
+msgid "Nuragic Shamanic Healing Message Received"
+msgstr "Nuragic Shamanic Healing Messagio Ricevuto"
+
+#: templates/contact/emails/thanks_body.txt:2
+msgid "Hello"
+msgstr "Ciao"
+
+#: templates/contact/emails/thanks_body.txt:4
+msgid "Thank you for getting in contact with Nuragic Shamanic Healing"
+msgstr "Grazie per contattare Nuragic Shamanic Healing"
+
+#: templates/contact/emails/thanks_body.txt:6
+msgid ""
+"We have received your message and will get in contact with you as soon as "
+"possible"
+msgstr "Abbiamo Ricevuto il tuo messagio e ti contatteremmo al primo possibile"
+
+#: templates/contact/emails/thanks_body.txt:9
+msgid "Kind Regards"
+msgstr "Cordiali Saluti"
+
+#: templates/contact/emails/thanks_subject.txt:2
+msgid "Nuragic Shamanic Healing Contact"
+msgstr "Contatto Nuragic Shamanic Healing"
 
 #: templates/info/index.html:4
 msgid "Holistic | Courses | Readings"

@@ -1,1 +1,1 @@
-Nuragic Shamanic Healing Contact: {{ subject }}
+{% load i18n %}{% trans 'Nuragic Shamanic Healing Contact' %}: {{ subject }}
