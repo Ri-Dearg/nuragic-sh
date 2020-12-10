@@ -1,9 +1,9 @@
-Hello, {{ name }},
+{% load i18n %}{% trans 'Hello' %}, {{ name }},
 
-Thank you for getting in contact with Nuragic Shamanic Healing.
+{% trans 'Thank you for getting in contact with Nuragic Shamanic Healing' %}.
 
-We have received your message and will get in contact with you as soon as possible.
+{% trans 'We have received your message and will get in contact with you as soon as possible' %}.
 
 
-Kind Regards,
+{% trans 'Kind Regards' %},
 Nuragic Shamanic Healing

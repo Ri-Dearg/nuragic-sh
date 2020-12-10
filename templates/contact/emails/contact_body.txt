@@ -1,8 +1,8 @@
-Nuragic Shamanic Healing has received a message from {{ name }} at {{ email }}
+{% load i18n %}{% trans 'Nuragic Shamanic Healing has received a message from' %} {{ name }} {% trans 'at' %} {{ email }}.
 
-They have written the following:
+{% trans 'They have written the following' %}:
 
 {{ message }}
 
-Be Well
+{% trans 'Be Well' %},
 Nuragic Shamanic Healing

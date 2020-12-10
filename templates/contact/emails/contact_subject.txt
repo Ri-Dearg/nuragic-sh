@@ -1,1 +1,1 @@
-Nuragic Shamanic Healing Message Received: {{ subject }}
+{% load i18n %}{% trans 'Nuragic Shamanic Healing Message Received' %}: {{ subject }}
