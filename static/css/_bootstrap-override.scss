@@ -8,8 +8,6 @@
 $enable-rounded: false;
 $enable-shadows: true;
 $enable-responsive-font-sizes: true;
-$navbar-dark-color: #fff; 
-$navbar-dark-hover-color: #fff; 
 
 $primary: #2b384c;
 $secondary: #c5b9a0;
@@ -18,24 +16,21 @@ $info: #47B9FF;
 $success: #2CC968;
 $danger: #dc3545;
 
-$theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    "error":      $danger,
-  ),
-  $theme-colors
-);
-
 $grid-gutter-width: 0;
 
+// scss-docs-start import-stack
+// Configuration
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+// Layout & components
 @import "bootstrap/root";
 @import "bootstrap/reboot";
 @import "bootstrap/type";
 @import "bootstrap/images";
-// @import "bootstrap/code";
+@import "bootstrap/containers";
 @import "bootstrap/grid";
 // @import "bootstrap/tables";
 @import "bootstrap/forms";
@@ -43,25 +38,26 @@ $grid-gutter-width: 0;
 @import "bootstrap/transitions";
 // @import "bootstrap/dropdown";
 // @import "bootstrap/button-group";
-// @import "bootstrap/input-group";
-// @import "bootstrap/custom-forms";
 @import "bootstrap/nav";
 @import "bootstrap/navbar";
 // @import "bootstrap/card";
+// @import "bootstrap/accordion";
 // @import "bootstrap/breadcrumb";
 // @import "bootstrap/pagination";
 // @import "bootstrap/badge";
-// @import "bootstrap/jumbotron";
 @import "bootstrap/alert";
 // @import "bootstrap/progress";
-// @import "bootstrap/media";
 // @import "bootstrap/list-group";
 @import "bootstrap/close";
 @import "bootstrap/toasts";
 // @import "bootstrap/modal";
 // @import "bootstrap/tooltip";
 // @import "bootstrap/popover";
-// @import "bootstrap/spinners";
 @import "bootstrap/carousel";
-@import "bootstrap/utilities";
-@import "bootstrap/print";
+// @import "bootstrap/spinners";
+// Helpers
+@import "bootstrap/helpers";
+
+// Utilities
+@import "bootstrap/utilities/api";
+// scss-docs-end import-stack
