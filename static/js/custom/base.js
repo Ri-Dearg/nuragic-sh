@@ -19,21 +19,22 @@ function newsletterSignup(formData, formUrl) {
 
     // Sends form to Django view
     fetch(formUrl, {
-        method: "POST",
-        body: formData,
-        credentials: "same-origin",
-    })
+            method: "POST",
+            body: formData,
+            credentials: "same-origin",
+        })
         .then((response) => {
             if (response.ok) {
                 const defHeight = $("#news-col").height()
                 const defWidth = defHeight * 1.5
                 $("#news-submit").css("max-height", defHeight).css("max-width", defWidth).fadeTo(300, 0, function() {
                     $(this).html('<object class="header-object" type="image/svg+xml" data="/static/icons/check-circle.svg"><img src="/static/icons/check-circle.svg" alt="Account" /></object>')
-                .fadeTo(300, 0.65)
+                        .fadeTo(300, 0.65)
                 })
-                
+
                 return response.json();
-            } else {
+            }
+            else {
                 $("#news-submit").prop("disabled", false).removeClass("disabled")
                 throw Error(response.status + " " + response.statusText);
             }
@@ -41,11 +42,11 @@ function newsletterSignup(formData, formUrl) {
         // Fires off a toast notification
         .then(data => toastMessage(data.tag, data.tagMessage, data.message))
         // Catches any errors and displays their text message
-        .catch(error => toastMessage("error", error))
+        .catch(error => toastMessage("warning", "Error", error));
 }
 
 // Watches the form for submission, then fires the Fetch function
-$("#news-form").on("submit", function (ev) {
+$("#news-form").on("submit", function(ev) {
     // stops form from sending
     ev.preventDefault();
     $("#news-submit").prop("disabled", true).addClass("disabled")
