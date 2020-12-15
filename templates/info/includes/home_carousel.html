@@ -1,12 +1,12 @@
 {% load static %} {% get_media_prefix as MEDIA_URL %}
 <!-- Displays carousel items. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
-<div id="splash-carousel" class="carousel slide" data-ride="carousel">
+<div id="splash-carousel" class="carousel slide" data-bs-ride="carousel">
     <!-- This loops through the items, setting the first as the active one. -->
     {% if carousel|length > 1 %}
     <ol class="carousel-indicators d-none d-lg-flex mb-0">
         {% for number in carousel %}
-        <li data-target="#splash-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
+        <li data-bs-target="#splash-carousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
         {% endfor %}
     </ol>
     {% endif %}
@@ -19,18 +19,16 @@ This is done in the view before being passed here. They are ordered by most rece
                 <h5 class="h-font l-space-2 mb-0 mb-md-1">{{ item.name }}</h5>
                 <p class="p-font d-none d-md-block mb-0">{{item.description}}</p>
             </div>
-        </a>
-        {% endfor %}
+        </a> {% endfor %}
     </div>
     {% if carousel|length > 1 %}
     <!-- This displays the buttons for slide selection. -->
-    <a class="carousel-control-prev" href="#splash-carousel" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#splash-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="visually-hidden">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#splash-carousel" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#splash-carousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    {% endif %}
+        <span class="visually-hidden">Next</span>
+    </a> {% endif %}
 </div>
