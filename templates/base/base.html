@@ -65,7 +65,7 @@
 
 	{% include 'base/includes/header.html' %}
 
-	<main class="min-vh-75 container-fluid shadow p-0">
+	<main class="min-vh-75 container-xxl shadow p-0">
 		<!-- This hold the toasts notifications in position on the page.
         Can be changed with the toast-position class.-->
 		<div class="toast-container position-fixed">
@@ -77,7 +77,10 @@
 
 	{% include 'base/includes/footer.html' %} {% block modal%} {% endblock %} {% block postloadjs %}
 	<script src="{% static 'js/custom/base.js' %}"></script>
-	{% endblock %}
+	{% if messages %}
+	<script>
+		showToast()
+	</script>{% endif %} {% endblock %}
 </body>
 
 </html>

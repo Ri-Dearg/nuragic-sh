@@ -9,7 +9,7 @@
 			<form action="{% url 'contact:newsletter' %}" method="POST" id="news-form" class="row g-1 justify-content-center mw-100 mb-1">
 				{% csrf_token %}
 				<div class="col-auto ms-1 form-floating mb-1">
-					<input id="newsEmail" type="email" name="email_{{ LANGUAGE_CODE }}" placeholder="Email" class="form-control" aria-describedby="newsEmailText" required />
+					<input id="newsEmail" type="email" name="email_{{ LANGUAGE_CODE }}" placeholder="Email" class="form-control" aria-describedby="newsEmailText" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" required />
 					<label class="p-font sr-only" for="newsEmail ">{% trans 'Email' %}</label>
 				</div>
 				<div class="col-auto mb-1">

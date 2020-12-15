@@ -1,3 +1,16 @@
+function showToast() {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+    var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl)
+    });
+    // Fires the toast.
+    var toast;
+    for (toast in toastList) {
+        console.log(toastList[toast]);
+        toastList[toast].show();
+    }
+}
+
 function toastMessage(tag, tagMessage, message) {
     // Sets the toast HTML.
     $(".toast-container").html(
@@ -10,16 +23,7 @@ function toastMessage(tag, tagMessage, message) {
             <div class="toast-body">${message}</div>
         </div>`
     );
-    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-    var toastList = toastElList.map(function(toastEl) {
-        return new bootstrap.Toast(toastEl)
-    })
-    // Fires the toast.
-    var toast;
-    for (toast in toastList) {
-        console.log(toastList[toast]);
-        toastList[toast].show()
-    }
+    showToast();
 }
 
 function newsletterSignup(formData, formUrl) {
