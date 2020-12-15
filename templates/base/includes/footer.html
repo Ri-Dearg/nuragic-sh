@@ -1,62 +1,46 @@
-{% load i18n %}
-{% get_current_language as LANGUAGE_CODE %}
-<footer class="container-fluid bg-secondary text-center text-primary">
+{% load i18n %} {% get_current_language as LANGUAGE_CODE %}
+<footer class="container-xxl bg-secondary text-center text-primary">
 	<div class="row">
 		<!-- Newsletter sign up -->
 		<div class="col-12 col-md-4 order-md-3 mt-3">
 			<h2 class="p-font l-space-1 h4">{% trans 'Newsletter' %}</h2>
-			<p class="mb-1">{% trans 'Sign Up Here!' %}</p>
+			<p id="newsEmailText" class="p-font form-text mb-1">{% trans 'Sign Up Here!' %}</p>
 			<!-- Fires function in sendMail.js, sending form to sheridan.rp@gmail.com -->
-			<form action="{% url 'contact:newsletter' %}" method="POST" id="news-form"
-				class="form-row justify-content-center mw-100 mb-1">
+			<form action="{% url 'contact:newsletter' %}" method="POST" id="news-form" class="row g-1 justify-content-center mw-100 mb-1">
 				{% csrf_token %}
-				<div class="col-auto mb-1">
-					<label class="sr-only" for="newsEmail">{% trans 'Email' %}</label>
-					<input
-                            id="newsEmail"
-                            type="email"
-                            name="email_{{ LANGUAGE_CODE }}"
-                            placeholder="Email"
-                            class="form-control"
-                            required
-                        />
+				<div class="col-auto ms-1 form-floating mb-1">
+					<input id="newsEmail" type="email" name="email_{{ LANGUAGE_CODE }}" placeholder="Email" class="form-control" aria-describedby="newsEmailText" required />
+					<label class="p-font sr-only" for="newsEmail ">{% trans 'Email' %}</label>
 				</div>
-					<div class="col-auto">
-						<button
-                            type="submit"
-                            id="news-submit"
-                            class="p-font btn-tran btn btn-warning text-primary"
-                        >{% trans 'Join' %}
-                        </button>
-					</div>
+				<div class="col-auto mb-1">
+					<button type="submit" id="news-submit" class="p-font btn-tran btn btn-warning text-primary h-100">{% trans 'Join' %}</button>
+				</div>
 			</form>
 		</div>
 		<!-- Social Link section -->
-		<!-- HTML layout from Resume Project: https://github.com/Ri-Dearg/resume-project/blob/master/index.html  (Correct link to Code Institute)-->
-		<div class="col-12 col-md-4 mt-3">
-			<h2 class="p-font l-space-1 h4">{% trans 'Social' %}</h2>
-			<ul class="list-inline h4">
-				<li class="list-inline-item">
-					<a target="_blank" href="https://500px.com/horizonrecordblog">
+		<div class="col-12 col-md-4 mt-3 ">
+			<h2 class="p-font l-space-1 h4 ">{% trans 'Social' %}</h2>
+			<ul class="list-inline h4 ">
+				<li class="list-inline-item ">
+					<a target="_blank " href="https://500px.com/horizonrecordblog ">
 						Facebook</a>
 				</li>
-				<li class="list-inline-item">
-					<a target="_blank" href="https://www.facebook.com/ridearg-411885722878522/">
+				<li class="list-inline-item ">
+					<a target="_blank " href="https://www.facebook.com/ridearg-411885722878522/ ">
 						Instagram</a>
 				</li>
-				<li class="list-inline-item">
-					<a target="_blank" href="https://www.instagram.com/ri.dearg/">
+				<li class="list-inline-item ">
+					<a target="_blank " href="https://www.instagram.com/ri.dearg/ ">
 						Youtube</a>
 				</li>
 			</ul>
 		</div>
 		<!-- Links to contact page -->
-		<div class="col-12 col-md-4 mt-3">
-			<h2 class="p-font l-space-1 h4">{% trans 'Contact' %}</h2>
-			<p class="mb-0">
+		<div class="col-12 col-md-4 mt-3 ">
+			<h2 class="p-font l-space-1 h4 ">{% trans 'Contact' %}</h2>
+			<p class="mb-0 ">
 				Contact me on whatsapp, messenger or send an email on the
-				<a class="text-primary">Contact Us</a>
-				page
+				<a class="text-primary ">Contact Us</a> page
 			</p>
 		</div>
 	</div>
