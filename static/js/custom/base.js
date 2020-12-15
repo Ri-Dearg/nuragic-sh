@@ -1,18 +1,25 @@
 function toastMessage(tag, tagMessage, message) {
     // Sets the toast HTML.
-    $(".toast-wrapper").html(
-        `<div class="toast" data-delay="5000">
+    $(".toast-container").html(
+        `<div class="toast" data-bs-delay="5000" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-${tag}">
-                <strong class="mr-auto text-white">${tagMessage}</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <strong class="me-auto text-white">${tagMessage}</strong>
+                    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+                    </button>
+                        </div>
             <div class="toast-body">${message}</div>
         </div>`
     );
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl)
+    })
     // Fires the toast.
-    $(".toast").toast("show");
+    var toast;
+    for (toast in toastList) {
+        console.log(toastList[toast]);
+        toastList[toast].show()
+    }
 }
 
 function newsletterSignup(formData, formUrl) {

@@ -12,7 +12,7 @@
 	<meta name="msapplication-TileImage" content="{% static 'favicons/ms-icon-144x144.png' %}" />
 	<meta name="theme-color" content="#2b384c" />
 
-	<link rel="manifest" href="manifest.webmanifest" />
+	<link rel="manifest" href="{% static 'manifest.json' %}" />
 
 	<link rel="icon" href="{% static 'favicons/favicon.ico' %}" />
 	<link rel="icon" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}" />
@@ -36,10 +36,10 @@
 	<link rel="stylesheet" type="text/css" href="{% sass_src 'css/main.scss' %}" />
 
 	<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+	<!--<meta property="og:locale" content="en_US" />-->
+	<!--<meta property="og:url" content="{{ request.build_absolute_uri }}" />-->
 	<!-- <meta property="fb:app_id" content="" />
 
         <meta property="og:type" content="{% block og_type %}{% endblock %}" />
@@ -65,21 +65,17 @@
 
 	{% include 'base/includes/header.html' %}
 
-	<main class="container-fluid shadow min-vh-75 p-0">
+	<main class="min-vh-75 container-fluid shadow p-0">
+		<!-- This hold the toasts notifications in position on the page.
+        Can be changed with the toast-position class.-->
+		<div class="toast-container position-fixed">
+			{% if messages %} {% for message in messages %} {% include 'base/includes/messages.html' %} {% endfor %} {% endif %}
+		</div>
+
 		{% block content %} {% endblock %}
 	</main>
 
-	{% include 'base/includes/footer.html' %}
-
-	<!-- This hold the toasts notifications in position on the page.
-        Can be changed with the toast-position class.-->
-	<div class="toast-position" aria-live="polite" aria-atomic="true">
-		<div class="toast-wrapper">
-			{% if messages %} {% for message in messages %} {% include 'base/includes/messages.html' %} {% endfor %} {% endif %}
-		</div>
-	</div>
-
-	{% block modal%} {% endblock %} {% block postloadjs %}
+	{% include 'base/includes/footer.html' %} {% block modal%} {% endblock %} {% block postloadjs %}
 	<script src="{% static 'js/custom/base.js' %}"></script>
 	{% endblock %}
 </body>
