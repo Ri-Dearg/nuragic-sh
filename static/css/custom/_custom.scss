@@ -120,6 +120,10 @@ Toasts
     z-index: 1022;
 }
 
+.form-floating>textarea {
+    min-height: 200px;
+}
+
 .form-box {
     max-width: 500px;
 }

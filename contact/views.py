@@ -18,11 +18,12 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
         form.fields['email'].widget.attrs = {'placeholder': _('Email*'),
-                                             'class': 'form-control'}
+                                             'class': 'form-control',
+                                             'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'}
         form.fields['email'].label = _('Email*')
 
         form.fields['name'].widget.attrs = {'placeholder': _('Name*'),
-                                            'class': 'form-control'}
+                                            'class': 'form-control', }
         form.fields['name'].label = _('Name*')
         form.fields['subject'].widget.attrs = {'placeholder': _('Subject*'),
                                                'class': 'form-control'}
@@ -30,7 +31,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         form.fields['message'].widget.attrs = {
             'placeholder': _('What are your thoughts?*'),
             'class': 'form-control'}
-        form.fields['message'].label = ''
+        form.fields['message'].label = _('What are your thoughts?*')
         return form
 
     def get_context_data(self, **kwargs):
