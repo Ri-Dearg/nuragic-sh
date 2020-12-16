@@ -10,6 +10,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 from PIL import Image
 
+from django_better_admin_arrayfield.models.fields import ArrayField
+
 
 class HomeCarousel(models.Model):
     """Allows for the creation of a collection of carousel items.
@@ -68,7 +70,7 @@ class HomeCarousel(models.Model):
         return f'{self.name}'
 
 
-class HomeInfo(models.Model):
+class Category(models.Model):
     """Allows for the creation of a collection of Products.
     You can add a splash image which will be resized and a blurb.
     Images will be resized on upload to 1289x480px square shape.
@@ -76,7 +78,7 @@ class HomeInfo(models.Model):
     name = models.CharField(max_length=30, null=False)
     description = models.TextField()
     button_text = models.CharField(max_length=30, null=False)
-    image = models.ImageField(upload_to='info')
+    image = models.ImageField(upload_to='info/category')
     display = models.BooleanField(default=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
@@ -88,8 +90,8 @@ class HomeInfo(models.Model):
         # Opening the image
         this_object = None
         try:
-            this_object = HomeInfo.objects.get(pk=self.id)
-        except HomeInfo.DoesNotExist:
+            this_object = Category.objects.get(pk=self.id)
+        except Category.DoesNotExist:
             pass
         finally:
             img = Image.open(self.image)
@@ -123,9 +125,26 @@ class HomeInfo(models.Model):
     class Meta:
         """Orders by the most recent created by default."""
         ordering = ['order']
+        verbose_name = 'Categories'
 
     def __str__(self):
         return f'{self.name}'
+
+
+class DetailInfo(models.Model):
+    """Detailed info for Categories"""
+    title = models.CharField(max_length=60, null=False)
+    summary = models.CharField(max_length=400, null=False)
+    description1 = models.TextField()
+    description2 = models.TextField(blank=True, default='')
+    title_image = models.ImageField(upload_to='info/detail/title')
+    desc_image = models.ImageField(upload_to='info/detail/desc', blank=True)
+
+
+class GalleryImage(models.Model):
+    detail = models.ForeignKey(
+        DetailInfo, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='info/detail/gallery')
 
 
 class Review(models.Model):
