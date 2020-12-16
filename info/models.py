@@ -76,6 +76,7 @@ class Category(models.Model):
     Images will be resized on upload to 1289x480px square shape.
     I would recommend cropping your images to a 16:10 ratio first."""
     name = models.CharField(max_length=30, null=False)
+    menu_word = models.CharField(max_length=10, null=False)
     description = models.TextField()
     button_text = models.CharField(max_length=30, null=False)
     image = models.ImageField(upload_to='info/category')
@@ -125,7 +126,7 @@ class Category(models.Model):
     class Meta:
         """Orders by the most recent created by default."""
         ordering = ['order']
-        verbose_name = 'Categories'
+        verbose_name = 'Categorie'
 
     def __str__(self):
         return f'{self.name}'
@@ -133,6 +134,8 @@ class Category(models.Model):
 
 class DetailInfo(models.Model):
     """Detailed info for Categories"""
+    category = models.ForeignKey(
+        Category, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     description1 = models.TextField()
