@@ -101,7 +101,7 @@ class EmailHistory(models.Model):
     class Meta:
         """Orders by alphabetical order."""
         ordering = ['email_address']
-        verbose_name = 'Email Histories'
+        verbose_name = 'Email Historie'
 
     def __str__(self):
         return f'{self.email_address}'
