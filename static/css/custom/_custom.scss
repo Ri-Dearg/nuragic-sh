@@ -62,7 +62,10 @@
     transition: 0.5s;
 }
 
-.nav-item.active,
+.nav-item.active {
+    background-color: #F5C936;
+}
+
 .btn-tran:hover {
     background-color: #2b384c;
 }
@@ -100,6 +103,27 @@
 }
 
 /*--------------------------------------------------------------------------
+Preloader
+--------------------------------------------------------------------------*/
+
+.preloader {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 1025;
+    padding-bottom: 153px
+}
+
+.spinner-border {
+    width: 5rem;
+    height: 5rem;
+}
+
+/*--------------------------------------------------------------------------
 Toasts
 --------------------------------------------------------------------------*/
 
@@ -111,13 +135,13 @@ Toasts
     top: 146px;
     right: 10px;
     min-height: 200px;
-    z-index: 1021;
+    z-index: 1026;
 }
 
 /*It is positioned above the preloader with the z-index.*/
 
 .toast {
-    z-index: 1022;
+    z-index: 1027;
 }
 
 .form-floating>textarea {

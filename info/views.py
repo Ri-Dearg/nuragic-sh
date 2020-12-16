@@ -8,6 +8,7 @@ def render_index(request):
     info = HomeInfo.objects.all().filter(display=True)
     review = Review.objects.all().filter(display=True)
     context = {'carousel': carousel,
-               'info': info, 
-               'review': review}
+               'info': info,
+               'review': review,
+               'home_active': True}
     return render(request, 'info/index.html', context)

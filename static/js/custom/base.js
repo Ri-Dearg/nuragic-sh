@@ -1,3 +1,19 @@
+function fadePreload() {
+    $(".preloader").fadeOut(1000);
+}
+
+function smoothFade() {
+    $(".smooth-click").unbind('click').on("click", function(ev) {
+        console.log("hello")
+        ev.preventDefault()
+        var goTo = this.getAttribute("href")
+        $(".preloader").fadeIn(1000);
+        setTimeout(function(){
+         window.location = goTo;
+    }, 800);
+    })
+}
+
 function showToast() {
     var toastElList = [].slice.call(document.querySelectorAll('.toast'));
     var toastList = toastElList.map(function(toastEl) {
