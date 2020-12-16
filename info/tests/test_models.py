@@ -3,7 +3,7 @@ import re
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from info.models import HomeCarousel, HomeInfo, Review
+from info.models import HomeCarousel, Category, Review
 
 
 class InfoTests(TestCase):
@@ -22,7 +22,7 @@ class InfoTests(TestCase):
                                           content_type='image/jpeg',))
         valid_carousel.save()
 
-        valid_info = HomeInfo(name_en='HI1',
+        valid_info = Category(name_en='HI1',
                               name_it='HI1',
                               description_en='description',
                               description_it='description',
@@ -67,16 +67,16 @@ class InfoTests(TestCase):
                          (f'{hc1.name}'))
 
     def test_info_image_file_is_processed_correctly(self):
-        """Tests that an uploaded HomeInfo image is resized and
+        """Tests that an uploaded Category image is resized and
         processed correctly by the view."""
 
-        # Retrieves the latest HomeInfo and saves an image to it.
-        hi1 = HomeInfo.objects.latest('date_added')
+        # Retrieves the latest Category and saves an image to it.
+        hi1 = Category.objects.latest('date_added')
         hi1.image = SimpleUploadedFile(
             name='default.jpg',
             content=open('media/default.jpg', 'rb').read(),
             content_type='image/jpeg')
-        new_info = HomeInfo.objects.latest('date_added')
+        new_info = Category.objects.latest('date_added')
         new_info.save()
 
         # Checks that the image has been modified and named correctly
@@ -87,8 +87,8 @@ class InfoTests(TestCase):
                                   new_info.image.name))
 
     def test_info_str(self):
-        """Tests the string method on the HomeInfo."""
-        hi1 = HomeInfo.objects.latest('date_added')
+        """Tests the string method on the Category."""
+        hi1 = Category.objects.latest('date_added')
         self.assertEqual(str(hi1),
                          (f'{hi1.name}'))
 
