@@ -12,5 +12,6 @@ htmlcov/
 *.css
 *.css.map
 .theia/
-
+.~c9*
+.c9
 !jasmine.css
