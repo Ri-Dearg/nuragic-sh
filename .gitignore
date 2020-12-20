@@ -14,4 +14,7 @@ htmlcov/
 .theia/
 .~c9*
 .c9
+venv
+.vscode
+
 !jasmine.css
