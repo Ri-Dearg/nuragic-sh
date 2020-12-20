@@ -83,7 +83,7 @@ class InfoTests(TestCase):
         # after being saved.
         self.assertEqual(new_info.image.height, 800)
         self.assertEqual(new_info.image.width, 1280)
-        self.assertTrue(re.search('^info/default.*.jpeg$',
+        self.assertTrue(re.search('^info/category/default.*.jpeg$',
                                   new_info.image.name))
 
     def test_info_str(self):
