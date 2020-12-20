@@ -44,8 +44,8 @@ if DEBUG == 'True':
 elif DEBUG is False:
     print('Debug mode is off.')
 
-ALLOWED_HOSTS = ['localhost', 'nuragic-sh.herokuapp.com',
-                 '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'nuragic-sh.herokuapp.com',
+                 '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']  # noqa E501
 
 
 # Application definition
@@ -104,6 +104,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # for navbar categories
+                'info.context_processors.get_categories',
             ],
         },
     },
