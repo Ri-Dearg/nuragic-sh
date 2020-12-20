@@ -24,35 +24,32 @@ def image_resize(self, image_title, folder, width, height):
     finally:
         try:
             img = Image.open(image_field)
+            img_format = img.format.lower()
+
+            # Prevents images from being copied on every save
+            # will save a new copy on an upload
+            if (this_object and f'{folder}' + '/' + f'{image_field.name}'.replace(" ", "_")
+                    != object_image.name) or (not this_object):
+                # Image is resized
+                output_size = (width, height)
+                img = img.resize(size=(output_size))
+                # Converts format while in memory
+                output = BytesIO()
+                img.save(output, format=img_format)
+                output.seek(0)
+
+                # Replaces the Imagefield value with the newly converted image
+                image_field = InMemoryUploadedFile(
+                    output,
+                    'ImageField',
+                    f'{image_field.name.split(".")[0]}.{img_format}',
+                    'image/jpeg', sys.getsizeof(output),
+                    None)
+                return image_field
+            else:
+                return False
         except ValueError:
-            img = None
             return True
-        finally:
-            if img:
-                img_format = img.format.lower()
-
-                # Prevents images from being copied on every save
-                # will save a new copy on an upload
-                if (this_object and f'{folder}' + '/' + f'{image_field.name}'.replace(" ", "_")
-                        != object_image.name) or (not this_object):
-                    # Image is resized
-                    output_size = (width, height)
-                    img = img.resize(size=(output_size))
-                    # Converts format while in memory
-                    output = BytesIO()
-                    img.save(output, format=img_format)
-                    output.seek(0)
-
-                    # Replaces the Imagefield value with the newly converted image
-                    image_field = InMemoryUploadedFile(
-                        output,
-                        'ImageField',
-                        f'{image_field.name.split(".")[0]}.{img_format}',
-                        'image/jpeg', sys.getsizeof(output),
-                        None)
-                    return True
-                else:
-                    return False
 
 
 class HomeCarousel(models.Model):
@@ -67,11 +64,13 @@ class HomeCarousel(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if image_resize(self, 'image', 'info/carousel', 1920, 720) is False:
+        image1 = image_resize(self, 'image', 'info/carousel', 1920, 720)
+        if image1 is False:
             super().save(*args,
                          update_fields=['name', 'description', 'display'],
                          **kwargs)
         else:
+            self.image = image1
             super().save(*args, **kwargs)
 
     class Meta:
@@ -98,12 +97,14 @@ class Category(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if image_resize(self, 'image', 'info/category', 1280, 800) is False:
+        image1 = image_resize(self, 'image', 'info/category', 1280, 800)
+        if image1 is False:
             super().save(*args,
                          update_fields=['name', 'menu_word', 'description',
                                         'button_text', 'display', 'order'],
                          **kwargs)
         else:
+            self.image = image1
             super().save(*args, **kwargs)
 
     class Meta:
@@ -118,7 +119,9 @@ class Category(models.Model):
 class DetailInfo(models.Model):
     """Detailed info for Categories"""
     category = models.ForeignKey(
-        Category, null=True, on_delete=models.SET_NULL)
+        Category, null=True,
+        on_delete=models.SET_NULL,
+        related_name='detail_info')
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     description1 = models.TextField()
@@ -136,10 +139,16 @@ class DetailInfo(models.Model):
 
         image1 = image_resize(self, 'title_image', 'info/detail', 1920, 720)
         image2 = image_resize(self, 'desc_image', 'info/detail', 1280, 800)
+
         if image1 is False:
             update_fields = update_fields.remove('title_image')
+        else:
+            self.title_image = image1
+
         if image2 is False:
             update_fields = update_fields.remove('desc_image')
+        else:
+            self.desc_image = image2
 
         if (image1 or image2) is False:
             super().save(*args, update_fields=update_fields, **kwargs)
