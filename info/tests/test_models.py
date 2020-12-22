@@ -1,9 +1,8 @@
 import re
 
-from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-
-from info.models import HomeCarousel, Category, Review
+from django.test import TestCase
+from info.models import Category, HomeCarousel, Review
 
 
 class InfoTests(TestCase):
@@ -24,6 +23,8 @@ class InfoTests(TestCase):
 
         valid_info = Category(name_en='HI1',
                               name_it='HI1',
+                              menu_word_en='HCMW1',
+                              menu_word_it='HCMW1',
                               description_en='description',
                               description_it='description',
                               image=SimpleUploadedFile(
@@ -86,11 +87,11 @@ class InfoTests(TestCase):
         self.assertTrue(re.search('^info/category/default.*.jpeg$',
                                   new_info.image.name))
 
-    def test_info_str(self):
+    def test_category_str(self):
         """Tests the string method on the Category."""
         hi1 = Category.objects.latest('date_added')
         self.assertEqual(str(hi1),
-                         (f'{hi1.name}'))
+                         (f'{hi1.menu_word}'))
 
     def test_review_str(self):
         """Tests the string method on the Review."""
