@@ -15,6 +15,7 @@ htmlcov/
 .~c9*
 .c9
 venv
+.venv
 .vscode
 
 !jasmine.css
