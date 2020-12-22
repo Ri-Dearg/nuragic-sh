@@ -3,14 +3,11 @@
 import sys
 from io import BytesIO
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.core.validators import MinValueValidator, MaxValueValidator
-
 from PIL import Image
-
-from django_better_admin_arrayfield.models.fields import ArrayField
 
 
 def image_resize(self, image_title, folder, width, height):
@@ -28,7 +25,8 @@ def image_resize(self, image_title, folder, width, height):
 
             # Prevents images from being copied on every save
             # will save a new copy on an upload
-            if (this_object and f'{folder}' + '/' + f'{image_field.name}'.replace(" ", "_")
+            if (this_object and f'{folder}' +
+                '/' + f'{image_field.name}'.replace(" ", "_")
                     != object_image.name) or (not this_object):
                 # Image is resized
                 output_size = (width, height)
@@ -110,10 +108,10 @@ class Category(models.Model):
     class Meta:
         """Orders by the most recent created by default."""
         ordering = ['order']
-        verbose_name = 'Categorie'
+        verbose_name_plural = 'categories'
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.menu_word}'
 
 
 class DetailInfo(models.Model):
