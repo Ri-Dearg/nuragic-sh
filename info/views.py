@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from .models import Category, HomeCarousel, Review
+from .models import Category, DetailInfo, HomeCarousel, Review
 
 
 # Create your views here.
@@ -17,3 +17,8 @@ def render_index(request):
 class CategoryDetailView(DetailView):
     """Renders the category detail page."""
     model = Category
+
+
+class DetailInfoDetailView(DetailView):
+    """Renders the category detail page."""
+    model = DetailInfo
