@@ -7,15 +7,15 @@
 
 $enable-rounded: false;
 $enable-shadows: true;
-$enable-deprecation-messages :true;
+$enable-deprecation-messages: true;
 $navbar-dark-color: #fff;
 $navbar-dark-hover-color: #fff;
 
 $primary: #2b384c;
 $secondary: #c5b9a0;
-$warning: #F5C936;
-$info: #47B9FF;
-$success: #2CC968;
+$warning: #f5c936;
+$info: #00a1e4;
+$success: #2cc968;
 $danger: #dc3545;
 
 $grid-gutter-width: 0;
@@ -26,6 +26,23 @@ $grid-gutter-width: 0;
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "opacity": (
+      property: opacity,
+      responsive: true,
+      values: (
+        0: 0,
+        25: 0.25,
+        50: 0.5,
+        75: 0.75,
+        100: 1,
+      ),
+    ),
+  )
+);
 
 // Layout & components
 @import "bootstrap/root";
@@ -62,4 +79,4 @@ $grid-gutter-width: 0;
 
 // Utilities
 @import "bootstrap/utilities/api";
-// scss-docs-end import-stack
+// scss-docs-end import-stack;
