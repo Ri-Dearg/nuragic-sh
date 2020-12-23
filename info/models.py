@@ -63,13 +63,9 @@ class HomeCarousel(models.Model):
 
     def save(self, *args, **kwargs):
         image1 = image_resize(self, 'image', 1920, 720)
-        if image1 is False:
-            super().save(*args,
-                         update_fields=['name', 'description', 'display'],
-                         **kwargs)
-        else:
+        if image1:
             self.image = image1
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         """Orders by the most recent created by default."""
@@ -96,14 +92,9 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         image1 = image_resize(self, 'image', 1280, 800)
-        if image1 is False:
-            super().save(*args,
-                         update_fields=['name', 'menu_word', 'description',
-                                        'button_text', 'display', 'order'],
-                         **kwargs)
-        else:
+        if image1:
             self.image = image1
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         """Orders by the most recent created by default."""
@@ -122,36 +113,32 @@ class DetailInfo(models.Model):
         related_name='detail_info')
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
+    desc_title1 = models.CharField(max_length=60, null=False)
     description1 = models.TextField()
+    desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = models.TextField(blank=True, default='')
     title_image = models.ImageField(upload_to='info/detail')
     desc_image = models.ImageField(upload_to='info/detail', blank=True)
+    bot_image = models.ImageField(upload_to='info/detail', blank=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        update_fields = ['category', 'title', 'summary',
-                         'description1', 'description2', 'order',
-                         'date_added', 'title_image', 'desc_image']
-
         image1 = image_resize(self, 'title_image', 1500, 500)
         image2 = image_resize(self, 'desc_image', 1280, 800)
+        image3 = image_resize(self, 'bot_image', 1500, 500)
 
-        if image1 is False:
-            update_fields.remove('title_image')
-        else:
+        if image1:
             self.title_image = image1
 
-        if image2 is False:
-            update_fields.remove('desc_image')
-        else:
+        if image2:
             self.desc_image = image2
 
-        if (image1 or image2) is False:
-            super().save(*args, update_fields=update_fields, **kwargs)
-        else:
-            super().save(*args, **kwargs)
+        if image3:
+            self.bot_image = image3
+
+        super().save(*args, **kwargs)
 
     class Meta:
         """Orders by the most recent created by default."""
@@ -163,7 +150,10 @@ class DetailInfo(models.Model):
 
 class GalleryImage(models.Model):
     detail = models.ForeignKey(
-        DetailInfo, default=None, on_delete=models.CASCADE)
+        DetailInfo,
+        related_name='gallery',
+        default=None,
+        on_delete=models.CASCADE)
     image = models.ImageField(upload_to='info/detail/gallery')
 
     def __str__(self):
