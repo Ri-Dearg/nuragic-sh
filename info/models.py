@@ -10,7 +10,7 @@ from django.utils import timezone
 from PIL import Image
 
 
-def image_resize(self, image_title, folder, width, height):
+def image_resize(self, image_title, width, height):
     this_object = None
     image_field = getattr(self, image_title)
     try:
@@ -25,9 +25,9 @@ def image_resize(self, image_title, folder, width, height):
 
             # Prevents images from being copied on every save
             # will save a new copy on an upload
-            if (this_object and f'{folder}' +
-                '/' + f'{image_field.name}'.replace(" ", "_")
-                    != object_image.name) or (not this_object):
+            if (this_object and f'{image_field.name}'
+                .replace(' ', '_').replace('(', '').replace(')', '')
+                    not in object_image.name) or (not this_object):
                 # Image is resized
                 output_size = (width, height)
                 img = img.resize(size=(output_size))
@@ -62,7 +62,7 @@ class HomeCarousel(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        image1 = image_resize(self, 'image', 'info/carousel', 1920, 720)
+        image1 = image_resize(self, 'image', 1920, 720)
         if image1 is False:
             super().save(*args,
                          update_fields=['name', 'description', 'display'],
@@ -95,7 +95,7 @@ class Category(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        image1 = image_resize(self, 'image', 'info/category', 1280, 800)
+        image1 = image_resize(self, 'image', 1280, 800)
         if image1 is False:
             super().save(*args,
                          update_fields=['name', 'menu_word', 'description',
@@ -135,16 +135,16 @@ class DetailInfo(models.Model):
                          'description1', 'description2', 'order',
                          'date_added', 'title_image', 'desc_image']
 
-        image1 = image_resize(self, 'title_image', 'info/detail', 1920, 720)
-        image2 = image_resize(self, 'desc_image', 'info/detail', 1280, 800)
+        image1 = image_resize(self, 'title_image', 1500, 500)
+        image2 = image_resize(self, 'desc_image', 1280, 800)
 
         if image1 is False:
-            update_fields = update_fields.remove('title_image')
+            update_fields.remove('title_image')
         else:
             self.title_image = image1
 
         if image2 is False:
-            update_fields = update_fields.remove('desc_image')
+            update_fields.remove('desc_image')
         else:
             self.desc_image = image2
 
