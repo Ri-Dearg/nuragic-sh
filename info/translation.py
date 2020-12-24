@@ -11,7 +11,7 @@ class HomeCarouselTranslation(TranslationOptions):
 
 @register(Category)
 class CategoryTranslation(TranslationOptions):
-    fields = ('name', 'menu_word', 'description', 'button_text')
+    fields = ('title', 'menu_word', 'description', 'button_text')
     required_languages = ('en', 'it',)
 
 

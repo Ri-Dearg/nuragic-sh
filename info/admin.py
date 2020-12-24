@@ -5,8 +5,21 @@ from modeltranslation.admin import TranslationAdmin
 from .models import Category, DetailInfo, GalleryImage, HomeCarousel, Review
 
 
+class DetailInfoInlineAdmin(admin.StackedInline):
+    model = DetailInfo
+
+
 class GalleryInlineAdmin(admin.StackedInline):
     model = GalleryImage
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    """Displays the detailinfo arrayfield as a list."""
+    inlines = [DetailInfoInlineAdmin]
+
+
+class CategoryTrans(CategoryAdmin, TranslationAdmin):
+    pass
 
 
 class DetailInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
@@ -24,7 +37,7 @@ class GalleryImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(HomeCarousel, TranslationAdmin)
-admin.site.register(Category, TranslationAdmin)
+admin.site.register(Category, CategoryTrans)
 admin.site.register(DetailInfo, DetailInfoTrans)
 admin.site.register(GalleryImage, GalleryImageAdmin)
 admin.site.register(Review, TranslationAdmin)
