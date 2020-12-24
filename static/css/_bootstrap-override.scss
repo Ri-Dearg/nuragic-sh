@@ -23,6 +23,10 @@ $custom-colors: (
   "purple": #a755c2,
 );
 
+/*Sets default dropdown link colors*/
+$dropdown-link-hover-bg: $primary;
+$dropdown-link-active-bg: $warning;
+
 $grid-gutter-width: 0;
 
 // scss-docs-start import-stack
@@ -62,7 +66,7 @@ $utilities: map-merge(
 @import "bootstrap/forms";
 @import "bootstrap/buttons";
 @import "bootstrap/transitions";
-// @import "bootstrap/dropdown";
+@import "bootstrap/dropdown";
 // @import "bootstrap/button-group";
 @import "bootstrap/nav";
 @import "bootstrap/navbar";
