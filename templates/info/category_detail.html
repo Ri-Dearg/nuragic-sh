@@ -1,5 +1,5 @@
-{% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.name }}{% endblock %}
+{% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.title }}{% endblock %}
 {% block content %} <section class="pt-3">
-    <h1 class="h-font text-center display-1 text-secondary text-decoration-underline">{{ object.name|upper }}</h1>
+    <h1 class="h-font text-center display-1 text-secondary text-decoration-underline">{{ object.title|upper }}</h1>
     <article>{% include 'info/includes/category_info.html' %}</article>
 </section>{% endblock %}
