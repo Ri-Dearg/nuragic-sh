@@ -1,10 +1,8 @@
 from django.contrib import admin
-
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from modeltranslation.admin import TranslationAdmin
 
-from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
-
-from .models import HomeCarousel, Category, DetailInfo, GalleryImage, Review
+from .models import Category, DetailInfo, GalleryImage, HomeCarousel, Review
 
 
 class GalleryInlineAdmin(admin.StackedInline):
@@ -22,7 +20,7 @@ class DetailInfoTrans(DetailInfoAdmin, TranslationAdmin):
 
 class GalleryImageAdmin(admin.ModelAdmin):
     def has_module_permission(self, request):
-        return False
+        return False  # pragma: no cover
 
 
 admin.site.register(HomeCarousel, TranslationAdmin)
