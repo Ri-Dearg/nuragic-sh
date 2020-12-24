@@ -15,8 +15,13 @@ $primary: #2b384c;
 $secondary: #c5b9a0;
 $warning: #f5c936;
 $info: #00a1e4;
-$success: #2cc968;
-$danger: #dc3545;
+$success: #2a9134;
+$danger: #d62828;
+
+$custom-colors: (
+  "brown": #8a3324,
+  "purple": #a755c2,
+);
 
 $grid-gutter-width: 0;
 
@@ -24,6 +29,8 @@ $grid-gutter-width: 0;
 // Configuration
 @import "bootstrap/functions";
 @import "bootstrap/variables";
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 

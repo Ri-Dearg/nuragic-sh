@@ -3,28 +3,29 @@
 {% include 'info/includes/home_carousel.html' %} <section>
 	<article>
 		<aside>
-			<div class="row my-2">
-				<div class="col-12">
-					<p class="h-font l-space-2 d-none d-md-block h3 text-center text-secondary my-2"> &bull;
+			<div class="row">
+				<div class="col-12 bg-warning py-2">
+					<p class="h-font l-space-2 d-none d-md-block h3 text-center text-primary my-2"> &bull;
 						{% trans 'SPIRITUALITY' %} &bull; {% trans 'CONNECTIONS' %} &bull; {% trans 'SHARING' %} &bull;
 						{% trans 'ROOTS' %} &bull; </p>
-					<p class="h-font l-space-2 d-md-none h6 text-center text-secondary mb-0"> &bull;
+					<p class="h-font l-space-2 d-md-none h6 text-center text-primary mb-0"> &bull;
 						{% trans 'SPIRITUALITY' %} &bull; {% trans 'CONNECTIONS' %} &bull; {% trans 'SHARING' %} &bull;
 						{% trans 'ROOTS' %} &bull; </p>
 				</div>
 			</div>
 		</aside> {% for item in categories %} {% if 'about' in item.menu_word_en %} <section class="row">
 			<div class="col-auto col-md d-flex bg-white">
-				<img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid m-auto" />
+				<img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
 			</div>
 			<div class="col-auto col-md bg-white px-3 pt-3">
-				<h1 class="h-font l-space-2 text-center text-primary">{{ item.name|upper }}</h1>
+				<h1 class="h-font l-space-2 text-center text-brown">{{ item.title|upper }}</h1>
 				<p class="p-font text-primary">{{ item.description }}</p>
 				<p class="text-center">
 					<a href="{% url 'info:category-detail' item.id %}"
 						class="p-font btn-tran btn btn-warning shadow text-white">{{ item.button_text }}<a>
 				</p>
 			</div>
+			<div class="col-12 bg-warning py-2"></div>
 		</section> {% endif %} {% endfor %} {% include 'info/includes/home_reviews.html' %}
 	</article>
 	<article>{% include 'info/includes/home_info.html' %}</article>
