@@ -6,7 +6,7 @@ This is done in the view before being passed here. They are ordered by most rece
         class="carousel-indicators d-flex mb-0"> {% for number in review %} <li data-bs-target="#review-carousel"
             data-bs-slide-to="{{ forloop.counter0 }}" class="bg-warning {% if forloop.first %}active{% endif %}"></li>
         {% endfor %} </ol> {% endif %} <div class="carousel-inner text-center text-primary">
-        <h1 class="h-font l-space-2 display-4 text-brown mb-3">REVIEWS</h1> {% for item in review %} <div
+        <h1 class="h-font l-space-2 display-4 text-primary mb-3">REVIEWS</h1> {% for item in review %} <div
             class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
             <div class="row carousel-row">
                 <div class="col-12 col-md-10 offset-md-1 p-1 my-auto">
