@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.title }}{% endblock %}
-{% block content %} <section class="pt-3">
-    <h1 class="h-font text-center display-1 text-secondary text-decoration-underline">{{ object.title|upper }}</h1>
-    <article>{% include 'info/includes/category_info.html' %}</article>
-</section>{% endblock %}
+{% block content %} <article>
+    <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4 text-decoration-underline">
+        {{ object.title|upper }}</h1> {% include 'info/includes/category_info.html' %}
+</article>
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
+</div> {% endblock %}
