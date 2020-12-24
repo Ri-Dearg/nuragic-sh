@@ -47,7 +47,7 @@ def image_resize(self, image_title, width, height):
             else:
                 return False
         except ValueError:
-            return True
+            return False
 
 
 class HomeCarousel(models.Model):
