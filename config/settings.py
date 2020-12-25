@@ -13,10 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import sys
 
-from django.utils.translation import ugettext_lazy as _
-
 import dj_database_url
-
+from django.utils.translation import ugettext_lazy as _
 
 try:
     import env  # noqa: F401
@@ -69,6 +67,8 @@ INSTALLED_APPS = [
     'jasmine_testing',
     'contact',
     'info',
+    # Deletes unused media fields
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 
