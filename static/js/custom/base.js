@@ -6,7 +6,6 @@ function smoothFade() {
   $(".smooth-click")
     .unbind("click")
     .on("click", function (ev) {
-      console.log("hello");
       ev.preventDefault();
       var goTo = this.getAttribute("href");
       $(".preloader").fadeIn(1000);
@@ -24,7 +23,6 @@ function showToast() {
   // Fires the toast.
   var toast;
   for (toast in toastList) {
-    console.log(toastList[toast]);
     toastList[toast].show();
   }
 }

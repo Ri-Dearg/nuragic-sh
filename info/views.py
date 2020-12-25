@@ -42,7 +42,6 @@ class DetailInfoDetailView(DetailView):
         this_object = context['object']
         # Selects the active tab
         if f'/detailinfo/{this_object.id}' in self.request.path:
-            print(this_object.category.id)
             category_id = this_object.category.id
             context['active_category'] = f'{category_id}'
             context['active_page'] = f'{this_object.id}'
