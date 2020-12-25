@@ -59,7 +59,7 @@ function newsletterSignup(formData, formUrl) {
           .fadeTo(300, 0, function () {
             $(this)
               .html(
-                '<object class="header-object" type="image/svg+xml" data="/static/icons/check-circle.svg"><img src="/static/icons/check-circle.svg" alt="Account" /></object>'
+                `<svg class="bi" width="32"height="32" fill="currentColor"><use xlink:href="/static/icons/bootstrap-icons.svg#check-circle"></svg>`
               )
               .fadeTo(300, 0.65);
           });
