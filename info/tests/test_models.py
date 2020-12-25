@@ -24,8 +24,8 @@ class InfoTests(TestCase):
                                       image=image)
         valid_carousel.save()
 
-        valid_category = Category(name_en='HI1',
-                                  name_it='HI1',
+        valid_category = Category(title_en='HI1',
+                                  title_it='HI1',
                                   menu_word_en='HCMW1',
                                   menu_word_it='HCMW1',
                                   description_en='description',
