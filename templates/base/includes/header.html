@@ -29,7 +29,7 @@
 								aria-expanded="false">{{ item.menu_word|upper }}</a>
 							<ul class="dropdown-menu text-end text-md-center bg-secondary"
 								aria-labelledby="{{ item.menu_word }}Dropdown">
-								<li><a class="p-font l-space-1 dropdown-item text-white {% if item.id|stringformat:'i' in active_page %}active{% endif %}"
+								<li><a class="p-font l-space-1 dropdown-item text-white {% if item.id|stringformat:'i' in active_all %}active{% endif %}"
 										href="{% url 'info:category-detail' item.id %}">{% trans 'All' %}
 										{{ item.menu_word|title }}</a>
 								</li> {% for page in item.detail_info.all %} <li><a

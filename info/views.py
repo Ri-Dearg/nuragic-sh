@@ -26,7 +26,7 @@ class CategoryDetailView(DetailView):
         # Selects the active tab
         if f'/category/{this_object.id}' in self.request.path:
             context['active_category'] = f'{this_object.id}'
-            context['active_page'] = f'{this_object.id}'
+            context['active_all'] = f'{this_object.id}'
 
         return context
 
