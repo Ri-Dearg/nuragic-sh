@@ -35,16 +35,20 @@ class InfoTests(TestCase):
                                   order=1)
         valid_category.save()
 
-        valid_detailinfo = DetailInfo(title_en='HI1',
-                                      title_it='HI1',
-                                      summary_en='HCMW1',
-                                      summary_it='HCMW1',
-                                      desc_title1_en='heading',
-                                      desc_title1_it='heading',
-                                      description1_en='description',
-                                      description1_it='description',
-                                      title_image=image,
-                                      order=1)
+        valid_detailinfo = DetailInfo(
+            category=Category.objects.latest('date_added'),
+            title_en='HI1',
+            title_it='HI1',
+            summary_en='HCMW1',
+            summary_it='HCMW1',
+            desc_title1_en='heading',
+            desc_title1_it='heading',
+            description1_en='description',
+            description1_it='description',
+            title_image=image,
+            desc_image=image,
+            theme='brown',
+            order=1)
         valid_detailinfo.save()
 
         valid_review = Review(reviewer_name='abacus',
