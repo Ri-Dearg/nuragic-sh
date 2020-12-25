@@ -107,6 +107,24 @@ class Category(models.Model):
 
 class DetailInfo(models.Model):
     """Detailed info for Categories"""
+    beige = 'secondary'
+    blue = 'info'
+    brown = 'brown'
+    green = 'success'
+    navy = 'primary'
+    purple = 'purple'
+    red = 'danger'
+    yellow = 'warning'
+
+    theme_choices = [(beige, 'beige'),
+                     (blue, 'blue'),
+                     (brown, 'brown'),
+                     (green, 'green'),
+                     (navy, 'navy'),
+                     (purple, 'purple'),
+                     (red, 'red'),
+                     (yellow, 'yellow'), ]
+
     category = models.ForeignKey(
         Category, null=True,
         on_delete=models.SET_NULL,
@@ -118,10 +136,12 @@ class DetailInfo(models.Model):
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = models.TextField(blank=True, default='')
     title_image = models.ImageField(upload_to='info/detail')
-    desc_image = models.ImageField(upload_to='info/detail', blank=True)
+    desc_image = models.ImageField(upload_to='info/detail')
     bot_image = models.ImageField(upload_to='info/detail', blank=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
+    theme = models.CharField(
+        max_length=10, choices=theme_choices, default=blue)
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):

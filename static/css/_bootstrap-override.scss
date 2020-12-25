@@ -52,6 +52,18 @@ $utilities: map-merge(
         100: 1,
       ),
     ),
+    "text-shadow": (
+      property: text-shadow,
+      values: (
+        1: 0.1rem 0.1rem #000,
+        2: 0.2rem 0.2rem #000,
+      ),
+    ),
+    "text-decoration-color": (
+      class: decoration-color,
+      property: text-decoration-color,
+      values: $theme-colors,
+    ),
   )
 );
 
