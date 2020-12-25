@@ -31,9 +31,8 @@
             <h3 class="h-font text-center text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
                 {{ object.desc_title2|upper }}</h3>
             <p class="p-font text-primary">{{ object.description2 }}</p>
-        </div>
-        <div class="col-12 bg-{{ object.theme}} py-2"></div>
-        <img src="{{ object.bot_image.url }}" alt="{{ object.desc_title2 }}" class="img-fluid"></img>
-        <div class="col-12 bg-{{ object.theme}} py-2"></div>
+        </div> {% if object.bot_image %} <div class="col-12 bg-{{ object.theme}} py-2"></div>
+        <img src="{{ object.bot_image.url }}" alt="{{ object.desc_title2 }}" class="img-fluid"></img> {% endif %} <div
+            class="col-12 bg-{{ object.theme}} py-2"></div>
     </section> {% endif %}
 </article>{% endblock %}
