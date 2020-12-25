@@ -47,8 +47,15 @@
 		<!-- Links to contact page -->
 		<div class="col-12 col-md-4 mt-3">
 			<h2 class="p-font l-space-1 h4">{% trans 'Contact' %}</h2>
-			<p class="mb-0 "> Contact me on whatsapp, messenger or send an email on the <a class="text-primary ">Contact
-					Us</a> page </p>
+			<p class="mb-0 "> {% trans 'Message me on' %} <strong><a target="_blank "
+						href="https://wa.me/353834646130">WhatsApp <svg class="bi" width="16" height="16"
+							fill="currentColor">
+							<use xlink:href="{% static 'icons/bootstrap-icons.svg'%}#whatsapp" />
+						</svg></a></strong> , <strong><a target="_blank " href="https://m.me/NuragicShamanicHealing">FB
+						Messenger <svg class="bi" width="16" height="16" fill="currentColor">
+							<use xlink:href="{% static 'icons/bootstrap-icons.svg'%}#fb-messenger" />
+						</svg></a></strong> {% trans 'or' %} <strong><a class="smooth-click text-primary"
+						href="{% url 'contact:email-form' %}">{% trans 'send an email' %}.</a></strong></p>
 		</div>
 	</div>
 </footer>
