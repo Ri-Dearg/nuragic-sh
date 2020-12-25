@@ -1,8 +1,9 @@
-from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
 from django.utils.translation import ugettext as _
-from django.http import HttpResponse, JsonResponse
+from django.views.generic import CreateView
+from info.models import Category
 
 from .models import Email, Newsletter
 
@@ -17,9 +18,10 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': _('Email*'),
-                                             'class': 'form-control',
-                                             'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'}
+        form.fields['email'].widget.attrs = {
+            'placeholder': _('Email*'),
+            'class': 'form-control',
+            'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'}  # noqa E501
         form.fields['email'].label = _('Email*')
 
         form.fields['name'].widget.attrs = {'placeholder': _('Name*'),
@@ -39,9 +41,9 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         Mainly just highlights the "Contact" in the navbar."""
         context = super().get_context_data(**kwargs)
         # Details necessary for Stripe payment processing
-        contact_active = True
+        this_object = Category.objects.get(title_en='about')
+        context['active_category'] = f'{this_object.id}'
 
-        context['contact_active'] = contact_active
         return context
 
 

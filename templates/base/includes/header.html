@@ -3,7 +3,7 @@
 		<div class="col-auto mx-auto">
 			<a href="{% url 'info:home' %}" class="smooth-click text-decoration-none d-flex mt-2">
 				<img src="{% static 'images/logo.png' %}" alt="Logo" class="d-inline-block align-self-center" />
-				<h1 class="brand-logo h-font d-inline-block my-auto"> NURAGIC<span
+				<h1 class="brand-logo h-font d-inline-block my-auto">NURAGIC<span
 						class="brand-sub p-font d-block h6">SHAMANIC HEALING</span>
 				</h1>
 			</a>
@@ -36,7 +36,10 @@
 										class="p-font l-space-1 dropdown-item text-white {% if page.id|stringformat:'i' in active_page %}active{% endif %}"
 										href="{% url 'info:detailinfo-detail' page.id %}">{{ page.title|title }}</a>
 								</li>
-								<li> {% endfor %}
+								<li> {% endfor %} {% if 'about' in item.title_en %}
+								<li><a class="p-font l-space-1 dropdown-item text-white {% if 'contact' in request.path %}active{% endif %}"
+										href="{% url 'contact:email-form' %}">Contact</a>
+								</li> {% endif %}
 							</ul>
 						</li>{% endfor %}
 					</ul>
