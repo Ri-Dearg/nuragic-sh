@@ -1,34 +1,39 @@
 {% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.title }}{% endblock %}
 {% block content %} <article>
+    <div class="row">
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
+    </div>
     <section class="row">
         <div class="col-12 position-relative">
             <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 bg-dark opacity-25">
             </div>
             <h1
-                class="h-font position-absolute top-50 start-50 translate-middle w-100 text-center display-1 text-white text-decoration-underline">
+                class="h-font position-absolute top-50 start-50 translate-middle w-100 text-center display-1 text-white text-shadow-2">
                 {{ object.title|upper }} </h1>
             <img src="{{ object.title_image.url }}" alt="{{ object.title }}" class="img-fluid">
         </div>
-        <aside class="col-12 bg-info">
+        <aside class="col-12 bg-{{ object.theme}}">
             <p class="p-font h6 text-center fw-bold text-white my-2"><i>"{{ object.summary }}"</i></p>
         </aside>
     </section>
-    <section class="row">
+    <section class="row bg-white">
         <div class="col-auto col-md d-flex bg-white">
             <img src="{{ object.desc_image.url }}" alt="{{ item.title }}" class="img-fluid my-auto">
         </div>
         <div class="col-auto col-md bg-white px-3 pt-3">
-            <h3 class="h-font text-info h2">{{ object.desc_title1|upper }}</h3>
+            <h3 class="h-font text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
+                {{ object.desc_title1|upper }}</h3>
             <p class="p-font text-primary">{{ object.description1 }}</p>
         </div>
     </section> {% if object.description2 %} <section class="row">
-        <div class="col-12 bg-info py-2"></div>
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
         <div class="col-12 bg-white p-2 px-md-4">
-            <h3 class="h-font text-center text-info h2">{{ object.desc_title2|upper }}</h3>
+            <h3 class="h-font text-center text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
+                {{ object.desc_title2|upper }}</h3>
             <p class="p-font text-primary">{{ object.description2 }}</p>
         </div>
-        <div class="col-12 bg-info py-2"></div>
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
         <img src="{{ object.bot_image.url }}" alt="{{ object.desc_title2 }}" class="img-fluid"></img>
-        <div class="col-12 bg-info py-2"></div>
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
     </section> {% endif %}
 </article>{% endblock %}
