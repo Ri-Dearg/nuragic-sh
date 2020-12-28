@@ -32,9 +32,9 @@
 								<li><a class="p-font smooth-click l-space-1 dropdown-item text-white {% if item.id|stringformat:'i' in active_all %}active{% endif %}"
 										href="{% url 'info:category-detail' item.id %}">{% trans 'All' %}
 										{{ item.menu_word|title }}</a>
-								</li> {% for page in item.detail_info.all %} <li><a
+								</li> {% for page in item.page.all %} <li><a
 										class="p-font smooth-click l-space-1 dropdown-item text-white {% if page.id|stringformat:'i' in active_page %}active{% endif %}"
-										href="{% url 'info:detailinfo-detail' page.id %}">{{ page.title|title }}</a>
+										href="{% url 'info:page-detail' page.id %}">{{ page.title|title }}</a>
 								</li>
 								<li> {% endfor %} {% if 'about' in item.title_en %}
 								<li><a class="p-font l-space-1 smooth-click dropdown-item text-white {% if 'contact' in request.path %}active{% endif %}"

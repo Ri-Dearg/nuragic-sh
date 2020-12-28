@@ -109,7 +109,7 @@ class Category(models.Model):
         return f'{self.menu_word}'
 
 
-class DetailInfo(models.Model):
+class Page(models.Model):
     """Detailed info for Categories"""
     beige = 'secondary'
     blue = 'info'
@@ -132,16 +132,16 @@ class DetailInfo(models.Model):
     category = models.ForeignKey(
         Category, null=True,
         on_delete=models.SET_NULL,
-        related_name='detail_info')
+        related_name='page')
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     desc_title1 = models.CharField(max_length=60, null=False)
     description1 = models.TextField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = models.TextField(blank=True, default='')
-    title_image = models.ImageField(upload_to='info/detail')
-    desc_image = models.ImageField(upload_to='info/detail')
-    bot_image = models.ImageField(upload_to='info/detail', blank=True)
+    title_image = models.ImageField(upload_to='info/page')
+    desc_image = models.ImageField(upload_to='info/page')
+    bot_image = models.ImageField(upload_to='info/page', blank=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     theme = models.CharField(
@@ -173,15 +173,15 @@ class DetailInfo(models.Model):
 
 
 class GalleryImage(models.Model):
-    detail = models.ForeignKey(
-        DetailInfo,
+    page = models.ForeignKey(
+        Page,
         related_name='gallery',
         default=None,
         on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='info/detail/gallery')
+    image = models.ImageField(upload_to='info/page/gallery')
 
     def __str__(self):
-        return f'{self.detail}, {self.image}'
+        return f'{self.page}, {self.image}'
 
 
 class Review(models.Model):

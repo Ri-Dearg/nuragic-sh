@@ -2,12 +2,12 @@
 
 from django.urls import path
 
-from .views import CategoryDetailView, DetailInfoDetailView, render_index
+from .views import CategoryDetailView, PageDetailView, render_index
 
 urlpatterns = [
     path('', render_index, name="home"),
     path('category/<int:pk>/',
          CategoryDetailView.as_view(), name='category-detail'),
-    path('detailinfo/<int:pk>/',
-         DetailInfoDetailView.as_view(), name='detailinfo-detail'),
+    path('page/<int:pk>/',
+         PageDetailView.as_view(), name='page-detail'),
 ]

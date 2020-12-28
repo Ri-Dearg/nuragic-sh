@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
-from .models import Category, DetailInfo, GalleryImage, HomeCarousel, Review
+from .models import Category, GalleryImage, HomeCarousel, Page, Review
 
 
-class DetailInfoInlineAdmin(admin.StackedInline):
-    model = DetailInfo
+class PageInlineAdmin(TranslationStackedInline):
+    model = Page
 
 
 class GalleryInlineAdmin(admin.StackedInline):
@@ -14,20 +14,20 @@ class GalleryInlineAdmin(admin.StackedInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    """Displays the detailinfo arrayfield as a list."""
-    inlines = [DetailInfoInlineAdmin]
+    """Displays the Page arrayfield as a list."""
+    inlines = [PageInlineAdmin]
 
 
 class CategoryTrans(CategoryAdmin, TranslationAdmin):
     pass
 
 
-class DetailInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
-    """Displays the detailinfo arrayfield as a list."""
+class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    """Displays the Page arrayfield as a list."""
     inlines = [GalleryInlineAdmin]
 
 
-class DetailInfoTrans(DetailInfoAdmin, TranslationAdmin):
+class PageTrans(PageAdmin, TranslationAdmin):
     pass
 
 
@@ -38,6 +38,6 @@ class GalleryImageAdmin(admin.ModelAdmin):
 
 admin.site.register(HomeCarousel, TranslationAdmin)
 admin.site.register(Category, CategoryTrans)
-admin.site.register(DetailInfo, DetailInfoTrans)
+admin.site.register(Page, PageTrans)
 admin.site.register(GalleryImage, GalleryImageAdmin)
 admin.site.register(Review, TranslationAdmin)

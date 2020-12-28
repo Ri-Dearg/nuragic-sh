@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from .models import Category, DetailInfo, HomeCarousel, Review
+from .models import Category, HomeCarousel, Page, Review
 
 
 # Create your views here.
@@ -31,9 +31,9 @@ class CategoryDetailView(DetailView):
         return context
 
 
-class DetailInfoDetailView(DetailView):
+class PageDetailView(DetailView):
     """Renders the category detail page."""
-    model = DetailInfo
+    model = Page
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
@@ -41,7 +41,7 @@ class DetailInfoDetailView(DetailView):
 
         this_object = context['object']
         # Selects the active tab
-        if f'/detailinfo/{this_object.id}' in self.request.path:
+        if f'/page/{this_object.id}' in self.request.path:
             category_id = this_object.category.id
             context['active_category'] = f'{category_id}'
             context['active_page'] = f'{this_object.id}'
