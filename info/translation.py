@@ -1,6 +1,6 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from .models import Category, DetailInfo, HomeCarousel, Review
+from .models import Category, HomeCarousel, Page, Review
 
 
 @register(HomeCarousel)
@@ -15,8 +15,8 @@ class CategoryTranslation(TranslationOptions):
     required_languages = ('en', 'it',)
 
 
-@register(DetailInfo)
-class DetailInfoTranslation(TranslationOptions):
+@register(Page)
+class PageTranslation(TranslationOptions):
     fields = ('title', 'summary', 'desc_title1',
               'description1', 'desc_title2', 'description2')
     required_languages = {'default': (

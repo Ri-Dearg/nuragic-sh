@@ -2,8 +2,7 @@ import re
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from info.models import (Category, DetailInfo, GalleryImage, HomeCarousel,
-                         Review)
+from info.models import Category, GalleryImage, HomeCarousel, Page, Review
 
 
 class InfoTests(TestCase):
@@ -35,7 +34,7 @@ class InfoTests(TestCase):
                                   order=1)
         valid_category.save()
 
-        valid_detailinfo = DetailInfo(
+        valid_page = Page(
             category=Category.objects.latest('date_added'),
             title_en='HI1',
             title_it='HI1',
@@ -49,7 +48,7 @@ class InfoTests(TestCase):
             desc_image=image,
             theme='brown',
             order=1)
-        valid_detailinfo.save()
+        valid_page.save()
 
         valid_review = Review(reviewer_name='abacus',
                               text='this is a review')
@@ -108,8 +107,8 @@ class InfoTests(TestCase):
         self.assertEqual(str(hi1),
                          (f'{hi1.menu_word}'))
 
-    def test_detailinfo_image_processing(self):
-        d1 = DetailInfo.objects.latest('date_added')
+    def test_page_image_processing(self):
+        d1 = Page.objects.latest('date_added')
 
         image = SimpleUploadedFile(
             name='default.jpg',
@@ -126,7 +125,7 @@ class InfoTests(TestCase):
 
     def test_galleryimage_str(self):
         """Tests the string method on the GalleryImage."""
-        d1 = DetailInfo.objects.latest('date_added')
+        d1 = Page.objects.latest('date_added')
 
         image = SimpleUploadedFile(
             name='default.jpg',
@@ -135,9 +134,9 @@ class InfoTests(TestCase):
                  'rb').read(),
             content_type='image/jpeg',)
 
-        g1 = GalleryImage(detail=d1, image=image)
+        g1 = GalleryImage(page=d1, image=image)
         self.assertEqual(str(g1),
-                         (f'{g1.detail}, {g1.image}'))
+                         (f'{g1.page}, {g1.image}'))
 
     def test_review_str(self):
         """Tests the string method on the Review."""
