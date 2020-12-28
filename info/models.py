@@ -1,5 +1,6 @@
 """Models for the info module,"""
 
+import datetime
 import sys
 from io import BytesIO
 
@@ -20,6 +21,9 @@ def image_resize(self, image_title, width, height):
         pass
     finally:
         try:
+            time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
+                                              '%d.%m.%Y %H:%M:%S,%f')
+            millisecs = int(time.timestamp() * 1000)
             img = Image.open(image_field)
             img_format = img.format.lower()
 
@@ -40,7 +44,7 @@ def image_resize(self, image_title, width, height):
                 image_field = InMemoryUploadedFile(
                     output,
                     'ImageField',
-                    f'{image_field.name.split(".")[0]}.{img_format}',
+                    f'{image_field.name.split(".")[0]}_{millisecs}.{img_format}',
                     'image/jpeg', sys.getsizeof(output),
                     None)
                 return image_field
