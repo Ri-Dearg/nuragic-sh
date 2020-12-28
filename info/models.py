@@ -78,7 +78,7 @@ class HomeCarousel(models.Model):
 class Category(models.Model):
     """Allows for the creation of a collection of Products.
     You can add a splash image which will be resized and a blurb.
-    Images will be resized on upload to 1289x480px square shape.
+    Images will be resized on upload to 1200x628px squar shape.
     I would recommend cropping your images to a 16: 10 ratio first."""
     title = models.CharField(max_length=30, null=False)
     menu_word = models.CharField(max_length=10, null=False)
@@ -91,7 +91,7 @@ class Category(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        image1 = image_resize(self, 'image', 1280, 800)
+        image1 = image_resize(self, 'image', 1200, 628)
         if image1:
             self.image = image1
         super().save(*args, **kwargs)
@@ -146,7 +146,7 @@ class DetailInfo(models.Model):
 
     def save(self, *args, **kwargs):
         image1 = image_resize(self, 'title_image', 1500, 500)
-        image2 = image_resize(self, 'desc_image', 1280, 800)
+        image2 = image_resize(self, 'desc_image', 1200, 628)
         image3 = image_resize(self, 'bot_image', 1500, 500)
 
         if image1:
