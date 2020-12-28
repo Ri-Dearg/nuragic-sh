@@ -97,8 +97,8 @@ class InfoTests(TestCase):
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image.height, 800)
-        self.assertEqual(new_info.image.width, 1280)
+        self.assertEqual(new_info.image.height, 628)
+        self.assertEqual(new_info.image.width, 1200)
         self.assertTrue(re.search('^info/category/default.*.jpeg$',
                                   new_info.image.name))
 
