@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %} {% load i18n %} {% load static %} {% load app_filters %}
 {% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}website{% endblock %}
 {% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
-{% block og_description %}{{ object.title|title }}{% endblock %} {% block og_image %}{{ object.image }}{% endblock %}
+{% block og_description %}{{ object.title|title }}{% endblock %}
+{% block og_image %}{{ object.image.url }}{% endblock %}
 {% block og_image_type %}image/{{ object.image.name|extension }}{% endblock %}
 {% block og_image_width %}{{ object.image.width }}{% endblock %}
 {% block og_image_height %}{{ object.image.height }}{% endblock %}
