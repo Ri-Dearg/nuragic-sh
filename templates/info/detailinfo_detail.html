@@ -1,5 +1,12 @@
-{% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.title }}{% endblock %}
-{% block content %} <article>
+{% extends 'base/base.html' %} {% load i18n %} {% load static %} {% load app_filters %}
+{% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}article{% endblock %}
+{% block og_title %}Nuragic Shamanic Healing: {{ object.title }}{% endblock %}
+{% block og_description %}{{ object.desc_title1|title }}{% endblock %}
+{% block og_image %}{{ object.desc_image.url }}{% endblock %}
+{% block og_image_type %}image/{{ object.desc_image.name|extension }}{% endblock %}
+{% block og_image_width %}{{ object.desc_image.width }}{% endblock %}
+{% block og_image_height %}{{ object.desc_image.height }}{% endblock %}
+{% block og_image_alt %}{{ object.title }}{% endblock %} {% block content %} <article>
     <div class="row">
         <div class="col-12 bg-{{ object.theme}} py-2"></div>
     </div>
