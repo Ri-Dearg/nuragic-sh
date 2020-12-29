@@ -82,10 +82,29 @@
   color: #fff !important;
 }
 
-.body-mods {
-  margin-top: 136px;
+.z-n1 {
+  z-index: -1;
+}
+.z-n2 {
+  z-index: -2;
 }
 
+.border-position {
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.left-border {
+  transform: translate(-660px);
+}
+
+.right-border {
+  transform: translate(660px);
+}
+
+.main-mods {
+  margin-top: 136px;
+}
 .carousel-caption {
   position: absolute;
   right: 0;
