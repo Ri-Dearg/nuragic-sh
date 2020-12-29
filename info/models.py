@@ -9,6 +9,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from PIL import Image
+from tinymce.models import HTMLField
 
 
 def image_resize(self, image_title, width, height):
@@ -86,7 +87,7 @@ class Category(models.Model):
     I would recommend cropping your images to a 16: 10 ratio first."""
     title = models.CharField(max_length=30, null=False)
     menu_word = models.CharField(max_length=10, null=False)
-    description = models.TextField()
+    description = HTMLField()
     button_text = models.CharField(max_length=30, null=False)
     image = models.ImageField(upload_to='info/category')
     display = models.BooleanField(default=True)
@@ -136,9 +137,9 @@ class Page(models.Model):
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     desc_title1 = models.CharField(max_length=60, null=False)
-    description1 = models.TextField()
+    description1 = HTMLField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
-    description2 = models.TextField(blank=True, default='')
+    description2 = HTMLField(blank=True, default='')
     title_image = models.ImageField(upload_to='info/page')
     desc_image = models.ImageField(upload_to='info/page')
     bot_image = models.ImageField(upload_to='info/page', blank=True)
@@ -187,7 +188,7 @@ class GalleryImage(models.Model):
 class Review(models.Model):
     """Allows for the creation of reviews."""
     reviewer_name = models.CharField(max_length=50, null=False)
-    text = models.TextField()
+    text = HTMLField()
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
 

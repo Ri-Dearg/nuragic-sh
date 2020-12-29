@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'jasmine_testing',
     'contact',
     'info',
+    # Add editor in admin
+    'tinymce',
     # Deletes unused media fields
     'django_cleanup.apps.CleanupConfig',
 ]
