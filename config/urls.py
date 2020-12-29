@@ -27,4 +27,5 @@ urlpatterns = i18n_patterns(
     path('contact/', include(('contact.urls', 'contact'),
                              namespace='contact')),
     path('', include(('info.urls', 'info'), namespace='info')),
-    prefix_default_language=False) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    prefix_default_language=False) + static(settings.MEDIA_URL,
+                                            document_root=settings.MEDIA_ROOT)
