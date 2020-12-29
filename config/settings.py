@@ -235,3 +235,13 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "280px",
+    "width": "960px",
+    "plugins": "autosave emoticons link lists preview",
+    "toolbar": "undo redo | formatselect fontsizeselect | "
+    "bold italic underline | "
+    "alignleft aligncenter alignright alignjustify | "
+    "numlist bullist | link emoticons | preview restoredraft"
+}
