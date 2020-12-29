@@ -24,24 +24,26 @@
         </aside>
     </section>
     <section class="row bg-white">
-        <div class="col-auto col-md d-flex bg-white">
+        <div class="col-auto col-md d-flex order-3 order-xl-1 d-md-none d-xl-flex bg-white">
             <img src="{{ object.desc_image.url }}" alt="{{ item.title }}" class="img-fluid my-auto">
         </div>
-        <div class="col-auto col-md bg-white px-3 pt-3">
+        <div class="col-12 order-2 d-md-none bg-{{ object.theme}} py-2"></div>
+        <div class="col-auto col-md order-1 order-xl-2 bg-white px-3 pt-3">
+            <img src="{{ object.desc_image.url }}" alt="{{ item.title }}"
+                class="w-50 d-none d-md-inline-block d-xl-none float-start border rounded border-3 border-{{ object.theme}} me-2">
             <h3 class="h-font text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
                 {{ object.desc_title1|upper }}</h3>
             <div class="p-font text-primary">{{ object.description1|safe }}</div>
         </div>
-        <div class="col-12 bg-{{ object.theme}} py-2"></div>
+        <div class="col-12 order-3 bg-{{ object.theme}} py-2"></div>
     </section> {% if object.description2 or object.bot_image %} <section class="row"> {% if object.description2 %} <div
-            class="col-12 order-3 order-md-1 bg-white p-2 px-md-4">
+            class="col-12 bg-white p-2 px-md-4">
             <h3 class="h-font text-center text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
                 {{ object.desc_title2|upper }}</h3>
             <div class="p-font text-primary">{{ object.description2|safe }}</div>
         </div>
-        <div class="col-12 order-4 order-md-2 bg-{{ object.theme}} py-2"></div> {% endif %} {% if object.bot_image %}
-        </div>
-        <img src="{{ object.bot_image.url }}" alt="{{ object.desc_title2 }}" class="img-fluid order-1 order-md-3"></img>
-        {% endif %} <div class="col-12 order-2 order-md-4 bg-{{ object.theme}} py-2"></div>
+        <div class="col-12 bg-{{ object.theme}} py-2"></div> {% endif %} {% if object.bot_image %} </div>
+        <img src="{{ object.bot_image.url }}" alt="{{ object.desc_title2 }}" class="img-fluid"></img> {% endif %} <div
+            class="col-12 bg-{{ object.theme}} py-2"></div>
     </section> {% endif %}
 </article>{% endblock %}
