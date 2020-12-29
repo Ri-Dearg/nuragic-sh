@@ -46,12 +46,19 @@
 		<title> Nuragic Shamanic Healing | {% block head_title %}{% endblock %} </title>
 	</head> {% endblock %}
 
-	<body class="body-mods bg-primary">
+	<body class="bg-primary">
 		<div class="preloader justify-content-center align-items-center bg-primary">
 			<div class="preload-gif" style="background-image: url('{{ PRELOADER }}')" role="status">
 				<span class="visually-hidden">Loading...</span>
 			</div>
-		</div> {% include 'base/includes/header.html' %} <main class="min-vh-75 container-xxl shadow p-0">
+		</div>
+		<div class="z-n1 border-position fixed-top opacity-40 vh-100">
+			<img src="{% static 'images/borders.png'%}" alt="border image"
+				class="z-n2 left-border position-absolute h-100">
+			<img src="{% static 'images/borders.png'%}" alt="border image"
+				class="z-n2 right-border position-absolute h-100">
+		</div> {% include 'base/includes/header.html' %} <main
+			class="main-mods min-vh-75 container-xxl shadow-lg bg-primary p-0">
 			<!-- This hold the toasts notifications in position on the page.
         Can be changed with the toast-position class.-->
 			<div class="toast-container position-fixed"> {% if messages %} {% for message in messages %}
