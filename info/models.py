@@ -8,6 +8,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from PIL import Image
 from tinymce.models import HTMLField
 
@@ -136,6 +137,8 @@ class Page(models.Model):
         related_name='page')
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
+    button_text = models.CharField(
+        max_length=30, null=False, default=_('Learn More'))
     desc_title1 = models.CharField(max_length=60, null=False)
     description1 = HTMLField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')

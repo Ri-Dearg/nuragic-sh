@@ -17,10 +17,10 @@ class CategoryTranslation(TranslationOptions):
 
 @register(Page)
 class PageTranslation(TranslationOptions):
-    fields = ('title', 'summary', 'desc_title1',
+    fields = ('title', 'summary', 'button_text', 'desc_title1',
               'description1', 'desc_title2', 'description2')
     required_languages = {'default': (
-        'title', 'summary', 'desc_title1', 'description1',)}
+        'title', 'summary', 'button_text', 'desc_title1', 'description1',)}
 
 
 @ register(Review)

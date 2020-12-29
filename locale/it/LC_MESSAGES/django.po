@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-25 18:44+0100\n"
+"POT-Creation-Date: 2020-12-29 15:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\config\settings.py:165
+#: .\config\settings.py:167
 msgid "English"
 msgstr "Inglese"
 
-#: .\config\settings.py:166
+#: .\config\settings.py:168
 msgid "Italian"
 msgstr "Italiano"
 
@@ -61,6 +61,10 @@ msgstr "Grazie per la tua sottoscrizione."
 #: .\contact\views.py:71
 msgid "Success"
 msgstr "Successo"
+
+#: .\info\models.py:141
+msgid "Learn More"
+msgstr "Scopri di Più"
 
 #: .\templates\base\includes\footer.html:6
 msgid "Newsletter"
@@ -106,15 +110,26 @@ msgstr "HOME"
 msgid "All"
 msgstr "Tutti"
 
-#: .\templates\contact\email_form.html:1
+#: .\templates\contact\email_form.html:2
 msgid "Contact Us"
 msgstr "Contattaci"
 
-#: .\templates\contact\email_form.html:3
+#: .\templates\contact\email_form.html:3 .\templates\info\index.html:2
+msgid "Ancient Wisdom, Modern Healing"
+msgstr "Antica Sagezza, Energia Moderna"
+
+#: .\templates\contact\email_form.html:4 .\templates\info\index.html:3
+msgid ""
+"Consciousness, spirituality, healing and ancestry. Working with systems such "
+"as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
+"sharing and connections between individuals and cultures."
+msgstr "Consepevelozza, spirtualita, energia e antenati. Lavoriam con le sisteme dei Tarocchi, Oracoli, Tamburi e Reiki."
+
+#: .\templates\contact\email_form.html:9
 msgid "REACH OUT"
 msgstr "ENTRA IN CONTATTO"
 
-#: .\templates\contact\email_form.html:25
+#: .\templates\contact\email_form.html:26
 msgid "Send"
 msgstr "Invia"
 
@@ -160,26 +175,22 @@ msgstr "Cordiali Saluti"
 msgid "Nuragic Shamanic Healing Contact"
 msgstr "Contatto Nuragic Shamanic Healing"
 
-#: .\templates\info\includes\category_info.html:8
-msgid "Learn More"
-msgstr "Scopri di più"
-
-#: .\templates\info\index.html:2
+#: .\templates\info\index.html:7
 msgid "Holistic | Courses | Readings"
 msgstr "Olisitico | Corsi | Consulti"
 
-#: .\templates\info\index.html:9 .\templates\info\index.html:12
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "SPIRITUALITY"
 msgstr "SPIRITUALITÀ"
 
-#: .\templates\info\index.html:9 .\templates\info\index.html:12
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "CONNECTIONS"
 msgstr "CONESSIONI"
 
-#: .\templates\info\index.html:9 .\templates\info\index.html:12
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "SHARING"
 msgstr "CONDIVISIONE"
 
-#: .\templates\info\index.html:10 .\templates\info\index.html:13
+#: .\templates\info\index.html:15 .\templates\info\index.html:18
 msgid "ROOTS"
 msgstr "RADICI"
