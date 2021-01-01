@@ -1,3 +1,4 @@
+"""Views for the info app."""
 from django.shortcuts import render
 from django.views.generic import DetailView
 
@@ -6,6 +7,7 @@ from .models import Category, Page, Review, SplashImage
 
 # Create your views here.
 def render_index(request):
+    """Renders the index with context for categories and splash images."""
     carousel = SplashImage.objects.all().filter(display=True)
     review = Review.objects.all().filter(display=True)
     context = {'carousel': carousel,

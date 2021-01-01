@@ -1,3 +1,4 @@
+"""Adds context to every page."""
 from .models import Category
 
 
