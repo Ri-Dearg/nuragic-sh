@@ -1,12 +1,15 @@
+"""Tests views for the Info app."""
+
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from info.models import Category, Page
 
 
 class TestInfoViews(TestCase):
+    """Tests for Info app views."""
 
     def setUp(self):
-        """Sets up a SplashImage model."""
+        """Sets up a model instances for tests."""
         image = SimpleUploadedFile(
             name='default.jpg',
             content=open(
@@ -42,6 +45,7 @@ class TestInfoViews(TestCase):
         valid_page.save()
 
     def test_render_home(self):
+        """Tests templates for index page."""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'info/index.html')
@@ -50,6 +54,7 @@ class TestInfoViews(TestCase):
         self.assertTemplateUsed(response, 'base/includes/footer.html')
 
     def test_render_category_detail(self):
+        """Tests templates for Category detail page."""
         category = Category.objects.latest('date_added')
         response = self.client.get(f'/category/{category.id}/')
 
@@ -63,6 +68,7 @@ class TestInfoViews(TestCase):
         self.assertTrue(response.context['active_all'], f'{category.id}')
 
     def test_render_page_detail(self):
+        """Tests templates for Page detail page."""
         page = Page.objects.latest('date_added')
         response = self.client.get(f'/page/{page.id}/')
 

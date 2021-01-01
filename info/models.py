@@ -14,15 +14,19 @@ from tinymce.models import HTMLField
 
 
 def image_resize(self, image_title, width, height):
+    """Function to resize the images for smaller memory."""
+    # Checks if the instance already exists
     this_object = None
     image_field = getattr(self, image_title)
     try:
+        # If it exists, selects current image, if not goes to next step
         this_object = self.__class__.objects.get(pk=self.id)
         object_image = getattr(this_object, image_title)
     except self.__class__.DoesNotExist:
         pass
     finally:
         try:
+            # Makes each image unique, django-cleanup deletes shared files
             time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
                                               '%d.%m.%Y %H:%M:%S,%f')
             millisecs = int(time.timestamp() * 1000)
@@ -50,8 +54,10 @@ def image_resize(self, image_title, width, height):
                     'image/jpeg', sys.getsizeof(output),
                     None)
                 return image_field
+            # if the image doesn't need to be changed, returns false
             else:
                 return False
+        # If uploading multiple images on a new file there can this error.
         except ValueError:
             return False
 
@@ -71,6 +77,7 @@ class SplashImage(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
+        """Resizes and saves images."""
         image1 = image_resize(self, 'image_big', 1500, 500)
         image2 = image_resize(self, 'image_small', 1200, 628)
 
@@ -104,6 +111,7 @@ class Category(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
+        """Resizes and saves images."""
         image1 = image_resize(self, 'image', 1200, 628)
         if image1:
             self.image = image1
@@ -119,7 +127,7 @@ class Category(models.Model):
 
 
 class Page(models.Model):
-    """Detailed info for Categories"""
+    """Detailed pages for Categories"""
     beige = 'secondary'
     blue = 'info'
     brown = 'brown'
@@ -160,6 +168,7 @@ class Page(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
+        """Resizes and saves images."""
         image1 = image_resize(self, 'title_image', 1500, 500)
         image2 = image_resize(self, 'desc_image', 1200, 628)
         image3 = image_resize(self, 'bot_image', 1500, 500)
@@ -184,6 +193,7 @@ class Page(models.Model):
 
 
 class GalleryImage(models.Model):
+    """Currently not implemented. Used for galleries on Pages."""
     page = models.ForeignKey(
         Page,
         related_name='gallery',

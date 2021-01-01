@@ -1,3 +1,4 @@
+"""Tests for the Info app Models."""
 import re
 
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -5,11 +6,11 @@ from django.test import TestCase
 from info.models import Category, GalleryImage, Page, Review, SplashImage
 
 
-class InfoTests(TestCase):
-    """Tests for Product models."""
+class TestInfoModels(TestCase):
+    """Tests for Info models."""
 
     def setUp(self):
-        """Sets up a SplashImage model."""
+        """Created instances for use in tests"""
         image = SimpleUploadedFile(
             name='default.jpg',
             content=open(
@@ -119,6 +120,8 @@ class InfoTests(TestCase):
                          (f'{hi1.menu_word}'))
 
     def test_page_image_processing(self):
+        """Tests that an uploaded Page image is resized and
+        processed correctly by the view. Tests str"""
         d1 = Page.objects.latest('date_added')
 
         image = SimpleUploadedFile(

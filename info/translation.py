@@ -1,3 +1,4 @@
+"""Fields to be translated by django-modeltranslation."""
 from modeltranslation.translator import TranslationOptions, register
 
 from .models import Category, Page, Review, SplashImage
