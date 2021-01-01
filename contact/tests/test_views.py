@@ -1,3 +1,4 @@
+"""Tests views for the Contact app."""
 from contact.models import Newsletter
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
@@ -5,8 +6,10 @@ from info.models import Category
 
 
 class TestContactViews(TestCase):
+    """Tests for Contact app views."""
 
     def setUp(self):
+        """Created instances for use in tests"""
         image = SimpleUploadedFile(
             name='default.jpg',
             content=open(
@@ -25,14 +28,14 @@ class TestContactViews(TestCase):
                                   order=1)
         valid_category.save()
 
-    """Tests views for the Email app."""
-    # Confirms the correct template is used
-
     def test_contact_template(self):
+        """Tests templates for Contact page."""
         self.client.get('/contact/')
         self.assertTemplateUsed('contact_form.html')
 
-    def test_newsletter_signup(self):
+    def test_newsletter_singup(self):
+        """FETCH method for signing up to newletter checked."""
+        # Signs up for newsletter in both languages.
         self.client.post('/contact/f/newsletter/',
                          {'email_en': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
@@ -40,18 +43,19 @@ class TestContactViews(TestCase):
                          {'email_it': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
+        # Retrieves the newletter and checks that the email is present
         newsletter = Newsletter.objects.get(name="basic")
-
         self.assertTrue("test@test.com" in newsletter.email_list_en)
 
+        # Checks the correct message is processed if already signed up
         response = self.client.post('/contact/f/newsletter/',
                                     {'email_en': 'test@test.com'},
                                     HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
         self.assertTrue(response.content,
                         {"message": "You have already signed up for the newsletter.",  # NOQA E501
                          "tag": "info"})
 
+        # Checks for refusal in a GET request
         response = self.client.get('/contact/f/newsletter/',
                                    {'email_en': 'test@test.com'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
