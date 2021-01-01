@@ -1,18 +1,12 @@
 """Models for the info module."""
 
-from django.shortcuts import reverse
+from config import settings
 from django.core.mail import send_mail
+from django.db import models
+from django.shortcuts import reverse
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.translation import get_language
-from django.db import IntegrityError
-
-
-from django.db import models
-
 from django_better_admin_arrayfield.models.fields import ArrayField
-
-from config import settings
 
 
 class Newsletter(models.Model):
@@ -24,6 +18,8 @@ class Newsletter(models.Model):
         null=False, blank=False), default=list)
 
     def save(self, *args, **kwargs):
+        """Function """
+        # Declares variables to check for users in certain newsletters
         email_history = EmailHistory.objects.all()
         history_list = []
         for item in email_history:
@@ -32,6 +28,8 @@ class Newsletter(models.Model):
         news_list_it = self.email_list_it
         history_obj = []
 
+        # These two functions check for which newsletter the user has
+        # subscribed to and highlights the correct checkboxes accordingly
         for email in news_list_en:
             for item in email_history:
                 if email == item.email_address and item.newsletter_en is False:
@@ -86,6 +84,8 @@ class EmailHistory(models.Model):
     newsletter_it = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
+        """Fills newletter subscription boxes accordingly
+        and sorts them alphabetically."""
         newsletter = Newsletter.objects.get(name='basic')
         newsletter_list_en = newsletter.email_list_en
         newsletter_list_it = newsletter.email_list_it
@@ -101,7 +101,7 @@ class EmailHistory(models.Model):
     class Meta:
         """Orders by alphabetical order."""
         ordering = ['email_address']
-        verbose_name = 'Email Historie'
+        verbose_name_plural = 'Email Histories'
 
     def __str__(self):
         return f'{self.email_address}'
