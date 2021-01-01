@@ -2,26 +2,22 @@
 <!-- Displays carousel items. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
 <div id="splash-carousel" class="carousel slide" data-bs-ride="carousel">
-    <!-- This loops through the items, setting the first as the active one. -->
-    {% if carousel|length > 1 %}
-    <ol class="carousel-indicators d-none d-lg-flex mb-0">
-        {% for number in carousel %}
-        <li data-bs-target="#splash-carousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
-        {% endfor %}
-    </ol>
-    {% endif %}
-    <div class="carousel-inner">
-        <!-- This loops through each item and gives them appropriate images and links. -->
-        {% for item in carousel %}
-        <a class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
-            <img src="{{ item.image.url }}" class="d-block w-100" alt="{{ item.name }}" />
+    <!-- This loops through the items, setting the first as the active one. --> {% if carousel|length > 1 %} <ol
+        class="carousel-indicators d-none d-lg-flex mb-0"> {% for number in carousel %} <li
+            data-bs-target="#splash-carousel" data-bs-slide-to="{{ forloop.counter0 }}"
+            {% if forloop.first %}class="active" {% endif %}></li> {% endfor %} </ol> {% endif %} <div
+        class="carousel-inner">
+        <!-- This loops through each item and gives them appropriate images and links. --> {% for item in carousel %} <a
+            class="smooth-click carousel-item {% if forloop.first %}active{% endif %}"
+            href="{% url 'info:page-detail' item.page.id %}">
+            <img src="{{ item.image_big.url }}" class="d-none d-md-block w-100" alt="{{ item.title }}" />
+            <img src="{{ item.image_small.url }}" class="d-block d-md-none w-100" alt="{{ item.title }}" />
             <div class="dark-overlay carousel-caption w-100 py-1 py-lg-3">
-                <h5 class="h-font l-space-2 mb-0 mb-md-1">{{ item.name }}</h5>
+                <h5 class="h-font l-space-2 mb-0 mb-md-1">{{ item.title }}</h5>
                 <p class="p-font d-none d-md-block mb-0">{{item.description}}</p>
             </div>
         </a> {% endfor %}
-    </div>
-    {% if carousel|length > 1 %}
+    </div> {% if carousel|length > 1 %}
     <!-- This displays the buttons for slide selection. -->
     <a class="carousel-control-prev" href="#splash-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
