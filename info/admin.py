@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
-from .models import Category, GalleryImage, HomeCarousel, Page, Review
+from .models import Category, GalleryImage, Page, Review, SplashImage
 
 
 class PageInlineAdmin(TranslationStackedInline):
@@ -36,7 +36,7 @@ class GalleryImageAdmin(admin.ModelAdmin):
         return False  # pragma: no cover
 
 
-admin.site.register(HomeCarousel, TranslationAdmin)
+admin.site.register(SplashImage, TranslationAdmin)
 admin.site.register(Category, CategoryTrans)
 admin.site.register(Page, PageTrans)
 admin.site.register(GalleryImage, GalleryImageAdmin)

@@ -1,10 +1,10 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from .models import Category, HomeCarousel, Page, Review
+from .models import Category, Page, Review, SplashImage
 
 
-@register(HomeCarousel)
-class HomeCarouselTranslation(TranslationOptions):
+@register(SplashImage)
+class SplashImageTranslation(TranslationOptions):
     fields = ('title', 'description')
     required_languages = ('en', 'it',)
 
