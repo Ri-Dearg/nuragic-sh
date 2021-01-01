@@ -56,7 +56,7 @@ def image_resize(self, image_title, width, height):
             return False
 
 
-class HomeCarousel(models.Model):
+class SplashImage(models.Model):
     """Allows for the creation of a collection of carousel items.
     You can add a splash image which will be resized and a blurb.
     Images will be resized on upload to 1920x720px square shape.

@@ -6,7 +6,7 @@ from info.models import Category, Page
 class TestInfoViews(TestCase):
 
     def setUp(self):
-        """Sets up a HomeCarousel model."""
+        """Sets up a SplashImage model."""
         image = SimpleUploadedFile(
             name='default.jpg',
             content=open(
