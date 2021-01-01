@@ -17,5 +17,6 @@ htmlcov/
 venv
 .venv
 .vscode
+staticfiles
 
 !jasmine.css
