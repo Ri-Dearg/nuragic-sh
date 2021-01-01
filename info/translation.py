@@ -5,7 +5,7 @@ from .models import Category, HomeCarousel, Page, Review
 
 @register(HomeCarousel)
 class HomeCarouselTranslation(TranslationOptions):
-    fields = ('name', 'description')
+    fields = ('title', 'description')
     required_languages = ('en', 'it',)
 
 

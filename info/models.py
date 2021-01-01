@@ -61,16 +61,23 @@ class HomeCarousel(models.Model):
     You can add a splash image which will be resized and a blurb.
     Images will be resized on upload to 1920x720px square shape.
     I would recommend cropping your images to a 8: 3 ratio first."""
-    name = models.CharField(max_length=30, null=False)
+    page = models.OneToOneField('Page',
+                                on_delete=models.CASCADE)
+    title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
-    image = models.ImageField(upload_to='carousel')
+    image_big = models.ImageField(upload_to='carousel')
+    image_small = models.ImageField(upload_to='carousel')
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        image1 = image_resize(self, 'image', 1920, 720)
+        image1 = image_resize(self, 'image_big', 1500, 500)
+        image2 = image_resize(self, 'image_small', 1200, 628)
+
         if image1:
-            self.image = image1
+            self.image_big = image1
+        if image1:
+            self.image_small = image2
         super().save(*args, **kwargs)
 
     class Meta:
@@ -78,7 +85,7 @@ class HomeCarousel(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.title}'
 
 
 class Category(models.Model):
