@@ -16,13 +16,6 @@ class InfoTests(TestCase):
                 'media/default.jpg',
                  'rb').read(),
             content_type='image/jpeg',)
-        valid_carousel = SplashImage(title_en='HC1',
-                                     title_it='HC1',
-                                     description_en='description',
-                                     description_it='description',
-                                     image_big=image,
-                                     image_small=image)
-        valid_carousel.save()
 
         valid_category = Category(title_en='HI1',
                                   title_it='HI1',
@@ -51,6 +44,15 @@ class InfoTests(TestCase):
             order=1)
         valid_page.save()
 
+        valid_splash = SplashImage(page=Page.objects.latest('date_added'),
+                                   title_en='splash1',
+                                   title_it='splash1',
+                                   description_en='description',
+                                   description_it='description',
+                                   image_big=image,
+                                   image_small=image)
+        valid_splash.save()
+
         valid_review = Review(reviewer_name='abacus',
                               text='this is a review')
 
@@ -61,8 +63,12 @@ class InfoTests(TestCase):
         processed correctly by the view."""
 
         # Retrieves the latest SplashImage and saves an image to it.
-        hc1 = SplashImage.objects.latest('date_added')
-        hc1.image = SimpleUploadedFile(
+        splash1 = SplashImage.objects.latest('date_added')
+        splash1.image_big = SimpleUploadedFile(
+            name='default.jpg',
+            content=open('media/default.jpg', 'rb').read(),
+            content_type='image/jpeg')
+        splash1.image_big = SimpleUploadedFile(
             name='default.jpg',
             content=open('media/default.jpg', 'rb').read(),
             content_type='image/jpeg')
@@ -71,16 +77,20 @@ class InfoTests(TestCase):
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image.height, 720)
-        self.assertEqual(new_info.image.width, 1920)
+        self.assertEqual(new_info.image_big.height, 500)
+        self.assertEqual(new_info.image_big.width, 1500)
+        self.assertEqual(new_info.image_small.height, 628)
+        self.assertEqual(new_info.image_small.width, 1200)
         self.assertTrue(re.search('^carousel/default.*.jpeg$',
-                                  new_info.image.name))
+                                  new_info.image_big.name))
+        self.assertTrue(re.search('^carousel/default.*.jpeg$',
+                                  new_info.image_small.name))
 
     def test_carousel_str(self):
         """Tests the string method on the SplashImage."""
-        hc1 = SplashImage.objects.latest('date_added')
-        self.assertEqual(str(hc1),
-                         (f'{hc1.title}'))
+        splash1 = SplashImage.objects.latest('date_added')
+        self.assertEqual(str(splash1),
+                         (f'{splash1.title}'))
 
     def test_category_image_file_is_processed_correctly(self):
         """Tests that an uploaded Category image is resized and
