@@ -1,26 +1,39 @@
-{% load static %} {% get_media_prefix as MEDIA_URL %} {% for item in categories %}
-{% if 'about' not in item.menu_word_en %} <div class="col-12 bg-brown py-2"></div>
-<section class="row bg-white"> {% if forloop.counter|divisibleby:"2" %} <div class="col-auto col-md d-flex bg-white">
-		<img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
-	</div>
-	<div class="col-auto col-md align-items-center bg-white my-auto px-3 px-md-4 pt-3">
-		<h1 class="h-font l-space-2 text-primary text-primary"> {{ item.title|upper }} </h1>
-		<div class="p-font text-primary">{{ item.description|safe }}</div>
-		<p class="text-center py-2">
-			<a href="{% url 'info:category-detail' item.id %}"
-				class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
-		</p>
-	</div> {% else %} <div class="col-auto col-md order-2 order-md-1 bg-white my-auto px-3 px-md-4 pt-3">
-		<h1 class="h-font l-space-2 text-primary"> {{ item.title|upper }} </h1>
-		<div class="p-font text-primary">{{ item.description|safe }}</div>
-		<p class="text-center py-2">
-			<a href="{% url 'info:category-detail' item.id %}"
-				class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
-		</p>
-	</div>
-	<div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
-		<img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid my-auto" />
-	</div> {% endif %}
-</section> {% endif %}{% endfor %} <div class="row">
-	<div class="col-12 bg-brown py-2"></div>
+{% load static %}
+<!-- Displays a section for each Category -->
+{% for item in categories %}
+<!-- Will not display the about section here .Alternates the layout-->
+{% if 'about' not in item.menu_word_en %}
+<!-- spacer -->
+<div class="col-12 bg-brown py-2"></div>
+<section class="row bg-white">
+    {% if forloop.counter|divisibleby:"2" %}
+    <div class="col-auto col-md d-flex bg-white">
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
+    </div>
+    <div class="col-auto col-md align-items-center bg-white my-auto px-3 px-md-4 pt-3">
+        <h2 class="h-font l-space-2 h1 text-primary text-primary"> {{ item.title|upper }} </h2>
+        <div class="p-font text-primary">{{ item.description|safe }}</div>
+        <p class="text-center py-2">
+            <a href="{% url 'info:category-detail' item.id %}"
+                class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
+        </p>
+    </div>
+    {% else %}
+    <div class="col-auto col-md order-2 order-md-1 bg-white my-auto px-3 px-md-4 pt-3">
+        <h2 class="h-font l-space-2 h1 text-primary"> {{ item.title|upper }} </h2>
+        <div class="p-font text-primary">{{ item.description|safe }}</div>
+        <p class="text-center py-2">
+            <a href="{% url 'info:category-detail' item.id %}"
+                class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
+        </p>
+    </div>
+    <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid my-auto" />
+    </div>
+    {% endif %}
+</section>
+{% endif %}
+{% endfor %}
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
 </div>
