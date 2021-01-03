@@ -15,7 +15,7 @@
         <div class="p-font text-primary">{{ item.description|safe }}</div>
         <p class="text-center py-2">
             <a href="{% url 'info:category-detail' item.id %}"
-                class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
+                class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
         </p>
     </div>
     {% else %}
@@ -24,7 +24,7 @@
         <div class="p-font text-primary">{{ item.description|safe }}</div>
         <p class="text-center py-2">
             <a href="{% url 'info:category-detail' item.id %}"
-                class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
+                class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
         </p>
     </div>
     <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">

@@ -8,7 +8,7 @@
             <h2 class="h-font l-space-2 h1 text-primary text-center">{{ item.title|upper }}</h2>
             <p class="p-font text-primary">{{ item.summary }}</p>
             <p class="text-center"><a href="{% url 'info:page-detail' item.id %}"
-                    class="p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a></p>
+                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a></p>
         </div>
         <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
             <img src="{{ item.desc_image.url }}" alt="{{ item.title }}" class="img-fluid my-auto">
