@@ -1,105 +1,207 @@
-@font-face {
-    font-family: 'Sierra_madre';
-    src: url('custom/fonts/sierra_madre/sierra_madre-webfont.eot');
-    src: url('custom/fonts/sierra_madre/sierra_madre-webfont.eot?#iefix') format('embedded-opentype'),
-    url('custom/fonts/sierra_madre/sierra_madre-webfont.woff2') format('woff2'),
-    url('custom/fonts/sierra_madre/sierra_madre-webfont.woff') format('woff'),
-    url('custom/fonts/sierra_madre/sierra_madre-webfont.ttf') format('truetype'),
-    url('custom/fonts/sierra_madre/sierra_madre-webfont.svg#sierra_madreregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
 
-@font-face {
-    font-family: 'Montserrat';
-    src: url('custom/fonts/montserrat/montserrat-regular-webfont.eot');
-    src: url('custom/fonts/montserrat/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('custom/fonts/montserrat/montserrat-regular-webfont.woff2') format('woff2'),
-    url('custom/fonts/montserrat/montserrat-regular-webfont.woff') format('woff'),
-    url('custom/fonts/montserrat/montserrat-regular-webfont.ttf') format('truetype'),
-    url('custom/fonts/montserrat/montserrat-regular-webfont.svg#montserratregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/*Used for the main brand logo in the Navbar*/
-
-.brand-logo {
-    font-size: 3.2rem;
-    text-decoration: none;
-    color: #ffffff;
-    letter-spacing: 0.8rem;
-}
-
-.brand-sub {
-    letter-spacing: 0.225rem;
-    color: #c5b9a0;
-}
-
-.h-font {
-    font-family: Sierra_madre, Arial, sans-serif;
-}
-
-.p-font {
-    font-family: Montserrat, sans-serif;
-}
-
-.l-space-1 {
-    letter-spacing: 0.1rem
-}
-
-.l-space-2 {
-    letter-spacing: 0.25rem
-}
-
-.l-height-1 {
-    line-height: 1.25
-}
-
-.nav-item {
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
-}
-
-.nav-item.active {
-    background-color: #F5C936;
-}
+/*--------------------------------------------------------------------------
+Buttons
+--------------------------------------------------------------------------*/
 
 .btn-tran:hover {
-    background-color: #2b384c;
+  background-color: #2b384c;
 }
 
 .btn.btn-tran:hover {
-    background-color: #8A3324;
-    color: #fff !important;
+  background-color: #8a3324;
+  color: #fff !important;
 }
 
-.body-mods {
-    margin-top: 136px;
-}
-
+/*--------------------------------------------------------------------------
+Carousel
+--------------------------------------------------------------------------*/
 .carousel-caption {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .carousel-control-prev-icon.rev-arr {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
 }
 
 .carousel-control-next-icon.rev-arr {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
 .dark-overlay {
-    background-color: rgba(38, 30, 46, 0.7);
+  background-color: rgba(23, 36, 56, 0.7);
+}
+
+
+.foot-link.sv-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.foot-link.sv-md {
+  width: 40px;
+  height: 40px;
+}
+
+.foot-link.sv-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.foot-link:hover {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------------------
+Fonts
+--------------------------------------------------------------------------*/
+/*Font used for Headings and titles*/
+@font-face {
+  font-family: "Sierra_madre";
+  src: url("custom/fonts/sierra_madre/sierra_madre-webfont.eot");
+  src: url("custom/fonts/sierra_madre/sierra_madre-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.woff2") format("woff2"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.woff") format("woff"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.ttf") format("truetype"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.svg#sierra_madreregular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/*Font used for General text*/
+@font-face {
+  font-family: "Montserrat";
+  src: url("custom/fonts/montserrat/montserrat-regular-webfont.eot");
+  src: url("custom/fonts/montserrat/montserrat-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.woff2")
+      format("woff2"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.woff")
+      format("woff"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.ttf")
+      format("truetype"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.svg#montserratregular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Used for the main brand logo in the Navbar*/
+.brand-logo {
+  font-size: 3.2rem;
+  text-decoration: none;
+  color: #ffffff;
+  letter-spacing: 0.8rem;
+}
+
+/*Sub text in the brand logo*/
+.brand-sub {
+  letter-spacing: 0.225rem;
+  color: #c5b9a0;
+}
+
+/*sets fonts for headings*/
+.h-font {
+  font-family: Sierra_madre, Arial, sans-serif;
+}
+
+/*Sets fonts for paragraphs*/
+.p-font {
+  font-family: Montserrat, sans-serif;
+}
+
+/*Letter spacing and line height*/
+.l-space-1 {
+  letter-spacing: 0.1rem;
+}
+
+.l-space-2 {
+  letter-spacing: 0.25rem;
+}
+
+.l-height-1 {
+  line-height: 1.25;
+}
+
+/*--------------------------------------------------------------------------
+Forms
+--------------------------------------------------------------------------*/
+
+/*Spaces the textarea*/
+.form-floating > textarea {
+  min-height: 200px;
+}
+
+.form-box {
+  max-width: 500px;
+}
+
+/*--------------------------------------------------------------------------
+Navbar
+--------------------------------------------------------------------------*/
+
+/*Hover transition*/
+.nav-item {
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/*Highlighted nav option*/
+.nav-item.active {
+  background-color: #f5c936;
+}
+
+
+/*--------------------------------------------------------------------------
+Positioning
+--------------------------------------------------------------------------*/
+
+/*Used for the background images*/
+.z-n1 {
+  z-index: -1;
+}
+
+.z-n2 {
+  z-index: -2;
 }
 
 .min-vh-75 {
-    min-height: 75vh;
+  min-height: 75vh;
+}
+
+/*Background images positioning*/
+.border-position {
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.left-border {
+  -webkit-transform: translate(-660px);
+      -ms-transform: translate(-660px);
+          transform: translate(-660px);
+}
+
+.right-border {
+  -webkit-transform: translate(660px);
+      -ms-transform: translate(660px);
+          transform: translate(660px);
+}
+
+/* Pushed down for the header*/
+.main-mods {
+  margin-top: 136px;
 }
 
 /*--------------------------------------------------------------------------
@@ -107,20 +209,22 @@ Preloader
 --------------------------------------------------------------------------*/
 
 .preloader {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    z-index: 1025;
-    padding-bottom: 153px
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1025;
+  padding-bottom: 153px;
 }
 
-.spinner-border {
-    width: 5rem;
-    height: 5rem;
+.preload-gif {
+  width: 10rem;
+  height: 10rem;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /*--------------------------------------------------------------------------
@@ -128,26 +232,14 @@ Toasts
 --------------------------------------------------------------------------*/
 
 /*This allows for multiple toasts to stack.*/
-
-/*This positions the toast on the page.*/
-
 .toast-container {
-    top: 146px;
-    right: 10px;
-    min-height: 200px;
-    z-index: 1026;
+  top: 146px;
+  right: 10px;
+  min-height: 200px;
+  z-index: 1026;
 }
 
 /*It is positioned above the preloader with the z-index.*/
-
 .toast {
-    z-index: 1027;
-}
-
-.form-floating>textarea {
-    min-height: 200px;
-}
-
-.form-box {
-    max-width: 500px;
+  z-index: 1027;
 }

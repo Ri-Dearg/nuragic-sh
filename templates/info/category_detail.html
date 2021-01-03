@@ -1,11 +1,25 @@
-{% extends 'base/base.html' %} {% load i18n %} {% load static %} {% block head_title %}{{ object.title }}{% endblock %}
-{% block content %} <div class="row">
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static and filter to get image extension -->
+{% load i18n %} {% load static %} {% load app_filters %}
+<!-- Open Graph Tags -->
+{% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}website{% endblock %}
+{% block og_title %}Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{{ object.title|title }}{% endblock %}
+{% block og_image %}{{ object.image.url }}{% endblock %}
+{% block og_image_type %}image/{{ object.image.name|extension }}{% endblock %}
+{% block og_image_width %}{{ object.image.width }}{% endblock %}
+{% block og_image_height %}{{ object.image.height }}{% endblock %}
+{% block og_image_alt %}{{ object.title }}{% endblock %} {% block content %}
+<!-- Spacer -->
+<div class="row">
     <div class="col-12 bg-brown py-2"></div>
 </div>
 <article>
-    <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4"> {{ object.title|upper }}</h1>
+    <h2 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4"> {{ object.title|upper }}</h2>
+    <!-- Runs through each Page in a Category -->
     {% include 'info/includes/category_info.html' %}
 </article>
 <div class="row">
     <div class="col-12 bg-brown py-2"></div>
-</div> {% endblock %}
+</div>
+{% endblock %}
