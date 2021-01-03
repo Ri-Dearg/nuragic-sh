@@ -5,12 +5,14 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+/*Basic bootstrap variables defaults*/
 $enable-rounded: false;
 $enable-shadows: true;
 $enable-deprecation-messages: true;
 $navbar-dark-color: #fff;
 $navbar-dark-hover-color: #fff;
 
+/*Color themes*/
 $primary: #2b384c;
 $secondary: #c5b9a0;
 $warning: #f5c936;
@@ -18,6 +20,7 @@ $info: #1999b3;
 $success: #2d764a;
 $danger: #ae1e2c;
 
+/*Extra colors to add to the map*/
 $custom-colors: (
   "brown": #8a3324,
   "purple": #874587,
@@ -27,17 +30,21 @@ $custom-colors: (
 $dropdown-link-hover-bg: $primary;
 $dropdown-link-active-bg: $warning;
 
+/*Removes gutter margins on the page*/
 $grid-gutter-width: 0;
 
 // scss-docs-start import-stack
 // Configuration
 @import "bootstrap/functions";
 @import "bootstrap/variables";
+
+/*Merging custom colors*/
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
+/*Adds opacity values, text shadow and text decoration colors*/
 $utilities: map-merge(
   $utilities,
   (
