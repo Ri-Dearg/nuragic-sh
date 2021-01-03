@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-10 16:37+0000\n"
+"POT-Creation-Date: 2020-12-29 15:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,179 +18,179 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings.py:163
+#: .\config\settings.py:167
 msgid "English"
 msgstr "Inglese"
 
-#: config/settings.py:164
+#: .\config\settings.py:168
 msgid "Italian"
 msgstr "Italiano"
 
-#: contact/views.py:15
+#: .\contact\views.py:16
 msgid "Thank you, your message has been sent."
 msgstr "Grazie, il tuo messagio è stato spedito."
 
-#: contact/views.py:20 contact/views.py:22
+#: .\contact\views.py:22 .\contact\views.py:25
 msgid "Email*"
 msgstr "Email*"
 
-#: contact/views.py:24 contact/views.py:26
+#: .\contact\views.py:27 .\contact\views.py:29
 msgid "Name*"
 msgstr "Nome*"
 
-#: contact/views.py:27 contact/views.py:29
+#: .\contact\views.py:30 .\contact\views.py:32
 msgid "Subject*"
 msgstr "Soggetto*"
 
-#: contact/views.py:31
+#: .\contact\views.py:34 .\contact\views.py:36
 msgid "What are your thoughts?*"
 msgstr "Cosa pensi?*"
 
-#: contact/views.py:58
+#: .\contact\views.py:61
 msgid "You have already signed up for the newsletter."
 msgstr "Sei già iscritto alla newsletter."
 
-#: contact/views.py:60
+#: .\contact\views.py:63
 msgid "Info"
 msgstr "Info"
 
-#: contact/views.py:66
+#: .\contact\views.py:69
 msgid "Thank you for signing up!"
 msgstr "Grazie per la tua sottoscrizione."
 
-#: contact/views.py:68
+#: .\contact\views.py:71
 msgid "Success"
 msgstr "Successo"
 
-#: templates/base/includes/footer.html:7
+#: .\info\models.py:141
+msgid "Learn More"
+msgstr "Scopri di Più"
+
+#: .\templates\base\includes\footer.html:6
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: templates/base/includes/footer.html:8
+#: .\templates\base\includes\footer.html:7
 msgid "Sign Up Here!"
 msgstr "Iscriviti!"
 
-#: templates/base/includes/footer.html:14
+#: .\templates\base\includes\footer.html:15
 msgid "Email"
 msgstr "Email"
 
-#: templates/base/includes/footer.html:29
+#: .\templates\base\includes\footer.html:19
 msgid "Join"
 msgstr "Unisciti"
 
-#: templates/base/includes/footer.html:37
+#: .\templates\base\includes\footer.html:25
 msgid "Social"
 msgstr "Social"
 
-#: templates/base/includes/footer.html:55
+#: .\templates\base\includes\footer.html:49
 msgid "Contact"
 msgstr "Contatti"
 
-#: templates/base/includes/header.html:19
+#: .\templates\base\includes\footer.html:50
+msgid "Message me on"
+msgstr "Scrivimi su"
+
+#: .\templates\base\includes\footer.html:57
+msgid "or"
+msgstr "o"
+
+#: .\templates\base\includes\footer.html:58
+msgid "send an email"
+msgstr "mandami un email"
+
+#: .\templates\base\includes\header.html:24
 msgid "HOME"
 msgstr "HOME"
 
-#: templates/base/includes/header.html:20
-msgid "COURSES"
-msgstr "CORSI"
+#: .\templates\base\includes\header.html:33
+msgid "All"
+msgstr "Tutti"
 
-#: templates/base/includes/header.html:21
-msgid "SERVICES"
-msgstr "SERVIZI"
-
-#: templates/base/includes/header.html:22
-msgid "ABOUT"
-msgstr "CHI SONO"
-
-#: templates/base/includes/header.html:23
-msgid "CONTACT"
-msgstr "CONTTATI"
-
-#: templates/contact/email_form.html:1
+#: .\templates\contact\email_form.html:2
 msgid "Contact Us"
 msgstr "Contattaci"
 
-#: templates/contact/email_form.html:3
+#: .\templates\contact\email_form.html:3 .\templates\info\index.html:2
+msgid "Ancient Wisdom, Modern Healing"
+msgstr "Antica Sagezza, Energia Moderna"
+
+#: .\templates\contact\email_form.html:4 .\templates\info\index.html:3
+msgid ""
+"Consciousness, spirituality, healing and ancestry. Working with systems such "
+"as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
+"sharing and connections between individuals and cultures."
+msgstr "Consepevelozza, spirtualita, energia e antenati. Lavoriam con le sisteme dei Tarocchi, Oracoli, Tamburi e Reiki."
+
+#: .\templates\contact\email_form.html:9
 msgid "REACH OUT"
 msgstr "ENTRA IN CONTATTO"
 
-#: templates/contact/email_form.html:40
+#: .\templates\contact\email_form.html:26
 msgid "Send"
 msgstr "Invia"
 
-#: templates/contact/emails/contact_body.txt:2
+#: .\templates\contact\emails\contact_body.txt:1
 msgid "Nuragic Shamanic Healing has received a message from"
 msgstr "Nuragic Shamanic Healing ha ricevuto un messagio da"
 
-#: templates/contact/emails/contact_body.txt:2
+#: .\templates\contact\emails\contact_body.txt:1
 msgid "at"
 msgstr "a"
 
-#: templates/contact/emails/contact_body.txt:4
+#: .\templates\contact\emails\contact_body.txt:3
 msgid "They have written the following"
 msgstr "Ha scritto"
 
-#: templates/contact/emails/contact_body.txt:8
+#: .\templates\contact\emails\contact_body.txt:7
 msgid "Be Well"
 msgstr "Cordiali Saluti"
 
-#: templates/contact/emails/contact_subject.txt:2
+#: .\templates\contact\emails\contact_subject.txt:1
 msgid "Nuragic Shamanic Healing Message Received"
 msgstr "Nuragic Shamanic Healing Messagio Ricevuto"
 
-#: templates/contact/emails/thanks_body.txt:2
+#: .\templates\contact\emails\thanks_body.txt:1
 msgid "Hello"
 msgstr "Ciao"
 
-#: templates/contact/emails/thanks_body.txt:4
+#: .\templates\contact\emails\thanks_body.txt:3
 msgid "Thank you for getting in contact with Nuragic Shamanic Healing"
 msgstr "Grazie per contattare Nuragic Shamanic Healing"
 
-#: templates/contact/emails/thanks_body.txt:6
+#: .\templates\contact\emails\thanks_body.txt:5
 msgid ""
 "We have received your message and will get in contact with you as soon as "
 "possible"
 msgstr "Abbiamo Ricevuto il tuo messagio e ti contatteremmo al primo possibile"
 
-#: templates/contact/emails/thanks_body.txt:9
+#: .\templates\contact\emails\thanks_body.txt:8
 msgid "Kind Regards"
 msgstr "Cordiali Saluti"
 
-#: templates/contact/emails/thanks_subject.txt:2
+#: .\templates\contact\emails\thanks_subject.txt:1
 msgid "Nuragic Shamanic Healing Contact"
 msgstr "Contatto Nuragic Shamanic Healing"
 
-#: templates/info/index.html:4
+#: .\templates\info\index.html:7
 msgid "Holistic | Courses | Readings"
-msgstr "Olisitico | Corsi | Letture"
+msgstr "Olisitico | Corsi | Consulti"
 
-#: templates/info/index.html:13 templates/info/index.html:14
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "SPIRITUALITY"
 msgstr "SPIRITUALITÀ"
 
-#: templates/info/index.html:13 templates/info/index.html:14
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "CONNECTIONS"
 msgstr "CONESSIONI"
 
-#: templates/info/index.html:13 templates/info/index.html:14
+#: .\templates\info\index.html:14 .\templates\info\index.html:17
 msgid "SHARING"
 msgstr "CONDIVISIONE"
 
-#: templates/info/index.html:13 templates/info/index.html:14
+#: .\templates\info\index.html:15 .\templates\info\index.html:18
 msgid "ROOTS"
 msgstr "RADICI"
-
-#: templates/info/index.html:24
-msgid ""
-"Tarot Reader & Teacher. Kundalini Reiki Practitioner. Womb Keeper. Spiritual "
-"Events and Retreats Organizer. Founder of Nuragic Shamanic Healing Founder "
-"of The Path of the Bull : Men's Circle"
-msgstr ""
-"Consulti Tarologici e Insegnante di Tarocchi. Operatore Kundalini Reiki. "
-"Custode del Grembo. Organizzatore di Eventi e Ritiri Spirituali. Fondatore "
-"di Nuragic Shamanic Healing. Fondatore de Il Cammino del Toro : Cerchio di "
-"Uomini Sardegna."
-
-#: templates/info/index.html:25
-msgid "Get to Know Me"
-msgstr "Vuoi Conoscermi?"

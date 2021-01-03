@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'jasmine_testing',
     'contact',
     'info',
+    # Add editor in admin
+    'tinymce',
     # Deletes unused media fields
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -132,6 +134,7 @@ DATABASES = {
 env_db = dj_database_url.config(conn_max_age=500)
 
 # Declare variable  to check if django is in testing mode
+# Uses a test database if True
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 if TESTING:
     env_db = dj_database_url.parse(os.environ.get(
@@ -183,7 +186,6 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
@@ -217,8 +219,6 @@ if not DEVELOPMENT:
     DEFAULT_FILE_STORAGE = 'config.custom_storage.MediaStorage'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 # If in development, emails are displayed in the terminal
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -233,3 +233,14 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+# Settings for Rich Text Editor in admin
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "280px",
+    "width": "960px",
+    "plugins": "autosave emoticons link lists preview",
+    "toolbar": "undo redo | formatselect fontsizeselect | "
+    "bold italic underline | "
+    "alignleft aligncenter alignright alignjustify | "
+    "numlist bullist | link emoticons | preview restoredraft"
+}

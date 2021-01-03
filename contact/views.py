@@ -1,3 +1,4 @@
+"""Views for the Contact app."""
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
@@ -9,7 +10,7 @@ from .models import Email, Newsletter
 
 
 class CreateEmailView(SuccessMessageMixin, CreateView):
-    """The page used for contatc to send an email."""
+    """The page used for contact to send an email."""
     model = Email
     context_object_name = 'email'
     fields = ['email', 'name', 'subject', 'message']
@@ -48,7 +49,9 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
 
 def newsletter_singup(request):
-    """Inserts email into newsletter list."""
+    """Inserts email into newsletter list.
+    Runs through selected language and adds them
+    to the appropriate mailing list"""
     if request.method == "POST":
         data = {}
         newsletter = Newsletter.objects.get(name='basic')

@@ -1,13 +1,21 @@
-{% load static %} {% get_media_prefix as MEDIA_URL %}
+{% load static %}
 <!-- Displays reviews. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
 <section id="review-carousel" class="carousel slide bg-white py-4 px-1 px-md-4 px-lg-5" data-bs-ride="carousel">
-    <!-- This loops through the items, setting the first as the active one. --> {% if review|length > 1 %} <ol
-        class="carousel-indicators d-flex mb-0"> {% for number in review %} <li data-bs-target="#review-carousel"
-            data-bs-slide-to="{{ forloop.counter0 }}" class="bg-warning {% if forloop.first %}active{% endif %}"></li>
-        {% endfor %} </ol> {% endif %} <div class="carousel-inner text-center text-primary">
-        <h1 class="h-font l-space-2 display-4 text-primary mb-3">REVIEWS</h1> {% for item in review %} <div
-            class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
+    <!-- This loops through the items, setting the first as the active one. -->
+    {% if review|length > 1 %}
+    <ol class="carousel-indicators d-flex mb-0">
+        {% for number in review %}
+        <li data-bs-target="#review-carousel" data-bs-slide-to="{{ forloop.counter0 }}"
+            class="bg-warning {% if forloop.first %}active{% endif %}">
+        </li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+    <div class="carousel-inner text-center text-primary">
+        <h2 class="h-font l-space-2 display-4 text-primary mb-3">REVIEWS</h2>
+        {% for item in review %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="row carousel-row">
                 <div class="col-12 col-md-10 offset-md-1 p-1 my-auto">
                     <p class="p-font l-space-1 l-height-1 font-italic h6">"{{ item.text }}"</p>
@@ -15,8 +23,10 @@ This is done in the view before being passed here. They are ordered by most rece
                     <h5 class="p-font l-space-1 l-height-1 font-italic">- {{ item.reviewer_name }}</h5>
                 </div>
             </div>
-        </div> {% endfor %}
-    </div> {% if review|length > 1 %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if review|length > 1 %}
     <!-- This displays the buttons for slide selection. -->
     <a class="carousel-control-prev d-none d-md-flex" href="#review-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon rev-arr" aria-hidden="true"></span>

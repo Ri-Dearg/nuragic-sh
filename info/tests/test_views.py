@@ -1,12 +1,15 @@
+"""Tests views for the Info app."""
+
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from info.models import Category, DetailInfo
+from info.models import Category, Page
 
 
 class TestInfoViews(TestCase):
+    """Tests for Info app views."""
 
     def setUp(self):
-        """Sets up a HomeCarousel model."""
+        """Sets up a model instances for tests."""
         image = SimpleUploadedFile(
             name='default.jpg',
             content=open(
@@ -25,7 +28,7 @@ class TestInfoViews(TestCase):
                                   order=1)
         valid_category.save()
 
-        valid_detailinfo = DetailInfo(
+        valid_page = Page(
             category=Category.objects.latest('date_added'),
             title_en='HI1',
             title_it='HI1',
@@ -39,9 +42,10 @@ class TestInfoViews(TestCase):
             desc_image=image,
             theme='brown',
             order=1)
-        valid_detailinfo.save()
+        valid_page.save()
 
     def test_render_home(self):
+        """Tests templates for index page."""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'info/index.html')
@@ -50,6 +54,7 @@ class TestInfoViews(TestCase):
         self.assertTemplateUsed(response, 'base/includes/footer.html')
 
     def test_render_category_detail(self):
+        """Tests templates for Category detail page."""
         category = Category.objects.latest('date_added')
         response = self.client.get(f'/category/{category.id}/')
 
@@ -62,15 +67,16 @@ class TestInfoViews(TestCase):
         self.assertTrue(response.context['active_category'], f'{category.id}')
         self.assertTrue(response.context['active_all'], f'{category.id}')
 
-    def test_render_info_detail(self):
-        detailinfo = DetailInfo.objects.latest('date_added')
-        response = self.client.get(f'/detailinfo/{detailinfo.id}/')
+    def test_render_page_detail(self):
+        """Tests templates for Page detail page."""
+        page = Page.objects.latest('date_added')
+        response = self.client.get(f'/page/{page.id}/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'info/detailinfo_detail.html')
+        self.assertTemplateUsed(response, 'info/page_detail.html')
         self.assertTemplateUsed(response, 'base/base.html')
         self.assertTemplateUsed(response, 'base/includes/header.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
         self.assertTrue(
-            response.context['active_category'], f'{detailinfo.id}')
-        self.assertTrue(response.context['active_page'], f'{detailinfo.id}')
+            response.context['active_category'], f'{page.id}')
+        self.assertTrue(response.context['active_page'], f'{page.id}')
