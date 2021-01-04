@@ -50,8 +50,8 @@ class TestInfoModels(TestCase):
                                    title_it='splash1',
                                    description_en='description',
                                    description_it='description',
-                                   image_big=image,
-                                   image_small=image)
+                                   image_tw_header=image,
+                                   image_fb_link=image)
         valid_splash.save()
 
         valid_review = Review(reviewer_name='abacus',
@@ -65,11 +65,11 @@ class TestInfoModels(TestCase):
 
         # Retrieves the latest SplashImage and saves an image to it.
         splash1 = SplashImage.objects.latest('date_added')
-        splash1.image_big = SimpleUploadedFile(
+        splash1.image_image_tw_header = SimpleUploadedFile(
             name='default.jpg',
             content=open('media/default.jpg', 'rb').read(),
             content_type='image/jpeg')
-        splash1.image_big = SimpleUploadedFile(
+        splash1.image_fb_link = SimpleUploadedFile(
             name='default.jpg',
             content=open('media/default.jpg', 'rb').read(),
             content_type='image/jpeg')
@@ -78,14 +78,14 @@ class TestInfoModels(TestCase):
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image_big.height, 500)
-        self.assertEqual(new_info.image_big.width, 1500)
-        self.assertEqual(new_info.image_small.height, 628)
-        self.assertEqual(new_info.image_small.width, 1200)
+        self.assertEqual(new_info.image_tw_header.height, 500)
+        self.assertEqual(new_info.image_tw_header.width, 1500)
+        self.assertEqual(new_info.image_fb_link.height, 628)
+        self.assertEqual(new_info.image_fb_link.width, 1200)
         self.assertTrue(re.search('^carousel/default.*.jpeg$',
-                                  new_info.image_big.name))
+                                  new_info.image_tw_header.name))
         self.assertTrue(re.search('^carousel/default.*.jpeg$',
-                                  new_info.image_small.name))
+                                  new_info.image_fb_link.name))
 
     def test_carousel_str(self):
         """Tests the string method on the SplashImage."""
