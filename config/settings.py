@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'jasmine_testing',
     'contact',
     'info',
+    'products',
     # Add editor in admin
     'tinymce',
     # Deletes unused media fields
