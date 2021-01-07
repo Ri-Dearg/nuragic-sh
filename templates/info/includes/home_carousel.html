@@ -16,8 +16,8 @@ This is done in the view before being passed here. They are ordered by most rece
         {% for item in carousel %}
         <a class="smooth-click carousel-item {% if forloop.first %}active{% endif %}"
             href="{% url 'info:page-detail' item.page.id %}">
-            <img src="{{ item.image_big.url }}" class="d-none d-md-block w-100" alt="{{ item.title }}" />
-            <img src="{{ item.image_small.url }}" class="d-block d-md-none w-100" alt="{{ item.title }}" />
+            <img src="{{ item.image_tw_header.url }}" class="d-none d-md-block w-100" alt="{{ item.title }}" />
+            <img src="{{ item.image_fb_link.url }}" class="d-block d-md-none w-100" alt="{{ item.title }}" />
             <div class="dark-overlay carousel-caption w-100 py-1 py-lg-3">
                 <h5 class="h-font l-space-2 mb-0 mb-md-1">{{ item.title }}</h5>
                 <p class="p-font d-none d-md-block mb-0">{{item.description}}</p>

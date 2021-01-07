@@ -39,9 +39,11 @@ class TestContactViews(TestCase):
         self.client.post('/contact/f/newsletter/',
                          {'email_en': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.client.post('/it/contact/f/newsletter/',
+
+        self.client.post('/contact/f/newsletter/',
                          {'email_it': 'test@test.com'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                         HTTP_ACCEPT_LANGUAGE='it')
 
         # Retrieves the newletter and checks that the email is present
         newsletter = Newsletter.objects.get(name="basic")
@@ -50,7 +52,8 @@ class TestContactViews(TestCase):
         # Checks the correct message is processed if already signed up
         response = self.client.post('/contact/f/newsletter/',
                                     {'email_en': 'test@test.com'},
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                    HTTP_ACCEPT_LANGUAGE='en')
         self.assertTrue(response.content,
                         {"message": "You have already signed up for the newsletter.",  # NOQA E501
                          "tag": "info"})
