@@ -28,6 +28,7 @@ class CategoryTrans(CategoryAdmin, TranslationAdmin):
 
 class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
     """Displays the Page arrayfield as a list."""
+    ordering = ['category']
     inlines = [GalleryInlineAdmin]
 
 
@@ -43,7 +44,17 @@ class GalleryImageAdmin(admin.ModelAdmin):
         return False  # pragma: no cover
 
 
-admin.site.register(SplashImage, TranslationAdmin)
+class SplashImageAdmin(admin.ModelAdmin):
+    """Displays order based on its associated Page."""
+    ordering = ['page']
+
+
+class SplashImageTrans(SplashImageAdmin, TranslationAdmin):
+    """Allows translation in the admin."""
+    pass
+
+
+admin.site.register(SplashImage, SplashImageTrans)
 admin.site.register(Category, CategoryTrans)
 admin.site.register(Page, PageTrans)
 admin.site.register(GalleryImage, GalleryImageAdmin)
