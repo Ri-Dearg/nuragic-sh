@@ -20,13 +20,14 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('tinymce/', include('tinymce.urls')),
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
     path('contact/', include(('contact.urls', 'contact'),
                              namespace='contact')),
     path('', include(('info.urls', 'info'), namespace='info')),
- ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
