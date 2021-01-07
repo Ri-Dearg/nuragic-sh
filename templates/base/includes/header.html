@@ -31,7 +31,7 @@
                         <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
                         {% for item in categories %}
                         <li
-                            class="btn-tran nav-item dropdown pt-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en %} order-last{% endif %}">
+                            class="btn-tran nav-item dropdown pt-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-last{% endif %}">
                             <a class="nav-link p-font l-space-2 h5 dropdown-toggle text-end text-md-center mb-0 p-0"
                                 href="#" id="{{ item.menu_word }}Dropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">{{ item.menu_word|upper }}</a>
@@ -50,10 +50,10 @@
                                 </li>
                                 {% endfor %}
                                 <!-- The 'About' Category is always last -->
-                                {% if 'about' in item.title_en %}
+                                {% if 'about' in item.title_en.lower %}
                                 <li>
                                     <a class="p-font l-space-1 smooth-click dropdown-item text-white{% if 'contact' in request.path %} active{% endif %}"
-                                        href="{% url 'contact:email-form' %}">Contact</a>
+                                        href="{% url 'contact:email-form' %}">{% trans 'Contact' %}</a>
                                 </li>
                                 {% endif %}
                             </ul>

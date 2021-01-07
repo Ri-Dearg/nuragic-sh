@@ -30,7 +30,7 @@
         </aside>
         <!-- PLaces a description for the About section, excluding than other categories -->
         {% for item in categories %}
-        {% if 'about' in item.menu_word_en %}
+        {% if 'about' in item.menu_word_en.lower %}
         <section class="row bg-white">
             <div class="col-auto col-md d-flex bg-white">
                 <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
@@ -51,7 +51,7 @@
         <!-- Review carousel -->
         {% include 'info/includes/home_reviews.html' %}
     </article>
-    <!-- Runs through each category, placing them al except About.  -->
+    <!-- Runs through each category, placing them all except About.  -->
     <article>
         <h2 class="d-none">{% trans 'What we do' %}</h2>
         {% include 'info/includes/home_info.html' %}</article>
@@ -62,7 +62,7 @@
 {{ block.super }}
 <script src="{% static 'js/custom/index.js' %}"></script>
 <script>
-    // Sets the REview carousel to a fixed height as their content can differ
+    // Sets the Review carousel to a fixed height as their content can differ
     carouselNormalization();
 </script>
 {% endblock %}
