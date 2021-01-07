@@ -5,4 +5,4 @@ from .models import Product
 
 class ProductListView(ListView):
     model = Product
-    paginate_by = 10
+    paginate_by = 12
