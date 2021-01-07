@@ -91,7 +91,7 @@ class TestInfoModels(TestCase):
         """Tests the string method on the SplashImage."""
         splash1 = SplashImage.objects.latest('date_added')
         self.assertEqual(str(splash1),
-                         (f'{splash1.title}'))
+                         (f'{splash1.page}: {splash1.title}'))
 
     def test_category_image_file_is_processed_correctly(self):
         """Tests that an uploaded Category image is resized and
@@ -135,7 +135,7 @@ class TestInfoModels(TestCase):
         d1.bot_image = image
         d1.save()
         self.assertEqual(str(d1),
-                         (f'{d1.title}'))
+                         (f'{d1.category}: {d1.title}'))
 
     def test_galleryimage_str(self):
         """Tests the string method on the GalleryImage."""
