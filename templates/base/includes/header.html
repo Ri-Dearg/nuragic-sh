@@ -39,8 +39,12 @@
                                 aria-labelledby="{{ item.menu_word }}Dropdown">
                                 <li>
                                     <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"
-                                        href="{% url 'info:category-detail' item.id %}">{% trans 'All' %}
-                                        {{ item.menu_word|title }}</a>
+                                        href="{% url 'info:category-detail' item.id %}">{% if 'about' in item.title_en.lower %}
+                                        {% trans 'All About' %}
+                                        {% else %}
+                                        {% trans 'All' %}
+                                        {{ item.menu_word|title }}
+                                        {% endif %}</a>
                                 </li>
                                 <!-- Adds a dropdown item for each page in a category -->
                                 {% for page in item.page.all %}
