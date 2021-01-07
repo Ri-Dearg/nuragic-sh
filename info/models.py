@@ -1,4 +1,4 @@
-"""Models for the info module,"""
+"""Models for the info module."""
 
 import datetime
 import sys
@@ -92,7 +92,7 @@ class SplashImage(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.page}: {self.title}'
 
 
 class Category(models.Model):
@@ -189,7 +189,7 @@ class Page(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.category}: {self.title}'
 
 
 class GalleryImage(models.Model):
@@ -208,7 +208,7 @@ class GalleryImage(models.Model):
 class Review(models.Model):
     """Allows for the creation of reviews."""
     reviewer_name = models.CharField(max_length=50, null=False)
-    text = HTMLField()
+    text = models.TextField()
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
 
