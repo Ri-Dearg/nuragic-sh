@@ -109,6 +109,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # for navbar categories
                 'info.context_processors.get_categories',
+                'products.context_processors.get_shop_categories',
             ],
         },
     },

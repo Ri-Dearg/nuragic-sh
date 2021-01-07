@@ -78,7 +78,11 @@
     </div>
 
     <!-- Header template -->
-    {% include 'base/includes/header.html' %}
+    {% if 'shop' in request.path %}
+            {% include 'base/includes/header_shop.html' %}
+    {% else %}
+        {% include 'base/includes/header.html' %}
+    {% endif %}
 
     <!-- Main content container -->
     <main class="main-mods min-vh-75 container-xxl shadow-lg bg-primary p-0">
