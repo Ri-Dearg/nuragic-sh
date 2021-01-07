@@ -208,7 +208,7 @@ class GalleryImage(models.Model):
 class Review(models.Model):
     """Allows for the creation of reviews."""
     reviewer_name = models.CharField(max_length=50, null=False)
-    text = HTMLField()
+    text = models.TextField()
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
 
