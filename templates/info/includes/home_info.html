@@ -2,7 +2,7 @@
 <!-- Displays a section for each Category -->
 {% for item in categories %}
 <!-- Will not display the about section here .Alternates the layout-->
-{% if 'about' not in item.menu_word_en %}
+{% if 'about' not in item.menu_word_en.lower %}
 <!-- spacer -->
 <div class="col-12 bg-brown py-2"></div>
 <section class="row bg-white">
