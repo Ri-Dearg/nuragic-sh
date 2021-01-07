@@ -1,4 +1,4 @@
-{% load static %}
+{% load i18n %} {% load static %}
 <!-- Displays reviews. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
 <section id="review-carousel" class="carousel slide bg-white py-4 px-1 px-md-4 px-lg-5" data-bs-ride="carousel">
@@ -13,7 +13,7 @@ This is done in the view before being passed here. They are ordered by most rece
     </ol>
     {% endif %}
     <div class="carousel-inner text-center text-primary">
-        <h2 class="h-font l-space-2 display-4 text-primary mb-3">REVIEWS</h2>
+        <h2 class="h-font l-space-2 display-4 text-primary mb-3">{% trans 'REVIEWS' %}</h2>
         {% for item in review %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="row carousel-row">
@@ -30,10 +30,11 @@ This is done in the view before being passed here. They are ordered by most rece
     <!-- This displays the buttons for slide selection. -->
     <a class="carousel-control-prev d-none d-md-flex" href="#review-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon rev-arr" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">{% trans 'Previous' %}</span>
     </a>
     <a class="carousel-control-next d-none d-md-flex" href="#review-carousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon rev-arr" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </a> {% endif %}
+        <span class="visually-hidden">{% trans 'Next' %}</span>
+    </a>
+    {% endif %}
 </section>
