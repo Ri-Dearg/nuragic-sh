@@ -1,4 +1,4 @@
-{% load static %}
+{% load i18n %} {% load static %}
 <!-- Displays carousel items. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
 <div id="splash-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -29,10 +29,10 @@ This is done in the view before being passed here. They are ordered by most rece
     <!-- This displays the buttons for slide selection. -->
     <a class="carousel-control-prev" href="#splash-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">{% trans 'Previous' %</span>
     </a>
     <a class="carousel-control-next" href="#splash-carousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">{% trans 'Next' %}</span>
     </a> {% endif %}
 </div>
