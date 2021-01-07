@@ -1,0 +1,67 @@
+<!-- Loads internationalization, loads static  -->
+{% load i18n %} {% load static %}
+<!-- Header -->
+<header class="fixed-top container-xxl shadow p-0">
+    <!-- First row just contains the logo -->
+    <div class="row bg-primary">
+        <div class="col-auto mx-auto">
+            <a href="{% url 'info:home' %}" class="smooth-click text-decoration-none d-flex mt-2">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="d-inline-block align-self-center" />
+                <h1 class="brand-logo h-font d-inline-block my-auto">NURAGIC<span
+                        class="brand-sub p-font d-block h6">SHAMANIC HEALING</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Navbar is collapsible to the right -->
+            <nav class="navbar navbar-expand-md navbar-dark bg-secondary w-100 p-0">
+                <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="flex-column collapse navbar-collapse mt-auto" id="navbarCollapse">
+                    <ul class="navbar-nav nav-justified w-100">
+                        <li class="btn-tran nav-item py-2{% if home_active %} active{% endif %}">
+                            <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0"
+                                href="{% url 'info:home' %}">{% trans 'HOME' %}</a>
+                        </li>
+                        <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
+                        {% for item in shop_categories %}
+                        <li
+                            class="btn-tran nav-item dropdown pt-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.title %} order-last{% endif %}">
+                            <a class="nav-link p-font l-space-2 h5 dropdown-toggle text-end text-md-center mb-0 p-0"
+                                href="#" id="{{ item.title }}Dropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">{{ item.title|upper }}</a>
+                            <ul class="dropdown-menu text-end text-md-center bg-secondary"
+                                aria-labelledby="{{ item.title }}Dropdown">
+                                <li>
+                                    <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"
+                                        href="{% url 'info:category-detail' item.id %}">{% trans 'All' %}
+                                        {{ item.title|title }}</a>
+                                </li>
+                                <!-- Adds a dropdown item for each page in a category -->
+                                {% for page in item.page.all %}
+                                <li>
+                                    <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' in active_page %} active{% endif %}"
+                                        href="{% url 'info:page-detail' page.id %}">{{ page.title|title }}</a>
+                                </li>
+                                {% endfor %}
+                                <!-- The 'About' Category is always last -->
+                                {% if 'about' in item.title_en %}
+                                <li>
+                                    <a class="p-font l-space-1 smooth-click dropdown-item text-white{% if 'contact' in request.path %} active{% endif %}"
+                                        href="{% url 'contact:email-form' %}">Contact</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
