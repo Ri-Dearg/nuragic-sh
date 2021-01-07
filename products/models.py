@@ -90,8 +90,8 @@ class Product(models.Model):
     title = models.CharField(max_length=254, default='')
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(default='default.jpg',
-                              upload_to='shop/products')
+    image_4_3 = models.ImageField(default='default.jpg',
+                                  upload_to='shop/products')
     date_added = models.DateTimeField(default=timezone.now)
 
     stock = models.SmallIntegerField(default=1, blank=False, null=False)
@@ -107,7 +107,7 @@ class Product(models.Model):
         Image resizing, snippet repurposed from:
         https://djangosnippets.org/snippets/10597/ """
 
-        image1 = image_resize(self, 'image', 500, 500)
+        image1 = image_resize(self, 'image_4_3', 960, 1280)
 
         if image1:
             self.image = image1
