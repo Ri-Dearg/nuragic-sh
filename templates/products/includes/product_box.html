@@ -4,10 +4,10 @@ It is used in many templates, stockdrop and category detail, the product_list ho
 related items box, and likes_list.
 It displays two ajax buttons for liking and adding to cart among other details that vary depending on
 the product's characteristics, e.g. size, unique item, etc.. -->
-<div class="col-12 col-md-4 p-0 infinite-item">
+<div class="col-12 col-md-3 p-0 p-md-3 infinite-item">
     <article class="card mx-0 mx-md-2 mt-3 border-0">
         <a href="">
-            <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}" />
+            <img src="{{ product.image_4_3.url }}" class="card-img-top img-fluid" alt="{{ product.name }}" />
             <!-- These display little banners that give extra info about the item. -->
             {% if product.is_unique and product.stock > 0 %}
             <span class="product-alert badge badge-pill badge-secondary">Sole Item</span>
