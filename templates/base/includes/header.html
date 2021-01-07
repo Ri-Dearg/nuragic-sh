@@ -80,7 +80,7 @@
                             </ul>
                         </li>
                         {% endfor %}
-                        <li class="nav-item d-md-none order-last text-end py-2 pe-2">
+                        <li class="nav-item d-md-none order-last text-end py-2 pe-3">
                             <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">{% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="en">
