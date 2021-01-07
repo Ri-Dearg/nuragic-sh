@@ -71,20 +71,20 @@ class SplashImage(models.Model):
                                 on_delete=models.CASCADE)
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
-    image_big = models.ImageField(upload_to='carousel')
-    image_small = models.ImageField(upload_to='carousel')
+    image_tw_header = models.ImageField(upload_to='carousel')
+    image_fb_link = models.ImageField(upload_to='carousel')
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'image_big', 1500, 500)
-        image2 = image_resize(self, 'image_small', 1200, 628)
+        image1 = image_resize(self, 'image_tw_header', 1500, 500)
+        image2 = image_resize(self, 'image_fb_link', 1200, 628)
 
         if image1:
-            self.image_big = image1
+            self.image_tw_header = image1
         if image1:
-            self.image_small = image2
+            self.image_fb_link = image2
         super().save(*args, **kwargs)
 
     class Meta:

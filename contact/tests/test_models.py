@@ -24,7 +24,7 @@ class TestContactModels(TestCase):
         self.assertTrue(new_email.message == 'this is a message')
         self.assertEqual(str(new_email), 'test@test.com, interesting')
 
-        self.client.post('/it/contact/', email)
+        self.client.post('/contact/', email, HTTP_ACCEPT_LANGUAGE='it')
         new_email = Email.objects.latest('date')
         self.assertTrue(new_email.message == 'this is a message')
         self.assertEqual(str(new_email), 'test@test.com, interesting')
@@ -56,7 +56,7 @@ class TestContactModels(TestCase):
         newsletter.save()
 
         # Posts the Italian email, creating an email for use in the tests
-        self.client.post('/it/contact/', email2)
+        self.client.post('/contact/', email2, HTTP_ACCEPT_LANGUAGE='it')
         new_email2 = Email.objects.latest('date')
 
         # Adds the email address to the Italian newsletter
@@ -64,8 +64,8 @@ class TestContactModels(TestCase):
         newsletter.save()
 
         # Posts an email in both languages
-        self.client.post('/contact/', email1)
-        self.client.post('/it/contact/', email2)
+        self.client.post('/contact/', email1, HTTP_ACCEPT_LANGUAGE='en')
+        self.client.post('/contact/', email2, HTTP_ACCEPT_LANGUAGE='it')
 
         # Saves emails into Email history
         email_history1 = EmailHistory.objects.get(
