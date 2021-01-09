@@ -67,6 +67,7 @@ class ShopCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'Shop Categories'
+        ordering = ['title']
 
     def __str__(self):
         return self.title
