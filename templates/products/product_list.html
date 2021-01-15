@@ -9,10 +9,15 @@ such as likes_list, category_detail and stockdrop_detail.-->
 {% if 'query' in request.GET %}
 <!-- Detects if a search query was made and displays the keyword.-->
 <h3 class="text-center pt-2">check out:</h3>
-<h1 class="text-center heading-font text-primary">{{ request.GET.query }}</h1>
+<h1 class="h-font display-2 l-space-2 text-primary text-center">{{ request.GET.query }}</h1>
 <hr />
 {% endif %}
 {% if page_obj %}
+<div class="row bg-white pt-4">
+    <div class="col">
+        <h1 class="h-font display-2 l-space-2 text-primary text-center">{% trans 'OUR OFFERINGS' %}</h1>
+    </div>
+</div>
 <div class="row px-2 bg-white">
 <!-- This displays all products, organised by 'popularity' and stock quantity.
 Retrieves all products if no search query is performed.
