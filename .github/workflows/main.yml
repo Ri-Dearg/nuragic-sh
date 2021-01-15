@@ -58,4 +58,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           coverage run --source=. --omit=config/*,manage.py manage.py test --keepdb
-          coveralls --service=github-actions
+          coveralls --service=github
