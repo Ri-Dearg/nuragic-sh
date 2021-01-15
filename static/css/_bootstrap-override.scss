@@ -30,6 +30,11 @@ $custom-colors: (
 $dropdown-link-hover-bg: $primary;
 $dropdown-link-active-bg: $warning;
 
+/*Sets pagination colors*/
+$pagination-hover-color: #fff;
+$pagination-hover-bg: $primary;
+$pagination-active-bg: $warning;
+
 /*Removes gutter margins on the page*/
 $grid-gutter-width: 0;
 
@@ -93,7 +98,7 @@ $utilities: map-merge(
 @import "bootstrap/card";
 // @import "bootstrap/accordion";
 // @import "bootstrap/breadcrumb";
-// @import "bootstrap/pagination";
+@import "bootstrap/pagination";
 @import "bootstrap/badge";
 @import "bootstrap/alert";
 // @import "bootstrap/progress";
