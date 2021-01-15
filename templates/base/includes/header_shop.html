@@ -47,26 +47,9 @@
                         </li>
                         <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
                         {% for item in shop_categories %}
-                        <li
-                            class="btn-tran shop-nav nav-item dropdown pt-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}">
-                            <a class="nav-link p-font l-space-2 h5 dropdown-toggle text-end text-md-center mb-0 p-0"
-                                href="#" id="{{ item.title }}Dropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">{{ item.title|upper }}</a>
-                            <ul class="dropdown-menu text-end text-md-center bg-warning"
-                                aria-labelledby="{{ item.title }}Dropdown">
-                                <li>
-                                    <a class="p-font smooth-click l-space-1 shop-nav dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"
-                                        href="{% url 'info:category-detail' item.id %}">{% trans 'All' %}
-                                        {{ item.title|title }}</a>
-                                </li>
-                                <!-- Adds a dropdown item for each page in a category -->
-                                {% for page in item.page.all %}
-                                <li>
-                                    <a class="p-font smooth-click shop-nav l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' in active_page %} active{% endif %}"
-                                        href="{% url 'info:page-detail' page.id %}">{{ page.title|title }}</a>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                        <li class="btn-tran shop-nav nav-item py-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}">
+                            <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0 pe-3 pe-md-0"
+                                href="{% url 'products:shop-category-detail' item.id %}">{{ item.title|upper }}</a>
                         </li>
                         {% endfor %}
                         <li class="nav-item d-md-none order-last text-end py-2 pe-3">
