@@ -38,7 +38,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install coverage
           pip install coveralls
 
       - name: Lint with flake8
@@ -59,4 +58,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           coverage run --source=. --omit=config/*,manage.py manage.py test --keepdb
-          coveralls
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
