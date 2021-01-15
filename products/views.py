@@ -1,3 +1,4 @@
+"""Views for the Products app."""
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 

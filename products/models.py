@@ -55,7 +55,8 @@ def image_resize(self, image_title, width, height):
             else:
                 return False
         # If uploading multiple images on a new file there can this error.
-        except ValueError:
+        # Test not necessary for this model file
+        except ValueError:  # pragma: no cover
             return False
 
 
@@ -111,7 +112,7 @@ class Product(models.Model):
         image1 = image_resize(self, 'image_4_3', 960, 1280)
 
         if image1:
-            self.image = image1
+            self.image_4_3 = image1
 
         # Updates popularity (See below)
         # self._update_popularity()

@@ -121,7 +121,7 @@ class TestInfoModels(TestCase):
 
     def test_page_image_processing(self):
         """Tests that an uploaded Page image is resized and
-        processed correctly by the view. Tests str"""
+        processed correctly by the view. Tests str."""
         d1 = Page.objects.latest('date_added')
 
         image = SimpleUploadedFile(
