@@ -14,7 +14,7 @@
                         </h1>
                     </a>
                 </div>
-                <div class="col-2 d-none d-md-inline-block position-absolute bottom-0 end-0 text-center">
+                <div class="col-2 d-none d-md-inline-block position-absolute bottom-0 start-0 text-center">
                         <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">{% csrf_token %}
                             <input name="next" type="hidden" value="{{ request.path }}">
                             <input name="language" type="hidden" value="en">
