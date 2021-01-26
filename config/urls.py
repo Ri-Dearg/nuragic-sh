@@ -30,6 +30,8 @@ urlpatterns = [
     path('', include(('info.urls', 'info'), namespace='info')),
     path('shop/', include(('products.urls', 'products'),
                           namespace='products')),
+    path('users/', include(('users.urls', 'users'),
+                           namespace='users')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(

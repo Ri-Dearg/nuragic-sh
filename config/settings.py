@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'contact',
     'info',
     'products',
+    'users',
     # Add editor in admin
     'tinymce',
     # Deletes unused media fields
