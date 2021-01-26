@@ -21,6 +21,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
+    path('accounts/', include('allauth.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
