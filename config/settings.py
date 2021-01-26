@@ -56,7 +56,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # Necessary for allauth
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    # Allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     # App for connecting to AWS
     'storages',
     # Better Array Fields
@@ -74,6 +80,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
+SITE_ID = 1
 
 # Settings for SASS compiling
 SASS_PRECISION = 8
@@ -246,3 +253,11 @@ TINYMCE_DEFAULT_CONFIG = {
     "alignleft aligncenter alignright alignjustify | "
     "numlist bullist | link emoticons | preview restoredraft"
 }
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
