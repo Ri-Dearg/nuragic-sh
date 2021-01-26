@@ -15,17 +15,26 @@
                     </a>
                 </div>
                 <div class="col-2 d-none d-md-inline-block position-absolute bottom-0 start-0 text-center">
-                        <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.path }}">
-                            <input name="language" type="hidden" value="en">
-                            <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="EN">
-                            |
-                        </form>
-                        <form class="d-inline-block" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.path }}">
-                            <input name="language" type="hidden" value="it">
-                            <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="IT">
-                        </form>
+                    <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <input name="language" type="hidden" value="en">
+                        <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="EN">
+                        |
+                    </form>
+                    <form class="d-inline-block" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <input name="language" type="hidden" value="it">
+                        <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="IT">
+                    </form>
+                </div>
+                <div class="col-1 d-none d-md-inline-block position-absolute bottom-0 end-0 text-center">
+                    {% if user.is_authenticated %}
+                    {% include 'users/includes/authenticated_dropdown.html' %}
+                    {% else %}
+                    {% include 'users/includes/unauthenticated_dropdown.html' %}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -41,7 +50,7 @@
                 </button>
                 <div class="flex-column collapse navbar-collapse mt-auto" id="navbarCollapse">
                     <ul class="navbar-nav nav-justified w-100">
-                        <li class="btn-tran nav-item py-2{% if home_active %} active{% endif %}">
+                        <li class="btn-tran nav-item pt-2{% if home_active %} active{% endif %}">
                             <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0 pe-3 pe-md-0"
                                 href="{% url 'info:home' %}">{% trans 'HOME' %}</a>
                         </li>
@@ -81,16 +90,20 @@
                         </li>
                         {% endfor %}
                         <li class="nav-item d-md-none order-last text-end py-2 pe-3">
-                            <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="en">
-                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="EN">
+                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit"
+                                    value="EN">
                                 |
                             </form>
-                            <form class="d-inline-block" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <form class="d-inline-block" action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="it">
-                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="IT">
+                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit"
+                                    value="IT">
                             </form>
                         </li>
                     </ul>

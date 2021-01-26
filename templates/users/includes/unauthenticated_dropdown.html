@@ -1,0 +1,24 @@
+<!-- Loads internationalization -->
+{% load i18n %}
+<div class="dropdown">
+    <a href="#" role="button" class="href-stop no-caret dropdown-toggle d-inline-block text-white pb-2" tabindex="0"
+        id="dropdownUserMenu" data-bs-toggle="dropdown" aria-expanded="false">
+        {% include 'base/includes/icons/person-circle.svg' %}
+    </a>
+    <!-- Displays Register and Sign In buttons. -->
+    <ul class="dropdown-menu text-center" aria-labelledby="dropdownUserMenu">
+        <li class="dropdown-item no-hover">
+            <a href="{% url 'account_login' %}?next={{ request.path }}"
+                class="p-font btn-tran smooth-click btn btn-warning text-primary mb-0">{% trans 'Sign In' %}</a>
+            |
+            <a href="{% url 'account_signup' %}?next={{ request.path }}"
+                class="p-font btn-tran smooth-click btn btn-warning text-primary mb-0">{% trans 'Register' %}</a>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li>
+            <p class="p-font text-primary mb-0">{% trans 'Join the Community' %}</p>
+        </li>
+    </ul>
+</div>
