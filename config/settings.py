@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'django_better_admin_arrayfield',
     # Apps for compiling SASS
     'sass_processor',
+    # Dor phone number fields
+    'phonenumber_field',
     # My apps
     'jasmine_testing',
     'contact',
