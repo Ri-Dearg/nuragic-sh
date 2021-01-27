@@ -44,7 +44,14 @@
             <!-- Navbar is collapsible to the right -->
             <nav
                 class="navbar navbar-expand-md navbar-dark {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
-                <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse"
+                <div class="d-md-none ms-auto">
+                    {% if user.is_authenticated %}
+                    {% include 'users/includes/authenticated_dropdown.html' %}
+                    {% else %}
+                    {% include 'users/includes/unauthenticated_dropdown.html' %}
+                    {% endif %}
+                </div>
+                <button class="navbar-toggler ms-2 me-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
