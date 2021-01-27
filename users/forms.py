@@ -1,15 +1,35 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm, SignupForm
 from django import forms
-from django.utils.translation import gettext as _
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import Layout, Row, Column, Submit
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext
 from phonenumber_field import widgets
 
 from .models import UserProfile
 
 
+class StyledLoginForm(LoginForm):
+    """Custom styled login form for allauth Signup."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].widget.attrs = {'placeholder': _('Password'),
+                                                'class': 'form-control'}
+        self.fields['remember'].widget.attrs = {
+            'class': 'form-check-input'}
+
+        login_widget = forms.TextInput(
+            attrs={'placeholder': _('Username or Email'),
+                   'class': 'form-control',
+                   'autocomplete': 'email'}
+        )
+        login_field = forms.CharField(
+            label=pgettext('label', 'Username or Email'), widget=login_widget
+        )
+        self.fields['login'] = login_field
+
+
 class StyledSignupForm(SignupForm):
-    """Custom styled signup form using crispy forms for alluth Signup."""
+    """Custom styled signup form using crispy forms for allauth Signup."""
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -55,7 +75,7 @@ class UserProfileForm(forms.ModelForm):
                   'shipping_county', 'shipping_country', 'shipping_postcode']
 
     def __init__(self, *args, **kwargs):
-        """Selects custom layout and placehgolders for the form."""
+        """Selects custom layout and placeholders for the form."""
         super(UserProfileForm, self).__init__(*args, **kwargs)
         self.fields['shipping_full_name'].widget.attrs = {'placeholder': 'Full Name'}  # noqa E501
         self.fields['shipping_full_name'].label = 'Full Name'

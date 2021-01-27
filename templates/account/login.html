@@ -1,46 +1,60 @@
-{% extends "account/base.html" %}
-
-{% load i18n %}
+{% extends "base/base.html" %}
+<!-- Loads internationalization, loads static  -->
+{% load static %} {% load i18n %}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
+<!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
+{% include 'base/includes/open_graph_basic.html'%}
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
-
-{% get_providers as socialaccount_providers %}
-
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
-
+<article class="row mb-3">
+    <h2 class="h-font col-12 text-center text-white h1 pt-3">{% trans 'SIGN IN' %}</h2>
+    <div class="form-box col col-md-8 offset-md-2 bg-secondary rounded mx-sm-auto p-2">
+        <p class="p-font text-primary text-center mt-1 mb-0">
+            {% blocktrans %}<a class="text-white" href="{{ signup_url }}">Sign Up</a>
+            if you have not created an account yet.{% endblocktrans %}
+        </p>
+        <form class="login rounded p-2" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="row">
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.login }}
+                    <label for="id_{{ form.login.name }}"
+                        class="p-font text-primary sr-only">{{ form.login.label }}</label>
+                </div>
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.password }}
+                    <label for="id_{{ form.password.name }}"
+                        class="p-font text-primary sr-only">{{ form.password.label }}</label>
+                </div>
+                <a class="p-font text-white text-center mt-1 mb-2 secondaryAction"
+                    href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                <div class="col-12 d-flex">
+                    <div class="form-check mx-auto mb-2">
+                        {{ form.remember }}
+                        <label for="id_{{ form.remember.name }}"
+                            class="p-font form-check-label text-primary sr-only">{{ form.remember.label }}</label>
+                    </div>
+                </div>
+                <div class="col-auto mx-auto">
+                    <button class="p-font btn-tran btn btn-warning text-primary primaryAction"
+                        type="submit">{% trans "Sign In" %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</article>
 {% endblock %}
