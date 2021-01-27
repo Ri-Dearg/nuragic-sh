@@ -24,7 +24,8 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-12 col-md-6 form-floating my-1"> {{ form.email }}
-                    <label for="id_{{ form.email.name }}" class="p-font sr-only">{{ form.email.label }}</label>
+                    <label for="id_{{ form.email.name }}"
+                        class="p-font text-primary sr-only">{{ form.email.label }}</label>
                 </div>
                 <div class="col-12 col-md-6 form-floating my-1">{{ form.name }}
                     <label for="id_{{ form.name.name }}"
