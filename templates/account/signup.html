@@ -1,21 +1,63 @@
-{% extends "account/base.html" %}
-
-{% load i18n %}
+{% extends "base/base.html" %}
+<!-- Loads internationalization, loads static  -->
+{% load static %} {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
+<!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
+{% include 'base/includes/open_graph_basic.html'%}
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<article class="row min-vh-60 align-content-center">
+    <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
+        {% trans 'REGISTER' %}</h2>
+    <div class="col-12"></div>
+    <div class="form-box col col-md-8 bg-secondary rounded-bottom mx-sm-auto p-2">
+        <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}
+            <a class="smooth-click text-white" href="{{ login_url }}">Sign In</a>
+            if you already have an account.{% endblocktrans %}
+        </p>
+        <form class="signup rounded p-2" id="signup_form" method="POST" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="row">
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.email }}
+                    <label for="id_{{ form.email.name }}"
+                        class="p-font text-primary sr-only">{{ form.email.label }}</label>
+                </div>
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.username }}
+                    <label for="id_{{ form.username.name }}"
+                        class="p-font text-primary sr-only">{{ form.username.label }}</label>
+                </div>
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.password1 }}
+                    <label for="id_{{ form.password1.name }}"
+                        class="p-font text-primary sr-only">{{ form.password1.label }}</label>
+                </div>
+                <div class="col-12 col-md-6 form-floating my-1">
+                    {{ form.password2 }}
+                    <label for="id_{{ form.password2.name }}"
+                        class="p-font text-primary sr-only">{{ form.password2.label }}</label>
+                </div>
+                <div class="col-auto mt-1 mx-auto">
+                    <button class="p-font btn-tran btn btn-warning text-primary"
+                        type="submit">{% trans "Register" %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
-
+</article>
 {% endblock %}
