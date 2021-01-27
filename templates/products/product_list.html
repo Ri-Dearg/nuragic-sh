@@ -19,10 +19,10 @@ such as likes_list, category_detail and stockdrop_detail.-->
     </div>
 </div>
 <div class="row px-2 bg-white">
-<!-- This displays all products, organised by 'popularity' and stock quantity.
+    <!-- This displays all products, organised by 'popularity' and stock quantity.
 Retrieves all products if no search query is performed.
 It utilises the paginator so it can use the infinite scroll feature. -->
- {% for product in page_obj %} {% include 'products/includes/product_box.html' %} {% endfor %}
+    {% for product in page_obj %} {% include 'products/includes/product_box.html' %} {% endfor %}
 </div>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
@@ -30,7 +30,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
     <div class="col text-center">
         <h4 class="text-dark">Nothing found but good stuff is...</h4>
         <h2 class="text-primary heading-font">Neverlost</h2>
-        <a class="btn btn-lg btn-danger mt-2" href="{% url 'products:product-list' %}">Shop</a>
+        <a class="btn btn-lg btn-danger shadow mt-2" href="{% url 'products:product-list' %}">Shop</a>
     </div>
 </div>
 <hr>

@@ -8,30 +8,39 @@
 {% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
 {% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
 {% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
-{% block og_image_type %}image/png{% endblock %} {% block og_image_width %}1200{% endblock %}
-{% block og_image_height %}630{% endblock %} {% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
-{% include 'base/includes/open_graph_basic.html'%} {% block content %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block content %}
 
 <!-- Contact email form -->
 <article class="row mb-3">
     <h2 class="h-font col-12 text-center text-white h1 pt-3">{% trans 'REACH OUT' %}</h2>
     <div class="form-box col col-md-8 offset-md-2 bg-secondary rounded mx-sm-auto p-2">
-        <form class="p-2 rounded" action="{% url 'contact:email-form' %}" method="POST"> {% csrf_token %} <div
-                class="row">
-                <div class="col-12 col-md-6 form-floating my-1"> {{ form.email }} <label for="id_{{ form.email.name }}"
-                        class="p-font sr-only">{{ form.email.label }}</label>
+        <form class="rounded p-2" action="{% url 'contact:email-form' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-md-6 form-floating my-1"> {{ form.email }}
+                    <label for="id_{{ form.email.name }}" class="p-font sr-only">{{ form.email.label }}</label>
                 </div>
-                <div class="col-12 col-md-6 form-floating my-1"> {{ form.name }} <label for="id_{{ form.name.name }}"
-                        class="p-font sr-only">{{ form.name.label }}</label>
+                <div class="col-12 col-md-6 form-floating my-1">{{ form.name }}
+                    <label for="id_{{ form.name.name }}"
+                        class="p-font text-primary sr-only">{{ form.name.label }}</label>
                 </div>
-                <div class="col-12 form-floating my-1"> {{ form.subject }} <label for="id_{{ form.subject.name }}"
-                        class="p-font sr-only">{{ form.subject.label }}</label>
+                <div class="col-12 form-floating my-1"> {{ form.subject }}
+                    <label for="id_{{ form.subject.name }}"
+                        class="p-font text-primary sr-only">{{ form.subject.label }}</label>
                 </div>
-                <div class="col-12 form-floating my-1"> {{ form.message }} <label for="id_{{ form.message.name }}"
-                        class="p-font sr-only">{{ form.message.label }}</label>
+                <div class="col-12 form-floating my-1"> {{ form.message }}
+                    <label for="id_{{ form.message.name }}"
+                        class="p-font text-primary sr-only">{{ form.message.label }}</label>
                 </div>
                 <div class="col-12 my-1 text-center">
-                    <button type="submit" class="p-font btn btn-tran btn-warning shadow">{% trans 'Send' %}</button>
+                    <button type="submit"
+                        class="p-font btn btn-tran btn-warning text-primary shadow">{% trans 'Send' %}</button>
                 </div>
             </div>
         </form>

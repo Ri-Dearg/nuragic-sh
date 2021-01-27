@@ -7,7 +7,7 @@
     </a>
     <!-- Displays settings button -->
     <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownUserMenu">
-        <a class="p-font btn-tran btn btn-warning text-primary mb-0"
+        <a class="p-font btn-tran btn btn-warning text-primary shadow mb-0"
             href="{% url 'users:user-detail' request.user.id %}">{% trans 'Settings' %}</a>
         <!--Displays logout button. -->
         <div class="list-group border-0">
@@ -17,7 +17,7 @@
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button type="submit" class="p-font btn btn-link text-left p-0"
+                <button type="submit" class="p-font btn btn-link text-left p-0 shadow"
                     value="Submit">{% trans 'Logout' %}</button>
             </form>
         </div>

@@ -9,10 +9,10 @@
     <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownUserMenu">
         <li class="dropdown-item no-hover">
             <a href="{% url 'account_login' %}?next={{ request.path }}"
-                class="p-font btn-tran smooth-click btn btn-warning text-primary mb-0">{% trans 'Sign In' %}</a>
+                class="p-font btn-tran smooth-click btn btn-warning text-primary shadow mb-0">{% trans 'Sign In' %}</a>
             |
             <a href="{% url 'account_signup' %}?next={{ request.path }}"
-                class="p-font btn-tran smooth-click btn btn-warning text-primary mb-0">{% trans 'Register' %}</a>
+                class="p-font btn-tran smooth-click btn btn-warning text-primary shadow mb-0">{% trans 'Register' %}</a>
         </li>
         <li>
             <hr class="dropdown-divider">
