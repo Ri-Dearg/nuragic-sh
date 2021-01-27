@@ -15,14 +15,14 @@
                     </a>
                 </div>
                 <div class="col-2 d-none d-md-inline-block position-absolute bottom-0 start-0 text-center">
-                    <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">
+                    <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="POST">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="en">
                         <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="EN">
                         |
                     </form>
-                    <form class="d-inline-block" action="{% url 'set_language' %}" method="post">
+                    <form class="d-inline-block" action="{% url 'set_language' %}" method="POST">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="it">
@@ -42,7 +42,8 @@
     <div class="row">
         <div class="col">
             <!-- Navbar is collapsible to the right -->
-            <nav class="navbar navbar-expand-md navbar-dark bg-secondary w-100 p-0">
+            <nav
+                class="navbar navbar-expand-md navbar-dark {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
                 <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -50,47 +51,13 @@
                 </button>
                 <div class="flex-column collapse navbar-collapse mt-auto" id="navbarCollapse">
                     <ul class="navbar-nav nav-justified w-100">
-                        <li class="btn-tran nav-item pt-2{% if home_active %} active{% endif %}">
-                            <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0 pe-3 pe-md-0"
-                                href="{% url 'info:home' %}">{% trans 'HOME' %}</a>
-                        </li>
-                        <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
-                        {% for item in categories %}
-                        <li
-                            class="btn-tran nav-item dropdown pt-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5 order-md-last{% endif %}">
-                            <a class="nav-link p-font l-space-2 h5 dropdown-toggle text-end text-md-center mb-0 p-0"
-                                href="#" id="{{ item.menu_word }}Dropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">{{ item.menu_word|upper }}</a>
-                            <ul class="dropdown-menu text-end text-md-center bg-secondary"
-                                aria-labelledby="{{ item.menu_word }}Dropdown">
-                                <li>
-                                    <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"
-                                        href="{% url 'info:category-detail' item.id %}">{% if 'about' in item.title_en.lower %}
-                                        {% trans 'All About' %}
-                                        {% else %}
-                                        {% trans 'All' %}
-                                        {{ item.menu_word|title }}
-                                        {% endif %}</a>
-                                </li>
-                                <!-- Adds a dropdown item for each page in a category -->
-                                {% for page in item.page.all %}
-                                <li>
-                                    <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' in active_page %} active{% endif %}"
-                                        href="{% url 'info:page-detail' page.id %}">{{ page.title|title }}</a>
-                                </li>
-                                {% endfor %}
-                                <!-- The 'About' Category is always last -->
-                                {% if 'about' in item.title_en.lower %}
-                                <li>
-                                    <a class="p-font l-space-1 smooth-click dropdown-item text-white{% if 'contact' in request.path %} active{% endif %}"
-                                        href="{% url 'contact:email-form' %}">{% trans 'Contact' %}</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                        {% endfor %}
+                        {% if 'shop' in request.path %}
+                        {% include 'base/includes/shop_nav.html' %}
+                        {% else %}
+                        {% include 'base/includes/info_nav.html' %}
+                        {% endif %}
                         <li class="nav-item d-md-none order-last text-end py-2 pe-3">
-                            <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="post">
+                            <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="POST">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="en">
@@ -98,7 +65,7 @@
                                     value="EN">
                                 |
                             </form>
-                            <form class="d-inline-block" action="{% url 'set_language' %}" method="post">
+                            <form class="d-inline-block" action="{% url 'set_language' %}" method="POST">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="it">
