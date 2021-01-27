@@ -20,21 +20,21 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
         form.fields['email'].widget.attrs = {
-            'placeholder': _('Email*'),
+            'placeholder': _('Email'),
             'class': 'form-control',
             'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'}  # noqa E501
-        form.fields['email'].label = _('Email*')
+        form.fields['email'].label = _('Email')
 
-        form.fields['name'].widget.attrs = {'placeholder': _('Name*'),
+        form.fields['name'].widget.attrs = {'placeholder': _('Name'),
                                             'class': 'form-control', }
-        form.fields['name'].label = _('Name*')
-        form.fields['subject'].widget.attrs = {'placeholder': _('Subject*'),
+        form.fields['name'].label = _('Name')
+        form.fields['subject'].widget.attrs = {'placeholder': _('Subject'),
                                                'class': 'form-control'}
-        form.fields['subject'].label = _('Subject*')
+        form.fields['subject'].label = _('Subject')
         form.fields['message'].widget.attrs = {
-            'placeholder': _('What are your thoughts?*'),
+            'placeholder': _('What are your thoughts?'),
             'class': 'form-control'}
-        form.fields['message'].label = _('What are your thoughts?*')
+        form.fields['message'].label = _('What are your thoughts?')
         return form
 
     def get_context_data(self, **kwargs):
@@ -42,7 +42,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         Mainly just highlights the "Contact" in the navbar."""
         context = super().get_context_data(**kwargs)
         # Details necessary for Stripe payment processing
-        this_object = Category.objects.get(title_en='about')
+        this_object = Category.objects.get(title_en__iexact='about')
         context['active_category'] = f'{this_object.id}'
 
         return context
