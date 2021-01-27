@@ -29,37 +29,20 @@ class StyledLoginForm(LoginForm):
 
 
 class StyledSignupForm(SignupForm):
-    """Custom styled signup form using crispy forms for allauth Signup."""
+    """Custom styled signup for allauth Signup."""
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    #     self.fields["email2"] = forms.EmailField(
-    #         label=_("E-mail (again)"),
-    #         widget=forms.TextInput(
-    #             attrs={
-    #                 'type': 'email',
-    #                 'placeholder': _('Confirm Email')
-    #             }
-    #         )
-    #     )
-
-    #     # Changes form layout to be more compact
-    #     self.helper = FormHelper()
-    #     self.helper.layout = Layout(
-    #         Row(
-    #             Column('username')
-    #         ),
-    #         Row(
-    #             Column('email', css_class='col-md-6'),
-    #             Column('email2', css_class='col-md-6')
-    #         ),
-    #         Row(
-    #             Column('password1', css_class='col-md-6'),
-    #             Column('password2', css_class='col-md-6')
-    #         ),
-    #         Submit('save', 'Join')
-    #     )
+        self.fields['email'].widget.attrs = {'placeholder': _('Email'),
+                                             'class': 'form-control'}
+        self.fields['username'].widget.attrs = {'placeholder': _('Username'),
+                                                'class': 'form-control'}
+        self.fields['password1'].widget.attrs = {'placeholder': _('Password'),
+                                                 'class': 'form-control'}
+        self.fields['password2'].widget.attrs = {
+            'placeholder': _('Repeat Password'),
+            'class': 'form-control'}
 
 
 class UserProfileForm(forms.ModelForm):
