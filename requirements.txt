@@ -15,6 +15,7 @@ django-better-admin-arrayfield==1.4.0
 django-cleanup==5.1.0
 django-compressor==2.4
 django-countries==7.0
+django-crispy-forms==1.10.0
 django-modeltranslation==0.16.1
 django-phonenumber-field==5.0.0
 django-sass-processor==0.8.2
