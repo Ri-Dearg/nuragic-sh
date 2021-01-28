@@ -69,8 +69,10 @@ INSTALLED_APPS = [
     'django_better_admin_arrayfield',
     # Apps for compiling SASS
     'sass_processor',
-    # Dor phone number fields
+    # Int phone number fields
     'phonenumber_field',
+    # Renders form fields
+    'crispy_forms',
     # My apps
     'jasmine_testing',
     'contact',
@@ -256,6 +258,8 @@ TINYMCE_DEFAULT_CONFIG = {
     "alignleft aligncenter alignright alignjustify | "
     "numlist bullist | link emoticons | preview restoredraft"
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
