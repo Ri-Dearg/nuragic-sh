@@ -1,4 +1,7 @@
 """Views for the Contact app."""
+from crispy_forms.bootstrap import StrictButton
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Column, Field, Layout, Row
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
@@ -19,22 +22,41 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {
-            'placeholder': _('Email'),
-            'class': 'form-control',
-            'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'}  # noqa E501
         form.fields['email'].label = _('Email')
-
-        form.fields['name'].widget.attrs = {'placeholder': _('Name'),
-                                            'class': 'form-control', }
         form.fields['name'].label = _('Name')
-        form.fields['subject'].widget.attrs = {'placeholder': _('Subject'),
-                                               'class': 'form-control'}
         form.fields['subject'].label = _('Subject')
-        form.fields['message'].widget.attrs = {
-            'placeholder': _('What are your thoughts?'),
-            'class': 'form-control'}
         form.fields['message'].label = _('What are your thoughts?')
+
+        form.helper = FormHelper(form)
+        helper = form.helper
+        helper.form_action = 'contact:email-form'
+        helper.form_class = 'rounded p-2'
+        helper.label_class = 'p-font text-primary sr-only'
+        helper.field_class = 'col-12 form-floating my-1'
+        helper.floating_labels = True
+
+        helper.layout = Layout(
+            Row(
+                Column(Field('email',  placeholder=_('Email'),
+                pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
+                        css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('name', placeholder=_('Name')),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('subject', placeholder=_('Subject')),
+                       css_class=f'{helper.field_class}'),
+
+                Column(Field('message',
+                       placeholder=_('What are your thoughts?')),
+                       css_class=f'{helper.field_class}'),
+
+                Column(StrictButton(_('Send'), type='submit',
+                             css_class="p-font btn-tran btn-warning text-primary shadow"),  # noqa E501
+                       css_class='col-12 my-1 text-center'),
+                css_class='row')
+        )
+
         return form
 
     def get_context_data(self, **kwargs):

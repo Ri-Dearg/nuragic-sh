@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
-{% load static %} {% load i18n %}
+{% load static %} {% load i18n %} {% load crispy_forms_tags %}
+
 <!-- Title -->
 {% block head_title %}{% trans 'Contact Us' %}{% endblock%}
 <!-- Open Graph Tags -->
@@ -17,36 +18,12 @@
 {% block content %}
 
 <!-- Contact email form -->
-<article class="row min-vh-75 align-content-center">
+<article class="row min-vh-75 align-content-center py-2">
     <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
         {% trans 'REACH OUT' %}</h2>
     <div class="col-12"></div>
     <div class="form-box col col-md-8 bg-secondary rounded-bottom mx-sm-auto p-2">
-        <form class="rounded p-2" action="{% url 'contact:email-form' %}" method="POST">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-12 col-md-6 form-floating my-1"> {{ form.email }}
-                    <label for="id_{{ form.email.name }}"
-                        class="p-font text-primary sr-only">{{ form.email.label }}</label>
-                </div>
-                <div class="col-12 col-md-6 form-floating my-1">{{ form.name }}
-                    <label for="id_{{ form.name.name }}"
-                        class="p-font text-primary sr-only">{{ form.name.label }}</label>
-                </div>
-                <div class="col-12 form-floating my-1"> {{ form.subject }}
-                    <label for="id_{{ form.subject.name }}"
-                        class="p-font text-primary sr-only">{{ form.subject.label }}</label>
-                </div>
-                <div class="col-12 form-floating my-1"> {{ form.message }}
-                    <label for="id_{{ form.message.name }}"
-                        class="p-font text-primary sr-only">{{ form.message.label }}</label>
-                </div>
-                <div class="col-12 my-1 text-center">
-                    <button type="submit"
-                        class="p-font btn btn-tran btn-warning text-primary shadow">{% trans 'Send' %}</button>
-                </div>
-            </div>
-        </form>
+        {% crispy form %}
     </div>
 </article>
 {% endblock %}
