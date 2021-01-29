@@ -10,15 +10,15 @@
         <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mb-0"
             href="{% url 'users:user-detail' request.user.id %}">{% trans 'Settings' %}</a>
         <!--Displays logout button. -->
-        <div class="list-group border-0">
-            <form class="list-group-item border-0 mx-0 my-1 p-1" method="POST"
+        <div class="border-0">
+            <form class="border-0 mx-0 my-1 p-1" method="POST"
                 action="{% url 'account_logout' %}?next={{ request.path }}">
                 {% csrf_token %}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button type="submit" class="p-font smooth-click btn btn-link text-left p-0"
-                    value="Submit">{% trans 'Logout' %}</button>
+                <button type="submit" class="p-font btn btn-link text-left p-0"
+                    value="Submit">{% trans 'Sign Out' %}</button>
             </form>
         </div>
     </ul>

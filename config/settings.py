@@ -270,11 +270,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
                  'signup': 'users.forms.StyledSignupForm',
                  'reset_password': 'users.forms.StyledResetPasswordForm',
-                 'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',
+                 'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
                  }
