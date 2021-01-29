@@ -1,4 +1,5 @@
-from allauth.account.forms import LoginForm, ResetPasswordForm, SignupForm
+from allauth.account.forms import (LoginForm, ResetPasswordForm,
+                                   ResetPasswordKeyForm, SignupForm)
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Field, Layout, Row
@@ -44,7 +45,7 @@ class StyledLoginForm(LoginForm):
                 Column(Field('password', placeholder=_('Password')),
                        css_class=f'{helper.field_class} col-md-6'),
 
-                HTML(f'<a class="p-font text-white text-center mt-1 mb-2 secondaryAction"\
+                HTML(f'<a class="p-font smooth-click text-white text-center mt-1 mb-2 secondaryAction"\
                 href="{account_reset}">\
                 {forgot_password}</a>'),
 
@@ -83,6 +84,41 @@ class StyledResetPasswordForm(ResetPasswordForm):
                        css_class=f'{helper.field_class}'),
 
                 Column(StrictButton(_('Reset Password'), type='submit',
+                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                       css_class='col-auto mt-1 mx-auto'),
+                css_class='row'
+            )
+        )
+
+
+class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
+    """Custom styled rest password form for allauth Signup."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.label_class = 'p-font text-primary sr-only'
+        helper.field_class = 'col-12 form-floating my-1'
+        form_tag = False
+        helper.floating_labels = True
+
+        helper.layout = Layout(
+            HTML('{% if redirect_field_value %}<input type="hidden" \
+                name="{{ redirect_field_name }}" \
+                value="{{ redirect_field_value }}" />{% endif %}'),
+
+            Row(
+                Column(Field('password1', placeholder=_('New Password'),
+                             autocomplete='off', minlength='8'),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('password2', placeholder=_('Repeat Password'),
+                             autocomplete='off', minlength='8'),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(StrictButton(_('Change Password'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
                        css_class='col-auto mt-1 mx-auto'),
                 css_class='row'
