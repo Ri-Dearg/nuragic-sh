@@ -1,4 +1,7 @@
-from allauth.account.forms import LoginForm, SignupForm
+from allauth.account.forms import LoginForm, ResetPasswordForm, SignupForm
+from crispy_forms.bootstrap import StrictButton
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import HTML, Column, Field, Layout, Row
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
@@ -12,20 +15,79 @@ class StyledLoginForm(LoginForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password'].widget.attrs = {'placeholder': _('Password'),
-                                                'class': 'form-control'}
-        self.fields['remember'].widget.attrs = {
-            'class': 'form-check-input'}
 
-        login_widget = forms.TextInput(
-            attrs={'placeholder': _('Username or Email'),
-                   'class': 'form-control',
-                   'autocomplete': 'email'}
-        )
         login_field = forms.CharField(
-            label=pgettext('label', 'Username or Email'), widget=login_widget
-        )
+            label=pgettext('label', 'Username or Email'))
         self.fields['login'] = login_field
+
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_action = 'account_login'
+        helper.form_class = 'login rounded p-2'
+        helper.label_class = 'p-font text-primary sr-only'
+        helper.field_class = 'col-12 form-floating my-1'
+        helper.floating_labels = True
+
+        account_reset = '{% url "account_reset_password" %}'
+        forgot_password = _('Forgot Password?')
+
+        helper.layout = Layout(
+            HTML('{% if redirect_field_value %}<input type="hidden" \
+                name="{{ redirect_field_name }}" \
+                value="{{ redirect_field_value }}" />{% endif %}'),
+
+            Row(
+                Column(Field('login', placeholder=_('Username or E-mail'),
+                             autocomplete='email'),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('password', placeholder=_('Password')),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                HTML(f'<a class="p-font text-white text-center mt-1 mb-2 secondaryAction"\
+                href="{account_reset}">\
+                {forgot_password}</a>'),
+
+                Field('remember'),
+
+                Column(StrictButton(_('Sign In'), type='submit',
+                             css_class='p-font btn-tran btn btn-warning text-primary shadow primaryAction'),  # noqa E501
+                       css_class='col-auto mx-auto'),
+                css_class='row'
+            )
+        )
+
+
+class StyledResetPasswordForm(ResetPasswordForm):
+    """Custom styled rest password form for allauth Signup."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_action = 'account_reset_password'
+        helper.form_class = 'password_reset rounded p-2'
+        helper.label_class = 'p-font text-primary sr-only'
+        helper.field_class = 'col-12 form-floating my-1'
+        helper.floating_labels = True
+
+        helper.layout = Layout(
+            HTML('{% if redirect_field_value %}<input type="hidden" \
+                name="{{ redirect_field_name }}" \
+                value="{{ redirect_field_value }}" />{% endif %}'),
+
+            Row(
+                Column(Field('email', placeholder=_('E-mail'),
+                             autocomplete='email'),
+                       css_class=f'{helper.field_class}'),
+
+                Column(StrictButton(_('Reset Password'), type='submit',
+                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                       css_class='col-auto mt-1 mx-auto'),
+                css_class='row'
+            )
+        )
 
 
 class StyledSignupForm(SignupForm):
@@ -34,15 +96,42 @@ class StyledSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['email'].widget.attrs = {'placeholder': _('Email'),
-                                             'class': 'form-control'}
-        self.fields['username'].widget.attrs = {'placeholder': _('Username'),
-                                                'class': 'form-control'}
-        self.fields['password1'].widget.attrs = {'placeholder': _('Password'),
-                                                 'class': 'form-control'}
-        self.fields['password2'].widget.attrs = {
-            'placeholder': _('Repeat Password'),
-            'class': 'form-control'}
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_action = 'account_signup'
+        helper.form_id = 'signup_form'
+        helper.form_class = 'singup rounded p-2'
+        helper.label_class = 'p-font text-primary sr-only'
+        helper.field_class = 'col-12 form-floating my-1'
+        helper.floating_labels = True
+
+        helper.layout = Layout(
+            HTML('{% if redirect_field_value %}<input type="hidden" \
+                name="{{ redirect_field_name }}" \
+                value="{{ redirect_field_value }}" />{% endif %}'),
+
+            Row(
+                Column(Field('email',  placeholder=_('E-mail'),
+                pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
+                        css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('username',  placeholder=_('Username')),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('password1', placeholder=_('Password'),
+                             minlength='8'),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(Field('password2', placeholder=_('Repeat Password'),
+                             minlength='8'),
+                       css_class=f'{helper.field_class} col-md-6'),
+
+                Column(StrictButton(_('Register'), type='submit',
+                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                       css_class='col-auto mx-auto mt-1'),
+                css_class='row'
+            )
+        )
 
 
 class UserProfileForm(forms.ModelForm):

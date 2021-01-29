@@ -4,9 +4,9 @@
 {{ field }}
 {% else %}
 {% if field|is_checkbox %}
-<div class="form-group{% if 'form-horizontal' in form_class %} row{% endif %}">
+<div class="col-12 d-flex">
     {% if label_class %}
-    <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset }} {% endfor %}{{ field_class }}">
+    <div class="form-check mx-auto mb-2">
         {% endif %}
         {% endif %}
         {% if not floating_labels %}
@@ -24,13 +24,9 @@
 
             {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}
             {% if field|is_checkbox and form_show_labels %}
-            {%if use_custom_control%}
-            {% crispy_field field 'class' 'custom-control-input' %}
-            {% else %}
             {% crispy_field field 'class' 'form-check-input' %}
-            {% endif %}
             <label for="{{ field.id_for_label }}"
-                class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}{% if field.field.required %} requiredField{% endif %}">
+                class="p-font form-check-label text-primary sr-only{% if field.field.required %} requiredField{% endif %}">
                 {{ field.label|safe }}
             </label>
             {% include 'bootstrap4/layout/help_text_and_errors.html' %}

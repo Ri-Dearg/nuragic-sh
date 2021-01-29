@@ -1,8 +1,8 @@
 {% extends "base/base.html" %}
-<!-- Loads internationalization, loads static  -->
-{% load static %} {% load i18n %}
+<!-- Loads internationalization, loads static, loads crispy forms  -->
+{% load static %} {% load i18n %} {% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block head_title %}{% trans "Register" %}{% endblock %}
 
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
@@ -16,7 +16,7 @@
 {% include 'base/includes/open_graph_basic.html'%}
 {% block content %}
 
-<article class="row min-vh-60 align-content-center">
+<article class="row min-vh-60 align-content-center py-2">
     <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
         {% trans 'REGISTER' %}</h2>
     <div class="col-12"></div>
@@ -25,39 +25,7 @@
             <a class="smooth-click text-white" href="{{ login_url }}">Sign In</a>
             if you already have an account.{% endblocktrans %}
         </p>
-        <form class="signup rounded p-2" id="signup_form" method="POST" action="{% url 'account_signup' %}">
-            {% csrf_token %}
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            <div class="row">
-                <div class="col-12 col-md-6 form-floating my-1">
-                    {{ form.email }}
-                    <label for="id_{{ form.email.name }}"
-                        class="p-font text-primary sr-only">{{ form.email.label }}</label>
-                </div>
-                <div class="col-12 col-md-6 form-floating my-1">
-                    {{ form.username }}
-                    <label for="id_{{ form.username.name }}"
-                        class="p-font text-primary sr-only">{{ form.username.label }}</label>
-                </div>
-                <div class="col-12 col-md-6 form-floating my-1">
-                    {{ form.password1 }}
-                    <label for="id_{{ form.password1.name }}"
-                        class="p-font text-primary sr-only">{{ form.password1.label }}</label>
-                </div>
-                <div class="col-12 col-md-6 form-floating my-1">
-                    {{ form.password2 }}
-                    <label for="id_{{ form.password2.name }}"
-                        class="p-font text-primary sr-only">{{ form.password2.label }}</label>
-                </div>
-                <div class="col-auto mt-1 mx-auto">
-                    <button class="p-font btn-tran btn btn-warning text-primary"
-                        type="submit">{% trans "Register" %}</button>
-                </div>
-            </div>
-        </form>
+        {% crispy form %}
     </div>
-
 </article>
 {% endblock %}
