@@ -123,7 +123,7 @@ class StyledSignupForm(SignupForm):
         helper.form_action = 'account_signup'
         helper.form_id = 'signup_form'
         helper.form_class = 'singup rounded p-2'
-        # helper.field_class = 'col-12 form-floating my-1'
+        helper.field_class = 'col-md-6'
 
         helper.layout = Layout(
             HTML('{% if redirect_field_value %}<input type="hidden" \
@@ -131,20 +131,16 @@ class StyledSignupForm(SignupForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Column(Field('email',  placeholder=_('E-mail'),
+                Field('email',  placeholder=_('E-mail'),
                 pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
-                        css_class='col-md-6'),
 
-                Column(Field('username',  placeholder=_('Username')),
-                       css_class='col-md-6'),
+                Field('username',  placeholder=_('Username')),
 
-                Column(Field('password1', placeholder=_('Password'),
-                             minlength='8'),
-                       css_class='col-md-6'),
+                Field('password1', placeholder=_('Password'),
+                      minlength='8'),
 
-                Column(Field('password2', placeholder=_('Repeat Password'),
-                             minlength='8'),
-                       css_class='col-md-6'),
+                Field('password2', placeholder=_('Repeat Password'),
+                      minlength='8'),
 
                 Column(StrictButton(_('Register'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
@@ -168,6 +164,10 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """Selects custom layout and placeholders for the form."""
         super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_action = 'users:shipping-billing'
+        helper.form_id = 'shipping_billing_form'
         self.fields['shipping_full_name'].widget.attrs = {'placeholder': 'Full Name'}  # noqa E501
         self.fields['shipping_full_name'].label = 'Full Name'
         self.fields['shipping_phone_number'] = forms.CharField(
