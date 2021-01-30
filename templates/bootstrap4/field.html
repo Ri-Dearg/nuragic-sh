@@ -5,9 +5,7 @@
 {% else %}
 {% if field|is_checkbox %}
 <div class="col-12 d-flex">
-    {% if label_class %}
     <div class="form-check mx-auto mb-2">
-        {% endif %}
         {% endif %}
         {% if bootstrap4 %}
         <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}"
@@ -51,9 +49,7 @@
         </{% if tag %}{{ tag }}{% else %}div{% endif %}>
         {% endif %}
         {% if field|is_checkbox %}
-        {% if label_class %}
     </div>
-    {% endif %}
 </div>
 {% endif %}
 {% endif %}
