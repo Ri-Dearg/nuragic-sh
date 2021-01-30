@@ -31,31 +31,27 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         helper = form.helper
         helper.form_action = 'contact:email-form'
         helper.form_class = 'rounded p-2'
-        helper.label_class = 'p-font text-primary sr-only'
-        helper.field_class = 'col-12 form-floating my-1'
         helper.floating_labels = True
         helper.use_custom_control = False
 
         helper.layout = Layout(
             Row(
-                Column(Field('email',  placeholder=_('E-mail'),
-                pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
-                        css_class=f'{helper.field_class} col-md-6'),
+                Field('email',  placeholder=_('E-mail'),
+                      pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501
+                      wrapper_class='col-md-6'),
 
-                Column(Field('name', placeholder=_('Name')),
-                       css_class=f'{helper.field_class} col-md-6'),
+                Field('name', placeholder=_('Name'),
+                      wrapper_class='col-md-6'),
 
-                Column(Field('subject', placeholder=_('Subject')),
-                       css_class=f'{helper.field_class}'),
+                Field('subject', placeholder=_('Subject')),
 
-                Column(Field('message',
-                       placeholder=_('What are your thoughts?')),
-                       css_class=f'{helper.field_class}'),
+                Field('message',
+                      placeholder=_('What are your thoughts?')),
 
                 Column(StrictButton(_('Send'), type='submit',
-                             css_class="p-font btn-tran btn-warning text-primary shadow"),  # noqa E501
+                       css_class="p-font btn-tran btn-warning text-primary shadow"),  # noqa E501
                        css_class='col-12 my-1 text-center'),
-                css_class='row')
+                )
         )
 
         return form
