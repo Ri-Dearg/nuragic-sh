@@ -24,7 +24,10 @@ $danger: #ae1e2c;
 $custom-colors: (
   "brown": #8a3324,
   "purple": #874587,
+  "error": #ae1e2c,
 );
+
+$component-active-bg: $warning;
 
 /*Sets default dropdown link colors*/
 $dropdown-link-hover-bg: $primary;
