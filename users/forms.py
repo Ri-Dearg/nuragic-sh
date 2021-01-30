@@ -25,9 +25,7 @@ class StyledLoginForm(LoginForm):
         helper = self.helper
         helper.form_action = 'account_login'
         helper.form_class = 'login rounded p-2'
-        helper.label_class = 'p-font text-primary sr-only'
-        helper.field_class = 'col-12 form-floating my-1'
-        helper.floating_labels = True
+        helper.field_class = 'col-md-6'
 
         account_reset = '{% url "account_reset_password" %}'
         forgot_password = _('Forgot Password?')
@@ -38,15 +36,14 @@ class StyledLoginForm(LoginForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Column(Field('login', placeholder=_('Username or E-mail'),
-                             autocomplete='email'),
-                       css_class=f'{helper.field_class} col-md-6'),
+                Field('login', placeholder=_('Username or E-mail'),
+                      autocomplete='email'),
 
-                Column(Field('password', placeholder=_('Password')),
-                       css_class=f'{helper.field_class} col-md-6'),
+                Field('password', placeholder=_('Password')),
 
-                HTML(f'<a class="p-font smooth-click text-white text-center mt-1 mb-2 secondaryAction"\
-                href="{account_reset}">\
+                HTML(f'<a class="p-font smooth-click text-white \
+                     text-center mt-1 mb-2 secondaryAction" \
+                     href="{account_reset}">\
                 {forgot_password}</a>'),
 
                 Field('remember'),
@@ -54,7 +51,6 @@ class StyledLoginForm(LoginForm):
                 Column(StrictButton(_('Sign In'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow primaryAction'),  # noqa E501
                        css_class='col-auto mx-auto'),
-                css_class='row'
             )
         )
 
@@ -69,9 +65,6 @@ class StyledResetPasswordForm(ResetPasswordForm):
         helper = self.helper
         helper.form_action = 'account_reset_password'
         helper.form_class = 'password_reset rounded p-2'
-        helper.label_class = 'p-font text-primary sr-only'
-        helper.field_class = 'col-12 form-floating my-1'
-        helper.floating_labels = True
 
         helper.layout = Layout(
             HTML('{% if redirect_field_value %}<input type="hidden" \
@@ -79,14 +72,12 @@ class StyledResetPasswordForm(ResetPasswordForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Column(Field('email', placeholder=_('E-mail'),
-                             autocomplete='email'),
-                       css_class=f'{helper.field_class}'),
+                Field('email', placeholder=_('E-mail'),
+                      autocomplete='email'),
 
                 Column(StrictButton(_('Reset Password'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
                        css_class='col-auto mt-1 mx-auto'),
-                css_class='row'
             )
         )
 
@@ -99,10 +90,8 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
 
         self.helper = FormHelper(self)
         helper = self.helper
-        helper.label_class = 'p-font text-primary sr-only'
-        helper.field_class = 'col-12 form-floating my-1'
-        form_tag = False
-        helper.floating_labels = True
+        helper.field_class = 'col-md-6'
+        helper.form_tag = False
 
         helper.layout = Layout(
             HTML('{% if redirect_field_value %}<input type="hidden" \
@@ -110,18 +99,15 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Column(Field('password1', placeholder=_('New Password'),
-                             autocomplete='off', minlength='8'),
-                       css_class=f'{helper.field_class} col-md-6'),
+                Field('password1', placeholder=_('New Password'),
+                      autocomplete='off', minlength='8'),
 
-                Column(Field('password2', placeholder=_('Repeat Password'),
-                             autocomplete='off', minlength='8'),
-                       css_class=f'{helper.field_class} col-md-6'),
+                Field('password2', placeholder=_('Repeat Password'),
+                      autocomplete='off', minlength='8'),
 
                 Column(StrictButton(_('Change Password'), type='submit',
-                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                       css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
                        css_class='col-auto mt-1 mx-auto'),
-                css_class='row'
             )
         )
 
@@ -137,9 +123,7 @@ class StyledSignupForm(SignupForm):
         helper.form_action = 'account_signup'
         helper.form_id = 'signup_form'
         helper.form_class = 'singup rounded p-2'
-        helper.label_class = 'p-font text-primary sr-only'
-        helper.field_class = 'col-12 form-floating my-1'
-        helper.floating_labels = True
+        # helper.field_class = 'col-12 form-floating my-1'
 
         helper.layout = Layout(
             HTML('{% if redirect_field_value %}<input type="hidden" \
@@ -149,23 +133,22 @@ class StyledSignupForm(SignupForm):
             Row(
                 Column(Field('email',  placeholder=_('E-mail'),
                 pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
-                        css_class=f'{helper.field_class} col-md-6'),
+                        css_class='col-md-6'),
 
                 Column(Field('username',  placeholder=_('Username')),
-                       css_class=f'{helper.field_class} col-md-6'),
+                       css_class='col-md-6'),
 
                 Column(Field('password1', placeholder=_('Password'),
                              minlength='8'),
-                       css_class=f'{helper.field_class} col-md-6'),
+                       css_class='col-md-6'),
 
                 Column(Field('password2', placeholder=_('Repeat Password'),
                              minlength='8'),
-                       css_class=f'{helper.field_class} col-md-6'),
+                       css_class='col-md-6'),
 
                 Column(StrictButton(_('Register'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
                        css_class='col-auto mx-auto mt-1'),
-                css_class='row'
             )
         )
 
