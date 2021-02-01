@@ -1,9 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
-
+from django.db import models
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-
 from products.models import Product
 
 
@@ -17,7 +15,7 @@ class CustomPhoneNumberField(PhoneNumberField):
 class UserProfile(models.Model):
     """User Profile used to store default delivery information and
     liked/bookmarked items"""
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     shipping_full_name = models.CharField(max_length=50,
                                           default='', blank=True)
@@ -69,4 +67,4 @@ class Liked(models.Model):
     datetime_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.userprofile.user.username}, {self.product.name}, {self.datetime_added}' # noqa E501
+        return f'{self.userprofile.user.username}, {self.product.name}, {self.datetime_added}'  # noqa E501
