@@ -1,0 +1,4 @@
+{% load crispy_forms_tags %}
+<form action="{% url 'users:shipping-billing' %}?next={{ request.path }}" method="POST">
+    {% crispy user_profile_detail %}
+</form>

@@ -1,18 +1,15 @@
-from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.forms import model_to_dict
-from django.contrib.auth.decorators import login_required
-
-from allauth.account.views import (EmailView,
-                                   AddEmailForm,
-                                   ChangePasswordForm,
+from allauth.account.utils import sync_user_email_addresses
+from allauth.account.views import (AddEmailForm, ChangePasswordForm, EmailView,
                                    PasswordChangeView,
                                    sensitive_post_parameters_m)
-from allauth.account.utils import sync_user_email_addresses
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.forms import model_to_dict
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views.generic import DetailView
 
 from .forms import UserProfileForm
 
@@ -52,7 +49,7 @@ class CustomEmailView(LoginRequiredMixin, EmailView):
     as it is incredibly difficult to have allauth utilise alternative views
     for some functions it was easier to utilise alternative views with
     the same template and context as the basic UserProfile Detailview.
-    Apart from the url difference it should be unnoticable to the user."""
+    Apart from the url difference it should be unnoticeable to the user."""
 
     template_name = 'users/user_detail.html'
 
@@ -138,9 +135,10 @@ def update_shipping_billing(request):
     # Retrieves the current user and redirection page.
     user = request.user
     userprofile = user.userprofile
-    next = request.GET.get('next', '')
+    redirect_url = request.GET.get('next', '')
     if request.method == 'POST':
         data = request.POST
+        print(data)
         form = UserProfileForm(data=data)
         if form.is_valid():
             # Make sure the correct user is applied to the profile
@@ -150,9 +148,9 @@ def update_shipping_billing(request):
             profile.user = user
             profile.save()
             messages.success(request, 'Your information has been updated')
-            return HttpResponseRedirect(next)
+            return HttpResponseRedirect(redirect_url)
         else:
             form = UserProfileForm()
             messages.warning(request, 'Failed to update your information. \
                 Please Check your details.')
-            return HttpResponseRedirect(next)
+            return HttpResponseRedirect(redirect_url)

@@ -2,7 +2,7 @@ from allauth.account.forms import (LoginForm, ResetPasswordForm,
                                    ResetPasswordKeyForm, SignupForm)
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Field, Layout, Row
+from crispy_forms.layout import HTML, Column, Field, Fieldset, Layout, Row
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
@@ -168,63 +168,81 @@ class UserProfileForm(forms.ModelForm):
         helper = self.helper
         helper.form_action = 'users:shipping-billing'
         helper.form_id = 'shipping_billing_form'
-        self.fields['shipping_full_name'].widget.attrs = {'placeholder': 'Full Name'}  # noqa E501
-        self.fields['shipping_full_name'].label = 'Full Name'
+        helper.form_tag = False
+
         self.fields['shipping_phone_number'] = forms.CharField(
-            widget=widgets.PhoneNumberPrefixWidget(
-                attrs={
-                    'type': 'tel',
-                    'placeholder': 'Phone Number',
-                    'class': 'form-control',
-                    'pattern': '[0-9]+',
-                }),
+            widget=widgets.PhoneNumberPrefixWidget(),
             required=False)
-        self.fields['shipping_street_address_1'].widget.attrs = {
-            'placeholder': '123 Main St.'}
-        self.fields['shipping_street_address_1'].label = 'Street Address 1'
-        self.fields['shipping_street_address_2'].widget.attrs = {
-            'placeholder': 'Street Address 2'}
-        self.fields['shipping_street_address_2'].label = 'Street Address 2'
-        self.fields['shipping_town_or_city'].widget.attrs = {
-            'placeholder': 'Town or City'}
-        self.fields['shipping_town_or_city'].label = 'City or Town'
-        self.fields['shipping_county'].widget.attrs = {
-            'placeholder': 'Locality'}
-        self.fields['shipping_county'].label = 'County, State or Locality'
-        self.fields['shipping_country'].widget.attrs = {'placeholder': 'Country',  # noqa E501
-                                                        'class': 'form-control'}  # noqa E501
-        self.fields['shipping_country'].label = 'Country'
-        self.fields['shipping_postcode'].widget.attrs = {
-            'placeholder': 'Postcode'}
-        self.fields['shipping_postcode'].label = 'Postcode'
-        self.fields['billing_full_name'].widget.attrs = {
-            'placeholder': 'Full Name', 'class': 'billing-field'}
-        self.fields['billing_full_name'].label = 'Full Name'
+
         self.fields['billing_phone_number'] = forms.CharField(
-            label='Phone Number',
-            widget=widgets.PhoneNumberPrefixWidget(
-                attrs={
-                    'type': 'tel',
-                    'placeholder': 'Phone Number',
-                    'class': 'form-control billing-field',
-                    'pattern': '[0-9]+',
-                }),
+            widget=widgets.PhoneNumberPrefixWidget(),
             required=False)
-        self.fields['billing_street_address_1'].widget.attrs = {
-            'Placeholder': 'Street Address 1', 'class': 'billing-field'}
+
+        self.fields['shipping_full_name'].label = 'Full Name'
+        self.fields['shipping_street_address_1'].label = 'Street Address 1'
+        self.fields['shipping_street_address_2'].label = 'Street Address 2'
+        self.fields['shipping_town_or_city'].label = 'Town or City'
+        self.fields['shipping_county'].label = 'County, State or Locality'
+        self.fields['shipping_country'].label = 'Country'
+
+        self.fields['billing_full_name'].label = 'Full Name'
         self.fields['billing_street_address_1'].label = 'Street Address 1'
-        self.fields['billing_street_address_2'].widget.attrs = {
-            'placeholder': 'Street Address 2'}
         self.fields['billing_street_address_2'].label = 'Street Address 2'
-        self.fields['billing_town_or_city'].widget.attrs = {
-            'placeholder': 'Town or City', 'class': 'billing-field'}
         self.fields['billing_town_or_city'].label = 'City or Town'
-        self.fields['billing_county'].widget.attrs = {
-            'placeholder': 'Locality'}
         self.fields['billing_county'].label = 'County, State or Locality'
-        self.fields['billing_country'].widget.attrs = {'placeholder': 'Country',  # noqa E501
-                                                       'class': 'form-control billing-field'}  # noqa E501
-        self.fields['billing_country'].label = 'Country'
-        self.fields['billing_postcode'].widget.attrs = {
-            'placeholder': 'Postcode'}
         self.fields['billing_postcode'].label = 'Postcode'
+        self.fields['billing_country'].label = 'Country'
+
+        helper.layout = Layout(
+            Row(
+                Column(
+                    Fieldset(_('SHIPPING DETAILS'),
+                             Row(
+                        Field('shipping_full_name',
+                              placeholder=_('Full Name')),
+                        Field('shipping_phone_number',
+                              template='bootstrap4/phone_field.html'),
+                        Field('shipping_street_address_1',
+                              placeholder=_('Street Address 1')),
+                        Field('shipping_street_address_2',
+                              placeholder=_('Street Address 2')),
+                        Field('shipping_town_or_city',
+                              placeholder=_('Town or City')),
+                        Field('shipping_county',
+                              placeholder=_('County, State or Locality')),
+                        Field('shipping_postcode',
+                              placeholder=_('Postcode')),
+                        Field('shipping_country',
+                              placeholder=_('Country'),
+                              css_class='form-select')
+                    )),
+                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
+
+                Column(
+                    Fieldset(_('BILLING DETAILS'),
+                             Row(
+                        Field('billing_full_name',
+                              placeholder=_('Full Name')),
+                        Field('billing_phone_number',
+                              template='bootstrap4/phone_field.html'),
+                        Field('billing_street_address_1',
+                              placeholder=_('Street Address 1')),
+                        Field('billing_street_address_2',
+                              placeholder=_('Street Address 2')),
+                        Field('billing_town_or_city',
+                              placeholder=_('Town or City')),
+                        Field('billing_county',
+                              placeholder=_('County, State or Locality')),
+                        Field('billing_postcode',
+                              placeholder=_('Postcode')),
+                        Field('billing_country',
+                              placeholder=_('Country'),
+                              css_class='form-select')
+                    )),
+                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
+
+                Column(StrictButton(_('Save Details'), type='submit',
+                                    css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                       css_class='col-12 col-md-auto me-auto mx-md-auto mb-3')
+            )
+        )
