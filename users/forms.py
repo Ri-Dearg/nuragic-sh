@@ -2,7 +2,8 @@ from allauth.account.forms import (LoginForm, ResetPasswordForm,
                                    ResetPasswordKeyForm, SignupForm)
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Field, Fieldset, Layout, Row
+from crispy_forms.layout import (HTML, Column, Field, Fieldset, Layout,
+                                 MultiWidgetField, Row)
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
@@ -178,20 +179,20 @@ class UserProfileForm(forms.ModelForm):
             widget=widgets.PhoneNumberPrefixWidget(),
             required=False)
 
-        self.fields['shipping_full_name'].label = 'Full Name'
-        self.fields['shipping_street_address_1'].label = 'Street Address 1'
-        self.fields['shipping_street_address_2'].label = 'Street Address 2'
-        self.fields['shipping_town_or_city'].label = 'Town or City'
-        self.fields['shipping_county'].label = 'County, State or Locality'
-        self.fields['shipping_country'].label = 'Country'
+        self.fields['shipping_full_name'].label = _('Full Name')
+        self.fields['shipping_street_address_1'].label = _('Street Address 1')
+        self.fields['shipping_street_address_2'].label = _('Street Address 2')
+        self.fields['shipping_town_or_city'].label = _('Town or City')
+        self.fields['shipping_county'].label = _('County, State or Locality')
+        self.fields['shipping_country'].label = _('Country')
 
-        self.fields['billing_full_name'].label = 'Full Name'
-        self.fields['billing_street_address_1'].label = 'Street Address 1'
-        self.fields['billing_street_address_2'].label = 'Street Address 2'
-        self.fields['billing_town_or_city'].label = 'City or Town'
-        self.fields['billing_county'].label = 'County, State or Locality'
-        self.fields['billing_postcode'].label = 'Postcode'
-        self.fields['billing_country'].label = 'Country'
+        self.fields['billing_full_name'].label = _('Full Name')
+        self.fields['billing_street_address_1'].label = _('Street Address 1')
+        self.fields['billing_street_address_2'].label = _('Street Address 2')
+        self.fields['billing_town_or_city'].label = _('City or Town')
+        self.fields['billing_county'].label = _('County, State or Locality')
+        self.fields['billing_postcode'].label = _('Postcode')
+        self.fields['billing_country'].label = _('Country')
 
         helper.layout = Layout(
             Row(
@@ -200,8 +201,17 @@ class UserProfileForm(forms.ModelForm):
                              Row(
                         Field('shipping_full_name',
                               placeholder=_('Full Name')),
-                        Field('shipping_phone_number',
-                              template='bootstrap4/phone_field.html'),
+                        # Persistent layout issues using this widget
+                        # Review in future
+                        # For now I am using a workaround with javascript.
+                        MultiWidgetField(
+                            'shipping_phone_number',
+                            template='bootstrap4/phone_field.html',
+                            attrs=({'class': 'form-select',
+                                   'placeholder': _('Country Code')},
+                                   {'class': 'd-none visually-hidden delete-me',  # noqa E501
+                                   'type': 'hidden'})
+                        ),
                         Field('shipping_street_address_1',
                               placeholder=_('Street Address 1')),
                         Field('shipping_street_address_2',
@@ -223,8 +233,17 @@ class UserProfileForm(forms.ModelForm):
                              Row(
                         Field('billing_full_name',
                               placeholder=_('Full Name')),
-                        Field('billing_phone_number',
-                              template='bootstrap4/phone_field.html'),
+                        # Persistent layout issues using this widget
+                        # Review in future
+                        # For now I am using a workaround with javascript.
+                        MultiWidgetField(
+                            'billing_phone_number',
+                            template='bootstrap4/phone_field.html',
+                            attrs=({'class': 'form-select',
+                                   'placeholder': _('Country Code')},
+                                   {'class': 'd-none visually-hidden delete-me',  # noqa E501
+                                   'type': 'hidden'})
+                        ),
                         Field('billing_street_address_1',
                               placeholder=_('Street Address 1')),
                         Field('billing_street_address_2',
@@ -243,6 +262,6 @@ class UserProfileForm(forms.ModelForm):
 
                 Column(StrictButton(_('Save Details'), type='submit',
                                     css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
-                       css_class='col-12 col-md-auto me-auto mx-md-auto mb-3')
+                       css_class='col-12 col-md-auto ms-2 me-auto mx-md-auto mb-3')
             )
         )
