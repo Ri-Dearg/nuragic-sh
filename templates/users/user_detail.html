@@ -44,18 +44,5 @@ Much of the content is taken directly from their templates. -->
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
-<script type="text/javascript">
-    // Script taken from django-allauth
-    (function () {
-        var message = "Do you really want to remove the selected e-mail address?";
-        var actions = document.getElementsByName("action_remove");
-        if (actions.length) {
-            actions[0].addEventListener("click", function (e) {
-                if (!confirm(message)) {
-                    e.preventDefault();
-                }
-            });
-        }
-    })();
-</script>
+<script src="{% static 'js/custom/userDetail.js' %}"></script>
 {% endblock %}
