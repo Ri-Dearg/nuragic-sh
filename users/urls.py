@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .views import (UserProfileDetailView,
                     CustomEmailView,
                     CustomPasswordChangeView,
-                    update_shipping_billing)
+                    update_shipping_billing, update_newsletter)
 
 urlpatterns = [
     path('profile/<int:pk>/', login_required(UserProfileDetailView.as_view()),
@@ -17,4 +17,7 @@ urlpatterns = [
     path('shipping-billing/',
          login_required(update_shipping_billing),
          name='shipping-billing'),
+    path('newsletter/',
+         login_required(update_newsletter),
+         name='newsletter'),
 ]
