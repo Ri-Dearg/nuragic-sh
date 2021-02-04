@@ -1,17 +1,25 @@
+{% load i18n %}
 <div class="col-12 col-md-6 form-floating my-1">
-    {% load crispy_forms_field %}
-    {% crispy_field field %}
+    <select placeholder="Country Code" name="{{ field.name }}_0" class="form-select" id="id_{{ field.name }}_0">
+        {% with field.value.country_code|stringformat:'i' as country_string %}
+        {% with "+"|add:country_string as country_value %}
+        {% for choice in field.field.widget.widgets.0.choices %}
+        <option value="{{ choice.0 }}" {% if country_value == choice.0 %} selected{% endif %}>{{ choice.1 }}
+        </option>
+        {% endfor %}
+        {% endwith %}
+        {% endwith %}
+    </select>
     <label for="id_{{ field.name }}_0" class="p-font text-primary sr-only">
-        Country Code
+        {% trans 'Country Code' %}
     </label>
-    {% include 'bootstrap4/layout/help_text_and_errors.html' %}
 </div>
 <div class="col-12 col-md-6 form-floating my-1">
-    <input type="tel" name="{{ field.name }}_1" pattern="[0-9]+" placeholder="Phone Number" class="form-control"
-        id="id_{{ field.name }}_1" {% if field.value.national_number != None %}
+    <input type="tel" name="{{ field.name }}_1" pattern="[0-9]+" maxlength="15" placeholder="Phone Number"
+        class="form-control" id="id_{{ field.name }}_1" {% if field.value.national_number != None %}
         value="{{ field.value.national_number }}" {% endif %}>
     <label for="id_{{ field.name }}_1" class="p-font text-primary sr-only">
-        Phone Number
+        {% trans 'Phone Number' %}
     </label>
     {% include 'bootstrap4/layout/help_text_and_errors.html' %}
 </div>
