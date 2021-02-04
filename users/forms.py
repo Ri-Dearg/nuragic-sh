@@ -38,9 +38,10 @@ class StyledLoginForm(LoginForm):
 
             Row(
                 Field('login', placeholder=_('Username or E-mail'),
-                      autocomplete='email'),
+                      autocomplete='email', css_class='p-font text-primary'),
 
-                Field('password', placeholder=_('Password')),
+                Field('password', placeholder=_('Password'),
+                      css_class='p-font text-primary'),
 
                 HTML(f'<a class="p-font smooth-click text-white \
                      text-center mt-1 mb-2 secondaryAction" \
@@ -74,7 +75,7 @@ class StyledResetPasswordForm(ResetPasswordForm):
 
             Row(
                 Field('email', placeholder=_('E-mail'),
-                      autocomplete='email'),
+                      autocomplete='email', css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Reset Password'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
@@ -101,10 +102,10 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
 
             Row(
                 Field('password1', placeholder=_('New Password'),
-                      autocomplete='off', minlength='8'),
+                      autocomplete='off', minlength='8', css_class='p-font text-primary'),
 
                 Field('password2', placeholder=_('Repeat Password'),
-                      autocomplete='off', minlength='8'),
+                      autocomplete='off', minlength='8', css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Change Password'), type='submit',
                        css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
@@ -132,16 +133,18 @@ class StyledSignupForm(SignupForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Field('email',  placeholder=_('E-mail'),
+                Field('email', placeholder=_('E-mail'),
+                css_class='p-font text-primary',
                 pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
 
-                Field('username',  placeholder=_('Username')),
+                Field('username',  placeholder=_('Username'),
+                      css_class='p-font text-primary'),
 
                 Field('password1', placeholder=_('Password'),
-                      minlength='8'),
+                      minlength='8', css_class='p-font text-primary'),
 
                 Field('password2', placeholder=_('Repeat Password'),
-                      minlength='8'),
+                      minlength='8', css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Register'), type='submit',
                              css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
@@ -200,24 +203,30 @@ class UserProfileForm(forms.ModelForm):
                     Fieldset(_('SHIPPING DETAILS'),
                              Row(
                         Field('shipping_full_name',
-                              placeholder=_('Full Name')),
+                              placeholder=_('Full Name'),
+                              css_class='p-font text-primary'),
                         MultiWidgetField(
                             'shipping_phone_number',
                             template='bootstrap4/phone_field.html'
                         ),
                         Field('shipping_street_address_1',
-                              placeholder=_('Street Address 1')),
+                              placeholder=_('Street Address 1'),
+                              css_class='p-font text-primary'),
                         Field('shipping_street_address_2',
-                              placeholder=_('Street Address 2')),
+                              placeholder=_('Street Address 2'),
+                              css_class='p-font text-primary'),
                         Field('shipping_town_or_city',
-                              placeholder=_('Town or City')),
+                              placeholder=_('Town or City'),
+                              css_class='p-font text-primary'),
                         Field('shipping_county',
-                              placeholder=_('County, State or Locality')),
+                              placeholder=_('County, State or Locality'),
+                              css_class='p-font text-primary'),
                         Field('shipping_postcode',
-                              placeholder=_('Postcode')),
+                              placeholder=_('Postcode'),
+                              css_class='p-font text-primary'),
                         Field('shipping_country',
                               placeholder=_('Country'),
-                              css_class='form-select')
+                              css_class='form-select p-font text-primary')
                     )),
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
 
@@ -225,32 +234,35 @@ class UserProfileForm(forms.ModelForm):
                     Fieldset(_('BILLING DETAILS'),
                              Row(
                         Field('billing_full_name',
-                              placeholder=_('Full Name')),
-                        # Persistent layout issues using this widget
-                        # Review in future
-                        # For now I am using a workaround with javascript.
+                              placeholder=_('Full Name'),
+                              css_class='p-font text-primary'),
                         MultiWidgetField(
                             'billing_phone_number',
                             template='bootstrap4/phone_field.html'
                             ),
                         Field('billing_street_address_1',
-                              placeholder=_('Street Address 1')),
+                              placeholder=_('Street Address 1'),
+                              css_class='p-font text-primary'),
                         Field('billing_street_address_2',
-                              placeholder=_('Street Address 2')),
+                              placeholder=_('Street Address 2'),
+                              css_class='p-font text-primary'),
                         Field('billing_town_or_city',
-                              placeholder=_('Town or City')),
+                              placeholder=_('Town or City'),
+                              css_class='p-font text-primary'),
                         Field('billing_county',
-                              placeholder=_('County, State or Locality')),
+                              placeholder=_('County, State or Locality'),
+                              css_class='p-font text-primary'),
                         Field('billing_postcode',
-                              placeholder=_('Postcode')),
+                              placeholder=_('Postcode'),
+                              css_class='p-font text-primary'),
                         Field('billing_country',
                               placeholder=_('Country'),
-                              css_class='form-select')
+                              css_class='form-select p-font text-primary')
                     )),
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
 
                 Column(StrictButton(_('Save Details'), type='submit',
                                     css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
-                       css_class='col-12 col-md-auto ms-2 me-auto mx-md-auto mb-3')
+                       css_class='col-12 col-md-auto ms-2 me-auto mx-md-auto mb-3')  # noqa E501
             )
         )

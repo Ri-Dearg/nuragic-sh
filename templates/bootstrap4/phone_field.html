@@ -1,6 +1,7 @@
 {% load i18n %}
 <div class="col-12 col-md-6 form-floating my-1">
-    <select placeholder="Country Code" name="{{ field.name }}_0" class="form-select" id="id_{{ field.name }}_0">
+    <select placeholder="Country Code" name="{{ field.name }}_0" class="p-font text-primary form-select"
+        id="id_{{ field.name }}_0">
         {% with field.value.country_code|stringformat:'i' as country_string %}
         {% with "+"|add:country_string as country_value %}
         {% for choice in field.field.widget.widgets.0.choices %}
@@ -16,7 +17,7 @@
 </div>
 <div class="col-12 col-md-6 form-floating my-1">
     <input type="tel" name="{{ field.name }}_1" pattern="[0-9]+" maxlength="15" placeholder="Phone Number"
-        class="form-control" id="id_{{ field.name }}_1" {% if field.value.national_number != None %}
+        class="p-font text-primary form-control" id="id_{{ field.name }}_1" {% if field.value.national_number != None %}
         value="{{ field.value.national_number }}" {% endif %}>
     <label for="id_{{ field.name }}_1" class="p-font text-primary sr-only">
         {% trans 'Phone Number' %}

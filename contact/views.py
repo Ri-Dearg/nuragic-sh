@@ -5,7 +5,7 @@ from crispy_forms.layout import Column, Field, Layout, Row
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
 from info.models import Category
 
@@ -22,7 +22,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].label = _('Email')
+        form.fields['email'].label = _('E-mail')
         form.fields['name'].label = _('Name')
         form.fields['subject'].label = _('Subject')
         form.fields['message'].label = _('What are your thoughts?')
@@ -38,15 +38,19 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
             Row(
                 Field('email',  placeholder=_('E-mail'),
                       pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501
-                      wrapper_class='col-md-6'),
+                      wrapper_class='col-md-6',
+                      css_class='p-font text-primary'),
 
                 Field('name', placeholder=_('Name'),
-                      wrapper_class='col-md-6'),
+                      wrapper_class='col-md-6',
+                      css_class='p-font text-primary'),
 
-                Field('subject', placeholder=_('Subject')),
+                Field('subject', placeholder=_('Subject'),
+                      css_class='p-font text-primary'),
 
                 Field('message',
-                      placeholder=_('What are your thoughts?')),
+                      placeholder=_('What are your thoughts?'),
+                      css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Send'), type='submit',
                        css_class="p-font btn-tran btn-warning text-primary shadow"),  # noqa E501
