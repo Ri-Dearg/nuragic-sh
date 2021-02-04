@@ -201,16 +201,9 @@ class UserProfileForm(forms.ModelForm):
                              Row(
                         Field('shipping_full_name',
                               placeholder=_('Full Name')),
-                        # Persistent layout issues using this widget
-                        # Review in future
-                        # For now I am using a workaround with javascript.
                         MultiWidgetField(
                             'shipping_phone_number',
-                            template='bootstrap4/phone_field.html',
-                            attrs=({'class': 'form-select',
-                                   'placeholder': _('Country Code')},
-                                   {'class': 'd-none visually-hidden delete-me',  # noqa E501
-                                   'type': 'hidden'})
+                            template='bootstrap4/phone_field.html'
                         ),
                         Field('shipping_street_address_1',
                               placeholder=_('Street Address 1')),
@@ -238,12 +231,8 @@ class UserProfileForm(forms.ModelForm):
                         # For now I am using a workaround with javascript.
                         MultiWidgetField(
                             'billing_phone_number',
-                            template='bootstrap4/phone_field.html',
-                            attrs=({'class': 'form-select',
-                                   'placeholder': _('Country Code')},
-                                   {'class': 'd-none visually-hidden delete-me',  # noqa E501
-                                   'type': 'hidden'})
-                        ),
+                            template='bootstrap4/phone_field.html'
+                            ),
                         Field('billing_street_address_1',
                               placeholder=_('Street Address 1')),
                         Field('billing_street_address_2',

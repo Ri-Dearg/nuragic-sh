@@ -1,6 +1,4 @@
 (function profileActions() {
-  $(".delete-me").remove();
-
   var message = "Do you really want to remove the selected e-mail address?";
   var actions = document.getElementsByName("action_remove");
   if (actions.length) {
