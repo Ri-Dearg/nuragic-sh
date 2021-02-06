@@ -38,7 +38,7 @@
         </form>
     </div>
 
-    <h6 class="p-font col-12 text-primary mt-2">{% trans "Add E-mail Address" %}</h5>
+    <h6 class="p-font col-12 text-primary mt-2">{% trans "Add E-mail Address" %}:</h5>
         <div class="col-12">
             <form method="POST" action="{% url 'users:user-email' %}" class="add_email">
                 {% csrf_token %}
