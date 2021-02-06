@@ -101,11 +101,15 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Field('password1', placeholder=_('New Password'),
-                      autocomplete='off', minlength='8', css_class='p-font text-primary'),
+                Field('password1',
+                      placeholder=_('New Password'),
+                      autocomplete='off', minlength='8',
+                      css_class='p-font text-primary'),
 
-                Field('password2', placeholder=_('Repeat Password'),
-                      autocomplete='off', minlength='8', css_class='p-font text-primary'),
+                Field('password2',
+                      placeholder=_('Repeat Password'),
+                      autocomplete='off', minlength='8',
+                      css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Change Password'), type='submit',
                        css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
@@ -134,7 +138,7 @@ class StyledSignupForm(SignupForm):
 
             Row(
                 Field('email', placeholder=_('E-mail'),
-                css_class='p-font text-primary',
+                      css_class='p-font text-primary',
                 pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
 
                 Field('username',  placeholder=_('Username'),
@@ -262,7 +266,7 @@ class UserProfileForm(forms.ModelForm):
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
 
                 Column(StrictButton(_('Save Details'), type='submit',
-                                    css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
-                       css_class='col-12 col-md-auto ms-2 me-auto mx-md-auto mb-3')  # noqa E501
+                                    css_class='p-font btn-tran btn btn-sm btn-warning text-primary shadow'),  # noqa E501
+                       css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 pb-md-4 mx-md-auto')  # noqa E501
             )
         )
