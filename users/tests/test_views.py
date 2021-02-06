@@ -1,3 +1,4 @@
+from contact.models import Newsletter
 from django.contrib.auth.models import User
 from django.test import TestCase
 
@@ -14,7 +15,39 @@ class TestUserViews(TestCase):
                                    email=email,
                                    password=password)
 
-    def test_context(self):
+        Newsletter.objects.create(name='basic')
+
+    def test_custom_forms_rendering(self):
+        response = self.client.get('/accounts/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base/base.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/info_nav.html')
+        self.assertTemplateUsed(response, 'base/includes/footer.html')
+
+        response = self.client.get('/accounts/signup/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base/base.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/info_nav.html')
+        self.assertTemplateUsed(response, 'base/includes/footer.html')
+
+        response = self.client.get('/accounts/password/reset/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base/base.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/info_nav.html')
+        self.assertTemplateUsed(response, 'base/includes/footer.html')
+
+        response = self.client.get(
+            '/accounts/password/reset/key/2-set-password/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base/base.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/info_nav.html')
+        self.assertTemplateUsed(response, 'base/includes/footer.html')
+
+    def test_user_profile_context(self):
         """Tests the all the correct context appear on the user's settings
         page. That's their shipping and billing info, emails, and custom info
         change forms"""
@@ -83,3 +116,73 @@ class TestUserViews(TestCase):
         test_user = User.objects.latest('date_joined')
         self.assertEqual(test_user.userprofile.shipping_full_name,
                          'Test Name')
+
+        # Posts an ivalid form to update the info
+        self.client.post('/users/shipping-billing/?next=/',
+                         {'shipping_postcode': '123456789012345678901'})
+
+        self.assertEqual(test_user.userprofile.shipping_phone_number,
+                         '+93.1')
+
+    def test_update_newsletter(self):
+        # Retrieves the most recently created user and logs them in
+        newsletter = Newsletter.objects.get(name='basic')
+
+        test_user = User.objects.latest('date_joined')
+        self.client.force_login(test_user)
+
+        response = self.client.post('/users/newsletter/?next=/',
+                                    {'save': '',
+                                     'newsletter': 'en',
+                                     'email': test_user.email})
+
+        self.assertEqual(response.status_code, 302)
+        newsletter = Newsletter.objects.get(name='basic')
+
+        self.assertTrue(test_user.email in newsletter.email_list_en)
+
+        self.client.post('/users/newsletter/?next=/',
+                         {'save': '',
+                          'newsletter': 'en',
+                          'email': test_user.email})
+
+        newsletter = Newsletter.objects.get(name='basic')
+        self.assertTrue(newsletter.email_list_en == [test_user.email])
+
+        self.client.post('/users/newsletter/?next=/',
+                         {'save': '',
+                          'newsletter': 'it',
+                          'email': test_user.email})
+        newsletter = Newsletter.objects.get(name='basic')
+
+        self.assertTrue(test_user.email in newsletter.email_list_it)
+        self.assertTrue(test_user.email not in newsletter.email_list_en)
+
+        self.client.get('/users/newsletter/?next=/',
+                        {'save': '',
+                         'newsletter': 'en',
+                         'email': test_user.email})
+        newsletter = Newsletter.objects.get(name='basic')
+
+        self.assertTrue(test_user.email in newsletter.email_list_it)
+        self.assertTrue(test_user.email not in newsletter.email_list_en)
+
+        self.client.post('/users/newsletter/?next=/',
+                         {'unsub': '',
+                          'email': test_user.email})
+        newsletter = Newsletter.objects.get(name='basic')
+
+        self.assertTrue(test_user.email not in newsletter.email_list_it)
+        self.assertTrue(test_user.email not in newsletter.email_list_en)
+
+        self.client.post('/users/newsletter/?next=/',
+                         {'save': '',
+                          'newsletter': 'en',
+                          'email': test_user.email})
+        self.client.post('/users/newsletter/?next=/',
+                         {'unsub': '',
+                          'email': test_user.email})
+        newsletter = Newsletter.objects.get(name='basic')
+
+        self.assertTrue(test_user.email not in newsletter.email_list_it)
+        self.assertTrue(test_user.email not in newsletter.email_list_en)
