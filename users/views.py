@@ -95,7 +95,7 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     as it is incredibly difficult to have allauth utilise alternative views
     for some functions it was easier to utilise alternative views with
     the same template and context as the basic UserProfile Detailview.
-    Apart from the url difference it should be unnoticable to the user."""
+    Apart from the url difference it should be unnoticeable to the user."""
 
     template_name = 'users/user_detail.html'
 
@@ -163,6 +163,15 @@ def update_newsletter(request):
     # Retrieves the current user and redirection page.
     redirect_url = request.GET.get('next', '')
 
+    def update_email(email, add_list, remove_list):
+        """Updates the newsletter lists"""
+        if email in add_list:
+            pass
+        else:
+            add_list.append(email)
+            if email in remove_list:
+                remove_list.remove(email)
+
     if request.method == 'POST':
         email = request.POST['email']
         newsletter = Newsletter.objects.get(name='basic')
@@ -171,26 +180,15 @@ def update_newsletter(request):
 
         if 'save' and 'newsletter' in request.POST:
             if 'it' in request.POST['newsletter']:
-                if email in it_list:
-                    pass
-                else:
-                    it_list.append(email)
-            else:
-                if email in it_list:
-                    it_list.remove(email)
+                update_email(email, it_list, en_list)
 
             if 'en' in request.POST['newsletter']:
-                if email in en_list:
-                    pass
-                else:
-                    en_list.append(email)
-            else:
-                if email in en_list:
-                    en_list.remove(email)
-            newsletter.save()
+                update_email(email, en_list, it_list)
 
+            newsletter.save()
             messages.success(request, _(
                 f'Your newsletter preferences have been updated for {email}.'))
+
             return HttpResponseRedirect(redirect_url)
 
         else:
