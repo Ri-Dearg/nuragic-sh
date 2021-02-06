@@ -1,9 +1,10 @@
-from django.test import TestCase
 from django.contrib.auth.models import User
+from django.test import TestCase
 
 
 class TestUserViews(TestCase):
     """Tests views for the Users app."""
+
     def setUp(self):
         """Creates a fake user for use in the tests."""
         username = 'user1'
