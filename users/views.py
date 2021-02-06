@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 
 from .forms import UserProfileForm
@@ -152,7 +152,7 @@ def update_shipping_billing(request):
             return HttpResponseRedirect(redirect_url)
         else:
             form = UserProfileForm()
-            messages.warning(request, -('Failed to update your information. \
+            messages.warning(request, _('Failed to update your information. \
                 Please Check your details.'))
             return HttpResponseRedirect(redirect_url)
 
@@ -201,6 +201,6 @@ def update_newsletter(request):
                 f'You have unsubscribed {email} from the newsletter.'))
             return HttpResponseRedirect(redirect_url)
 
-    messages.warning(request, _('Failed to update your information. \
-                Please Check your details.'))
-    return HttpResponse(status=403)
+    messages.warning(request, _(
+        'Failed to update your information. Please Check your details.'))
+    return HttpResponse(redirect_url)
