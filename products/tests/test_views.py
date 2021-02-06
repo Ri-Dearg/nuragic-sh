@@ -38,7 +38,8 @@ class TestProductsViews(TestCase):
         self.assertTemplateUsed(response, 'products/product_list.html')
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
         self.assertTemplateUsed(response, 'base/base.html')
-        self.assertTemplateUsed(response, 'base/includes/header_shop.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/shop_nav.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
         self.assertTrue(
             response.context['all_products_active'], True)
@@ -52,7 +53,8 @@ class TestProductsViews(TestCase):
         self.assertTemplateUsed(response, 'products/shopcategory_detail.html')
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
         self.assertTemplateUsed(response, 'base/base.html')
-        self.assertTemplateUsed(response, 'base/includes/header_shop.html')
+        self.assertTemplateUsed(response, 'base/includes/header.html')
+        self.assertTemplateUsed(response, 'base/includes/shop_nav.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
         self.assertTrue(
             response.context['active_category'], f'{shopcategory.id}')
