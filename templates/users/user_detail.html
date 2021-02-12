@@ -21,7 +21,9 @@ The email and password functions use django-allauth logic with custom forms.
 Much of the content is taken directly from their templates. -->
 <div class="row py-3 bg-brown">
     <div class="col">
-        <h2 class="h-font l-space-1 h1 text-white text-center">{{ user.username|upper }}{% trans "'S SETTINGS" %}</h2>
+        {% blocktrans with user.username|upper as name %}
+        <h2 class="h-font l-space-1 h1 text-white text-center">{{ name }}'S SETTINGS"</h2>
+        {% endblocktrans %}
     </div>
 </div>
 <div class="row bg-white">

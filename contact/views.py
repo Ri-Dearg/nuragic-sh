@@ -5,7 +5,7 @@ from crispy_forms.layout import Column, Field, Layout, Row
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
 from info.models import Category
 
