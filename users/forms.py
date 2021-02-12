@@ -5,7 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (HTML, Column, Field, Fieldset, Layout,
                                  MultiWidgetField, Row)
 from django import forms
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext
 from phonenumber_field import widgets
 
@@ -19,7 +19,7 @@ class StyledLoginForm(LoginForm):
         super().__init__(*args, **kwargs)
 
         login_field = forms.CharField(
-            label=pgettext('label', 'Username or Email'))
+            label=pgettext('label', 'Username or E-mail'))
         self.fields['login'] = login_field
 
         self.helper = FormHelper(self)
@@ -196,7 +196,7 @@ class UserProfileForm(forms.ModelForm):
         self.fields['billing_full_name'].label = _('Full Name')
         self.fields['billing_street_address_1'].label = _('Street Address 1')
         self.fields['billing_street_address_2'].label = _('Street Address 2')
-        self.fields['billing_town_or_city'].label = _('City or Town')
+        self.fields['billing_town_or_city'].label = _('Town or City')
         self.fields['billing_county'].label = _('County, State or Locality')
         self.fields['billing_postcode'].label = _('Postcode')
         self.fields['billing_country'].label = _('Country')
