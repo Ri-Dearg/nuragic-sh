@@ -18,54 +18,68 @@ class Newsletter(models.Model):
         null=False, blank=False), default=list)
 
     def save(self, *args, **kwargs):
-        """Function """
+        """Sorts the newsletter lists.
+        Creates EmailHistory objects for new emails, then parses
+        emails to set the correct checkboxes for the EmailHistory models."""
+
+        def create_history(email_list):
+            """Creates EmailHistory models for any unregistered emails."""
+            email_history = EmailHistory.objects.all()
+            history_list = []
+            for item in email_history:
+                history_list.append(str(item))
+
+            history_obj = []
+
+            for email in email_list:
+                if email not in history_list:
+                    newsletter = {}
+                    newsletter['email_address'] = email
+                    history_obj.append(EmailHistory(**newsletter))
+
+            if len(history_obj) > 0:
+                EmailHistory.objects.bulk_create(history_obj)
+
+        def checkbox_highlight(newsletter_list_en, newsletter_list_it,
+                               email_history):
+            """Highlights subscription checkboxes for EmailHistory models."""
+            for item in email_history:
+                if (str(item) in newsletter_list_en
+                        and item.newsletter_en is False):
+                    print('true')
+                    item.newsletter_en = True
+                    item.save()
+                elif (str(item) not in newsletter_list_en
+                        and item.newsletter_en is True):
+                    print('false')
+                    item.newsletter_en = False
+                    item.save()
+
+                if (str(item) in newsletter_list_it
+                        and item.newsletter_it is False):
+                    item.newsletter_it = True
+                    item.save()
+                elif (str(item) not in newsletter_list_it
+                        and item.newsletter_it is True):
+                    item.newsletter_it = False
+                    item.save()
+
+        # Sorts the newletter lists alphabetically and declares variables
+        self.email_list_en = sorted(self.email_list_en)
+        self.email_list_it = sorted(self.email_list_it)
+        news_list_en = self.email_list_en
+        news_list_it = self.email_list_it
+        news_list_total = list(set(news_list_en).union(news_list_it))
+
+        create_history(news_list_total)
+
         # Declares variables to check for users in certain newsletters
         email_history = EmailHistory.objects.all()
         history_list = []
         for item in email_history:
             history_list.append(str(item))
-        news_list_en = self.email_list_en
-        news_list_it = self.email_list_it
-        history_obj = []
 
-        # These two functions check for which newsletter the user has
-        # subscribed to and highlights the correct checkboxes accordingly
-        for email in news_list_en:
-            for item in email_history:
-                if email == item.email_address and item.newsletter_en is False:
-                    item.newsletter_en = True
-                    if email not in news_list_it:
-                        item.newsletter_it = False
-                    item.save()
-            if email not in history_list:
-                newsletter = {}
-                newsletter['email_address'] = email
-                newsletter['newsletter_en'] = True
-                history_obj.append(EmailHistory(**newsletter))
-
-        for email in news_list_it:
-            for item in email_history:
-                if email == item.email_address and item.newsletter_it is False:
-                    item.newsletter_it = True
-                    if email not in news_list_en:
-                        item.newsletter_en = False
-                    item.save()
-            if email not in history_list:
-                newsletter = {}
-                newsletter['email_address'] = email
-                newsletter['newsletter_it'] = True
-                history_obj.append(EmailHistory(**newsletter))
-
-            if len(history_obj) > 0:
-                EmailHistory.objects.bulk_create(history_obj)
-
-            news_list_total = news_list_en + news_list_it
-
-            for item in email_history:
-                if item.email_address not in (news_list_total):
-                    item.newsletter_en = False
-                    item.newsletter_it = False
-                    item.save()
+        checkbox_highlight(news_list_en, news_list_it, email_history)
 
         super().save(*args, **kwargs)
 
@@ -84,17 +98,20 @@ class EmailHistory(models.Model):
     newsletter_it = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        """Fills newletter subscription boxes accordingly
-        and sorts them alphabetically."""
+        """Fills newletter subscription boxes accordingly."""
         newsletter = Newsletter.objects.get(name='basic')
         newsletter_list_en = newsletter.email_list_en
         newsletter_list_it = newsletter.email_list_it
+
         if self.email_address in newsletter_list_en:
             self.newsletter_en = True
+        else:
+            self.newsletter_en = False
+
         if self.email_address in newsletter_list_it:
             self.newsletter_it = True
-        newsletter_list_en = sorted(newsletter_list_en)
-        newsletter_list_it = sorted(newsletter_list_it)
+        else:
+            self.newsletter_it = False
 
         super().save(*args, **kwargs)
 
