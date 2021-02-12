@@ -46,12 +46,10 @@ class Newsletter(models.Model):
             for item in email_history:
                 if (str(item) in newsletter_list_en
                         and item.newsletter_en is False):
-                    print('true')
                     item.newsletter_en = True
                     item.save()
                 elif (str(item) not in newsletter_list_en
                         and item.newsletter_en is True):
-                    print('false')
                     item.newsletter_en = False
                     item.save()
 
