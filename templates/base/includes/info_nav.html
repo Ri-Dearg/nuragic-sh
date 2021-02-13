@@ -5,6 +5,7 @@
         href="{% url 'info:home' %}">{% trans 'HOME' %}</a>
 </li>
 <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
+{% if categories %}
 {% for item in categories %}
 <li
     class="btn-tran nav-item dropdown pt-2 py-md-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5 order-md-last{% endif %}">
@@ -39,3 +40,4 @@
     </ul>
 </li>
 {% endfor %}
+{% endif %}
