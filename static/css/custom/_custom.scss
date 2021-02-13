@@ -40,30 +40,6 @@ Carousel
   background-color: rgba(23, 36, 56, 0.7);
 }
 
-.foot-link.sv-sm {
-  width: 16px;
-  height: 16px;
-}
-
-.foot-link.sv-md {
-  width: 28px;
-  height: 28px;
-}
-
-.foot-link.sv-lg {
-  width: 40px;
-  height: 40px;
-}
-
-.foot-link.sv-xl {
-  width: 48px;
-  height: 48px;
-}
-
-.foot-link:hover {
-  color: #fff;
-}
-
 .no-caret.dropdown-toggle::after {
   content: none;
   display: none;
@@ -76,6 +52,7 @@ Carousel
 /*--------------------------------------------------------------------------
 Fonts
 --------------------------------------------------------------------------*/
+
 /*Font used for Headings and titles*/
 @font-face {
   font-family: "Sierra_madre";
@@ -90,6 +67,7 @@ Fonts
   font-weight: normal;
   font-style: normal;
 }
+
 /*Font used for General text*/
 @font-face {
   font-family: "Montserrat";
@@ -204,6 +182,34 @@ Forms
 
 .form-box {
   max-width: 500px;
+}
+
+/*--------------------------------------------------------------------------
+Icons
+--------------------------------------------------------------------------*/
+
+.foot-link.sv-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.foot-link.sv-md {
+  width: 28px;
+  height: 28px;
+}
+
+.foot-link.sv-lg {
+  width: 40px;
+  height: 40px;
+}
+
+.foot-link.sv-xl {
+  width: 48px;
+  height: 48px;
+}
+
+.foot-link:hover {
+  color: #fff;
 }
 
 /*--------------------------------------------------------------------------

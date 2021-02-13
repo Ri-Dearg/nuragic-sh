@@ -27,6 +27,7 @@ $custom-colors: (
   "error": #ae1e2c,
 );
 
+/*Sets default checkbox/radio color*/
 $component-active-bg: $warning;
 
 /*Sets default dropdown link colors*/
@@ -113,6 +114,7 @@ $utilities: map-merge(
 // @import "bootstrap/popover";
 @import "bootstrap/carousel";
 // @import "bootstrap/spinners";
+
 // Helpers
 @import "bootstrap/helpers";
 
