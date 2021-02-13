@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'jasmine_testing',
     'contact',
     'info',
+    'likes',
     'products',
     'users',
     # Add editor in admin
