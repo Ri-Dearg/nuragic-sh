@@ -20,9 +20,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    # Internationalization functions
     path('i18n/', include('django.conf.urls.i18n')),
+    # Allauth functions
     path('accounts/', include('allauth.urls')),
+    # Rich Text Editor functions
     path('tinymce/', include('tinymce.urls')),
+    # Jasmine testing functions
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
     path('contact/', include(('contact.urls', 'contact'),
