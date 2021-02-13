@@ -9,11 +9,10 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
     """Displays a list of products in the Category.
     The MultipleObjectMixin allows for easy pagination."""
     model = ShopCategory
-    paginate_by = 4
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
-
         # Declares objects for pagination
         object_list = self.object.products.all().order_by(
             '-stock', '-popularity')
@@ -30,12 +29,11 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
 
 class ProductListView(ListView):
     model = Product
-    paginate_by = 4
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
-
         # Selects the active tab
         if 'query' not in self.request.GET and self.request.path == '/shop/':
             all_products_active = True
