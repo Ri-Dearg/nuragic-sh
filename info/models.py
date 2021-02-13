@@ -26,7 +26,7 @@ def image_resize(self, image_title, width, height):
         pass
     finally:
         try:
-            # Makes each image unique, django-cleanup deletes shared files
+            # Makes each image unique as django-cleanup deletes shared files
             time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
                                               '%d.%m.%Y %H:%M:%S,%f')
             millisecs = int(time.timestamp() * 1000)
@@ -65,15 +65,16 @@ def image_resize(self, image_title, width, height):
 class SplashImage(models.Model):
     """Allows for the creation of a collection of carousel items.
     You can add a splash image which will be resized and a blurb.
-    Images will be resized on upload to 1920x720px square shape.
-    I would recommend cropping your images to a 8: 3 ratio first."""
+    Images are different sizes depending on the screen size.
+    I would recommend cropping your images first."""
     page = models.OneToOneField('Page',
                                 on_delete=models.CASCADE)
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
     image_tw_header = models.ImageField(upload_to='carousel')
     image_fb_link = models.ImageField(upload_to='carousel')
-    display = models.BooleanField(default=True)
+    info_display = models.BooleanField(default=True)
+    shop_display = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -99,12 +100,12 @@ class Category(models.Model):
     """Allows for the creation of a collection of Products.
     You can add a splash image which will be resized and a blurb.
     Images will be resized on upload to 1200x628px shape.
-    I would recommend cropping your images to a 16: 10 ratio first."""
+    I would recommend cropping your images first."""
     title = models.CharField(max_length=30, null=False)
     menu_word = models.CharField(max_length=10, null=False)
     description = HTMLField()
     button_text = models.CharField(max_length=30, null=False)
-    image = models.ImageField(upload_to='info/category')
+    image_fb_link = models.ImageField(upload_to='info/category')
     display = models.BooleanField(default=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
@@ -112,7 +113,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'image', 1200, 628)
+        image1 = image_resize(self, 'image_fb_link', 1200, 628)
         if image1:
             self.image = image1
         super().save(*args, **kwargs)
@@ -158,9 +159,9 @@ class Page(models.Model):
     description1 = HTMLField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = HTMLField(blank=True, default='')
-    title_image = models.ImageField(upload_to='info/page')
-    desc_image = models.ImageField(upload_to='info/page')
-    bot_image = models.ImageField(upload_to='info/page', blank=True)
+    title_image_tw_header = models.ImageField(upload_to='info/page')
+    image_fb_link = models.ImageField(upload_to='info/page')
+    bot_image_tw_header = models.ImageField(upload_to='info/page', blank=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     theme = models.CharField(
@@ -169,9 +170,9 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'title_image', 1500, 500)
-        image2 = image_resize(self, 'desc_image', 1200, 628)
-        image3 = image_resize(self, 'bot_image', 1500, 500)
+        image1 = image_resize(self, 'title_image_tw_header', 1500, 500)
+        image2 = image_resize(self, 'image_fb_link', 1200, 628)
+        image3 = image_resize(self, 'bot_image_tw_header', 1500, 500)
 
         if image1:
             self.title_image = image1
