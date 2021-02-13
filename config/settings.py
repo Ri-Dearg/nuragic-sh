@@ -156,6 +156,7 @@ if TESTING:
 # Production Database
 DATABASES['default'].update(env_db)
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -258,6 +259,8 @@ TINYMCE_DEFAULT_CONFIG = {
     "numlist bullist | link emoticons | preview restoredraft"
 }
 
+# Template pack for crispy_forms.
+# Check templates for edits made to bring it in line with bootstrap 5
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTHENTICATION_BACKENDS = [
