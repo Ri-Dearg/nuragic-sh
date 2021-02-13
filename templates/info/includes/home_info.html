@@ -8,7 +8,7 @@
 <section class="row bg-white">
     {% if forloop.counter|divisibleby:"2" %}
     <div class="col-auto col-md d-flex bg-white">
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
+        <img src="{{ item.image_fb_link.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
     </div>
     <div class="col-auto col-md align-items-center bg-white my-auto px-3 px-md-4 pt-3">
         <h2 class="h-font l-space-2 h1 text-primary text-primary"> {{ item.title|upper }} </h2>
@@ -28,7 +28,7 @@
         </p>
     </div>
     <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid my-auto" />
+        <img src="{{ item.image_fb_link.url }}" alt="{{ item.title }}" class="img-fluid my-auto" />
     </div>
     {% endif %}
 </section>

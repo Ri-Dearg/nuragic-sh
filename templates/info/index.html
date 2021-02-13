@@ -33,7 +33,7 @@
         {% if 'about' in item.menu_word_en.lower %}
         <section class="row bg-white">
             <div class="col-auto col-md d-flex bg-white">
-                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
+                <img src="{{ item.image_fb_link.url }}" alt="{{ item.title }}" class="img-fluid m-auto" />
             </div>
             <div class="col-auto col-md bg-white px-3 px-md-4 pt-3 my-auto">
                 <h2 class="h-font l-space-2 h1 text-center text-primary">{{ item.title|upper }}</h2>

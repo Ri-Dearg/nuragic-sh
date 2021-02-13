@@ -8,7 +8,7 @@ from .models import Category, Page, Review, SplashImage
 # Create your views here.
 def render_index(request):
     """Renders the index with context for categories and splash images."""
-    carousel = SplashImage.objects.all().filter(display=True)
+    carousel = SplashImage.objects.all().filter(info_display=True)
     review = Review.objects.all().filter(display=True)
     context = {'carousel': carousel,
                'review': review,
