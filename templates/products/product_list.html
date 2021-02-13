@@ -13,10 +13,17 @@ such as likes_list, category_detail and stockdrop_detail.-->
 <hr />
 {% endif %}
 {% if page_obj %}
-<div class="row bg-white pt-4">
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
+</div>
+<div class="row bg-white">
     <div class="col">
-        <h1 class="h-font display-2 l-space-2 text-primary text-center">{% trans 'OUR OFFERINGS' %}</h1>
+        <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4">{% trans 'OUR OFFERINGS' %}
+        </h1>
     </div>
+</div>
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
 </div>
 <div class="row px-2 bg-white">
     <!-- This displays all products, organised by 'popularity' and stock quantity.
@@ -41,5 +48,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
     {% include 'base/includes/paginator.html' %}
 </nav>
 {% endif %}
-
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
+</div>
 {% endblock %}
