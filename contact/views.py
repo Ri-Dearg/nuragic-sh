@@ -62,7 +62,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context.
-        Mainly just highlights the "Contact" in the navbar."""
+        Highlights the "Contact" in the navbar."""
         context = super().get_context_data(**kwargs)
         # Details necessary for Stripe payment processing
         this_object = Category.objects.get(title_en__iexact='about')
@@ -74,7 +74,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 def newsletter_singup(request):
     """Inserts email into newsletter list.
     Runs through selected language and adds them
-    to the appropriate mailing list"""
+    to the appropriate mailing list. Is an ajax view."""
     if request.method == "POST":
         data = {}
         newsletter = Newsletter.objects.get(name='basic')
