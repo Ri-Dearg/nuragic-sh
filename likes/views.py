@@ -87,14 +87,14 @@ def likes_toggle(request):
                 if product in liked_products.all():
                     user.userprofile.liked_products.remove(product)
                     product.save()
-                    data['message'] = _(f'{product.name} unliked!')
+                    data['message'] = _(f'{product.title} unliked!')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
-                    data['message'] = _(f'{product.name} liked!')
+                    data['message'] = _(f'{product.title} liked!')
                     data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
@@ -108,14 +108,14 @@ def likes_toggle(request):
                 if item_id in likes:
                     likes.remove(item_id)
                     request.session['likes'] = likes
-                    data['message'] = _(f'{product.name} unliked!')
+                    data['message'] = _(f'{product.title} unliked!')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
-                    data['message'] = _(f'{product.name} liked!')
+                    data['message'] = _(f'{product.title} liked!')
                     data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
