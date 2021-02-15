@@ -1,0 +1,17 @@
+{% load static %}
+<!--This is the button that appears on the product_box.html template.
+The toggle-form class makes it a target for the ajax functions..-->
+<form class="toggle-form position-absolute bottom-0 end-0 text-center bg-transparent bg-white rounded-circle p-1 m-2" id="lf-{{ product.id }}" action="{% url 'likes:likes-toggle' %}" method="POST">
+    {% csrf_token %}
+    <!--It only sends the product ID.-->
+    <input type="hidden" name="item-id" value="{{ product.id }}" />
+    <button type="submit" class="opacity-100 btn p-1">
+        <!--Selects the default icon based on whether the item is in the like context or not.
+        object tags are used to display the SVG for caching.-->
+        {% if product in likes %}
+            {% include 'base/includes/icons/bookmark-heart-fill.svg' %}
+        {% else %}
+            {% include 'base/includes/icons/bookmark-heart.svg' %}
+        {% endif %}
+    </button>
+</form>
