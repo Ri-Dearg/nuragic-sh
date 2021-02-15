@@ -4,6 +4,5 @@ tasks:
  - init: . ${GITPOD_REPO_ROOT}/.theia/init_tasks.sh    
 vscode:
   extensions:
-    - mkaufman.HTMLHint@0.10.0:xevX4CvYOkKd8xjvtJQiGQ==
     - formulahendry.auto-close-tag@0.5.9:JZIefALANqOfhSK1TU4+Fw==
     - esbenp.prettier-vscode@5.7.1:4Zx39KyQMoIz7x94PSmDmQ==
