@@ -13,7 +13,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 20691eec35216c6
     mkdir /var/run/mysqld && \
     chown -R gitpod:gitpod /etc/mysql /var/run/mysqld /var/log/mysql /var/lib/mysql /var/lib/mysql-files /var/lib/mysql-keyring /var/lib/mysql-upgrade /home/gitpod/.cache/heroku/ && \
     pip3 install flake8 flake8-django pylint-django coverage
-    npm install -g sass
 
 # Create our own config files
 
