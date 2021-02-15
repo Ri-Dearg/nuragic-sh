@@ -19,6 +19,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+# Patterns for the shop section functions
+shop_patterns = [
+    path('', include(('products.urls', 'products'),
+                     namespace='products')),
+    path('likes/', include(('likes.urls', 'likes'),
+                           namespace='likes'))
+]
+
 urlpatterns = [
     # Internationalization functions
     path('i18n/', include('django.conf.urls.i18n')),
@@ -33,10 +41,7 @@ urlpatterns = [
                              namespace='contact')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
-    path('likes/', include(('likes.urls', 'likes'),
-                           namespace='likes')),
-    path('shop/', include(('products.urls', 'products'),
-                          namespace='products')),
+    path('shop/', include(shop_patterns)),
     path('users/', include(('users.urls', 'users'),
                            namespace='users')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
