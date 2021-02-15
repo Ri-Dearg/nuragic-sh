@@ -122,6 +122,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # for navbar categories
                 'info.context_processors.get_categories',
+                'likes.context_processors.get_likes',
             ],
         },
     },

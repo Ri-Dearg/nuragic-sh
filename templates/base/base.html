@@ -84,11 +84,15 @@
             <!-- This hold the toasts notifications in position on the page.
         Can be changed with the toast-position class.-->
             <div class="toast-container position-fixed">
-                {% if messages %} {% for message in messages %} {% include 'base/includes/messages.html' %} {% endfor %}
+                {% if messages %}
+                {% for message in messages %}
+                {% include 'base/includes/messages.html' %}
+                {% endfor %}
                 {% endif %}
             </div>
             <!-- Main content container -->
-            {% block content %} {% endblock %}
+            {% block content %}
+            {% endblock %}
         </main>
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
@@ -101,7 +105,11 @@
         <script>
             showToast();
         </script>
-        {% endif %} {% endblock %}
+        {% endif %}
+        {% if 'shop' in request.path %}
+        <script src="{% static 'js/custom/shop.js' %}"></script>
+        {% endif %}
+        {% endblock %}
     </body>
 
 </html>

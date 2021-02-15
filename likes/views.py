@@ -1,11 +1,9 @@
-from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
-
-
-from django_ajax.decorators import ajax
-
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
 from products.models import Product
 
 
@@ -28,7 +26,7 @@ class LikesListView(ListView):
         user = self.request.user
         context['products'] = []
 
-        # Adds liked products ffrom the account if logged in.
+        # Adds liked products from the account if logged in.
         if user.is_authenticated:
             liked_products = user.userprofile.liked_products.order_by(
                 '-liked__datetime_added')
@@ -59,10 +57,9 @@ class LikesListView(ListView):
         return context
 
 
-@ajax
 def likes_toggle(request):
     """Add or removes the specified product to likes.
-    The view is Ajaxed, so it is only called by a JS file.
+    The view is Ajax, so it is only called by a JS file.
     It checks whether the user is authenticated or anonymous and
     runs different functions accordingly.
     The decorator converts the response to JSON format.
@@ -70,7 +67,8 @@ def likes_toggle(request):
     'tag' and 'message' are used to display the toasts.
     'result' is used to define the logic on the JS side."""
 
-    if request.is_ajax and request.method == "POST":
+    data = {}
+    if request.method == "POST":
         # Runs through a number of variables to process the ajax call.
         # If it fails, it throws an exception with a message.
         try:
@@ -89,16 +87,18 @@ def likes_toggle(request):
                 if product in liked_products.all():
                     user.userprofile.liked_products.remove(product)
                     product.save()
-                    tag = 'info'
-                    message = f'{product.name} unliked!'
-                    result = 'unliked'
+                    data['message'] = _(f'{product.name} unliked!')
+                    data['result'] = 'unliked'
+                    data['tag'] = 'info'
+                    data['tagMessage'] = _('Info')
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
-                    tag = 'success'
-                    message = f'{product.name} liked!'
-                    result = 'liked'
-            
+                    data['message'] = _(f'{product.name} liked!')
+                    data['result'] = 'liked'
+                    data['tag'] = 'success'
+                    data['tagMessage'] = _('Success')
+
             # If the user is anonymous the items get added to the session.
             else:
                 likes = request.session.get('likes', [])
@@ -108,34 +108,42 @@ def likes_toggle(request):
                 if item_id in likes:
                     likes.remove(item_id)
                     request.session['likes'] = likes
-                    tag = 'info'
-                    result = 'unliked'
-                    message = f'{product.name} unliked!'
+                    data['message'] = _(f'{product.name} unliked!')
+                    data['result'] = 'unliked'
+                    data['tag'] = 'info'
+                    data['tagMessage'] = _('Info')
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
-                    tag = 'success'
-                    message = f'{product.name} liked!'
-                    result = 'liked'
+                    data['message'] = _(f'{product.name} liked!')
+                    data['result'] = 'liked'
+                    data['tag'] = 'success'
+                    data['tagMessage'] = _('Success')
 
         # If none of the conditions are true, it throws an error.
         except Exception as e:
-            result = 'error'
-            tag = 'warning'
-            message = f'Error liking item: {e}'
-        return {'message': message, 'result': result, 'tag': tag}
+            data['message'] = _(f'Error liking item: {e}')
+            data['result'] = 'error'
+            data['tag'] = 'error'
+            data['tagMessage'] = _('Error')
+    else:
+        data['message'] = _('Error liking item. Forbidden.')
+        data['result'] = 'error'
+        data['tag'] = 'error'
+        data['tagMessage'] = _('Error')
+    return JsonResponse(data)
 
 
 def update_likes(request):
     """This view is used to update the likes_popover.html template.
-    It is called by the JS file after it successfully recieves
+    It is called by the JS file after it successfully receives
     the likes_toggle view response.
     It updates the context using the same logic as the get_likes context
     processor before refreshing the template.
     The JS script then pushes the newly rendered template into
     the popover HTML."""
 
-    # Initialises a list for use with the context
+    # Initializes a list for use with the context
     likes = []
 
     # Saves the item to the profile if the user is logged in, otherwise
