@@ -108,6 +108,9 @@
         {% endif %}
         {% if 'shop' in request.path %}
         <script src="{% static 'js/custom/shop.js' %}"></script>
+        <script>
+            buttonToggle('{% include "base/includes/icons/bookmark-heart-fill.svg" %}', '{% include "base/includes/icons/bookmark-heart.svg" %}')
+        </script>
         {% endif %}
         {% endblock %}
     </body>
