@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
@@ -68,7 +68,7 @@ def likes_toggle(request):
     'result' is used to define the logic on the JS side."""
 
     data = {}
-    if request.method == "POST":
+    if request.method == 'POST':
         # Runs through a number of variables to process the ajax call.
         # If it fails, it throws an exception with a message.
         try:
@@ -126,12 +126,10 @@ def likes_toggle(request):
             data['result'] = 'error'
             data['tag'] = 'error'
             data['tagMessage'] = _('Error')
+
+        return JsonResponse(data)
     else:
-        data['message'] = _('Error liking item. Forbidden.')
-        data['result'] = 'error'
-        data['tag'] = 'error'
-        data['tagMessage'] = _('Error')
-    return JsonResponse(data)
+        return HttpResponseForbidden
 
 
 def update_likes(request):
