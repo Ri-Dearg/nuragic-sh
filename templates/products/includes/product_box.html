@@ -23,8 +23,8 @@ the product's characteristics, e.g. size, unique item, etc.. -->
             <a class="col-12 px-0" href="">
                 <h5 class="card-text text-primary h-font mb-1 px-2">{{ product.title|truncatechars:25|upper }}</h5>
             </a>
-            <p class="p-font col-12 text-primary fs-6 mb-0 px-2">{{ product.description|truncatechars:100 }}</p>
-            <h6 class="p-font col-auto text-muted px-2 mt-auto me-auto">€{{ product.price }}</h6>
+            <p class="p-font col-12 text-primary fs-6 mb-0 px-2">{{ product.description|truncatechars:50 }}</p>
+            <h6 class="p-font col-auto text-muted px-2 mt-auto ms-auto">€{{ product.price }}</h6>
         </div>
     </article>
 </div>
