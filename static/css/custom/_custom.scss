@@ -6,7 +6,22 @@
 */
 
 .product.card-body {
-    height: 10rem;
+  height: 7rem;
+}
+
+.product.btn {
+  background-color: rgba(#ffffff, 0.5);
+  color: rgba(#2b384c, 0.85);
+  transition: all 0.2s linear;
+}
+
+.product.btn:active {
+  transform: scale(0.2);
+}
+
+.product.btn:hover {
+  background-color: #fff;
+  color: #2b384c;
 }
 
 /*--------------------------------------------------------------------------
@@ -192,22 +207,22 @@ Forms
 Icons
 --------------------------------------------------------------------------*/
 
-.foot-link.sv-sm {
-  width: 16px;
-  height: 16px;
+.sv-sm {
+  width: 1rem;
+  height: 1rem;
 }
 
-.foot-link.sv-md {
-  width: 28px;
-  height: 28px;
+.sv-md {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
-.foot-link.sv-lg {
-  width: 40px;
-  height: 40px;
+.sv-lg {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
-.foot-link.sv-xl {
+.sv-xl {
   width: 48px;
   height: 48px;
 }

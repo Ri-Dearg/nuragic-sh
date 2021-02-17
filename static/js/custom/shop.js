@@ -25,11 +25,16 @@ function buttonToggle(
    * Switches the SVG icons when a button is pressed.
    * @param {string} btn - Either 'cart' or 'like' depending on which button is pressed.
    * @param {string} id - The specific product id, so other products aren't selected.
-   * @param {string} svgUrl - The URL for the SVG to use.
+   * @param {object} svg - The SVG HTML element.
    */
-  function svgSwitch(btn, id, svgUrl) {
-    $(`#${btn}-svg-${id}`).attr("data", svgUrl);
-    $(`#${btn}-img-${id}`).attr("src", svgUrl);
+  function svgSwitch(btn, id, svg) {
+    var classList = svg.classList;
+
+    if (classList.contains("bi-bookmark-heart-fill")) {
+      $(`#${btn}-${id}`).html(unlikedSvg);
+    } else if (classList.contains("bi-bookmark-heart")) {
+      $(`#${btn}-${id}`).html(likedSvg);
+    }
   }
 
   /**
@@ -61,93 +66,105 @@ function buttonToggle(
    * The response it receives is in JSON format.
    * On success it uses the different variables received in the response to perform logic
    * and decide which action to perform in a specific context.
-   * @param {string} id - The specific product id, so other products aren't selected.
-   * @param {string} serializedData - The data sent in POST form serialised.
-   * @param {string} formUrl - The URL the data was being sent to.
+   * @param {object} object - The captured form element.
    */
-  function like(id, formData, formUrl) {
+  function like(object) {
+    // The ID of the product clicked.
+    const id = object.id.slice(3);
+
+    // Gets svg classes for icon swapping
+    var svg = object.firstElementChild.firstElementChild;
+
+    // The data sent in the form POST request.
+    const formData = new FormData(object);
+
+    // The URL that the POST data would be sent to.
+    const formUrl = object.action;
+
+    // Swaps svg icons appropriately
+    svgSwitch("lb", id, svg);
+
     // Sends form to Django view
     fetch(formUrl, {
       method: "POST",
       body: formData,
       credentials: "same-origin",
     })
-      .then((response, data) => {
-        // if the response is okay, changes the icon and returns the data
+      .then((response) => {
+        // if the response is okay, goes switches icons
         if (response.ok) {
-          // If content is not liked, swaps the icon to the 'liked' icon
-          // Sends off a message and refreshes the like popover.
-          if (data.result === "liked") {
-            svgSwitch("like", id, likedSvg);
-            // toastMessage(data.tag, data.message);
-            // popoverUpdate("like", likeUpdate);
-
-            // If content is already liked, swaps the icon to the 'unliked icon
-            // Sends off a message and refreshes the like popover.
-          } else if (data.result === "unliked") {
-            svgSwitch("like", id, unlikedSvg);
-            // toastMessage(data.tag, data.content.message);
-            // popoverUpdate("like", likeUpdate);
-          }
-          // // If content is not carted, swaps the icon to the 'carted' icon
-          // // Sends off a message and refreshes the cart popover.
-          // } else if (data.result === "carted") {
-          // svgSwitch("cart", id, cartedSvg);
-          // toastMessage(data.tag, data.message);
-          // popoverUpdate("cart", cartUpdate);
-          // // Used on the product_detail.html template.
-          // // If the product does not have mutliple stock the button text switches.
-          // if (data.special != "stocked") {
-          //     if ($(`#btn-${id}`).length > 0) {
-          //     $(`#btn-${id}`).contents().last()[0].textContent =
-          //         "  Remove from Cart";
-          //     }
-          // }
-
-          // // If content is already carted, swaps the icon to the 'uncarted' icon
-          // // Sends off a message and refreshes the cart popover.
-          // } else if (data.result === "uncarted") {
-          // svgSwitch("cart", id, uncartedSvg);
-          // toastMessage(data.tag, data.message);
-          // popoverUpdate("cart", cartUpdate);
-
-          // // Used on the product_detail.html template o change button text.
-          // if ($(`#btn-${id}`).length > 0) {
-          //     $(`#btn-${id}`).contents().last()[0].textContent = "  Add to Cart";
-          // }
-          // //Used on the cart list page to remove items from view after being uncarted.
-          // if (window.location.pathname == "/cart/") {
-          //     if (data.special != "update") {
-          //     $(`#cart-item-${id}`).fadeOut("slow");
-          //     }
-          //     // Refreshes the totals box. Works for both removing items and updating quantity.
-          //     $("#totals-box").fadeTo("slow", 0, function () {
-          //     $(`#totals-box`).html("").load(cartRefresh);
-          //     $(`#totals-box`).delay(400).fadeTo("slow", 1);
-          //     });
-          // }
-          // Send the message if anything else occurs.
-          // } else {
-          // toastMessage(data.tag, data.message);
-          // }
+          return response.json();
+        } else {
+          // if there is an error, it fires a message and swaps back the svg icon
+          var svg = object.firstElementChild.firstElementChild;
+          svgSwitch("lb", id, svg);
+          throw Error(response.status + " " + response.statusText);
         }
       })
-      .catch((error) => toastMessage("warning", "Error", error));
+      .then((data) => {
+        // If content is not liked, swaps the icon to the 'liked' icon
+        // Sends off a message and refreshes the like popover.
+        if (data.result === "liked") {
+          toastMessage(data.tag, data.tagMessage, data.message);
+          // popoverUpdate("like", likeUpdate);
+
+          // If content is already liked, swaps the icon to the 'unliked icon
+          // Sends off a message and refreshes the like popover.
+        } else if (data.result === "unliked") {
+          toastMessage(data.tag, data.tagMessage, data.message);
+          // popoverUpdate("like", likeUpdate);
+        }
+      })
+      // // If content is not carted, swaps the icon to the 'carted' icon
+      // // Sends off a message and refreshes the cart popover.
+      // } else if (data.result === "carted") {
+      // svgSwitch("cart", id, cartedSvg);
+      // toastMessage(data.tag, data.message);
+      // popoverUpdate("cart", cartUpdate);
+      // // Used on the product_detail.html template.
+      // // If the product does not have mutliple stock the button text switches.
+      // if (data.special != "stocked") {
+      //     if ($(`#btn-${id}`).length > 0) {
+      //     $(`#btn-${id}`).contents().last()[0].textContent =
+      //         "  Remove from Cart";
+      //     }
+      // }
+
+      // // If content is already carted, swaps the icon to the 'uncarted' icon
+      // // Sends off a message and refreshes the cart popover.
+      // } else if (data.result === "uncarted") {
+      // svgSwitch("cart", id, uncartedSvg);
+      // toastMessage(data.tag, data.message);
+      // popoverUpdate("cart", cartUpdate);
+
+      // // Used on the product_detail.html template o change button text.
+      // if ($(`#btn-${id}`).length > 0) {
+      //     $(`#btn-${id}`).contents().last()[0].textContent = "  Add to Cart";
+      // }
+      // //Used on the cart list page to remove items from view after being uncarted.
+      // if (window.location.pathname == "/cart/") {
+      //     if (data.special != "update") {
+      //     $(`#cart-item-${id}`).fadeOut("slow");
+      //     }
+      //     // Refreshes the totals box. Works for both removing items and updating quantity.
+      //     $("#totals-box").fadeTo("slow", 0, function () {
+      //     $(`#totals-box`).html("").load(cartRefresh);
+      //     $(`#totals-box`).delay(400).fadeTo("slow", 1);
+      //     });
+      // }
+      // Send the message if anything else occurs.
+      // } else {
+      // toastMessage(data.tag, data.message);
+      // }
+      //     }
+      //   })
+      .catch((error) => toastMessage("danger", "Error", error));
   }
   $(`.toggle-form`).on("submit", function (ev) {
     // stops form from sending
     ev.preventDefault();
 
-    // The ID of the product clicked.
-    const id = this.id.slice(3);
-
-    // The data sent in the form POST request.
-    const formData = new FormData(this);
-
-    // The URL that the POST data would be sent to.
-    const formUrl = this.action;
-
-    // Fires the main ajax function
-    like(id, formData, formUrl);
+    // Fires the main fetch function
+    like(this);
   });
 }
