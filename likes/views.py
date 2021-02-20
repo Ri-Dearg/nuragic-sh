@@ -10,7 +10,6 @@ from products.models import Product
 class LikesListView(ListView):
     """View that displays all the liked products for the user."""
     model = Product
-    context_object_name = 'products'
     template_name = 'likes/likes_list.html'
 
     def get_context_data(self, **kwargs):
@@ -47,9 +46,9 @@ class LikesListView(ListView):
                 for product in liked_products:
                     context['products'].append(product)
 
-        # Paginates the items for the infinite scroll feed.
+        # Paginates the items.
         products = context['products']
-        paginator = Paginator(products, 9)
+        paginator = Paginator(products, 6)
 
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
