@@ -6,14 +6,6 @@
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
 
 <!-- Open Graph Tags -->
-{% block og_type %}website{% endblock %}
-{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
-{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
-{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
-{% block og_image_type %}image/png{% endblock %}
-{% block og_image_width %}1200{% endblock %}
-{% block og_image_height %}630{% endblock %}
-{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
 {% include 'base/includes/open_graph_basic.html'%}
 
 {% block content %}
@@ -35,7 +27,7 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-auto mx-auto">
-                    <button class="btn p-font btn-tran btn btn-warning text-primary shadow"
+                    <button class="p-font btn-tran btn  btn-warning text-primary shadow"
                         type="submit">{% trans 'Confirm' %}</button>
                 </div>
             </div>
