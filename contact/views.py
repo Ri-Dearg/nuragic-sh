@@ -53,7 +53,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
                       css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Send'), type='submit',
-                       css_class="p-font btn-tran btn-warning text-primary shadow"),  # noqa E501
+                       css_class='p-font btn-tran btn-warning text-primary shadow'),  # noqa E501
                        css_class='col-12 my-1 text-center'),
                 )
         )
@@ -62,7 +62,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context.
-        Highlights the "Contact" in the navbar."""
+        Highlights the 'Contact' in the navbar."""
         context = super().get_context_data(**kwargs)
         # Details necessary for Stripe payment processing
         this_object = Category.objects.get(title_en__iexact='about')
@@ -75,7 +75,7 @@ def newsletter_singup(request):
     """Inserts email into newsletter list.
     Runs through selected language and adds them
     to the appropriate mailing list. Is an ajax view."""
-    if request.method == "POST":
+    if request.method == 'POST':
         data = {}
         newsletter = Newsletter.objects.get(name='basic')
         if get_language() == 'it':
@@ -83,17 +83,17 @@ def newsletter_singup(request):
         if get_language() == 'en':
             email_list = newsletter.email_list_en
         if request.POST[f'email_{get_language()}'] in email_list:
-            data["message"] = _(
-                "You have already signed up for the newsletter.")
-            data["tag"] = "info"
-            data["tagMessage"] = _('Info')
+            data['message'] = _(
+                'You have already signed up for the newsletter.')
+            data['tag'] = 'info'
+            data['tagMessage'] = _('Info')
 
             return JsonResponse(data)
 
         email_list.append(request.POST[f'email_{get_language()}'])
         newsletter.save()
-        data["message"] = _("Thank you for signing up!")
-        data["tag"] = "success"
-        data["tagMessage"] = _('Success')
+        data['message'] = _('Thank you for signing up!')
+        data['tag'] = 'success'
+        data['tagMessage'] = _('Success')
         return JsonResponse(data)
     return HttpResponse(status=403)
