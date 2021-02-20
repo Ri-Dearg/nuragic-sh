@@ -1,7 +1,20 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
+
 {% block head_title %}{% trans 'Shop' %}{% endblock%}
+
+<!-- Open Graph Tags To redo -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_description %}{% trans 'Our Offerings for You.' %}{% endblock %}
+{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
+{% include 'base/includes/open_graph_basic.html'%}
+
 {% block content %}
 <!-- Page is utilised as the homepage as well as the search results page.
 After the search section, it is the basis for all feed-based templates,
@@ -29,7 +42,9 @@ such as likes_list, category_detail and stockdrop_detail.-->
     <!-- This displays all products, organised by 'popularity' and stock quantity.
 Retrieves all products if no search query is performed.
 It utilises the paginator so it can use the infinite scroll feature. -->
-    {% for product in page_obj %} {% include 'products/includes/product_box.html' %} {% endfor %}
+    {% for product in page_obj %}
+    {% include 'products/includes/product_box.html' %}
+    {% endfor %}
 </div>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
