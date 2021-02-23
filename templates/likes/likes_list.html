@@ -31,9 +31,9 @@ If There is nothing it provides a link back to the page. -->
 </div>
 {% else %}
 <div class="row bg-white min-vh-75 p-2">
-    <div class="col text-center">
-        <h4 class="p-font text-primary">{% trans 'No Favorites...' %}</h4>
-        <h2 class="h-font text-primary">{% trans 'DISCOVER' %}</h2>
+    <div class="col text-center my-auto">
+        <h4 class="p-font text-primary fs-6">{% trans 'No Favorites...' %}</h4>
+        <h2 class="h-font l-space-2 text-primary">{% trans 'DISCOVER' %}</h2>
         <a class="p-font btn-tran btn-lg btn btn-warning text-primary shadow"
             href="{% url 'products:product-list' %}">{% trans 'Our Offerings' %}</a>
     </div>
