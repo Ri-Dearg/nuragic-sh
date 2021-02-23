@@ -36,6 +36,9 @@ function showToast() {
     if (toastList.hasOwnProperty(toast)) {
       toastList[toast].show();
     }
+    $(".toast").on("hidden.bs.toast", function () {
+      $(this).remove();
+    });
   }
 }
 
@@ -49,7 +52,7 @@ function showToast() {
 function toastMessage(tag, tagMessage, message) {
   // Sets the toast HTML.
   $(".toast-container").prepend(
-    `<div class="toast my-2" data-bs-delay="5000" aria-live="assertive" aria-atomic="true">
+    `<div class="toast my-2" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-${tag}">
                 <strong class="me-auto text-white">${tagMessage}</strong>
                     <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
