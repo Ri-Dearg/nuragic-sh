@@ -1,9 +1,10 @@
-from django.test import TestCase
 from django.contrib.auth.models import User
+from django.test import TestCase
 
 
 class TestViews(TestCase):
     """Tests views for the Likes app."""
+
     def setUp(self):
         """Sets up or retrieves a fake user for use in the tests."""
         username = 'user1',
@@ -125,14 +126,14 @@ class TestViews(TestCase):
 
         # Tests the template is updated when the view is called
         self.client.get('/likes/update/')
-        self.assertTemplateUsed('likes/includes/likes_popover.html')
+        self.assertTemplateUsed('likes/includes/likes_dropdown.html')
 
         # Adds a liked product
         self.client.post('/likes/ajax/toggle/', {'item-id': 2},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         # Updates the template and context
         self.client.get('/likes/update/')
-        self.assertTemplateUsed('likes/includes/likes_popover.html')
+        self.assertTemplateUsed('likes/includes/likes_dropdown.html')
 
         # Logs a user in and updates the context
         test_user = User.objects.latest('date_joined')
