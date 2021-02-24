@@ -9,7 +9,7 @@ from django.views.generic import ListView
 from products.models import Product
 
 
-class LikesListView(ListView):
+class LikesListView(ListView):  # pylint: disable=too-many-ancestors
     """View that displays all the liked products for the user."""
     model = Product
     template_name = 'likes/likes_list.html'
@@ -88,7 +88,8 @@ def likes_toggle(request):
                 if product in liked_products.all():
                     user.userprofile.liked_products.remove(product)
                     product.save()
-                    data['message'] = _(f'{product.title} removed from bookmarks.')
+                    data['message'] = _(
+                        f'{product.title} removed from bookmarks.')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
@@ -109,7 +110,8 @@ def likes_toggle(request):
                 if item_id in likes:
                     likes.remove(item_id)
                     request.session['likes'] = likes
-                    data['message'] = _(f'{product.title} removed from bookmarks.')
+                    data['message'] = _(
+                        f'{product.title} removed from bookmarks.')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
@@ -169,4 +171,4 @@ def update_likes(request):
 
     # Pushes the new context to the page before re-rendering the template.
     RequestContext(request).push({'likes': likes})
-    return render(request, 'likes/includes/likes_popover.html')
+    return render(request, 'likes/includes/likes_dropdown.html')

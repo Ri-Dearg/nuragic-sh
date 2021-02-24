@@ -7,19 +7,23 @@
     </a>
     <!-- Displays settings button -->
     <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownUserMenu">
-        <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mb-0"
-            href="{% url 'users:user-detail' request.user.id %}">{% trans 'Settings' %}</a>
+        <li>
+            <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mb-0"
+                href="{% url 'users:user-detail' request.user.id %}">{% trans 'Settings' %}</a>
+        </li>
         <!--Displays logout button. -->
-        <div class="border-0">
-            <form class="border-0 mx-0 my-1 p-1" method="POST"
-                action="{% url 'account_logout' %}?next={{ request.path }}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button type="submit" class="p-font btn btn-link text-left p-0"
-                    value="Submit">{% trans 'Sign Out' %}</button>
-            </form>
-        </div>
+        <li>
+            <div class="border-0">
+                <form class="border-0 mx-0 my-1 p-1" method="POST"
+                    action="{% url 'account_logout' %}?next={{ request.path }}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <button type="submit" class="p-font btn btn-link text-left p-0"
+                        value="Submit">{% trans 'Sign Out' %}</button>
+                </form>
+            </div>
+        </li>
     </ul>
 </div>
