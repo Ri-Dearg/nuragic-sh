@@ -1,0 +1,44 @@
+<!-- Loads internationalization and static -->
+{% load i18n %} {% load static %}
+<div class="dropdown mx-2">
+    <a href="#" role="button" class="href-stop no-caret dropdown-toggle d-inline-block text-white py-auto pb-md-1"
+        tabindex="0" id="dropdownLikeMenu" data-bs-toggle="dropdown" aria-expanded="false">
+        <!--Selects the default icon based on whether there are likes or not.
+            object tags are used to display the SVG for caching.-->
+        {% if likes %}
+        {% include 'base/includes/icons/bookmark-heart-fill.svg' %}
+        {% else %}
+        {% include 'base/includes/icons/bookmark-heart.svg' %}
+        {% endif %}
+    </a>
+    <!-- Displays Likes button -->
+    {% if likes %}
+    <div class="min-vw-25 dropdown-menu dropdown-menu-end text-center pb-0" aria-labelledby="dropdownLikeMenu">
+        <ul class="list-unstyled mb-0">
+            <li>
+                <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mb-1 mx-5"
+                    href="{% url 'likes:likes-list' %}">{% trans 'All Favorites' %}</a>
+            </li>
+            <li>
+                <hr class="dropdown-divider mb-0 mt-1">
+            </li>
+        </ul>
+        <ul class="row list-group list-group-horizontal">
+            {% for product in likes|slice:':6' %}
+            <li class="fav-item col-4 list-group-item border-0 p-1">
+                <a class="border-0 mx-0 my-1" href="#">
+                    <img src="{{ product.image_4_3.url }}" class="img-fluid" alt="{{ product.title }}" />
+                    <p class="h-font text-decoration-underline fs-6 mb-0">{{ product.title|truncatechars:15|upper }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownLikeMenu">
+        <li>
+            <p class="p-font text-primary mb-0">{% trans 'No Favorites' %}</p>
+        </li>
+    </ul>
+    {% endif %}
+</div>

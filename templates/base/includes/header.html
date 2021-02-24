@@ -6,7 +6,7 @@
     <div class="row bg-primary">
         <div class="col-12">
             <div class="row align-items-end">
-                                <div class="col-2 d-none d-md-inline-block text-center">
+                <div class="col-2 d-none d-md-inline-block text-center">
                     <form class="d-inline-block text-white" action="{% url 'set_language' %}" method="POST">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
@@ -20,7 +20,7 @@
                         <input name="language" type="hidden" value="it">
                         <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="IT">
                     </form>
-                </div>  
+                </div>
                 <div class="col-auto mx-auto">
                     <a href="{% if 'shop' in request.path %}{% url 'products:product-list' %}{% else %}{% url 'info:home' %}{% endif %}"
                         class="smooth-click text-decoration-none d-flex mt-2">
@@ -29,7 +29,7 @@
                                 class="brand-sub p-font d-block h6">SHAMANIC HEALING</span>
                         </h1>
                     </a>
-                </div>              
+                </div>
                 <div class="col-2 d-none d-md-flex justify-content-end mx-2">
                     {% if user.is_authenticated %}
                     {% include 'users/includes/authenticated_dropdown.html' %}
@@ -37,7 +37,7 @@
                     {% include 'users/includes/unauthenticated_dropdown.html' %}
                     {% endif %}
 
-                    {% include 'likes/includes/likes_popover.html' %}
+                    {% include 'likes/includes/likes_dropdown.html' %}
                 </div>
             </div>
         </div>
