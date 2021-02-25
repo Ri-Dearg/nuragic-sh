@@ -89,14 +89,14 @@ def likes_toggle(request):
                     user.userprofile.liked_products.remove(product)
                     product.save()
                     data['message'] = _(
-                        f'{product.title} removed from bookmarks.')
+                        f'{product.title} removed from favorites.')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
-                    data['message'] = _(f'{product.title} bookmarked!')
+                    data['message'] = _(f'{product.title} favourited!')
                     data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
@@ -111,23 +111,23 @@ def likes_toggle(request):
                     likes.remove(item_id)
                     request.session['likes'] = likes
                     data['message'] = _(
-                        f'{product.title} removed from bookmarks.')
+                        f'{product.title} removed from favorites.')
                     data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
-                    data['message'] = _(f'{product.title} bookmarked!')
+                    data['message'] = _(f'{product.title} favorited!')
                     data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
 
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except
-            data['message'] = _(f'Error liking item: %r, {error}')
+            data['message'] = _(f'Error: %r, {error}')
             data['result'] = 'error'
-            data['tag'] = 'error'
+            data['tag'] = 'danger'
             data['tagMessage'] = _('Error')
 
         return JsonResponse(data)
