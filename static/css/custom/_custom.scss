@@ -6,7 +6,7 @@
 */
 
 .product.card-body {
-  height: 7rem;
+  height: 8rem;
 }
 
 .product.btn {
@@ -24,7 +24,8 @@
   color: #2b384c;
 }
 
-.fav-item:hover {
+.fav-item:hover,
+.fav-item:active {
   background-color: #f5c936 !important;
 }
 
@@ -266,18 +267,6 @@ Positioning
 
 .z-n2 {
   z-index: -2;
-}
-
-.min-vw-25 {
-  min-width: 33vw;
-}
-
-.min-vh-75 {
-  min-height: 75vh;
-}
-
-.min-vh-60 {
-  min-height: 60vh;
 }
 
 /*Background images positioning*/

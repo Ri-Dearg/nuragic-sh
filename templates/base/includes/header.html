@@ -31,13 +31,16 @@
                     </a>
                 </div>
                 <div class="col-2 d-none d-md-flex justify-content-end mx-2">
+                    {% if 'shop' in request.path %}
+                    <div class="like-dropdown-container">
+                        {% include 'likes/includes/likes_dropdown.html' %}
+                    </div>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     {% include 'users/includes/authenticated_dropdown.html' %}
                     {% else %}
                     {% include 'users/includes/unauthenticated_dropdown.html' %}
                     {% endif %}
-
-                    {% include 'likes/includes/likes_dropdown.html' %}
                 </div>
             </div>
         </div>
@@ -46,15 +49,22 @@
         <div class="col">
             <!-- Navbar is collapsible to the right -->
             <nav
-                class="navbar navbar-expand-md navbar-dark {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
-                <div class="d-md-none ms-auto">
+                class="navbar navbar-expand-md navbar-dark justify-content-end {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
+                {% if 'shop' in request.path %}
+                <div class="d-md-none like-dropdown-container">
+                    <p class="visually-hidden" id="dropdownLikeMenu">Likes</p>
+                    {% include 'likes/includes/likes_dropdown.html' %}
+                </div>
+                {% endif %}
+                <div class="d-md-none">
+                    <p class="visually-hidden" id="dropdownUserMenu">Authentication Menu</p>
                     {% if user.is_authenticated %}
                     {% include 'users/includes/authenticated_dropdown.html' %}
                     {% else %}
                     {% include 'users/includes/unauthenticated_dropdown.html' %}
                     {% endif %}
                 </div>
-                <button class="navbar-toggler ms-2 me-2" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler ms-1 me-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
