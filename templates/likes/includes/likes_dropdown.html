@@ -1,8 +1,8 @@
 <!-- Loads internationalization and static -->
 {% load i18n %} {% load static %}
 <div class="dropdown mx-2">
-    <a href="#" role="button" class="href-stop no-caret dropdown-toggle d-inline-block text-white py-auto pb-md-1"
-        tabindex="0" id="dropdownLikeMenu" data-bs-toggle="dropdown" aria-expanded="false">
+    <a href="#" role="button" class="like-dropdown no-caret dropdown-toggle d-inline-block text-white py-auto pb-md-1"
+        tabindex="0" data-bs-toggle="dropdown" aria-expanded="false">
         <!--Selects the default icon based on whether there are likes or not.
             object tags are used to display the SVG for caching.-->
         {% if likes %}
@@ -13,25 +13,28 @@
     </a>
     <!-- Displays Likes button -->
     {% if likes %}
-    <div class="min-vw-25 dropdown-menu dropdown-menu-end text-center pb-0" aria-labelledby="dropdownLikeMenu">
-        <ul class="list-unstyled mb-0">
-            <li>
-                <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mb-1 mx-5"
-                    href="{% url 'likes:likes-list' %}">{% trans 'All Favorites' %}</a>
-            </li>
-            <li>
-                <hr class="dropdown-divider mb-0 mt-1">
-            </li>
-        </ul>
+    <div class="min-vw-60 min-vw-md-40 min-vw-xxl-33 dropdown-menu dropdown-menu-end text-center pt-0"
+        aria-labelledby="dropdownLikeMenu">
         <ul class="row list-group list-group-horizontal">
             {% for product in likes|slice:':6' %}
             <li class="fav-item col-4 list-group-item border-0 p-1">
                 <a class="border-0 mx-0 my-1" href="#">
                     <img src="{{ product.image_4_3.url }}" class="img-fluid" alt="{{ product.title }}" />
-                    <p class="h-font text-decoration-underline fs-6 mb-0">{{ product.title|truncatechars:15|upper }}</p>
+                    <p class="h-font d-none d-sm-block text-decoration-underline fs-6 mb-0">
+                        {{ product.title|truncatechars:15|upper }}
+                    </p>
                 </a>
             </li>
             {% endfor %}
+        </ul>
+        <ul class="list-unstyled mb-0">
+            <li>
+                <hr class="dropdown-divider mb-1 mt-0">
+            </li>
+            <li>
+                <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mt-1 mx-auto"
+                    href="{% url 'likes:likes-list' %}">{% trans 'All Favorites' %}</a>
+            </li>
         </ul>
     </div>
     {% else %}

@@ -14,10 +14,10 @@
  */
 function buttonToggle(
   likedSvg,
-  unlikedSvg
+  unlikedSvg,
   //   cartedSvg,
   //   uncartedSvg,
-  //   likeUpdate,
+  likeUpdate
   //   cartUpdate,
   //   cartRefresh
 ) {
@@ -43,22 +43,31 @@ function buttonToggle(
    * @param {string} btn - Either 'cart' or 'like' depending on which button is pressed.
    * @param {string} update - the URL which fires the view to update the template
    */
-  function popoverUpdate(btn, update) {
+  function dropdownUpdate(btn, update) {
     // Deletes the popover instance, necessary in bootstrap otherwise the new one won't load.
-    $(`#${btn}-popover`).popover("dispose");
-    // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`#${btn}-popover-container`).fadeTo("fast", 0, function () {
-      $(`#${btn}-popover-container`).html("").load(update);
-      // Animates the icon, then initialises the popover.
-      $(`#${btn}-popover-container`)
-        .delay(400)
-        .fadeTo("slow", 1, function () {
-          $(`#${btn}-popover`).popover();
-          // Stops the page from jumping when clicking the icon.
-          $(".href-stop").off("click");
-          hrefStop();
-        });
+    var dropdownElList = [].slice.call(
+      document.querySelectorAll(`.${btn}-dropdown`)
+    );
+    var dropdownList = dropdownElList.map(function (dropdownEl) {
+      return new bootstrap.Dropdown(dropdownEl);
     });
+    for (dropdown in dropdownList) {
+      if (dropdownList.hasOwnProperty(dropdown)) {
+        dropdownList[dropdown].dispose();
+      }
+      // Animates the icon before deleting the HTML and loading the template refresh.
+      $(`.${btn}-dropdown-container`).fadeTo("fast", 0, function () {
+        $(`.${btn}-dropdown-container`).html("").load(update);
+        // Animates the icon, then initialises the popover.
+        $(`.${btn}-dropdown-container`)
+          .delay(400)
+          .fadeTo("slow", 1, function () {
+            dropdownElList.map(function (dropdownEl) {
+              return new bootstrap.Dropdown(dropdownEl);
+            });
+          });
+      });
+    }
   }
 
   /**
@@ -102,17 +111,22 @@ function buttonToggle(
         }
       })
       .then((data) => {
+        if (data.result == "error") {
+          var svg = object.firstElementChild.firstElementChild;
+          svgSwitch("lb", id, svg);
+          throw Error(data.message);
+        }
         // If content is not liked, swaps the icon to the 'liked' icon
         // Sends off a message and refreshes the like popover.
-        if (data.result === "liked") {
+        else if (data.result === "liked") {
           toastMessage(data.tag, data.tagMessage, data.message);
-          // popoverUpdate("like", likeUpdate);
+          dropdownUpdate("like", likeUpdate);
 
           // If content is already liked, swaps the icon to the 'unliked icon
           // Sends off a message and refreshes the like popover.
         } else if (data.result === "unliked") {
           toastMessage(data.tag, data.tagMessage, data.message);
-          // popoverUpdate("like", likeUpdate);
+          dropdownUpdate("like", likeUpdate);
         }
       })
       // // If content is not carted, swaps the icon to the 'carted' icon
@@ -120,7 +134,7 @@ function buttonToggle(
       // } else if (data.result === "carted") {
       // svgSwitch("cart", id, cartedSvg);
       // toastMessage(data.tag, data.message);
-      // popoverUpdate("cart", cartUpdate);
+      // dropdownUpdate("cart", cartUpdate);
       // // Used on the product_detail.html template.
       // // If the product does not have mutliple stock the button text switches.
       // if (data.special != "stocked") {
@@ -135,7 +149,7 @@ function buttonToggle(
       // } else if (data.result === "uncarted") {
       // svgSwitch("cart", id, uncartedSvg);
       // toastMessage(data.tag, data.message);
-      // popoverUpdate("cart", cartUpdate);
+      // dropdownUpdate("cart", cartUpdate);
 
       // // Used on the product_detail.html template o change button text.
       // if ($(`#btn-${id}`).length > 0) {
