@@ -1,12 +1,13 @@
 """Models for the info module."""
 
-from config import settings
 from django.core.mail import send_mail
 from django.db import models
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django_better_admin_arrayfield.models.fields import ArrayField
+
+from config import settings
 
 
 class Newsletter(models.Model):
@@ -97,7 +98,8 @@ class EmailHistory(models.Model):
 
     def save(self, *args, **kwargs):
         """Fills newletter subscription boxes accordingly."""
-        newsletter = Newsletter.objects.get(name='basic')
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         newsletter_list_en = newsletter.email_list_en
         newsletter_list_it = newsletter.email_list_it
 

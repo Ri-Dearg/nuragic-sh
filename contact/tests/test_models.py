@@ -1,14 +1,15 @@
 """Tests for the Contact app Models."""
-from contact.models import Email, EmailHistory, Newsletter
 from django.test import TestCase
+
+from contact.models import Email, EmailHistory, Newsletter
+
+Newsletter.objects.create(name='basic')
+newsletter = Newsletter.objects.filter(
+    name='basic').order_by('id').first()
 
 
 class TestContactModels(TestCase):
     """Tests the models for the Contact app."""
-
-    def setUp(self):
-        """Created instances for use in tests"""
-        Newsletter.objects.create(name='basic')
 
     def test_email_creation_and_string(self):
         """Tests the emails are correctly created for the model."""
@@ -31,7 +32,6 @@ class TestContactModels(TestCase):
 
     def test_newsletter_string(self):
         """Tests the string method on the Newsletter."""
-        newsletter = Newsletter.objects.get(name='basic')
         self.assertEqual(str(newsletter), "basic")
 
     def test_emailhistory_and_newsletter_setting(self):
@@ -51,7 +51,6 @@ class TestContactModels(TestCase):
         new_email1 = Email.objects.latest('date')
 
         # Adds the email address to the English newsletter
-        newsletter = Newsletter.objects.get(name='basic')
         newsletter.email_list_en.append(new_email1.email)
         newsletter.save()
 
