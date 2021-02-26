@@ -1,10 +1,10 @@
-from django.urls import path
+"""Urls for the users module."""
 from django.contrib.auth.decorators import login_required
+from django.urls import path
 
-from .views import (UserProfileDetailView,
-                    CustomEmailView,
-                    CustomPasswordChangeView,
-                    update_shipping_billing, update_newsletter)
+from .views import (CustomEmailView, CustomPasswordChangeView,
+                    UserProfileDetailView, update_newsletter,
+                    update_shipping_billing)
 
 urlpatterns = [
     path('profile/<int:pk>/', login_required(UserProfileDetailView.as_view()),
