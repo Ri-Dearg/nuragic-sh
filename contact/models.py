@@ -135,7 +135,7 @@ class Email(models.Model):
                                       null=True,
                                       on_delete=models.SET_NULL)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self):  # pylint: disable=no-self-use
         """Returns users to the contact page on successful creation."""
         return reverse('contact:email-form')
 
