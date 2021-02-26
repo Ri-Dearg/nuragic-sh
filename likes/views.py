@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
+
 from products.models import Product
 
 
@@ -96,7 +97,7 @@ def likes_toggle(request):
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
-                    data['message'] = _(f'{product.title} favourited!')
+                    data['message'] = _(f'{product.title} favorited!')
                     data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
@@ -104,7 +105,6 @@ def likes_toggle(request):
             # If the user is anonymous the items get added to the session.
             else:
                 likes = request.session.get('likes', [])
-
                 # If the product is in the list it is unliked,
                 # otherwise it is liked.
                 if item_id in likes:
