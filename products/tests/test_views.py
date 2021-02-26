@@ -1,8 +1,9 @@
 """Tests views for the Product app."""
 
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from products.models import Product, ShopCategory
+
+from products.models import ShopCategory
+from products.tests.test_models import valid_product_1, valid_shopcategory
 
 
 class TestProductsViews(TestCase):
@@ -10,26 +11,8 @@ class TestProductsViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-        image = SimpleUploadedFile(
-            name='default.jpg',
-            content=open(
-                'media/default.jpg',
-                'rb').read(),
-            content_type='image/jpeg',)
-
-        valid_shopcategory = ShopCategory(title_en='SC1',
-                                          title_it='SC1',)
         valid_shopcategory.save()
-
-        valid_product = Product(
-            category=ShopCategory.objects.get(title='SC1'),
-            title_en='P1',
-            title_it='P1',
-            description_en='description',
-            description_it='description',
-            price=0.5,
-            image_4_3=image,)
-        valid_product.save()
+        valid_product_1.save()
 
     def test_render_shop(self):
         """Tests templates for shop page."""
@@ -46,7 +29,8 @@ class TestProductsViews(TestCase):
 
     def test_render_shopcategory_detail(self):
         """Tests templates for Category detail page."""
-        shopcategory = ShopCategory.objects.get(title='SC1')
+        shopcategory = ShopCategory.objects.filter(
+            title='SC1').order_by('id').first()
         response = self.client.get(f'/shop/category/{shopcategory.id}/')
 
         self.assertEqual(response.status_code, 200)
