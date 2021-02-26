@@ -131,7 +131,7 @@ def likes_toggle(request):
             data['tagMessage'] = _('Error')
 
         return JsonResponse(data)
-    return HttpResponseForbidden
+    return HttpResponseForbidden()
 
 
 def update_likes(request):
