@@ -38,7 +38,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         helper.layout = Layout(
             Row(
                 Field('email',  placeholder=_('E-mail'),
-                      pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501
+                      pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501  # pylint: disable=line-too-long
                       wrapper_class='col-md-6',
                       css_class='p-font text-primary'),
 

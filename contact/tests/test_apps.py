@@ -1,7 +1,8 @@
 """Tests App Config."""
-from contact.apps import ContactConfig
 from django.apps import apps
 from django.test import TestCase
+
+from contact.apps import ContactConfig
 
 
 class TestContactConfig(TestCase):

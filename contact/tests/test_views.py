@@ -1,10 +1,8 @@
 """Tests views for the Contact app."""
 from django.test import TestCase
 
-from contact.tests.test_models import newsletter
+from contact.models import Newsletter
 from info.tests.test_models import about_category, valid_category
-
-newsletter_1 = newsletter
 
 
 class TestContactViews(TestCase):
@@ -32,6 +30,8 @@ class TestContactViews(TestCase):
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                          HTTP_ACCEPT_LANGUAGE='it')
 
+        newsletter_1 = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         # Retrieves the newletter and checks that the email is present
         self.assertTrue("test@test.com" in newsletter_1.email_list_en)
 
