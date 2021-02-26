@@ -55,19 +55,19 @@ function buttonToggle(
       if (dropdownList.hasOwnProperty(dropdown)) {
         dropdownList[dropdown].dispose();
       }
-      // Animates the icon before deleting the HTML and loading the template refresh.
-      $(`.${btn}-dropdown-container`).fadeTo("fast", 0, function () {
-        $(`.${btn}-dropdown-container`).html("").load(update);
-        // Animates the icon, then initialises the popover.
-        $(`.${btn}-dropdown-container`)
-          .delay(400)
-          .fadeTo("slow", 1, function () {
-            dropdownElList.map(function (dropdownEl) {
-              return new bootstrap.Dropdown(dropdownEl);
-            });
-          });
-      });
     }
+    // Animates the icon before deleting the HTML and loading the template refresh.
+    $(`.${btn}-dropdown-container`).fadeTo("fast", 0, function () {
+      $(`.${btn}-dropdown-container`).html("").load(update);
+      // Animates the icon, then initialises the popover.
+      $(`.${btn}-dropdown-container`)
+        .delay(400)
+        .fadeTo("slow", 1, function () {
+          dropdownElList.map(function (dropdownEl) {
+            return new bootstrap.Dropdown(dropdownEl);
+          });
+        });
+    });
   }
 
   /**
@@ -136,7 +136,7 @@ function buttonToggle(
       // toastMessage(data.tag, data.message);
       // dropdownUpdate("cart", cartUpdate);
       // // Used on the product_detail.html template.
-      // // If the product does not have mutliple stock the button text switches.
+      // // If the product does not have multiple stock the button text switches.
       // if (data.special != "stocked") {
       //     if ($(`#btn-${id}`).length > 0) {
       //     $(`#btn-${id}`).contents().last()[0].textContent =
