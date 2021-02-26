@@ -1,8 +1,10 @@
 """Tests views for the Info app."""
 
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+
 from info.models import Category, Page
+
+from .test_models import valid_category, valid_page
 
 
 class TestInfoViews(TestCase):
@@ -10,38 +12,9 @@ class TestInfoViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-        image = SimpleUploadedFile(
-            name='default.jpg',
-            content=open(
-                'media/default.jpg',
-                'rb').read(),
-            content_type='image/jpeg',)
 
-        valid_category = Category(title_en='HI1',
-                                  title_it='HI1',
-                                  menu_word_en='HCMW1',
-                                  menu_word_it='HCMW1',
-                                  description_en='description',
-                                  description_it='description',
-                                  image=image,
-                                  button_text="text here",
-                                  order=1)
         valid_category.save()
 
-        valid_page = Page(
-            category=Category.objects.latest('date_added'),
-            title_en='HI1',
-            title_it='HI1',
-            summary_en='HCMW1',
-            summary_it='HCMW1',
-            desc_title1_en='heading',
-            desc_title1_it='heading',
-            description1_en='description',
-            description1_it='description',
-            title_image=image,
-            desc_image=image,
-            theme='brown',
-            order=1)
         valid_page.save()
 
     def test_render_home(self):

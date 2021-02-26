@@ -24,42 +24,40 @@ def image_resize(self, image_title, width, height):
         object_image = getattr(this_object, image_title)
     except self.__class__.DoesNotExist:
         pass
-    finally:
-        try:
-            # Makes each image unique as django-cleanup deletes shared files
-            time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
-                                              '%d.%m.%Y %H:%M:%S,%f')
-            millisecs = int(time.timestamp() * 1000)
-            img = Image.open(image_field)
-            img_format = img.format.lower()
+    try:
+        # Makes each image unique as django-cleanup deletes shared files
+        time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
+                                          '%d.%m.%Y %H:%M:%S,%f')
+        millisecs = int(time.timestamp() * 1000)
+        img = Image.open(image_field)
+        img_format = img.format.lower()
 
-            # Prevents images from being copied on every save
-            # will save a new copy on an upload
-            if (this_object and f'{image_field.name}'
-                .replace(' ', '_').replace('(', '').replace(')', '')
-                    not in object_image.name) or (not this_object):
-                # Image is resized
-                output_size = (width, height)
-                img = img.resize(size=(output_size))
-                # Converts format while in memory
-                output = BytesIO()
-                img.save(output, format=img_format)
-                output.seek(0)
+        # Prevents images from being copied on every save
+        # will save a new copy on an upload
+        if (this_object and f'{image_field.name}'
+            .replace(' ', '_').replace('(', '').replace(')', '')
+                not in object_image.name) or (not this_object):
+            # Image is resized
+            output_size = (width, height)
+            img = img.resize(size=(output_size))
+            # Converts format while in memory
+            output = BytesIO()
+            img.save(output, format=img_format)
+            output.seek(0)
 
-                # Replaces the Imagefield value with the newly converted image
-                image_field = InMemoryUploadedFile(
-                    output,
-                    'ImageField',
-                    f'{image_field.name.split(".")[0]}_{millisecs}.{img_format}',  # noqa E501
-                    'image/jpeg', sys.getsizeof(output),
-                    None)
-                return image_field
-            # if the image doesn't need to be changed, returns false
-            else:
-                return False
-        # If uploading multiple images on a new file there can this error.
-        except ValueError:
-            return False
+            # Replaces the Imagefield value with the newly converted image
+            image_field = InMemoryUploadedFile(
+                output,
+                'ImageField',
+                f'{image_field.name.split(".")[0]}_{millisecs}.{img_format}',  # noqa E501
+                'image/jpeg', sys.getsizeof(output),
+                None)
+            return image_field
+        # if the image doesn't need to be changed, returns false
+        return False
+    # If uploading multiple images on a new file there can this error.
+    except ValueError:
+        return False
 
 
 class SplashImage(models.Model):
@@ -115,7 +113,7 @@ class Category(models.Model):
         """Resizes and saves images."""
         image1 = image_resize(self, 'image_fb_link', 1200, 628)
         if image1:
-            self.image = image1
+            self.image_fb_link = image1
         super().save(*args, **kwargs)
 
     class Meta:
@@ -175,13 +173,13 @@ class Page(models.Model):
         image3 = image_resize(self, 'bot_image_tw_header', 1500, 500)
 
         if image1:
-            self.title_image = image1
+            self.title_image_tw_header = image1
 
         if image2:
-            self.desc_image = image2
+            self.image_fb_link = image2
 
         if image3:
-            self.bot_image = image3
+            self.bot_image_tw_header = image3
 
         super().save(*args, **kwargs)
 
