@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
+
 from info.models import Category
 
 from .models import Email, Newsletter
@@ -77,7 +78,8 @@ def newsletter_singup(request):
     to the appropriate mailing list. Is an ajax view."""
     if request.method == 'POST':
         data = {}
-        newsletter = Newsletter.objects.get(name='basic')
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         if get_language() == 'it':
             email_list = newsletter.email_list_it
         if get_language() == 'en':

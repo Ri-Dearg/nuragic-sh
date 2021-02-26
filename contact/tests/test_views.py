@@ -1,8 +1,10 @@
 """Tests views for the Contact app."""
-from contact.models import Newsletter
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from info.models import Category
+
+from contact.tests.test_models import newsletter
+from info.tests.test_models import about_category, valid_category
+
+newsletter_1 = newsletter
 
 
 class TestContactViews(TestCase):
@@ -10,23 +12,8 @@ class TestContactViews(TestCase):
 
     def setUp(self):
         """Created instances for use in tests"""
-        image = SimpleUploadedFile(
-            name='default.jpg',
-            content=open(
-                'media/default.jpg',
-                 'rb').read(),
-            content_type='image/jpeg',)
-        Newsletter.objects.create(name="basic")
-        valid_category = Category(title_en='about',
-                                  title_it='about',
-                                  menu_word_en='HCMW1',
-                                  menu_word_it='HCMW1',
-                                  description_en='description',
-                                  description_it='description',
-                                  image=image,
-                                  button_text="text here",
-                                  order=1)
         valid_category.save()
+        about_category.save()
 
     def test_contact_template(self):
         """Tests templates for Contact page."""
@@ -46,8 +33,7 @@ class TestContactViews(TestCase):
                          HTTP_ACCEPT_LANGUAGE='it')
 
         # Retrieves the newletter and checks that the email is present
-        newsletter = Newsletter.objects.get(name="basic")
-        self.assertTrue("test@test.com" in newsletter.email_list_en)
+        self.assertTrue("test@test.com" in newsletter_1.email_list_en)
 
         # Checks the correct message is processed if already signed up
         response = self.client.post('/contact/f/newsletter/',
