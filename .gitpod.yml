@@ -2,6 +2,3 @@ image:
   file: .gitpod.dockerfile
 tasks:
  - init: . ${GITPOD_REPO_ROOT}/.theia/init_tasks.sh    
-vscode:
-  extensions:
-    - mkaufman.HTMLHint@0.10.0:xevX4CvYOkKd8xjvtJQiGQ==
