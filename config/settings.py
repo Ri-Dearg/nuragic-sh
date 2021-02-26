@@ -12,17 +12,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import sys
+from pathlib import Path
 
 import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    import env  # noqa: F401
+    import env  # noqa: F401 # pylint: disable=unused-import
 except ModuleNotFoundError:
     # Error handling
     pass
-
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -160,20 +159,24 @@ DATABASES['default'].update(env_db)
 
 
 # Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-pa ssword-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa E501
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa E501
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa E501
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa E501
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa E501
     },
 ]
 
