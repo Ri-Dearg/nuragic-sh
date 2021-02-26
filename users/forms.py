@@ -1,3 +1,5 @@
+"""Custom allauth forms for custom redirection.
+Also includes forms for shipping and billing details."""
 from allauth.account.forms import (LoginForm, ResetPasswordForm,
                                    ResetPasswordKeyForm, SignupForm)
 from crispy_forms.bootstrap import StrictButton
@@ -5,8 +7,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (HTML, Column, Field, Fieldset, Layout,
                                  MultiWidgetField, Row)
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext
+from django.utils.translation import ugettext_lazy as _
 from phonenumber_field import widgets
 
 from .models import UserProfile
@@ -50,9 +52,13 @@ class StyledLoginForm(LoginForm):
 
                 Field('remember'),
 
-                Column(StrictButton(_('Sign In'), type='submit',
-                             css_class='p-font btn-tran btn btn-warning text-primary shadow primaryAction'),  # noqa E501
-                       css_class='col-auto mx-auto'),
+                Column(
+                    StrictButton(
+                        _('Sign In'),
+                        type='submit',
+                        css_class='p-font btn-tran btn btn-warning text-primary \
+                            shadow primaryAction'),
+                    css_class='col-auto mx-auto'),
             )
         )
 
@@ -75,10 +81,11 @@ class StyledResetPasswordForm(ResetPasswordForm):
 
             Row(
                 Field('email', placeholder=_('E-mail'),
-                      autocomplete='email', css_class='p-font text-primary'),
-
+                      autocomplete='email', css_class='p-font text-primary',
+                      pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
                 Column(StrictButton(_('Reset Password'), type='submit',
-                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                                    css_class='p-font btn-tran btn btn-warning \
+                                    text-primary shadow'),
                        css_class='col-auto mt-1 mx-auto'),
             )
         )
@@ -112,7 +119,8 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
                       css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Change Password'), type='submit',
-                       css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                                    css_class='p-font btn-tran btn btn-warning \
+                           text-primary shadow'),
                        css_class='col-auto mt-1 mx-auto'),
             )
         )
@@ -139,7 +147,7 @@ class StyledSignupForm(SignupForm):
             Row(
                 Field('email', placeholder=_('E-mail'),
                       css_class='p-font text-primary',
-                pattern='^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501
+                pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
 
                 Field('username',  placeholder=_('Username'),
                       css_class='p-font text-primary'),
@@ -151,7 +159,8 @@ class StyledSignupForm(SignupForm):
                       minlength='8', css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Register'), type='submit',
-                             css_class='p-font btn-tran btn btn-warning text-primary shadow'),  # noqa E501
+                                    css_class='p-font btn-tran btn btn-warning \
+                                    text-primary shadow'),
                        css_class='col-auto mx-auto mt-1'),
             )
         )
@@ -171,7 +180,7 @@ class UserProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """Selects custom layout and placeholders for the form."""
-        super(UserProfileForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         helper = self.helper
         helper.form_action = 'users:shipping-billing'
@@ -243,7 +252,7 @@ class UserProfileForm(forms.ModelForm):
                         MultiWidgetField(
                             'billing_phone_number',
                             template='bootstrap4/phone_field.html'
-                            ),
+                        ),
                         Field('billing_street_address_1',
                               placeholder=_('Street Address 1'),
                               css_class='p-font text-primary'),
@@ -266,7 +275,9 @@ class UserProfileForm(forms.ModelForm):
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
 
                 Column(StrictButton(_('Save Details'), type='submit',
-                                    css_class='p-font btn-tran btn btn-sm btn-warning text-primary shadow'),  # noqa E501
-                       css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 pb-md-4 mx-md-auto')  # noqa E501
+                                    css_class='p-font btn-tran btn btn-sm \
+                                        btn-warning text-primary shadow'),
+                       css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 \
+                           pb-md-4 mx-md-auto')
             )
         )

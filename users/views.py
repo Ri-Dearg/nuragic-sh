@@ -1,11 +1,12 @@
+"""Views for the Users app."""
 from allauth.account.utils import sync_user_email_addresses
 from allauth.account.views import (AddEmailForm, ChangePasswordForm, EmailView,
                                    PasswordChangeView,
                                    sensitive_post_parameters_m)
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -19,15 +20,18 @@ from .forms import UserProfileForm
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     """Renders the user profile only if logged in."""
-    model = User
+    user_model = get_user_model()
+    model = user_model
     context_object_name = 'user'
     template_name = 'users/user_detail.html'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(
+            self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
+        user_model = get_user_model()
         # Selects the request user as user id no matter id is put in the url
-        user = User.objects.get(pk=self.request.user.id)
+        user = user_model.objects.get(pk=self.request.user.id)
         profile = user.userprofile
         userprofile_dict = model_to_dict(profile)
 
@@ -53,25 +57,27 @@ class CustomEmailView(LoginRequiredMixin, EmailView):
     for some functions it was easier to utilise alternative views with
     the same template and context as the basic UserProfile Detailview.
     Apart from the url difference it should be unnoticeable to the user."""
-
     template_name = 'users/user_detail.html'
 
     def dispatch(self, request, *args, **kwargs):
 
         # Retrieves user's emails
+        user_model = get_user_model()
         sync_user_email_addresses(request.user)
-        user_id = User.objects.get(pk=self.request.user.id).id
+        user_id = user_model.objects.get(pk=self.request.user.id).id
 
         # Returns the user to the profile page on success
         self.success_url = reverse_lazy('users:user-detail',
                                         kwargs={'pk': user_id})
-        return super(CustomEmailView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(
+            self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context."""
         context = super().get_context_data(**kwargs)
+        user_model = get_user_model()
         # Selects the request user as user id no matter id is put in the url
-        user = User.objects.get(pk=self.request.user.id)
+        user = user_model.objects.get(pk=self.request.user.id)
         profile = user.userprofile
         userprofile_dict = model_to_dict(profile)
 
@@ -102,19 +108,22 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
     @sensitive_post_parameters_m
     def dispatch(self, request, *args, **kwargs):
-        user_id = User.objects.get(pk=self.request.user.id).id
+        user_model = get_user_model()
+        user_id = user_model.objects.get(pk=self.request.user.id).id
 
         self.success_url = reverse_lazy('users:user-detail',
                                         kwargs={'pk': user_id})
 
-        return super(CustomPasswordChangeView, self).dispatch(
+        return super().dispatch(
             request, *args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(
+            self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
+        user_model = get_user_model()
         # Selects the request user as user id no matter id is put in the url
-        user = User.objects.get(pk=self.request.user.id)
+        user = user_model.objects.get(pk=self.request.user.id)
         profile = user.userprofile
         userprofile_dict = model_to_dict(profile)
 

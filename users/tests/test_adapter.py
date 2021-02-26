@@ -1,3 +1,4 @@
+"""Tests redirection for the custom allauth adapter."""
 import random
 import string
 
@@ -9,17 +10,16 @@ def generate_string():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
 
-# Generates fake credentials
-email = generate_string() + '@' + generate_string() + '.com'
-password = generate_string()
-
-
 class TestAdapter(TestCase):
     """A custom adapter was created, subclassing django-allauth's for a custom
     redirect. This tests the correct redirect."""
 
     def test_redirect(self):
         """Tests that the adapter redirects correctly."""
+        # Generates fake credentials
+        email = generate_string() + '@' + generate_string() + '.com'
+        password = generate_string()
+
         # Creates a fake user
         new_user = {'username': generate_string(),
                     'email1': email,

@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
+"""Models for the contact module."""
+from django.contrib.auth import get_user_model
 from django.db import models
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
+
 from products.models import Product
 
 
@@ -16,7 +18,7 @@ class UserProfile(models.Model):
     """User Profile used to store default delivery information and
     liked/bookmarked items"""
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     shipping_full_name = models.CharField(max_length=50,
                                           default='', blank=True)
     shipping_phone_number = CustomPhoneNumberField(default='', blank=True)
@@ -55,7 +57,7 @@ class UserProfile(models.Model):
                                             through='Liked')
 
     def __str__(self):
-        return self.user.username
+        return self.user.username  # pylint: disable=no-member
 
 
 class Liked(models.Model):
@@ -67,4 +69,4 @@ class Liked(models.Model):
     datetime_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.userprofile.user.username}, {self.product.title}, {self.datetime_added}'  # noqa E501
+        return f'{self.userprofile.user.username}, {self.product.title}, {self.datetime_added}'  # noqa E501 # pylint: disable=line-too-long, no-member

@@ -2,12 +2,14 @@
 import random
 import string
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from products.models import Product
 from products.tests.test_models import valid_product_1, valid_shopcategory
 from users.models import Liked
+
+user_model = get_user_model()
 
 
 class TestUserProfile(TestCase):
@@ -27,9 +29,9 @@ class TestUserProfile(TestCase):
         username = generate_string()
         email = generate_string() + '@' + generate_string() + '.com'
         password = generate_string()
-        user1 = User.objects.create(username=username,
-                                    email=email,
-                                    password=password)
+        user1 = user_model.objects.create(username=username,
+                                          email=email,
+                                          password=password)
         user1.userprofile.shipping_name = 'Fake name'
         user1.userprofile.liked_products.set([Product.objects.latest(
             'date_added').id])
@@ -38,7 +40,7 @@ class TestUserProfile(TestCase):
     def test_str(self):
         """Tests the string method on the UserProfile."""
         # Retrieves the most recently created user and gets their string
-        user1 = User.objects.latest('date_joined')
+        user1 = user_model.objects.latest('date_joined')
         user_string = str(user1.userprofile)
 
         # Retrieves the user's liked products and gets its string
@@ -50,5 +52,6 @@ class TestUserProfile(TestCase):
         self.assertEqual((user_string), (user1.username))
 
         # Confirms the User's Liked Product string is correct.
-        self.assertEqual((liked_string),
-                         (f'{user1.username}, {product.title}, {liked_table.datetime_added}'))  # noqa E501
+        self.assertEqual(
+            (liked_string),
+            (f'{user1.username}, {product.title}, {liked_table.datetime_added}'))  # noqa E501
