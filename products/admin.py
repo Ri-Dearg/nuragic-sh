@@ -1,3 +1,4 @@
+"""Registers models to the admin for the Products app."""
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
