@@ -78,6 +78,16 @@ class TestViews(TestCase):
         # Confirms an error message shows
         self.assertRaises(Exception, msg='Error adding item: 0')
 
+    def test_forbidden_on_get(self):
+        """Confirms that a 403 error when not using POST."""
+        # Adds a liked product
+        response = self.client.get('/shop/likes/ajax/toggle/',
+                                   {'item-id': '1'},
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        # Confirms an error message shows
+        self.assertEqual(response.status_code, 403)
+
     def test_successfully_remove_from_likes(self):
         """Checks that the like toggle removes liked products
         for both anonymous and logged in users."""
