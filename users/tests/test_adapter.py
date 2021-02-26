@@ -1,5 +1,6 @@
 import random
 import string
+
 from django.test import TestCase
 
 
@@ -32,8 +33,8 @@ class TestAdapter(TestCase):
                                     new_user, follow=True)
 
         # Declares next as the query string
-        next = response.request['QUERY_STRING']
+        next_page = response.request['QUERY_STRING']
 
         # Confirms the redirect is correct
-        self.assertEqual('next=/products/1/', next)
+        self.assertEqual('next=/products/1/', next_page)
         self.assertEqual(response.status_code, 200)

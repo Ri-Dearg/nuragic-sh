@@ -1,10 +1,12 @@
+"""Tests models for the users module."""
 import random
 import string
 
 from django.contrib.auth.models import User
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from products.models import Product, ShopCategory
+
+from products.models import Product
+from products.tests.test_models import valid_product_1, valid_shopcategory
 from users.models import Liked
 
 
@@ -18,28 +20,11 @@ class TestUserProfile(TestCase):
             return ''.join(random.choices(string.ascii_uppercase +
                                           string.digits,
                                           k=8))
-        image = SimpleUploadedFile(
-            name='default.jpg',
-            content=open(
-                'media/default.jpg',
-                'rb').read(),
-            content_type='image/jpeg',)
 
-        valid_shopcategory = ShopCategory(title_en='SC1',
-                                          title_it='SC1',)
         valid_shopcategory.save()
+        valid_product_1.save()
 
-        valid_product = Product(
-            category=ShopCategory.objects.get(title='SC1'),
-            title_en='P1',
-            title_it='P1',
-            description_en='description',
-            description_it='description',
-            price=0.5,
-            image_4_3=image,)
-        valid_product.save()
-
-        username = generate_string(),
+        username = generate_string()
         email = generate_string() + '@' + generate_string() + '.com'
         password = generate_string()
         user1 = User.objects.create(username=username,

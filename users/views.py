@@ -2,7 +2,6 @@ from allauth.account.utils import sync_user_email_addresses
 from allauth.account.views import (AddEmailForm, ChangePasswordForm, EmailView,
                                    PasswordChangeView,
                                    sensitive_post_parameters_m)
-from contact.models import Newsletter
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,6 +11,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
+
+from contact.models import Newsletter
 
 from .forms import UserProfileForm
 
@@ -150,11 +151,11 @@ def update_shipping_billing(request):
             profile.save()
             messages.success(request, _('Your information has been updated.'))
             return HttpResponseRedirect(redirect_url)
-        else:
-            form = UserProfileForm()
-            messages.warning(request, _('Failed to update your information. \
-                Please Check your details.'))
-            return HttpResponseRedirect(redirect_url)
+
+    form = UserProfileForm()
+    messages.warning(request, _('Failed to update your information. \
+        Please Check your details.'))
+    return HttpResponseRedirect(redirect_url)
 
 
 @login_required
@@ -174,32 +175,32 @@ def update_newsletter(request):
 
     if request.method == 'POST':
         email = request.POST['email']
-        newsletter = Newsletter.objects.get(name='basic')
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         it_list = newsletter.email_list_it
         en_list = newsletter.email_list_en
 
-        if 'save' and 'newsletter' in request.POST:
+        if 'save' in request.POST:
             if 'it' in request.POST['newsletter']:
                 update_email(email, it_list, en_list)
 
             if 'en' in request.POST['newsletter']:
                 update_email(email, en_list, it_list)
-
             newsletter.save()
+
             messages.success(request, _(
                 f'Your newsletter preferences have been updated for {email}.'))
-
             return HttpResponseRedirect(redirect_url)
 
-        else:
-            if email in it_list:
-                it_list.remove(email)
-            if email in en_list:
-                en_list.remove(email)
-            newsletter.save()
-            messages.info(request, _(
-                f'You have unsubscribed {email} from the newsletter.'))
-            return HttpResponseRedirect(redirect_url)
+        if email in it_list:
+            it_list.remove(email)
+        if email in en_list:
+            en_list.remove(email)
+        newsletter.save()
+
+        messages.info(request, _(
+            f'You have unsubscribed {email} from the newsletter.'))
+        return HttpResponseRedirect(redirect_url)
 
     messages.warning(request, _(
         'Failed to update your information. Please Check your details.'))
