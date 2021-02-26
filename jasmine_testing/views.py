@@ -6,7 +6,6 @@ from django.shortcuts import render
 # Create your views here.
 def run_jasmine(request):
     """Run jasmine tests."""
-    if request.user.is_superuser:
+    if request.user.is_staff:
         return render(request, 'jasmine_testing/jasmine.html')
-    else:
-        return HttpResponse(status=500)
+    return HttpResponse(status=500)
