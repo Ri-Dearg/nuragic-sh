@@ -1,23 +1,24 @@
-from contact.models import Newsletter
-from django.contrib.auth.models import User
+"""Tests views for custom authorization functions."""
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from contact.models import Newsletter
+from users.tests.test_adapter import generate_string
+
+user_model = get_user_model()
+user_model.objects.get_or_create(
+    username=generate_string(),
+    email=f'{generate_string()}@{generate_string()}.com',
+    password=generate_string())
+
+test_user = user_model.objects.latest('date_joined')
 
 
 class TestUserViews(TestCase):
     """Tests views for the Users app."""
 
-    def setUp(self):
-        """Creates a fake user for use in the tests."""
-        username = 'user1'
-        email = 'test@test.com'
-        password = 'password'
-        User.objects.get_or_create(username=username,
-                                   email=email,
-                                   password=password)
-
-        Newsletter.objects.create(name='basic')
-
     def test_custom_forms_rendering(self):
+        """Tests the correct use of custom forms."""
         response = self.client.get('/accounts/login/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/base.html')
@@ -54,7 +55,6 @@ class TestUserViews(TestCase):
 
         # Retrieves the most recently created user, logs them in
         # and goes to their profile.
-        test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
         response = self.client.get(f'/users/profile/{test_user.id}/')
 
@@ -68,7 +68,6 @@ class TestUserViews(TestCase):
     def test_custom_email_view(self):
         """Confirms a custom view is used for changing email."""
         # Retrieves the most recently created user and logs them in
-        test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
@@ -78,7 +77,6 @@ class TestUserViews(TestCase):
     def test_custom_password_view(self):
         """Confirms a custom view is used for changing password."""
         # Retrieves the most recently created user and logs them in
-        test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
@@ -88,7 +86,6 @@ class TestUserViews(TestCase):
     def test_custom_update_shipping(self):
         """Confirms a custom view is used for changing email."""
         # Retrieves the most recently created user and logs them in
-        test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Posts a valid form to update the info
@@ -112,68 +109,66 @@ class TestUserViews(TestCase):
                           'billing_postcode': '',
                           'billing_country': 'IE'})
 
+        updated_user = user_model.objects.latest('date_joined')
+
         # Confirms the name has been updated
-        test_user = User.objects.latest('date_joined')
-        self.assertEqual(test_user.userprofile.shipping_full_name,
+        self.assertEqual(updated_user.userprofile.shipping_full_name,
                          'Test Name')
 
         # Posts an ivalid form to update the info
         self.client.post('/users/shipping-billing/?next=/',
                          {'shipping_postcode': '123456789012345678901'})
 
-        self.assertEqual(test_user.userprofile.shipping_phone_number,
+        self.assertEqual(updated_user.userprofile.shipping_phone_number,
                          '+93.1')
 
     def test_update_newsletter(self):
+        """Tests different methods of updating the email lists."""
         # Retrieves the most recently created user and logs them in
-        newsletter = Newsletter.objects.get(name='basic')
-
-        test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
-
         response = self.client.post('/users/newsletter/?next=/',
                                     {'save': '',
                                      'newsletter': 'en',
                                      'email': test_user.email})
+        newsletter_1 = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
 
         self.assertEqual(response.status_code, 302)
-        newsletter = Newsletter.objects.get(name='basic')
-
-        self.assertTrue(test_user.email in newsletter.email_list_en)
+        self.assertTrue(test_user.email in newsletter_1.email_list_en)
 
         self.client.post('/users/newsletter/?next=/',
                          {'save': '',
                           'newsletter': 'en',
                           'email': test_user.email})
 
-        newsletter = Newsletter.objects.get(name='basic')
-        self.assertTrue(newsletter.email_list_en == [test_user.email])
+        self.assertTrue(newsletter_1.email_list_en == [test_user.email])
 
         self.client.post('/users/newsletter/?next=/',
                          {'save': '',
                           'newsletter': 'it',
                           'email': test_user.email})
-        newsletter = Newsletter.objects.get(name='basic')
 
-        self.assertTrue(test_user.email in newsletter.email_list_it)
-        self.assertTrue(test_user.email not in newsletter.email_list_en)
+        newsletter_update = Newsletter.objects.get(pk=newsletter_1.id)
+
+        self.assertTrue(test_user.email in newsletter_update.email_list_it)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
         self.client.get('/users/newsletter/?next=/',
                         {'save': '',
                          'newsletter': 'en',
                          'email': test_user.email})
-        newsletter = Newsletter.objects.get(name='basic')
 
-        self.assertTrue(test_user.email in newsletter.email_list_it)
-        self.assertTrue(test_user.email not in newsletter.email_list_en)
+        newsletter_update = Newsletter.objects.get(pk=newsletter_1.id)
+        self.assertTrue(test_user.email in newsletter_update.email_list_it)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
         self.client.post('/users/newsletter/?next=/',
                          {'unsub': '',
                           'email': test_user.email})
-        newsletter = Newsletter.objects.get(name='basic')
 
-        self.assertTrue(test_user.email not in newsletter.email_list_it)
-        self.assertTrue(test_user.email not in newsletter.email_list_en)
+        newsletter_update = Newsletter.objects.get(pk=newsletter_1.id)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_it)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
         self.client.post('/users/newsletter/?next=/',
                          {'save': '',
@@ -182,7 +177,7 @@ class TestUserViews(TestCase):
         self.client.post('/users/newsletter/?next=/',
                          {'unsub': '',
                           'email': test_user.email})
-        newsletter = Newsletter.objects.get(name='basic')
 
-        self.assertTrue(test_user.email not in newsletter.email_list_it)
-        self.assertTrue(test_user.email not in newsletter.email_list_en)
+        newsletter_update = Newsletter.objects.get(pk=newsletter_1.id)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_it)
+        self.assertTrue(test_user.email not in newsletter_update.email_list_en)
