@@ -1,6 +1,7 @@
+"""Urls for like app."""
 from django.urls import path
 
-from .views import likes_toggle, update_likes, LikesListView
+from .views import LikesListView, likes_toggle, update_likes
 
 urlpatterns = [
     path('', LikesListView.as_view(), name='likes-list'),
