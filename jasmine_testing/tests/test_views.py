@@ -1,7 +1,8 @@
 """Tests views for the Jasmine app."""
-
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from users.tests.test_views import test_user
 
 
 class TestJasmineViews(TestCase):
@@ -10,11 +11,17 @@ class TestJasmineViews(TestCase):
     def test_render_jasmine(self):
         """Tests templates for jasmine page."""
         response = self.client.get('/jasmine/')
-        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.force_login(test_user)
+        response = self.client.get('/jasmine/')
+        self.assertEqual(response.status_code, 403)
 
         password = 'mypassword'
-        my_admin = User.objects.create_superuser('myuser', 'myemail@test.com',
-                                                 password)
+        my_admin = get_user_model().objects.create_superuser(
+            'myuser',
+            'myemail@test.com',
+            password)
         self.client.login(username=my_admin.username, password=password)
 
         response = self.client.get('/jasmine/')
