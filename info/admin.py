@@ -23,7 +23,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class CategoryTrans(CategoryAdmin, TranslationAdmin):
     """Allows translation in the admin."""
-    pass
 
 
 class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
@@ -34,7 +33,6 @@ class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
 
 class PageTrans(PageAdmin, TranslationAdmin):
     """Allows translation in the admin."""
-    pass
 
 
 class GalleryImageAdmin(admin.ModelAdmin):
@@ -51,7 +49,6 @@ class SplashImageAdmin(admin.ModelAdmin):
 
 class SplashImageTrans(SplashImageAdmin, TranslationAdmin):
     """Allows translation in the admin."""
-    pass
 
 
 admin.site.register(SplashImage, SplashImageTrans)

@@ -1,3 +1,4 @@
+"""A filter used to split the file extension from the filename."""
 from django import template
 
 register = template.Library()
@@ -5,7 +6,5 @@ register = template.Library()
 
 @register.filter(name='extension')
 def extension(value):
-    """
-        Returns the value turned into a list.
-    """
+    """Splits the string at the first '.' from the right."""
     return value.rsplit('.')[-1]
