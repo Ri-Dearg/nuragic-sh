@@ -9,6 +9,6 @@ def get_categories(request):
     if 'shop' in request.path:
         shop_categories = ShopCategory.objects.all().filter(display=True)
         return {'categories': shop_categories}
-    else:
-        categories = Category.objects.all().filter(display=True)
-        return {'categories': categories}
+
+    categories = Category.objects.all().filter(display=True)
+    return {'categories': categories}

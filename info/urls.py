@@ -1,4 +1,4 @@
-"""Urls for the info module"""
+"""Urls for the info module."""
 
 from django.urls import path
 

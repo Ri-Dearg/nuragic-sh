@@ -1,6 +1,7 @@
 """Tests App Config."""
 from django.apps import apps
 from django.test import TestCase
+
 from info.apps import InfoConfig
 
 
