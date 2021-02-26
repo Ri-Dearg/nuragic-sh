@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils import timezone
+
 from info.models import image_resize
 
 

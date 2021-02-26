@@ -16,7 +16,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         # Declares objects for pagination
         object_list = self.object.products.all().order_by(
             '-stock', '-popularity')
-        context = super(ShopCategoryDetailView, self).get_context_data(
+        context = super().get_context_data(
             object_list=object_list, **kwargs)
 
         this_object = context['object']
@@ -27,7 +27,9 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         return context
 
 
-class ProductListView(ListView):
+class ProductListView(ListView):  # pylint: disable=too-many-ancestors
+    """Displays all products in a list.
+    Adds context for highlighting the menu."""
     model = Product
     paginate_by = 6
 
