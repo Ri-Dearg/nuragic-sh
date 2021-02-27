@@ -41,6 +41,8 @@ urlpatterns = [
                              namespace='contact')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
+    path('', include(('pwa.urls', 'pwa'),
+                     namespace='pwa')),
     path('shop/', include(shop_patterns)),
     path('users/', include(('users.urls', 'users'),
                            namespace='users')),

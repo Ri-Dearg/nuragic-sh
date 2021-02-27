@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'info',
     'likes',
     'products',
+    'pwa',
     'users',
     # Add editor in admin
     'tinymce',

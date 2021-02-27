@@ -13,12 +13,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <!-- Windows app tile config -->
-        <meta name="msapplication-config" content="browserconfig.xml" />
+        <meta name="msapplication-config" content="{% static 'browserconfig.xml' %}" />
         <meta name="msapplication-TileColor" content="#2b384c" />
         <meta name="msapplication-TileImage" content="{% static 'favicons/ms-icon-144x144.png' %}" />
         <meta name="theme-color" content="#2b384c" />
         <!-- Web manifest files (currently not in use) -->
-        <link rel="manifest" href="{{ request.scheme }}://{{ request.get_host }}/manifest.webmanifest" />
+        <link rel="manifest" href="{% static 'manifest.json' %}" />
         <!-- favicons -->
         <link rel="icon" href="{% static 'favicons/favicon.ico' %}" />
         <link rel="icon" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}" />
@@ -100,6 +100,12 @@
         {% block postloadjs %}
         <!-- Basic js files loaded -->
         <script src="{% static 'js/custom/base.js' %}"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('{% url "pwa:service-worker" %}', { scope: '/' })
+            }
+        </script>
+
         <!-- shows toasts if there are messages -->
         {% if messages %}
         <script>

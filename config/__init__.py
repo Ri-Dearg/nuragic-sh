@@ -1,0 +1,2 @@
+"""Contains site version."""
+version = '0.0.1'
