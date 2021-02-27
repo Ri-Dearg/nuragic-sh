@@ -9,6 +9,11 @@
         "minimal-ui",
         "fullscreen"
     ],
+    "categories": [
+        "lifestyle",
+        "shopping",
+        "health"
+    ],
     "display": "standalone",
     "scope": "/",
     "theme_color": "#2b384c",
