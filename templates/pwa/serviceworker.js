@@ -4,12 +4,14 @@ const staticCachePrefix = "static";
 const staticCacheName = `${staticCachePrefix}-${VERSION}`;
 const dynamicCacheName = "dynamic";
 const appShell = [
-  "static/favicons/maskable_icon_x512.png",
-  "static/manifest.json",
-  "",
-  "offline/",
-].map((partialUrl) => `${location.protocol}//${location.host}/${partialUrl}`);
-const maxNumberItemsDynamicCache = 5;
+  "{{ icon_url }}",
+  "{{ manifest_url }}",
+  "{{ style_url }}",
+  "{{ home_url }}",
+  "{{ offline_url }}",
+].map((partialUrl) => `${location.protocol}//${location.host}${partialUrl}`);
+
+const maxNumberItemsDynamicCache = 10;
 const urlsToCacheTimes = new Map();
 
 const networkWaitTime = 6000;
@@ -97,8 +99,13 @@ function fetchAndSaveInCache(event, cacheName) {
   console.log(`[SW] Fetching ${event.request.url}`);
   return fetch(event.request).then((res) => {
     const requestSucceeded = res.status >= 200 && res.status <= 300;
+    const cacheHeader = res.headers.get("cache-control") || [];
+    const mustNotCache = cacheHeader.includes("no-cache");
     if (!requestSucceeded) {
       console.log("[SW] Request failed.");
+      return res;
+    } else if (mustNotCache) {
+      console.log("[SW] The page must not be cached.");
       return res;
     }
 
