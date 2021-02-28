@@ -1,6 +1,8 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static and filter to get image extension -->
 {% load i18n %} {% load static %} {% load app_filters %}
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'info/includes/critical_css/category_detail.html' %}{% endblock %}
 <!-- Open Graph Tags -->
 {% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}website{% endblock %}
 {% block og_title %}Nuragic Shamanic Healing{% endblock %}
