@@ -95,9 +95,9 @@ class TestInfoModels(TestCase):
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image_tw_header.height, 500)
-        self.assertEqual(new_info.image_tw_header.width, 1500)
-        self.assertEqual(new_info.image_fb_link.height, 628)
+        self.assertEqual(new_info.image_tw_header.height, 420)
+        self.assertEqual(new_info.image_tw_header.width, 1260)
+        self.assertEqual(new_info.image_fb_link.height, 630)
         self.assertEqual(new_info.image_fb_link.width, 1200)
         self.assertTrue(re.search('^carousel/default.*.jpeg$',
                                   new_info.image_tw_header.name))
@@ -121,7 +121,7 @@ class TestInfoModels(TestCase):
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image_fb_link.height, 628)
+        self.assertEqual(new_info.image_fb_link.height, 630)
         self.assertEqual(new_info.image_fb_link.width, 1200)
         self.assertTrue(re.search('^info/category/default.*.jpeg$',
                                   new_info.image_fb_link.name))
