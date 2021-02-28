@@ -4,6 +4,9 @@
 
 {% block head_title %}{% trans 'Shop' %}{% endblock%}
 
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
+
 <!-- Open Graph Tags To redo -->
 {% block og_type %}website{% endblock %}
 {% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
