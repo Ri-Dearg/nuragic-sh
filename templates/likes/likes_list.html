@@ -2,6 +2,9 @@
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
 
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'likes/includes/critical_css/likes_list.html' %}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
