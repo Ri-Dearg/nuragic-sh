@@ -36,10 +36,10 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicons/apple-icon-144x144.png' %}" />
         <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicons/apple-icon-152x152.png' %}" />
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-icon-180x180.png' %}" />
-        <link rel="stylesheet" type="text/css" href="{% sass_src 'css/main.scss' %}" />
-        <!-- Jquery and Bootstrap 5 -->
-        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <!-- Critical styles, then all styles -->
+        {% block critical_css %}{% endblock %}
+        <link rel="stylesheet preload" as="style" type="text/css" href="{% sass_src 'css/main.scss' %}" />
+
         <!-- Open Graph details -->
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="it_IT" />
@@ -98,6 +98,9 @@
         {% include 'base/includes/footer.html' %}
         <!-- Script block -->
         {% block postloadjs %}
+        <!-- Jquery and Bootstrap 5 -->
+        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
         <!-- Basic js files loaded -->
         <script src="{% static 'js/custom/base.js' %}"></script>
         <!-- shows toasts if there are messages -->
