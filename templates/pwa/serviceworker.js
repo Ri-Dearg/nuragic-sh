@@ -11,7 +11,7 @@ const appShell = [
   "{{ offline_url }}",
 ].map((partialUrl) => `${location.protocol}//${location.host}${partialUrl}`);
 
-const maxNumberItemsDynamicCache = 10;
+const maxNumberItemsDynamicCache = 50;
 const urlsToCacheTimes = new Map();
 
 const networkWaitTime = 6000;
