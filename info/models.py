@@ -40,6 +40,7 @@ def image_resize(self, image_title, width, height):
             # Image is resized
             output_size = (width, height)
             img = img.resize(size=(output_size))
+
             # Converts format while in memory
             output = BytesIO()
             img.save(output, format=img_format)
@@ -60,6 +61,16 @@ def image_resize(self, image_title, width, height):
         return False
 
 
+def responsive_images(self, image_title, width, height):
+    """Uses the resize_image function to create three different sized images
+    Returned from largest to smallest."""
+    lg = image_resize(self, image_title, width, height)
+    md = image_resize(self, image_title, width//3*2, height//3*2)
+    sm = image_resize(self, image_title, width//3, height//3)
+
+    return lg, md, sm
+
+
 class SplashImage(models.Model):
     """Allows for the creation of a collection of carousel items.
     You can add a splash image which will be resized and a blurb.
@@ -70,20 +81,32 @@ class SplashImage(models.Model):
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
     image_tw_header = models.ImageField(upload_to='carousel')
+    image_tw_header_md = models.ImageField(upload_to='carousel', default='')
+    image_tw_header_sm = models.ImageField(upload_to='carousel', default='')
     image_fb_link = models.ImageField(upload_to='carousel')
+    image_fb_link_md = models.ImageField(upload_to='carousel', default='')
+    image_fb_link_sm = models.ImageField(upload_to='carousel', default='')
     info_display = models.BooleanField(default=True)
     shop_display = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'image_tw_header', 1500, 500)
-        image2 = image_resize(self, 'image_fb_link', 1200, 628)
+        image1, image1_md, image1_sm = responsive_images(
+            self, 'image_tw_header', 1200, 400)
+
+        image2, image2_md, image2_sm = responsive_images(
+            self, 'image_fb_link', 1200, 630)
 
         if image1:
             self.image_tw_header = image1
-        if image1:
+            self.image_tw_header_md = image1_md
+            self.image_tw_header_sm = image1_sm
+        if image2:
             self.image_fb_link = image2
+            self.image_fb_link_md = image2_md
+            self.image_fb_link_sm = image2_sm
+
         super().save(*args, **kwargs)
 
     class Meta:
@@ -97,7 +120,7 @@ class SplashImage(models.Model):
 class Category(models.Model):
     """Allows for the creation of a collection of Products.
     You can add a splash image which will be resized and a blurb.
-    Images will be resized on upload to 1200x628px shape.
+    Images will be resized on upload to 1200x630px shape.
     I would recommend cropping your images first."""
     title = models.CharField(max_length=30, null=False)
     menu_word = models.CharField(max_length=10, null=False)
@@ -111,7 +134,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'image_fb_link', 1200, 628)
+        image1 = image_resize(self, 'image_fb_link', 1200, 630)
         if image1:
             self.image_fb_link = image1
         super().save(*args, **kwargs)
@@ -168,9 +191,9 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'title_image_tw_header', 1500, 500)
-        image2 = image_resize(self, 'image_fb_link', 1200, 628)
-        image3 = image_resize(self, 'bot_image_tw_header', 1500, 500)
+        image1 = image_resize(self, 'title_image_tw_header', 1200, 400)
+        image2 = image_resize(self, 'image_fb_link', 1200, 630)
+        image3 = image_resize(self, 'bot_image_tw_header', 1200, 400)
 
         if image1:
             self.title_image_tw_header = image1

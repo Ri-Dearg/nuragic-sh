@@ -45,6 +45,8 @@ class GalleryImageAdmin(admin.ModelAdmin):
 class SplashImageAdmin(admin.ModelAdmin):
     """Displays order based on its associated Page."""
     ordering = ['page']
+    fields = ('page', 'title', 'description', 'image_tw_header',
+              'image_fb_link', 'info_display', 'shop_display', 'date_added')
 
 
 class SplashImageTrans(SplashImageAdmin, TranslationAdmin):
