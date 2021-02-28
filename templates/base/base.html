@@ -2,7 +2,7 @@
 <!-- Loads internationalization, loads static and loads sass for compiling -->
 {% load i18n %} {% load static %} {% load sass_tags %}
 <!-- Gets the preloader for a background URL, necessary due to quotes -->
-{% static 'images/preloader.gif' as PRELOADER %}
+{% static 'images/preloader.webm' as PRELOADER %}
 <!-- Gets current language -->
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
@@ -61,9 +61,13 @@
     {% endblock %}
 
     <body class="bg-primary">
-        <!-- preloader gif. Uses classes to center the logo on the viewport -->
+        <!-- preloader video. Uses classes to center the logo on the viewport -->
         <div class="preloader justify-content-center align-items-center bg-primary">
-            <div class="preload-gif" style="background-image: url('{{ PRELOADER }}')" role="status">
+            <div class="preload-gif" role="status">
+                <video playsinline autoplay muted loop poster="{% static 'images/logo.png' %}">
+                    <source src="{% static 'images/preloader.mp4' %}" type="video/mp4">
+                    <source src="{% static 'images/preloader.webm' %}" type="video/webm">
+                </video>
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>

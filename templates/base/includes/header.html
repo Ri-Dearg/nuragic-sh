@@ -24,7 +24,7 @@
                 <div class="col-auto mx-auto">
                     <a href="{% if 'shop' in request.path %}{% url 'products:product-list' %}{% else %}{% url 'info:home' %}{% endif %}"
                         class="smooth-click text-decoration-none d-flex mt-2">
-                        <img src="{% static 'images/logo.png' %}" alt="Logo" class="d-inline-block align-self-center" />
+                        <img id="logo-image" src="{% static 'images/logo.png' %}" alt="Logo" class="d-inline-block align-self-center" />
                         <h1 class="brand-logo h-font d-inline-block my-auto">NURAGIC<span
                                 class="brand-sub p-font d-block h6">SHAMANIC HEALING</span>
                         </h1>
