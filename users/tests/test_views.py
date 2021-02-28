@@ -89,7 +89,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Posts a valid form to update the info
-        self.client.post('/users/shipping-billing/?next=/',
+        response = self.client.post('/users/shipping-billing/?next=/',
                          {'shipping_full_name': 'Test Name',
                           'shipping_phone_number_0': '+93',
                           'shipping_phone_number_1': '1',
@@ -108,7 +108,6 @@ class TestUserViews(TestCase):
                           'billing_county': '',
                           'billing_postcode': '',
                           'billing_country': 'IE'})
-
         updated_user = user_model.objects.latest('date_joined')
 
         # Confirms the name has been updated
