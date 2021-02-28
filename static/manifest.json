@@ -4,17 +4,18 @@
     "description": "Reflection & Healing",
     "start_url": "/",
     "background_color": "#2b384c",
-    "display_override": [
-        "window-control-overlay",
-        "minimal-ui",
-        "fullscreen"
-    ],
     "categories": [
         "lifestyle",
         "shopping",
         "health"
     ],
-    "display": "standalone",
+    "display_override": [
+        "window-control-overlay",
+        "minimal-ui",
+        "fullscreen",
+        "standalone"
+    ],
+    "display": "minimal-ui",
     "scope": "/",
     "theme_color": "#2b384c",
     "icons": [
