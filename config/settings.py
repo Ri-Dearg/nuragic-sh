@@ -96,6 +96,7 @@ SASS_PROCESSOR_ROOT = 'static/'
 COMPRESS_ROOT = 'static'
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
