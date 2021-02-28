@@ -4,6 +4,9 @@
 
 {% block head_title %}{{ user.username }}{% endblock%}
 
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'users/includes/critical_css/user_detail.html' %}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
