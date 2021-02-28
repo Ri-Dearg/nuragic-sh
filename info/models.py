@@ -80,12 +80,17 @@ class SplashImage(models.Model):
                                 on_delete=models.CASCADE)
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
-    image_tw_header = models.ImageField(upload_to='carousel')
-    image_tw_header_md = models.ImageField(upload_to='carousel', default='')
-    image_tw_header_sm = models.ImageField(upload_to='carousel', default='')
-    image_fb_link = models.ImageField(upload_to='carousel')
-    image_fb_link_md = models.ImageField(upload_to='carousel', default='')
-    image_fb_link_sm = models.ImageField(upload_to='carousel', default='')
+    image_tw_header = models.ImageField(upload_to='info/carousel')
+    image_tw_header_md = models.ImageField(
+        upload_to='info/carousel', default='')
+    image_tw_header_sm = models.ImageField(
+        upload_to='info/carousel', default='')
+    image_fb_link = models.ImageField(
+        upload_to='info/carousel')
+    image_fb_link_md = models.ImageField(
+        upload_to='info/carousel', default='')
+    image_fb_link_sm = models.ImageField(
+        upload_to='info/carousel', default='')
     info_display = models.BooleanField(default=True)
     shop_display = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now)
@@ -93,7 +98,7 @@ class SplashImage(models.Model):
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
         image1, image1_md, image1_sm = responsive_images(
-            self, 'image_tw_header', 1200, 400)
+            self, 'image_tw_header', 1260, 420)
 
         image2, image2_md, image2_sm = responsive_images(
             self, 'image_fb_link', 1200, 630)
@@ -127,6 +132,8 @@ class Category(models.Model):
     description = HTMLField()
     button_text = models.CharField(max_length=30, null=False)
     image_fb_link = models.ImageField(upload_to='info/category')
+    image_fb_link_md = models.ImageField(upload_to='info/category', default='')
+    image_fb_link_sm = models.ImageField(upload_to='info/category', default='')
     display = models.BooleanField(default=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
@@ -134,9 +141,12 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'image_fb_link', 1200, 630)
+        image1, image1_md, image1_sm = responsive_images(
+            self, 'image_fb_link', 1200, 630)
         if image1:
             self.image_fb_link = image1
+            self.image_fb_link_md = image1_md
+            self.image_fb_link_sm = image1_sm
         super().save(*args, **kwargs)
 
     class Meta:

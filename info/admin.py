@@ -23,6 +23,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class CategoryTrans(CategoryAdmin, TranslationAdmin):
     """Allows translation in the admin."""
+    fields = ('title', 'menu_word', 'description', 'button_text',
+              'image_fb_link', 'display', 'date_added')
 
 
 class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
