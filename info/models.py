@@ -82,15 +82,15 @@ class SplashImage(models.Model):
     description = models.CharField(max_length=200, default='')
     image_tw_header = models.ImageField(upload_to='info/carousel')
     image_tw_header_md = models.ImageField(
-        upload_to='info/carousel', default='')
+        upload_to='info/carousel', default='', blank=True)
     image_tw_header_sm = models.ImageField(
-        upload_to='info/carousel', default='')
+        upload_to='info/carousel', default='', blank=True)
     image_fb_link = models.ImageField(
         upload_to='info/carousel')
     image_fb_link_md = models.ImageField(
-        upload_to='info/carousel', default='')
+        upload_to='info/carousel', default='', blank=True)
     image_fb_link_sm = models.ImageField(
-        upload_to='info/carousel', default='')
+        upload_to='info/carousel', default='', blank=True)
     info_display = models.BooleanField(default=True)
     shop_display = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now)
@@ -132,8 +132,10 @@ class Category(models.Model):
     description = HTMLField()
     button_text = models.CharField(max_length=30, null=False)
     image_fb_link = models.ImageField(upload_to='info/category')
-    image_fb_link_md = models.ImageField(upload_to='info/category', default='')
-    image_fb_link_sm = models.ImageField(upload_to='info/category', default='')
+    image_fb_link_md = models.ImageField(
+        upload_to='info/category', default='', blank=True)
+    image_fb_link_sm = models.ImageField(
+        upload_to='info/category', default='', blank=True)
     display = models.BooleanField(default=True)
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
@@ -192,17 +194,17 @@ class Page(models.Model):
     description2 = HTMLField(blank=True, default='')
     title_image_tw_header = models.ImageField(upload_to='info/page/title')
     title_image_tw_header_md = models.ImageField(
-        upload_to='info/page/title', default='')
+        upload_to='info/page/title', default='', blank=True)
     title_image_tw_header_sm = models.ImageField(
-        upload_to='info/page/title', default='')
+        upload_to='info/page/title', default='', blank=True)
     image_fb_link = models.ImageField(
         upload_to='info/page/desc')
     image_fb_link_md = models.ImageField(
-        upload_to='info/page/desc', default='')
+        upload_to='info/page/desc', default='', blank=True)
     image_fb_link_sm = models.ImageField(
-        upload_to='info/page/desc', default='')
+        upload_to='info/page/desc', default='', blank=True)
     bot_image_tw_header = models.ImageField(
-        upload_to='info/page/bot', blank=True)
+        upload_to='info/page/bot', blank=True, default='')
     bot_image_tw_header_md = models.ImageField(
         upload_to='info/page/bot', blank=True, default='')
     bot_image_tw_header_sm = models.ImageField(
