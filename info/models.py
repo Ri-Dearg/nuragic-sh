@@ -190,9 +190,23 @@ class Page(models.Model):
     description1 = HTMLField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = HTMLField(blank=True, default='')
-    title_image_tw_header = models.ImageField(upload_to='info/page')
-    image_fb_link = models.ImageField(upload_to='info/page')
-    bot_image_tw_header = models.ImageField(upload_to='info/page', blank=True)
+    title_image_tw_header = models.ImageField(upload_to='info/page/title')
+    title_image_tw_header_md = models.ImageField(
+        upload_to='info/page/title', default='')
+    title_image_tw_header_sm = models.ImageField(
+        upload_to='info/page/title', default='')
+    image_fb_link = models.ImageField(
+        upload_to='info/page/desc')
+    image_fb_link_md = models.ImageField(
+        upload_to='info/page/desc', default='')
+    image_fb_link_sm = models.ImageField(
+        upload_to='info/page/desc', default='')
+    bot_image_tw_header = models.ImageField(
+        upload_to='info/page/bot', blank=True)
+    bot_image_tw_header_md = models.ImageField(
+        upload_to='info/page/bot', blank=True, default='')
+    bot_image_tw_header_sm = models.ImageField(
+        upload_to='info/page/bot', blank=True, default='')
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     theme = models.CharField(
@@ -201,18 +215,27 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
-        image1 = image_resize(self, 'title_image_tw_header', 1200, 400)
-        image2 = image_resize(self, 'image_fb_link', 1200, 630)
-        image3 = image_resize(self, 'bot_image_tw_header', 1200, 400)
+        image1, image1_md, image1_sm = responsive_images(
+            self, 'title_image_tw_header', 1260, 420)
+        image2, image2_md, image2_sm = responsive_images(
+            self, 'image_fb_link', 1200, 630)
+        image3, image3_md, image3_sm = responsive_images(
+            self, 'bot_image_tw_header', 1260, 420)
 
         if image1:
             self.title_image_tw_header = image1
+            self.title_image_tw_header_md = image1_md
+            self.title_image_tw_header_sm = image1_sm
 
         if image2:
             self.image_fb_link = image2
+            self.image_fb_link_md = image2_md
+            self.image_fb_link_sm = image2_sm
 
         if image3:
             self.bot_image_tw_header = image3
+            self.bot_image_tw_header_md = image3_md
+            self.bot_image_tw_header_sm = image3_sm
 
         super().save(*args, **kwargs)
 
