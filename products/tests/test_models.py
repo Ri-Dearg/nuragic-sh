@@ -15,6 +15,7 @@ image = SimpleUploadedFile(
 
 valid_shopcategory = ShopCategory(title_en='SC1',
                                   title_it='SC1')
+valid_shopcategory.save()
 
 valid_product_1 = Product(
     category=ShopCategory.objects.filter(

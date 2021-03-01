@@ -2,7 +2,7 @@
 
 from django.test import TestCase
 
-from products.models import ShopCategory
+from products.models import ShopCategory, Product
 from products.tests.test_models import valid_product_1, valid_shopcategory
 
 
