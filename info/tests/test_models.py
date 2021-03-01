@@ -20,8 +20,9 @@ valid_category = Category(title_en='HI1',
                           description_en='description',
                           description_it='description',
                           image_fb_link=image,
+                          display=False,
                           button_text="text here",
-                          order=1)
+                          order=12)
 valid_category.save()
 
 about_category = Category(title_en='about',
