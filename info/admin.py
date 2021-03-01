@@ -19,19 +19,22 @@ class GalleryInlineAdmin(admin.StackedInline):  #
 class CategoryAdmin(admin.ModelAdmin):
     """Displays the Page arrayfield as a list."""
     inlines = [PageInlineAdmin]
+    fields = ('title', 'menu_word', 'description', 'button_text',
+              'image_fb_link', 'display', 'date_added')
 
 
 class CategoryTrans(CategoryAdmin, TranslationAdmin):
     """Allows translation in the admin."""
-    fields = ('title', 'menu_word', 'description', 'button_text',
-              'image_fb_link', 'display', 'date_added')
 
 
 class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
     """Displays the Page arrayfield as a list."""
     ordering = ['category']
     inlines = [GalleryInlineAdmin]
-
+    fields = ('category', 'title', 'summary', 'button_text',
+              'desc_title1', 'description1', 'desc_title2', 'description2',
+              'title_image_tw_header', 'image_fb_link',
+              'bot_image_tw_header', 'order', 'theme', 'date_added')
 
 class PageTrans(PageAdmin, TranslationAdmin):
     """Allows translation in the admin."""
