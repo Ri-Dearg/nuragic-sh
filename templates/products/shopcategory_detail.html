@@ -14,7 +14,9 @@ Uses the product_box.html template -->
     </div>
 </div>
 <div class="row bg-white">
-    {% for product in page_obj %} {% include 'products/includes/product_box.html' %} {% endfor %}
+    {% for product in page_obj %}
+    {% include 'products/includes/product_box.html' %}
+    {% endfor %}
 </div>
 {% if page_obj.has_next or page_obj.has_previous %}
 <nav aria-label="{% trans 'Product Page Navigation for {{ object.title }}' %}">
