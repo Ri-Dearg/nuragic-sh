@@ -3,7 +3,7 @@
 from django.db import models
 from django.utils import timezone
 
-from info.models import image_resize
+from info.models import responsive_images
 
 
 class ShopCategory(models.Model):
@@ -39,7 +39,11 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image_4_3 = models.ImageField(default='default.jpg',
-                                  upload_to='shop/products')
+                                  upload_to='shop/products')    
+    image_4_3_md = models.ImageField(default='', blank=True,
+                                     upload_to='shop/products')    
+    image_4_3_sm = models.ImageField(default='', blank=True,
+                                     upload_to='shop/products')
     date_added = models.DateTimeField(default=timezone.now)
 
     stock = models.SmallIntegerField(default=1, blank=False, null=False)
@@ -55,10 +59,13 @@ class Product(models.Model):
         Image resizing, snippet repurposed from:
         https://djangosnippets.org/snippets/10597/ """
 
-        image1 = image_resize(self, 'image_4_3', 960, 1280)
+        image1, image1_md, image1_sm = responsive_images(
+            self, 'image_4_3', 945, 1260)
 
         if image1:
             self.image_4_3 = image1
+            self.image_4_3_md = image1_md
+            self.image_4_3_sm = image1_sm
 
         # Updates popularity (See below)
         # self._update_popularity()
