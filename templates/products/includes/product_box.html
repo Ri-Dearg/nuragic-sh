@@ -7,7 +7,13 @@ the product's characteristics, e.g. size, unique item, etc.. -->
 <div class="col-12 col-md-3 p-0 p-md-1 p-lg-2 p-lg-3">
     <article class="card mx-0 mx-lg-1 mx-lg-2 mt-3">
         <a href="#" class="position-relative">
-            <img src="{{ product.image_4_3.url }}" class="card-img-top img-fluid" alt="{{ product.name }}" />
+            <img src="{{ product.image_4_3.url }}" 
+                    width="{{ product.image_4_3.width }}" height="{{ product.image_4_3.height }}"
+                    srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
+                    {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
+                    {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w,"
+                    sizes="25vw"
+                    class="card-img-top img-fluid" alt="{{ product.name }}" />
             <!-- These display little banners that give extra info about the item. -->
             {% if product.is_unique and product.stock > 0 %}
             <span class="product-alert p-font badge bg-success">Unique</span>

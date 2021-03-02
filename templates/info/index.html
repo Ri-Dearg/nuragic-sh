@@ -38,9 +38,10 @@
         {% if 'about' in item.menu_word_en.lower %}
         <section class="row bg-white">
             <div class="col-auto col-md d-flex bg-white">
-                <img src="{{ item.image_fb_link.url }}" 
-                    srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
-                    {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
+                <img src="{{ item.image_fb_link.url }}"
+                    width="{{ item.image_fb_link.width }}"
+                    height="{{ item.image_fb_link.height }}"                    srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
+                    {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,{{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
                     {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
                     sizes="(max-width: 767px) 100vw,
                     (min-width: 768px) 50vw" 
