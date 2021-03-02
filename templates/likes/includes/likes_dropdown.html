@@ -19,7 +19,15 @@
             {% for product in likes|slice:':6' %}
             <li class="fav-item col-4 list-group-item border-0 p-1">
                 <a class="border-0 mx-0 my-1" href="#">
-                    <img src="{{ product.image_4_3.url }}" class="img-fluid" alt="{{ product.title }}" />
+                    <img src="{{ product.image_4_3.url }}" 
+                    width="{{ product.image_4_3.width }}" height="{{ product.image_4_3.height }}"
+                    srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
+                    {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
+                    {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w,"
+                    sizes="(max-width: 767px) 20vw,
+                    (min-width: 768px) and (max-width: 1399px) 14vw,
+                    (min-width: 1400px) 11vw"
+                    class="img-fluid" alt="{{ product.title }}" />
                     <p class="h-font d-none d-sm-block text-decoration-underline fs-6 mb-0">
                         {{ product.title|truncatechars:15|upper }}
                     </p>

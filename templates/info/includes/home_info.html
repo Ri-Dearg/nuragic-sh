@@ -8,7 +8,7 @@
 <section class="row bg-white">
     {% if forloop.counter|divisibleby:"2" %}
     <div class="col-auto col-md d-flex bg-white">
-        <img src="{{ item.image_fb_link.url }}" 
+        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}" height="{{ item.image_fb_link.height }}"
         srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
             {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
             {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
@@ -34,7 +34,7 @@
         </p>
     </div>
     <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
-        <img src="{{ item.image_fb_link.url }}" 
+        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}" height="{{ item.image_fb_link.height }}"
                 srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
             {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
             {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
