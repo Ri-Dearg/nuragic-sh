@@ -9,6 +9,10 @@ from .models import Category, GalleryImage, Page, Review, SplashImage
 class PageInlineAdmin(TranslationStackedInline):
     """Inline for viewing all Pages in a category in both langauges."""
     model = Page
+    fields = ('category', 'title', 'summary', 'button_text',
+              'desc_title1', 'description1', 'desc_title2', 'description2',
+              'title_image_tw_header', 'image_fb_link',
+              'bot_image_tw_header', 'order', 'theme', 'date_added')
 
 
 class GalleryInlineAdmin(admin.StackedInline):  #
@@ -35,6 +39,7 @@ class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
               'desc_title1', 'description1', 'desc_title2', 'description2',
               'title_image_tw_header', 'image_fb_link',
               'bot_image_tw_header', 'order', 'theme', 'date_added')
+
 
 class PageTrans(PageAdmin, TranslationAdmin):
     """Allows translation in the admin."""
