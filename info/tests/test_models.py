@@ -20,7 +20,8 @@ valid_category = Category(title_en='HI1',
                           description_en='description',
                           description_it='description',
                           image_fb_link=image,
-                          display=False,
+                          image_fb_link_md=image,
+                          image_fb_link_sm=image,
                           button_text="text here",
                           order=12)
 valid_category.save()
@@ -32,6 +33,8 @@ about_category = Category(title_en='about',
                           description_en='description',
                           description_it='description',
                           image_fb_link=image,
+                          image_fb_link_md=image,
+                          image_fb_link_sm=image,
                           button_text="text here",
                           order=2)
 
@@ -45,7 +48,11 @@ valid_page = Page(category=Category.objects.latest('date_added'),
                   description1_en='description',
                   description1_it='description',
                   title_image_tw_header=image,
+                  title_image_tw_header_md=image,
+                  title_image_tw_header_sm=image,
                   image_fb_link=image,
+                  image_fb_link_md=image,
+                  image_fb_link_sm=image,
                   theme='brown',
                   order=1)
 valid_page.save()
@@ -57,7 +64,11 @@ valid_splash = SplashImage(page=Page.objects.latest('date_added'),
                            description_en='description',
                            description_it='description',
                            image_tw_header=image,
-                           image_fb_link=image)
+                           image_tw_header_md=image,
+                           image_tw_header_sm=image,
+                           image_fb_link=image,
+                           image_fb_link_md=image,
+                           image_fb_link_sm=image)
 
 valid_review = Review(reviewer_name='abacus',
                       text='this is a review')
