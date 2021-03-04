@@ -3,6 +3,10 @@
 {% load i18n %} {% load static %}
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'info/includes/critical_css/index.html' %}{% endblock %}
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with Tarot, Oracle Cards, Shamanic and Healing through Ancient Wisdom. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'spiritual, spirituality, nuragic, tarot, oracle cards, healing, reiki,workshops, online workshops, online courses, courses, events, spiritual events, Sardinia, Ireland' %}{% endblock %}
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %} {% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
 {% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
