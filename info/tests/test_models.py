@@ -23,6 +23,7 @@ valid_category = Category(title_en='HI1',
                           image_fb_link_md=image,
                           image_fb_link_sm=image,
                           button_text="text here",
+                          display=False,
                           order=12)
 valid_category.save()
 
@@ -56,7 +57,6 @@ valid_page = Page(category=Category.objects.latest('date_added'),
                   theme='brown',
                   order=1)
 valid_page.save()
-
 
 valid_splash = SplashImage(page=Page.objects.latest('date_added'),
                            title_en='splash1',
