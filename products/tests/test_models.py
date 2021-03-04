@@ -67,7 +67,7 @@ class TestProductsModels(TestCase):
         new_info = Product.objects.latest('date_added')
         new_info.save()
 
-        self.assertEqual(new_info.image_4_3.height, 1280)
-        self.assertEqual(new_info.image_4_3.width, 960)
+        self.assertEqual(new_info.image_4_3.height, 1260)
+        self.assertEqual(new_info.image_4_3.width, 945)
         self.assertTrue(re.search('^shop/products/default.*.jpeg$',
                                   new_info.image_4_3.name))
