@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if product.is_unique and product.stock > 0 %}
+<span class="product-alert p-font badge bg-success">{% trans 'Unique'%}</span>
+{% elif not product.is_unique and product.stock < 10 %}
+<span class="product-alert p-font badge bg-warning">{% trans 'Low Stock'%}</span>
+{% elif product.stock == 0 %}
+<span class="product-alert p-font badge bg-danger">{% trans 'Out of Stock'%}</span>
+{% endif %}
