@@ -35,6 +35,16 @@ class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        this_object = context['product']
+
+        # Selects the active tab
+        context['active_category'] = f'{this_object.category.id}'
+
+        return context
+
 
 class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     """Displays all products in a list.
