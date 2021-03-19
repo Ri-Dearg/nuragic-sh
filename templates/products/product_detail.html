@@ -19,9 +19,7 @@
 <!-- Displays product details. Information changes depending on product characteristics,
 such as size or quantity, mainly following the same scheme as the product_box.html template.
 If there is quantity, it includes quantity selection linked to the form in the detail_cart_toggle.html template. -->
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 <section class="bg-white p-md-5">
     <article class="row justify-content-md-center">
         <div class="col-12 col-md-4 col-lg-5 position-relative p-0">
@@ -61,7 +59,9 @@ If there is quantity, it includes quantity selection linked to the form in the d
         </div>
     </article>
 </section>
-<hr>
+<div class="col-12 bg-brown py-2"></div>
 <!-- Displays related items based on category. -->
 {% include 'products/includes/related_products.html' %}
+<div class="col-12 bg-brown py-2"></div>
+
 {% endblock %}

@@ -12,9 +12,7 @@
 {% block content %}
 <!-- DIsplays a liked items feed in reverse chronological order.
 If There is nothing it provides a link back to the page. -->
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 <div class="row bg-white">
     <div class="col">
         <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4">
@@ -22,9 +20,7 @@ If There is nothing it provides a link back to the page. -->
         </h1>
     </div>
 </div>
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 {% if likes %}
 <div class="row px-2 bg-white">
     <!-- Includes the standard product_box.hml template -->
@@ -47,7 +43,5 @@ If There is nothing it provides a link back to the page. -->
     {% include 'base/includes/paginator.html' %}
 </nav>
 {% endif %}
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 {% endblock %}
