@@ -2,6 +2,8 @@
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 
+from info.models import SplashImage
+
 from .models import Product, ShopCategory
 
 
@@ -27,6 +29,12 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         return context
 
 
+class ProductDetailView(DetailView):
+    """Displays a list of products in the Category.
+    The MultipleObjectMixin allows for easy pagination."""
+    model = Product
+
+
 class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     """Displays all products in a list.
     Adds context for highlighting the menu."""
@@ -38,6 +46,10 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
         context = super().get_context_data(**kwargs)
         # Selects the active tab
         if 'query' not in self.request.GET and self.request.path == '/shop/':
+            # Adds Carousel info
+            carousel = SplashImage.objects.all().filter(shop_display=True)
+            context['carousel'] = carousel
+
             all_products_active = True
             context['all_products_active'] = all_products_active
 
