@@ -5,7 +5,7 @@ The toggle-form class makes it a target for the ajax functions..-->
     action="{% url 'likes:likes-toggle' %}" method="POST">
     <!-- Important button comes first as firstChildElement is used in fetch funtcion. -->
     <!--Selects the default icon based on whether the item is in the like context or not.-->
-    <button type="submit" class="product btn text-center rounded-circle m-1 p-2" id="lb-{{ product.id }}">
+    <button type="submit" class="product btn text-center rounded-circle shadow m-1 p-2" id="lb-{{ product.id }}">
         {% if product in likes %}
         {% include 'base/includes/icons/bookmark-heart-fill.svg' %}
         {% else %}
