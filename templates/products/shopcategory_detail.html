@@ -8,11 +8,14 @@
 
 <!-- Displays category. The name is up top, followed by the product feed.
 Uses the product_box.html template -->
-<div class="row bg-white pt-4">
+<div class="col-12 bg-brown py-2"></div>
+<div class="row bg-white">
     <div class="col">
-        <h1 class="h-font display-2 l-space-2 text-primary text-center">{{ object.title|upper }}</h1>
+        <h2 class="h-font display-2 l-space-2 text-primary text-center py-3">{{ object.title|upper }}</h2>
     </div>
 </div>
+<div class="col-12 bg-brown py-2"></div>
+
 <div class="row bg-white">
     {% for product in page_obj %}
     {% include 'products/includes/product_box.html' %}
@@ -23,4 +26,6 @@ Uses the product_box.html template -->
     {% include 'base/includes/paginator.html' %}
 </nav>
 {% endif %}
+<div class="col-12 bg-brown py-2"></div>
+
 {% endblock %}

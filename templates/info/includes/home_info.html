@@ -8,13 +8,11 @@
 <section class="row bg-white">
     {% if forloop.counter|divisibleby:"2" %}
     <div class="col-auto col-md d-flex bg-white">
-        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}" height="{{ item.image_fb_link.height }}"
-        srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
+        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}"
+            height="{{ item.image_fb_link.height }}" srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
             {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
-            {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
-            sizes="(max-width: 767px) 100vw,
-            (min-width: 768px) 50vw" 
-            alt="{{ item.title }}" class="img-fluid m-auto" />
+            {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" sizes="(max-width: 767px) 100vw,
+            (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid m-auto" />
     </div>
     <div class="col-auto col-md align-items-center bg-white my-auto px-3 px-md-4 pt-3">
         <h4 class="h-font l-space-2 h1 text-primary text-primary">{{ item.title|upper }}</h4>
@@ -34,18 +32,14 @@
         </p>
     </div>
     <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
-        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}" height="{{ item.image_fb_link.height }}"
-                srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
+        <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}"
+            height="{{ item.image_fb_link.height }}" srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
             {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
-            {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
-            sizes="(max-width: 767px) 100vw,
-            (min-width: 768px) 50vw" 
-            alt="{{ item.title }}" class="img-fluid my-auto" />
+            {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" sizes="(max-width: 767px) 100vw,
+            (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid my-auto" />
     </div>
     {% endif %}
 </section>
 {% endif %}
 {% endfor %}
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>

@@ -18,15 +18,11 @@
 {% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
 {% block og_image_alt %}{{ object.title }}{% endblock %} {% block content %}
 <!-- Spacer -->
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 <article>
     <h2 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4"> {{ object.title|upper }}</h2>
     <!-- Runs through each Page in a Category -->
     {% include 'info/includes/category_info.html' %}
 </article>
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
+<div class="col-12 bg-brown py-2"></div>
 {% endblock %}
