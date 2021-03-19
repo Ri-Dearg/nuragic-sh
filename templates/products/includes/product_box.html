@@ -7,7 +7,7 @@ It displays two ajax buttons for liking and adding to cart among other details t
 the product's characteristics, e.g. size, unique item, etc.. -->
 <div class="col-12 col-md-3 p-0 p-md-1 p-lg-2 p-lg-3">
     <article class="card mx-0 mx-lg-1 mx-lg-2 mt-3">
-        <a href="{% url 'products:product-detail' product.id %}" class="position-relative">
+        <a href="{% url 'products:product-detail' product.id %}" class="smooth-click position-relative">
             <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
                 height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
