@@ -33,6 +33,7 @@ class ProductDetailView(DetailView):
     """Displays a list of products in the Category.
     The MultipleObjectMixin allows for easy pagination."""
     model = Product
+    context_object_name = 'product'
 
 
 class ProductListView(ListView):  # pylint: disable=too-many-ancestors

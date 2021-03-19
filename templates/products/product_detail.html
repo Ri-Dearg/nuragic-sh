@@ -5,70 +5,62 @@
 
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
-{% block og_title %}{{ object.title }}{% endblock %}
-{% block og_description %}{{ object.description|title }}{% endblock %}
-{% block og_image %}{{ object.image_4_3.url }}{% endblock %}
-{% block og_image_type %}image/{{ object.image_4_3.name|extension }}{% endblock %}
-{% block og_image_width %}{{ object.image_4_3.width }}{% endblock %}
-{% block og_image_height %}{{ object.image_4_3.height }}{% endblock %}
-{% block og_image_alt %}{{ object.title }}{% endblock %}
+{% block og_title %}{{ product.title }}{% endblock %}
+{% block og_description %}{{ product.description|title }}{% endblock %}
+{% block og_image %}{{ product.image_4_3.url }}{% endblock %}
+{% block og_image_type %}image/{{ product.image_4_3.name|extension }}{% endblock %}
+{% block og_image_width %}{{ product.image_4_3.width }}{% endblock %}
+{% block og_image_height %}{{ product.image_4_3.height }}{% endblock %}
+{% block og_image_alt %}{{ product.title }}{% endblock %}
 
-{% block head_title %}{{ object.title }}{% endblock %}
-
+{% block head_title %}{{ product.title }}{% endblock %}
 
 {% block content %}
 <!-- Displays product details. Information changes depending on product characteristics,
 such as size or quantity, mainly following the same scheme as the product_box.html template.
 If there is quantity, it includes quantity selection linked to the form in the detail_cart_toggle.html template. -->
-<div class="p-md-5">
-    <article class="card border-0">
-        <div class="row mx-0">
-            <div class="col-md-5 p-0">
-                <img src="{{ object.image_4_3.url }}" width="{{ object.image_4_3.width }}"
-                    height="{{ object.image_4_3.height }}" srcset="{{ object.image_4_3.url }} {{ object.image_4_3.width }}w,
-                                                {{ object.image_4_3_md.url }} {{ object.image_4_3_md.width }}w,
-                                                {{ object.image_4_3_sm.url }} {{ object.image_4_3_sm.width }}w,"
-                    sizes="25vw" class="card-img-top img-fluid" alt="{{ object.name }}" />
-                <!-- These display little banners that give extra info about the item. -->
-                <!-- These display little banners that give extra info about the item. -->
-                {% if object.is_unique and object.stock > 0 %}
-                <span class="product-alert p-font badge bg-success">{% trans 'Unique'%}</span>
-                {% elif not object.is_unique and object.stock < 10 %}
-                <span class="product-alert p-font badge bg-warning">{% trans 'Low Stock'%}</span>
-                {% elif object.stock == 0 %}
-                <span class="product-alert p-font badge bg-danger">{% trans 'Out of Stock'%}</span>
-                {% endif %}
-            </div>
-            <div class="col-md-7">
-                <div class="card-body card-body-detail pl-0 pt-0">
-                    <div class="row">
-                        <div class="col-12">
-                            <h1 class="text-primary heading-font">{{ object.name }}</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p class="col-12">{{ object.description }}</p>
-                        <!-- Section selects columns and characteristics of the product to display. -->
-                        {% if not object.is_unique and object.stock > 0 %}
-                        <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
-                        <div class="form-label-group col-4 mb-3">
-                            <input class="form-control mt-1 pt-4" type="number" id="detail-quantity"
-                                form="cf-{{ object.id }}" name="quantity" value="1" min="1" max="{{ object.stock }}" />
-                            <label class="ml-2 pb-0" for="detail-quantity">{% trans 'Quantity' %}</label>
-                        </div>
-                        <h4 class="col-4 px-0 text-center mb-3">€{{ object.price }}</h4>
-                    </div>
-                    <div class="row w-100 ml-1">
-                        <!-- This will only show the add to cart button if the item is in stock.
-                        Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
-                        {% endif %}
-                        {% include 'likes/includes/detail_like_toggle.html' %}
-                    </div>
+<div class="row">
+    <div class="col-12 bg-brown py-2"></div>
+</div>
+<section class="bg-white p-md-5">
+    <article class="row justify-content-md-center">
+        <div class="col-12 col-md-4 col-lg-5 position-relative p-0">
+            <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
+                height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
+                                                {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
+                                                {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w,"
+                sizes="40vw" class="img-fluid" alt="{{ product.name }}" />
+            <!-- These display little banners that give extra info about the item. -->
+            {% include 'products/includes/product_banners.html' %}
+        </div>
+        <div class="col-auto col-md-8 col-lg-6 col-xl-5 px-2 p-md-5">
+            <div class="row">
+                <div class="col-auto mt-2 mt-md-0">
+                    <h2 class="l-space-1 h-font text-primary">{{ product.title|upper }}</h2>
                 </div>
+            </div>
+            <div class="row">
+                <p class="p-font col-auto">{{ product.description }}</p>
+                <div class="col-12"></div>
+                <!-- Section selects columns and characteristics of the product to display. -->
+                {% if not product.is_unique and product.stock > 0 %}
+                <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
+                <!-- <div class="form-label-group col-4 mb-3">
+                    <input class="form-control mt-1 pt-4" type="number" id="detail-quantity" form="cf-{{ product.id }}"
+                        name="quantity" value="1" min="1" max="{{ product.stock }}" />
+                    <label class="ml-2 pb-0" for="detail-quantity">{% trans 'Quantity' %}</label>
+                </div> -->
+                <h4 class="col-auto px-0 text-center mb-3">€{{ product.price }}</h4>
+            </div>
+            <div class="row ms-1">
+                <!-- This will only show the add to cart button if the item is in stock.
+                        Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
+                {% endif %}
+                {% include 'likes/includes/detail_like_toggle.html' %}
             </div>
         </div>
     </article>
-</div>
+</section>
 <hr>
 <!-- Displays related items based on category. -->
 {% include 'products/includes/related_products.html' %}
