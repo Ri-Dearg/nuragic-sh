@@ -8,14 +8,6 @@
 {% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
 
 <!-- Open Graph Tags To redo -->
-{% block og_type %}website{% endblock %}
-{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
-{% block og_description %}{% trans 'Our Offerings for You.' %}{% endblock %}
-{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
-{% block og_image_type %}image/png{% endblock %}
-{% block og_image_width %}1200{% endblock %}
-{% block og_image_height %}630{% endblock %}
-{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
 {% include 'base/includes/open_graph_basic.html'%}
 
 {% block content %}
@@ -24,22 +16,18 @@ After the search section, it is the basis for all feed-based templates,
 such as likes_list, category_detail and stockdrop_detail.-->
 {% if 'query' in request.GET %}
 <!-- Detects if a search query was made and displays the keyword.-->
-<h3 class="text-center pt-2">check out:</h3>
-<h1 class="h-font display-2 l-space-2 text-primary text-center">{{ request.GET.query }}</h1>
+<h2 class="text-center pt-2">check out:</h2>
+<h2 class="h-font display-2 l-space-2 text-primary text-center">{{ request.GET.query }}</h2>
 <hr />
+{% else %}
+{% if page_obj.number == 1 %}
+{% include 'info/includes/home_carousel.html' %}
 {% endif %}
 {% if page_obj %}
 <div class="row">
-    <div class="col-12 bg-brown py-2"></div>
-</div>
-<div class="row bg-white">
-    <div class="col">
-        <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4">{% trans 'OUR OFFERINGS' %}
-        </h1>
+    <div class="col-12 bg-brown py-2">
+        <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
     </div>
-</div>
-<div class="row">
-    <div class="col-12 bg-brown py-2"></div>
 </div>
 <div class="row px-2 bg-white">
     <!-- This displays all products, organised by 'popularity' and stock quantity.
@@ -60,6 +48,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 </div>
 <hr>
 {% include 'products/includes/related_products.html' %}
+{% endif %}
 {% endif %}
 {% if page_obj.has_next or page_obj.has_previous %}
 <nav aria-label="{% trans 'Product Page Navigation' %}">
