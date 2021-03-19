@@ -12,7 +12,7 @@
     <a class="nav-link p-font l-space-2 h5 dropdown-toggle text-end text-md-center mb-0 p-0" href="#"
         id="{{ item.menu_word }}Dropdown" role="button" data-bs-toggle="dropdown"
         aria-expanded="false">{{ item.menu_word|upper }}</a>
-    <ul class="dropdown-menu dropdown-menu-end text-end text-md-center bg-secondary"
+    <ul class="dropdown-menu dropdown-menu-end text-end text-lg-center bg-secondary"
         aria-labelledby="{{ item.menu_word }}Dropdown">
         <li>
             <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"

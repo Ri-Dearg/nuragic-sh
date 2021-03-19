@@ -1,7 +1,7 @@
 <!-- Loads internationalization -->
 {% load i18n %}
 <li class="btn-tran shop-nav nav-item pt-2 py-md-2{% if all_products_active %} active{% endif %}">
-    <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0 pe-3 pe-md-0"
+    <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-lg-center mb-0 p-0 pe-3 pe-md-0"
         href="{% url 'products:product-list' %}">{% trans 'ALL PRODUCTS' %}</a>
 </li>
 <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
@@ -9,7 +9,7 @@
 {% for item in categories %}
 <li
     class="btn-tran shop-nav nav-item pt-2 py-md-2{% if item.id|stringformat:'i' in active_category %} active{% endif %}">
-    <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-md-center mb-0 p-0 pe-3 pe-md-0"
+    <a class="smooth-click p-font l-space-2 nav-link h5 text-end text-lg-center mb-0 p-0 pe-3 pe-md-0"
         href="{% url 'products:shop-category-detail' item.id %}">{{ item.title|upper }}</a>
 </li>
 {% endfor %}
