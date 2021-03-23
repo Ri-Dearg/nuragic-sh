@@ -40,8 +40,19 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         this_object = context['product']
 
+        product_category = this_object.category
+
+        # Renders related products from the same category
+        # while removing the current product.
+        products = Product.objects.exclude(
+            pk=this_object.id).filter(
+                category=product_category).order_by(
+                    '-stock', '-popularity')[:9]
+
+        context['related_products'] = products
+
         # Selects the active tab
-        context['active_category'] = f'{this_object.category.id}'
+        context['active_category'] = f'{product_category.id}'
 
         return context
 
