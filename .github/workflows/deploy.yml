@@ -48,7 +48,7 @@ jobs:
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          coverage run --source=. --omit=config/*,manage.py manage.py test --keepdb
+          coverage run --source=. --omit=custom_storages.py,config/*,manage.py,users/adapter.py manage.py test --keepdb
           coveralls --service=github
 
   heroku_git_deploy_job:
