@@ -1,9 +1,11 @@
+"""Adds carted items to the context."""
+from decimal import Decimal
+
 from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 from config import settings
 from products.models import Product
-
-from decimal import Decimal
 
 
 def get_cart(request):
@@ -32,7 +34,7 @@ def get_cart(request):
                 product = False
                 cart.pop(item_id)
                 messages.warning(request,
-                                 'A Product is unavailable.')
+                                 _('A Product is unavailable.'))
 
             # If the product is valid and in stock,
             # it calculates details for that item:
@@ -48,18 +50,18 @@ def get_cart(request):
                 else:
                     cart.pop(item_id)
                     messages.warning(request,
-                                     f'{product} has run out of stock!')
+                                     _(f'{product} has run out of stock!'))
 
-            # Skips the product if it is not False:
+            # Skips the product if it is False:
             else:
                 pass
 
     # Checks the cart total price and declares delivery price accordingly.
     # The FREE_DELIVERY_THRESHOLD is a set price declared in settings.
-    if cart_total < settings.FREE_DELIVERY_THRESHOLD and cart_total > 0:
+    # if cart_total < settings.FREE_DELIVERY_THRESHOLD and cart_total > 0:
         delivery = Decimal(settings.STANDARD_DELIVERY)
-    else:
-        delivery = 0
+    # else:
+        # delivery = 0
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery

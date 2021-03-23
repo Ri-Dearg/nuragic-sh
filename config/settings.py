@@ -123,7 +123,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # for navbar categories
                 'info.context_processors.get_categories',
+                # Context necessary for shop functions
                 'likes.context_processors.get_likes',
+                'cart.context_processors.get_cart',
             ],
         },
     },
@@ -288,3 +290,5 @@ ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
                  'reset_password': 'users.forms.StyledResetPasswordForm',
                  'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
                  }
+
+STANDARD_DELIVERY = 7
