@@ -59,9 +59,9 @@ def get_cart(request):
     # Checks the cart total price and declares delivery price accordingly.
     # The FREE_DELIVERY_THRESHOLD is a set price declared in settings.
     # if cart_total < settings.FREE_DELIVERY_THRESHOLD and cart_total > 0:
-        delivery = Decimal(settings.STANDARD_DELIVERY)
+    delivery = Decimal(settings.STANDARD_DELIVERY)
     # else:
-        # delivery = 0
+    # delivery = 0
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
