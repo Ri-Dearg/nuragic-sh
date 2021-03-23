@@ -1,15 +1,19 @@
+"""Views for cart app: a page for viewing items in the cart
+and fetch views to update cart and update the template."""
 from decimal import Decimal
 
 from django.contrib import messages
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 
 from config import settings
 from products.models import Product
 
 
-class CartListView(ListView):
+class CartListView(ListView):  # pylint: disable=too-many-ancestors
     """View that displays all the products in the cart as a list."""
     model = Product
     context_object_name = 'products'
@@ -26,7 +30,8 @@ def cart_toggle(request):
     'tag' and 'message' are used to display the toasts.
     'result' and 'special' are used to define the logic on the JS side."""
 
-    if request.is_ajax and request.method == "POST":
+    data = {}
+    if request.method == "POST":
         # Runs through a number of variables to process the ajax call.
         # If it fails, it throws an exception with a message.
         try:
@@ -42,44 +47,32 @@ def cart_toggle(request):
             # 'update' is sent when product quantity is being changed.
             # Despite the 'uncart' result variable it doesn't uncart but
             # actually updates quantity on the cart list page.
-            if request.POST.get('special') == 'update':
-                cart[item_id] = quantity
+            # if request.POST.get('special') == 'update':
+            #   cart[item_id] = quantity
 
-                # Checks stock and if the quantity requestd is greater,
-                # it sets it to the max available.
-                if cart[item_id] > product.stock:
-                    cart[item_id] = product.stock
-                request.session['cart'] = cart
+            #    # Checks stock and if the quantity requestd is greater,
+            #    # it sets it to the max available.
+            #    if cart[item_id] > product.stock:
+            #         cart[item_id] = product.stock
+            #     request.session['cart'] = cart
 
-                # Defines the variables to be sent the JS file.
-                tag = 'success'
-                message = f'Updated {product.name} quantity to \
-                    {cart[item_id]}.'
-                result = 'uncarted'
+            #     # Defines the variables to be sent the JS file.
+            #     tag = 'success'
+            #     message = f'Updated {product.name} quantity to \
+            #         {cart[item_id]}.'
+            #     result = 'uncarted'
 
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
-            elif (item_id in list(cart.keys()) and product.is_unique) or (
+            if (item_id in list(cart.keys())) or (
                     request.POST.get('special') == 'remove'):
                 cart.pop(str(item_id))
 
                 request.session['cart'] = cart
-                tag = 'info'
-                message = f'Removed {product.name} from your cart.'
-                result = 'uncarted'
-
-            # If the product is not a once-off item and is already in the cart,
-            # hitting the 'add to cart' button will increase quantity by one.
-            elif item_id in list(cart.keys()) and not product.is_unique:
-                cart[item_id] += quantity
-                if cart[item_id] > product.stock:
-                    cart[item_id] = product.stock
-
-                request.session['cart'] = cart
-                tag = 'success'
-                message = f'Updated {product.name} quantity to \
-                    {cart[item_id]}.'
-                result = 'uncarted'
+                data['message'] = _(f'Removed {product.title} from your cart.')
+                data['result'] = 'uncarted'
+                data['tag'] = 'info'
+                data['tagMessage'] = _('Info')
 
             # If the other conditions aren't true it is a simple add to cart.
             else:
@@ -88,25 +81,26 @@ def cart_toggle(request):
                     cart[item_id] = product.stock
 
                 request.session['cart'] = cart
-                tag = 'success'
-                message = f'Added {product.name} to your cart.'
-                result = 'carted'
+                data['message'] = _(f'Added {product.title} to your cart.')
+                data['result'] = 'carted'
+                data['tag'] = 'success'
+                data['tagMessage'] = _('Success')
 
         # If none of the conditions are true, it throws an error.
-        except Exception as e:
-            result = 'error'
-            tag = 'warning'
-            message = f'Error adding item to cart: {e}'
+        except Exception as error:  # pylint: disable=broad-except
+            data['message'] = _(f'Error: %r, {error}')
+            data['result'] = 'error'
+            data['tag'] = 'danger'
+            data['tagMessage'] = _('Error')
 
         # If there is a special case in the POST data,
         # it gets passed to the JS file for its logic.
         # Else, it sends the variables declare in the 'if' clauses.
         if 'special' in request.POST:
-            special = request.POST.get('special')
-            return {'message': message, 'result': result, 'tag': tag,
-                    'special': special}
-        else:
-            return {'message': message, 'result': result, 'tag': tag}
+            data['special'] = request.POST.get('special')
+            return JsonResponse(data)
+        return JsonResponse(data)
+    return HttpResponseForbidden()
 
 
 def update_cart(request):

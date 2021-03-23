@@ -13,8 +13,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <!-- Meta keywords and description -->
-        <meta name="description" content="{% block meta_description %}{% endblock %}" />        
-        <meta name="keywords" content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuargic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
+        <meta name="description" content="{% block meta_description %}{% endblock %}" />
+        <meta name="keywords"
+            content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuargic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
         <!-- Windows app tile config -->
         <meta name="msapplication-config" content="{% static 'browserconfig.xml' %}" />
         <meta name="msapplication-TileColor" content="#2b384c" />
@@ -121,6 +122,8 @@
         <script>
             buttonToggle('{% include "base/includes/icons/bookmark-heart-fill.svg" %}',
                 '{% include "base/includes/icons/bookmark-heart.svg" %}',
+                '{% include "base/includes/icons/cart-check-fill.svg" %}',
+                '{% include "base/includes/icons/cart-plus.svg" %}',
                 '{% url "likes:likes-update" %}')
         </script>
         {% endif %}

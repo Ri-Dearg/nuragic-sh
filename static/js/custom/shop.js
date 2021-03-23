@@ -15,8 +15,8 @@
 function buttonToggle(
   likedSvg,
   unlikedSvg,
-  //   cartedSvg,
-  //   uncartedSvg,
+  cartedSvg,
+  uncartedSvg,
   likeUpdate
   //   cartUpdate,
   //   cartRefresh
@@ -27,13 +27,22 @@ function buttonToggle(
    * @param {string} id - The specific product id, so other products aren't selected.
    * @param {object} svg - The SVG HTML element.
    */
-  function svgSwitch(btn, id, svg) {
+  function svgSwitch(form, id, svg) {
     var classList = svg.classList;
 
-    if (classList.contains("bi-bookmark-heart-fill")) {
-      $(`#${btn}-${id}`).html(unlikedSvg);
-    } else if (classList.contains("bi-bookmark-heart")) {
-      $(`#${btn}-${id}`).html(likedSvg);
+    if (form === "lf") {
+      if (classList.contains("bi-bookmark-heart-fill")) {
+        $(`#lb-${id}`).html(unlikedSvg);
+      } else if (classList.contains("bi-bookmark-heart")) {
+        $(`#lb-${id}`).html(likedSvg);
+      }
+    }
+    if (form === "cf") {
+      if (classList.contains("bi-cart-check-fill")) {
+        $(`#cb-${id}`).html(uncartedSvg);
+      } else if (classList.contains("bi-cart-plus")) {
+        $(`#cb-${id}`).html(cartedSvg);
+      }
     }
   }
 
@@ -77,7 +86,10 @@ function buttonToggle(
    * and decide which action to perform in a specific context.
    * @param {object} object - The captured form element.
    */
-  function like(object) {
+  function fetchForm(object) {
+    // Cart or like button of the product clicked.
+    const formType = object.id.slice(0, 2);
+
     // The ID of the product clicked.
     const id = object.id.slice(3);
 
@@ -91,7 +103,7 @@ function buttonToggle(
     const formUrl = object.action;
 
     // Swaps svg icons appropriately
-    svgSwitch("lb", id, svg);
+    svgSwitch(formType, id, svg);
 
     // Sends form to Django view
     fetch(formUrl, {
@@ -106,27 +118,32 @@ function buttonToggle(
         } else {
           // if there is an error, it fires a message and swaps back the svg icon
           var svg = object.firstElementChild.firstElementChild;
-          svgSwitch("lb", id, svg);
+          svgSwitch(formType, id, svg);
           throw Error(response.status + " " + response.statusText);
         }
       })
       .then((data) => {
-        if (data.result == "error") {
+        if (data.result === "error") {
           var svg = object.firstElementChild.firstElementChild;
-          svgSwitch("lb", id, svg);
+          svgSwitch(formType, id, svg);
           throw Error(data.message);
+        } else if (data.result != "error") {
+          toastMessage(data.tag, data.tagMessage, data.message);
         }
+
         // If content is not liked, swaps the icon to the 'liked' icon
         // Sends off a message and refreshes the like popover.
-        else if (data.result === "liked") {
-          toastMessage(data.tag, data.tagMessage, data.message);
+        if (data.result === "liked") {
           dropdownUpdate("like", likeUpdate);
 
           // If content is already liked, swaps the icon to the 'unliked icon
           // Sends off a message and refreshes the like popover.
         } else if (data.result === "unliked") {
-          toastMessage(data.tag, data.tagMessage, data.message);
           dropdownUpdate("like", likeUpdate);
+        } else if (data.result === "carted") {
+          //   dropdownUpdate("like", likeUpdate);
+        } else if (data.result === "uncarted") {
+          //   dropdownUpdate("like", likeUpdate);
         }
       })
       // // If content is not carted, swaps the icon to the 'carted' icon
@@ -179,6 +196,6 @@ function buttonToggle(
     ev.preventDefault();
 
     // Fires the main fetch function
-    like(this);
+    fetchForm(this);
   });
 }
