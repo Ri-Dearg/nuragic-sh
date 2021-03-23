@@ -59,9 +59,10 @@ If there is quantity, it includes quantity selection linked to the form in the d
         </div>
     </article>
 </section>
+{% if related_products %}
 <div class="col-12 bg-brown py-2"></div>
 <!-- Displays related items based on category. -->
 {% include 'products/includes/related_products.html' %}
+{% endif %}
 <div class="col-12 bg-brown py-2"></div>
-
 {% endblock %}
