@@ -17,7 +17,10 @@ the product's characteristics, e.g. size, unique item, etc.. -->
             {% include 'products/includes/product_banners.html' %}
         </a>
         <div class="position-relative">
-            {% include 'likes/includes/box_like_toggle.html' %}
+            <div class="col-auto position-absolute bottom-0 end-0 text-center m-2">
+                {% include 'cart/includes/box_cart_toggle.html' %}
+                {% include 'likes/includes/box_like_toggle.html' %}
+            </div>
         </div>
         <div class="product row card-body mx-0 px-0 pt-1 pb-0">
             <!-- Displays product info -->
