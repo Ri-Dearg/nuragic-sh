@@ -73,9 +73,10 @@ INSTALLED_APPS = [
     # Renders form fields
     'crispy_forms',
     # My apps
-    'jasmine_testing',
+    'cart',
     'contact',
     'info',
+    'jasmine_testing',
     'likes',
     'products',
     'users',

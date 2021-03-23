@@ -1,5 +1,7 @@
+"""Urls for cart app."""
 from django.urls import path
-from .views import cart_toggle, update_cart, refresh_total, CartListView
+
+from .views import CartListView, cart_toggle, refresh_total, update_cart
 
 urlpatterns = [
     path('', CartListView.as_view(), name='cart-list'),

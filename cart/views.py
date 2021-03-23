@@ -1,14 +1,12 @@
-from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView
-from django.template import RequestContext
-from django.contrib import messages
+from decimal import Decimal
 
-from django_ajax.decorators import ajax
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, render
+from django.template import RequestContext
+from django.views.generic import ListView
 
 from config import settings
 from products.models import Product
-
-from decimal import Decimal
 
 
 class CartListView(ListView):
@@ -18,7 +16,6 @@ class CartListView(ListView):
     template_name = 'cart/cart_list.html'
 
 
-@ajax
 def cart_toggle(request):
     """Add or removes the specified product to the shopping cart.
     The view is Ajaxed, so it is only called by a JS file.

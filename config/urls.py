@@ -24,7 +24,9 @@ shop_patterns = [
     path('', include(('products.urls', 'products'),
                      namespace='products')),
     path('likes/', include(('likes.urls', 'likes'),
-                           namespace='likes'))
+                           namespace='likes')),
+    path('cart/', include(('cart.urls', 'cart'),
+                          namespace='cart'))
 ]
 
 urlpatterns = [
