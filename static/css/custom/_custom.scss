@@ -314,11 +314,6 @@ Positioning
   transform: translate(660px);
 }
 
-/* Pushed down for the header*/
-.main-mods {
-  margin-top: 136px;
-}
-
 /*--------------------------------------------------------------------------
 Preloader
 --------------------------------------------------------------------------*/
@@ -331,7 +326,7 @@ Preloader
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  z-index: 1025;
+  z-index: 1019;
   padding-bottom: 153px;
 }
 
@@ -361,10 +356,10 @@ Toasts
   top: 146px;
   right: 10px;
   min-height: 200px;
-  z-index: 1026;
+  z-index: 1020;
 }
 
 /*It is positioned above the preloader with the z-index.*/
 .toast {
-  z-index: 1027;
+  z-index: 1021;
 }
