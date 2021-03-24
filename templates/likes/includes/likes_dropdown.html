@@ -1,7 +1,8 @@
 <!-- Loads internationalization and static -->
 {% load i18n %} {% load static %}
-<div class="dropdown mx-2">
-    <a href="#" role="button" class="like-dropdown no-caret dropdown-toggle d-inline-block text-white py-auto pb-md-1"
+<div class="dropdown">
+    <button type="button"
+        class="like-dropdown no-caret btn btn-link dropdown-toggle d-inline-block text-white px-2 py-auto pb-md-1"
         tabindex="0" data-bs-toggle="dropdown" aria-expanded="false">
         <!--Selects the default icon based on whether there are likes or not.
             object tags are used to display the SVG for caching.-->
@@ -10,7 +11,7 @@
         {% else %}
         {% include 'base/includes/icons/bookmark-heart.svg' %}
         {% endif %}
-    </a>
+    </button>
     <!-- Displays Likes button -->
     {% if likes %}
     <div class="min-vw-60 min-vw-md-40 min-vw-xxl-33 dropdown-menu dropdown-menu-end text-center pt-0"
