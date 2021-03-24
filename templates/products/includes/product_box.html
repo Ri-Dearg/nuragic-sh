@@ -8,7 +8,7 @@ the product's characteristics, e.g. size, unique item, etc.. -->
 {% if 'shop/product' in request.path %}
 <div class="col-8 col-md-4 col-lg-3 m-2">
     {% else %}
-    <div class="col-12 col-md-3 p-0 p-md-1 p-lg-2 p-lg-3">
+    <div class="col-12 col-md-4 col-lg-3 p-0 p-md-1 p-lg-2 p-xl-3">
         {% endif %}
         <article class="card mx-0 mx-lg-1 mx-lg-2 mt-3">
             <a href="{% url 'products:product-detail' product.id %}" class="smooth-click position-relative">

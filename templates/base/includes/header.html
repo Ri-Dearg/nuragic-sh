@@ -33,10 +33,10 @@
                 </div>
                 <div class="col-2 d-none d-md-flex justify-content-end mx-2">
                     {% if 'shop' in request.path %}
-                    <div class="cart-dropdown-container">
+                    <div class="col-4 cart-dropdown-container">
                         {% include 'cart/includes/cart_dropdown.html' %}
                     </div>
-                    <div class="like-dropdown-container">
+                    <div class="col-4 like-dropdown-container">
                         {% include 'likes/includes/likes_dropdown.html' %}
                     </div>
                     {% endif %}
@@ -55,11 +55,11 @@
             <nav
                 class="navbar navbar-expand-lg navbar-dark justify-content-end {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
                 {% if 'shop' in request.path %}
-                <div class="d-md-none cart-dropdown-container">
+                <div class="col-2 col-sm-1 d-md-none cart-dropdown-container">
                     <p class="visually-hidden" id="dropdownCartMenu">Likes</p>
                     {% include 'cart/includes/cart_dropdown.html' %}
                 </div>
-                <div class="d-md-none like-dropdown-container">
+                <div class="col-2 col-sm-1 d-md-none like-dropdown-container">
                     <p class="visually-hidden" id="dropdownLikeMenu">Likes</p>
                     {% include 'likes/includes/likes_dropdown.html' %}
                 </div>
