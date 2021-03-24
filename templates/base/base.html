@@ -15,7 +15,7 @@
         <!-- Meta keywords and description -->
         <meta name="description" content="{% block meta_description %}{% endblock %}" />
         <meta name="keywords"
-            content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuargic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
+            content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuragic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
         <!-- Windows app tile config -->
         <meta name="msapplication-config" content="{% static 'browserconfig.xml' %}" />
         <meta name="msapplication-TileColor" content="#2b384c" />
@@ -72,7 +72,7 @@
                     <source src="{% static 'images/preloader.mp4' %}" type="video/mp4">
                     <source src="{% static 'images/preloader.webm' %}" type="video/webm">
                 </video>
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">{% trans 'Loading' %}...</span>
             </div>
         </div>
         <!-- Background images positioned behind the main section
@@ -124,7 +124,8 @@
                 '{% include "base/includes/icons/bookmark-heart.svg" %}',
                 '{% include "base/includes/icons/cart-check-fill.svg" %}',
                 '{% include "base/includes/icons/cart-plus.svg" %}',
-                '{% url "likes:likes-update" %}')
+                '{% url "likes:likes-update" %}',
+                '{% url "cart:cart-update" %}')
         </script>
         {% endif %}
         {% endblock %}

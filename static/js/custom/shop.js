@@ -17,8 +17,8 @@ function buttonToggle(
   unlikedSvg,
   cartedSvg,
   uncartedSvg,
-  likeUpdate
-  //   cartUpdate,
+  likeUpdate,
+  cartUpdate
   //   cartRefresh
 ) {
   /**
@@ -49,13 +49,17 @@ function buttonToggle(
   /**
    * First deletes the popover, then clears the popover html
    * and then fires the view that refreshes the template.
-   * @param {string} btn - Either 'cart' or 'like' depending on which button is pressed.
-   * @param {string} update - the URL which fires the view to update the template
+   * @param {string} result - Either 'cart' or 'like' depending on which button is pressed.
    */
-  function dropdownUpdate(btn, update) {
+  function dropdownUpdate(result) {
+    if (result === "like") {
+      var update = likeUpdate;
+    } else if (result === "cart") {
+      var update = cartUpdate;
+    }
     // Deletes the popover instance, necessary in bootstrap otherwise the new one won't load.
     var dropdownElList = [].slice.call(
-      document.querySelectorAll(`.${btn}-dropdown`)
+      document.querySelectorAll(`.${result}-dropdown`)
     );
     var dropdownList = dropdownElList.map(function (dropdownEl) {
       return new bootstrap.Dropdown(dropdownEl);
@@ -66,10 +70,10 @@ function buttonToggle(
       }
     }
     // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`.${btn}-dropdown-container`).fadeTo("fast", 0, function () {
-      $(`.${btn}-dropdown-container`).html("").load(update);
+    $(`.${result}-dropdown-container`).fadeTo("fast", 0, function () {
+      $(`.${result}-dropdown-container`).html("").load(update);
       // Animates the icon, then initialises the popover.
-      $(`.${btn}-dropdown-container`)
+      $(`.${result}-dropdown-container`)
         .delay(400)
         .fadeTo("slow", 1, function () {
           dropdownElList.map(function (dropdownEl) {
@@ -127,31 +131,13 @@ function buttonToggle(
           var svg = object.firstElementChild.firstElementChild;
           svgSwitch(formType, id, svg);
           throw Error(data.message);
+          // Refreshes the dropdowns
         } else if (data.result != "error") {
           toastMessage(data.tag, data.tagMessage, data.message);
-        }
-
-        // If content is not liked, swaps the icon to the 'liked' icon
-        // Sends off a message and refreshes the like popover.
-        if (data.result === "liked") {
-          dropdownUpdate("like", likeUpdate);
-
-          // If content is already liked, swaps the icon to the 'unliked icon
-          // Sends off a message and refreshes the like popover.
-        } else if (data.result === "unliked") {
-          dropdownUpdate("like", likeUpdate);
-        } else if (data.result === "carted") {
-          //   dropdownUpdate("like", likeUpdate);
-        } else if (data.result === "uncarted") {
-          //   dropdownUpdate("like", likeUpdate);
+          dropdownUpdate(data.result);
         }
       })
-      // // If content is not carted, swaps the icon to the 'carted' icon
-      // // Sends off a message and refreshes the cart popover.
-      // } else if (data.result === "carted") {
-      // svgSwitch("cart", id, cartedSvg);
-      // toastMessage(data.tag, data.message);
-      // dropdownUpdate("cart", cartUpdate);
+
       // // Used on the product_detail.html template.
       // // If the product does not have multiple stock the button text switches.
       // if (data.special != "stocked") {
@@ -160,13 +146,6 @@ function buttonToggle(
       //         "  Remove from Cart";
       //     }
       // }
-
-      // // If content is already carted, swaps the icon to the 'uncarted' icon
-      // // Sends off a message and refreshes the cart popover.
-      // } else if (data.result === "uncarted") {
-      // svgSwitch("cart", id, uncartedSvg);
-      // toastMessage(data.tag, data.message);
-      // dropdownUpdate("cart", cartUpdate);
 
       // // Used on the product_detail.html template o change button text.
       // if ($(`#btn-${id}`).length > 0) {
