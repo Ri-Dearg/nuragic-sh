@@ -4,6 +4,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import "bootstrap/functions";
 
 /*Basic bootstrap variables defaults*/
 $enable-rounded: false;
@@ -42,9 +43,7 @@ $pagination-active-bg: $warning;
 /*Removes gutter margins on the page*/
 $grid-gutter-width: 0;
 
-// scss-docs-start import-stack
 // Configuration
-@import "bootstrap/functions";
 @import "bootstrap/variables";
 
 /*Merging custom colors*/
@@ -129,6 +128,7 @@ $utilities: map-merge(
 @import "bootstrap/card";
 // @import "bootstrap/accordion";
 // @import "bootstrap/breadcrumb";
+// @import "bootstrap/offcanvas";
 @import "bootstrap/pagination";
 @import "bootstrap/badge";
 @import "bootstrap/alert";
