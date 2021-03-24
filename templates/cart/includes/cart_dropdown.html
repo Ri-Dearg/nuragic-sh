@@ -1,52 +1,65 @@
 <!-- Loads internationalization and static -->
 {% load i18n %} {% load static %}
+<!-- On xs devices the link goes directly to the cart. -->
 <div class="dropdown">
+    <a href="{% url 'cart:cart-list' %}" class="d-inline-block d-sm-none btn btn-link text-white px-2 py-auto">
+        <p class="visually-hidden">{% trans 'Go to Cart' %}</p>
+        <!--Selects the default icon based on whether there are carted items or not.-->
+        {% if cart %}
+        {% include 'base/includes/icons/cart-fill.svg' %}
+        {% else %}
+        {% include 'base/includes/icons/cart.svg' %}
+        {% endif %}
+    </a>
+    <!-- On small devices and above the link opens a menu displaying items in the cart. -->
     <button type="button"
-        class="cart-dropdown no-caret btn btn-link dropdown-toggle d-inline-block text-white px-2 py-auto pb-md-1"
+        class="d-none d-sm-inline-block cart-dropdown no-caret btn btn-link dropdown-toggle text-white px-2 py-auto pb-md-1"
         tabindex="0" data-bs-toggle="dropdown" aria-expanded="false">
-        <!--Selects the default icon based on whether there are likes or not.
-            object tags are used to display the SVG for caching.-->
+        <!--Selects the default icon based on whether there are carted items or not.-->
         {% if cart %}
         {% include 'base/includes/icons/cart-fill.svg' %}
         {% else %}
         {% include 'base/includes/icons/cart.svg' %}
         {% endif %}
     </button>
-    <!-- Displays Likes button -->
-    {% if likes %}
-    <div class="min-vw-60 min-vw-md-40 min-vw-xxl-33 dropdown-menu dropdown-menu-end text-center pt-0"
-        aria-labelledby="dropdownLikeMenu">
-        <ul class="row list-group list-group-horizontal">
-            {% for product in likes|slice:':6' %}
-            <li class="fav-item col-4 list-group-item border-0 p-1">
-                <a class="smooth-click border-0 mx-0 my-1" href="{% url 'products:product-detail' product.id %}">
-                    <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
-                        height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
-                    {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
-                    {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w," sizes="(max-width: 767px) 20vw,
-                    (min-width: 768px) and (max-width: 1399px) 14vw,
-                    (min-width: 1400px) 11vw" class="img-fluid" alt="{{ product.title }}" />
-                    <p class="h-font d-none d-sm-block text-decoration-underline fs-6 mb-0">
-                        {{ product.title|truncatechars:15|upper }}
-                    </p>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
+    <!-- Displays Cart -->
+    {% if cart %}
+    <div class="min-vw-50 min-vw-lg-40 min-vw-xl-33 min-vw-xxl-25 dropdown-menu dropdown-menu-end text-start pt-0"
+        aria-labelledby="dropdownCartMenu">
         <ul class="list-unstyled mb-0">
-            <li>
-                <hr class="dropdown-divider mb-1 mt-0">
+            <li class="text-end">
+                <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mt-1 me-2"
+                    href="{% url 'cart:cart-list' %}">{% trans 'Go to Cart.' %}</a>
             </li>
-            <li>
-                <a class="p-font smooth-click btn-tran btn btn-warning text-primary shadow mt-1 mx-auto"
-                    href="{% url 'likes:likes-list' %}">{% trans 'All Favorites' %}</a>
-            </li>
+        </ul>
+        <ul class="list-group list-group-flush">
+            {% for item in cart_items %}
+            <a href="{% url 'products:product-detail' item.product.id %}"
+                class="p-font list-group-item list-group-item-action fs-6 mb-0">
+                <p class="mb-0">
+                    <span
+                        class="col-8 float-start text-decoration-underline text-truncate">{{ item.product.title }}</span>
+                    <span class="col-auto text-muted float-end">{{ item.quantity }} x
+                        €{{ item.product.price }}</span>
+                </p>
+            </a>
+            {% endfor %}
+            {% if delivery != 0 %}
+            <p class="p-font list-group-item text-primary fs-6 mx-0 mb-0">
+                <span class="float-start">Delivery</span>
+                <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+            </p>
+            {% endif %}
+            <p class="p-font list-group-item text-primary  fs-6 mx-0 mb-0">
+                <strong><span class="float-start">Total</span></strong>
+                <span class="float-end">€{{ grand_total }}</span>
+            </p>
         </ul>
     </div>
     {% else %}
-    <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownLikeMenu">
+    <ul class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="dropdownCartMenu">
         <li>
-            <p class="p-font text-primary mb-0">{% trans 'No Favorites' %}</p>
+            <p class="p-font text-primary mb-0">{% trans 'The Cart is empty.' %}</p>
         </li>
     </ul>
     {% endif %}

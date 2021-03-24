@@ -4,15 +4,14 @@
     <button type="button"
         class="like-dropdown no-caret btn btn-link dropdown-toggle d-inline-block text-white px-2 py-auto pb-md-1"
         tabindex="0" data-bs-toggle="dropdown" aria-expanded="false">
-        <!--Selects the default icon based on whether there are likes or not.
-            object tags are used to display the SVG for caching.-->
+        <!--Selects the default icon based on whether there are likes or not.-->
         {% if likes %}
         {% include 'base/includes/icons/bookmark-heart-fill.svg' %}
         {% else %}
         {% include 'base/includes/icons/bookmark-heart.svg' %}
         {% endif %}
     </button>
-    <!-- Displays Likes button -->
+    <!-- Displays Likes -->
     {% if likes %}
     <div class="min-vw-60 min-vw-md-40 min-vw-xxl-33 dropdown-menu dropdown-menu-end text-center pt-0"
         aria-labelledby="dropdownLikeMenu">
