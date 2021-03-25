@@ -65,6 +65,12 @@
     {% endblock %}
 
     <body class="bg-primary">
+        {% if user.is_authenticated %}
+        {% include 'users/includes/authenticated_offcanvas.html' %}
+        {% else %}
+        {% include 'users/includes/unauthenticated_offcanvas.html' %}
+        {% endif %}
+
         <!-- preloader video. Uses classes to center the logo on the viewport -->
         <div class="preloader justify-content-center align-items-center bg-primary">
             <div class="preload-gif" role="status">
@@ -102,6 +108,7 @@
             {% block content %}
             {% endblock %}
         </main>
+
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
         <!-- Script block -->

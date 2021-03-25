@@ -41,9 +41,9 @@
                     </div>
                     {% endif %}
                     {% if user.is_authenticated %}
-                    {% include 'users/includes/authenticated_dropdown.html' %}
+                    {% include 'users/includes/authenticated_menu.html' %}
                     {% else %}
-                    {% include 'users/includes/unauthenticated_dropdown.html' %}
+                    {% include 'users/includes/unauthenticated_menu.html' %}
                     {% endif %}
                 </div>
             </div>
@@ -67,9 +67,9 @@
                 <div class="d-md-none">
                     <p class="visually-hidden" id="dropdownUserMenu">Authentication Menu</p>
                     {% if user.is_authenticated %}
-                    {% include 'users/includes/authenticated_dropdown.html' %}
+                    {% include 'users/includes/authenticated_menu.html' %}
                     {% else %}
-                    {% include 'users/includes/unauthenticated_dropdown.html' %}
+                    {% include 'users/includes/unauthenticated_menu.html' %}
                     {% endif %}
                 </div>
                 <button class="navbar-toggler ms-1 me-2" type="button" data-bs-toggle="collapse"
