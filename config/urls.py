@@ -29,11 +29,16 @@ shop_patterns = [
                           namespace='cart'))
 ]
 
+account_patterns = [
+    # Allauth functions
+    path('', include('allauth.urls')),
+    path('', include(('users.urls', 'users'),
+                     namespace='users')),
+]
+
 urlpatterns = [
     # Internationalization functions
     path('i18n/', include('django.conf.urls.i18n')),
-    # Allauth functions
-    path('accounts/', include('allauth.urls')),
     # Rich Text Editor functions
     path('tinymce/', include('tinymce.urls')),
     # Jasmine testing functions
@@ -43,9 +48,8 @@ urlpatterns = [
                              namespace='contact')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
+    path('accounts/', include(account_patterns)),
     path('shop/', include(shop_patterns)),
-    path('users/', include(('users.urls', 'users'),
-                           namespace='users')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
