@@ -36,7 +36,7 @@
                     <div class="col-4 cart-dropdown-container">
                         {% include 'cart/includes/cart_dropdown.html' %}
                     </div>
-                    <div class="col-4 like-dropdown-container">
+                    <div class="col-4 like-offcanvas-container">
                         {% include 'likes/includes/likes_menu.html' %}
                     </div>
                     {% endif %}
@@ -61,8 +61,7 @@
                     <p class="visually-hidden" id="dropdownCartMenu">Likes</p>
                     {% include 'cart/includes/cart_dropdown.html' %}
                 </div>
-                <div class="col-2 col-sm-1 d-md-none like-dropdown-container">
-                    <p class="visually-hidden" id="dropdownLikeMenu">Likes</p>
+                <div class="col-2 col-sm-1 d-md-none like-offcanvas-container">
                     {% include 'likes/includes/likes_menu.html' %}
                 </div>
                 {% endif %}

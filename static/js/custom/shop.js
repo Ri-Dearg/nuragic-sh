@@ -8,7 +8,7 @@
  * @param {string} unlikedSvg - location of the SVG for an unliked item.
  * @param {string} cartedSvg - location of the SVG for a carted item.
  * @param {string} uncartedSvg - location of the SVG for an uncarted item.
- * @param {string} likeUpdate - url for the view that updates the like popover.
+ * @param {string} likeUpdate - urls for updating likes
  * @param {string} cartUpdate - url for the view that updates the cart popover.
  * @param {string} cartRefresh - url for the view that updates the cart totals box on the cart_list page.
  */
@@ -51,34 +51,22 @@ function buttonToggle(
    * and then fires the view that refreshes the template.
    * @param {string} result - Either 'cart' or 'like' depending on which button is pressed.
    */
-  function dropdownUpdate(result) {
+  function offcanvasUpdate(result) {
     if (result === "like") {
       var update = likeUpdate;
     } else if (result === "cart") {
       var update = cartUpdate;
     }
-    // Deletes the popover instance, necessary in bootstrap otherwise the new one won't load.
-    var dropdownElList = [].slice.call(
-      document.querySelectorAll(`.${result}-dropdown`)
-    );
-    var dropdownList = dropdownElList.map(function (dropdownEl) {
-      return new bootstrap.Dropdown(dropdownEl);
-    });
-    for (dropdown in dropdownList) {
-      if (dropdownList.hasOwnProperty(dropdown)) {
-        dropdownList[dropdown].dispose();
-      }
-    }
+
     // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`.${result}-dropdown-container`).fadeTo("fast", 0, function () {
-      $(`.${result}-dropdown-container`).html("").load(update);
-      // Animates the icon, then initialises the popover.
-      $(`.${result}-dropdown-container`)
-        .delay(400)
-        .fadeTo("slow", 1, function () {
-          dropdownElList.map(function (dropdownEl) {
-            return new bootstrap.Dropdown(dropdownEl);
-          });
+    $(`.${result}-offcanvas-container`).fadeTo("fast", 0);
+    $(`.${result}-offcanvas-content`).fadeTo("fast", 0, function () {
+      $(`.${result}-offcanvas-content`)
+        .html("")
+        // reloads the context and content
+        .load(update, function () {
+          $(`.${result}-offcanvas-content`).fadeTo("fast", 1);
+          $(`.${result}-offcanvas-container`).fadeTo("fast", 1);
         });
     });
   }
@@ -134,7 +122,7 @@ function buttonToggle(
           // Refreshes the dropdowns
         } else if (data.result != "error") {
           toastMessage(data.tag, data.tagMessage, data.message);
-          dropdownUpdate(data.result);
+          offcanvasUpdate(data.result);
         }
       })
 

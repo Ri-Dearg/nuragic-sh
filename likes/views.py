@@ -78,6 +78,7 @@ def likes_toggle(request):
         try:
             item_id = request.POST.get('item-id')
             product = get_object_or_404(Product, pk=item_id)
+            data['result'] = 'like'
 
             # Saves the item to the profile if the user is logged in, otherwise
             # saves to the session
@@ -93,14 +94,12 @@ def likes_toggle(request):
                     product.save()
                     data['message'] = _(
                         f'{product.title} removed from favorites.')
-                    data['result'] = 'like'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
                     data['message'] = _(f'{product.title} favorited!')
-                    data['result'] = 'like'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
 
@@ -114,14 +113,12 @@ def likes_toggle(request):
                     request.session['likes'] = likes
                     data['message'] = _(
                         f'{product.title} removed from favorites.')
-                    data['result'] = 'like'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
                     data['message'] = _(f'{product.title} favorited!')
-                    data['result'] = 'like'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
 
@@ -136,15 +133,15 @@ def likes_toggle(request):
     return HttpResponseForbidden()
 
 
-def update_likes(request):
-    """This view is used to update the likes_popover.html template.
+def update_likes_offcanvas(request):
+    """This view is used to update the likes_menu.html template.
     It is called by the JS file after it successfully receives
     the likes_toggle view response.
     It updates the context using the same logic as the get_likes context
     processor before refreshing the template.
     The JS script then pushes the newly rendered template into
-    the popover HTML."""
+    the HTML."""
 
     # Pushes the new context to the page before re-rendering the template.
     RequestContext(request).push(get_likes(request))
-    return render(request, 'likes/includes/likes_dropdown.html')
+    return render(request, 'likes/includes/likes_offcanvas.html')

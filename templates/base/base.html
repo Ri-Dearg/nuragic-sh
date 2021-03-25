@@ -71,8 +71,14 @@
         {% include 'users/includes/unauthenticated_offcanvas.html' %}
         {% endif %}
         {% if 'shop' in request.path %}
-        {% include 'likes/includes/likes_offcanvas.html' %}
+        <!-- Displays Likes -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLikes" aria-labelledby="offcanvasLikesLabel">
+            <div class="like-offcanvas-content">
+                {% include 'likes/includes/likes_offcanvas.html' %}
+            </div>
+        </div>
         {% endif %}
+
         <!-- preloader video. Uses classes to center the logo on the viewport -->
         <div class="preloader justify-content-center align-items-center bg-primary">
             <div class="preload-gif" role="status">
@@ -133,7 +139,7 @@
                 '{% include "base/includes/icons/bookmark-heart.svg" %}',
                 '{% include "base/includes/icons/cart-check-fill.svg" %}',
                 '{% include "base/includes/icons/cart-plus.svg" %}',
-                '{% url "likes:likes-update" %}',
+                '{% url "likes:likes-offcanvas" %}',
                 '{% url "cart:cart-update" %}')
         </script>
         {% endif %}
