@@ -70,7 +70,9 @@
         {% else %}
         {% include 'users/includes/unauthenticated_offcanvas.html' %}
         {% endif %}
-
+        {% if 'shop' in request.path %}
+        {% include 'likes/includes/likes_offcanvas.html' %}
+        {% endif %}
         <!-- preloader video. Uses classes to center the logo on the viewport -->
         <div class="preloader justify-content-center align-items-center bg-primary">
             <div class="preload-gif" role="status">

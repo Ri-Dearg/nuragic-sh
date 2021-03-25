@@ -6,9 +6,9 @@
         <p class="visually-hidden">{% trans 'Go to Cart' %}</p>
         <!--Selects the default icon based on whether there are carted items or not.-->
         {% if cart %}
-        {% include 'base/includes/icons/cart-fill.svg' %}
+        {% include 'base/includes/icons/cart-fill.nav.svg' %}
         {% else %}
-        {% include 'base/includes/icons/cart.svg' %}
+        {% include 'base/includes/icons/cart.nav.svg' %}
         {% endif %}
     </a>
     <!-- On small devices and above the link opens a menu displaying items in the cart. -->
@@ -17,9 +17,9 @@
         tabindex="0" data-bs-toggle="dropdown" aria-expanded="false">
         <!--Selects the default icon based on whether there are carted items or not.-->
         {% if cart %}
-        {% include 'base/includes/icons/cart-fill.svg' %}
+        {% include 'base/includes/icons/cart-fill.nav.svg' %}
         {% else %}
-        {% include 'base/includes/icons/cart.svg' %}
+        {% include 'base/includes/icons/cart.nav.svg' %}
         {% endif %}
     </button>
     <!-- Displays Cart -->

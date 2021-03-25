@@ -37,14 +37,16 @@
                         {% include 'cart/includes/cart_dropdown.html' %}
                     </div>
                     <div class="col-4 like-dropdown-container">
-                        {% include 'likes/includes/likes_dropdown.html' %}
+                        {% include 'likes/includes/likes_menu.html' %}
                     </div>
                     {% endif %}
-                    {% if user.is_authenticated %}
-                    {% include 'users/includes/authenticated_menu.html' %}
-                    {% else %}
-                    {% include 'users/includes/unauthenticated_menu.html' %}
-                    {% endif %}
+                    <div class="col-4">
+                        {% if user.is_authenticated %}
+                        {% include 'users/includes/authenticated_menu.html' %}
+                        {% else %}
+                        {% include 'users/includes/unauthenticated_menu.html' %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,11 +63,10 @@
                 </div>
                 <div class="col-2 col-sm-1 d-md-none like-dropdown-container">
                     <p class="visually-hidden" id="dropdownLikeMenu">Likes</p>
-                    {% include 'likes/includes/likes_dropdown.html' %}
+                    {% include 'likes/includes/likes_menu.html' %}
                 </div>
                 {% endif %}
                 <div class="d-md-none">
-                    <p class="visually-hidden" id="dropdownUserMenu">Authentication Menu</p>
                     {% if user.is_authenticated %}
                     {% include 'users/includes/authenticated_menu.html' %}
                     {% else %}
