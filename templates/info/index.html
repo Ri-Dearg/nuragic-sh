@@ -74,7 +74,7 @@
 <!-- Script block -->
 {% block postloadjs %}
 {{ block.super }}
-<script src="{% static 'js/custom/index.js' %}"></script>
+<script src="{% static 'js/custom/index.js' %}?{{ VERSION }}"></script>
 <script>
     // Sets the Review carousel to a fixed height as their content can differ
     carouselNormalization();

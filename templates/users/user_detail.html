@@ -51,5 +51,5 @@ Much of the content is taken directly from their templates. -->
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
-<script src="{% static 'js/custom/userDetail.js' %}"></script>
+<script src="{% static 'js/custom/userDetail.js' %}?{{ VERSION }}"></script>
 {% endblock %}

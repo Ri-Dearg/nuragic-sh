@@ -23,6 +23,9 @@ except ModuleNotFoundError:
     # Error handling
     pass
 
+# Version Number
+VERSION = '0.0.1'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,6 +127,7 @@ TEMPLATES = [
                 # for navbar categories
                 'info.context_processors.get_categories',
                 # Context necessary for shop functions
+                'config.context_processors.global_settings',
                 'likes.context_processors.get_likes',
                 'cart.context_processors.get_cart',
             ],
