@@ -19,6 +19,9 @@
                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
                                 {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w," sizes="125px"
                     class="img-fluid" alt="{{ product.title }}" />
+                <p class="h-font d-block d-sm-none text-decoration-underline fs-6 mb-0">
+                    {{ product.title|truncatechars:10|upper }}
+                </p>
                 <p class="h-font d-none d-sm-block text-decoration-underline fs-6 mb-0">
                     {{ product.title|truncatechars:15|upper }}
                 </p>
