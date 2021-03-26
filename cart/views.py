@@ -102,7 +102,7 @@ def cart_toggle(request):
     return HttpResponseForbidden()
 
 
-def update_cart(request):
+def update_cart_offcanvas(request):
     """This view is used to update the cart_popover.html template.
     It is called by the JS file after it successfully receives
     the cart_toggle view response.
@@ -115,7 +115,7 @@ def update_cart(request):
     RequestContext(request).push(get_cart(request))
 
     # Re-renders the popover template
-    return render(request, 'cart/includes/cart_dropdown.html')
+    return render(request, 'cart/includes/cart_offcanvas.html')
 
 
 def refresh_total(request):
