@@ -59,7 +59,7 @@ function buttonToggle(
     }
 
     // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`.${result}-offcanvas-container`).fadeTo("fast", 0);
+    $(`.${result}-offcanvas-container`).fadeTo("fast", 0.6);
     $(`.${result}-offcanvas-content`).fadeTo("fast", 0, function () {
       $(`.${result}-offcanvas-content`)
         .html("")
@@ -104,6 +104,7 @@ function buttonToggle(
       credentials: "same-origin",
     })
       .then((response) => {
+        $(".toggle-submit").prop("disabled", false).removeClass("disabled");
         // if the response is okay, goes switches icons
         if (response.ok) {
           return response.json();
@@ -161,6 +162,7 @@ function buttonToggle(
   $(`.toggle-form`).on("submit", function (ev) {
     // stops form from sending
     ev.preventDefault();
+    $(`.toggle-submit`).prop("disabled", true).addClass("disabled");
 
     // Fires the main fetch function
     fetchForm(this);

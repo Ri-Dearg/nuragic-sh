@@ -4,7 +4,8 @@ The toggle-form class makes it a target for the ajax functions..-->
 <form class="toggle-form d-inline-block" id="cf-{{ product.id }}" action="{% url 'cart:cart-toggle' %}" method="POST">
     <!--Selects the default icon based on whether the item is in the cart or not.
     object tags are used to display the SVG for caching.-->
-    <button type="submit" class="product btn text-center rounded-circle shadow m-1 p-2" id="cb-{{ product.id }}">
+    <button type="submit" class="toggle-submit product btn text-center rounded-circle shadow m-1 p-2"
+        id="cb-{{ product.id }}">
         {% if product.id|stringformat:'s' in cart %}
         {% include 'base/includes/icons/cart-check-fill.svg' %}
         {% else %}
