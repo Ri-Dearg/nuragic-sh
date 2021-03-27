@@ -8,38 +8,42 @@
 <div class="offcanvas-body">
     <div class="w-100 text-center mb-3">
         <a class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0"
-            href="{% url 'likes:likes-list' %}">{% trans 'Go to Cart' %}</a>
+            href="{% url 'cart:cart-list' %}">{% trans 'Go to Cart' %}</a>
         <div class="col-12 my-2"></div>
         <a class="p-font col-8 smooth-click btn btn-purple text-white shadow mx-auto mb-0"
             href="#">{% trans 'Checkout' %}</a>
     </div>
-    <div class="row">
-        <ul class="list-group list-group-flush">
-            {% for item in cart_items %}
-            <a href="{% url 'products:product-detail' item.product.id %}"
-                class="p-font list-group-item list-group-item-action fs-6 mb-0">
-                <img class="product-thumb col-auto d-none d-md-inline-block float-start me-2"
-                    src="{{ item.product.image_4_3_sm.url }}" alt="{{ item.product.title }}">
-                <p class="mb-0">
+    <ul class="list-group list-group-flush">
+        {% for item in cart_items %}
+        <a href="{% url 'products:product-detail' item.product.id %}"
+            class="p-font list-group-item list-group-item-action fs-6 mb-0">
+            <img class="product-thumb col-2 d-inline-block float-start" src="{{ item.product.image_4_3_sm.url }}"
+                alt="{{ item.product.title }}">
+            <div class="col-10 ms-auto">
+                <div class="row">
                     <span
-                        class="col-7 col-sm-9 col-md-7 float-start text-decoration-underline text-truncate">{{ item.product.title }}</span>
-                    <span class="col-auto text-muted float-end">{{ item.quantity }} x
+                        class="col-9 text-decoration-underline text-truncate align-self-start ps-2">{{ item.product.title }}</span>
+                </div>
+                <div class="row mt-3">
+                    <span class="col-auto text-muted align-self-end ms-auto">{{ item.quantity }} x
                         €{{ item.product.price }}</span>
-                </p>
-            </a>
-            {% endfor %}
-            {% if delivery != 0 %}
-            <p class="p-font list-group-item text-primary fs-6 mx-0 mb-0">
-                <span class="float-start">Delivery</span>
-                <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
-            </p>
-            {% endif %}
-            <p class="p-font list-group-item text-primary  fs-6 mx-0 mb-0">
-                <strong><span class="float-start">Total</span></strong>
-                <span class="float-end">€{{ grand_total }}</span>
-            </p>
-        </ul>
-    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        {% if delivery != 0 %}
+        <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
+            href="{% url 'cart:cart-list' %}">
+            <span class="float-start">Delivery</span>
+            <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+        </a>
+        {% endif %}
+        <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
+            href="{% url 'cart:cart-list' %}">
+            <strong><span class="float-start">Total</span></strong>
+            <span class="float-end">€{{ grand_total }}</span>
+        </a>
+    </ul>
 </div>
 {% else %}
 <div class="offcanvas-header pb-0">
