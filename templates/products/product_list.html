@@ -34,7 +34,9 @@ such as likes_list, category_detail and stockdrop_detail.-->
 Retrieves all products if no search query is performed.
 It utilises the paginator so it can use the infinite scroll feature. -->
     {% for product in page_obj %}
+    {% if product.stock > 0 or product.can_preorder %}
     {% include 'products/includes/product_box.html' %}
+    {% endif %}
     {% endfor %}
 </div>
 {% else %}
