@@ -44,9 +44,13 @@ class Product(models.Model):
                                      upload_to='shop/products')
     image_4_3_sm = models.ImageField(default='', blank=True,
                                      upload_to='shop/products')
+    image_4_3_xs = models.ImageField(default='', blank=True,
+                                     upload_to='shop/products')
     date_added = models.DateTimeField(default=timezone.now)
-
-    stock = models.SmallIntegerField(default=1, blank=False, null=False)
+    stock = models.SmallIntegerField(default=10, blank=False, null=False)
+    is_unique = models.BooleanField(default=False)
+    is_artisanal = models.BooleanField(default=False)
+    can_preorder = models.BooleanField(default=False)
     times_purchased = models.IntegerField(
         default=0, blank=False, null=False, editable=False)
     popularity = models.IntegerField(
@@ -59,13 +63,14 @@ class Product(models.Model):
         Image resizing, snippet repurposed from:
         https://djangosnippets.org/snippets/10597/ """
 
-        image1, image1_md, image1_sm = responsive_images(
-            self, 'image_4_3', 945, 1260)
+        image1, image1_md, image1_sm, image1_xs = responsive_images(
+            self, 'image_4_3', 945, 1260, thumb=True)
 
         if image1:
             self.image_4_3 = image1
             self.image_4_3_md = image1_md
             self.image_4_3_sm = image1_sm
+            self.image_4_3_xs = image1_xs
 
         # Updates popularity (See below)
         # self._update_popularity()
