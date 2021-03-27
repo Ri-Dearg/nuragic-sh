@@ -20,9 +20,9 @@
 such as size or quantity, mainly following the same scheme as the product_box.html template.
 If there is quantity, it includes quantity selection linked to the form in the detail_cart_toggle.html template. -->
 <div class="col-12 bg-brown py-2"></div>
-<section class="bg-white p-md-5 pb-2">
+<section class="bg-white p-md-5 p-sm-0 pb-2">
     <article class="row justify-content-md-center">
-        <div class="col-12 col-md-5 position-relative p-0">
+        <div class="col-12 col-sm-5 position-relative p-0">
             <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
                 height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
                                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
@@ -31,7 +31,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
             <!-- These display little banners that give extra info about the item. -->
             {% include 'products/includes/product_banners.html' %}
         </div>
-        <div class="col-auto col-md-7 col-lg-6 col-xl-5 px-2 p-md-5">
+        <div class="col-auto col-sm-7 col-lg-6 col-xl-5 px-2 p-md-4 p-lg-5">
             <div class="row">
                 <div class="col-auto mt-2 mt-md-0">
                     <h2 class="l-space-1 h-font text-primary">{{ product.title|upper }}</h2>
@@ -50,10 +50,11 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 </div> -->
                 <h4 class="col-auto px-0 text-center text-muted mb-3">€{{ product.price }}</h4>
             </div>
-            <div class="row ms-1">
+            <div class="row align-items-center ms-1">
                 <!-- This will only show the add to cart button if the item is in stock.
                         Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
                 {% endif %}
+                {% include 'cart/includes/detail_cart_toggle.html' %}
                 {% include 'likes/includes/detail_like_toggle.html' %}
             </div>
         </div>

@@ -40,8 +40,14 @@ function buttonToggle(
     if (form === "cf") {
       if (classList.contains("bi-cart-check-fill")) {
         $(`#cb-${id}`).html(uncartedSvg);
+        if ($(`#cb-${id}`)[0].classList.contains("cart-text")) {
+          $(`#cb-${id}`).append("&nbsp;&nbsp;Add to Cart");
+        }
       } else if (classList.contains("bi-cart-plus")) {
         $(`#cb-${id}`).html(cartedSvg);
+        if ($(`#cb-${id}`)[0].classList.contains("cart-text")) {
+          $(`#cb-${id}`).append("&nbsp;&nbsp;Remove from Cart");
+        }
       }
     }
   }
