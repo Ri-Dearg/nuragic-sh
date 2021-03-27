@@ -22,7 +22,9 @@ the product's characteristics, e.g. size, unique item, etc.. -->
             </a>
             <div class="position-relative">
                 <div class="col-auto position-absolute bottom-0 end-0 text-center m-2">
+                    {% if product.stock > 0 or product.can_preorder %}
                     {% include 'cart/includes/box_cart_toggle.html' %}
+                    {% endif %}
                     {% include 'likes/includes/box_like_toggle.html' %}
                 </div>
             </div>

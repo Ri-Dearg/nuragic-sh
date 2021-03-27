@@ -76,11 +76,17 @@ def cart_toggle(request):
             # If the other conditions aren't true it is a simple add to cart.
             else:
                 cart[item_id] = quantity
-                if cart[item_id] > product.stock:
+                if product.is_unique:
+                    cart[item_id] = 1
+                elif (cart[item_id] > product.stock
+                      and not product.can_preorder):
                     cart[item_id] = product.stock
 
                 request.session['cart'] = cart
-                data['message'] = _(f'Added {product.title} to your cart.')
+                if product.can_preorder and product.stock == 0:
+                    data['message'] = _(f'Preordered {product.title}.')
+                else:
+                    data['message'] = _(f'Added {product.title} to your cart.')
                 data['result'] = 'cart'
                 data['tag'] = 'success'
                 data['tagMessage'] = _('Success')

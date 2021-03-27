@@ -72,6 +72,9 @@ class Product(models.Model):
             self.image_4_3_sm = image1_sm
             self.image_4_3_xs = image1_xs
 
+        if self.is_unique:
+            self.stock = 1
+
         # Updates popularity (See below)
         # self._update_popularity()
 

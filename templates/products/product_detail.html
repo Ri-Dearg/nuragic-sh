@@ -54,7 +54,9 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 <!-- This will only show the add to cart button if the item is in stock.
                         Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
                 {% endif %}
+                {% if product.stock > 0 or product.can_preorder %}
                 {% include 'cart/includes/detail_cart_toggle.html' %}
+                {% endif %}
                 {% include 'likes/includes/detail_like_toggle.html' %}
             </div>
         </div>

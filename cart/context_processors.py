@@ -39,7 +39,7 @@ def get_cart(request):
             # If the product is valid and in stock,
             # it calculates details for that item:
             if product is not False:
-                if product.stock >= 1:
+                if product.stock >= 1 or product.can_preorder:
                     cart_total += item_data * product.price
                     cart_items.append({
                         'item_id': item_id,
