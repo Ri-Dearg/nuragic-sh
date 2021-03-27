@@ -41,7 +41,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 <p class="p-font col-auto">{{ product.description }}</p>
                 <div class="col-12"></div>
                 <!-- Section selects columns and characteristics of the product to display. -->
-                {% if not product.is_unique and product.stock > 0 %}
+                {% if product.stock > 0 or product.can_preorder %}
                 <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
                 <!-- <div class="form-label-group col-4 mb-3">
                     <input class="form-control mt-1 pt-4" type="number" id="detail-quantity" form="cf-{{ product.id }}"
@@ -49,11 +49,11 @@ If there is quantity, it includes quantity selection linked to the form in the d
                     <label class="ml-2 pb-0" for="detail-quantity">{% trans 'Quantity' %}</label>
                 </div> -->
                 <h4 class="col-auto px-0 text-center text-muted mb-3">€{{ product.price }}</h4>
+                {% endif %}
             </div>
             <div class="row align-items-center ms-1">
                 <!-- This will only show the add to cart button if the item is in stock.
                         Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
-                {% endif %}
                 {% if product.stock > 0 or product.can_preorder %}
                 {% include 'cart/includes/detail_cart_toggle.html' %}
                 {% endif %}
