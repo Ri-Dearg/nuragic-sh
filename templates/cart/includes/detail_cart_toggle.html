@@ -11,7 +11,7 @@ This box is linked to this form and does not appear in this template.-->
                 object tags are used to display the SVG for caching.-->
         {% if product.id|stringformat:'s' in cart %}
         {% include 'base/includes/icons/cart-check-fill.svg' %}
-        &nbsp;&nbsp;{% trans 'Remove from Cart' %}
+        &nbsp;&nbsp;{% trans 'Update Cart' %}
         {% else %}
         {% include 'base/includes/icons/cart-plus.svg' %}
         &nbsp;&nbsp;{% trans 'Add to Cart' %}
@@ -22,5 +22,5 @@ This box is linked to this form and does not appear in this template.-->
     If the product is unique it automatically sends 1 as the quantity.
     It send the 'special=stocked' value for other items for logic in the ajax JS and views.-->
     <input type="hidden" name="item-id" value="{{ product.id }}" />
-    <input type="hidden" name="quantity" value="1" />
+    <input type="hidden" name="special" value="update" />
 </form>

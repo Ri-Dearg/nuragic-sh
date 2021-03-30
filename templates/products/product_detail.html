@@ -37,18 +37,20 @@ If there is quantity, it includes quantity selection linked to the form in the d
                     <h2 class="l-space-1 h-font text-primary">{{ product.title|upper }}</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row align-items-center">
                 <p class="p-font col-auto">{{ product.description }}</p>
                 <div class="col-12"></div>
                 <!-- Section selects columns and characteristics of the product to display. -->
                 {% if product.stock > 0 or product.can_preorder %}
-                <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
-                <!-- <div class="form-label-group col-4 mb-3">
-                    <input class="form-control mt-1 pt-4" type="number" id="detail-quantity" form="cf-{{ product.id }}"
-                        name="quantity" value="1" min="1" max="{{ product.stock }}" />
-                    <label class="ml-2 pb-0" for="detail-quantity">{% trans 'Quantity' %}</label>
-                </div> -->
                 <h4 class="col-auto px-0 text-center text-muted mb-3">€{{ product.price }}</h4>
+                <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
+                <div class="col-4 form-floating ms-3 mb-2">
+                    <input class="form-control" type="number" id="id_quantity" form="cf-{{ product.id }}"
+                        name="quantity" value="1" min="0" {% if product.stock > 0 %} max="{{ product.stock }}"
+                        {% endif %} required />
+                    <label class="p-font text-primary sr-only requiredField"
+                        for="id_quantity">{% trans 'Quantity' %}</label>
+                </div>
                 {% endif %}
             </div>
             <div class="row align-items-center ms-1">

@@ -44,31 +44,44 @@ def cart_toggle(request):
             cart = request.session.get('cart', {})
 
             # 'update' is sent when product quantity is being changed.
-            # Despite the 'uncart' result variable it doesn't uncart but
-            # actually updates quantity on the cart list page.
-            # if request.POST.get('special') == 'update':
-            #   cart[item_id] = quantity
+            if request.POST.get('special') == 'update' and quantity != 0:
 
-            #    # Checks stock and if the quantity requestd is greater,
-            #    # it sets it to the max available.
-            #    if cart[item_id] > product.stock:
-            #         cart[item_id] = product.stock
-            #     request.session['cart'] = cart
+                # Checks stock and if the quantity requested is greater,
+                # it sets it to the max available.
+                if product.is_unique:
+                    quantity = 1
+                elif (quantity > product.stock
+                        and not product.can_preorder):
+                    quantity = product.stock
 
-            #     # Defines the variables to be sent the JS file.
-            #     tag = 'success'
-            #     message = f'Updated {product.name} quantity to \
-            #         {cart[item_id]}.'
-            #     result = 'uncarted'
+                if item_id not in cart:
+                    cart[item_id] = quantity
+                    data['message'] = _(f'Added {product.title} to your cart.')
+                else:
+                    cart[item_id] = quantity
+                    data['message'] = f'Updated {product.title} \
+                        quantity to {cart[item_id]}.'
+                request.session['cart'] = cart
+
+                data['result'] = 'cart'
+                data['tag'] = 'success'
+                data['tagMessage'] = _('Success')
 
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
-            if (item_id in list(cart.keys())) or (
-                    request.POST.get('special') == 'remove'):
-                cart.pop(str(item_id))
+            elif (item_id in list(cart.keys())) or (
+                    request.POST.get('special') == 'remove') or (
+                        quantity == 0):
+                if item_id in cart:
+                    cart.pop(str(item_id))
+                    data['message'] = _(
+                        f'Removed {product.title} from your cart.')
+                else:
+                    data['message'] = _(
+                        f'Please update the quantity to add \
+                            {product.title} to your cart.')
 
                 request.session['cart'] = cart
-                data['message'] = _(f'Removed {product.title} from your cart.')
                 data['result'] = 'cart'
                 data['tag'] = 'info'
                 data['tagMessage'] = _('Info')
