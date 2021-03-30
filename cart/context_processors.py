@@ -25,7 +25,7 @@ def get_cart(request):
         for item_id, item_data in temp_cart.items():
             # Sets the total quantity of an item:
             cart_quantity += item_data
-
+            request.session['cart_quantity'] = cart_quantity
             # Confirms the item is valid or throws an error with a message:
             try:
                 product = Product.objects.get(pk=item_id)

@@ -61,24 +61,31 @@ function buttonToggle(
   /**
    * First deletes the popover, then clears the popover html
    * and then fires the view that refreshes the template.
-   * @param {string} result - Either 'cart' or 'like' depending on which button is pressed.
+   * @param {array} result - Either 'cart' or 'like' for [0],
+   * [1] is used for cart quantity updating depending on which button is pressed.
    */
   function offcanvasUpdate(result) {
-    if (result === "like") {
+    console.log(result);
+    if (result[0] === "like") {
       var update = likeUpdate;
-    } else if (result === "cart") {
+    } else if (result[0] === "cart") {
       var update = cartUpdate;
+      if (result[1] > 0) {
+        $(`#quantity-badge`).text(result[1]);
+      } else {
+        $(`#quantity-badge`).text("");
+      }
     }
 
     // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`.${result}-offcanvas-container`).fadeTo("fast", 0.6);
-    $(`.${result}-offcanvas-content`).fadeTo("fast", 0, function () {
-      $(`.${result}-offcanvas-content`)
+    $(`.${result[0]}-offcanvas-container`).fadeTo("fast", 0.6);
+    $(`.${result[0]}-offcanvas-content`).fadeTo("fast", 0, function () {
+      $(`.${result[0]}-offcanvas-content`)
         .html("")
         // reloads the context and content
         .load(update, function () {
-          $(`.${result}-offcanvas-content`).fadeTo("fast", 1);
-          $(`.${result}-offcanvas-container`).fadeTo("fast", 1);
+          $(`.${result[0]}-offcanvas-content`).fadeTo("fast", 1);
+          $(`.${result[0]}-offcanvas-container`).fadeTo("fast", 1);
         });
     });
   }

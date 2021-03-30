@@ -42,8 +42,7 @@ def cart_toggle(request):
 
             # Gets the cart to run through item details.
             cart = request.session.get('cart', {})
-
-            data['result'] = 'cart'
+            cart_quantity = request.session.get('cart_quantity', 0)
 
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
@@ -89,6 +88,13 @@ def cart_toggle(request):
 
                 data['tag'] = 'success'
                 data['tagMessage'] = _('Success')
+
+            cart_quantity = 0
+            for item in cart:
+                cart_quantity += cart[item]
+            request.session['cart_quantity'] = cart_quantity
+
+            data['result'] = ['cart', cart_quantity]
 
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except
