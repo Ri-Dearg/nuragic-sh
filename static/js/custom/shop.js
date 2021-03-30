@@ -27,7 +27,7 @@ function buttonToggle(
    * @param {string} id - The specific product id, so other products aren't selected.
    * @param {object} svg - The SVG HTML element.
    */
-  function svgSwitch(form, id, svg) {
+  function svgSwitch(form, id, svg, formData) {
     var classList = svg.classList;
 
     if (form === "lf") {
@@ -38,15 +38,21 @@ function buttonToggle(
       }
     }
     if (form === "cf") {
-      if (classList.contains("bi-cart-check-fill")) {
-        $(`#cb-${id}`).html(uncartedSvg);
-        if ($(`#cb-${id}`)[0].classList.contains("cart-text")) {
-          $(`#cb-${id}`).append("&nbsp;&nbsp;Add to Cart");
+      if (formData.get("special") === "update") {
+        if (formData.get("quantity") == 0) {
+          $(`#cb-${id}`)
+            .html(uncartedSvg)
+            .append("&nbsp;&nbsp;&nbsp;Add to Cart");
+        } else {
+          $(`#cb-${id}`)
+            .html(cartedSvg)
+            .append("&nbsp;&nbsp;&nbsp;Update Cart");
         }
-      } else if (classList.contains("bi-cart-plus")) {
-        $(`#cb-${id}`).html(cartedSvg);
-        if ($(`#cb-${id}`)[0].classList.contains("cart-text")) {
-          $(`#cb-${id}`).append("&nbsp;&nbsp;Remove from Cart");
+      } else if (formData.get("special") === null) {
+        if (classList.contains("bi-cart-check-fill")) {
+          $(`#cb-${id}`).html(uncartedSvg);
+        } else if (classList.contains("bi-cart-plus")) {
+          $(`#cb-${id}`).html(cartedSvg);
         }
       }
     }
@@ -101,7 +107,7 @@ function buttonToggle(
     const formUrl = object.action;
 
     // Swaps svg icons appropriately
-    svgSwitch(formType, id, svg);
+    svgSwitch(formType, id, svg, formData);
 
     // Sends form to Django view
     fetch(formUrl, {
@@ -117,14 +123,14 @@ function buttonToggle(
         } else {
           // if there is an error, it fires a message and swaps back the svg icon
           var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg);
+          svgSwitch(formType, id, svg, formData);
           throw Error(response.status + " " + response.statusText);
         }
       })
       .then((data) => {
         if (data.result === "error") {
           var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg);
+          svgSwitch(formType, id, svg, formData);
           throw Error(data.message);
           // Refreshes the dropdowns
         } else if (data.result != "error") {
@@ -132,37 +138,6 @@ function buttonToggle(
           offcanvasUpdate(data.result);
         }
       })
-
-      // // Used on the product_detail.html template.
-      // // If the product does not have multiple stock the button text switches.
-      // if (data.special != "stocked") {
-      //     if ($(`#btn-${id}`).length > 0) {
-      //     $(`#btn-${id}`).contents().last()[0].textContent =
-      //         "  Remove from Cart";
-      //     }
-      // }
-
-      // // Used on the product_detail.html template o change button text.
-      // if ($(`#btn-${id}`).length > 0) {
-      //     $(`#btn-${id}`).contents().last()[0].textContent = "  Add to Cart";
-      // }
-      // //Used on the cart list page to remove items from view after being uncarted.
-      // if (window.location.pathname == "/cart/") {
-      //     if (data.special != "update") {
-      //     $(`#cart-item-${id}`).fadeOut("slow");
-      //     }
-      //     // Refreshes the totals box. Works for both removing items and updating quantity.
-      //     $("#totals-box").fadeTo("slow", 0, function () {
-      //     $(`#totals-box`).html("").load(cartRefresh);
-      //     $(`#totals-box`).delay(400).fadeTo("slow", 1);
-      //     });
-      // }
-      // Send the message if anything else occurs.
-      // } else {
-      // toastMessage(data.tag, data.message);
-      // }
-      //     }
-      //   })
       .catch((error) => toastMessage("danger", "Error", error));
   }
   $(`.toggle-form`).on("submit", function (ev) {

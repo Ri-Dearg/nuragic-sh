@@ -49,8 +49,8 @@ def get_cart(request):
                 # Or else the item is removed from the cart with feedback:
                 else:
                     cart.pop(item_id)
-                    messages.warning(request,
-                                     _(f'{product} has run out of stock!'))
+                    messages.error(request,
+                                   _(f'{product} has run out of stock!'))
 
             # Skips the product if it is False:
             else:
