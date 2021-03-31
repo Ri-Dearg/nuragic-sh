@@ -1,15 +1,19 @@
 <!-- Loads internationalization  -->
 {% load i18n %}
-<!--A template which displays the cart total and delivery cost on the cart_list page.-->
-<div id="subtotal" class="list-group-item">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8 mx-2">
-            <p class="p-font text-primary fs-5"><strong>{% trans 'Sub-total' %}:</strong></p>
+<div class="card position-fixed border-0">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <p class="p-font card-subtitle mb-2 text-muted h5">{% trans 'Delivery' %}:</p>
+            <p class="p-font card-subtitle mb-2 text-muted h5">€{{ delivery|floatformat:2 }}</p>
         </div>
-        <!--Displays the current delivery total.-->
-        <div class="col-auto text-end ms-auto me-2">
-            <p class="p-font l-space-1 text-primary fs-5"><strong>€{{ cart_total }}</strong></p>
+        <div class="d-flex justify-content-between">
+
+            <h3 class="p-font card-title text-primary h4">{% trans 'Sub-total' %}:</h3>
+            <h3 class="p-font card-title text-primary h4">€{{ grand_total }}</h3>
         </div>
+        <p class="p-font fs-6 text-muted card-text">
+            {% trans 'Grand total will be finalised after delivery address is confirmed.' %}</p>
+        <a class="p-font smooth-click btn btn-info text-white shadow mx-auto mb-0"
+            href="#">{% trans 'Proceed with Order' %}</a>
     </div>
 </div>

@@ -6,7 +6,7 @@
         <!--Provides an image with a link to the product.
         the cart-thumb class controls the size.-->
         <div class="col-2 py-0">
-            <a href="{% url 'products:product-detail' item.product.id %}" class="mb-0">
+            <a href="{% url 'products:product-detail' item.product.id %}" class="smooth-click mb-0">
                 <img src="{{ item.product.image_4_3_sm.url }}" class="img-fluid" alt="{{ item.product.title }}" />
             </a>
         </div>
@@ -14,7 +14,7 @@
             <div class="row">
                 <!--Displays the item name, truncating longer text on smaller devices.-->
                 <a href="{% url 'products:product-detail' item.product.id %}">
-                    <h3 class="h-font l-space-1 text-primary text-truncate">{{ item.product.title|upper }}
+                    <h3 class="h-font smooth-click l-space-1 text-primary text-truncate">{{ item.product.title|upper }}
                     </h3>
                 </a>
                 <p class="p-font text-primary mb-1">{{ item.product.description|truncatechars:'120' }}</p>
@@ -38,7 +38,7 @@
                     Allows for quantity to be updated if there is numerous stock.-->
                 <div class="col-2 ms-3 text-center">
                     <button id="up-{{ item.product.id }}" type="submit"
-                        class="update-button p-font btn btn-sm btn-success">{% trans 'Update' %}</button>
+                        class="update-button p-font btn btn-sm btn-success shadow">{% trans 'Update' %}</button>
                 </div>
                 <div class="col-2 text-center">
                     <button id="re-{{ item.product.id }}" type="submit"

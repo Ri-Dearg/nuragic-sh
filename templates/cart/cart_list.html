@@ -20,21 +20,12 @@
             {% for item in cart_items %}
             {% include 'cart/includes/cart_product_display.html' %}
             {% endfor %}
-            {% include 'cart/includes/subtotal.html' %}
+            {% include 'cart/includes/cart_total.html' %}
         </ul>
     </article>
-    <div class="row mt-3 mx-0">
-        <div class="col">
-            <a class="btn btn-secondary float-right mx-3" href="#">
-                <object class="search-object" type="image/svg+xml" data="{% static 'icons/lock.svg' %}">
-                    <img src="{% static 'icons/lock.svg' %}" alt="Checkout" />
-                </object>
-                Checkout
-            </a>
-            <a class="btn btn-primary float-right" href="{% url 'products:product-list' %}">To Shop</a>
-        </div>
-    </div>
-
+    <article class="col-4">
+        {% include 'cart/includes/subtotal.html' %}
+    </article>
 </section>
 {% else %}
 <!--If there is no item in the cart, it displays a link back to he shop-->
