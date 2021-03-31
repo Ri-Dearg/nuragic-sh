@@ -1,0 +1,15 @@
+<!-- Loads internationalization  -->
+{% load i18n %}
+<!--A template which displays the cart total and delivery cost on the cart_list page.-->
+<div id="subtotal" class="list-group-item">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 mx-2">
+            <p class="p-font text-primary fs-5"><strong>{% trans 'Sub-total' %}:</strong></p>
+        </div>
+        <!--Displays the current delivery total.-->
+        <div class="col-auto text-end ms-auto me-2">
+            <p class="p-font l-space-1 text-primary fs-5"><strong>€{{ cart_total }}</strong></p>
+        </div>
+    </div>
+</div>
