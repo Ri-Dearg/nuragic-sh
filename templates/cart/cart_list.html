@@ -14,7 +14,7 @@
 </div>
 <section class="row px-0 px-md-2 bg-white">
     {% if cart %}
-    <article class="col-8">
+    <article class="col-12 col-md-8 order-1 order-md-0">
         <ul class="list-group list-group-flush">
             <!--For every item in the cart, it creates a row with option for that product.-->
             {% for item in cart_items %}
@@ -23,9 +23,7 @@
             {% include 'cart/includes/cart_total.html' %}
         </ul>
     </article>
-    <article class="col-4">
-        {% include 'cart/includes/subtotal.html' %}
-    </article>
+    {% include 'cart/includes/subtotal.html' %}
 </section>
 {% else %}
 <!--If there is no item in the cart, it displays a link back to he shop-->
@@ -37,6 +35,7 @@
     </div>
 </article>
 {% endif %}
+<div class="col-12 bg-brown py-2"></div>
 {% endblock %}
 {% block postloadjs %}
 <script>
