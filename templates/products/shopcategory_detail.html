@@ -22,7 +22,7 @@ Uses the product_box.html template -->
     {% endfor %}
 </div>
 {% if page_obj.has_next or page_obj.has_previous %}
-<nav aria-label="{% trans 'Product Page Navigation for {{ object.title }}' %}">
+<nav aria-label="{% trans 'Product Page Navigation for' %} {{ object.title }}">
     {% include 'base/includes/paginator.html' %}
 </nav>
 {% endif %}

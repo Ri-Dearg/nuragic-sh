@@ -56,7 +56,11 @@ class TestUserViews(TestCase):
         # Retrieves the most recently created user, logs them in
         # and goes to their profile.
         self.client.force_login(test_user)
-        response = self.client.get(f'/users/profile/{test_user.id}/')
+
+        response = self.client.get('/accounts/profile/')
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(f'/accounts/profile/{test_user.id}/')
 
         # Confirms context for all required page items as stated in the above.
         self.assertTrue(response.context['user_profile_detail'])
@@ -71,7 +75,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
-        self.client.get('/users/accounts/email/')
+        self.client.get('/accounts/c/email/')
         self.assertTemplateUsed('users/user_detail.html')
 
     def test_custom_password_view(self):
@@ -80,7 +84,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
-        self.client.get('/users/accounts/password/change/')
+        self.client.get('/accounts/c/password/change/')
         self.assertTemplateUsed('users/user_detail.html')
 
     def test_custom_update_shipping(self):
@@ -89,7 +93,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Posts a valid form to update the info
-        response = self.client.post('/users/shipping-billing/?next=/',
+        self.client.post('/accounts/shipping-billing/?next=/',
                          {'shipping_full_name': 'Test Name',
                           'shipping_phone_number_0': '+93',
                           'shipping_phone_number_1': '1',
@@ -115,7 +119,7 @@ class TestUserViews(TestCase):
                          'Test Name')
 
         # Posts an ivalid form to update the info
-        self.client.post('/users/shipping-billing/?next=/',
+        self.client.post('/accounts/shipping-billing/?next=/',
                          {'shipping_postcode': '123456789012345678901'})
 
         self.assertEqual(updated_user.userprofile.shipping_phone_number,
@@ -125,7 +129,7 @@ class TestUserViews(TestCase):
         """Tests different methods of updating the email lists."""
         # Retrieves the most recently created user and logs them in
         self.client.force_login(test_user)
-        response = self.client.post('/users/newsletter/?next=/',
+        response = self.client.post('/accounts/newsletter/?next=/',
                                     {'save': '',
                                      'newsletter': 'en',
                                      'email': test_user.email})
@@ -135,14 +139,14 @@ class TestUserViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(test_user.email in newsletter_1.email_list_en)
 
-        self.client.post('/users/newsletter/?next=/',
+        self.client.post('/accounts/newsletter/?next=/',
                          {'save': '',
                           'newsletter': 'en',
                           'email': test_user.email})
 
         self.assertTrue(newsletter_1.email_list_en == [test_user.email])
 
-        self.client.post('/users/newsletter/?next=/',
+        self.client.post('/accounts/newsletter/?next=/',
                          {'save': '',
                           'newsletter': 'it',
                           'email': test_user.email})
@@ -152,7 +156,7 @@ class TestUserViews(TestCase):
         self.assertTrue(test_user.email in newsletter_update.email_list_it)
         self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
-        self.client.get('/users/newsletter/?next=/',
+        self.client.get('/accounts/newsletter/?next=/',
                         {'save': '',
                          'newsletter': 'en',
                          'email': test_user.email})
@@ -161,7 +165,7 @@ class TestUserViews(TestCase):
         self.assertTrue(test_user.email in newsletter_update.email_list_it)
         self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
-        self.client.post('/users/newsletter/?next=/',
+        self.client.post('/accounts/newsletter/?next=/',
                          {'unsub': '',
                           'email': test_user.email})
 
@@ -169,11 +173,11 @@ class TestUserViews(TestCase):
         self.assertTrue(test_user.email not in newsletter_update.email_list_it)
         self.assertTrue(test_user.email not in newsletter_update.email_list_en)
 
-        self.client.post('/users/newsletter/?next=/',
+        self.client.post('/accounts/newsletter/?next=/',
                          {'save': '',
                           'newsletter': 'en',
                           'email': test_user.email})
-        self.client.post('/users/newsletter/?next=/',
+        self.client.post('/accounts/newsletter/?next=/',
                          {'unsub': '',
                           'email': test_user.email})
 
