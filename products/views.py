@@ -16,8 +16,9 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
         # Declares objects for pagination
-        object_list = self.object.products.all().order_by(
-            '-stock', '-popularity')
+        object_list = self.object.products.filter(
+            stock__gte=1) | self.object.products.filter(
+            can_preorder=True).order_by('-stock', '-popularity')
         context = super().get_context_data(
             object_list=object_list, **kwargs)
 
@@ -46,8 +47,12 @@ class ProductDetailView(DetailView):
         # while removing the current product.
         products = Product.objects.exclude(
             pk=this_object.id).filter(
-                category=product_category).order_by(
-                    '-stock', '-popularity')[:9]
+                category=product_category, stock__gte=1
+        ) | Product.objects.exclude(
+            pk=this_object.id).filter(
+            category=product_category, can_preorder=True
+        ).order_by('-stock', '-popularity').order_by(
+            '-stock', '-popularity')[:9]
 
         context['related_products'] = products
 

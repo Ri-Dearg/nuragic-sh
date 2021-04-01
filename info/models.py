@@ -61,14 +61,18 @@ def image_resize(self, image_title, width, height):
         return False
 
 
-def responsive_images(self, image_title, width, height):
+def responsive_images(self, image_title, width, height, thumb=False):
     """Uses the resize_image function to create three different sized images
     Returned from largest to smallest."""
-    lg = image_resize(self, image_title, width, height)
-    md = image_resize(self, image_title, width//3*2, height//3*2)
-    sm = image_resize(self, image_title, width//3, height//3)
+    lg_image = image_resize(self, image_title, width, height)
+    md_image = image_resize(self, image_title, width//3*2, height//3*2)
+    sm_image = image_resize(self, image_title, width//3, height//3)
 
-    return lg, md, sm
+    if thumb is True:
+        xs_image = image_resize(self, image_title, 48, 64)
+        return lg_image, md_image, sm_image, xs_image
+
+    return lg_image, md_image, sm_image
 
 
 class SplashImage(models.Model):
@@ -162,24 +166,14 @@ class Category(models.Model):
 
 class Page(models.Model):
     """Detailed pages for Categories"""
-    beige = 'secondary'
-    blue = 'info'
-    brown = 'brown'
-    green = 'success'
-    navy = 'primary'
-    purple = 'purple'
-    red = 'danger'
-    yellow = 'warning'
-
-    theme_choices = [(beige, 'beige'),
-                     (blue, 'blue'),
-                     (brown, 'brown'),
-                     (green, 'green'),
-                     (navy, 'navy'),
-                     (purple, 'purple'),
-                     (red, 'red'),
-                     (yellow, 'yellow'), ]
-
+    theme_choices = [('secondary', 'beige'),
+                     ('info', 'blue'),
+                     ('brown', 'brown'),
+                     ('success', 'green'),
+                     ('primary', 'navy'),
+                     ('purple', 'purple'),
+                     ('danger', 'red'),
+                     ('warning', 'yellow'), ]
     category = models.ForeignKey(
         Category, null=True,
         on_delete=models.SET_NULL,
@@ -212,7 +206,7 @@ class Page(models.Model):
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     theme = models.CharField(
-        max_length=10, choices=theme_choices, default=blue)
+        max_length=10, choices=theme_choices, default='info')
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):

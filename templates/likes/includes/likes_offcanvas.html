@@ -1,0 +1,44 @@
+<!-- Loads internationalization -->
+{% load i18n %}
+{% if likes %}
+<div class="offcanvas-header pb-0">
+    <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasLikesLabel">{% trans 'YOUR FAVOURITES' %}</h2>
+    <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+    <div class="w-100 text-center mb-3">
+        <a class="p-font smooth-click col-8 btn btn-purple text-white shadow mx-auto mb-0"
+            href="{% url 'likes:likes-list' %}">{% trans 'All Favorites' %}</a>
+    </div>
+    <div class="row">
+        {% for product in likes %}
+        <div class="fav-item col-4 p-1">
+            <a class="smooth-click mx-0 my-1" href="{% url 'products:product-detail' product.id %}">
+                <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
+                    height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
+                                {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
+                                {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w," sizes="125px"
+                    class="img-fluid" alt="{{ product.title }}" />
+                <p class="h-font d-block d-sm-none text-decoration-underline fs-6 mb-0">
+                    {{ product.title|truncatechars:10|upper }}
+                </p>
+                <p class="h-font d-none d-sm-block text-decoration-underline fs-6 mb-0">
+                    {{ product.title|truncatechars:15|upper }}
+                </p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="offcanvas-header pb-0">
+    <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasLikesLabel">{% trans 'NO FAVOURITES' %}</h2>
+    <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+    <div class="w-100 text-center mb-3">
+        <a class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0"
+            href="{% url 'products:product-list' %}">{% trans 'Explore our Offerings' %}.</a>
+    </div>
+</div>
+{% endif %}

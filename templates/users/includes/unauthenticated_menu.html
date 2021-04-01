@@ -1,0 +1,9 @@
+<!-- Loads internationalization -->
+{% load i18n %}
+<div class="col-auto">
+    <button type="button" class="btn btn-link d-inline-block text-white px-2 py-auto pb-md-1" tabindex="0"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
+        <p class="visually-hidden">{% trans 'Login or Register' %}</p>
+        {% include 'base/includes/icons/person-circle.svg' %}
+    </button>
+</div>

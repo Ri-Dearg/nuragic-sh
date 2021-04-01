@@ -1,7 +1,7 @@
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
 <!-- Header -->
-<header class="fixed-top container-xxl shadow p-0">
+<header class="sticky-top container-xxl shadow p-0">
     <!-- First row just contains the logo -->
     <div class="row bg-primary">
         <div class="col-12">
@@ -33,15 +33,20 @@
                 </div>
                 <div class="col-2 d-none d-md-flex justify-content-end mx-2">
                     {% if 'shop' in request.path %}
-                    <div class="like-dropdown-container">
-                        {% include 'likes/includes/likes_dropdown.html' %}
+                    <div class="col-4 cart-offcanvas-container">
+                        {% include 'cart/includes/cart_menu.html' %}
+                    </div>
+                    <div class="col-4 like-offcanvas-container">
+                        {% include 'likes/includes/likes_menu.html' %}
                     </div>
                     {% endif %}
-                    {% if user.is_authenticated %}
-                    {% include 'users/includes/authenticated_dropdown.html' %}
-                    {% else %}
-                    {% include 'users/includes/unauthenticated_dropdown.html' %}
-                    {% endif %}
+                    <div class="col-4">
+                        {% if user.is_authenticated %}
+                        {% include 'users/includes/authenticated_menu.html' %}
+                        {% else %}
+                        {% include 'users/includes/unauthenticated_menu.html' %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,17 +57,19 @@
             <nav
                 class="navbar navbar-expand-lg navbar-dark justify-content-end {% if 'shop' in request.path %}bg-warning {% else %}bg-secondary {% endif %}w-100 p-0">
                 {% if 'shop' in request.path %}
-                <div class="d-md-none like-dropdown-container">
-                    <p class="visually-hidden" id="dropdownLikeMenu">Likes</p>
-                    {% include 'likes/includes/likes_dropdown.html' %}
+                <div class="col-2 col-sm-1 d-md-none cart-offcanvas-container">
+                    <p class="visually-hidden" id="dropdownCartMenu">Likes</p>
+                    {% include 'cart/includes/cart_menu.html' %}
+                </div>
+                <div class="col-2 col-sm-1 d-md-none like-offcanvas-container">
+                    {% include 'likes/includes/likes_menu.html' %}
                 </div>
                 {% endif %}
                 <div class="d-md-none">
-                    <p class="visually-hidden" id="dropdownUserMenu">Authentication Menu</p>
                     {% if user.is_authenticated %}
-                    {% include 'users/includes/authenticated_dropdown.html' %}
+                    {% include 'users/includes/authenticated_menu.html' %}
                     {% else %}
-                    {% include 'users/includes/unauthenticated_dropdown.html' %}
+                    {% include 'users/includes/unauthenticated_menu.html' %}
                     {% endif %}
                 </div>
                 <button class="navbar-toggler ms-1 me-2" type="button" data-bs-toggle="collapse"

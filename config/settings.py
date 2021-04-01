@@ -23,6 +23,9 @@ except ModuleNotFoundError:
     # Error handling
     pass
 
+# Version Number
+VERSION = '0.0.2'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -73,9 +76,10 @@ INSTALLED_APPS = [
     # Renders form fields
     'crispy_forms',
     # My apps
-    'jasmine_testing',
+    'cart',
     'contact',
     'info',
+    'jasmine_testing',
     'likes',
     'products',
     'users',
@@ -122,7 +126,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # for navbar categories
                 'info.context_processors.get_categories',
+                # Context necessary for shop functions
+                'config.context_processors.global_settings',
                 'likes.context_processors.get_likes',
+                'cart.context_processors.get_cart',
             ],
         },
     },
@@ -287,3 +294,5 @@ ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
                  'reset_password': 'users.forms.StyledResetPasswordForm',
                  'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
                  }
+
+STANDARD_DELIVERY = 7

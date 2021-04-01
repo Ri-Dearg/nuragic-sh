@@ -152,20 +152,20 @@ class TestViews(TestCase):
         product_2 = Product.objects.latest('date_added')
 
         # Tests the template is updated when the view is called
-        self.client.get('/shop/likes/update/')
-        self.assertTemplateUsed('likes/includes/likes_dropdown.html')
+        self.client.get('/shop/likes/update_offcanvas/')
+        self.assertTemplateUsed('likes/includes/likes_offcanvas.html')
 
         # Adds a liked product
         self.client.post('/shop/likes/ajax/toggle/',
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         # Updates the template and context
-        self.client.get('/shop/likes/update/')
-        self.assertTemplateUsed('likes/includes/likes_dropdown.html')
+        self.client.get('/shop/likes/update_offcanvas/')
+        self.assertTemplateUsed('likes/includes/likes_offcanvas.html')
 
         # Logs a user in and updates the context
         self.client.force_login(test_user)
-        self.client.get('/shop/likes/update/')
+        self.client.get('/shop/likes/update_offcanvas/')
 
         # Confirms the session context
         session = self.client.session

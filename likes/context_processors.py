@@ -1,3 +1,4 @@
+"""Adds liked items to the context."""
 from products.models import Product
 
 

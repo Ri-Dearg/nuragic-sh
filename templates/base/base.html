@@ -13,15 +13,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <!-- Meta keywords and description -->
-        <meta name="description" content="{% block meta_description %}{% endblock %}" />        
-        <meta name="keywords" content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuargic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
+        <meta name="description" content="{% block meta_description %}{% endblock %}" />
+        <meta name="keywords"
+            content="{% block meta_keywords %}{% trans 'Alessandro Olianas, Nuragic Shamanic Healing, events, spiritual events, Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, online courses, courses, spiritual, spirituality, nuragic,' %}{% endblock %}" />
         <!-- Windows app tile config -->
-        <meta name="msapplication-config" content="{% static 'browserconfig.xml' %}" />
+        <meta name="msapplication-config" content="{% static 'browserconfig.xml' %}?{{ VERSION }}" />
         <meta name="msapplication-TileColor" content="#2b384c" />
         <meta name="msapplication-TileImage" content="{% static 'favicons/ms-icon-144x144.png' %}" />
         <meta name="theme-color" content="#2b384c" />
         <!-- Web manifest files (currently not in use) -->
-        <link rel="manifest" href="{% static 'manifest.json' %}" />
+        <link rel="manifest" href="{% static 'manifest.json' %}?{{ VERSION }}" />
         <!-- favicons -->
         <link rel="icon" href="{% static 'favicons/favicon.ico' %}" />
         <link rel="icon" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}" />
@@ -40,8 +41,8 @@
         <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicons/apple-icon-152x152.png' %}" />
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-icon-180x180.png' %}" />
         <!-- Critical styles, then all styles -->
-        {% block critical_css %}{% endblock %}
-        <link rel="stylesheet preload" as="style" type="text/css" href="{% sass_src 'css/main.scss' %}" />
+        <!-- {% block critical_css %}{% endblock %} -->
+        <link rel="stylesheet preload" as="style" type="text/css" href="{% sass_src 'css/main.scss' %}?{{ VERSION }}" />
 
         <!-- Open Graph details -->
         <meta property="og:locale" content="en_US" />
@@ -64,6 +65,26 @@
     {% endblock %}
 
     <body class="bg-primary">
+        {% if user.is_authenticated %}
+        {% include 'users/includes/authenticated_offcanvas.html' %}
+        {% else %}
+        {% include 'users/includes/unauthenticated_offcanvas.html' %}
+        {% endif %}
+        {% if 'shop' in request.path %}
+        <!-- Displays Likes -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLikes" aria-labelledby="offcanvasLikesLabel">
+            <div class="like-offcanvas-content overflow-auto">
+                {% include 'likes/includes/likes_offcanvas.html' %}
+            </div>
+        </div>
+        <!-- Displays Cart -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+            <div class="cart-offcanvas-content overflow-auto">
+                {% include 'cart/includes/cart_offcanvas.html' %}
+            </div>
+        </div>
+        {% endif %}
+
         <!-- preloader video. Uses classes to center the logo on the viewport -->
         <div class="preloader justify-content-center align-items-center bg-primary">
             <div class="preload-gif" role="status">
@@ -71,7 +92,7 @@
                     <source src="{% static 'images/preloader.mp4' %}" type="video/mp4">
                     <source src="{% static 'images/preloader.webm' %}" type="video/webm">
                 </video>
-                <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">{% trans 'Loading' %}...</span>
             </div>
         </div>
         <!-- Background images positioned behind the main section
@@ -101,15 +122,14 @@
             {% block content %}
             {% endblock %}
         </main>
+
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
-        <!-- Script block -->
-        {% block postloadjs %}
         <!-- Jquery and Bootstrap 5 -->
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}?{{ VERSION }}"></script>
         <!-- Basic js files loaded -->
-        <script src="{% static 'js/custom/base.js' %}"></script>
+        <script src="{% static 'js/custom/base.js' %}?{{ VERSION }}"></script>
         <!-- shows toasts if there are messages -->
         {% if messages %}
         <script>
@@ -117,13 +137,18 @@
         </script>
         {% endif %}
         {% if 'shop' in request.path %}
-        <script src="{% static 'js/custom/shop.js' %}"></script>
+        <script src="{% static 'js/custom/shop.js' %}?{{ VERSION }}"></script>
         <script>
             buttonToggle('{% include "base/includes/icons/bookmark-heart-fill.svg" %}',
                 '{% include "base/includes/icons/bookmark-heart.svg" %}',
-                '{% url "likes:likes-update" %}')
+                '{% include "base/includes/icons/cart-check-fill.svg" %}',
+                '{% include "base/includes/icons/cart-plus.svg" %}',
+                '{% url "likes:likes-offcanvas" %}',
+                '{% url "cart:cart-offcanvas" %}')
         </script>
         {% endif %}
+        <!-- Script block -->
+        {% block postloadjs %}
         {% endblock %}
     </body>
 

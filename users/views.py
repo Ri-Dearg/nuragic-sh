@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
@@ -16,6 +17,11 @@ from django.views.generic import DetailView
 from contact.models import Newsletter
 
 from .forms import UserProfileForm
+
+
+def profile_redirect(request):
+    """Redirects to user profile with pk."""
+    return redirect('users:user-detail', pk=request.user.id)
 
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):

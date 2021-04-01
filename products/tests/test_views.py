@@ -38,11 +38,22 @@ class TestProductsViews(TestCase):
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
         self.assertTemplateUsed(
             response, 'products/includes/related_products.html')
-        self.assertTemplateUsed(response, 'likes/includes/likes_dropdown.html')
+        self.assertTemplateUsed(
+            response, 'likes/includes/likes_offcanvas.html')
+        self.assertTemplateUsed(
+            response, 'likes/includes/likes_menu.html')
+        self.assertTemplateUsed(
+            response, 'cart/includes/cart_offcanvas.html')
+        self.assertTemplateUsed(
+            response, 'cart/includes/cart_menu.html')
         self.assertTemplateUsed(
             response, 'likes/includes/detail_like_toggle.html')
         self.assertTemplateUsed(
+            response, 'cart/includes/detail_cart_toggle.html')
+        self.assertTemplateUsed(
             response, 'likes/includes/box_like_toggle.html')
+        self.assertTemplateUsed(
+            response, 'cart/includes/box_cart_toggle.html')
         self.assertTemplateUsed(response, 'base/base.html')
         self.assertTemplateUsed(response, 'base/includes/header.html')
         self.assertTemplateUsed(response, 'base/includes/shop_nav.html')

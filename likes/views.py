@@ -9,6 +9,8 @@ from django.views.generic import ListView
 
 from products.models import Product
 
+from .context_processors import get_likes
+
 
 class LikesListView(ListView):  # pylint: disable=too-many-ancestors
     """View that displays all the liked products for the user."""
@@ -76,6 +78,7 @@ def likes_toggle(request):
         try:
             item_id = request.POST.get('item-id')
             product = get_object_or_404(Product, pk=item_id)
+            data['result'] = ['like']
 
             # Saves the item to the profile if the user is logged in, otherwise
             # saves to the session
@@ -91,14 +94,12 @@ def likes_toggle(request):
                     product.save()
                     data['message'] = _(
                         f'{product.title} removed from favorites.')
-                    data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
                     data['message'] = _(f'{product.title} favorited!')
-                    data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
 
@@ -112,14 +113,12 @@ def likes_toggle(request):
                     request.session['likes'] = likes
                     data['message'] = _(
                         f'{product.title} removed from favorites.')
-                    data['result'] = 'unliked'
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
                     data['message'] = _(f'{product.title} favorited!')
-                    data['result'] = 'liked'
                     data['tag'] = 'success'
                     data['tagMessage'] = _('Success')
 
@@ -134,41 +133,15 @@ def likes_toggle(request):
     return HttpResponseForbidden()
 
 
-def update_likes(request):
-    """This view is used to update the likes_popover.html template.
+def update_likes_offcanvas(request):
+    """This view is used to update the likes_menu.html template.
     It is called by the JS file after it successfully receives
     the likes_toggle view response.
     It updates the context using the same logic as the get_likes context
     processor before refreshing the template.
     The JS script then pushes the newly rendered template into
-    the popover HTML."""
-
-    # Initializes a list for use with the context
-    likes = []
-
-    # Saves the item to the profile if the user is logged in, otherwise
-    # saves to the session
-    user = request.user
-    if user.is_authenticated:
-        liked_products = user.userprofile.liked_products.order_by(
-            '-liked__datetime_added')
-        for product in liked_products:
-            likes.append(product)
-
-    # Creates a list of IDs and retrieves the products from
-    # the DB before adding them to the context.
-    else:
-        id_list = []
-        session_likes = request.session.get('likes')
-
-        if session_likes:
-            for key in session_likes:
-                id_list.append(key)
-            liked_products = Product.objects.filter(id__in=id_list)
-
-            for product in liked_products:
-                likes.append(product)
+    the HTML."""
 
     # Pushes the new context to the page before re-rendering the template.
-    RequestContext(request).push({'likes': likes})
-    return render(request, 'likes/includes/likes_dropdown.html')
+    RequestContext(request).push(get_likes(request))
+    return render(request, 'likes/includes/likes_offcanvas.html')

@@ -9,13 +9,15 @@ class ProductInlineAdmin(TranslationStackedInline):
     """Inline for viewing all Products in a category in both langauges."""
     model = Product
     fields = ('category', 'title', 'description', 'price',
-              'image_4_3', 'stock', 'date_added')
+              'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
+              'stock', 'date_added')
 
 
 class ProductAdmin(admin.ModelAdmin):
     """Displays the Products admin fields."""
     fields = ('category', 'title', 'description', 'price',
-              'image_4_3', 'stock', 'date_added')
+              'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
+              'stock', 'date_added')
 
 
 class ProductTrans(ProductAdmin, TranslationAdmin):
