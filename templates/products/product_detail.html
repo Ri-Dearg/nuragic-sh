@@ -47,7 +47,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 <div class="col-4 form-floating ms-3 mb-2">
                     <input class="form-control" type="number" id="id_quantity" form="cf-{{ product.id }}"
                         name="quantity" value="1" min="0" {% if product.stock > 0 %} max="{{ product.stock }}"
-                        {% endif %} required />
+                        {% endif %} required{% if product.is_unique %} readonly{% endif %} />
                     <label class="p-font text-primary sr-only requiredField"
                         for="id_quantity">{% trans 'Quantity' %}</label>
                 </div>

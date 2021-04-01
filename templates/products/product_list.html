@@ -29,7 +29,7 @@ such as likes_list, category_detail and stockdrop_detail.-->
         <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
     </div>
 </div>
-<div class="row px-0 px-md-2 bg-white">
+<section class="row px-0 px-md-2 bg-white">
     <!-- This displays all products, organised by 'popularity' and stock quantity.
 Retrieves all products if no search query is performed.
 It utilises the paginator so it can use the infinite scroll feature. -->
@@ -38,16 +38,16 @@ It utilises the paginator so it can use the infinite scroll feature. -->
     {% include 'products/includes/product_box.html' %}
     {% endif %}
     {% endfor %}
-</div>
+</section>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
-<div class="row bg-white">
+<section class="row bg-white">
     <div class="col text-center">
         <h4 class="text-dark">Nothing found but good stuff is...</h4>
         <h2 class="text-primary heading-font">Neverlost</h2>
         <a class="btn btn-lg btn-danger shadow mt-2" href="{% url 'products:product-list' %}">Shop</a>
     </div>
-</div>
+</section>
 <hr>
 {% include 'products/includes/related_products.html' %}
 {% endif %}
