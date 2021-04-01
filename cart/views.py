@@ -42,7 +42,6 @@ def cart_toggle(request):
 
             # Gets the cart to run through item details.
             cart = request.session.get('cart', {})
-            cart_quantity = request.session.get('cart_quantity', 0)
 
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
@@ -89,15 +88,31 @@ def cart_toggle(request):
                 data['tag'] = 'success'
                 data['tagMessage'] = _('Success')
 
-            cart_quantity = 0
-            for item in cart:
-                cart_quantity += cart[item]
-            request.session['cart_quantity'] = cart_quantity
+            # Calculates the grand total and
+            # then pushes all details into the context.
+            RequestContext(request).push(get_cart(request))
 
-            data['result'] = ['cart', cart_quantity]
+            cart_quantity = request.session.get('cart_quantity', 0)
+            cart_total = request.session.get('cart_total', '0.00')
+            delivery = request.session.get('delivery', '0.00')
+            grand_total = request.session.get('grand_total', '0.00')
+
+            request.session['cart_quantity'] = cart_quantity
+            request.session['cart_total'] = cart_total
+            request.session['delivery'] = delivery
+            request.session['grand_total'] = grand_total
+
+            data['result'] = ['cart',
+                              cart_quantity,
+                              cart_total,
+                              delivery,
+                              grand_total]
 
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except
+            # Calculates the grand total and
+            # then pushes all details into the context.
+            RequestContext(request).push(get_cart(request))
             data['message'] = _(f'Error: %r, {error}')
             data['result'] = 'error'
             data['tag'] = 'danger'
@@ -116,15 +131,5 @@ def update_cart_offcanvas(request):
     The JS script then pushes the newly rendered template into
     the popover HTML."""
 
-    # Calculates the grand total and then pushes all details into the context.
-    RequestContext(request).push(get_cart(request))
-
     # Re-renders the popover template
     return render(request, 'cart/includes/cart_offcanvas.html')
-
-
-def refresh_total(request):
-    """One the cart list page, this refreshes the totals box template.
-    Other context info is handled by the update_crt view."""
-
-    return render(request, 'cart/includes/totals.html')

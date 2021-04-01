@@ -19,7 +19,6 @@ function buttonToggle(
   uncartedSvg,
   likeUpdate,
   cartUpdate
-  //   cartRefresh
 ) {
   /**
    * Switches the SVG icons when a button is pressed.
@@ -64,12 +63,20 @@ function buttonToggle(
    * @param {array} result - Either 'cart' or 'like' for [0],
    * [1] is used for cart quantity updating depending on which button is pressed.
    */
-  function offcanvasUpdate(result) {
-    console.log(result);
+  function offcanvasUpdate(result, formData, id) {
     if (result[0] === "like") {
       var update = likeUpdate;
     } else if (result[0] === "cart") {
       var update = cartUpdate;
+      if (formData.get("special") === "remove") {
+        $(`#cart-item-${id}`).slideUp();
+      }
+      $(`.cart-totals`).fadeTo("fast", 0, function () {
+        $("#cart-items").text(`€${result[2]}`);
+        $("#cart-delivery").text(`€${result[3]}`);
+        $("#cart-grand").text(`€${result[4]}`);
+        $(`.cart-totals`).fadeTo("fast", 1);
+      });
       if (result[1] > 0) {
         $(`#quantity-badge`).text(result[1]);
       } else {
@@ -113,8 +120,10 @@ function buttonToggle(
     // The URL that the POST data would be sent to.
     const formUrl = object.action;
 
-    // Swaps svg icons appropriately
-    svgSwitch(formType, id, svg, formData);
+    if (svg != null) {
+      // Swaps svg icons appropriately
+      svgSwitch(formType, id, svg, formData);
+    }
 
     // Sends form to Django view
     fetch(formUrl, {
@@ -129,20 +138,24 @@ function buttonToggle(
           return response.json();
         } else {
           // if there is an error, it fires a message and swaps back the svg icon
-          var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg, formData);
+          if (svg != null) {
+            var svg = object.firstElementChild.firstElementChild;
+            svgSwitch(formType, id, svg, formData);
+          }
           throw Error(response.status + " " + response.statusText);
         }
       })
       .then((data) => {
         if (data.result === "error") {
-          var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg, formData);
+          if (svg != null) {
+            var svg = object.firstElementChild.firstElementChild;
+            svgSwitch(formType, id, svg, formData);
+          }
           throw Error(data.message);
           // Refreshes the dropdowns
         } else if (data.result != "error") {
           toastMessage(data.tag, data.tagMessage, data.message);
-          offcanvasUpdate(data.result);
+          offcanvasUpdate(data.result, formData, id);
         }
       })
       .catch((error) => toastMessage("danger", "Error", error));

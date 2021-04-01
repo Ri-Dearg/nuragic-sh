@@ -25,7 +25,6 @@ def get_cart(request):
         for item_id, item_data in temp_cart.items():
             # Sets the total quantity of an item:
             cart_quantity += item_data
-            request.session['cart_quantity'] = cart_quantity
             # Confirms the item is valid or throws an error with a message:
             try:
                 product = Product.objects.get(pk=item_id)
@@ -65,6 +64,11 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
+    request.session['cart_quantity'] = cart_quantity
+    request.session['cart_total'] = str(cart_total)
+    request.session['grand_total'] = str(grand_total)
+    request.session['delivery'] = "{:.2f}".format(delivery)
+
     request.session.save()
     return {'cart': cart,
             'cart_quantity': cart_quantity,

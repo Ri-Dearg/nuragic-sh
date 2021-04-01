@@ -32,8 +32,8 @@
                     <div class="form-floating">
                         <input class="form-control d-inline-block" type="number"
                             id="cart-quantity-{{ item.product.id }}" name=" quantity" value="{{ item.quantity }}"
-                            min="1" max="{{ item.product.stock }}" required{% if item.product.is_unique %}
-                            disabled{% endif %} />
+                            min="1" {% if item.product.stock > 0 %} max="{{ item.product.stock }}" {% endif %}
+                            required{% if item.product.is_unique %} readonly{% endif %} />
                         <label class="p-font text-primary sr-only requiredField"
                             for="cart-quantity-{{ item.product.id }}">{% trans 'Quantity' %}</label>
                     </div>

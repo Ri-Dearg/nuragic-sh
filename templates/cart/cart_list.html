@@ -27,11 +27,12 @@
 </section>
 {% else %}
 <!--If there is no item in the cart, it displays a link back to he shop-->
-<article class="row mx-0">
+<article class="row">
     <div class="col text-center">
-        <h4 class="text-dark">Your cart is empty...</h4>
-        <h2 class="text-primary heading-font">Let's do some shopping</h2>
-        <a class="btn btn-lg btn-danger mt-4 w-25" href="{% url 'products:product-list' %}">Shop</a>
+        <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
+        <h2 class="text-primary heading-font">{% trans 'See what we can offer' %}.</h2>
+        <a class="btn-tran btn btn-lg btn-warning mt-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
     </div>
 </article>
 {% endif %}
@@ -42,12 +43,15 @@
     // Inputs special values that are used for ajax logic processing to declare quantity update.
     $(".update-button").on("click", function () {
         var id = this.id.slice(3);
-        $(`#af-${id}`).append('<input type="hidden" name="special" value="update"/>');
+        $(`#${id}-special-info`).remove()
+        $(`#af-${id}`).append(`<input id="${id}-special-info" type="hidden" name="special" value="update"/>`);
     });
     // Inputs special values that are used for ajax logic processing to remove the product.
     $(".remove-button").on("click", function () {
         var id = this.id.slice(3);
-        $(`#af-${id}`).append('<input type="hidden" name="special" value="remove"/>');
+        $(`#${id}-special-info`).remove()
+        $(`#af-${id}`).append(`<input id="${id}-special-info" type="hidden" name="special" value="remove"/>`);
     });
 </script>
-{{ block.super }} {% endblock %}
+{{ block.super }}
+{% endblock %}
