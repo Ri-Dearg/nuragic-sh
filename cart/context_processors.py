@@ -32,8 +32,8 @@ def get_cart(request):
                 # Declares product as false and removes it:
                 product = False
                 cart.pop(item_id)
-                messages.warning(request,
-                                 _('A Product is unavailable.'))
+                messages.error(request,
+                               _('A Product is unavailable.'))
 
             # If the product is valid and in stock,
             # it calculates details for that item:
@@ -64,6 +64,7 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
+    request.session['cart'] = cart
     request.session['cart_quantity'] = cart_quantity
     request.session['cart_total'] = str(cart_total)
     request.session['grand_total'] = str(grand_total)
