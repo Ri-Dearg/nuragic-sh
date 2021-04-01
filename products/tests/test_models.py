@@ -43,11 +43,26 @@ valid_product_2 = Product(
     image_4_3_sm=image,
     image_4_3_xs=image)
 
+unique_product = Product(
+    category=ShopCategory.objects.filter(
+        title='SC1').order_by('id').first(),
+    title_en='unique',
+    title_it='unique',
+    description_en='description',
+    description_it='description',
+    price=0.5,
+    is_unique=True,
+    image_4_3=image,
+    image_4_3_md=image,
+    image_4_3_sm=image,
+    image_4_3_xs=image)
+
 
 class TestProductsModels(TestCase):
     """Tests for Products models."""
 
     def setUp(self):
+        unique_product.save()
         valid_product_1.save()
 
     def test_product_str(self):
@@ -77,3 +92,11 @@ class TestProductsModels(TestCase):
         self.assertEqual(new_info.image_4_3.width, 945)
         self.assertTrue(re.search('^shop/products/default.*.jpeg$',
                                   new_info.image_4_3.name))
+
+    def test_unique_unique_product_change(self):
+        """Tests that unique products can only have 1 stock."""
+        product_1 = Product.objects.get(title='unique')
+        product_1.stock = 50
+        product_1.save()
+
+        self.assertEqual(product_1.stock, 1)
