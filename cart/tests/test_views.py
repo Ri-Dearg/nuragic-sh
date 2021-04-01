@@ -15,6 +15,57 @@ class TestViews(TestCase):
                                      valid_product_1,
                                      valid_product_2])
 
+    def test_error_on_incorrect_item_removed(self):
+        """Checks that an error occurs in the toggle when an
+        item isn't in the cart"""
+
+        product = Product.objects.filter(
+            title='P1').last()
+        p_id = product.id
+
+        # This adds the item
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': p_id, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        session = self.client.session
+
+        # confirms the item is in the cart
+        self.assertEqual(session['cart'], {f'{p_id}': 1})
+
+        # Uses the toggle on a non-existant item
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': 0, 'quantity': '0'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        # confirms the error message
+        self.assertRaises(Exception, msg='Error removing item: 0')
+
+        session['cart'] = {f'{p_id}': 1, '0': 1}
+        session.save()
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': p_id, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        session = self.client.session
+        self.assertEqual(session['cart'], {})
+
+        # Adds an item with no stock and confirms an error.
+        no_stock_product = Product.objects.filter(
+            title='P1').last()
+        no_stock_product.stock = 0
+        no_stock_product.save()
+        nsp_id = no_stock_product.id
+
+        session['cart'] = {f'{nsp_id}': 1}
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': p_id, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        self.assertEqual(session['cart'], {f'{p_id}': 1})
+
     def test_correct_template_used(self):
         """Checks that the url produces the correct template."""
         response = self.client.get('/shop/cart/cart_list/')
@@ -158,32 +209,6 @@ class TestViews(TestCase):
 
         # Confirms the cart is now empty
         self.assertEqual(session['cart'], {})
-
-    def test_error_on_incorrect_item_removed(self):
-        """Checks that an error occurs in the toggle when an
-        item isn't in the cart"""
-
-        product = Product.objects.filter(
-            title='P1').last()
-        p_id = product.id
-
-        # This adds the item
-        self.client.post('/shop/cart/ajax/toggle/',
-                         {'item-id': p_id, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
-        session = self.client.session
-
-        # confirms the item is in the cart
-        self.assertEqual(session['cart'], {f'{p_id}': 1})
-
-        # Uses the toggle on a non-existant item
-        self.client.post('/shop/cart/ajax/toggle/',
-                         {'item-id': 0, 'quantity': '0'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
-        # confirms the error message
-        self.assertRaises(Exception, msg='Error removing item: 0')
 
     def test_update_cart_view(self):
         """Tests numerous functions relating to updating the cart update view,
