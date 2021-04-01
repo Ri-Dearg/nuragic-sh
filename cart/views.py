@@ -113,7 +113,7 @@ def cart_toggle(request):
             # Calculates the grand total and
             # then pushes all details into the context.
             RequestContext(request).push(get_cart(request))
-            data['message'] = _(f'Error: %r, {error}')
+            data['message'] = _(f'Error adding item to cart: {error}')
             data['result'] = 'error'
             data['tag'] = 'danger'
             data['tagMessage'] = _('Error')

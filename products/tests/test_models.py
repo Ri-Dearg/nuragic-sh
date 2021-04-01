@@ -27,7 +27,8 @@ valid_product_1 = Product(
     price=0.5,
     image_4_3=image,
     image_4_3_md=image,
-    image_4_3_sm=image)
+    image_4_3_sm=image,
+    image_4_3_xs=image)
 
 valid_product_2 = Product(
     category=ShopCategory.objects.filter(
@@ -39,7 +40,8 @@ valid_product_2 = Product(
     price=0.5,
     image_4_3=image,
     image_4_3_md=image,
-    image_4_3_sm=image)
+    image_4_3_sm=image,
+    image_4_3_xs=image)
 
 
 class TestProductsModels(TestCase):
