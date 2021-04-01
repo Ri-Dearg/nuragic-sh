@@ -1,6 +1,7 @@
 """Models for the info module."""
 
-import datetime
+import random
+import string
 import sys
 from io import BytesIO
 
@@ -11,6 +12,14 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from PIL import Image
 from tinymce.models import HTMLField
+
+
+def get_random_string(length):
+    # With combination of lower and upper case
+    result_str = ''.join(random.choice(string.ascii_letters)
+                         for i in range(length))
+    # print random string
+    return result_str
 
 
 def image_resize(self, image_title, width, height):
@@ -25,10 +34,6 @@ def image_resize(self, image_title, width, height):
     except self.__class__.DoesNotExist:
         pass
     try:
-        # Makes each image unique as django-cleanup deletes shared files
-        time = datetime.datetime.strptime('20.12.2016 09:38:42,76',
-                                          '%d.%m.%Y %H:%M:%S,%f')
-        millisecs = int(time.timestamp() * 1000)
         img = Image.open(image_field)
         img_format = img.format.lower()
 
@@ -50,7 +55,7 @@ def image_resize(self, image_title, width, height):
             image_field = InMemoryUploadedFile(
                 output,
                 'ImageField',
-                f'{image_field.name.split(".")[0]}_{millisecs}.{img_format}',  # noqa E501
+                f'{image_field.name.split(".")[0]}_{get_random_string(8)}.{img_format}',  # noqa E501
                 'image/jpeg', sys.getsizeof(output),
                 None)
             return image_field
