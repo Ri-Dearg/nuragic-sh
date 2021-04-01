@@ -2,14 +2,18 @@
 from django.test import TestCase
 
 from products.models import Product
-from products.tests.test_models import valid_product_1, valid_product_2
+from products.tests.test_models import (preorder_product, unique_product,
+                                        valid_product_1, valid_product_2)
 
 
 class TestViews(TestCase):
     """Tests views for the Cart app."""
 
     def setUp(self):
-        Product.objects.bulk_create([valid_product_1, valid_product_2])
+        Product.objects.bulk_create([preorder_product,
+                                     unique_product,
+                                     valid_product_1,
+                                     valid_product_2])
 
     def test_correct_template_used(self):
         """Checks that the url produces the correct template."""
@@ -17,23 +21,71 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cart/cart_list.html')
 
+    def test_correct_quantity_for_unique_products(self):
+        """Test unique product stock remains at 1
+        even when a greater quantity is added."""
+        product_is_unique = Product.objects.filter(
+            title='unique').last()
+
+        up_id = product_is_unique.id
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': up_id, 'quantity': '10'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        session = self.client.session
+        self.assertEqual(session['cart'], {f'{up_id}': 1})
+
+    def test_ability_to_preorder(self):
+        """Tests ability to preorder items when stock is at 0."""
+        product_preorder = Product.objects.filter(
+            title='preorder').last()
+
+        pp_id = product_preorder.id
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': pp_id, 'quantity': '10'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        session = self.client.session
+        self.assertEqual(session['cart'], {f'{pp_id}': 10})
+
     def test_confirm_add_to_cart_functions(self):
         """Tests add to cart functions, such as limiting stock,
         multiple items, updating quantities."""
 
         # Gets a product and sets a stock limit
-        not_unique_product = Product.objects.earliest('date_added')
+        not_unique_product = Product.objects.filter(
+            title='P1').first()
         not_unique_product.is_unique = False
         not_unique_product.stock = 3
         not_unique_product.save()
         nup_id = not_unique_product.id
 
-        limit_stock_product = Product.objects.latest('date_added')
+        limit_stock_product = Product.objects.filter(
+            title='P1').last()
         limit_stock_product.stock = 5
         limit_stock_product.save()
         lsp_id = limit_stock_product.id
 
+        response = self.client.get('/shop/cart/ajax/toggle/',
+                                   {'item-id': lsp_id, 'quantity': '1'},
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 403)
+
         # Adds a normal quantity, then adds a quantity higher than the stock
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': lsp_id, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': lsp_id, 'quantity': '0'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': lsp_id, 'quantity': '0'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
         self.client.post('/shop/cart/ajax/toggle/',
                          {'item-id': lsp_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
@@ -64,7 +116,8 @@ class TestViews(TestCase):
         self.assertRaises(Exception, msg='Error adding item: 0')
 
         # Adds an item with no stock and confirms an error.
-        no_stock_product = Product.objects.latest('date_added')
+        no_stock_product = Product.objects.filter(
+            title='P1').last()
         no_stock_product.stock = 0
         no_stock_product.save()
         nsp_id = no_stock_product.id
@@ -74,7 +127,7 @@ class TestViews(TestCase):
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         session = self.client.session
         self.client.get('/')
-        self.assertEqual(session['cart'], {})
+        self.assertEqual(session['cart'], None)
 
         self.assertRaises(Exception, msg='Error adding item: 0')
 
@@ -82,7 +135,8 @@ class TestViews(TestCase):
         """Tests that the ajax toggle first adds an item and
         then removes the item from the cart."""
 
-        product = Product.objects.latest('date_added')
+        product = Product.objects.filter(
+            title='P1').last()
         p_id = product.id
 
         # This adds the item
@@ -109,7 +163,8 @@ class TestViews(TestCase):
         """Checks that an error occurs in the toggle when an
         item isn't in the cart"""
 
-        product = Product.objects.latest('date_added')
+        product = Product.objects.filter(
+            title='P1').last()
         p_id = product.id
 
         # This adds the item
@@ -135,36 +190,6 @@ class TestViews(TestCase):
         mainly to ensure that the context information is correct."""
 
         # Tests the template is updated when the view is called
-        self.client.get('/shop/cart/update_offcanvas/')
+        response = self.client.get('/shop/cart/update_offcanvas/')
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed('cart/includes/cart_offcanvas.html')
-
-        product = Product.objects.earliest('date_added')
-        p_id = product.id
-
-        # This adds the item
-        self.client.post('/shop/cart/ajax/toggle/',
-                         {'item-id': p_id, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
-        # Declares an invalid item inside the cart
-        session = self.client.session
-        session['cart'] = {f'{p_id}': 1, '0': 0}
-        session.save()
-
-        self.assertRaises(Exception, msg='Error adding item: 0')
-
-        # Declares an item with no stock
-        no_stock_product = Product.objects.latest('date_added')
-        no_stock_product.stock = 0
-        no_stock_product.save()
-        nsp_id = no_stock_product.id
-
-        # Adds an item with no stock
-        self.client.post('/shop/cart/ajax/toggle/',
-                         {'item-id': nsp_id, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
-        # Ensures the item is not added to the cart on update
-        self.client.get('/shop/cart/update_offcanvas/')
-        session = self.client.session
-        self.assertEqual(session['cart'], {f'{p_id}': 1})

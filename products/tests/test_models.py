@@ -58,6 +58,22 @@ unique_product = Product(
     image_4_3_xs=image)
 
 
+preorder_product = Product(
+    category=ShopCategory.objects.filter(
+        title='SC1').order_by('id').first(),
+    title_en='preorder',
+    title_it='preorder',
+    description_en='description',
+    description_it='description',
+    price=0.5,
+    stock=0,
+    can_preorder=True,
+    image_4_3=image,
+    image_4_3_md=image,
+    image_4_3_sm=image,
+    image_4_3_xs=image)
+
+
 class TestProductsModels(TestCase):
     """Tests for Products models."""
 
@@ -95,7 +111,8 @@ class TestProductsModels(TestCase):
 
     def test_unique_unique_product_change(self):
         """Tests that unique products can only have 1 stock."""
-        product_1 = Product.objects.get(title='unique')
+        product_1 = Product.objects.filter(title='unique').last()
+
         product_1.stock = 50
         product_1.save()
 
