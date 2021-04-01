@@ -56,6 +56,10 @@ class TestUserViews(TestCase):
         # Retrieves the most recently created user, logs them in
         # and goes to their profile.
         self.client.force_login(test_user)
+
+        response = self.client.get('/accounts/profile/')
+        self.assertEqual(response.status_code, 302)
+
         response = self.client.get(f'/accounts/profile/{test_user.id}/')
 
         # Confirms context for all required page items as stated in the above.
