@@ -359,9 +359,10 @@ Toasts
 /*This allows for multiple toasts to stack.*/
 .toast-container {
   top: 146px;
-  right: 10px;
+  right: 0;
   min-height: 200px;
   z-index: 1020;
+  max-width: 100vw;
 }
 
 /*It is positioned above the preloader with the z-index.*/
