@@ -12,10 +12,14 @@
 .product.btn {
   background-color: rgba(#ffffff, 0.5);
   color: rgba(#2b384c, 0.85);
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
 .product.btn:active {
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
   transform: scale(0.2);
 }
 
@@ -27,10 +31,14 @@
 .product-detail.btn {
   background-color: #ab5fab;
   color: #fff;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
 .product-detail.btn:active {
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
   transform: scale(0.2);
 }
 
@@ -352,6 +360,13 @@ Products
   height: auto;
 }
 
+.product-box-desc {
+  display: -webkit-box;
+  line-height: 1rem;
+  max-height: 3.1rem;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 /*--------------------------------------------------------------------------
 Toasts
 --------------------------------------------------------------------------*/
