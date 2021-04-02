@@ -367,6 +367,11 @@ Products
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.breadcrumb-item a:hover {
+  color: #eee !important;
+}
+
 /*--------------------------------------------------------------------------
 Toasts
 --------------------------------------------------------------------------*/
