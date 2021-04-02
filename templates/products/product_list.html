@@ -24,20 +24,22 @@ such as likes_list, category_detail and stockdrop_detail.-->
 {% include 'info/includes/home_carousel.html' %}
 {% endif %}
 {% if page_obj %}
-<div class="row">
-    <div class="col-12 bg-brown py-2">
-        <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
+<section>
+    <div class="row">
+        <div class="col-12 bg-brown py-2">
+            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
+        </div>
     </div>
-</div>
-<section class="row px-0 px-md-2 bg-white">
-    <!-- This displays all products, organised by 'popularity' and stock quantity.
+    <div class="row px-0 px-md-2 bg-white">
+        <!-- This displays all products, organised by 'popularity' and stock quantity.
 Retrieves all products if no search query is performed.
 It utilises the paginator so it can use the infinite scroll feature. -->
-    {% for product in page_obj %}
-    {% if product.stock > 0 or product.can_preorder %}
-    {% include 'products/includes/product_box.html' %}
-    {% endif %}
-    {% endfor %}
+        {% for product in page_obj %}
+        {% if product.stock > 0 or product.can_preorder %}
+        {% include 'products/includes/product_box.html' %}
+        {% endif %}
+        {% endfor %}
+    </div>
 </section>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
