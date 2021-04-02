@@ -12,8 +12,8 @@
         <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'YOUR CART' %}</h2>
     </div>
 </div>
+{% if cart %}
 <section class="row px-0 px-md-2 bg-white">
-    {% if cart %}
     <article class="col-12 col-md-8 order-1 order-md-0">
         <ul class="list-group list-group-flush">
             <!--For every item in the cart, it creates a row with option for that product.-->
@@ -27,14 +27,19 @@
 </section>
 {% else %}
 <!--If there is no item in the cart, it displays a link back to he shop-->
-<article class="row">
-    <div class="col text-center">
+<section class="row px-0 px-md-2 bg-white">
+    <article class="col text-center mt-4">
         <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
-        <h2 class="text-primary heading-font">{% trans 'See what we can offer' %}.</h2>
-        <a class="btn-tran btn btn-lg btn-warning mt-4 w-25"
+        <h2 class="text-primary mb-0">{% trans 'See what we can offer' %}.</h2>
+        <a class="btn-tran btn btn-lg btn-warning my-4 w-25"
             href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
-    </div>
-</article>
+    </article>
+</section>
+{% if related_products %}
+<div class="col-12 bg-brown py-2"></div>
+<!-- Displays related items based on category. -->
+{% include 'products/includes/related_products.html' %}
+{% endif %}
 {% endif %}
 <div class="col-12 bg-brown py-2"></div>
 {% endblock %}
