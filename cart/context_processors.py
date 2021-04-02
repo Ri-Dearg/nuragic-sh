@@ -32,8 +32,8 @@ def get_cart(request):
                 # Declares product as false and removes it:
                 product = False
                 cart.pop(item_id)
-                messages.error(request,
-                               _('A Product is unavailable.'))
+                messages.warning(request,
+                                 _('A Product is unavailable.'))
 
             # If the product is valid and in stock,
             # it calculates details for that item:
@@ -48,8 +48,10 @@ def get_cart(request):
                 # Or else the item is removed from the cart with feedback:
                 else:
                     cart.pop(item_id)
-                    messages.error(request,
-                                   _(f'{product} has run out of stock!'))
+                    messages.warning(
+                        request,
+                        _(f'{product} has run out of stock \
+                            and has been removed from the cart.'))
 
             # Skips the product if it is False:
             else:
