@@ -78,9 +78,9 @@ function buttonToggle(
         $(`.cart-totals`).fadeTo("fast", 1);
       });
       if (result[1] > 0) {
-        $(`#quantity-badge`).text(result[1]);
+        $(`.quantity-badge`).text(result[1]);
       } else {
-        $(`#quantity-badge`).text("");
+        $(`.quantity-badge`).text("");
       }
     }
 

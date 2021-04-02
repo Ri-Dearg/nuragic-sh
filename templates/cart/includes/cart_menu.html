@@ -6,7 +6,7 @@
     <!--Selects the default icon based on whether there are likes or not.-->
     {% include 'base/includes/icons/cart-fill.nav.svg' %}
     <p class="text-success position-absolute top-50 start-50 translate-middle m-0" data-bs-target="#offcanvasCart">
-        <strong data-bs-target="#offcanvasCart" id="quantity-badge"
-            class="bg-white rounded-circle">{% if cart_quantity > 0 %}{{ cart_quantity }}{% endif %}</strong>
+        <strong data-bs-target="#offcanvasCart"
+            class="quantity-badge bg-white rounded-circle">{% if cart_quantity > 0 %}{{ cart_quantity }}{% endif %}</strong>
     </p>
 </button>
