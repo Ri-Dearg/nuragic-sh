@@ -19,7 +19,6 @@ function buttonToggle(
   uncartedSvg,
   likeUpdate,
   cartUpdate
-  //   cartRefresh
 ) {
   /**
    * Switches the SVG icons when a button is pressed.
@@ -27,7 +26,7 @@ function buttonToggle(
    * @param {string} id - The specific product id, so other products aren't selected.
    * @param {object} svg - The SVG HTML element.
    */
-  function svgSwitch(form, id, svg) {
+  function svgSwitch(form, id, svg, formData) {
     var classList = svg.classList;
 
     if (form === "lf") {
@@ -38,10 +37,22 @@ function buttonToggle(
       }
     }
     if (form === "cf") {
-      if (classList.contains("bi-cart-check-fill")) {
-        $(`#cb-${id}`).html(uncartedSvg);
-      } else if (classList.contains("bi-cart-plus")) {
-        $(`#cb-${id}`).html(cartedSvg);
+      if (formData.get("special") === "update") {
+        if (formData.get("quantity") == 0) {
+          $(`#cb-${id}`)
+            .html(uncartedSvg)
+            .append("&nbsp;&nbsp;&nbsp;Add to Cart");
+        } else {
+          $(`#cb-${id}`)
+            .html(cartedSvg)
+            .append("&nbsp;&nbsp;&nbsp;Update Cart");
+        }
+      } else if (formData.get("special") === null) {
+        if (classList.contains("bi-cart-check-fill")) {
+          $(`#cb-${id}`).html(uncartedSvg);
+        } else if (classList.contains("bi-cart-plus")) {
+          $(`#cb-${id}`).html(cartedSvg);
+        }
       }
     }
   }
@@ -49,24 +60,39 @@ function buttonToggle(
   /**
    * First deletes the popover, then clears the popover html
    * and then fires the view that refreshes the template.
-   * @param {string} result - Either 'cart' or 'like' depending on which button is pressed.
+   * @param {array} result - Either 'cart' or 'like' for [0],
+   * [1] is used for cart quantity updating depending on which button is pressed.
    */
-  function offcanvasUpdate(result) {
-    if (result === "like") {
+  function offcanvasUpdate(result, formData, id) {
+    if (result[0] === "like") {
       var update = likeUpdate;
-    } else if (result === "cart") {
+    } else if (result[0] === "cart") {
       var update = cartUpdate;
+      if (formData.get("special") === "remove") {
+        $(`#cart-item-${id}`).slideUp();
+      }
+      $(`.cart-totals`).fadeTo("fast", 0, function () {
+        $("#cart-items").text(`€${result[2]}`);
+        $("#cart-delivery").text(`€${result[3]}`);
+        $("#cart-grand").text(`€${result[4]}`);
+        $(`.cart-totals`).fadeTo("fast", 1);
+      });
+      if (result[1] > 0) {
+        $(`#quantity-badge`).text(result[1]);
+      } else {
+        $(`#quantity-badge`).text("");
+      }
     }
 
     // Animates the icon before deleting the HTML and loading the template refresh.
-    $(`.${result}-offcanvas-container`).fadeTo("fast", 0.6);
-    $(`.${result}-offcanvas-content`).fadeTo("fast", 0, function () {
-      $(`.${result}-offcanvas-content`)
+    $(`.${result[0]}-offcanvas-container`).fadeTo("fast", 0.6);
+    $(`.${result[0]}-offcanvas-content`).fadeTo("fast", 0, function () {
+      $(`.${result[0]}-offcanvas-content`)
         .html("")
         // reloads the context and content
         .load(update, function () {
-          $(`.${result}-offcanvas-content`).fadeTo("fast", 1);
-          $(`.${result}-offcanvas-container`).fadeTo("fast", 1);
+          $(`.${result[0]}-offcanvas-content`).fadeTo("fast", 1);
+          $(`.${result[0]}-offcanvas-container`).fadeTo("fast", 1);
         });
     });
   }
@@ -94,8 +120,10 @@ function buttonToggle(
     // The URL that the POST data would be sent to.
     const formUrl = object.action;
 
-    // Swaps svg icons appropriately
-    svgSwitch(formType, id, svg);
+    if (svg != null) {
+      // Swaps svg icons appropriately
+      svgSwitch(formType, id, svg, formData);
+    }
 
     // Sends form to Django view
     fetch(formUrl, {
@@ -110,53 +138,26 @@ function buttonToggle(
           return response.json();
         } else {
           // if there is an error, it fires a message and swaps back the svg icon
-          var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg);
+          if (svg != null) {
+            var svg = object.firstElementChild.firstElementChild;
+            svgSwitch(formType, id, svg, formData);
+          }
           throw Error(response.status + " " + response.statusText);
         }
       })
       .then((data) => {
         if (data.result === "error") {
-          var svg = object.firstElementChild.firstElementChild;
-          svgSwitch(formType, id, svg);
+          if (svg != null) {
+            var svg = object.firstElementChild.firstElementChild;
+            svgSwitch(formType, id, svg, formData);
+          }
           throw Error(data.message);
           // Refreshes the dropdowns
         } else if (data.result != "error") {
           toastMessage(data.tag, data.tagMessage, data.message);
-          offcanvasUpdate(data.result);
+          offcanvasUpdate(data.result, formData, id);
         }
       })
-
-      // // Used on the product_detail.html template.
-      // // If the product does not have multiple stock the button text switches.
-      // if (data.special != "stocked") {
-      //     if ($(`#btn-${id}`).length > 0) {
-      //     $(`#btn-${id}`).contents().last()[0].textContent =
-      //         "  Remove from Cart";
-      //     }
-      // }
-
-      // // Used on the product_detail.html template o change button text.
-      // if ($(`#btn-${id}`).length > 0) {
-      //     $(`#btn-${id}`).contents().last()[0].textContent = "  Add to Cart";
-      // }
-      // //Used on the cart list page to remove items from view after being uncarted.
-      // if (window.location.pathname == "/cart/") {
-      //     if (data.special != "update") {
-      //     $(`#cart-item-${id}`).fadeOut("slow");
-      //     }
-      //     // Refreshes the totals box. Works for both removing items and updating quantity.
-      //     $("#totals-box").fadeTo("slow", 0, function () {
-      //     $(`#totals-box`).html("").load(cartRefresh);
-      //     $(`#totals-box`).delay(400).fadeTo("slow", 1);
-      //     });
-      // }
-      // Send the message if anything else occurs.
-      // } else {
-      // toastMessage(data.tag, data.message);
-      // }
-      //     }
-      //   })
       .catch((error) => toastMessage("danger", "Error", error));
   }
   $(`.toggle-form`).on("submit", function (ev) {

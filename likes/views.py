@@ -78,7 +78,7 @@ def likes_toggle(request):
         try:
             item_id = request.POST.get('item-id')
             product = get_object_or_404(Product, pk=item_id)
-            data['result'] = 'like'
+            data['result'] = ['like']
 
             # Saves the item to the profile if the user is logged in, otherwise
             # saves to the session

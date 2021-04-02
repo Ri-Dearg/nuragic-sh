@@ -20,9 +20,9 @@
 such as size or quantity, mainly following the same scheme as the product_box.html template.
 If there is quantity, it includes quantity selection linked to the form in the detail_cart_toggle.html template. -->
 <div class="col-12 bg-brown py-2"></div>
-<section class="bg-white p-md-5 pb-2">
+<section class="bg-white p-md-5 p-sm-0 pb-2">
     <article class="row justify-content-md-center">
-        <div class="col-12 col-md-5 position-relative p-0">
+        <div class="col-12 col-sm-5 position-relative p-0">
             <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
                 height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
                                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
@@ -31,28 +31,33 @@ If there is quantity, it includes quantity selection linked to the form in the d
             <!-- These display little banners that give extra info about the item. -->
             {% include 'products/includes/product_banners.html' %}
         </div>
-        <div class="col-auto col-md-7 col-lg-6 col-xl-5 px-2 p-md-5">
+        <div class="col-auto col-sm-7 col-lg-6 col-xl-5 px-2 p-md-4 p-lg-5">
             <div class="row">
                 <div class="col-auto mt-2 mt-md-0">
                     <h2 class="l-space-1 h-font text-primary">{{ product.title|upper }}</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row align-items-center">
                 <p class="p-font col-auto">{{ product.description }}</p>
                 <div class="col-12"></div>
                 <!-- Section selects columns and characteristics of the product to display. -->
-                {% if not product.is_unique and product.stock > 0 %}
-                <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
-                <!-- <div class="form-label-group col-4 mb-3">
-                    <input class="form-control mt-1 pt-4" type="number" id="detail-quantity" form="cf-{{ product.id }}"
-                        name="quantity" value="1" min="1" max="{{ product.stock }}" />
-                    <label class="ml-2 pb-0" for="detail-quantity">{% trans 'Quantity' %}</label>
-                </div> -->
+                {% if product.stock > 0 or product.can_preorder %}
                 <h4 class="col-auto px-0 text-center text-muted mb-3">€{{ product.price }}</h4>
+                <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
+                <div class="col-4 form-floating ms-3 mb-2">
+                    <input class="form-control" type="number" id="id_quantity" form="cf-{{ product.id }}"
+                        name="quantity" value="1" min="0" {% if product.stock > 0 %} max="{{ product.stock }}"
+                        {% endif %} required{% if product.is_unique %} readonly{% endif %} />
+                    <label class="p-font text-primary sr-only requiredField"
+                        for="id_quantity">{% trans 'Quantity' %}</label>
+                </div>
+                {% endif %}
             </div>
-            <div class="row ms-1">
+            <div class="row align-items-center ms-1">
                 <!-- This will only show the add to cart button if the item is in stock.
                         Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
+                {% if product.stock > 0 or product.can_preorder %}
+                {% include 'cart/includes/detail_cart_toggle.html' %}
                 {% endif %}
                 {% include 'likes/includes/detail_like_toggle.html' %}
             </div>

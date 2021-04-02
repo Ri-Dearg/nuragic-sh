@@ -125,8 +125,6 @@
 
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
-        <!-- Script block -->
-        {% block postloadjs %}
         <!-- Jquery and Bootstrap 5 -->
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
         <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}?{{ VERSION }}"></script>
@@ -149,6 +147,8 @@
                 '{% url "cart:cart-offcanvas" %}')
         </script>
         {% endif %}
+        <!-- Script block -->
+        {% block postloadjs %}
         {% endblock %}
     </body>
 

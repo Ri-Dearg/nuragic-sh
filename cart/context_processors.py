@@ -25,7 +25,6 @@ def get_cart(request):
         for item_id, item_data in temp_cart.items():
             # Sets the total quantity of an item:
             cart_quantity += item_data
-
             # Confirms the item is valid or throws an error with a message:
             try:
                 product = Product.objects.get(pk=item_id)
@@ -33,13 +32,13 @@ def get_cart(request):
                 # Declares product as false and removes it:
                 product = False
                 cart.pop(item_id)
-                messages.warning(request,
-                                 _('A Product is unavailable.'))
+                messages.error(request,
+                               _('A Product is unavailable.'))
 
             # If the product is valid and in stock,
             # it calculates details for that item:
             if product is not False:
-                if product.stock >= 1:
+                if product.stock >= 1 or product.can_preorder:
                     cart_total += item_data * product.price
                     cart_items.append({
                         'item_id': item_id,
@@ -49,8 +48,8 @@ def get_cart(request):
                 # Or else the item is removed from the cart with feedback:
                 else:
                     cart.pop(item_id)
-                    messages.warning(request,
-                                     _(f'{product} has run out of stock!'))
+                    messages.error(request,
+                                   _(f'{product} has run out of stock!'))
 
             # Skips the product if it is False:
             else:
@@ -65,6 +64,12 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
+    request.session['cart'] = cart
+    request.session['cart_quantity'] = cart_quantity
+    request.session['cart_total'] = str(cart_total)
+    request.session['grand_total'] = str(grand_total)
+    request.session['delivery'] = "{:.2f}".format(delivery)
+
     request.session.save()
     return {'cart': cart,
             'cart_quantity': cart_quantity,

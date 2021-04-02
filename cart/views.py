@@ -21,7 +21,7 @@ class CartListView(ListView):  # pylint: disable=too-many-ancestors
 
 def cart_toggle(request):
     """Add or removes the specified product to the shopping cart.
-    The view is Ajaxed, so it is only called by a JS file.
+    The view is Fetch, so it is only called by a JS file.
     It runs through numerous variables such as item stock,
     whether the item is unique, etc, before giving a response.
     The decorator converts the response to JSON format.
@@ -43,61 +43,81 @@ def cart_toggle(request):
             # Gets the cart to run through item details.
             cart = request.session.get('cart', {})
 
-            # 'update' is sent when product quantity is being changed.
-            # Despite the 'uncart' result variable it doesn't uncart but
-            # actually updates quantity on the cart list page.
-            # if request.POST.get('special') == 'update':
-            #   cart[item_id] = quantity
-
-            #    # Checks stock and if the quantity requestd is greater,
-            #    # it sets it to the max available.
-            #    if cart[item_id] > product.stock:
-            #         cart[item_id] = product.stock
-            #     request.session['cart'] = cart
-
-            #     # Defines the variables to be sent the JS file.
-            #     tag = 'success'
-            #     message = f'Updated {product.name} quantity to \
-            #         {cart[item_id]}.'
-            #     result = 'uncarted'
-
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
-            if (item_id in list(cart.keys())) or (
-                    request.POST.get('special') == 'remove'):
-                cart.pop(str(item_id))
+            if (item_id in list(cart.keys()) and request.POST.get(
+                'special') != 'update') or (
+                    request.POST.get('special') == 'remove') or (
+                    quantity == 0):
+                if item_id in cart:
+                    cart.pop(str(item_id))
+                    data['message'] = _(
+                        f'Removed {product.title} from your cart.')
+                else:
+                    data['message'] = _(
+                        f'Please update the quantity to add \
+                            {product.title} to your cart.')
 
                 request.session['cart'] = cart
-                data['message'] = _(f'Removed {product.title} from your cart.')
-                data['result'] = 'cart'
                 data['tag'] = 'info'
                 data['tagMessage'] = _('Info')
 
             # If the other conditions aren't true it is a simple add to cart.
             else:
-                cart[item_id] = quantity
-                if cart[item_id] > product.stock:
-                    cart[item_id] = product.stock
+                if product.is_unique:
+                    quantity = 1
+                elif (quantity > product.stock
+                      and not product.can_preorder):
+                    quantity = product.stock
 
+                if (request.POST.get('special') == 'update') and (
+                        item_id in cart):
+                    # 'update' is sent when product quantity is being changed.
+                    data['message'] = f'Updated {product.title} \
+                        quantity to {quantity}.'
+                elif product.can_preorder and product.stock == 0:
+                    data['message'] = _(
+                        f'Preordered {quantity} {product.title}.')
+                else:
+                    data['message'] = _(
+                        f'Added {quantity} {product.title} to your cart.')
+
+                cart[item_id] = quantity
                 request.session['cart'] = cart
-                data['message'] = _(f'Added {product.title} to your cart.')
-                data['result'] = 'cart'
+
                 data['tag'] = 'success'
                 data['tagMessage'] = _('Success')
 
+            # Calculates the grand total and
+            # then pushes all details into the context.
+            RequestContext(request).push(get_cart(request))
+
+            cart_quantity = request.session.get('cart_quantity', 0)
+            cart_total = request.session.get('cart_total', '0.00')
+            delivery = request.session.get('delivery', '0.00')
+            grand_total = request.session.get('grand_total', '0.00')
+
+            request.session['cart_quantity'] = cart_quantity
+            request.session['cart_total'] = cart_total
+            request.session['delivery'] = delivery
+            request.session['grand_total'] = grand_total
+
+            data['result'] = ['cart',
+                              cart_quantity,
+                              cart_total,
+                              delivery,
+                              grand_total]
+
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except
-            data['message'] = _(f'Error: %r, {error}')
+            # Calculates the grand total and
+            # then pushes all details into the context.
+            RequestContext(request).push(get_cart(request))
+            data['message'] = _(f'Error adding item to cart: {error}')
             data['result'] = 'error'
             data['tag'] = 'danger'
             data['tagMessage'] = _('Error')
 
-        # If there is a special case in the POST data,
-        # it gets passed to the JS file for its logic.
-        # Else, it sends the variables declare in the 'if' clauses.
-        if 'special' in request.POST:
-            data['special'] = request.POST.get('special')
-            return JsonResponse(data)
         return JsonResponse(data)
     return HttpResponseForbidden()
 
@@ -111,15 +131,5 @@ def update_cart_offcanvas(request):
     The JS script then pushes the newly rendered template into
     the popover HTML."""
 
-    # Calculates the grand total and then pushes all details into the context.
-    RequestContext(request).push(get_cart(request))
-
     # Re-renders the popover template
     return render(request, 'cart/includes/cart_offcanvas.html')
-
-
-def refresh_total(request):
-    """One the cart list page, this refreshes the totals box template.
-    Other context info is handled by the update_crt view."""
-
-    return render(request, 'cart/includes/totals.html')
