@@ -138,8 +138,8 @@ function buttonToggle(
           return response.json();
         } else {
           // if there is an error, it fires a message and swaps back the svg icon
+          var svg = object.firstElementChild.firstElementChild;
           if (svg != null) {
-            var svg = object.firstElementChild.firstElementChild;
             svgSwitch(formType, id, svg, formData);
           }
           throw Error(response.status + " " + response.statusText);
@@ -147,8 +147,8 @@ function buttonToggle(
       })
       .then((data) => {
         if (data.result === "error") {
+          var svg = object.firstElementChild.firstElementChild;
           if (svg != null) {
-            var svg = object.firstElementChild.firstElementChild;
             svgSwitch(formType, id, svg, formData);
           }
           throw Error(data.message);
