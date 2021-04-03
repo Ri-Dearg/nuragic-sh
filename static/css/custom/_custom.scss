@@ -302,26 +302,6 @@ Positioning
   z-index: -2;
 }
 
-/*Background images positioning*/
-.border-position {
-  left: 50%;
-  -webkit-transform: translate(-50%);
-  -ms-transform: translate(-50%);
-  transform: translate(-50%);
-}
-
-.left-border {
-  -webkit-transform: translate(-660px);
-  -ms-transform: translate(-660px);
-  transform: translate(-660px);
-}
-
-.right-border {
-  -webkit-transform: translate(660px);
-  -ms-transform: translate(660px);
-  transform: translate(660px);
-}
-
 /*--------------------------------------------------------------------------
 Preloader
 --------------------------------------------------------------------------*/
