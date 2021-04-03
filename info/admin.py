@@ -43,8 +43,8 @@ class PageTrans(PageAdmin, TranslationAdmin):
 
 class SplashImageAdmin(admin.ModelAdmin):
     """Displays order based on its associated Page."""
-    ordering = ['page']
-    fields = ('page', 'title', 'description', 'image_tw_header',
+    ordering = ['page', 'product']
+    fields = ('page', 'product', 'title', 'description', 'image_tw_header',
               'image_fb_link', 'info_display', 'shop_display', 'date_added')
 
 

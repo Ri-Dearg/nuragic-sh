@@ -18,7 +18,13 @@ class SplashImage(models.Model):
     Images are different sizes depending on the screen size.
     I would recommend cropping your images first."""
     page = models.OneToOneField('Page',
-                                on_delete=models.CASCADE)
+                                blank=True,
+                                null=True,
+                                on_delete=models.SET_NULL)
+    product = models.OneToOneField(Product,
+                                   blank=True,
+                                   null=True,
+                                   on_delete=models.SET_NULL)
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
     image_tw_header = models.ImageField(upload_to='info/carousel')
@@ -37,7 +43,14 @@ class SplashImage(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        """Resizes and saves images."""
+        """Resizes and saves images.
+        Selects either Page or Product as field."""
+
+        if self.page:
+            self.product = None
+        elif self.product:
+            self.page = None
+
         image1, image1_md, image1_sm = responsive_images(
             self, 'image_tw_header', 1260, 420)
 
@@ -60,7 +73,12 @@ class SplashImage(models.Model):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.page}: {self.title}'
+        link = None
+        if self.page:
+            link = self.page
+        if self.product:
+            link = self.product
+        return f'{link}: {self.title}'
 
 
 class Category(models.Model):
