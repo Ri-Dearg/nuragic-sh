@@ -14,7 +14,7 @@ def get_cart(request):
     is invalid or not."""
 
     # Declares variables for use with the cart.
-    cart = request.session.get('cart')
+    cart = request.session.get('cart', {})
     cart_items = []
     cart_total = 0
     cart_quantity = 0
@@ -57,6 +57,8 @@ def get_cart(request):
             else:
                 pass
 
+        request.session['cart'] = cart
+
     # Checks the cart total price and declares delivery price accordingly.
     # The FREE_DELIVERY_THRESHOLD is a set price declared in settings.
     # if cart_total < settings.FREE_DELIVERY_THRESHOLD and cart_total > 0:
@@ -66,7 +68,7 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
-    request.session['cart'] = cart
+
     request.session['cart_quantity'] = cart_quantity
     request.session['cart_total'] = str(cart_total)
     request.session['grand_total'] = str(grand_total)
