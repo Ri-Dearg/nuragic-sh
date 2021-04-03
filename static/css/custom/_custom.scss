@@ -289,6 +289,22 @@ Navbar
   background-color: #c5b9a0;
 }
 
+.auth-menu:hover {
+  color: #f5c936;
+}
+
+.like-menu:hover {
+  color: #874587;
+}
+
+.quantity-button:hover > .cart-menu {
+  color: #2d764a;
+}
+
+.quantity-button:hover .quantity-badge {
+  color: #fff !important;
+  background-color: #2d764a !important;
+}
 /*--------------------------------------------------------------------------
 Positioning
 --------------------------------------------------------------------------*/
