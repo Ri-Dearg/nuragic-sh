@@ -307,15 +307,12 @@ Preloader
 --------------------------------------------------------------------------*/
 
 .preloader {
-  height: 100%;
-  width: 100%;
   position: fixed;
   bottom: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   z-index: 1019;
-  padding-bottom: 153px;
 }
 
 .preload-gif {
