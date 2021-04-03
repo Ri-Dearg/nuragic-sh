@@ -21,8 +21,8 @@ class CategoryTranslation(TranslationOptions):
 @register(Page)
 class PageTranslation(TranslationOptions):
     """Fields that need translation options."""
-    fields = ('title', 'summary', 'button_text', 'desc_title1',
-              'description1', 'desc_title2', 'description2')
+    fields = ('title', 'summary', 'button_text', 'product_button_text',
+              'desc_title1', 'description1', 'desc_title2', 'description2')
     required_languages = {'default': (
         'title', 'summary', 'button_text', 'desc_title1', 'description1',)}
 
