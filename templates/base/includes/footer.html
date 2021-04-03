@@ -4,22 +4,23 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 <!-- Basic footer -->
-<footer class="container-xxl bg-secondary text-center text-primary">
+<footer class="container-xxl bg-primary text-center text-secondary">
     <div class="row pb-2">
         <!-- Newsletter sign up -->
         <div class="col-12 col-md-4 order-1 order-md-2 mt-3">
-            <h2 class="p-font l-space-1 h4">{% trans 'Newsletter' %}</h2>
+            <h2 class="p-font l-space-1 h5">{% trans 'Newsletter' %}</h2>
             <p id="newsEmailText" class="p-font form-text mb-1 visually-hidden">{% trans 'Sign Up Here!' %}</p>
             <!-- Accepts email using django forms goes to a language based newsletter  -->
             <form action="{% url 'contact:newsletter' %}" method="POST" id="news-form"
-                class="row g-1 justify-content-center mw-100 mb-1"> {% csrf_token %}
-                <div class="col-auto ms-1 form-floating mb-1">
+                class="row g-1 justify-content-center mw-100 mb-1">
+                {% csrf_token %}
+                <label class="p-font text-primary sr-only visually-hidden" for="newsEmail">{% trans 'E-mail' %}</label>
+                <div class="col-8 col-sm-5 col-md-10 col-lg-8 mb-1 ps-1">
                     <input id="newsEmail" type="email" name="email_{{ LANGUAGE_CODE }}" placeholder="E-mail"
                         class="p-font text-primary form-control" aria-describedby="newsEmailText"
                         pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" required />
-                    <label class="p-font sr-only" for="newsEmail">{% trans 'E-mail' %}</label>
                 </div>
-                <div class="col-auto mb-1">
+                <div class="col-2 mb-1">
                     <button type="submit" id="news-submit"
                         class="p-font btn-tran btn btn-warning text-primary shadow h-100">{% trans 'Join' %}</button>
                 </div>
@@ -27,22 +28,25 @@
         </div>
         <!-- Social Link section Templates are inline SVG icons -->
         <div class="col-12 col-md-4 order-2 order-md-1 mt-3">
-            <h2 class="p-font l-space-1 h4">{% trans 'Social' %}</h2>
-            <ul class="list-inline d-flex h4 w-100 justify-content-evenly">
+            <h2 class="p-font l-space-1 h5">{% trans 'Social' %}</h2>
+            <ul class="list-inline d-flex h5 w-100 justify-content-evenly">
                 <li class="list-inline-item">
-                    <a target="_blank" rel="noopener" href="https://www.facebook.com/NuragicShamanicHealing/">
+                    <a class="text-white" target="_blank" rel="noopener"
+                        href="https://www.facebook.com/NuragicShamanicHealing/">
                         <p class="visually-hidden">{% trans 'Facebook Page' %}</p>
                         {% include 'base/includes/icons/facebook.svg' %}
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a target="_blank" rel="noopener" href="https://www.instagram.com/nuragic.shamanic.healing/">
+                    <a class="text-white" target="_blank" rel="noopener"
+                        href="https://www.instagram.com/nuragic.shamanic.healing/">
                         <p class="visually-hidden">{% trans 'Instagram Page' %}</p>
                         {% include 'base/includes/icons/instagram.svg' %}
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCyl4isKUXtr6YmAJWunqGtg">
+                    <a class="text-white" target="_blank" rel="noopener"
+                        href="https://www.youtube.com/channel/UCyl4isKUXtr6YmAJWunqGtg">
                         <p class="visually-hidden">{% trans 'Youtube Page' %}</p>
                         {% include 'base/includes/icons/youtube.svg' %}
                     </a>
@@ -51,21 +55,22 @@
         </div>
         <!-- Links to contact page -->
         <div class="col-12 col-md-4 order-3 mt-3">
-            <h2 class="p-font l-space-1 h4">{% trans 'Contact' %}</h2>
-            <ul class="list-inline d-flex h4 w-100 justify-content-evenly">
+            <h2 class="p-font l-space-1 h5">{% trans 'Contact' %}</h2>
+            <ul class="list-inline d-flex h5 w-100 justify-content-evenly">
                 <li class="list-inline-item">
-                    <a target="_blank" rel="noopener" href="https://wa.me/353834646130">
+                    <a class="text-white" target="_blank" rel="noopener" href="https://wa.me/353834646130">
                         <p class="visually-hidden">{% trans 'Whatsapp Messaging' %}</p>
                         {% include 'base/includes/icons/whatsapp.svg' %}
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a target="_blank" rel="noopener" href="https://m.me/NuragicShamanicHealing">
+                    <a class="text-white" target="_blank" rel="noopener" href="https://m.me/NuragicShamanicHealing">
                         <p class="visually-hidden">{% trans 'Facebook Messenger' %}</p>
-                        {% include 'base/includes/icons/messenger.svg' %} </a>
+                        {% include 'base/includes/icons/messenger.svg' %}
+                    </a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="smooth-click" href="{% url 'contact:email-form' %}">
+                    <a class="smooth-click text-white" href="{% url 'contact:email-form' %}">
                         <p class="visually-hidden">{% trans 'Email Contact' %}</p>
                         {% include 'base/includes/icons/envelope.svg' %}
                     </a>
