@@ -39,7 +39,7 @@ class SplashImage(models.Model):
     def save(self, *args, **kwargs):
         """Resizes and saves images."""
         image1, image1_md, image1_sm = responsive_images(
-            self, 'image_tw_header', 1260, 420, thumb=False)
+            self, 'image_tw_header', 1260, 420)
 
         image2, image2_md, image2_sm = responsive_images(
             self, 'image_fb_link', 1200, 630)
