@@ -1,11 +1,18 @@
-{% extends "account/base.html" %}
+{% extends 'base/includes/form_layout.html' %}
 
 {% load i18n %}
 
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+
 {% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
+{% block form_title %}{% trans "SIGN UP CLOSED" %}{% endblock %}
 
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+{% block form_content %}
+<p class="p-font text-primary text-center mt-1 mb-0">{% trans "We are sorry, but the sign up is currently closed." %}
+</p>
 {% endblock %}

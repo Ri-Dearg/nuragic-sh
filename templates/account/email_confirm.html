@@ -1,6 +1,6 @@
-{% extends "base/base.html" %}
-<!-- Loads internationalization, loads static, loads crispy forms  -->
-{% load static %} {% load i18n %}
+{% extends 'base/includes/form_layout.html' %}
+<!-- Loads internationalization, loads crispy forms  -->
+{% load i18n %}
 {% load account %}
 
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
@@ -11,39 +11,34 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block content %}
-<article class="row min-vh-60 align-content-center py-2">
-    <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
-        {% trans "Confirm E-mail Address" %}</h2>
-    <div class="col-12"></div>
-    <div class="form-box col col-md-8 bg-secondary rounded-bottom mx-sm-auto p-2">
-        {% if confirmation %}
-        {% user_display confirmation.email_address.user as user_display %}
+{% block form_title %}{% trans "CONFIRM E-MAIL ADDRESS" %}{% endblock %}
 
-        <p class="p-font text-primary text-center mt-1 mb-0">
-            {% blocktrans with confirmation.email_address.email as email %}I confirm that <a class="text-white"
-                href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user
-            {{ user_display }}.{% endblocktrans %}
-        </p>
+{% block form_content %}
+{% if confirmation %}
+{% user_display confirmation.email_address.user as user_display %}
 
-        <form class="rounded p-2" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-auto mx-auto">
-                    <button class="p-font btn-tran btn  btn-warning text-primary shadow"
-                        type="submit">{% trans 'Confirm' %}</button>
-                </div>
-            </div>
-        </form>
+<p class="p-font text-primary text-center mt-1 mb-0">
+    {% blocktrans with confirmation.email_address.email as email %}I confirm that <a class="text-white"
+        href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user
+    {{ user_display }}.{% endblocktrans %}
+</p>
 
-        {% else %}
-
-        {% url 'account_email' as email_url %}
-
-        <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This e-mail confirmation link expired or is
-            invalid. Please <a class="smooth-click text-white" href="{{ email_url }}">issue a new e-mail confirmation
-                request</a>.{% endblocktrans %}</p>
-        {% endif %}
+<form class="rounded p-2" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-auto mx-auto">
+            <button class="p-font btn-tran btn  btn-warning text-primary shadow"
+                type="submit">{% trans 'Confirm' %}</button>
+        </div>
     </div>
-</article>
+</form>
+
+{% else %}
+
+{% url 'account_email' as email_url %}
+
+<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This e-mail confirmation link expired or is
+    invalid. Please <a class="smooth-click text-white" href="{{ email_url }}">issue a new e-mail confirmation
+        request</a>.{% endblocktrans %}</p>
+{% endif %}
 {% endblock %}
