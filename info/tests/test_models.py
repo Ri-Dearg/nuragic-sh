@@ -72,17 +72,6 @@ valid_splash = SplashImage(page=Page.objects.latest('date_added'),
                            image_fb_link_md=image,
                            image_fb_link_sm=image)
 
-valid_splash_2 = SplashImage(page=Product.objects.latest('date_added'),
-                             title_en='splash1',
-                             title_it='splash1',
-                             description_en='description',
-                             description_it='description',
-                             image_tw_header=image,
-                             image_tw_header_md=image,
-                             image_tw_header_sm=image,
-                             image_fb_link=image,
-                             image_fb_link_md=image,
-                             image_fb_link_sm=image)
 
 valid_review = Review(reviewer_name='abacus',
                       text='this is a review')
@@ -93,15 +82,12 @@ class TestInfoModels(TestCase):
 
     def setUp(self):
         """Created instances for use in tests"""
-        valid_product_1.save()
 
         valid_category.save()
 
         valid_page.save()
 
         valid_splash.save()
-
-        valid_splash_2.save()
 
         valid_review.save()
 
@@ -135,9 +121,28 @@ class TestInfoModels(TestCase):
 
     def test_carousel_str(self):
         """Tests the string method on the SplashImage."""
+        valid_product_1.save()
+
+        valid_splash_2 = SplashImage(
+            product=Product.objects.latest('date_added'),
+            title_en='splash1',
+            title_it='splash1',
+            description_en='description',
+            description_it='description',
+            image_tw_header=image,
+            image_tw_header_md=image,
+            image_tw_header_sm=image,
+            image_fb_link=image,
+            image_fb_link_md=image,
+            image_fb_link_sm=image)
+        valid_splash_2.save()
+
+        splash2 = SplashImage.objects.earliest('date_added')
         splash1 = SplashImage.objects.latest('date_added')
         self.assertEqual(str(splash1),
-                         (f'{splash1.page}: {splash1.title}'))
+                         (f'{splash1.product}: {splash1.title}'))
+        self.assertEqual(str(splash2),
+                         (f'{splash2.page}: {splash2.title}'))
 
     def test_category_image_file_is_processed_correctly(self):
         """Tests that an uploaded Category image is resized and
