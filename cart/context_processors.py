@@ -68,22 +68,15 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
+    request.session['cart_quantity'] = cart_quantity
+    request.session['cart_total'] = str(cart_total)
+    request.session['grand_total'] = str(grand_total)
+    request.session['delivery'] = "{:.2f}".format(delivery)
 
-
-<< << << < HEAD
-request.session['cart'] = cart
-== == == =
-
->>>>>> > 22da7c870318433db1fb485d10b2fad1a41427bd
-request.session['cart_quantity'] = cart_quantity
-request.session['cart_total'] = str(cart_total)
-request.session['grand_total'] = str(grand_total)
-request.session['delivery'] = "{:.2f}".format(delivery)
-
-request.session.save()
-return {'cart': cart,
-        'cart_quantity': cart_quantity,
-        'cart_items': cart_items,
-        'cart_total': cart_total,
-        'delivery': delivery,
-        'grand_total': grand_total}
+    request.session.save()
+    return {'cart': cart,
+            'cart_quantity': cart_quantity,
+            'cart_items': cart_items,
+            'cart_total': cart_total,
+            'delivery': delivery,
+            'grand_total': grand_total}
