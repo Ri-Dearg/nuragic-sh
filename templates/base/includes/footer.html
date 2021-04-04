@@ -12,15 +12,15 @@
             <p id="newsEmailText" class="p-font form-text mb-1 visually-hidden">{% trans 'Sign Up Here!' %}</p>
             <!-- Accepts email using django forms goes to a language based newsletter  -->
             <form action="{% url 'contact:newsletter' %}" method="POST" id="news-form"
-                class="row g-1 justify-content-center mw-100 mb-1">
+                class="row justify-content-center mw-100 mb-1">
                 {% csrf_token %}
                 <label class="p-font text-primary sr-only visually-hidden" for="newsEmail">{% trans 'E-mail' %}</label>
-                <div class="col-8 col-sm-5 col-md-10 col-lg-8 mb-1 ps-1">
+                <div class="col-auto col-sm-5 col-md-8 col-lg-8 mb-1 ps-1">
                     <input id="newsEmail" type="email" name="email_{{ LANGUAGE_CODE }}" placeholder="E-mail"
                         class="p-font text-primary form-control" aria-describedby="newsEmailText"
                         pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" required />
                 </div>
-                <div class="col-2 mb-1">
+                <div class="col-auto col-sm-2 mb-1">
                     <button type="submit" id="news-submit"
                         class="p-font btn-tran btn btn-warning text-primary shadow h-100">{% trans 'Join' %}</button>
                 </div>
