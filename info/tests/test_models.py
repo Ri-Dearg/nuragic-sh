@@ -4,7 +4,7 @@ import re
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from info.models import Category, GalleryImage, Page, Review, SplashImage
+from info.models import Category, Page, Review, SplashImage
 
 image = SimpleUploadedFile(
     name='default.jpg',
@@ -154,14 +154,6 @@ class TestInfoModels(TestCase):
         page_1.save()
         self.assertEqual(str(page_1),
                          (f'{page_1.category}: {page_1.title}'))
-
-    def test_galleryimage_str(self):
-        """Tests the string method on the GalleryImage."""
-        page_1 = Page.objects.latest('date_added')
-
-        gallery_1 = GalleryImage(page=page_1, image=image)
-        self.assertEqual(str(gallery_1),
-                         (f'{gallery_1.page}, {gallery_1.image}'))
 
     def test_review_str(self):
         """Tests the string method on the Review."""
