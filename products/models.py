@@ -3,7 +3,7 @@
 from django.db import models
 from django.utils import timezone
 
-from info.models import responsive_images
+from info.utils import responsive_images
 
 
 class ShopCategory(models.Model):

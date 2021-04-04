@@ -67,9 +67,9 @@ function toastMessage(tag, tagMessage, message) {
 
 /**
  * Adds an email to the newsletter list. CHanges the icon
- * and disables the button if successful. If not, throws an erro notificaation.
+ * and disables the button if successful. If not, throws an error notification.
  * Fires toast as feedback
- * @param {object} formData - Formdata from the request
+ * @param {object} formData - Form data from the request
  * @param {string} formUrl - url to send the data
  */
 function newsletterSignup(formData, formUrl) {

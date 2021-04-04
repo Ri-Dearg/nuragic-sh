@@ -20,7 +20,7 @@
 <!-- SplashImage Carousel -->
 {% include 'info/includes/home_carousel.html' %}
 <!-- Main content section -->
-<section>
+<section class="flex-grow-1 bg-white">
     <h2 class="visually-hidden">{% trans 'Index' %}</h2>
     <article>
         <h3 class="visually-hidden">{% trans 'About' %}</h3>
@@ -57,7 +57,7 @@
                 </p>
             </div>
             <!-- Spacer -->
-            <div class="col-12 bg-brown py-2"></div>
+            {% include 'base/includes/horizontal_rule.html'%}
         </section>
         {% endif %}
         {% endfor %}

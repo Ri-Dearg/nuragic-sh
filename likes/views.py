@@ -53,7 +53,7 @@ class LikesListView(ListView):  # pylint: disable=too-many-ancestors
 
         # Paginates the items.
         products = context['products']
-        paginator = Paginator(products, 6)
+        paginator = Paginator(products, 12)
 
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)

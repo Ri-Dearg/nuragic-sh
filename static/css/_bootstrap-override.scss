@@ -49,6 +49,10 @@ $grid-gutter-width: 0;
 /*Merging custom colors*/
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
+// Breadcrumb settings
+$breadcrumb-divider-color: $secondary;
+$breadcrumb-divider: quote("\263D");
+
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
@@ -127,7 +131,7 @@ $utilities: map-merge(
 @import "bootstrap/navbar";
 @import "bootstrap/card";
 // @import "bootstrap/accordion";
-// @import "bootstrap/breadcrumb";
+@import "bootstrap/breadcrumb";
 @import "bootstrap/pagination";
 @import "bootstrap/badge";
 @import "bootstrap/alert";

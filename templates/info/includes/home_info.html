@@ -4,7 +4,7 @@
 <!-- Will not display the about section here .Alternates the layout-->
 {% if 'about' not in item.menu_word_en.lower %}
 <!-- spacer -->
-<div class="col-12 bg-brown py-2"></div>
+{% include 'base/includes/horizontal_rule.html'%}
 <section class="row bg-white">
     {% if forloop.counter|divisibleby:"2" %}
     <div class="col-auto col-md d-flex bg-white">
@@ -42,4 +42,4 @@
 </section>
 {% endif %}
 {% endfor %}
-<div class="col-12 bg-brown py-2"></div>
+{% include 'base/includes/horizontal_rule.html'%}

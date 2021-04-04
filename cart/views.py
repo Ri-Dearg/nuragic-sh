@@ -5,18 +5,27 @@ from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView
+from django.views.generic.base import TemplateView
 
 from products.models import Product
 
 from .context_processors import get_cart
 
 
-class CartListView(ListView):  # pylint: disable=too-many-ancestors
+class CartPageView(TemplateView):  # pylint: disable=too-many-ancestors
     """View that displays all the products in the cart as a list."""
-    model = Product
-    context_object_name = 'products'
     template_name = 'cart/cart_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        products = Product.objects.filter(
+            stock__gte=1) | Product.objects.filter(
+            can_preorder=True).order_by('-stock', '-popularity')
+
+        context['related_products'] = products
+
+        return context
 
 
 def cart_toggle(request):

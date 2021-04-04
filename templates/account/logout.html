@@ -1,6 +1,6 @@
-{% extends "base/base.html" %}
-<!-- Loads internationalization, loads static, loads crispy forms  -->
-{% load static %} {% load i18n %}
+{% extends 'base/includes/form_layout.html' %}
+<!-- Loads internationalization, loads crispy forms  -->
+{% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
@@ -10,27 +10,19 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block content %}
-<article class="row min-vh-60 align-content-center py-2">
-    <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
-        {% trans "SIGN OUT" %}</h2>
-    <div class="col-12"></div>
-    <div class="form-box col col-md-8 bg-secondary rounded-bottom mx-sm-auto p-2">
-        <p class="p-font text-primary text-center mt-1 mb-0">{% trans 'Are you sure you want to sign out?' %}</p>
-        <form class="rounded p-2" method="POST" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            <div class="row">
-                <div class="col-auto mx-auto">
-                    <button class="btn p-font btn-tran btn btn-warning text-primary shadow"
-                        type="submit">{% trans 'Sign Out' %}</button>
-                </div>
-            </div>
-        </form>
+{% block form_title %}{% trans "SIGN OUT" %}{% endblock %}
+{% block form_content %}
+<p class="p-font text-primary text-center mt-1 mb-0">{% trans 'Are you sure you want to sign out?' %}</p>
+<form class="rounded p-2" method="POST" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="row">
+        <div class="col-auto mx-auto">
+            <button class="btn p-font btn-tran btn btn-warning text-primary shadow"
+                type="submit">{% trans 'Sign Out' %}</button>
+        </div>
     </div>
-</article>
-
-
+</form>
 {% endblock %}

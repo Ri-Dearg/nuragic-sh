@@ -11,7 +11,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
     """Displays a list of products in the Category.
     The MultipleObjectMixin allows for easy pagination."""
     model = ShopCategory
-    paginate_by = 6
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
@@ -65,8 +65,10 @@ class ProductDetailView(DetailView):
 class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     """Displays all products in a list.
     Adds context for highlighting the menu."""
-    model = Product
-    paginate_by = 6
+    queryset = Product.objects.filter(
+        stock__gte=1) | Product.objects.filter(
+        can_preorder=True).order_by('-stock', '-popularity')
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
@@ -74,7 +76,9 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
         # Selects the active tab
         if 'query' not in self.request.GET and self.request.path == '/shop/':
             # Adds Carousel info
-            carousel = SplashImage.objects.all().filter(shop_display=True)
+            carousel = SplashImage.objects.filter(
+                shop_display=True) & SplashImage.objects.exclude(
+                page__isnull=True, product__isnull=True)
             context['carousel'] = carousel
 
             all_products_active = True

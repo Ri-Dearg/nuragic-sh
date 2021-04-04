@@ -1,12 +1,13 @@
 <!-- Loads internationalization and static -->
 {% load i18n %}
-<button type="button" class="position-relative btn btn-link d-inline-block text-white px-2 py-auto pb-md-1" tabindex="0"
+<button type="button"
+    class="quantity-button position-relative btn btn-link d-inline-block text-white px-2 py-auto pb-md-1" tabindex="0"
     data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
     <p class="visually-hidden">{% trans 'View Cart' %}</p>
     <!--Selects the default icon based on whether there are likes or not.-->
     {% include 'base/includes/icons/cart-fill.nav.svg' %}
     <p class="text-success position-absolute top-50 start-50 translate-middle m-0" data-bs-target="#offcanvasCart">
-        <strong data-bs-target="#offcanvasCart" id="quantity-badge"
-            class="bg-white rounded-circle">{% if cart_quantity > 0 %}{{ cart_quantity }}{% endif %}</strong>
+        <strong data-bs-target="#offcanvasCart"
+            class="quantity-badge bg-white rounded-circle">{% if cart_quantity > 0 %}{{ cart_quantity }}{% endif %}</strong>
     </p>
 </button>

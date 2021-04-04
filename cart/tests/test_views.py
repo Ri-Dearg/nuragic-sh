@@ -178,7 +178,7 @@ class TestViews(TestCase):
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         session = self.client.session
         self.client.get('/')
-        self.assertEqual(session['cart'], None)
+        self.assertEqual(session['cart'], {})
 
         self.assertRaises(Exception, msg='Error adding item: 0')
 

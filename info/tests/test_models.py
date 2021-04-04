@@ -4,7 +4,9 @@ import re
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from info.models import Category, GalleryImage, Page, Review, SplashImage
+from info.models import Category, Page, Review, SplashImage
+from products.models import Product
+from products.tests.test_models import valid_product_1
 
 image = SimpleUploadedFile(
     name='default.jpg',
@@ -70,6 +72,7 @@ valid_splash = SplashImage(page=Page.objects.latest('date_added'),
                            image_fb_link_md=image,
                            image_fb_link_sm=image)
 
+
 valid_review = Review(reviewer_name='abacus',
                       text='this is a review')
 
@@ -118,9 +121,28 @@ class TestInfoModels(TestCase):
 
     def test_carousel_str(self):
         """Tests the string method on the SplashImage."""
+        valid_product_1.save()
+
+        valid_splash_2 = SplashImage(
+            product=Product.objects.latest('date_added'),
+            title_en='splash1',
+            title_it='splash1',
+            description_en='description',
+            description_it='description',
+            image_tw_header=image,
+            image_tw_header_md=image,
+            image_tw_header_sm=image,
+            image_fb_link=image,
+            image_fb_link_md=image,
+            image_fb_link_sm=image)
+        valid_splash_2.save()
+
+        splash2 = SplashImage.objects.earliest('date_added')
         splash1 = SplashImage.objects.latest('date_added')
         self.assertEqual(str(splash1),
-                         (f'{splash1.page}: {splash1.title}'))
+                         (f'{splash1.product}: {splash1.title}'))
+        self.assertEqual(str(splash2),
+                         (f'{splash2.page}: {splash2.title}'))
 
     def test_category_image_file_is_processed_correctly(self):
         """Tests that an uploaded Category image is resized and
@@ -154,14 +176,6 @@ class TestInfoModels(TestCase):
         page_1.save()
         self.assertEqual(str(page_1),
                          (f'{page_1.category}: {page_1.title}'))
-
-    def test_galleryimage_str(self):
-        """Tests the string method on the GalleryImage."""
-        page_1 = Page.objects.latest('date_added')
-
-        gallery_1 = GalleryImage(page=page_1, image=image)
-        self.assertEqual(str(gallery_1),
-                         (f'{gallery_1.page}, {gallery_1.image}'))
 
     def test_review_str(self):
         """Tests the string method on the Review."""
