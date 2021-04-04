@@ -311,9 +311,6 @@ Preloader
 Products
 --------------------------------------------------------------------------*/
 /*These position the little info banner that appear on product images.*/
-.product.card-body {
-  height: 8rem;
-}
 
 .product.btn {
   background-color: rgba(#ffffff, 0.5);
@@ -366,8 +363,8 @@ Products
 
 .product-box-desc {
   display: -webkit-box;
-  line-height: 1rem;
-  max-height: 2.05rem;
+  line-height: 1.5rem;
+  max-height: 3rem;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
