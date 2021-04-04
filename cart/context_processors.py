@@ -14,7 +14,7 @@ def get_cart(request):
     is invalid or not."""
 
     # Declares variables for use with the cart.
-    cart = request.session.get('cart', {})
+    cart = request.session.get('cart')
     cart_items = []
     cart_total = 0
     cart_quantity = 0
