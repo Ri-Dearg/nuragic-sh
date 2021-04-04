@@ -45,7 +45,7 @@ class StyledLoginForm(LoginForm):
                 Field('password', placeholder=_('Password'),
                       css_class='p-font text-primary'),
 
-                HTML(f'<a class="p-font smooth-click text-white \
+                HTML(f'<a class="p-font smooth-click form-link text-info \
                      text-center mt-1 mb-2 secondaryAction" \
                      href="{account_reset}">\
                 {forgot_password}</a>'),
