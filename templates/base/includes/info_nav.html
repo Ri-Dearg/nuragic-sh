@@ -8,7 +8,7 @@
 {% if categories %}
 {% for item in categories %}
 <li
-    class="btn-tran nav-item dropdown py-1{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5 order-md-last{% endif %}">
+    class="btn-tran nav-item dropdown py-1{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5{% endif %}">
     <button class="nav-link p-font l-space-2 btn btn-link dropdown-toggle text-end text-lg-center mb-0 p-0"
         id="{{ item.menu_word }}Dropdown" type="button" data-bs-toggle="dropdown"
         aria-expanded="false">{{ item.menu_word|upper }}
@@ -43,3 +43,7 @@
 </li>
 {% endfor %}
 {% endif %}
+<li class="btn-tran nav-item order-last py-1">
+    <a class="smooth-click p-font l-space-2 btn btn-link nav-link text-end text-lg-center mb-0 p-0 pe-3 pe-md-0"
+        href="{% url 'products:product-list' %}">{% trans 'SHOP' %}</a>
+</li>
