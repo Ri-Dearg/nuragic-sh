@@ -56,8 +56,10 @@
 Buttons
 --------------------------------------------------------------------------*/
 
-.btn-tran:hover {
-  background-color: #2b384c;
+.btn-tran:hover,
+.btn-tran.active:hover,
+.dropdown-item.active:hover {
+  background-color: #2b384c !important;
 }
 
 .btn.btn-tran:hover {
