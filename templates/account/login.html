@@ -14,7 +14,7 @@
 {% block form_title %}{% trans 'SIGN IN' %}{% endblock %}
 {% block form_content %}
 <p class="p-font text-primary text-center mt-1 mb-0">
-    {% blocktrans %}<a class="smooth-click text-white" href="{{ signup_url }}">Sign Up</a>
+    {% blocktrans %}<a class="smooth-click form-link text-info" href="{{ signup_url }}">Sign Up</a>
     if you have not created an account yet.{% endblocktrans %}
 </p>
 {% crispy form %}

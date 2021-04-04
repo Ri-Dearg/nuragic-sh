@@ -18,7 +18,7 @@
 {% user_display confirmation.email_address.user as user_display %}
 
 <p class="p-font text-primary text-center mt-1 mb-0">
-    {% blocktrans with confirmation.email_address.email as email %}I confirm that <a class="text-white"
+    {% blocktrans with confirmation.email_address.email as email %}I confirm that <a class="form-link text-info"
         href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user
     {{ user_display }}.{% endblocktrans %}
 </p>
@@ -38,7 +38,7 @@
 {% url 'account_email' as email_url %}
 
 <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This e-mail confirmation link expired or is
-    invalid. Please <a class="smooth-click text-white" href="{{ email_url }}">issue a new e-mail confirmation
+    invalid. Please <a class="smooth-click form-link text-info" href="{{ email_url }}">issue a new e-mail confirmation
         request</a>.{% endblocktrans %}</p>
 {% endif %}
 {% endblock %}

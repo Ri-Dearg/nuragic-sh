@@ -14,6 +14,6 @@
 {% block form_content %}
 <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}We have sent an e-mail to you for
     verification. Follow the link provided to finalize the signup process. If you do not
-    receive it within a few minutes, please{% endblocktrans %} <a class="smooth-click text-white"
+    receive it within a few minutes, please{% endblocktrans %} <a class="smooth-click form-link text-info"
         href="{% url 'contact:email-form' %}">{% trans 'contact us' %}.</a></p>
 {% endblock %}
