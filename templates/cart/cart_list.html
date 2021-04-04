@@ -13,7 +13,7 @@
     </div>
 </div>
 {% if cart %}
-<section class="row px-0 px-md-2 bg-white">
+<section class="row px-0 px-md-2 flex-grow-1 bg-white">
     <article class="col-12 col-md-8 order-1 order-md-0">
         <ul class="list-group list-group-flush">
             <!--For every item in the cart, it creates a row with option for that product.-->
@@ -26,8 +26,8 @@
     {% include 'cart/includes/subtotal.html' %}
 </section>
 {% else %}
-<!--If there is no item in the cart, it displays a link back to he shop-->
-<section class="row px-0 px-md-2 bg-white">
+<!--If there is no item in the cart, it displays a link back to the shop-->
+<section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
     <article class="col text-center mt-4">
         <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
         <h2 class="text-primary mb-0">{% trans 'See what we can offer' %}.</h2>

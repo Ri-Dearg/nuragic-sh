@@ -5,48 +5,6 @@
 * Browsers: last 4 version
 */
 
-.product.card-body {
-  height: 8rem;
-}
-
-.product.btn {
-  background-color: rgba(#ffffff, 0.5);
-  color: rgba(#2b384c, 0.85);
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-
-.product.btn:active {
-  -webkit-transform: scale(0.2);
-  -ms-transform: scale(0.2);
-  transform: scale(0.2);
-}
-
-.product.btn:hover {
-  background-color: #fff;
-  color: #2b384c;
-}
-
-.product-detail.btn {
-  background-color: #ab5fab;
-  color: #fff;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-
-.product-detail.btn:active {
-  -webkit-transform: scale(0.2);
-  -ms-transform: scale(0.2);
-  transform: scale(0.2);
-}
-
-.product-detail.btn:hover {
-  background-color: #874587;
-  color: #fff;
-}
-
 .fav-item:hover,
 .fav-item:active {
   background-color: #f5c936 !important;
@@ -320,6 +278,10 @@ Positioning
   z-index: -2;
 }
 
+.body-mods {
+  min-height: 100vh;
+}
+
 /*--------------------------------------------------------------------------
 Preloader
 --------------------------------------------------------------------------*/
@@ -344,6 +306,48 @@ Preloader
 Products
 --------------------------------------------------------------------------*/
 /*These position the little info banner that appear on product images.*/
+.product.card-body {
+  height: 8rem;
+}
+
+.product.btn {
+  background-color: rgba(#ffffff, 0.5);
+  color: rgba(#2b384c, 0.85);
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.product.btn:active {
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  transform: scale(0.2);
+}
+
+.product.btn:hover {
+  background-color: #fff;
+  color: #2b384c;
+}
+
+.product-detail.btn {
+  background-color: #ab5fab;
+  color: #fff;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.product-detail.btn:active {
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  transform: scale(0.2);
+}
+
+.product-detail.btn:hover {
+  background-color: #874587;
+  color: #fff;
+}
+
 .product-alert {
   position: absolute;
   top: 83%;

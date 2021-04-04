@@ -64,7 +64,7 @@
     </head>
     {% endblock %}
 
-    <body class="bg-primary">
+    <body class="body-mods bg-primary d-flex flex-column">
         {% if user.is_authenticated %}
         {% include 'users/includes/authenticated_offcanvas.html' %}
         {% else %}
@@ -108,7 +108,7 @@
         {% include 'base/includes/header.html' %}
 
         <!-- Main content container -->
-        <main class="main-mods min-vh-75 container-xxl shadow-lg p-0">
+        <main class="flex-grow-1 d-flex flex-column container-xxl shadow-lg p-0">
             <!-- This hold the toasts notifications in position on the page.
         Can be changed with the toast-position class.-->
             <div class="toast-container px-1 position-fixed">

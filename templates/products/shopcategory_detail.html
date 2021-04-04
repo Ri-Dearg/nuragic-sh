@@ -1,14 +1,14 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
-{% block head_title %}{{ object.title }}{% endblock%} {% block content %}
-
+{% block head_title %}{{ object.title }}{% endblock%}
 <!-- Critical CSS -->
 <!-- {% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %} -->
+{% block content %}
 
 <!-- Displays category. The name is up top, followed by the product feed.
 Uses the product_box.html template -->
-<section>
+<section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
             <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{{ object.title|upper }}</h2>

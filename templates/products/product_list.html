@@ -24,7 +24,7 @@ such as likes_list, category_detail and stockdrop_detail.-->
 {% include 'info/includes/home_carousel.html' %}
 {% endif %}
 {% if page_obj %}
-<section>
+<section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
             <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
@@ -43,7 +43,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 </section>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
-<section class="row bg-white">
+<section class="row flex-grow-1 bg-white">
     <div class="col text-center">
         <h4 class="text-dark">Nothing found but good stuff is...</h4>
         <h2 class="text-primary heading-font">Neverlost</h2>
