@@ -48,12 +48,16 @@ def get_cart(request):
                 # Or else the item is removed from the cart with feedback:
                 else:
                     cart.pop(item_id)
-                    messages.error(request,
-                                   _(f'{product} has run out of stock!'))
+                    messages.warning(
+                        request,
+                        _(f'{product} has run out of stock \
+                            and has been removed from the cart.'))
 
             # Skips the product if it is False:
             else:
                 pass
+
+        request.session['cart'] = cart
 
     # Checks the cart total price and declares delivery price accordingly.
     # The FREE_DELIVERY_THRESHOLD is a set price declared in settings.
@@ -64,7 +68,6 @@ def get_cart(request):
 
     # Calculates the grand total and then pushes all details into the context.
     grand_total = cart_total + delivery
-    request.session['cart'] = cart
     request.session['cart_quantity'] = cart_quantity
     request.session['cart_total'] = str(cart_total)
     request.session['grand_total'] = str(grand_total)

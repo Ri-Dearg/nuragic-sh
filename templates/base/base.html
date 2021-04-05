@@ -64,7 +64,7 @@
     </head>
     {% endblock %}
 
-    <body class="bg-primary">
+    <body class="body-mods bg-primary d-flex flex-column">
         {% if user.is_authenticated %}
         {% include 'users/includes/authenticated_offcanvas.html' %}
         {% else %}
@@ -86,7 +86,7 @@
         {% endif %}
 
         <!-- preloader video. Uses classes to center the logo on the viewport -->
-        <div class="preloader justify-content-center align-items-center bg-primary">
+        <div class="preloader h-100 w-100 justify-content-center align-items-center bg-primary">
             <div class="preload-gif" role="status">
                 <video playsinline autoplay muted loop poster="{% static 'images/logo.png' %}">
                     <source src="{% static 'images/preloader.mp4' %}" type="video/mp4">
@@ -97,21 +97,21 @@
         </div>
         <!-- Background images positioned behind the main section
         They only show up beyond the xxl breakpoint -->
-        <div class="z-n1 border-position fixed-top opacity-40 vh-100">
+        <div class="z-n1 fixed-top opacity-40 vh-100 mt-5 pt-5">
             <img src="{% static 'images/borders.png'%}" alt="border image"
-                class="z-n2 left-border position-absolute h-100" />
+                class="z-n2 position-absolute top-50 start-0 translate-middle h-100 mt-4" />
             <img src="{% static 'images/borders.png'%}" alt="border image"
-                class="z-n2 right-border position-absolute h-100" />
+                class="z-n2 position-absolute top-50 start-100 translate-middle h-100 mt-4" />
         </div>
 
         <!-- Header template -->
         {% include 'base/includes/header.html' %}
 
         <!-- Main content container -->
-        <main class="main-mods min-vh-75 container-xxl shadow-lg bg-primary p-0">
+        <main class="flex-grow-1 d-flex flex-column container-xxl shadow-lg p-0">
             <!-- This hold the toasts notifications in position on the page.
         Can be changed with the toast-position class.-->
-            <div class="toast-container position-fixed">
+            <div class="toast-container px-1 position-fixed">
                 {% if messages %}
                 {% for message in messages %}
                 {% include 'base/includes/messages.html' %}
