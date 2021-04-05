@@ -52,8 +52,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # App for connecting to AWS
-    'storages',
     # Better Array Fields
     'django_better_admin_arrayfield',
     # Apps for compiling SASS
@@ -89,6 +87,7 @@ COMPRESS_ROOT = 'static'
 MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
