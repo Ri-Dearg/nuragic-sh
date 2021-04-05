@@ -31,18 +31,20 @@ if DEBUG == 'True':
 elif DEBUG is False:
     print('Debug mode is off.')
 
-ALLOWED_HOSTS = ['nuragicshamanichealing.org', '157.90.231.34', 'nuragic-sh.herokuapp.com',
-                 '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']  # noqa E501
+ALLOWED_HOSTS = [
+    'nuragicshamanichealing.org', '157.90.231.34',
+    'nuragic-sh.herokuapp.com',
+    '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR.parent, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR.parent, "static"),)
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')
 
 # # Settings for AWS bucket
 # AWS_S3_OBJECT_PARAMETERS = {
