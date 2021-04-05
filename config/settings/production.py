@@ -32,7 +32,9 @@ elif DEBUG is False:
     print('Debug mode is off.')
 
 ALLOWED_HOSTS = [
-    'nuragicshamanichealing.org', '157.90.231.34',
+    'nuragicshamanichealing.org',
+    '157.90.231.34',
+    'localhost',
     'nuragic-sh.herokuapp.com',
     '3b4ff521061d4d779f29048eb15db1ed.vfs.cloud9.eu-west-1.amazonaws.com']
 
