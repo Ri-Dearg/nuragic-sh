@@ -56,5 +56,7 @@ jobs:
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          python3 manage.py compilescss --traceback
+          python3 manage.py collectstatic --noinput --traceback
           coverage run --source=. --omit=custom_storages.py,config/*,manage.py,users/adapter.py manage.py test --keepdb
           coveralls --service=github
