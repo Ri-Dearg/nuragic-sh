@@ -85,7 +85,6 @@ SASS_PROCESSOR_ROOT = 'static/'
 COMPRESS_ROOT = 'static'
 
 MIDDLEWARE = [
-    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -196,7 +195,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'  # NOQA: E501
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # NOQA: E501
 
 # Settings for Rich Text Editor in admin
 TINYMCE_DEFAULT_CONFIG = {
