@@ -1,10 +1,10 @@
 """Adds carted items to the context."""
 from decimal import Decimal
 
+from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
-from config import settings
 from products.models import Product
 
 
