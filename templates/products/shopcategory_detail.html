@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static  -->
+{% load i18n %} {% load static %}
+{% block head_title %}{{ object.title }}{% endblock%} {% block content %}
+
+<!-- Critical CSS -->
+<!-- {% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %} -->
+
+<!-- Displays category. The name is up top, followed by the product feed.
+Uses the product_box.html template -->
+<div class="col-12 bg-brown py-2"></div>
+<div class="row bg-white">
+    <div class="col">
+        <h2 class="h-font display-2 l-space-2 text-primary text-center py-3">{{ object.title|upper }}</h2>
+    </div>
+</div>
+<div class="col-12 bg-brown py-2"></div>
+
+<div class="row bg-white">
+    {% for product in page_obj %}
+    {% include 'products/includes/product_box.html' %}
+    {% endfor %}
+</div>
+{% if page_obj.has_next or page_obj.has_previous %}
+<nav aria-label="{% trans 'Product Page Navigation for' %} {{ object.title }}">
+    {% include 'base/includes/paginator.html' %}
+</nav>
+{% endif %}
+<div class="col-12 bg-brown py-2"></div>
+
+{% endblock %}

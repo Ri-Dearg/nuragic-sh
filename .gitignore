@@ -12,5 +12,12 @@ htmlcov/
 *.css
 *.css.map
 .theia/
+.~c9*
+.c9
+venv
+.venv
+.vscode
+staticfiles
+.DS_Store
 
 !jasmine.css

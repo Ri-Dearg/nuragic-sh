@@ -1,24 +1,26 @@
-{% load static %} {% get_media_prefix as MEDIA_URL %}
+{% load i18n %} {% load static %}
 <!-- Displays reviews. Items are only shown if they have the "display" boolean as true.
 This is done in the view before being passed here. They are ordered by most recent first. -->
-<section id="review-carousel" class="carousel slide bg-white mt-3 py-4 px-1 px-md-4 px-lg-5" data-ride="carousel">
+<section id="review-carousel" class="carousel slide bg-white py-4 px-1 px-md-4 px-lg-5" data-bs-ride="carousel">
     <!-- This loops through the items, setting the first as the active one. -->
     {% if review|length > 1 %}
     <ol class="carousel-indicators d-flex mb-0">
         {% for number in review %}
-        <li data-target="#review-carousel" data-slide-to="{{ forloop.counter0 }}" class="bg-warning {% if forloop.first %}active{% endif %}"></li>
+        <li data-bs-target="#review-carousel" data-bs-slide-to="{{ forloop.counter0 }}"
+            class="bg-warning {% if forloop.first %}active{% endif %}">
+        </li>
         {% endfor %}
     </ol>
     {% endif %}
     <div class="carousel-inner text-center text-primary">
-        <h1 class="h-font l-space-2 display-4 mb-3">REVIEWS</h1>
+        <h4 class="h-font l-space-2 display-4 text-primary mb-3">{% trans 'REVIEWS' %}</h4>
         {% for item in review %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}" href="#">
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <div class="row carousel-row">
                 <div class="col-12 col-md-10 offset-md-1 p-1 my-auto">
-                    <p class="p-font l-space-1 l-height-1 font-italic h6">"{{ item.text }}"</p>
+                    <p class="p-font l-space-1 l-height-1 fst-italic h6">"{{ item.text }}"</p>
                     <br>
-                    <h5 class="p-font l-space-1 l-height-1 font-italic">- {{ item.reviewer_name }}</h5>
+                    <h5 class="p-font l-space-1 l-height-1 fst-italic">- {{ item.reviewer_name }}</h5>
                 </div>
             </div>
         </div>
@@ -26,13 +28,13 @@ This is done in the view before being passed here. They are ordered by most rece
     </div>
     {% if review|length > 1 %}
     <!-- This displays the buttons for slide selection. -->
-    <a class="carousel-control-prev d-none d-md-flex" href="#review-carousel" role="button" data-slide="prev">
+    <a class="carousel-control-prev d-none d-md-flex" href="#review-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon rev-arr" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="visually-hidden">{% trans 'Previous' %}</span>
     </a>
-    <a class="carousel-control-next d-none d-md-flex" href="#review-carousel" role="button" data-slide="next">
+    <a class="carousel-control-next d-none d-md-flex" href="#review-carousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon rev-arr" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="visually-hidden">{% trans 'Next' %}</span>
     </a>
     {% endif %}
 </section>

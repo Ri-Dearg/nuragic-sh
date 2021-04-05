@@ -1,0 +1,16 @@
+<!-- Loads internationalization -->
+{% load i18n %}
+
+<!-- A simple side-scrolling bar that displays products.
+Used on empty searches, products detail pages and error pages. -->
+<div class="row bg-white mx-0 pt-3">
+    <div class="col-12 text-center">
+        <h5 class="p-font text-primary mb-0">{% trans 'Or take a look at these' %}:</h5>
+    </div>
+</div>
+<div class="overflow-auto row bg-white flex-row flex-nowrap px-2 pt-0 pb-2">
+    <!-- Displays using the standard product_box.html template -->
+    {% for product in related_products %}
+    {% include 'products/includes/product_box.html' %}
+    {% endfor %}
+</div>

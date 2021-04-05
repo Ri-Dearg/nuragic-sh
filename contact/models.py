@@ -1,15 +1,10 @@
 """Models for the info module."""
 
-from django.shortcuts import reverse
 from django.core.mail import send_mail
+from django.db import models
+from django.shortcuts import reverse
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.translation import get_language
-from django.db import IntegrityError
-
-
-from django.db import models
-
 from django_better_admin_arrayfield.models.fields import ArrayField
 
 from config import settings
@@ -24,50 +19,66 @@ class Newsletter(models.Model):
         null=False, blank=False), default=list)
 
     def save(self, *args, **kwargs):
-        email_history = EmailHistory.objects.all()
-        history_list = []
-        for item in email_history:
-            history_list.append(str(item))
-        news_list_en = self.email_list_en
-        news_list_it = self.email_list_it
-        history_obj = []
+        """Sorts the newsletter lists.
+        Creates EmailHistory objects for new emails, then parses
+        emails to set the correct checkboxes for the EmailHistory models."""
 
-        for email in news_list_en:
+        def create_history(email_list):
+            """Creates EmailHistory models for any unregistered emails."""
+            email_history = EmailHistory.objects.all()
+            history_list = []
             for item in email_history:
-                if email == item.email_address and item.newsletter_en is False:
-                    item.newsletter_en = True
-                    if email not in news_list_it:
-                        item.newsletter_it = False
-                    item.save()
-            if email not in history_list:
-                newsletter = {}
-                newsletter['email_address'] = email
-                newsletter['newsletter_en'] = True
-                history_obj.append(EmailHistory(**newsletter))
+                history_list.append(str(item))
 
-        for email in news_list_it:
-            for item in email_history:
-                if email == item.email_address and item.newsletter_it is False:
-                    item.newsletter_it = True
-                    if email not in news_list_en:
-                        item.newsletter_en = False
-                    item.save()
-            if email not in history_list:
-                newsletter = {}
-                newsletter['email_address'] = email
-                newsletter['newsletter_it'] = True
-                history_obj.append(EmailHistory(**newsletter))
+            history_obj = []
+
+            for email in email_list:
+                if email not in history_list:
+                    newsletter = {}
+                    newsletter['email_address'] = email
+                    history_obj.append(EmailHistory(**newsletter))
 
             if len(history_obj) > 0:
                 EmailHistory.objects.bulk_create(history_obj)
 
-            news_list_total = news_list_en + news_list_it
-
+        def checkbox_highlight(newsletter_list_en, newsletter_list_it,
+                               email_history):
+            """Highlights subscription checkboxes for EmailHistory models."""
             for item in email_history:
-                if item.email_address not in (news_list_total):
+                if (str(item) in newsletter_list_en
+                        and item.newsletter_en is False):
+                    item.newsletter_en = True
+                    item.save()
+                elif (str(item) not in newsletter_list_en
+                        and item.newsletter_en is True):
                     item.newsletter_en = False
+                    item.save()
+
+                if (str(item) in newsletter_list_it
+                        and item.newsletter_it is False):
+                    item.newsletter_it = True
+                    item.save()
+                elif (str(item) not in newsletter_list_it
+                        and item.newsletter_it is True):
                     item.newsletter_it = False
                     item.save()
+
+        # Sorts the newletter lists alphabetically and declares variables
+        self.email_list_en = sorted(self.email_list_en)
+        self.email_list_it = sorted(self.email_list_it)
+        news_list_en = self.email_list_en
+        news_list_it = self.email_list_it
+        news_list_total = list(set(news_list_en).union(news_list_it))
+
+        create_history(news_list_total)
+
+        # Declares variables to check for users in certain newsletters
+        email_history = EmailHistory.objects.all()
+        history_list = []
+        for item in email_history:
+            history_list.append(str(item))
+
+        checkbox_highlight(news_list_en, news_list_it, email_history)
 
         super().save(*args, **kwargs)
 
@@ -86,22 +97,28 @@ class EmailHistory(models.Model):
     newsletter_it = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        newsletter = Newsletter.objects.get(name='basic')
+        """Fills newletter subscription boxes accordingly."""
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         newsletter_list_en = newsletter.email_list_en
         newsletter_list_it = newsletter.email_list_it
+
         if self.email_address in newsletter_list_en:
             self.newsletter_en = True
+        else:
+            self.newsletter_en = False
+
         if self.email_address in newsletter_list_it:
             self.newsletter_it = True
-        newsletter_list_en = sorted(newsletter_list_en)
-        newsletter_list_it = sorted(newsletter_list_it)
+        else:
+            self.newsletter_it = False
 
         super().save(*args, **kwargs)
 
     class Meta:
         """Orders by alphabetical order."""
         ordering = ['email_address']
-        verbose_name = 'Email Histories'
+        verbose_name_plural = 'Email Histories'
 
     def __str__(self):
         return f'{self.email_address}'
@@ -118,7 +135,7 @@ class Email(models.Model):
                                       null=True,
                                       on_delete=models.SET_NULL)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self):  # pylint: disable=no-self-use
         """Returns users to the contact page on successful creation."""
         return reverse('contact:email-form')
 

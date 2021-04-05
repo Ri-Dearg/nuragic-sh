@@ -1,0 +1,55 @@
+{% load crispy_forms_field %}
+
+{% if field.is_hidden %}
+{{ field }}
+{% else %}
+{% if field|is_checkbox %}
+<div class="col-12 d-flex">
+    <div class="form-check mx-auto mb-2">
+        {% endif %}
+        {% if bootstrap4 %}
+        <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}"
+            class="{% if not field|is_checkbox %}form-group{% if 'form-horizontal' in form_class %} row{% endif %}{% else %}{%if use_custom_control%}custom-control custom-checkbox{% else %}form-check{% endif %}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+            {% endif %}
+
+            {% if field|is_checkboxselectmultiple %}
+            {% include 'bootstrap4/layout/checkboxselectmultiple.html' %}
+            {% endif %}
+
+            {% if field|is_radioselect %}
+            {% include 'bootstrap4/layout/radioselect.html' %}
+            {% endif %}
+
+            {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}
+            {% if field|is_checkbox and form_show_labels %}
+            {% crispy_field field 'class' 'form-check-input' %}
+            <label for="{{ field.id_for_label }}"
+                class="p-font form-check-label text-primary sr-only{% if field.field.required %} requiredField{% endif %}">
+                {{ field.label|safe }}
+            </label>
+            {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+            {% elif field|is_file and use_custom_control  %}
+            {% include 'bootstrap4/layout/field_file.html' %}
+            {% else %}
+            <div
+                class="col-12 form-floating my-1{% if field_class %} {{ field_class }}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}">
+                {% crispy_field field %}
+                {% if field.label and not field|is_checkbox and form_show_labels %}
+                <label for="{{ field.id_for_label }}"
+                    class="{% if 'form-horizontal' in form_class %}col-form-label {% endif %}p-font text-primary sr-only {{ label_class }}{% if field.field.required %} requiredField{% endif %}">
+                    {{ field.label|safe }}
+                </label>
+                {% endif %}
+                {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+            </div>
+            {% endif %}
+
+            {% endif %}
+            {% if bootstrap4 %}
+        </{% if tag %}{{ tag }}{% else %}div{% endif %}>
+        {% endif %}
+        {% if field|is_checkbox %}
+    </div>
+</div>
+{% endif %}
+{% endif %}

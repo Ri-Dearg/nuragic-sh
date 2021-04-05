@@ -1,0 +1,28 @@
+<!-- Loads internationalization -->
+{% load i18n %}
+<!-- Displays settings button -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser" aria-labelledby="offcanvasUserLabel">
+    <div class="offcanvas-header pb-0">
+        <h2 class="h-font l-space-1  text-primary h3 mx-auto" id="offcanvasUserLabel">{% trans 'WELCOME' %},
+            {{ request.user.username|upper }}
+        </h2>
+        <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-center">
+        <a href="{% url 'users:user-detail' request.user.id %}"
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Settings' %}</a>
+        <div class="col-12 my-2"></div>
+        <!--Displays logout button. -->
+        <div class="border-0">
+            <form class="border-0 mx-0 my-1 p-1" method="POST"
+                action="{% url 'account_logout' %}?next={{ request.path }}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button type="submit" class="p-font col-8 btn btn-link text-center p-0"
+                    value="Submit">{% trans 'Sign Out' %}</button>
+            </form>
+        </div>
+    </div>
+</div>

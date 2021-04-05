@@ -1,0 +1,25 @@
+{% load static %}
+<!-- Displays a section for each page -->
+{% for item in object.page.all %}
+<section>
+    <div class="row bg-white">
+        <div class="col-12 bg-brown order-first py-2"></div>
+        <div class="col-auto col-md order-2 order-md-1 bg-white my-auto px-3 px-md-4 pt-3">
+            <h2 class="h-font l-space-2 h1 text-primary text-center">{{ item.title|upper }}</h2>
+            <p class="p-font text-primary">{{ item.summary }}</p>
+            <p class="text-center"><a href="{% url 'info:page-detail' item.id %}"
+                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text }}</a>
+            </p>
+        </div>
+        <div class="col-auto col-md order-1 order-md-2 d-flex bg-white">
+            <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}" height="{{ item.image_fb_link.height }}"
+            srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
+            {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
+            {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" 
+            sizes="(max-width: 767px) 100vw,
+            (min-width: 768px) 50vw" 
+            alt="{{ item.title }}" class="img-fluid my-auto">
+        </div>
+    </div>
+</section>
+{% endfor %}

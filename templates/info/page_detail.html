@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static and filter to get image extension -->
+{% load i18n %} {% load static %} {% load app_filters %}
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'info/includes/critical_css/page_detail.html' %}{% endblock %}
+
+<!-- Meta details -->
+{% block meta_description %}{{ object.summary|truncatechars:270 }}{% endblock %}
+{% block meta_keywords %}{{ block.super }}{{ object.title }}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ object.title }}{% endblock %}
+{% block og_description %}{{ object.desc_title1|title }}{% endblock %}
+{% block og_image %}{{ object.image_fb_link.url }}{% endblock %}
+{% block og_image_type %}image/{{ object.image_fb_link.name|extension }}{% endblock %}
+{% block og_image_width %}{{ object.image_fb_link.width }}{% endblock %}
+{% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
+{% block og_image_alt %}{{ object.title }}{% endblock %}
+{% block head_title %}{{ object.title }}{% endblock %}
+{% block content %}
+<!-- Layout for Pages -->
+<article>
+    <h2 class="d-none">{{ object.title }}</h2>
+    <!-- Spacer -->
+    <div class="row">
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
+    </div>
+    <section class="row">
+        <!-- Places the title with an overlay on top of an image -->
+        <div class="col-12 position-relative">
+            <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 bg-dark opacity-25">
+            </div>
+            <h2
+                class="h-font position-absolute top-50 start-50 translate-middle w-100 text-center display-1 text-white text-shadow-2">
+                {{ object.title|upper }}
+            </h2>
+            <img src="{{ object.title_image_tw_header.url }}"
+            srcset="{{ object.title_image_tw_header.url }} {{ object.title_image_tw_header.width }}w,
+            {{ object.title_image_tw_header_md.url }} {{ object.title_image_tw_header_md.width }}w,
+            {{ object.title_image_tw_header_sm.url }} {{ object.title_image_tw_header_sm.width }}w" 
+            sizes="100vw" 
+            alt="{{ object.title }}" class="img-fluid">
+        </div>
+        <!-- Small quote before text content -->
+        <aside class="col-12 bg-{{ object.theme}}">
+            <p class="p-font h6 text-center fw-bold text-white my-2"><i>"{{ object.summary }}"</i></p>
+        </aside>
+    </section>
+    <!-- Image positions change depending on screen size -->
+    <section class="row bg-white">
+        <div class="col-auto col-md d-flex order-3 order-xl-1 d-md-none d-xl-flex bg-white">
+            <img src="{{ object.image_fb_link.url }}" width="{{ object.image_fb_link.width }}"
+                srcset="{{ object.image_fb_link.url }} {{ object.image_fb_link.width }}w,
+                {{ object.image_fb_link_md.url }} {{ object.image_fb_link_md.width }}w,
+                {{ object.image_fb_link_sm.url }} {{ object.image_fb_link_sm.width }}w" 
+                sizes="(max-width: 767px) 100vw,
+                (min-width: 768px) 50vw"             
+                alt="{{ item.title }}" class="img-fluid my-auto">
+        </div>
+        <div class="col-12 order-2 d-md-none bg-{{ object.theme}} py-2"></div>
+        <div class="col-auto col-md order-1 order-xl-2 bg-white px-3 pt-3">
+            <img src="{{ object.image_fb_link.url }}"
+                srcset="{{ object.image_fb_link.url }} {{ object.image_fb_link.width }}w,
+                {{ object.image_fb_link_md.url }} {{ object.image_fb_link_md.width }}w,
+                {{ object.image_fb_link_sm.url }} {{ object.image_fb_link_sm.width }}w" 
+                sizes="(max-width: 767px) 100vw,
+                (min-width: 768px) 50vw"             
+                alt="{{ item.title }}"
+                class="w-50 d-none d-md-inline-block d-xl-none float-start border rounded border-3 border-{{ object.theme}} me-2">
+            <h3 class="h-font text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
+                {{ object.desc_title1|upper }}
+            </h3>
+            <!-- space that displays rich text -->
+            <div class="p-font text-primary">{{ object.description1|safe }}</div>
+        </div>
+        <div class="col-12 order-3 bg-{{ object.theme}} py-2"></div>
+    </section>
+    <!-- Sections display only if they have been filled -->
+    {% if object.description2 or object.bot_image_tw_header %}
+    <section class="row">
+        {% if object.description2 %}
+        <div class="col-12 bg-white p-2 px-md-4">
+            <h3
+                class="h-font text-center text-primary h2 text-decoration-underline decoration-color-{{ object.theme }}">
+                {{ object.desc_title2|upper }}
+            </h3>
+            <!-- space that displays rich text -->
+            <div class="p-font text-primary">{{ object.description2|safe }}</div>
+        </div>
+        {% endif %}
+        {% if object.bot_image_tw_header %}
+        <div class="col-12 bg-{{ object.theme}} py-2"></div>
+        <img src="{{ object.bot_image_tw_header.url }}" width="{{ object.bot_image_tw_header.width }}" height="{{ object.bot_image_tw_header.height }}"
+            srcset="{{ object.bot_image_tw_header.url }} {{ object.bot_image_tw_header.width }}w,
+            {{ object.bot_image_tw_header_md.url }} {{ object.bot_image_tw_header_md.width }}w,
+            {{ object.bot_image_tw_header_sm.url }} {{ object.bot_image_tw_header_sm.width }}w" 
+            sizes="100vw"         
+        alt="{{ object.desc_title2 }}" class="img-fluid">
+        {% endif %}
+        <div class="col-12 bg-{{ object.theme }} py-2"></div>
+    </section> {% endif %}
+</article>{% endblock %}

@@ -13,17 +13,45 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.i18n import i18n_patterns
-from django.contrib import admin
-from django.urls import path, include
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 
-urlpatterns = i18n_patterns(
-    path('admin/', admin.site.urls),
+# Patterns for the shop section functions
+shop_patterns = [
+    path('', include(('products.urls', 'products'),
+                     namespace='products')),
+    path('likes/', include(('likes.urls', 'likes'),
+                           namespace='likes')),
+    path('cart/', include(('cart.urls', 'cart'),
+                          namespace='cart'))
+]
+
+account_patterns = [
+    # Allauth functions
+    path('', include('allauth.urls')),
+    path('', include(('users.urls', 'users'),
+                     namespace='users')),
+]
+
+urlpatterns = [
+    # Internationalization functions
+    path('i18n/', include('django.conf.urls.i18n')),
+    # Rich Text Editor functions
+    path('tinymce/', include('tinymce.urls')),
+    # Jasmine testing functions
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
     path('contact/', include(('contact.urls', 'contact'),
                              namespace='contact')),
-    path('', include(('info.urls', 'info'), namespace='info')),
-    prefix_default_language=False) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include(('info.urls', 'info'),
+                     namespace='info')),
+    path('accounts/', include(account_patterns)),
+    path('shop/', include(shop_patterns)),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),
+)

@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static, loads crispy forms  -->
+{% load static %} {% load i18n %} {% load crispy_forms_tags %}
+
+{% block head_title %}{{ user.username }}{% endblock%}
+
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'users/includes/critical_css/user_detail.html' %}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block content %}
+<!-- This page displays option such as changing password, email address and shipping/billing info.
+The email and password functions use django-allauth logic with custom forms.
+Much of the content is taken directly from their templates. -->
+<div class="row py-3 bg-brown">
+    <div class="col">
+        {% blocktrans with user.username|upper as name %}
+        <h2 class="h-font l-space-1 h1 text-white text-center">{{ name }}'S SETTINGS</h2>
+        {% endblocktrans %}
+    </div>
+</div>
+<div class="row bg-white">
+    <div class="col-12 col-md-6 p-2 p-md-4">
+        {% include 'users/includes/email.html' %}
+    </div>
+    <div class="d-md-none col-12 px-2 px-md-4">
+        <hr class="my-3" />
+    </div>
+    <div class="col-12 col-md-6 p-2 p-md-4">
+        {% include 'users/includes/password_change.html' %}
+    </div>
+</div>
+<div class="row bg-white">
+    <div class="col-12 px-2 px-md-4">
+        <hr class="my-md-0 my-3" />
+    </div>
+    <div class="col-12">
+        {% include 'users/includes/shipping_billing.html' %}
+    </div>
+</div>
+<div class="row bg-white">
+    <div class="col-12 px-2 px-md-4">
+        <hr class="my-md-0 my-3" />
+    </div>
+    <div class="col-12 p-2 pb-4 p-md-4">
+        {% include 'users/includes/newsletter_form.html' %}
+    </div>
+</div>
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/custom/userDetail.js' %}?{{ VERSION }}"></script>
+{% endblock %}

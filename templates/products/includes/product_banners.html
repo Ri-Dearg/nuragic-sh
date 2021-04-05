@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="product-alert">
+    {% if product.is_unique %}
+    <span class="d-block p-font badge bg-info">{% trans 'Unique'%}</span>
+    {% endif %}
+    {% if product.is_artisanal %}
+    <span class="d-block p-font badge bg-brown">{% trans 'Artisan'%}</span>
+    {% endif %}
+    {% if product.stock == 0 and not product.can_preorder %}
+    <span class="d-block p-font badge bg-danger">{% trans 'Out of Stock'%}</span>
+    {% elif product.stock == 0 and product.can_preorder %}
+    <span class="d-block p-font badge bg-success">{% trans 'Pre-order' %}</span>
+    {% elif not product.is_unique and product.stock < 5 %}
+    <span class="d-block p-font badge bg-warning">{% trans 'Low Stock'%}</span>
+    {% endif %}
+</div>

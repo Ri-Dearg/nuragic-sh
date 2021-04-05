@@ -1,46 +1,24 @@
-{% extends 'base/base.html' %} {% load i18n %} {% block head_title %}{% trans 'Contact Us' %}{% endblock%} {% block content %}
-<article class="row my-auto">
-    <h1 class="col-12 text-center text-white h-font pt-3">{% trans 'REACH OUT' %}</h1>
-    	<div class="form-box col col-md-8 offset-md-2 bg-secondary mx-1 mx-sm-auto p-2 rounded">
-		{% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success rounded" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-		<form class="p-2 rounded" action="{% url 'contact:email-form' %}" method="POST">
-			{% csrf_token %}
-			<div class="row">
-				<div class="col-12 col-md-6 my-1">
-					<div class="form-label-group">
-						{{ form.email }}
-                        <label for="id_{{ form.email.name }}">{{ form.email.label }}</label>
-					</div>
-				</div>
-				<div class="col-12 col-md-6 my-1">
-					<div class="form-label-group">
-						{{ form.name }}
-                        <label for="id_{{ form.name.name }}">{{ form.name.label }}</label>
-					</div>
-				</div>
-				<div class="col-12 my-1">
-					<div class="form-label-group">
-						{{ form.subject }}
-                        <label for="id_{{ form.subject.name }}">{{ form.subject.label }}</label>
-					</div>
-				</div>
-				<div class="col-12 my-1 h-75">
-					<div class="form-label-group">
-						{{ form.message }}
-                        <label for="id_{{ form.message.name }}">{{ form.message.label }}</label>
-					</div>
-				</div>
-				<div class="col-12 my-1 text-center">
-					<button type="submit" class="btn btn-tran btn-warning shadow">{% trans 'Send' %}</button>
-				</div>
-			</div>
-		</form>
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static, loads crispy forms  -->
+{% load static %} {% load i18n %} {% load crispy_forms_tags %}
+
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'contact/includes/critical_css/email_form.html' %}{% endblock %}
+<!-- Title -->
+{% block head_title %}{% trans 'Contact Us' %}{% endblock%}
+
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block content %}
+
+<!-- Contact email form -->
+<article class="row min-vh-75 align-content-center py-2">
+    <h2 class="h-font l-space-2 form-box col-12 text-center text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
+        {% trans 'REACH OUT' %}</h2>
+    <div class="col-12"></div>
+    <div class="form-box col col-md-8 bg-secondary rounded-bottom mx-sm-auto p-2">
+        {% crispy form %}
     </div>
 </article>
 {% endblock %}

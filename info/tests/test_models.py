@@ -1,99 +1,170 @@
+"""Tests for the Info app Models."""
 import re
 
-from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import TestCase
 
-from info.models import HomeCarousel, HomeInfo, Review
+from info.models import Category, GalleryImage, Page, Review, SplashImage
+
+image = SimpleUploadedFile(
+    name='default.jpg',
+    content=open(
+        'media/default.jpg',
+        'rb').read(),
+    content_type='image/jpeg',)
+
+valid_category = Category(title_en='HI1',
+                          title_it='HI1',
+                          menu_word_en='HCMW1',
+                          menu_word_it='HCMW1',
+                          description_en='description',
+                          description_it='description',
+                          image_fb_link=image,
+                          image_fb_link_md=image,
+                          image_fb_link_sm=image,
+                          button_text="text here",
+                          display=False,
+                          order=12)
+valid_category.save()
+
+about_category = Category(title_en='about',
+                          title_it='HI1',
+                          menu_word_en='HCMW1',
+                          menu_word_it='HCMW1',
+                          description_en='description',
+                          description_it='description',
+                          image_fb_link=image,
+                          image_fb_link_md=image,
+                          image_fb_link_sm=image,
+                          button_text="text here",
+                          order=2)
+
+valid_page = Page(category=Category.objects.latest('date_added'),
+                  title_en='HI1',
+                  title_it='HI1',
+                  summary_en='HCMW1',
+                  summary_it='HCMW1',
+                  desc_title1_en='heading',
+                  desc_title1_it='heading',
+                  description1_en='description',
+                  description1_it='description',
+                  title_image_tw_header=image,
+                  title_image_tw_header_md=image,
+                  title_image_tw_header_sm=image,
+                  image_fb_link=image,
+                  image_fb_link_md=image,
+                  image_fb_link_sm=image,
+                  theme='brown',
+                  order=1)
+valid_page.save()
+
+valid_splash = SplashImage(page=Page.objects.latest('date_added'),
+                           title_en='splash1',
+                           title_it='splash1',
+                           description_en='description',
+                           description_it='description',
+                           image_tw_header=image,
+                           image_tw_header_md=image,
+                           image_tw_header_sm=image,
+                           image_fb_link=image,
+                           image_fb_link_md=image,
+                           image_fb_link_sm=image)
+
+valid_review = Review(reviewer_name='abacus',
+                      text='this is a review')
 
 
-class InfoTests(TestCase):
-    """Tests for Product models."""
+class TestInfoModels(TestCase):
+    """Tests for Info models."""
 
     def setUp(self):
-        """Sets up a HomeCarousel model."""
-        valid_carousel = HomeCarousel(name_en='HC1',
-                                      name_it='HC1',
-                                      description_en='description',
-                                      description_it='description',
-                                      image=SimpleUploadedFile(
-                                          name='default.jpg',
-                                          content=open(
-                                              'media/default.jpg', 'rb').read(),
-                                          content_type='image/jpeg',))
-        valid_carousel.save()
+        """Created instances for use in tests"""
 
-        valid_info = HomeInfo(name_en='HI1',
-                              name_it='HI1',
-                              description_en='description',
-                              description_it='description',
-                              image=SimpleUploadedFile(
-                                  name='default.jpg',
-                                  content=open(
-                                      'media/default.jpg', 'rb').read(),
-                                  content_type='image/jpeg',),
-                              button_text="text here",
-                              order=1)
-        valid_info.save()
+        valid_category.save()
 
-        valid_review = Review(reviewer_name='abacus',
-                              text='this is a review')
+        valid_page.save()
+
+        valid_splash.save()
 
         valid_review.save()
 
     def test_carousel_image_file_is_processed_correctly(self):
-        """Tests that an uploaded HomeCarousel image is resized and
+        """Tests that an uploaded SplashImage image is resized and
         processed correctly by the view."""
 
-        # Retrieves the latest HomeCarousel and saves an image to it.
-        hc1 = HomeCarousel.objects.latest('date_added')
-        hc1.image = SimpleUploadedFile(
+        # Retrieves the latest SplashImage and saves an image to it.
+        splash1 = SplashImage.objects.latest('date_added')
+        splash1.image_image_tw_header = SimpleUploadedFile(
             name='default.jpg',
             content=open('media/default.jpg', 'rb').read(),
             content_type='image/jpeg')
-        new_info = HomeCarousel.objects.latest('date_added')
+        splash1.image_fb_link = SimpleUploadedFile(
+            name='default.jpg',
+            content=open('media/default.jpg', 'rb').read(),
+            content_type='image/jpeg')
+        new_info = SplashImage.objects.latest('date_added')
         new_info.save()
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image.height, 720)
-        self.assertEqual(new_info.image.width, 1920)
-        self.assertTrue(re.search('^carousel/default.*.jpeg$',
-                                  new_info.image.name))
+        self.assertEqual(new_info.image_tw_header.height, 420)
+        self.assertEqual(new_info.image_tw_header.width, 1260)
+        self.assertEqual(new_info.image_fb_link.height, 630)
+        self.assertEqual(new_info.image_fb_link.width, 1200)
+        self.assertTrue(re.search('^info/carousel/default.*.jpeg$',
+                                  new_info.image_tw_header.name))
+        self.assertTrue(re.search('^info/carousel/default.*.jpeg$',
+                                  new_info.image_fb_link.name))
 
     def test_carousel_str(self):
-        """Tests the string method on the HomeCarousel."""
-        hc1 = HomeCarousel.objects.latest('date_added')
-        self.assertEqual(str(hc1),
-                         (f'{hc1.name}'))
+        """Tests the string method on the SplashImage."""
+        splash1 = SplashImage.objects.latest('date_added')
+        self.assertEqual(str(splash1),
+                         (f'{splash1.page}: {splash1.title}'))
 
-    def test_info_image_file_is_processed_correctly(self):
-        """Tests that an uploaded HomeInfo image is resized and
+    def test_category_image_file_is_processed_correctly(self):
+        """Tests that an uploaded Category image is resized and
         processed correctly by the view."""
 
-        # Retrieves the latest HomeInfo and saves an image to it.
-        hi1 = HomeInfo.objects.latest('date_added')
-        hi1.image = SimpleUploadedFile(
-            name='default.jpg',
-            content=open('media/default.jpg', 'rb').read(),
-            content_type='image/jpeg')
-        new_info = HomeInfo.objects.latest('date_added')
+        # Retrieves the latest Category and saves an image to it.
+        new_info = Category.objects.latest('date_added')
+        new_info.image_fb_link = image
         new_info.save()
 
         # Checks that the image has been modified and named correctly
         # after being saved.
-        self.assertEqual(new_info.image.height, 800)
-        self.assertEqual(new_info.image.width, 1280)
-        self.assertTrue(re.search('^info/default.*.jpeg$',
-                                  new_info.image.name))
+        self.assertEqual(new_info.image_fb_link.height, 630)
+        self.assertEqual(new_info.image_fb_link.width, 1200)
+        self.assertTrue(re.search('^info/category/default.*.jpeg$',
+                                  new_info.image_fb_link.name))
 
-    def test_info_str(self):
-        """Tests the string method on the HomeInfo."""
-        hi1 = HomeInfo.objects.latest('date_added')
+    def test_category_str(self):
+        """Tests the string method on the Category."""
+        hi1 = Category.objects.latest('date_added')
         self.assertEqual(str(hi1),
-                         (f'{hi1.name}'))
+                         (f'{hi1.menu_word}'))
+
+    def test_page_image_processing(self):
+        """Tests that an uploaded Page image is resized and
+        processed correctly by the view. Tests str."""
+        page_1 = Page.objects.latest('date_added')
+
+        page_1.image_fb_link = image
+        page_1.bot_image_tw_header = image
+        page_1.save()
+        self.assertEqual(str(page_1),
+                         (f'{page_1.category}: {page_1.title}'))
+
+    def test_galleryimage_str(self):
+        """Tests the string method on the GalleryImage."""
+        page_1 = Page.objects.latest('date_added')
+
+        gallery_1 = GalleryImage(page=page_1, image=image)
+        self.assertEqual(str(gallery_1),
+                         (f'{gallery_1.page}, {gallery_1.image}'))
 
     def test_review_str(self):
         """Tests the string method on the Review."""
-        r1 = Review.objects.latest('date_added')
-        self.assertEqual(str(r1),
-                         (f'{r1.reviewer_name}'))
+        review_1 = Review.objects.latest('date_added')
+        self.assertEqual(str(review_1),
+                         (f'{review_1.reviewer_name}'))

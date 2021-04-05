@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static  -->
+{% load i18n %} {% load static %}
+
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'likes/includes/critical_css/likes_list.html' %}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block head_title %}Your Likes{% endblock%}
+{% block content %}
+<!-- DIsplays a liked items feed in reverse chronological order.
+If There is nothing it provides a link back to the page. -->
+<div class="col-12 bg-brown py-2"></div>
+<div class="row bg-white">
+    <div class="col">
+        <h1 class="h-font l-space-2 bg-white text-center display-1 text-primary mb-0 py-4">
+            {% trans 'YOUR FAVORITES' %}
+        </h1>
+    </div>
+</div>
+<div class="col-12 bg-brown py-2"></div>
+{% if likes %}
+<div class="row px-2 bg-white">
+    <!-- Includes the standard product_box.hml template -->
+    {% for product in page_obj %}
+    {% include 'products/includes/product_box.html' %}
+    {% endfor %}
+</div>
+{% else %}
+<div class="row bg-white min-vh-75 p-2">
+    <div class="col text-center my-auto">
+        <h4 class="p-font text-primary fs-6">{% trans 'No Favorites...' %}</h4>
+        <h2 class="h-font l-space-2 text-primary">{% trans 'DISCOVER' %}</h2>
+        <a class="p-font smooth-click btn-tran btn-lg btn btn-warning text-primary shadow"
+            href="{% url 'products:product-list' %}">{% trans 'Our Offerings' %}</a>
+    </div>
+</div>
+{% endif %}
+{% if page_obj.has_next or page_obj.has_previous %}
+<nav aria-label="{% trans 'Product Page Navigation' %}">
+    {% include 'base/includes/paginator.html' %}
+</nav>
+{% endif %}
+<div class="col-12 bg-brown py-2"></div>
+{% endblock %}

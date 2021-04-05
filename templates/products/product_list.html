@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static  -->
+{% load i18n %} {% load static %}
+
+{% block head_title %}{% trans 'Shop' %}{% endblock%}
+
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
+
+<!-- Open Graph Tags To redo -->
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block content %}
+<!-- Page is utilised as the homepage as well as the search results page.
+After the search section, it is the basis for all feed-based templates,
+such as likes_list, category_detail and stockdrop_detail.-->
+{% if 'query' in request.GET %}
+<!-- Detects if a search query was made and displays the keyword.-->
+<h2 class="text-center pt-2">check out:</h2>
+<h2 class="h-font display-2 l-space-2 text-primary text-center">{{ request.GET.query }}</h2>
+<hr />
+{% else %}
+{% if page_obj.number == 1 %}
+{% include 'info/includes/home_carousel.html' %}
+{% endif %}
+{% if page_obj %}
+<div class="row">
+    <div class="col-12 bg-brown py-2">
+        <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
+    </div>
+</div>
+<section class="row px-0 px-md-2 bg-white">
+    <!-- This displays all products, organised by 'popularity' and stock quantity.
+Retrieves all products if no search query is performed.
+It utilises the paginator so it can use the infinite scroll feature. -->
+    {% for product in page_obj %}
+    {% if product.stock > 0 or product.can_preorder %}
+    {% include 'products/includes/product_box.html' %}
+    {% endif %}
+    {% endfor %}
+</section>
+{% else %}
+<!-- Otherwise it shows a link to the home page, and a related products box. -->
+<section class="row bg-white">
+    <div class="col text-center">
+        <h4 class="text-dark">Nothing found but good stuff is...</h4>
+        <h2 class="text-primary heading-font">Neverlost</h2>
+        <a class="btn btn-lg btn-danger shadow mt-2" href="{% url 'products:product-list' %}">Shop</a>
+    </div>
+</section>
+<hr>
+{% include 'products/includes/related_products.html' %}
+{% endif %}
+{% endif %}
+{% if page_obj.has_next or page_obj.has_previous %}
+<nav aria-label="{% trans 'Product Page Navigation' %}">
+    {% include 'base/includes/paginator.html' %}
+</nav>
+{% endif %}
+<div class="col-12 bg-brown py-2"></div>
+{% endblock %}

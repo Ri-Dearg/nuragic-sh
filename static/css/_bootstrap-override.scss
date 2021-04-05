@@ -4,64 +4,147 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import "bootstrap/functions";
 
+/*Basic bootstrap variables defaults*/
 $enable-rounded: false;
 $enable-shadows: true;
-$enable-responsive-font-sizes: true;
-$navbar-dark-color: #fff; 
-$navbar-dark-hover-color: #fff; 
+$enable-deprecation-messages: true;
+$navbar-dark-color: #fff;
+$navbar-dark-hover-color: #fff;
 
+/*Color themes*/
 $primary: #2b384c;
 $secondary: #c5b9a0;
-$warning: #F5C936;
-$info: #47B9FF;
-$success: #2CC968;
-$danger: #dc3545;
+$warning: #f5c936;
+$info: #1999b3;
+$success: #2d764a;
+$danger: #ae1e2c;
 
-$theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    "error":      $danger,
-  ),
-  $theme-colors
+/*Extra colors to add to the map*/
+$custom-colors: (
+  "brown": #8a3324,
+  "purple": #874587,
+  "error": #ae1e2c,
 );
 
+/*Sets default checkbox/radio color*/
+$component-active-bg: $warning;
+
+/*Sets default dropdown link colors*/
+$dropdown-link-hover-bg: $primary;
+$dropdown-link-active-bg: $warning;
+
+/*Sets pagination colors*/
+$pagination-hover-color: #fff;
+$pagination-hover-bg: $primary;
+$pagination-active-bg: $warning;
+
+/*Removes gutter margins on the page*/
 $grid-gutter-width: 0;
 
-@import "bootstrap/functions";
+// Configuration
 @import "bootstrap/variables";
+
+/*Merging custom colors*/
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
 @import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+/*Adds opacity values, text shadow and text decoration colors*/
+$utilities: map-merge(
+  $utilities,
+  (
+    "min-viewport-width": (
+      property: min-width,
+      class: min-vw,
+      responsive: true,
+      values: (
+        25: 25vw,
+        33: 33vw,
+        40: 40vw,
+        50: 50vw,
+        60: 60vw,
+        75: 75vw,
+        100: 100vw,
+      ),
+    ),
+    "min-viewport-height": (
+      property: min-height,
+      class: min-vh,
+      responsive: true,
+      values: (
+        25: 25vh,
+        33: 33vh,
+        50: 55vh,
+        60: 60vh,
+        75: 75vh,
+        100: 100vh,
+      ),
+    ),
+    "opacity": (
+      property: opacity,
+      responsive: true,
+      values: (
+        0: 0,
+        40: 0.4,
+        25: 0.25,
+        50: 0.5,
+        75: 0.75,
+        100: 1,
+      ),
+    ),
+    "text-shadow": (
+      property: text-shadow,
+      values: (
+        1: 0.1rem 0.1rem #000,
+        2: 0.2rem 0.2rem #000,
+      ),
+    ),
+    "text-decoration-color": (
+      class: decoration-color,
+      property: text-decoration-color,
+      values: $theme-colors,
+    ),
+  )
+);
+
+// Layout & components
 @import "bootstrap/root";
 @import "bootstrap/reboot";
 @import "bootstrap/type";
 @import "bootstrap/images";
-// @import "bootstrap/code";
+@import "bootstrap/containers";
 @import "bootstrap/grid";
 // @import "bootstrap/tables";
 @import "bootstrap/forms";
 @import "bootstrap/buttons";
 @import "bootstrap/transitions";
-// @import "bootstrap/dropdown";
+@import "bootstrap/dropdown";
 // @import "bootstrap/button-group";
-// @import "bootstrap/input-group";
-// @import "bootstrap/custom-forms";
 @import "bootstrap/nav";
 @import "bootstrap/navbar";
-// @import "bootstrap/card";
+@import "bootstrap/card";
+// @import "bootstrap/accordion";
 // @import "bootstrap/breadcrumb";
-// @import "bootstrap/pagination";
-// @import "bootstrap/badge";
-// @import "bootstrap/jumbotron";
+@import "bootstrap/pagination";
+@import "bootstrap/badge";
 @import "bootstrap/alert";
 // @import "bootstrap/progress";
-// @import "bootstrap/media";
-// @import "bootstrap/list-group";
+@import "bootstrap/list-group";
 @import "bootstrap/close";
 @import "bootstrap/toasts";
-// @import "bootstrap/modal";
+@import "bootstrap/modal";
 // @import "bootstrap/tooltip";
 // @import "bootstrap/popover";
-// @import "bootstrap/spinners";
 @import "bootstrap/carousel";
-@import "bootstrap/utilities";
-@import "bootstrap/print";
+// @import "bootstrap/spinners";
+@import "bootstrap/offcanvas";
+
+// Helpers
+@import "bootstrap/helpers";
+
+// Utilities
+@import "bootstrap/utilities/api";
+// scss-docs-end import-stack;

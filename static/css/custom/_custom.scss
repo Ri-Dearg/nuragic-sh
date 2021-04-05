@@ -1,196 +1,370 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.product.card-body {
+  height: 8rem;
+}
+
+.product.btn {
+  background-color: rgba(#ffffff, 0.5);
+  color: rgba(#2b384c, 0.85);
+  transition: all 0.2s linear;
+}
+
+.product.btn:active {
+  transform: scale(0.2);
+}
+
+.product.btn:hover {
+  background-color: #fff;
+  color: #2b384c;
+}
+
+.product-detail.btn {
+  background-color: #ab5fab;
+  color: #fff;
+  transition: all 0.2s linear;
+}
+
+.product-detail.btn:active {
+  transform: scale(0.2);
+}
+
+.product-detail.btn:hover {
+  background-color: #874587;
+  color: #fff;
+}
+
+.fav-item:hover,
+.fav-item:active {
+  background-color: #f5c936 !important;
+}
+
+/*--------------------------------------------------------------------------
+Buttons
+--------------------------------------------------------------------------*/
+
+.btn-tran:hover {
+  background-color: #2b384c;
+}
+
+.btn.btn-tran:hover {
+  background-color: #8a3324;
+  color: #fff !important;
+}
+
+/*--------------------------------------------------------------------------
+Carousel
+--------------------------------------------------------------------------*/
+.carousel-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-control-prev-icon.rev-arr {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+}
+
+.carousel-control-next-icon.rev-arr {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5C936'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.dark-overlay {
+  background-color: rgba(23, 36, 56, 0.7);
+}
+
+.no-caret.dropdown-toggle::after {
+  content: none;
+  display: none;
+}
+
+.dropdown-item.no-hover:hover {
+  background-color: #fff;
+}
+
+/*--------------------------------------------------------------------------
+Fonts
+--------------------------------------------------------------------------*/
+
+/*Font used for Headings and titles*/
 @font-face {
-    font-family: 'Sierra_madre';
-    src: url('custom/fonts/sierra_madre/sierra_madre-webfont.eot');
-    src: url('custom/fonts/sierra_madre/sierra_madre-webfont.eot?#iefix') format('embedded-opentype'),
-         url('custom/fonts/sierra_madre/sierra_madre-webfont.woff2') format('woff2'),
-         url('custom/fonts/sierra_madre/sierra_madre-webfont.woff') format('woff'),
-         url('custom/fonts/sierra_madre/sierra_madre-webfont.ttf') format('truetype'),
-         url('custom/fonts/sierra_madre/sierra_madre-webfont.svg#sierra_madreregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Sierra_madre";
+  src: url("custom/fonts/sierra_madre/sierra_madre-webfont.eot");
+  src: url("custom/fonts/sierra_madre/sierra_madre-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.woff2") format("woff2"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.woff") format("woff"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.ttf") format("truetype"),
+    url("custom/fonts/sierra_madre/sierra_madre-webfont.svg#sierra_madreregular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*Font used for General text*/
+@font-face {
+  font-family: "Montserrat";
+  src: url("custom/fonts/montserrat/montserrat-regular-webfont.eot");
+  src: url("custom/fonts/montserrat/montserrat-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.woff2")
+      format("woff2"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.woff")
+      format("woff"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.ttf")
+      format("truetype"),
+    url("custom/fonts/montserrat/montserrat-regular-webfont.svg#montserratregular")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    src: url('custom/fonts/montserrat/montserrat-regular-webfont.eot');
-    src: url('custom/fonts/montserrat/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('custom/fonts/montserrat/montserrat-regular-webfont.woff2') format('woff2'),
-         url('custom/fonts/montserrat/montserrat-regular-webfont.woff') format('woff'),
-         url('custom/fonts/montserrat/montserrat-regular-webfont.ttf') format('truetype'),
-         url('custom/fonts/montserrat/montserrat-regular-webfont.svg#montserratregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Montserrat";
+  src: url("custom/fonts/montserrat/montserrat-italic-webfont.eot");
+  src: url("custom/fonts/montserrat/montserrat-italic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/montserrat/montserrat-italic-webfont.woff2")
+      format("woff2"),
+    url("custom/fonts/montserrat/montserrat-italic-webfont.woff") format("woff"),
+    url("custom/fonts/montserrat/montserrat-italic-webfont.ttf")
+      format("truetype"),
+    url("custom/fonts/montserrat/montserrat-italic-webfont.svg#montserratitalic")
+      format("svg");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("custom/fonts/montserrat/montserrat-bold-webfont.eot");
+  src: url("custom/fonts/montserrat/montserrat-bold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/montserrat/montserrat-bold-webfont.woff2") format("woff2"),
+    url("custom/fonts/montserrat/montserrat-bold-webfont.woff") format("woff"),
+    url("custom/fonts/montserrat/montserrat-bold-webfont.ttf")
+      format("truetype"),
+    url("custom/fonts/montserrat/montserrat-bold-webfont.svg#montserratbold")
+      format("svg");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("custom/fonts/montserrat/montserrat-bolditalic-webfont.eot");
+  src: url("custom/fonts/montserrat/montserrat-bolditalic-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("custom/fonts/montserrat/montserrat-bolditalic-webfont.woff2")
+      format("woff2"),
+    url("custom/fonts/montserrat/montserrat-bolditalic-webfont.woff")
+      format("woff"),
+    url("custom/fonts/montserrat/montserrat-bolditalic-webfont.ttf")
+      format("truetype"),
+    url("custom/fonts/montserrat/montserrat-bolditalic-webfont.svg#montserratbold_italic")
+      format("svg");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
 }
 
 /*Used for the main brand logo in the Navbar*/
 .brand-logo {
-    font-size: 3.2rem;
-    text-decoration: none;
-    color: #ffffff;
-    letter-spacing: 0.8rem;
+  font-size: 3.2rem;
+  text-decoration: none;
+  color: #ffffff;
+  letter-spacing: 0.8rem;
 }
 
+/*Sub text in the brand logo*/
 .brand-sub {
-    letter-spacing: 0.225rem;
-    color: #c5b9a0;
+  letter-spacing: 0.225rem;
+  color: #c5b9a0;
 }
 
+#logo-image {
+  width: 80px;
+  height: 80px;
+}
+
+/*sets fonts for headings*/
 .h-font {
-    font-family: Sierra_madre, Arial, sans-serif;
+  font-family: Sierra_madre, Arial, sans-serif;
 }
 
+/*Sets fonts for paragraphs*/
 .p-font {
-    font-family: Montserrat, sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 
+/*Letter spacing and line height*/
 .l-space-1 {
-    letter-spacing: 0.1rem
+  letter-spacing: 0.1rem;
 }
 
 .l-space-2 {
-    letter-spacing: 0.25rem
+  letter-spacing: 0.25rem;
 }
 
 .l-height-1 {
-    line-height: 1.25
+  line-height: 1.25;
 }
 
+/*--------------------------------------------------------------------------
+Forms
+--------------------------------------------------------------------------*/
+
+/*Spaces the textarea*/
+.form-floating > textarea {
+  min-height: 200px;
+}
+
+.form-box {
+  max-width: 500px;
+}
+
+/*--------------------------------------------------------------------------
+Icons
+--------------------------------------------------------------------------*/
+
+.sv-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sv-md {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.sv-lg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.sv-xl {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.foot-link:hover {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------------------
+Navbar
+--------------------------------------------------------------------------*/
+
+/*Hover transition*/
 .nav-item {
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.nav-item.active,
-.btn-tran:hover {
-    background-color: #2b384c;
+/*Highlighted nav option*/
+.nav-item.active {
+  background-color: #f5c936;
 }
 
-.btn.btn-tran:hover {
-    background-color: #8A3324;
-    color: #fff !important;
+.shop-nav.active {
+  background-color: #c5b9a0;
 }
 
-.body-mods {
-    margin-top: 136px;
+/*--------------------------------------------------------------------------
+Positioning
+--------------------------------------------------------------------------*/
+
+/*Used for the background images*/
+.z-n1 {
+  z-index: -1;
 }
 
-.carousel-caption {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+.z-n2 {
+  z-index: -2;
 }
 
-.carousel-control-prev-icon.rev-arr {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F5C936' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+/*Background images positioning*/
+.border-position {
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
 }
 
-.carousel-control-next-icon.rev-arr {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F5C936' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+.left-border {
+  -webkit-transform: translate(-660px);
+  -ms-transform: translate(-660px);
+  transform: translate(-660px);
 }
 
-.dark-overlay {
-    background-color: rgba(38, 30, 46, 0.7);
+.right-border {
+  -webkit-transform: translate(660px);
+  -ms-transform: translate(660px);
+  transform: translate(660px);
 }
 
-.min-vh-75 {
-    min-height: 75vh;
+/*--------------------------------------------------------------------------
+Preloader
+--------------------------------------------------------------------------*/
+
+.preloader {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1019;
+  padding-bottom: 153px;
+}
+
+.preload-gif {
+  width: 200px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/*--------------------------------------------------------------------------
+Products
+--------------------------------------------------------------------------*/
+/*These position the little info banner that appear on product images.*/
+.product-alert {
+  position: absolute;
+  top: 83%;
+  left: 0;
+}
+
+.product-thumb {
+  max-width: 50px;
+  height: auto;
 }
 
 /*--------------------------------------------------------------------------
 Toasts
 --------------------------------------------------------------------------*/
-/*This allows for multiple toasts to stack.*/
-.toast-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 300px;
-}
 
-/*This positions the toast on the page.*/
-.toast-position {
-position: fixed;
-top: 146px;
-right: 10px;
-min-height: 200px;
-z-index: 1021;
+/*This allows for multiple toasts to stack.*/
+.toast-container {
+  top: 146px;
+  right: 10px;
+  min-height: 200px;
+  z-index: 1020;
 }
 
 /*It is positioned above the preloader with the z-index.*/
 .toast {
-    z-index: 1022;
-}
-
-.form-box {
-    max-width: 500px;
-}
-
-/*--------------------------------------------------------------------------
-Floating labels from: https://getbootstrap.com/docs/4.0/examples/floating-labels/
---------------------------------------------------------------------------*/
-/*On forms the placeholder becomes a little floating label above the input.*/
-:root {
-  --input-padding-x: .75rem;
-  --input-padding-y: .75rem;
-}
-
-.form-label-group {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.form-label-group > input,
-.form-label-group > label {
-  padding: var(--input-padding-y) var(--input-padding-x);
-}
-
-.form-label-group > label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  margin-bottom: 0; /* Override default `<label>` margin */
-  line-height: 1.5;
-  color: #495057;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  -webkit-transition: all .1s ease-in-out;
-  -o-transition: all .1s ease-in-out;
-  transition: all .1s ease-in-out;
-}
-
-.form-label-group input::-webkit-input-placeholder {
-  color: transparent;
-}
-
-.form-label-group input:-ms-input-placeholder {
-  color: transparent;
-}
-
-.form-label-group input::-ms-input-placeholder {
-  color: transparent;
-}
-
-.form-label-group input::-moz-placeholder {
-  color: transparent;
-}
-
-.form-label-group input::placeholder {
-  color: transparent;
-}
-
-.form-label-group input:not(:placeholder-shown) {
-  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
-  padding-bottom: calc(var(--input-padding-y) / 3);
-}
-
-.form-label-group input:not(:placeholder-shown) ~ label,
-.form-label-group input:-webkit-autofill ~ label {
-  padding-top: calc(var(--input-padding-y) / 3);
-  padding-bottom: calc(var(--input-padding-y) / 3);
-  font-size: 12px;
-  color: #777;
+  z-index: 1021;
 }
