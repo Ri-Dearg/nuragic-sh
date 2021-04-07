@@ -99,9 +99,9 @@ def likes_toggle(request):
                 else:
                     user.userprofile.liked_products.add(product)
                     product.save()
-                    data['message'] = _(f'{product.title} favorited!')
-                    data['tag'] = 'success'
-                    data['tagMessage'] = _('Success')
+                    data['message'] = _(f'{product.title} added to favorites.')
+                    data['tag'] = 'purple'
+                    data['tagMessage'] = _('Favorited!')
 
             # If the user is anonymous the items get added to the session.
             else:
@@ -118,9 +118,9 @@ def likes_toggle(request):
                 else:
                     likes.append(item_id)
                     request.session['likes'] = likes
-                    data['message'] = _(f'{product.title} favorited!')
-                    data['tag'] = 'success'
-                    data['tagMessage'] = _('Success')
+                    data['message'] = _(f'{product.title} added to favorites.')
+                    data['tag'] = 'purple'
+                    data['tagMessage'] = _('Favorited!')
 
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except
