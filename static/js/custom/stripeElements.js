@@ -63,7 +63,7 @@ form.addEventListener("submit", function (ev) {
     form.billing_county.value = form.shipping_county.value;
   }
 
-  var url = "/checkout/cache_data/";
+  var url = "/shop/checkout/cache_data/";
 
   $.post(url, postData)
     .done(function () {
