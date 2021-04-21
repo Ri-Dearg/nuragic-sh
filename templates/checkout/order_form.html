@@ -16,8 +16,8 @@
 </nav>
 {% if cart %}
 <!--Displays content if there are items in the cart, else it showsa link to the home page.-->
-<div class="row bg-white">
-    <div class="col-12 col-md-6 order-2 order-md-1 p-2 p-md-4">
+<article class="row bg-white">
+    <section class="col-12 col-md-6 order-2 order-md-1 p-2 p-md-4">
         <form id="payment-form" action="{% url 'checkout:order-create' %}" method="POST">
             {% csrf_token %}
             <!--Displays the details for shipping. Give the option to mark billing details as the same.
@@ -83,44 +83,40 @@
                 <input type="hidden" value="{{ client_secret }}" name="client_secret" />
             </fieldset>
             <button type="submit" id="payment-submit"
-                class="p-font text-primary btn-tran btn btn-warning shadow">{% trans 'Confirm Purchase' %}</button>
+                class="p-font text-white btn btn-info shadow mb-2">{% trans 'Confirm Purchase' %}</button>
         </form>
-        <hr class="d-md-none my-4" />
-    </div>
-    <div class="col-12 col-md-6 order-1 order-md-2">
+    </section>
+    <section class="col-12 col-md-6 order-1 order-md-2 p-2 p-md-4">
         <!-- Displays each item in the cart in rows.-->
-        {% for item in cart_items %}
-        {% include 'checkout/includes/checkout_product_display.html' %}
-        {% endfor %}
-        <div class="row mx-0">
-            <div class="col text-right">
-                <p class="p-font text-primary col">{% trans 'Delivery' %}:</p>
-            </div>
-            <!--Displays delivery costs followed by the total-->
-            <div class="col-3 col-md-2 pl-0 text-right">
-                <p class="p-font text-primary p-0 pr-2 pr-md-4"><strong>€{{ delivery|floatformat:2 }}</strong></p>
-            </div>
-        </div>
-        <div class="row mx-0">
-            <div class="col text-right">
-                <p class="col p-font text-primary">{% trans 'Total' %}:</p>
-            </div>
-            <div class="col-3 col-md-2 pl-0 text-right">
-                <p class="text-dark p-0 pr-2 pr-md-4"><strong>€{{ grand_total }}</strong></p>
-            </div>
-        </div>
-    </div>
-</div>
+        <h2 class="p-font text-primary fs-4">{% trans 'Items' %}</h2>
+        <ul class="list-group list-group-flush">
+            {% for item in cart_items %}
+            {% include 'checkout/includes/checkout_product_display.html' %}
+            {% endfor %}
+            {% if delivery != 0 %}
+            <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
+                <span class="float-start">{% trans 'Delivery' %}</span>
+                <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+            </li>
+            {% endif %}
+            <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
+                <strong><span class="p-font float-start">{% trans 'Total' %}</span></strong>
+                <span class="float-end">€{{ grand_total }}</span>
+            </li>
+        </ul>
+    </section>
+</article>
 {% else %}
-<div class="row mx-0">
+<article class="row">
     <div class="col text-center">
         <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
         <h2 class="text-primary h-font">{% trans "Let's do some shopping" %}</h2>
         <a class="btn btn-lg btn-danger mt-4 w-25" href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
     </div>
-</div>
+</article>
 <!--Script includes StripeElements scripts.-->
 {% endif %}
+<div class="col-12 bg-warning py-1"></div>
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
