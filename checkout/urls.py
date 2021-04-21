@@ -1,9 +1,10 @@
 from django.urls import path
+
 from .views import OrderCreateView, OrderDetailView, OrderListView, cache_data
 from .webhooks import webhook
 
 urlpatterns = [
-    path('', OrderCreateView.as_view(), name='order-create'),
+    path('payment/', OrderCreateView.as_view(), name='order-create'),
     path('order/<int:pk>/',
          OrderDetailView.as_view(), name='order-detail'),
     path('orders/',

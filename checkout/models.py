@@ -3,19 +3,11 @@ import uuid
 from django.db import models
 from django.db.models import Sum
 from django.shortcuts import reverse
-
+from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
-from phonenumber_field.modelfields import PhoneNumberField
 
-from users.models import UserProfile
 from products.models import Product
-
-
-class CustomPhoneNumberField(PhoneNumberField):
-    """Subclasses the PhoneNumberField in order to remove an overly-strict
-    validator."""
-
-    default_validators = []
+from users.models import CustomPhoneNumberField, UserProfile
 
 
 class Order(models.Model):
@@ -29,32 +21,35 @@ class Order(models.Model):
         on_delete=models.SET_NULL,
         null=True, blank=True, related_name='orders')
     email = models.EmailField(max_length=254, null=False, blank=False)
+
     shipping_full_name = models.CharField(
         max_length=50, null=False, blank=False)
     shipping_phone_number = CustomPhoneNumberField(null=False, blank=False)
-    shipping_country = CountryField(
-        blank_label='Country *', null=False, blank=False)
-    shipping_postcode = models.CharField(max_length=20, default='', blank=True)
-    shipping_town_or_city = models.CharField(
-        max_length=40, null=False, blank=False)
     shipping_street_address_1 = models.CharField(
         max_length=80, null=False, blank=False)
     shipping_street_address_2 = models.CharField(
         max_length=80, default='', blank=True)
+    shipping_town_or_city = models.CharField(
+        max_length=40, null=False, blank=False)
     shipping_county = models.CharField(max_length=80, blank=True)
+    shipping_postcode = models.CharField(max_length=20, default='', blank=True)
+    shipping_country = CountryField(
+        blank_label=_('Country'), null=False, blank=False)
+
     billing_full_name = models.CharField(
         max_length=50, null=False, blank=False)
     billing_phone_number = CustomPhoneNumberField(null=False, blank=False)
-    billing_country = CountryField(
-        blank_label='Country *', null=False, blank=False)
-    billing_postcode = models.CharField(max_length=20, default='', blank=True)
-    billing_town_or_city = models.CharField(
-        max_length=40, null=False, blank=False)
     billing_street_address_1 = models.CharField(
         max_length=80, null=False, blank=False)
     billing_street_address_2 = models.CharField(
         max_length=80, default='', blank=True)
+    billing_town_or_city = models.CharField(
+        max_length=40, null=False, blank=False)
     billing_county = models.CharField(max_length=80, default='', blank=True)
+    billing_postcode = models.CharField(max_length=20, default='', blank=True)
+    billing_country = CountryField(
+        blank_label=_('Country'), null=False, blank=False)
+
     date = models.DateTimeField(auto_now_add=True, editable=False)
     delivery_cost = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, default=0)
