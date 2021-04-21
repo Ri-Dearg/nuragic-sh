@@ -1,20 +1,32 @@
 var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 var clientSecret = $("#id_client_secret").text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
-var elements = stripe.elements();
+var elements = stripe.elements({
+  fonts: [
+    {
+      family: "Montserrat",
+      src:
+        "local(Montserrat), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2')",
+      display: "swap",
+    },
+  ],
+});
 var style = {
   base: {
-    color: "#000",
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: "antialiased",
+    color: "#2b384c",
+    fontFamily: "Montserrat, sans-serif",
     fontSize: "16px",
     "::placeholder": {
-      color: "#aab7c4",
+      color: "#6c757d",
     },
   },
   invalid: {
-    color: "#dc3545",
-    iconColor: "#dc3545",
+    color: "#ae1e2c",
+    iconColor: "#ae1e2c",
+  },
+  complete: {
+    color: "#2d764a",
+    iconColor: "#2d764a",
   },
 };
 
@@ -39,7 +51,7 @@ form.addEventListener("submit", function (ev) {
   ev.preventDefault();
   card.update({ disabled: true });
   $("#payment-submit").attr("disabled", true);
-  $(".preloader").fadeIn("fast");
+  $(".preloader").fadeIn("slow");
 
   var saveInfo = Boolean($("#id-save-info").prop("checked"));
   var billingSame = Boolean($("#billing-same").prop("checked"));

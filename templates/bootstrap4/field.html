@@ -32,11 +32,11 @@
             {% include 'bootstrap4/layout/field_file.html' %}
             {% else %}
             <div
-                class="col-12 form-floating p-font text-primary my-1{% if field_class %} {{ field_class }}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}">
+                class="col-12 form-floating p-font my-1{% if field_class %} {{ field_class }}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}">
                 {% crispy_field field %}
                 {% if field.label and not field|is_checkbox and form_show_labels %}
                 <label for="{{ field.id_for_label }}"
-                    class="{% if 'form-horizontal' in form_class %}col-form-label {% endif %}p-font text-primary sr-only {{ label_class }}{% if field.field.required %} requiredField{% endif %}">
+                    class="{% if 'form-horizontal' in form_class %}col-form-label {% endif %}p-font sr-only {{ label_class }}{% if field.field.required %} requiredField{% endif %}">
                     {{ field.label|safe }}
                 </label>
                 {% endif %}
