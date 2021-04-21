@@ -1,18 +1,20 @@
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.conf import settings
-
 import json
 import time
 
-from .models import Order, OrderLineItem
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
 from products.models import Product
+
+from .models import Order, OrderLineItem
 
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
+
     def __init__(self, request):
         self.request = request
 
