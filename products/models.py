@@ -47,7 +47,7 @@ class Product(models.Model):
     image_4_3_xs = models.ImageField(default='', blank=True,
                                      upload_to='shop/products')
     date_added = models.DateTimeField(default=timezone.now)
-    stock = models.SmallIntegerField(default=10, blank=False, null=False)
+    stock = models.SmallIntegerField(default=0, blank=False, null=False)
     is_unique = models.BooleanField(default=False)
     is_artisanal = models.BooleanField(default=False)
     can_preorder = models.BooleanField(default=False)
@@ -71,6 +71,9 @@ class Product(models.Model):
             self.image_4_3_md = image1_md
             self.image_4_3_sm = image1_sm
             self.image_4_3_xs = image1_xs
+
+        if self.stock < 0:
+            self.stock = 0
 
         if self.is_unique and self.stock > 1:
             self.stock = 1

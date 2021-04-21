@@ -57,7 +57,7 @@ def cart_toggle(request):
             if (item_id in list(cart.keys()) and request.POST.get(
                 'special') != 'update') or (
                     request.POST.get('special') == 'remove') or (
-                    quantity == 0):
+                    quantity <= 0):
                 if item_id in cart:
                     cart.pop(str(item_id))
                     data['message'] = _(
@@ -84,7 +84,7 @@ def cart_toggle(request):
                     # 'update' is sent when product quantity is being changed.
                     data['message'] = f'Updated {product.title} \
                         quantity to {quantity}.'
-                elif product.can_preorder and product.stock == 0:
+                elif product.can_preorder and product.stock <= 0:
                     data['message'] = _(
                         f'Preordered {quantity} {product.title}.')
                 else:
