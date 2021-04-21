@@ -1,20 +1,21 @@
-from django.shortcuts import redirect, reverse, HttpResponse
-from django.views.decorators.http import require_POST
-from django.contrib import messages
-from django.views.generic import CreateView, DetailView, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.forms import CharField, model_to_dict
-from django.conf import settings
-
-from phonenumber_field import widgets
-
-from products.models import Product
-from .models import Order, OrderLineItem
-from cart.context_processors import get_cart
+import itertools
+import json
 
 import stripe
-import json
-import itertools
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import CharField, model_to_dict
+from django.shortcuts import HttpResponse, redirect, reverse
+from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.http import require_POST
+from django.views.generic import CreateView, DetailView, ListView
+from phonenumber_field import widgets
+
+from cart.context_processors import get_cart
+from products.models import Product
+
+from .models import Order, OrderLineItem
 
 
 class OrderDetailView(DetailView):
@@ -85,67 +86,68 @@ class OrderCreateView(CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to the form"""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': 'Email Address'}
-        form.fields['shipping_full_name'].widget.attrs = {'placeholder': 'Full Name'}  # noqa E501
-        form.fields['shipping_full_name'].label = 'Full Name'
+        form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
+        form.fields['email'].label = _('Email')
+        form.fields['shipping_full_name'].widget.attrs = {'placeholder': _('Full Name')}  # noqa E501
+        form.fields['shipping_full_name'].label = _('Full Name')
         form.fields['shipping_phone_number'] = CharField(
             widget=widgets.PhoneNumberPrefixWidget(
                 attrs={
                     'type': 'tel',
-                    'placeholder': 'Phone Number',
+                    'placeholder': _('Phone Number'),
                     'class': 'form-control',
                     'pattern': '[0-9]+',
                 }),
             initial='+353')
         form.fields['shipping_street_address_1'].widget.attrs = {
-            'placeholder': '123 Main St.'}
-        form.fields['shipping_street_address_1'].label = 'Street Address 1'
+            'placeholder': _('123 Main St.')}
+        form.fields['shipping_street_address_1'].label = _('Street Address 1')
         form.fields['shipping_street_address_2'].widget.attrs = {
-            'placeholder': 'Street Address 2'}
-        form.fields['shipping_street_address_2'].label = 'Street Address 2'
+            'placeholder': _('Street Address 2')}
+        form.fields['shipping_street_address_2'].label = _('Street Address 2')
         form.fields['shipping_town_or_city'].widget.attrs = {
-            'placeholder': 'Town or City'}
-        form.fields['shipping_town_or_city'].label = 'City or Town'
+            'placeholder': _('Town or City')}
+        form.fields['shipping_town_or_city'].label = _('Town or City')
         form.fields['shipping_county'].widget.attrs = {
-            'placeholder': 'Locality'}
-        form.fields['shipping_county'].label = 'County, State or Locality'
-        form.fields['shipping_country'].widget.attrs = {'placeholder': 'Country',  # noqa E501
+            'placeholder': _('Locality')}
+        form.fields['shipping_county'].label = _('County, State or Locality')
+        form.fields['shipping_country'].widget.attrs = {'placeholder': _('Country'),  # noqa E501
                                                         'class': 'form-control'}  # noqa E501
-        form.fields['shipping_country'].label = 'Country'
+        form.fields['shipping_country'].label = _('Country')
         form.fields['shipping_postcode'].widget.attrs = {
-            'placeholder': 'Postcode'}
-        form.fields['shipping_postcode'].label = 'Postcode'
+            'placeholder': _('Postcode')}
+        form.fields['shipping_postcode'].label = _('Postcode')
         form.fields['billing_full_name'].widget.attrs = {
-            'placeholder': 'Full Name', 'class': 'billing-field'}
-        form.fields['billing_full_name'].label = 'Full Name'
+            'placeholder': _('Full Name'), 'class': 'billing-field'}
+        form.fields['billing_full_name'].label = _('Full Name')
         form.fields['billing_phone_number'] = CharField(
-            label='Phone Number',
+            label=_('Phone Number'),
             widget=widgets.PhoneNumberPrefixWidget(
                 attrs={
                     'type': 'tel',
-                    'placeholder': 'Phone Number',
+                    'placeholder': _('Phone Number'),
                     'class': 'form-control billing-field',
                     'pattern': '[0-9]+',
                 }),
             initial='+353')
         form.fields['billing_street_address_1'].widget.attrs = {
-            'Placeholder': 'Street Address 1', 'class': 'billing-field'}
-        form.fields['billing_street_address_1'].label = 'Street Address 1'
+            'Placeholder': _('Street Address 1'), 'class': 'billing-field'}
+        form.fields['billing_street_address_1'].label = _('Street Address 1')
         form.fields['billing_street_address_2'].widget.attrs = {
-            'placeholder': 'Street Address 2'}
-        form.fields['billing_street_address_2'].label = 'Street Address 2'
+            'placeholder': _('Street Address 2')}
+        form.fields['billing_street_address_2'].label = _('Street Address 2')
         form.fields['billing_town_or_city'].widget.attrs = {
-            'placeholder': 'Town or City', 'class': 'billing-field'}
-        form.fields['billing_town_or_city'].label = 'City or Town'
+            'placeholder': _('Town or City'), 'class': 'billing-field'}
+        form.fields['billing_town_or_city'].label = _('Town or City')
         form.fields['billing_county'].widget.attrs = {
-            'placeholder': 'Locality'}
-        form.fields['billing_county'].label = 'County, State or Locality'
-        form.fields['billing_country'].widget.attrs = {'placeholder': 'Country',  # noqa E501
+            'placeholder': _('Locality')}
+        form.fields['billing_county'].label = _('County, State or Locality')
+        form.fields['billing_country'].widget.attrs = {'placeholder': _('Country'),  # noqa E501
                                                        'class': 'form-control billing-field'}  # noqa E501
-        form.fields['billing_county'].label = 'Country'
+        form.fields['billing_country'].label = _('Country')
         form.fields['billing_postcode'].widget.attrs = {
-            'placeholder': 'Postcode'}
-        form.fields['billing_postcode'].label = 'Postcode'
+            'placeholder': _('Postcode')}
+        form.fields['billing_postcode'].label = _('Postcode')
         return form
 
     def dispatch(self, *args, **kwargs):
@@ -154,7 +156,7 @@ class OrderCreateView(CreateView):
 
         cart = self.request.session.get('cart', {})
         if not cart:
-            messages.info(self.request, "The cart is empty.")
+            messages.info(self.request, _('The cart is empty.'))
             return redirect(reverse('products:product-list'))
         return super().dispatch(*args, **kwargs)
 
@@ -228,8 +230,8 @@ class OrderCreateView(CreateView):
                 order_line_item.save()
             except Product.DoesNotExist:
                 messages.warning(self.request, (
-                    "One of the products in your cart wasn't found in our collection. \
-                    Please call us for assistance!")
+                    _("One of the products in your cart wasn't found in our collection. \
+                    Please call us for assistance!"))
                 )
                 order.delete()
 
@@ -245,8 +247,8 @@ class OrderCreateView(CreateView):
             else:
                 self.request.session['my_order'] = order.id
 
-        messages.success(self.request, f'Order successfully processed! \
-             A confirmation email will be sent to {order.email}.')
+        messages.success(self.request, _(f'Order successfully processed! \
+             A confirmation email will be sent to {order.email}.'))
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -296,6 +298,6 @@ def cache_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.warning(request, 'Sorry, your payment cannot be \
-            processed right now. Please try again later.')
+        messages.warning(request, _('Sorry, your payment cannot be \
+            processed right now. Please try again later.'))
         return HttpResponse(content=e, status=400)
