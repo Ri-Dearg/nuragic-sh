@@ -66,7 +66,7 @@ class TestProductsViews(TestCase):
     def test_render_shopcategory_detail(self):
         """Tests templates for Category detail page."""
         shopcategory = ShopCategory.objects.filter(
-            title='SC1').order_by('id').first()
+            title_en='SC1').order_by('id').first()
         response = self.client.get(f'/shop/category/{shopcategory.id}/')
 
         self.assertEqual(response.status_code, 200)
