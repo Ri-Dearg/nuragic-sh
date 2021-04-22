@@ -63,6 +63,7 @@ class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     context_object_name = 'orders'
     ordering = ['-date']
+    paginate_by = 10
 
     def get_queryset(self):
         """Filters the Order to those made only by this user."""
@@ -192,7 +193,7 @@ class OrderCreateView(CreateView):
 
         # Saves the form but doesn't commit it to the database yet.
         order = form.save(commit=False)
-        # Fills in the STRIPE PID infor
+        # Fills in the STRIPE PID in
         pid = self.request.POST.get('client_secret').split('_secret')[0]
         order.stripe_pid = pid
         # Dumps the original cart info
@@ -218,7 +219,7 @@ class OrderCreateView(CreateView):
         order.save()
 
         # Iterates the items to create OrderLine Item objects.
-        # If the product doesn't exist it deltes the order.
+        # If the product doesn't exist it deletes the order.
         for item_id, item_data in cart.items():
             try:
                 product = Product.objects.get(id=item_id)
@@ -235,7 +236,7 @@ class OrderCreateView(CreateView):
                 )
                 order.delete()
 
-        # Deetes the cart as it isn't needed.
+        # Deletes the cart as it isn't needed.
         if 'cart' in self.request.session:
             del self.request.session['cart']
 
