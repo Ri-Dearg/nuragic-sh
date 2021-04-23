@@ -1,188 +1,190 @@
-{% extends 'base/base.html' %} {% load static %} {% load crispy_forms_tags %} {% block head_title %}Your Order{% endblock%} {% block content %}
+{% extends 'base/base.html' %}
+<!-- Loads internationalization -->
+{% load i18n %}
+
+{% block head_title %}{% trans 'Your Order' %}{% endblock%}
+
+{% block content %}
 <!-- Dissplays an order's specific details.
 Utilises template logic to dispy or omit optional fields such as street_address_2 -->
-<div class="row mx-0 pt-3">
-    <div class="col">
-        <h1 class="heading-font text-primary text-center">Order Complete</h1>
-    </div>
-</div>
-<hr />
-<article class="row mx-0">
-    <div class="col-12 col-md-6">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="heading-font">Order Details</h3>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Order Number:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1 text-break">{{ order.order_number }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Date:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.date }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Email:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.email }}</p>
-            </div>
-            <div class="col-12">
-                <hr class="my-3" />
-            </div>
-            <div class="col-12 mt-3">
-                <h3 class="heading-font">Shipping Details</h3>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Name:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_full_name }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Phone Number:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_phone_number }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Street Address 1:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_street_address_1 }}</p>
-            </div>
-            {% if order.shipping_street_address_2 %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Street Address 2:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_street_address_2 }}</p>
-            </div>
-            {% endif %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Town or City:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_town_or_city }}</p>
-            </div>
-            {% if order.shipping_county %}
-            <div class="col-4">
-                <p class="mb-1"><strong>County:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_county }}</p>
-            </div>
-            {% endif %} {% if order.shipping_postcode %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Postcode:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_postcode }}</p>
-            </div>
-            {% endif %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Country:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.shipping_country.name }}</p>
-            </div>
+<section class="flex-grow-1 bg-white">
+    <div class="row">
+        <div class="col-12 bg-brown py-2">
+            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'ORDER COMPLETE' %}</h2>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <hr class="my-3" />
-            </div>
-            <div class="col-12 mt-3">
-                <h3 class="heading-font">Billing Details</h3>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Name:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_full_name }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Phone Number:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_phone_number }}</p>
-            </div>
-            <div class="col-4">
-                <p class="mb-1"><strong>Street Address 1:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_street_address_1 }}</p>
-            </div>
-            {% if order.billing_street_address_2 %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Street Address 2:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_street_address_2 }}</p>
-            </div>
-            {% endif %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Town or City:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_town_or_city }}</p>
-            </div>
-            {% if order.billing_county %}
-            <div class="col-4">
-                <p class="mb-1"><strong>County:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_county }}</p>
-            </div>
-            {% endif %} {% if order.billing_postcode %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Postcode:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_postcode }}</p>
-            </div>
-            {% endif %}
-            <div class="col-4">
-                <p class="mb-1"><strong>Country:</strong></p>
-            </div>
-            <div class="col-8">
-                <p class="mb-1">{{ order.billing_country.name }}</p>
-            </div>
-        </div>
-        <hr class="d-md-none my-3" />
     </div>
-    <div class="col-12 col-md-6">
-        <!-- Uses the same template as is used in the order_form.html template for product display -->
-        {% for item in order.lineitems.all %} {% with item.product as product %} {% include 'checkout/includes/checkout_product_display.html' %} {% endwith %} {% endfor %}
-        <div class="row mx-0">
-            <div class="col text-right">
-                <p class="col">Delivery:</p>
-            </div>
-            <div class="col-3 col-md-2 pl-0 text-right">
-                {% if order.delivery_cost != 0 %}
-                <p class="text-dark p-0 pr-2 pr-md-4">
-                    <strong>€{{ order.delivery_cost|floatformat:2 }}</strong>
-                </p>
-                {% else %}
-                <p class="text-dark p-0 pr-2 pr-md-4"><strong>Free!</strong></p>
+    <article class="row p-3">
+        <div class="col-12 col-md-6 p-md-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="p-font text-primary h3">{% trans 'Order Details' %}</h2>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Order Number:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1 text-break">{{ order.order_number }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Date:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.date }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Email:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.email }}</p>
+                </div>
+                <div class="col-12">
+                    <hr class="my-3" />
+                </div>
+                <div class="col-12">
+                    <h2 class="p-font text-primary h3">{% trans 'Shipping Details' %}</h2>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_full_name }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_phone_number }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_street_address_1 }}</p>
+                </div>
+                {% if order.shipping_street_address_2 %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_street_address_2 }}</p>
+                </div>
                 {% endif %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_town_or_city }}</p>
+                </div>
+                {% if order.shipping_county %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'County:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_county }}</p>
+                </div>
+                {% endif %} {% if order.shipping_postcode %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_postcode }}</p>
+                </div>
+                {% endif %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.shipping_country.name }}</p>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr class="my-3" />
+                </div>
+                <div class="col-12">
+                    <h2 class="p-font text-primary h3">{% trans 'Billing Details' %}</h2>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_full_name }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_phone_number }}</p>
+                </div>
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_street_address_1 }}</p>
+                </div>
+                {% if order.billing_street_address_2 %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_street_address_2 }}</p>
+                </div>
+                {% endif %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_town_or_city }}</p>
+                </div>
+                {% if order.billing_county %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'County:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_county }}</p>
+                </div>
+                {% endif %} {% if order.billing_postcode %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_postcode }}</p>
+                </div>
+                {% endif %}
+                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country:' %}</strong></p>
+                </div>
+                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                    <p class="p-font text-primary mb-1">{{ order.billing_country.name }}</p>
+                </div>
+            </div>
+            <hr class="d-md-none my-3" />
         </div>
-        <div class="row mx-0">
-            <div class="col text-right">
-                <p class="col">Total:</p>
-            </div>
-            <div class="col-3 col-md-2 pl-0 text-right">
-                <p class="text-dark p-0 pr-2 pr-md-4">
-                    <strong>€{{ order.grand_total }}</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-</article>
-<hr class="my-3" />
+        <div class="col-12 col-md-6 p-md-3">
+            <ul class="list-group list-group-flush">
 
+                <!-- Uses the same template as is used in the order_form.html template for product display -->
+                {% for item in order.lineitems.all %}
+                {% with item.product as product %}
+                {% include 'checkout/includes/checkout_product_display.html' %}
+                {% endwith %}
+                {% endfor %}
+                <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
+                    <span class="float-start">{% trans 'Item Total' %}</span>
+                    <span class="float-end text-muted">€{{ cart_total }}</span>
+                </li>
+                {% if delivery != 0 %}
+                <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
+                    <span class="float-start">{% trans 'Delivery' %}</span>
+                    <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+                </li>
+                {% endif %}
+                <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
+                    <strong><span class="p-font float-start">{% trans 'Grand Total' %}</span></strong>
+                    <strong><span class="float-end">€{{ grand_total }}</span></strong>
+                </li>
+            </ul>
+        </div>
+    </article>
+</section>
 {% endblock %}
