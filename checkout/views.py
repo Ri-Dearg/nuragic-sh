@@ -43,16 +43,12 @@ class OrderDetailView(DetailView):
             # Checks to see if the user has made this order, else redirects:
             if self.object.user_profile == userprofile:
                 return super().dispatch(*args, **kwargs)
-            else:
-                return redirect(reverse('products:product-list'))
         elif 'my_order' in self.request.session:
             # Checks to see if the user has the correct order in the session:
             if self.request.session['my_order'] == self.object.id:
                 return super().dispatch(*args, **kwargs)
-            else:
-                return redirect(reverse('products:product-list'))
-        else:
-            return redirect(reverse('products:product-list'))
+
+        return redirect(reverse('products:product-list'))
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -287,7 +283,7 @@ class OrderCreateView(CreateView):
 
 
 @require_POST
-def cache_data(request):
+def cache_data(request):  # pragma: no cover
     """Caches payment info and adds it to stripe metadata."""
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]

@@ -100,6 +100,56 @@ class TestCheckoutViews(TestCase):
         self.client.get(f'/shop/checkout/order/{new_order.id}/')
         self.assertTemplateUsed('order_detail.html')
 
+    def test_order_detail_view_redirects(self):
+        """Runs tests to see if the page redirects when
+        the incorrect user tries to access another user's order."""
+        product1 = Product.objects.filter(
+            title='preorder').last()
+        p_id1 = product1.id
+
+        # Adds items to the cart
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': p_id1, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post('/shop/checkout/payment/', valid_order_dict)
+
+        new_order1 = Order.objects.latest('date')
+        response = self.client.get(f'/shop/checkout/order/{new_order1.id}/')
+        session = self.client.session
+
+        self.assertEqual(session['my_order'], new_order1.id)
+        self.assertEqual(response.status_code, 200)
+
+        session['my_order'] = 0
+        session.save()
+
+        response = self.client.get(f'/shop/checkout/order/{new_order1.id}/')
+        self.assertEqual(response.status_code, 302)
+
+        test_user = User.objects.latest('date_joined')
+        self.client.force_login(test_user)
+
+        # Adds items to the cart
+        self.client.post('/shop/cart/ajax/toggle/',
+                         {'item-id': p_id1, 'quantity': '1'},
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post('/shop/checkout/payment/', valid_order_dict)
+
+        username2 = 'user2',
+        email2 = 'test2@test.com'
+        password2 = 'password2'
+        User.objects.get_or_create(username=username2,
+                                   email=email2,
+                                   password=password2)
+
+        test_user2 = User.objects.latest('date_joined')
+        self.client.force_login(test_user2)
+
+        new_order2 = Order.objects.latest('date')
+        response = self.client.get(f'/shop/checkout/order/{new_order2.id}/')
+
+        self.assertEqual(response.status_code, 302)
+
     def test_order_detail_view_after_login(self):
         """Runs the same test as the preceding view but logs in a user."""
 
@@ -122,7 +172,6 @@ class TestCheckoutViews(TestCase):
         # and creates an order
         test_user = User.objects.latest('date_joined')
         self.client.force_login(test_user)
-        valid_order_dict
         self.client.post('/shop/checkout/payment/', valid_order_dict)
 
         # Confirms the user can still view the order detail page
