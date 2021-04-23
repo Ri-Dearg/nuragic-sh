@@ -1,13 +1,15 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization -->
 {% load i18n %}
+
 {% block head_title %}{% trans 'My Orders' %}{% endblock%}
+
 {% block content %}
 <!--Displays all orders that have been made in a list. -->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'My Orders' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'MY ORDERS' %}</h2>
         </div>
     </div>
     <!-- Displays an order row for each item -->
