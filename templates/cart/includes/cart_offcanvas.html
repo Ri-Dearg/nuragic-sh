@@ -11,7 +11,7 @@
             href="{% url 'cart:cart-list' %}">{% trans 'Go to Cart' %}</a>
         <div class="col-12 my-2"></div>
         <a class="p-font col-8 smooth-click btn btn-info text-white shadow mx-auto mb-0"
-            href="#">{% trans 'Checkout' %}</a>
+            href="{% url 'checkout:order-create' %}">{% trans 'Checkout' %}</a>
     </div>
     <ul class="list-group list-group-flush">
         {% for item in cart_items %}
@@ -34,13 +34,13 @@
         {% if delivery != 0 %}
         <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
             href="{% url 'cart:cart-list' %}">
-            <span class="float-start">Delivery</span>
+            <span class="float-start">{% trans 'Delivery' %}</span>
             <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
         </a>
         {% endif %}
         <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
             href="{% url 'cart:cart-list' %}">
-            <strong><span class="float-start">Total</span></strong>
+            <strong><span class="float-start p-font">{% trans 'Total' %}</span></strong>
             <span class="float-end">€{{ grand_total }}</span>
         </a>
     </ul>

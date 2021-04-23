@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # My apps
     'cart',
+    'checkout',
     'contact',
     'info',
     'jasmine_testing',
@@ -232,3 +233,9 @@ ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
                  }
 
 STANDARD_DELIVERY = 7
+
+# Necessary variables and setting to take Stripe Payments.
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+STRIPE_CURRENCY = 'eur'

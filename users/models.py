@@ -16,9 +16,10 @@ class CustomPhoneNumberField(PhoneNumberField):
 
 class UserProfile(models.Model):
     """User Profile used to store default delivery information and
-    liked/bookmarked items"""
-
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    liked/bookmarked items."""
+    user = models.OneToOneField(get_user_model(),
+                                on_delete=models.CASCADE,
+                                related_name='userprofile')
     shipping_full_name = models.CharField(max_length=50,
                                           default='', blank=True)
     shipping_phone_number = CustomPhoneNumberField(default='', blank=True)

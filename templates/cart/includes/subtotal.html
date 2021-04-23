@@ -16,7 +16,7 @@
                 {% trans 'Grand total will be finalised after delivery address is confirmed.' %}</p>
             <div class="text-end text-md-start">
                 <a class="p-font smooth-click btn btn-info text-white shadow mb-0"
-                    href="#">{% trans 'Proceed with Order' %}</a>
+                    href="{% url 'checkout:order-create' %}">{% trans 'Proceed with Order' %}</a>
             </div>
         </div>
     </div>

@@ -23,10 +23,12 @@ from django.urls import include, path
 shop_patterns = [
     path('', include(('products.urls', 'products'),
                      namespace='products')),
-    path('likes/', include(('likes.urls', 'likes'),
-                           namespace='likes')),
     path('cart/', include(('cart.urls', 'cart'),
-                          namespace='cart'))
+                          namespace='cart')),
+    path('checkout/', include(('checkout.urls', 'checkout'),
+                              namespace='checkout')),
+    path('likes/', include(('likes.urls', 'likes'),
+                           namespace='likes'))
 ]
 
 account_patterns = [
