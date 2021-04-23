@@ -19,7 +19,7 @@ valid_shopcategory.save()
 
 valid_product_1 = Product(
     category=ShopCategory.objects.filter(
-        title='SC1').order_by('id').first(),
+        title_en='SC1').order_by('id').first(),
     title_en='P1',
     title_it='P1',
     description_en='description',
@@ -28,11 +28,12 @@ valid_product_1 = Product(
     image_4_3=image,
     image_4_3_md=image,
     image_4_3_sm=image,
-    image_4_3_xs=image)
+    image_4_3_xs=image,
+    stock=10)
 
 valid_product_2 = Product(
     category=ShopCategory.objects.filter(
-        title='SC1').order_by('id').first(),
+        title_en='SC1').order_by('id').first(),
     title_en='P1',
     title_it='P1',
     description_en='description',
@@ -41,11 +42,12 @@ valid_product_2 = Product(
     image_4_3=image,
     image_4_3_md=image,
     image_4_3_sm=image,
-    image_4_3_xs=image)
+    image_4_3_xs=image,
+    stock=10)
 
 unique_product = Product(
     category=ShopCategory.objects.filter(
-        title='SC1').order_by('id').first(),
+        title_en='SC1').order_by('id').first(),
     title_en='unique',
     title_it='unique',
     description_en='description',
@@ -55,12 +57,13 @@ unique_product = Product(
     image_4_3=image,
     image_4_3_md=image,
     image_4_3_sm=image,
-    image_4_3_xs=image)
+    image_4_3_xs=image,
+    stock=10)
 
 
 preorder_product = Product(
     category=ShopCategory.objects.filter(
-        title='SC1').order_by('id').first(),
+        title_en='SC1').order_by('id').first(),
     title_en='preorder',
     title_it='preorder',
     description_en='description',

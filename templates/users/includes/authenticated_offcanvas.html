@@ -12,6 +12,11 @@
         <a href="{% url 'users:user-detail' request.user.id %}"
             class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Settings' %}</a>
         <div class="col-12 my-2"></div>
+        {% if request.user.userprofile.orders.all %}
+        <a href="{% url 'checkout:order-list' %}"
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'My Orders' %}</a>
+        <div class="col-12 my-2"></div>
+        {% endif %}
         <!--Displays logout button. -->
         <div class="border-0">
             <form class="border-0 mx-0 my-1 p-1" method="POST"

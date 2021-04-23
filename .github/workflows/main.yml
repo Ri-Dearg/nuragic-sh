@@ -53,10 +53,12 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           HEROKU_POSTGRESQL_CRIMSON_URL: ${{ secrets.HEROKU_POSTGRESQL_CRIMSON_URL }}
+          STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 manage.py compilescss --traceback
           python3 manage.py collectstatic --noinput --traceback
-          coverage run --source=. --omit=custom_storages.py,config/*,manage.py,users/adapter.py manage.py test --keepdb
+          coverage run --source=. --omit=checkout/webhook*,venv/*,config/*,manage.py,users/adapter.py manage.py test --keepdb
           coveralls --service=github
