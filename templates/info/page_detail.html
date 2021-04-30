@@ -52,15 +52,15 @@
                 {{ object.image_fb_link_sm.url }} {{ object.image_fb_link_sm.width }}w" sizes="(max-width: 767px) 100vw,
                 (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid my-auto">
         </div>
-        <div class="col-auto col-lg order-1 order-xl-2 bg-white px-3 pt-3">
-            <h3 class="h-font text-primary h2 text-decoration-underline decoration-color-{{ object.theme}}">
+        <div class="col-auto col-lg order-1 order-xl-2 bg-white my-auto px-3 pt-3">
+            <h3 class="h-font text-primary h2">
                 {{ object.desc_title1|upper }}
             </h3>
             <!-- space that displays rich text -->
             <div class="p-font text-primary">{{ object.description1|safe }}</div>
             {% if object.product and object.product_button_text and not object.description2  %}
             <p class="text-center"><a href="{% url 'products:product-detail' object.product.id %}"
-                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text }}</a>
+                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}
         </div>
@@ -71,15 +71,14 @@
     <section class="row">
         {% if object.description2 %}
         <div class="col-12 bg-white p-2 px-md-4">
-            <h3
-                class="h-font text-center text-primary h2 text-decoration-underline decoration-color-{{ object.theme }}">
+            <h3 class="h-font text-center text-primary h2">
                 {{ object.desc_title2|upper }}
             </h3>
             <!-- space that displays rich text -->
             <div class="p-font text-primary">{{ object.description2|safe }}</div>
             {% if object.product_button_text and object.product %}
             <p class="text-center"><a href="{% url 'products:product-detail' object.product.id %}"
-                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text }}</a>
+                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}
         </div>
@@ -92,6 +91,8 @@
             {{ object.bot_image_tw_header_sm.url }} {{ object.bot_image_tw_header_sm.width }}w" sizes="100vw"
             alt="{{ object.desc_title2 }}" class="img-fluid">
         {% endif %}
-        <div class="col-12 bg-{{ object.theme }} py-1"></div>
-    </section> {% endif %}
-</article>{% endblock %}
+    </section>
+    {% endif %}
+</article>
+<div class="col-12 bg-{{ object.theme }} py-1"></div>
+{% endblock %}
