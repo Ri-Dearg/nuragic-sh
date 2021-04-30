@@ -84,7 +84,6 @@
                 <div class="flex-column collapse navbar-collapse mt-auto" id="navbarCollapse">
                     <ul class="navbar-nav nav-justified w-100">
                         {% if not 'checkout/payment' in request.path %}
-
                         {% if 'shop' in request.path %}
                         {% include 'base/includes/shop_nav.html' %}
                         {% else %}

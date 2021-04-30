@@ -6,7 +6,8 @@ If the item has numerous stock option the product_detail.html template displays 
 This box is linked to this form and does not appear in this template.-->
 <form class="toggle-form col-9 col-md-10 col-lg-9 pl-0 " id="cf-{{ product.id }}" action="{% url 'cart:cart-toggle'%}"
     method="POST">
-    <button type="submit" id="cb-{{ product.id }}" class="p-font fs-6 btn btn-lg btn-success shadow w-100">
+    <button type="submit" id="cb-{{ product.id }}"
+        class="p-font product-detail-icon fs-6 btn btn-lg btn-success shadow w-100">
         <!--Selects the default icon based on whether the item is in the like context or not.
                 object tags are used to display the SVG for caching.-->
         {% if product.id|stringformat:'s' in cart %}

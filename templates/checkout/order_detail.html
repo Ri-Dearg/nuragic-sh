@@ -171,17 +171,17 @@ Utilises template logic to dispy or omit optional fields such as street_address_
                 {% endfor %}
                 <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
                     <span class="float-start">{% trans 'Item Total' %}</span>
-                    <span class="float-end text-muted">€{{ cart_total }}</span>
+                    <span class="float-end text-muted">€{{ order.order_total|floatformat:2 }}</span>
                 </li>
                 {% if delivery != 0 %}
                 <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
                     <span class="float-start">{% trans 'Delivery' %}</span>
-                    <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+                    <span class="float-end text-muted">€{{ order.delivery_cost|floatformat:2 }}</span>
                 </li>
                 {% endif %}
                 <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
                     <strong><span class="p-font float-start">{% trans 'Grand Total' %}</span></strong>
-                    <strong><span class="float-end">€{{ grand_total }}</span></strong>
+                    <strong><span class="float-end">€{{ order.grand_total|floatformat:2 }}</span></strong>
                 </li>
             </ul>
         </div>
