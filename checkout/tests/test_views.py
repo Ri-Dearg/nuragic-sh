@@ -239,7 +239,8 @@ class TestCheckoutViews(TestCase):
         # Confirms a suitable response message is sent.
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'There was a problem processing the order. Please double check your information.')  # noqa E501
+        self.assertEqual(str(messages[0]), 'There was a problem processing the order.\
+             Please double check your information.')
 
     def test_empty_cart_returns_redirect(self):
         """Tests that going to the checkout with an empty cart
