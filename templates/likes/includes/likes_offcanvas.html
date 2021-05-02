@@ -13,7 +13,7 @@
     <div class="row">
         {% for product in likes %}
         <div class="fav-item col-4 p-1">
-            <a class="smooth-click mx-0 my-1" href="{% url 'products:product-detail' product.id %}">
+            <a class="smooth-click mx-0 my-1" href="{% url 'products:product-detail' product.slug product.id %}">
                 <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
                     height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,

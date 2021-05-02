@@ -28,7 +28,7 @@ class CategoryDetailView(DetailView):
 
         this_object = context['object']
         # Selects the active tab
-        if f'/category/{this_object.id}' in self.request.path:
+        if f'{this_object.slug}-{this_object.id}' in self.request.path:
             context['active_category'] = f'{this_object.id}'
             context['active_all'] = f'{this_object.id}'
 
@@ -45,7 +45,7 @@ class PageDetailView(DetailView):
 
         this_object = context['object']
         # Selects the active tab
-        if f'/page/{this_object.id}' in self.request.path:
+        if f'{this_object.slug}-{this_object.id}' in self.request.path:
             category_id = this_object.category.id
             context['active_category'] = f'{category_id}'
             context['active_page'] = f'{this_object.id}'

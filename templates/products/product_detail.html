@@ -26,7 +26,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
         </li>
         <li class="breadcrumb-item" aria-current="page">
             <a class="p-font smooth-click text-white"
-                href="{% url 'products:shop-category-detail' product.category.id %}">{{ product.category }}</a>
+                href="{% url 'products:shop-category-detail' product.category.slug product.category.id %}">{{ product.category }}</a>
         </li>
         <li class="p-font text-secondary breadcrumb-item active" aria-current="page">{{ product.title }}</li>
     </ol>

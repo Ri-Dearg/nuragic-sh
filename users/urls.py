@@ -10,7 +10,8 @@ urlpatterns = [
     path('profile/', login_required(profile_redirect),
          name='user-redirect'),
     path(
-        'profile/<int:pk>/', login_required(UserProfileDetailView.as_view()),
+        'your-profile/<str:username>-<int:pk>/', login_required(
+            UserProfileDetailView.as_view()),
         name='user-detail'),
     path('c/email/', login_required(CustomEmailView.as_view()),
          name='user-email'),

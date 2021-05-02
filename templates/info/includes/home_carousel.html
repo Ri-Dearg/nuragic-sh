@@ -15,8 +15,8 @@ This is done in the view before being passed here. They are ordered by most rece
         <!-- This loops through each item and gives them appropriate images and links. -->
         {% for item in carousel %}
         <a class="smooth-click carousel-item {% if forloop.first %}active{% endif %}" {% if item.page %}
-            href="{% url 'info:page-detail' item.page.id %}" {% elif item.product %}
-            href="{% url 'products:product-detail' item.product.id %}" {% endif %}>
+            href="{% url 'info:page-detail' item.page.slug item.page.id %}" {% elif item.product %}
+            href="{% url 'products:product-detail' item.product.slug item.product.id %}" {% endif %}>
             <img src="{{ item.image_tw_header.url }}" srcset="{{ item.image_tw_header.url }} {{ item.image_tw_header.width }}w,
             {{ item.image_tw_header_md.url }} {{ item.image_tw_header_md.width }}w,
             {{ item.image_tw_header_sm.url }} {{ item.image_tw_header_sm.width }}w" sizes="100vw"

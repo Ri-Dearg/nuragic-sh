@@ -1,5 +1,6 @@
 """Tests views for the Product app."""
 
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from products.models import Product, ShopCategory
@@ -18,7 +19,7 @@ class TestProductsViews(TestCase):
 
     def test_render_shop(self):
         """Tests templates for shop page."""
-        response = self.client.get('/shop/')
+        response = self.client.get(reverse('products:product-list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/product_list.html')
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
@@ -32,7 +33,9 @@ class TestProductsViews(TestCase):
     def test_render_product_detail(self):
         """Tests templates for shop page."""
         product = Product.objects.latest('date_added')
-        response = self.client.get(f'/shop/product/{product.id}/')
+        response = self.client.get(
+            reverse('products:product-detail',
+                    kwargs={'slug': product.slug, 'pk': product.id}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/product_detail.html')
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
@@ -67,7 +70,9 @@ class TestProductsViews(TestCase):
         """Tests templates for Category detail page."""
         shopcategory = ShopCategory.objects.filter(
             title_en='SC1').order_by('id').first()
-        response = self.client.get(f'/shop/category/{shopcategory.id}/')
+        response = self.client.get(
+            reverse('products:shop-category-detail',
+                    kwargs={'slug': shopcategory.slug, 'pk': shopcategory.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/shopcategory_detail.html')

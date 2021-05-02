@@ -1,4 +1,5 @@
 """Tets that likes are correctly added to the context."""
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from products.models import Product
@@ -11,7 +12,8 @@ class TestContext(TestCase):
 
     def setUp(self):
         """Creates a user and adds likes to their account."""
-        Product.objects.bulk_create([valid_product_1, valid_product_2])
+        valid_product_1.save()
+        valid_product_2.save()
         product_1 = Product.objects.earliest('date_added')
         product_2 = Product.objects.latest('date_added')
 
@@ -23,7 +25,7 @@ class TestContext(TestCase):
 
         # Logs in the user from the setup view
         self.client.force_login(test_user)
-        response = self.client.get('/')
+        response = self.client.get(reverse('info:home'))
 
         # Creates a fake list based on the user's likes and
         # orders it like the context does

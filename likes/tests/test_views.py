@@ -1,4 +1,5 @@
 """Tests views for the like module."""
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from products.models import Product
@@ -10,7 +11,8 @@ class TestViews(TestCase):
     """Tests views for the Likes app."""
 
     def setUp(self):
-        Product.objects.bulk_create([valid_product_1, valid_product_2])
+        valid_product_1.save()
+        valid_product_2.save()
 
     def test_correct_template_used_and_context(self):
         """Checks that the correct template is used after adding likes."""
@@ -18,14 +20,14 @@ class TestViews(TestCase):
         product_1 = Product.objects.earliest('date_added')
         product_2 = Product.objects.latest('date_added')
 
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_1.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        response = self.client.get('/shop/likes/')
+        response = self.client.get(reverse('likes:likes-list'))
         session = self.client.session.get('likes')
 
         # Confirms correct likes in the session, and the correct template
@@ -38,7 +40,7 @@ class TestViews(TestCase):
 
         # Confirms that the session likes have been transferred to the user
         # and are correctly displayed in the context.
-        response = self.client.get('/shop/likes/')
+        response = self.client.get(reverse('likes:likes-list'))
         self.assertEqual(response.context['products'],
                          list(test_user.userprofile.liked_products.order_by(
                              '-liked__datetime_added')))
@@ -51,7 +53,7 @@ class TestViews(TestCase):
         product_2 = Product.objects.latest('date_added')
 
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_1.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -64,7 +66,7 @@ class TestViews(TestCase):
 
         # Adds likes while logged in and confirms that two liked
         # products are in the account.
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertTrue(len(test_user.userprofile.liked_products.all()) == 2)
@@ -72,7 +74,7 @@ class TestViews(TestCase):
     def test_error_on_incorrect_item_added(self):
         """Confirms that an error shows when adding an invalid item."""
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/', {'item-id': 0},
+        self.client.post(reverse('likes:likes-toggle'), {'item-id': 0},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         # Confirms an error message shows
@@ -81,7 +83,7 @@ class TestViews(TestCase):
     def test_forbidden_on_get(self):
         """Confirms that a 403 error when not using POST."""
         # Adds a liked product
-        response = self.client.get('/shop/likes/ajax/toggle/',
+        response = self.client.get(reverse('likes:likes-toggle'),
                                    {'item-id': '1'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -96,7 +98,7 @@ class TestViews(TestCase):
         product_2 = Product.objects.latest('date_added')
 
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_1.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -105,7 +107,7 @@ class TestViews(TestCase):
         self.assertEqual(session['likes'], [f'{product_1.id}'])
 
         # Removes a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_1.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -117,12 +119,12 @@ class TestViews(TestCase):
         self.client.force_login(test_user)
 
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         # Removes a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -134,7 +136,7 @@ class TestViews(TestCase):
         product_1 = Product.objects.earliest('date_added')
 
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_1.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -143,7 +145,7 @@ class TestViews(TestCase):
         self.assertEqual(session['likes'], [f'{product_1.id}'])
 
         # Toggles an invalid item and confirms an error message
-        self.client.post('/shop/likes/ajax/toggle/', {'item-id': 0})
+        self.client.post(reverse('likes:likes-toggle'), {'item-id': 0})
         self.assertRaises(Exception, msg='Error removing item: 0')
 
     def test_update_like_view(self):
@@ -152,20 +154,20 @@ class TestViews(TestCase):
         product_2 = Product.objects.latest('date_added')
 
         # Tests the template is updated when the view is called
-        self.client.get('/shop/likes/update_offcanvas/')
+        self.client.get(reverse('likes:likes-offcanvas'))
         self.assertTemplateUsed('likes/includes/likes_offcanvas.html')
 
         # Adds a liked product
-        self.client.post('/shop/likes/ajax/toggle/',
+        self.client.post(reverse('likes:likes-toggle'),
                          {'item-id': f'{product_2.id}'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         # Updates the template and context
-        self.client.get('/shop/likes/update_offcanvas/')
+        self.client.get(reverse('likes:likes-offcanvas'))
         self.assertTemplateUsed('likes/includes/likes_offcanvas.html')
 
         # Logs a user in and updates the context
         self.client.force_login(test_user)
-        self.client.get('/shop/likes/update_offcanvas/')
+        self.client.get(reverse('likes:likes-offcanvas'))
 
         # Confirms the session context
         session = self.client.session

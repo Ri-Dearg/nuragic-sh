@@ -59,7 +59,7 @@
             <!-- space that displays rich text -->
             <div class="p-font text-primary">{{ object.description1|safe }}</div>
             {% if object.product and object.product_button_text and not object.description2  %}
-            <p class="text-center"><a href="{% url 'products:product-detail' object.product.id %}"
+            <p class="text-center"><a href="{% url 'products:product-detail' object.product.slug object.product.id %}"
                     class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}
@@ -77,7 +77,7 @@
             <!-- space that displays rich text -->
             <div class="p-font text-primary">{{ object.description2|safe }}</div>
             {% if object.product_button_text and object.product %}
-            <p class="text-center"><a href="{% url 'products:product-detail' object.product.id %}"
+            <p class="text-center"><a href="{% url 'products:product-detail' object.product.slug object.product.id %}"
                     class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}

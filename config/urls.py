@@ -46,8 +46,8 @@ urlpatterns = [
     # Jasmine testing functions
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
-    path('contact/', include(('contact.urls', 'contact'),
-                             namespace='contact')),
+    path('contact-us/', include(('contact.urls', 'contact'),
+                                namespace='contact')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
     path('accounts/', include(account_patterns)),

@@ -8,14 +8,14 @@ from django.shortcuts import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 
-from info.utils import get_random_string
+from info.utils import random_str
 from products.models import Product
 from users.models import CustomPhoneNumberField, UserProfile
 
 
 def generate_order_number():
     """Generates a random order number."""
-    return datetime.now().strftime('%m%d%y%H%M%S') + get_random_string(3)
+    return datetime.now().strftime('%m%d%y%H%M%S') + random_str(3)
 
 
 class Order(models.Model):

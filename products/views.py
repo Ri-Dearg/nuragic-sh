@@ -24,7 +24,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
 
         this_object = context['object']
         # Selects the active tab
-        if f'/category/{this_object.id}' in self.request.path:
+        if f'{this_object.slug}-{this_object.id}' in self.request.path:
             context['active_category'] = f'{this_object.id}'
 
         return context

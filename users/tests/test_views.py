@@ -1,5 +1,6 @@
 """Tests views for custom authorization functions."""
 from django.contrib.auth import get_user_model
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
@@ -60,7 +61,10 @@ class TestUserViews(TestCase):
         response = self.client.get('/accounts/profile/')
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.get(f'/accounts/profile/{test_user.id}/')
+        response = self.client.get(
+            reverse('users:user-detail',
+                    kwargs={'pk': test_user.id,
+                            'username': {test_user.username}}))
 
         # Confirms context for all required page items as stated in the above.
         self.assertTrue(response.context['user_profile_detail'])
@@ -75,7 +79,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
-        self.client.get('/accounts/c/email/')
+        self.client.get(reverse('users:user-email'))
         self.assertTemplateUsed('users/user_detail.html')
 
     def test_custom_password_view(self):
@@ -84,7 +88,7 @@ class TestUserViews(TestCase):
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
-        self.client.get('/accounts/c/password/change/')
+        self.client.get(reverse('users:user-change-password'))
         self.assertTemplateUsed('users/user_detail.html')
 
     def test_custom_update_shipping(self):
