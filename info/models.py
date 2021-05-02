@@ -106,6 +106,7 @@ class Category(models.Model):
         default='', editable=False, max_length=30, null=False)
 
     def get_absolute_url(self):
+        """Adds slug to url for page redirection."""
         kwargs = {'slug': self.slug,
                   'pk': self.id
                   }
