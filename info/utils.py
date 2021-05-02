@@ -1,4 +1,6 @@
-"""Utilities for resizing images."""
+"""Utilities for resizing images.
+Image resizing, snippet repurposed from:
+https://djangosnippets.org/snippets/10597/"""
 
 import random
 import string

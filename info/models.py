@@ -108,9 +108,8 @@ class Category(models.Model):
     def get_absolute_url(self):
         """Adds slug to url for page redirection."""
         kwargs = {'slug': self.slug,
-                  'pk': self.id
-                  }
-        return reverse('info:category-detail', kwargs=kwargs)
+                  'pk': self.id}
+        return reverse('products:product-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         """Creates and adds url slug.
