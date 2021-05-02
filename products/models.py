@@ -12,15 +12,33 @@ from info.utils import responsive_images
 class ShopCategory(models.Model):
     """Defines categories to apply to products.
     A simple model to group products."""
-    title = models.CharField(max_length=254)
+    title = models.CharField(max_length=50)
     display = models.BooleanField(default=True)
+    slug = models.SlugField(
+        default='', editable=False, max_length=50, null=False)
+
+    def get_absolute_url(self):
+        """Adds slug to url for page redirection."""
+        kwargs = {'slug': self.slug,
+                  'pk': self.id
+                  }
+        return reverse('products:shop-category-detail', kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        """Generates default stock values.
+        Will restock items that are not unique.
+        Updates the 'popularity' value"""
+        slug_value = _(self.title)
+        self.slug = slugify(slug_value, allow_unicode=True)
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Shop Categories'
         ordering = ['title']
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class Product(models.Model):

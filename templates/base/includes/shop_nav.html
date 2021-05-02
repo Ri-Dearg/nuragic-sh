@@ -9,7 +9,7 @@
 {% for item in categories %}
 <li class="btn-tran shop-nav nav-item py-1{% if item.id|stringformat:'i' in active_category %} active{% endif %}">
     <a class="smooth-click p-font l-space-2 btn btn-link nav-link text-end text-lg-center mb-0 p-0 pe-3 pe-lg-0"
-        href="{% url 'products:shop-category-detail' item.id %}">{{ item.title|upper }}</a>
+        href="{% url 'products:shop-category-detail' item.slug item.id %}">{{ item.title|upper }}</a>
 </li>
 {% endfor %}
 {% endif %}
