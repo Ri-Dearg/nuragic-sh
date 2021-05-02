@@ -15,7 +15,7 @@ def get_random_string(length):
     result_str = ''.join(random.choice(string.ascii_letters)
                          for i in range(length))
     # print random string
-    return result_str
+    return result_str.lower()
 
 
 def image_resize(self, image_title, width, height):
@@ -51,7 +51,8 @@ def image_resize(self, image_title, width, height):
             image_field = InMemoryUploadedFile(
                 output,
                 'ImageField',
-                f'{image_field.name.split(".")[0]}_{get_random_string(8)}.{img_format}',  # noqa E501
+                f'{image_field.name.split(".")[0]}_\
+                    {get_random_string(8)}.{img_format}',
                 'image/jpeg', sys.getsizeof(output),
                 None)
             return image_field

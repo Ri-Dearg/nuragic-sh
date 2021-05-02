@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+"""Tests for checkout"""
+from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 from django.test import TestCase
 
@@ -53,12 +54,12 @@ class TestCheckoutViews(TestCase):
 
     def setUp(self):
         """Sets up or retrieves a fake user for use in the tests."""
-        username = 'user1',
+        username = 'user1'
         email = 'test@test.com'
         password = 'password'
-        User.objects.get_or_create(username=username,
-                                   email=email,
-                                   password=password)
+        get_user_model().objects.get_or_create(username=username,
+                                               email=email,
+                                               password=password)
 
         valid_product_1.save()
         preorder_product.save()
@@ -126,7 +127,7 @@ class TestCheckoutViews(TestCase):
         response = self.client.get(f'/shop/checkout/order/{new_order1.id}/')
         self.assertEqual(response.status_code, 302)
 
-        test_user = User.objects.latest('date_joined')
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Adds items to the cart
@@ -135,14 +136,14 @@ class TestCheckoutViews(TestCase):
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.client.post('/shop/checkout/payment/', valid_order_dict)
 
-        username2 = 'user2',
+        username2 = 'user2'
         email2 = 'test2@test.com'
         password2 = 'password2'
-        User.objects.get_or_create(username=username2,
-                                   email=email2,
-                                   password=password2)
+        get_user_model().objects.get_or_create(username=username2,
+                                               email=email2,
+                                               password=password2)
 
-        test_user2 = User.objects.latest('date_joined')
+        test_user2 = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user2)
 
         new_order2 = Order.objects.latest('date')
@@ -170,7 +171,7 @@ class TestCheckoutViews(TestCase):
 
         # Retrives the user created in the setup view, logs them in
         # and creates an order
-        test_user = User.objects.latest('date_joined')
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
         self.client.post('/shop/checkout/payment/', valid_order_dict)
 
@@ -212,9 +213,8 @@ class TestCheckoutViews(TestCase):
 
         # Retrives the user created in the setup view, logs them in
         # and creates an order
-        test_user = User.objects.latest('date_joined')
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
-        global valid_order_dict
         self.client.post('/shop/checkout/payment/', valid_order_dict)
 
         # Confirms the User can view their order history list
@@ -239,7 +239,8 @@ class TestCheckoutViews(TestCase):
         # Confirms a suitable response message is sent.
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'There was a problem processing the order. Please double check your information.')  # noqa E501
+        self.assertEqual(str(messages[0]), 'There was a problem processing the order.\
+             Please double check your information.')
 
     def test_empty_cart_returns_redirect(self):
         """Tests that going to the checkout with an empty cart

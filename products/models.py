@@ -72,8 +72,7 @@ class Product(models.Model):
             self.image_4_3_sm = image1_sm
             self.image_4_3_xs = image1_xs
 
-        if self.stock < 0:
-            self.stock = 0
+        self.stock = max(self.stock, 0)
 
         if self.is_unique and self.stock > 1:
             self.stock = 1

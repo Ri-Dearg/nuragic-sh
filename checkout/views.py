@@ -1,5 +1,8 @@
+"""Views for the checkout.
+Creating, listing and showing order details. Also caches info."""
 import itertools
 import json
+import logging
 
 import stripe
 from django.conf import settings
@@ -34,24 +37,24 @@ class OrderDetailView(DetailView):
 
         # Gets the user and the Order object
         user = self.request.user
-        self.object = self.get_object()
+        this_object = self.get_object()
 
         # Checks to see whether the user is logged in or has the
         # necessary session cookie. If not, they are redirected.
         if user.is_authenticated:
             userprofile = self.request.user.userprofile
             # Checks to see if the user has made this order, else redirects:
-            if self.object.user_profile == userprofile:
+            if this_object.user_profile == userprofile:
                 return super().dispatch(*args, **kwargs)
         elif 'my_order' in self.request.session:
             # Checks to see if the user has the correct order in the session:
-            if self.request.session['my_order'] == self.object.id:
+            if self.request.session['my_order'] == this_object.id:
                 return super().dispatch(*args, **kwargs)
 
         return redirect(reverse('products:product-list'))
 
 
-class OrderListView(LoginRequiredMixin, ListView):
+class OrderListView(LoginRequiredMixin, ListView):  # noqa E501  # pylint: disable=too-many-ancestors
     """Displays all Orders made by a user in reverse chronological order.
     It requires login as anonymous users can't access
     more than one order at a time."""
@@ -85,7 +88,8 @@ class OrderCreateView(CreateView):
         form = super().get_form(form_class)
         form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
         form.fields['email'].label = _('Email')
-        form.fields['shipping_full_name'].widget.attrs = {'placeholder': _('Full Name')}  # noqa E501
+        form.fields['shipping_full_name'].widget.attrs = {
+            'placeholder': _('Full Name')}
         form.fields['shipping_full_name'].label = _('Full Name')
         form.fields['shipping_phone_number'] = CharField(
             widget=widgets.PhoneNumberPrefixWidget(
@@ -108,8 +112,9 @@ class OrderCreateView(CreateView):
         form.fields['shipping_county'].widget.attrs = {
             'placeholder': _('Locality')}
         form.fields['shipping_county'].label = _('County, State or Locality')
-        form.fields['shipping_country'].widget.attrs = {'placeholder': _('Country'),  # noqa E501
-                                                        'class': 'form-control'}  # noqa E501
+        form.fields['shipping_country'].widget.attrs = {
+            'placeholder': _('Country'),
+            'class': 'form-control'}
         form.fields['shipping_country'].label = _('Country')
         form.fields['shipping_postcode'].widget.attrs = {
             'placeholder': _('Postcode')}
@@ -139,8 +144,9 @@ class OrderCreateView(CreateView):
         form.fields['billing_county'].widget.attrs = {
             'placeholder': _('Locality')}
         form.fields['billing_county'].label = _('County, State or Locality')
-        form.fields['billing_country'].widget.attrs = {'placeholder': _('Country'),  # noqa E501
-                                                       'class': 'form-control billing-field'}  # noqa E501
+        form.fields['billing_country'].widget.attrs = {
+            'placeholder': _('Country'),
+            'class': 'form-control billing-field'}
         form.fields['billing_country'].label = _('Country')
         form.fields['billing_postcode'].widget.attrs = {
             'placeholder': _('Postcode')}
@@ -175,8 +181,7 @@ class OrderCreateView(CreateView):
                 elif field == key:
                     initial[f'{field}'] = userprofile_dict[key]
             return initial
-        else:
-            return initial
+        return initial
 
     def form_valid(self, form):
         """If the form is valid it adds additional information to the form
@@ -202,11 +207,15 @@ class OrderCreateView(CreateView):
         if 'billing-same' in self.request.POST:
             order.billing_full_name = self.request.POST['shipping_full_name']
             order.billing_phone_number = self.request.POST[
-                'shipping_phone_number_0'] + self.request.POST['shipping_phone_number_1']  # noqa E501
-            order.billing_street_address_1 = self.request.POST['shipping_street_address_1']  # noqa E501
+                'shipping_phone_number_0'] + self.request.POST[
+                    'shipping_phone_number_1']
+            order.billing_street_address_1 = self.request.POST[
+                'shipping_street_address_1']
             if 'shipping_street_address_2' in self.request.POST:
-                order.billing_street_address_2 = self.request.POST['shipping_street_address_2']  # noqa E501
-            order.billing_town_or_city = self.request.POST['shipping_town_or_city']  # noqa E501
+                order.billing_street_address_2 = self.request.POST[
+                    'shipping_street_address_2']
+            order.billing_town_or_city = self.request.POST[
+                'shipping_town_or_city']
             if 'shipping_county' in self.request.POST:
                 order.billing_county = self.request.POST['shipping_county']
             order.billing_country = self.request.POST['shipping_country']
@@ -250,7 +259,9 @@ class OrderCreateView(CreateView):
 
     def form_invalid(self, form):
         """An invalid form returns the user to the order page with a mesage."""
-        messages.warning(self.request, 'There was a problem processing the order. Please double check your information.')  # noqa E501
+        messages.warning(self.request,
+                         'There was a problem processing the order.\
+             Please double check your information.')
         return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
@@ -294,7 +305,8 @@ def cache_data(request):  # pragma: no cover
             'user': request.user,
         })
         return HttpResponse(status=200)
-    except Exception as e:
+    except Exception as error:
+        logging.exception(error)
         messages.warning(request, _('Sorry, your payment cannot be \
             processed right now. Please try again later.'))
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(status=400)
