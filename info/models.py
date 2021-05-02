@@ -2,7 +2,9 @@
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.shortcuts import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from tinymce.models import HTMLField
 
@@ -100,9 +102,21 @@ class Category(models.Model):
     order = models.SmallIntegerField(validators=[MaxValueValidator(12),
                                                  MinValueValidator(0)])
     date_added = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(
+        default='', editable=False, max_length=30, null=False)
+
+    def get_absolute_url(self):
+        kwargs = {'slug': self.slug,
+                  'pk': self.id
+                  }
+        return reverse('info:category-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
-        """Resizes and saves images."""
+        """Creates and adds url slug.
+        Resizes and saves images."""
+        slug_value = _(self.title)
+        self.slug = slugify(slug_value, allow_unicode=True)
+
         image1, image1_md, image1_sm = responsive_images(
             self, 'image_fb_link', 1200, 630)
         if image1:

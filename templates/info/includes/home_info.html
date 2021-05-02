@@ -18,7 +18,7 @@
         <h4 class="h-font l-space-2 h1 text-primary text-center">{{ item.title|upper }}</h4>
         <div class="p-font text-primary">{{ item.description|safe }}</div>
         <p class="text-center py-2">
-            <a href="{% url 'info:category-detail' item.id %}"
+            <a href="{% url 'info:category-detail' item.slug item.id %}"
                 class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text|title }}</a>
         </p>
     </div>
@@ -27,7 +27,7 @@
         <h4 class="h-font l-space-2 h1 text-primary text-center">{{ item.title|upper }}</h4>
         <div class="p-font text-primary">{{ item.description|safe }}</div>
         <p class="text-center py-2">
-            <a href="{% url 'info:category-detail' item.id %}"
+            <a href="{% url 'info:category-detail' item.slug item.id %}"
                 class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text|title }}</a>
         </p>
     </div>

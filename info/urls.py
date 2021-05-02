@@ -6,8 +6,8 @@ from .views import CategoryDetailView, PageDetailView, render_index
 
 urlpatterns = [
     path('', render_index, name="home"),
-    path('category/<int:pk>/',
+    path('category/<slug:slug>-<int:pk>/',
          CategoryDetailView.as_view(), name='category-detail'),
-    path('page/<int:pk>/',
+    path('article/<int:pk>/',
          PageDetailView.as_view(), name='page-detail'),
 ]
