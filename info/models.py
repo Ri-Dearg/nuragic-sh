@@ -187,9 +187,22 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
     theme = models.CharField(
         max_length=10, choices=theme_choices, default='info')
     date_added = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(
+        default='', editable=False, max_length=60, null=False)
+
+    def get_absolute_url(self):
+        """Adds slug to url for page redirection."""
+        kwargs = {'slug': self.slug,
+                  'pk': self.id
+                  }
+        return reverse('info:page-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
-        """Resizes and saves images."""
+        """Creates and adds url slug.
+        Resizes and saves images."""
+        slug_value = _(self.title)
+        self.slug = slugify(slug_value, allow_unicode=True)
+
         image1, image1_md, image1_sm = responsive_images(
             self, 'title_image_tw_header', 1260, 420)
         image2, image2_md, image2_sm = responsive_images(

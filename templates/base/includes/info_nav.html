@@ -29,7 +29,7 @@
         {% for page in item.page.all %}
         <li>
             <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' in active_page %} active{% endif %}"
-                href="{% url 'info:page-detail' page.id %}">{{ page.title|title }}</a>
+                href="{% url 'info:page-detail' page.slug page.id %}">{{ page.title|title }}</a>
         </li>
         {% endfor %}
         <!-- The 'About' Category is always last -->
