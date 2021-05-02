@@ -35,7 +35,7 @@
         <!-- The 'About' Category is always last -->
         {% if 'about' in item.title_en.lower %}
         <li>
-            <a class="p-font l-space-1 smooth-click dropdown-item text-white{% if 'contact' in request.path %} active{% endif %}"
+            <a class="p-font l-space-1 smooth-click dropdown-item text-white{% if 'contact-us' in request.path %} active{% endif %}"
                 href="{% url 'contact:email-form' %}">{% trans 'Contact' %}</a>
         </li>
         {% endif %}

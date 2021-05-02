@@ -21,7 +21,9 @@ from .forms import UserProfileForm
 
 def profile_redirect(request):
     """Redirects to user profile with pk."""
-    return redirect('users:user-detail', pk=request.user.id)
+    return redirect('users:user-detail',
+                    pk=request.user.id,
+                    username=request.user.username)
 
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):

@@ -1,4 +1,5 @@
 """Tests for Cart app."""
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from products.models import Product
@@ -10,10 +11,10 @@ class TestViews(TestCase):
     """Tests views for the Cart app."""
 
     def setUp(self):
-        Product.objects.bulk_create([preorder_product,
-                                     unique_product,
-                                     valid_product_1,
-                                     valid_product_2])
+        preorder_product.save()
+        unique_product.save()
+        valid_product_1.save()
+        valid_product_2.save()
 
     def test_error_on_incorrect_item_removed(self):
         """Checks that an error occurs in the toggle when an
@@ -24,7 +25,7 @@ class TestViews(TestCase):
         p_id = product.id
 
         # This adds the item
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -34,7 +35,7 @@ class TestViews(TestCase):
         self.assertEqual(session['cart'], {f'{p_id}': 1})
 
         # Uses the toggle on a non-existant item
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': 0, 'quantity': '0'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -44,7 +45,7 @@ class TestViews(TestCase):
         session['cart'] = {f'{p_id}': 1, '0': 1}
         session.save()
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -60,7 +61,7 @@ class TestViews(TestCase):
 
         session['cart'] = {f'{nsp_id}': 1}
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -68,7 +69,7 @@ class TestViews(TestCase):
 
     def test_correct_template_used(self):
         """Checks that the url produces the correct template."""
-        response = self.client.get('/shop/cart/cart_list/')
+        response = self.client.get(reverse('cart:cart-list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cart/cart_list.html')
 
@@ -80,7 +81,7 @@ class TestViews(TestCase):
 
         up_id = product_is_unique.id
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': up_id, 'quantity': '10'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -94,7 +95,7 @@ class TestViews(TestCase):
 
         pp_id = product_preorder.id
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': pp_id, 'quantity': '10'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -119,34 +120,34 @@ class TestViews(TestCase):
         limit_stock_product.save()
         lsp_id = limit_stock_product.id
 
-        response = self.client.get('/shop/cart/ajax/toggle/',
+        response = self.client.get(reverse('cart:cart-toggle'),
                                    {'item-id': lsp_id, 'quantity': '1'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
 
         # Adds a normal quantity, then adds a quantity higher than the stock
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': lsp_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': lsp_id, 'quantity': '0'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': lsp_id, 'quantity': '0'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': lsp_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': nup_id, 'quantity': '4'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         # Updates the product when adding to cart
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': lsp_id,
                           'quantity': '10',
                           'special': 'update'},
@@ -161,7 +162,7 @@ class TestViews(TestCase):
         raised."""
 
         # Adds a non-existent item and confirms an error
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': 0, 'quantity': '0'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertRaises(Exception, msg='Error adding item: 0')
@@ -173,7 +174,7 @@ class TestViews(TestCase):
         no_stock_product.save()
         nsp_id = no_stock_product.id
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': nsp_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         session = self.client.session
@@ -191,7 +192,7 @@ class TestViews(TestCase):
         p_id = product.id
 
         # This adds the item
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -201,7 +202,7 @@ class TestViews(TestCase):
         self.assertEqual(session['cart'], {f'{p_id}': 1})
 
         # This removes the item
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 

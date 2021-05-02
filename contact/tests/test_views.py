@@ -1,4 +1,5 @@
 """Tests views for the Contact app."""
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
@@ -15,17 +16,17 @@ class TestContactViews(TestCase):
 
     def test_contact_template(self):
         """Tests templates for Contact page."""
-        self.client.get('/contact/')
+        self.client.get(reverse('contact:email-form'))
         self.assertTemplateUsed('contact_form.html')
 
     def test_newsletter_singup(self):
         """FETCH method for signing up to newletter checked."""
         # Signs up for newsletter in both languages.
-        self.client.post('/contact/f/newsletter/',
+        self.client.post(reverse('contact:newsletter'),
                          {'email_en': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/contact/f/newsletter/',
+        self.client.post(reverse('contact:newsletter'),
                          {'email_it': 'test@test.com'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                          HTTP_ACCEPT_LANGUAGE='it')
@@ -36,7 +37,7 @@ class TestContactViews(TestCase):
         self.assertTrue("test@test.com" in newsletter_1.email_list_en)
 
         # Checks the correct message is processed if already signed up
-        response = self.client.post('/contact/f/newsletter/',
+        response = self.client.post(reverse('contact:newsletter'),
                                     {'email_en': 'test@test.com'},
                                     HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                     HTTP_ACCEPT_LANGUAGE='en')
@@ -45,7 +46,7 @@ class TestContactViews(TestCase):
                          "tag": "info"})
 
         # Checks for refusal in a GET request
-        response = self.client.get('/contact/f/newsletter/',
+        response = self.client.get(reverse('contact:newsletter'),
                                    {'email_en': 'test@test.com'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)

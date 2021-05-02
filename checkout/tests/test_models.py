@@ -1,4 +1,5 @@
 """Tests the models of the checkout app."""
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from checkout.models import Order
@@ -12,9 +13,8 @@ class TestCheckoutModels(TestCase):
     """Tests the models for the checkout app."""
 
     def setUp(self):
-        Product.objects.bulk_create([
-            valid_product_1,
-            valid_product_2])
+        valid_product_1.save()
+        valid_product_2.save()
 
     def test_order_and_lineitem_string(self):
         """Tests the string method for the models."""
@@ -23,11 +23,11 @@ class TestCheckoutModels(TestCase):
             title='P1').last()
         p_id = product.id
 
-        self.client.post('/shop/cart/ajax/toggle/',
+        self.client.post(reverse('cart:cart-toggle'),
                          {'item-id': p_id, 'quantity': '1'},
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        self.client.post('/shop/checkout/payment/', valid_order_dict)
+        self.client.post(reverse('checkout:order-create'), valid_order_dict)
 
         # Retrieves the new order
         new_order = Order.objects.latest('date')
