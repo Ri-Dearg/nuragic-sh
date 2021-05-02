@@ -1,4 +1,6 @@
-import uuid
+"""Models for Orders: Order and OrderLineItem.
+Function for order number generation."""
+from datetime import datetime
 
 from django.db import models
 from django.db.models import Sum
@@ -6,8 +8,14 @@ from django.shortcuts import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 
+from info.utils import get_random_string
 from products.models import Product
 from users.models import CustomPhoneNumberField, UserProfile
+
+
+def generate_order_number():
+    """Generates a random order number."""
+    return datetime.now().strftime('%m%d%y%H%M%S') + get_random_string(3)
 
 
 class Order(models.Model):
@@ -71,15 +79,11 @@ class Order(models.Model):
             'lineitem_total'))['lineitem_total__sum'] or 0
         self.grand_total = self.order_total + self.delivery_cost
 
-    def _generate_order_number(self):
-        """Generates a random order number."""
-        return uuid.uuid4().hex.upper()
-
     def save(self, *args, **kwargs):
         """Saves the order number and updates the total."""
         self._update_total()
         if not self.order_number:
-            self.order_number = self._generate_order_number()
+            self.order_number = generate_order_number()
         super().save(*args, **kwargs)
 
     def __str__(self):

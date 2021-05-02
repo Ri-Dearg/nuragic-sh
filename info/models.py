@@ -16,6 +16,8 @@ class SplashImage(models.Model):
     You can add a splash image which will be resized and a blurb.
     Images are different sizes depending on the screen size.
     I would recommend cropping your images first."""
+    # pylint: disable=too-many-instance-attributes
+
     page = models.OneToOneField('Page',
                                 blank=True,
                                 null=True,
@@ -118,7 +120,7 @@ class Category(models.Model):
         return f'{self.menu_word}'
 
 
-class Page(models.Model):
+class Page(models.Model):  # pylint: disable=too-many-instance-attributes
     """Detailed pages for Categories"""
     theme_choices = [('secondary', 'beige'),
                      ('info', 'blue'),
@@ -128,6 +130,7 @@ class Page(models.Model):
                      ('purple', 'purple'),
                      ('danger', 'red'),
                      ('warning', 'yellow'), ]
+
     category = models.ForeignKey(
         Category, null=True,
         on_delete=models.SET_NULL,

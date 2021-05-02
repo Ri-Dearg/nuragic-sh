@@ -1,3 +1,4 @@
+"""Tests the models of the checkout app."""
 from django.test import TestCase
 
 from checkout.models import Order
@@ -34,5 +35,6 @@ class TestCheckoutModels(TestCase):
 
         # CHecks that the string method for the order and its items is correct.
         self.assertEqual(str(new_order), new_order.order_number)
-        self.assertEqual(str(order_lineitem),
-                         f'{order_lineitem.product.title} on order {new_order.order_number}')  # noqa E501
+        self.assertEqual(
+            str(order_lineitem),
+            f'{order_lineitem.product.title} on order {new_order.order_number}')  # noqa E501
