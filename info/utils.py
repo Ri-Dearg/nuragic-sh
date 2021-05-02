@@ -1,4 +1,6 @@
-"""Utilities for resizing images."""
+"""Utilities for resizing images.
+Image resizing, snippet repurposed from:
+https://djangosnippets.org/snippets/10597/"""
 
 import random
 import string
@@ -9,7 +11,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 
 
-def get_random_string(length):
+def random_str(length):
     """Creates random string for unique image names."""
     # With combination of lower and upper case
     result_str = ''.join(random.choice(string.ascii_letters)
@@ -31,7 +33,7 @@ def image_resize(self, image_title, width, height):
         pass
     try:
         img = Image.open(image_field)
-        img_format = img.format.lower()
+        i_format = img.format.lower()
 
         # Prevents images from being copied on every save
         # will save a new copy on an upload
@@ -44,16 +46,16 @@ def image_resize(self, image_title, width, height):
 
             # Converts format while in memory
             output = BytesIO()
-            img.save(output, format=img_format)
+            img.save(output, format=i_format)
             output.seek(0)
 
             # Replaces the Imagefield value with the newly converted image
             image_field = InMemoryUploadedFile(
                 output,
                 'ImageField',
-                f'{image_field.name.split(".")[0]}_\
-                    {get_random_string(8)}.{img_format}',
-                'image/jpeg', sys.getsizeof(output),
+                f'{image_field.name.split(".")[0]}_{random_str(8)}.{i_format}',
+                'image/jpeg',
+                sys.getsizeof(output),
                 None)
             return image_field
         # if the image doesn't need to be changed, returns false

@@ -15,7 +15,7 @@
     </div>
     <ul class="list-group list-group-flush">
         {% for item in cart_items %}
-        <a href="{% url 'products:product-detail' item.product.id %}"
+        <a href="{% url 'products:product-detail' item.product.slug item.product.id %}"
             class="p-font list-group-item list-group-item-action fs-6 mb-0">
             <img class="product-thumb col-2 d-inline-block float-start" src="{{ item.product.image_4_3_xs.url }}"
                 alt="{{ item.product.title }}">

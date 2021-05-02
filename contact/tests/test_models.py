@@ -1,5 +1,6 @@
 """Tests for the Contact app Models."""
 from django.test import TestCase
+from django.shortcuts import reverse
 
 from contact.models import Email, EmailHistory, Newsletter
 
@@ -20,12 +21,13 @@ class TestContactModels(TestCase):
                  'message': 'this is a message'}
 
         # Posts the email, retrieves the email object and confirms the string
-        self.client.post('/contact/', email)
+        self.client.post(reverse('contact:email-form'), email)
         new_email = Email.objects.latest('date')
         self.assertTrue(new_email.message == 'this is a message')
         self.assertEqual(str(new_email), 'test@test.com, interesting')
 
-        self.client.post('/contact/', email, HTTP_ACCEPT_LANGUAGE='it')
+        self.client.post(reverse('contact:email-form'),
+                         email, HTTP_ACCEPT_LANGUAGE='it')
         new_email = Email.objects.latest('date')
         self.assertTrue(new_email.message == 'this is a message')
         self.assertEqual(str(new_email), 'test@test.com, interesting')
@@ -47,7 +49,7 @@ class TestContactModels(TestCase):
                   'message': 'this is a message'}
 
         # Posts the English email, creating an email for use in the tests
-        self.client.post('/contact/', email1)
+        self.client.post(reverse('contact:email-form'), email1)
         new_email1 = Email.objects.latest('date')
 
         # Adds the email address to the English newsletter
@@ -55,7 +57,8 @@ class TestContactModels(TestCase):
         newsletter.save()
 
         # Posts the Italian email, creating an email for use in the tests
-        self.client.post('/contact/', email2, HTTP_ACCEPT_LANGUAGE='it')
+        self.client.post(reverse('contact:email-form'),
+                         email2, HTTP_ACCEPT_LANGUAGE='it')
         new_email2 = Email.objects.latest('date')
 
         # Adds the email address to the Italian newsletter
@@ -63,8 +66,10 @@ class TestContactModels(TestCase):
         newsletter.save()
 
         # Posts an email in both languages
-        self.client.post('/contact/', email1, HTTP_ACCEPT_LANGUAGE='en')
-        self.client.post('/contact/', email2, HTTP_ACCEPT_LANGUAGE='it')
+        self.client.post(reverse('contact:email-form'),
+                         email1, HTTP_ACCEPT_LANGUAGE='en')
+        self.client.post(reverse('contact:email-form'),
+                         email2, HTTP_ACCEPT_LANGUAGE='it')
 
         # Saves emails into Email history
         email_history1 = EmailHistory.objects.get(

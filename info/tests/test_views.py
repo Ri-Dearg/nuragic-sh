@@ -1,5 +1,6 @@
 """Tests views for the Info app."""
 
+from django.shortcuts import reverse
 from django.test import TestCase
 
 from info.models import Category, Page
@@ -19,7 +20,7 @@ class TestInfoViews(TestCase):
 
     def test_render_home(self):
         """Tests templates for index page."""
-        response = self.client.get('/')
+        response = self.client.get(reverse('info:home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'info/index.html')
         self.assertTemplateUsed(response, 'base/base.html')
@@ -29,7 +30,9 @@ class TestInfoViews(TestCase):
     def test_render_category_detail(self):
         """Tests templates for Category detail page."""
         category = Category.objects.latest('date_added')
-        response = self.client.get(f'/category/{category.id}/')
+        response = self.client.get(
+            reverse('info:category-detail',
+                    kwargs={'slug': category.slug, 'pk': category.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'info/category_detail.html')
@@ -43,7 +46,9 @@ class TestInfoViews(TestCase):
     def test_render_page_detail(self):
         """Tests templates for Page detail page."""
         page = Page.objects.latest('date_added')
-        response = self.client.get(f'/page/{page.id}/')
+        response = self.client.get(
+            reverse('info:page-detail',
+                    kwargs={'slug': page.slug, 'pk': page.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'info/page_detail.html')
