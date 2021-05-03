@@ -132,7 +132,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'TEST': {
             # Runs tests on a secondary database
-            'NAME': 'dfkr3u5kvd8qj8',
+            'NAME': 'd8bgrsa150rjjt',
         },
     }
 }

@@ -71,7 +71,7 @@
         {% else %}
         {% include 'users/includes/unauthenticated_offcanvas.html' %}
         {% endif %}
-        {% if 'shop' in request.path %}
+        {% if '/shop/' in request.path %}
         <!-- Displays Likes -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLikes" aria-labelledby="offcanvasLikesLabel">
             <div class="like-offcanvas-content overflow-auto">
@@ -139,7 +139,7 @@
             showToast();
         </script>
         {% endif %}
-        {% if 'shop' in request.path %}
+        {% if '/shop/' in request.path %}
         <script src="{% static 'js/custom/shop.js' %}?{{ VERSION }}"></script>
         <script>
             buttonToggle('{% include "base/includes/icons/bookmark-heart-fill.svg" %}',

@@ -4,7 +4,6 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
 
 from info.utils import responsive_images
 
@@ -28,8 +27,11 @@ class ShopCategory(models.Model):
         """Generates default stock values.
         Will restock items that are not unique.
         Updates the 'popularity' value"""
-        slug_value = _(self.title)
-        self.slug = slugify(slug_value, allow_unicode=True)
+        slug_value_en = self.title_en
+        self.slug_en = slugify(slug_value_en, allow_unicode=True)
+
+        slug_value_it = self.title_it
+        self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         super().save(*args, **kwargs)
 
@@ -90,8 +92,11 @@ class Product(models.Model):
         """Generates default stock values.
         Will restock items that are not unique.
         Updates the 'popularity' value"""
-        slug_value = _(self.title)
-        self.slug = slugify(slug_value, allow_unicode=True)
+        slug_value_en = self.title_en
+        self.slug_en = slugify(slug_value_en, allow_unicode=True)
+
+        slug_value_it = self.title_it
+        self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         image1, image1_md, image1_sm, image1_xs = responsive_images(
             self, 'image_4_3', 945, 1260, thumb=True)
