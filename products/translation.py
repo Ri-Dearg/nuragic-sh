@@ -8,7 +8,7 @@ from .models import Product, ShopCategory
 class ShopCategoryTranslation(TranslationOptions):
     """Fields that need translation options."""
 
-    fields = ('title',)
+    fields = ('title', 'slug',)
     required_languages = ('en', 'it',)
 
 
@@ -16,5 +16,5 @@ class ShopCategoryTranslation(TranslationOptions):
 class ProductTranslation(TranslationOptions):
     """Fields that need translation options."""
 
-    fields = ('title', 'description',)
+    fields = ('title', 'description', 'slug',)
     required_languages = ('en', 'it',)

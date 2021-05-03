@@ -114,8 +114,11 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         """Creates and adds url slug.
         Resizes and saves images."""
-        slug_value = _(self.title)
-        self.slug = slugify(slug_value, allow_unicode=True)
+        slug_value_en = self.title_en
+        self.slug_en = slugify(slug_value_en, allow_unicode=True)
+
+        slug_value_it = self.title_it
+        self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         image1, image1_md, image1_sm = responsive_images(
             self, 'image_fb_link', 1200, 630)
@@ -199,8 +202,11 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
     def save(self, *args, **kwargs):
         """Creates and adds url slug.
         Resizes and saves images."""
-        slug_value = _(self.title)
-        self.slug = slugify(slug_value, allow_unicode=True)
+        slug_value_en = self.title_en
+        self.slug_en = slugify(slug_value_en, allow_unicode=True)
+
+        slug_value_it = self.title_it
+        self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         image1, image1_md, image1_sm = responsive_images(
             self, 'title_image_tw_header', 1260, 420)
