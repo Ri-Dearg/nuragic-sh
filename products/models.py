@@ -24,9 +24,7 @@ class ShopCategory(models.Model):
         return reverse('products:shop-category-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
-        """Generates default stock values.
-        Will restock items that are not unique.
-        Updates the 'popularity' value"""
+        """Generates a slug for the url."""
         slug_value_en = self.title_en
         self.slug_en = slugify(slug_value_en, allow_unicode=True)
 
