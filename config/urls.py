@@ -50,6 +50,8 @@ urlpatterns = [
                                 namespace='contact')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
+    path('policies/', include(('policies.urls', 'policies'),
+                              namespace='policies')),
     path('accounts/', include(account_patterns)),
     path('shop/', include(shop_patterns)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

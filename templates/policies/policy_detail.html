@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+<!-- Loads internationalization, loads static, loads crispy forms  -->
+{% load i18n %}
+<!-- Critical CSS -->
+{% block critical_css %}{% endblock %}
+
+<!-- Meta details -->
+{% block meta_description %}{{ object.name }}{% endblock %}
+{% block meta_keywords %}{{ block.super }}{{ object.name }}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+
+{% block head_title %}{{ object.name }}{% endblock %}
+{% block content %}
+<!-- Layout for Pages -->
+<article class="flex-grow-1 bg-white">
+    <div class="row">
+        <div class="col-12 bg-brown py-2">
+            <h2 class="p-font l-space-2 text-white text-center display-4 mb-0">{{ object.name }}</h2>
+        </div>
+    </div>
+    <section class="row mt-3 mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+        <div class="col-12">
+            <div class="p-font text-primary text-break">{{ object.content|safe }}</div>
+        </div>
+    </section>
+</article>
+{% endblock %}

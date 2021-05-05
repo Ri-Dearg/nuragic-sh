@@ -1,3 +1,8 @@
-from django.shortcuts import render
+"""Views for the Policies app."""
+from django.views.generic import DetailView
+from .models import Policy
 
-# Create your views here.
+
+class PolicyDetailView(DetailView):
+    """Shows the policy on the page."""
+    model = Policy
