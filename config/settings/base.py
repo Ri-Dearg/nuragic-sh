@@ -117,6 +117,7 @@ TEMPLATES = [
                 'config.context_processors.global_settings',
                 'likes.context_processors.get_likes',
                 'cart.context_processors.get_cart',
+                'policies.context_processors.get_policies',
             ],
         },
     },

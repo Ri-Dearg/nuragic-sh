@@ -11,6 +11,7 @@ class Policy(models.Model):
     name = models.CharField(max_length=100, default='')
     content = HTMLField()
     date_created = models.DateTimeField(default=timezone.now)
+    display = models.BooleanField(default=True)
     slug = models.SlugField(
         default='a', editable=False, max_length=100, null=False)
 
