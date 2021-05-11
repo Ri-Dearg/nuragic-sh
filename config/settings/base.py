@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'contact',
+    'cookies',
     'info',
     'jasmine_testing',
     'likes',
