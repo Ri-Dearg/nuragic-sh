@@ -45,7 +45,7 @@ class CookieRecord(models.Model):
         self.cookie_policy = Policy.objects.get(active_cookie=True)
         self.privacy_policy = Policy.objects.get(active_privacy=True)
         self.current_dialogue = render_to_string(
-            'cookies/cookie_dialogue.html')
+            'cookies/includes/cookie_dialogue.html')
 
         js_url = staticfiles_storage.url('js/custom/cookie.js')
         with open(js_url, 'r') as js_file:

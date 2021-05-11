@@ -1,0 +1,26 @@
+{% load i18n %}
+<div class="offcanvas offcanvas-end show" tabindex="-1" id="offcanvasCookies" aria-labelledby="offcanvasCookieLabel">
+    <div class="cart-offcanvas-content overflow-auto">
+        <div class="offcanvas-header pb-0">
+            <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasCookieLabel">{% trans 'COOKIE CONSENT' %}
+            </h2>
+        </div>
+        <div class="offcanvas-body">
+            <div class="w-100 text-center mb-3">
+                <p class="p-font text-primary text-start">
+                    {% blocktrans %}
+                    <small>This website uses cookies that help the website to function and also to track how you
+                        interact with our website.<br>
+                        We respect Do Not Track requests.<br>
+                        We do not track any personally identifiable information.<br>
+                        We do not use cookies for advertising purposes.<br>
+                        For us to provide the best user experience, please enable the cookies by clicking on
+                        Accept.</small>
+                    {% endblocktrans %}
+                </p>
+                <a class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0" id="cookieAccept"
+                    href="#">{% trans 'Accept' %}?</a>
+            </div>
+        </div>
+    </div>
+</div>
