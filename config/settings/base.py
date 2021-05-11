@@ -199,6 +199,8 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
+SESSION_COOKIE_AGE = 4838400
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # NOQA: E501
 
 # Settings for Rich Text Editor in admin

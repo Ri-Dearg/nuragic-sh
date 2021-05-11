@@ -47,9 +47,10 @@ class CookieRecord(models.Model):
         self.current_dialogue = render_to_string(
             'cookies/includes/cookie_dialogue.html')
 
-        js_url = staticfiles_storage.url('js/custom/cookie.js')
-        with open(js_url, 'r') as js_file:
+        with staticfiles_storage.open('js/custom/cookie.js', 'r') as js_file:
             self.current_javascript = js_file.read()
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.ip_address}, {self.date}, {self.consent}'

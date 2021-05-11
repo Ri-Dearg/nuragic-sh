@@ -13,9 +13,9 @@ cookieOffcanvas.addEventListener("show.bs.offcanvas", function () {
     { signal: signal }
   );
 });
-
-var cookieAccept = document.getElementById("cookieAccept");
-cookieAccept.addEventListener("click", function () {
-  bsCookieOffcanvas.hide();
-  controller.abort();
+document.querySelectorAll(".cookie-form").forEach((item) => {
+  item.addEventListener("submit", function () {
+    bsCookieOffcanvas.hide();
+    controller.abort();
+  });
 });

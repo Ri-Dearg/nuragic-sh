@@ -67,7 +67,9 @@
     {% endblock %}
 
     <body class="body-mods bg-primary d-flex flex-column">
+        {% if 'cookie_consent' not in request.session %}
         {% include 'cookies/includes/cookie_dialogue.html' %}
+        {% endif %}
         {% if user.is_authenticated %}
         {% include 'users/includes/authenticated_offcanvas.html' %}
         {% else %}
@@ -135,8 +137,11 @@
         <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}?{{ VERSION }}"></script>
         <!-- Basic js files loaded -->
         <script src="{% static 'js/custom/base.js' %}?{{ VERSION }}"></script>
-        <!-- shows toasts if there are messages -->
+        {% if 'cookie_consent' not in request.session %}
+        <!-- Cookie consent dialogue fetch function -->
         <script src="{% static 'js/custom/cookie.js' %}?{{ VERSION }}"></script>
+        {% endif %}
+        <!-- shows toasts if there are messages -->
         {% if messages %}
         <script>
             showToast();

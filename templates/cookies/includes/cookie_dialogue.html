@@ -18,8 +18,12 @@
                         Accept.</small>
                     {% endblocktrans %}
                 </p>
-                <a class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0" id="cookieAccept"
-                    href="#">{% trans 'Accept' %}?</a>
+                <form class="cookie-form" action="{% url 'cookies:consent' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cookie-consent" value="opt-in">
+                    <button type="submit"
+                        class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept' %}</button>
+                </form>
             </div>
         </div>
     </div>

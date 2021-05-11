@@ -46,13 +46,16 @@ urlpatterns = [
     # Jasmine testing functions
     path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
                              namespace='jasmine')),
+    # My apps
+    path('accounts/', include(account_patterns)),
     path('contact-us/', include(('contact.urls', 'contact'),
                                 namespace='contact')),
+    path('cookies/', include(('cookies.urls', 'cookie'),
+                             namespace='cookies')),
     path('', include(('info.urls', 'info'),
                      namespace='info')),
     path('policies/', include(('policies.urls', 'policies'),
                               namespace='policies')),
-    path('accounts/', include(account_patterns)),
     path('shop/', include(shop_patterns)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
