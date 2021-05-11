@@ -11,6 +11,8 @@ class Policy(models.Model):
     name = models.CharField(max_length=100, default='')
     content = HTMLField()
     date_created = models.DateTimeField(default=timezone.now)
+    active_cookie = models.BooleanField(default=False)
+    active_privacy = models.BooleanField(default=False)
     display = models.BooleanField(default=True)
     slug = models.SlugField(
         default='a', editable=False, max_length=100, null=False)
@@ -23,7 +25,22 @@ class Policy(models.Model):
         return reverse('policy:policy-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
-        """Generates a slug for the url."""
+        """Generates a slug for the url.
+        Sets active policy settings for use with cookie records."""
+        if self.active_cookie is True:
+            cookie_policy = Policy.objects.filter(
+                active_cookie=True).exclude(pk=self.id)
+            for item in cookie_policy:
+                item.active_cookie = False
+                item.save()
+
+        if self.active_privacy is True:
+            privacy_policy = Policy.objects.filter(
+                active_privacy=True).exclude(pk=self.id)
+            for item in privacy_policy:
+                item.active_privacy = False
+                item.save()
+
         slug_value_en = self.name_en
         self.slug_en = slugify(slug_value_en, allow_unicode=True)
 
