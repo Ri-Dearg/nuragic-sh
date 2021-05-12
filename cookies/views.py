@@ -23,7 +23,7 @@ def cookie_consent(request):
                      consent=request.session['cookie_consent']
                      ).save()
 
-        data['message'] = _('Cookie preferences saved')
+        data['message'] = _('Cookie preferences saved.')
         data['tag'] = 'info'
         data['tagMessage'] = _('Info')
         return JsonResponse(data)
