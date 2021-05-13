@@ -109,7 +109,7 @@ class Category(models.Model):
         """Adds slug to url for page redirection."""
         kwargs = {'slug': self.slug,
                   'pk': self.id}
-        return reverse('products:product-detail', kwargs=kwargs)
+        return reverse('info:category-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         """Creates and adds url slug.

@@ -69,6 +69,9 @@ class TestProductsViews(TestCase):
             response.context['active_category'], True)
         self.assertTrue(
             response.context['related_products'], True)
+        response = self.client.get(product.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'products/product_detail.html')
 
     def test_render_shopcategory_detail(self):
         """Tests templates for Category detail page."""
@@ -90,3 +93,7 @@ class TestProductsViews(TestCase):
         self.assertTrue(
             response.context['page_obj'], shopcategory.products.all().order_by(
                 '-stock', '-popularity'))
+
+        response = self.client.get(shopcategory.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'products/shopcategory_detail.html')

@@ -45,6 +45,10 @@ class TestInfoViews(TestCase):
         self.assertTrue(response.context['active_category'], f'{category.id}')
         self.assertTrue(response.context['active_all'], f'{category.id}')
 
+        response = self.client.get(category.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'info/category_detail.html')
+
     def test_render_page_detail(self):
         """Tests templates for Page detail page."""
         page = Page.objects.latest('date_added')
@@ -60,3 +64,7 @@ class TestInfoViews(TestCase):
         self.assertTrue(
             response.context['active_category'], f'{page.id}')
         self.assertTrue(response.context['active_page'], f'{page.id}')
+
+        response = self.client.get(page.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'info/page_detail.html')

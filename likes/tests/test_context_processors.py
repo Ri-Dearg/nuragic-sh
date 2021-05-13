@@ -2,11 +2,12 @@
 from django.shortcuts import reverse
 from django.test import TestCase
 
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
 from products.models import Product
 from products.tests.test_models import valid_product_1, valid_product_2
 from users.tests.test_views import test_user
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy)
+
 
 class TestContext(TestCase):
     """Tests the context processor orders likes correctly in the template."""

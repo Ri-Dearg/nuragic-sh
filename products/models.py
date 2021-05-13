@@ -84,7 +84,7 @@ class Product(models.Model):
         kwargs = {'slug': self.slug,
                   'pk': self.id
                   }
-        return reverse('info:category-detail', kwargs=kwargs)
+        return reverse('products:product-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         """Generates default stock values.
