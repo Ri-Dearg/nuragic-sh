@@ -3,6 +3,8 @@
 from django.shortcuts import reverse
 from django.test import TestCase
 
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
 from products.models import Product, ShopCategory
 from products.tests.test_models import (valid_product_1, valid_product_2,
                                         valid_shopcategory)
@@ -16,6 +18,8 @@ class TestProductsViews(TestCase):
         valid_shopcategory.save()
         valid_product_1.save()
         valid_product_2.save()
+        valid_cookie_policy.save()
+        valid_privacy_policy.save()
 
     def test_render_shop(self):
         """Tests templates for shop page."""

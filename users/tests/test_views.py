@@ -5,6 +5,8 @@ from django.test import TestCase
 
 from contact.models import Newsletter
 from users.tests.test_adapter import generate_string
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
 
 user_model = get_user_model()
 user_model.objects.get_or_create(
@@ -17,6 +19,10 @@ test_user = user_model.objects.latest('date_joined')
 
 class TestUserViews(TestCase):
     """Tests views for the Users app."""
+
+    def setUp(self):
+        valid_cookie_policy.save()
+        valid_privacy_policy.save()
 
     def test_custom_forms_rendering(self):
         """Tests the correct use of custom forms."""
