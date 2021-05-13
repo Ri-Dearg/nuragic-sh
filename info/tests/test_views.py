@@ -4,6 +4,8 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from info.models import Category, Page
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
 
 from .test_models import valid_category, valid_page
 
@@ -13,9 +15,9 @@ class TestInfoViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-
+        valid_cookie_policy.save()
+        valid_privacy_policy.save()
         valid_category.save()
-
         valid_page.save()
 
     def test_render_home(self):
@@ -43,6 +45,10 @@ class TestInfoViews(TestCase):
         self.assertTrue(response.context['active_category'], f'{category.id}')
         self.assertTrue(response.context['active_all'], f'{category.id}')
 
+        response = self.client.get(category.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'info/category_detail.html')
+
     def test_render_page_detail(self):
         """Tests templates for Page detail page."""
         page = Page.objects.latest('date_added')
@@ -58,3 +64,7 @@ class TestInfoViews(TestCase):
         self.assertTrue(
             response.context['active_category'], f'{page.id}')
         self.assertTrue(response.context['active_page'], f'{page.id}')
+
+        response = self.client.get(page.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'info/page_detail.html')

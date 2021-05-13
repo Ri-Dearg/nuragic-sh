@@ -2,6 +2,8 @@
 from django.shortcuts import reverse
 from django.test import TestCase
 
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
 from products.models import Product
 from products.tests.test_models import (preorder_product, unique_product,
                                         valid_product_1, valid_product_2)
@@ -11,6 +13,8 @@ class TestViews(TestCase):
     """Tests views for the Cart app."""
 
     def setUp(self):
+        valid_cookie_policy.save()
+        valid_privacy_policy.save()
         preorder_product.save()
         unique_product.save()
         valid_product_1.save()

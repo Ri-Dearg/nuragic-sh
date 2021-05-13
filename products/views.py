@@ -31,8 +31,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
 
 
 class ProductDetailView(DetailView):
-    """Displays a list of products in the Category.
-    The MultipleObjectMixin allows for easy pagination."""
+    """Displays details for a product."""
     model = Product
     context_object_name = 'product'
 

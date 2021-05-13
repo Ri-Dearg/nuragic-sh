@@ -7,7 +7,7 @@
 <footer class="container-xxl bg-primary text-center text-secondary">
     <div class="row pb-2">
         <!-- Newsletter sign up -->
-        <div class="col-12 col-md-4 order-1 order-md-2 mt-3">
+        <section class="col-12 col-md-4 order-1 order-md-2 mt-3">
             <h2 class="p-font l-space-1 h5">{% trans 'Newsletter' %}</h2>
             <p id="newsEmailText" class="p-font form-text mb-1 visually-hidden">{% trans 'Sign Up Here!' %}</p>
             <!-- Accepts email using django forms goes to a language based newsletter  -->
@@ -25,9 +25,9 @@
                         class="p-font btn-tran btn btn-warning text-primary shadow h-100">{% trans 'Join' %}</button>
                 </div>
             </form>
-        </div>
+        </section>
         <!-- Social Link section Templates are inline SVG icons -->
-        <div class="col-12 col-md-4 order-2 order-md-1 mt-3">
+        <section class="col-12 col-md-4 order-2 order-md-1 mt-3">
             <h2 class="p-font l-space-1 h5">{% trans 'Social' %}</h2>
             <ul class="list-inline d-flex h5 w-100 justify-content-evenly">
                 <li class="list-inline-item">
@@ -52,9 +52,9 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </section>
         <!-- Links to contact page -->
-        <div class="col-12 col-md-4 order-3 mt-3">
+        <section class="col-12 col-md-4 order-3 mt-3">
             <h2 class="p-font l-space-1 h5">{% trans 'Contact' %}</h2>
             <ul class="list-inline d-flex h5 w-100 justify-content-evenly">
                 <li class="list-inline-item">
@@ -76,6 +76,19 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </section>
+        <section class="col-12 order-last px-3 px-lg-5 mt-2">
+            <h2 class="p-font l-space-1 h6 mb-0">{% trans 'Policies' %}</h2>
+            <ul class="p-font list-inline my-1">
+                {% for item in all_policies %}
+                <a href="{% url 'policies:policy-detail' item.slug item.id %}"
+                    class="p-font col-12 col-md-auto text-secondary list-inline-item"><small
+                        class="policy-hover">{{ item.name }}</small></a>
+                {% endfor %}
+            </ul>
+            <p class="p-font text-secondary"><small>&copy; Nuragic Shamanic
+                    Healing<br>{% trans 'All Rights Reserved'%}</small></p>
+        </section>
+
     </div>
 </footer>

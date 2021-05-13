@@ -4,6 +4,9 @@ import string
 
 from django.test import TestCase
 
+from policies.tests.test_models import (valid_cookie_policy,
+                                        valid_privacy_policy)
+
 
 def generate_string():
     """Creates a random string for use as a user"""
@@ -13,6 +16,10 @@ def generate_string():
 class TestAdapter(TestCase):
     """A custom adapter was created, subclassing django-allauth's for a custom
     redirect. This tests the correct redirect."""
+
+    def setUp(self):
+        valid_cookie_policy.save()
+        valid_privacy_policy.save()
 
     def test_redirect(self):
         """Tests that the adapter redirects correctly."""
