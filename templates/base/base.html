@@ -58,14 +58,21 @@
         <meta property="og:image:width" content="{% block og_image_width %}{% endblock %}" />
         <meta property="og:image:height" content="{% block og_image_height %}{% endblock %}" />
         <meta property="og:image:alt" content="{% block og_image_alt %}{% endblock %}" />
-
         <title>
             Nuragic Shamanic Healing | {% block head_title %}{% endblock %}
         </title>
+        {% if request.DNT is False or request.session.cookie_consent == True %}
+        {% if request.session.cookie_consent == True %}
+        {% include 'cookies/includes/trackers.html' %}
+        {% endif %}
+        {% endif %}
     </head>
     {% endblock %}
 
     <body class="body-mods bg-primary d-flex flex-column">
+        {% if 'cookie_consent' not in request.session %}
+        {% include 'cookies/includes/cookie_dialogue.html' %}
+        {% endif %}
         {% if user.is_authenticated %}
         {% include 'users/includes/authenticated_offcanvas.html' %}
         {% else %}
@@ -133,6 +140,10 @@
         <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}?{{ VERSION }}"></script>
         <!-- Basic js files loaded -->
         <script src="{% static 'js/custom/base.js' %}?{{ VERSION }}"></script>
+        {% if 'cookie_consent' not in request.session %}
+        <!-- Cookie consent dialogue fetch function -->
+        <script src="{% static 'js/custom/cookie.js' %}?{{ VERSION }}"></script>
+        {% endif %}
         <!-- shows toasts if there are messages -->
         {% if messages %}
         <script>

@@ -1,0 +1,48 @@
+{% load i18n %} {% load static %}
+<div class="offcanvas offcanvas-end" data-bs-keyboard="false" tabindex="-1" id="offcanvasCookies"
+    aria-labelledby="offcanvasCookieLabel">
+    <div class="cart-offcanvas-content overflow-auto">
+        <div class="offcanvas-header pb-0">
+            <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasCookieLabel">{% trans 'COOKIE CONSENT' %}
+            </h2>
+        </div>
+        <div class="offcanvas-body">
+            <div class="w-100 text-center mb-3">
+                <section class="p-font text-primary text-start small">
+                    {% url 'policies:policy-detail' active_privacy.slug active_privacy.id as privacy_url %}
+                    {% url 'policies:policy-detail' active_cookie.slug active_cookie.id as cookie_url %}
+                    {% blocktrans %}
+                    <p>This website uses cookies that help the website to function, and for analytic purposes to
+                        track how you interact with our our website.</p>
+                    <ul>
+                        <li>Essential, functional and fraud prevention cookies are <strong>required</strong> for site
+                            use.</li>
+                        <li>We <strong>respect</strong> Do Not Track requests.</li>
+                        <li>We <strong>do not</strong> gather or track any personally identifiable information.</li>
+                        <li>We <strong>do not</strong> use cookies for advertising or personalization purposes.</li>
+                        <li>For <strong>more information</strong> please read our <a class="text-info"
+                                href="{{ privacy_url }}">Privacy
+                                Policy</a> and <a class="text-info" href="{{ cookie_url }}">Cookie
+                                Policy.</a></li>
+                    </ul>
+                    <p>For us to provide the best user experience, please enable the cookies by clicking on
+                        Accept All Cookies.</p>
+                    {% endblocktrans %}
+                </section>
+                <form class="cookie-form mb-3" action="{% url 'cookies:consent' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cookie-consent" value="opt-in">
+                    <input type="hidden" name="script-url" value="{% static 'js/custom/trackers.js' %}">
+                    <button type="submit"
+                        class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept All Cookies' %}</button>
+                </form>
+                <form class="cookie-form" action="{% url 'cookies:consent' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cookie-consent" value="decline">
+                    <button type="submit"
+                        class="p-font col-8 btn btn-link text-primary shadow mx-auto mb-0">{% trans 'Accept Required Cookies' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

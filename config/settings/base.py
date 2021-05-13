@@ -64,9 +64,11 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'contact',
+    'cookies',
     'info',
     'jasmine_testing',
     'likes',
+    'policies',
     'products',
     'users',
     # Add editor in admin
@@ -95,6 +97,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cookies.middleware.DoNotTrackMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -116,6 +119,7 @@ TEMPLATES = [
                 'config.context_processors.global_settings',
                 'likes.context_processors.get_likes',
                 'cart.context_processors.get_cart',
+                'policies.context_processors.get_policies',
             ],
         },
     },
@@ -195,6 +199,8 @@ USE_TZ = True
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+SESSION_COOKIE_AGE = 4838400
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # NOQA: E501
 
