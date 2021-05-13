@@ -22,7 +22,7 @@ class Policy(models.Model):
         kwargs = {'slug': self.slug,
                   'pk': self.id
                   }
-        return reverse('policy:policy-detail', kwargs=kwargs)
+        return reverse('policies:policy-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         """Generates a slug for the url.
