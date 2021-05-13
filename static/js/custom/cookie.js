@@ -1,6 +1,23 @@
 var cookieOffcanvas = document.getElementById("offcanvasCookies");
 var bsCookieOffcanvas = new bootstrap.Offcanvas(cookieOffcanvas);
 
+function injectTracker(scriptUrl) {
+  function gAnalyticsLoaded(scriptUrl) {
+    let moreScript = document.createElement("script");
+    moreScript.setAttribute("src", scriptUrl);
+    document.head.appendChild(moreScript);
+  }
+
+  let gAnalytics = document.createElement("script");
+  gAnalytics.setAttribute(
+    "src",
+    "https://www.googletagmanager.com/gtag/js?id=G-TY5DN8WWYB"
+  );
+  document.head.appendChild(gAnalytics);
+
+  gAnalytics.addEventListener("load", gAnalyticsLoaded(scriptUrl), false);
+}
+
 function cookieForm(object) {
   // The data sent in the form POST request.
   const formData = new FormData(object);
@@ -20,6 +37,9 @@ function cookieForm(object) {
       }
     })
     .then((data) => {
+      if (data.consent === "true") {
+        injectTracker(data.script);
+      }
       toastMessage(data.tag, data.tagMessage, data.message);
     })
     .catch((error) => toastMessage("danger", "Error", error));

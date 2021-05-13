@@ -11,9 +11,13 @@ def cookie_consent(request):
     user = None
     if request.method == 'POST':
         request.session['cookie_consent'] = False
+        data['consent'] = 'false'
         consent = request.POST['cookie-consent']
         if consent == 'opt-in':
             request.session['cookie_consent'] = True
+            script_url = request.POST['script-url']
+            data['script'] = script_url
+            data['consent'] = 'true'
 
         if request.user.is_authenticated:
             user = request.user

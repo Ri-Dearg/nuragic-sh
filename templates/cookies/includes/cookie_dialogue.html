@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %} {% load static %}
 <div class="offcanvas offcanvas-end" data-bs-keyboard="false" tabindex="-1" id="offcanvasCookies"
     aria-labelledby="offcanvasCookieLabel">
     <div class="cart-offcanvas-content overflow-auto">
@@ -26,20 +26,21 @@
                                 Policy.</a></li>
                     </ul>
                     <p>For us to provide the best user experience, please enable the cookies by clicking on
-                        Accept.</p>
+                        Accept All Cookies.</p>
                     {% endblocktrans %}
                 </section>
                 <form class="cookie-form mb-3" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cookie-consent" value="opt-in">
+                    <input type="hidden" name="script-url" value="{% static 'js/custom/trackers.js' %}">
                     <button type="submit"
-                        class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept' %}</button>
+                        class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept All Cookies' %}</button>
                 </form>
                 <form class="cookie-form" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cookie-consent" value="decline">
                     <button type="submit"
-                        class="p-font col-8 btn btn-link text-primary shadow mx-auto mb-0">{% trans 'Decline' %}</button>
+                        class="p-font col-8 btn btn-link text-primary shadow mx-auto mb-0">{% trans 'Accept Required Cookies' %}</button>
                 </form>
             </div>
         </div>
