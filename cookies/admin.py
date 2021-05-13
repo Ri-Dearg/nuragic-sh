@@ -10,7 +10,7 @@ class CookieRecordAdmin(admin.ModelAdmin):
                        'cookie_policy', 'privacy_policy',
                        'current_dialogue', 'current_javascript')
 
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None):  # pragma: no cover
         return False
 
 
