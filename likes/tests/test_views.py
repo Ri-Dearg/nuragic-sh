@@ -9,7 +9,7 @@ from products.tests.test_models import valid_product_1, valid_product_2
 from users.tests.test_views import test_user
 
 
-class TestViews(TestCase):
+class TestLikesViews(TestCase):
     """Tests views for the Likes app."""
 
     def setUp(self):

@@ -20,7 +20,7 @@ valid_general_policy = Policy(name='General Policy',
 
 
 class TestPoliciesModels(TestCase):
-    """Tests for Products models."""
+    """Tests for Policy models."""
 
     def setUp(self):
         valid_cookie_policy.save()
