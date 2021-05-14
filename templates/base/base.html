@@ -129,10 +129,10 @@
             <!-- Main content container -->
             {% block content %}
             {% endblock %}
+            {% if '/article/' not in request.path %}
+            {% include 'base/includes/horizontal_rule.html'%}
+            {% endif %}
         </main>
-        {% if '/article/' not in request.path %}
-        {% include 'base/includes/horizontal_rule.html'%}
-        {% endif %}
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
         <!-- Jquery and Bootstrap 5 -->
