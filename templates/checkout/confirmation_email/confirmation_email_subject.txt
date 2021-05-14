@@ -1,1 +1,2 @@
-Neverlost Thrift Order Confirmation: {{ order.order_number }}
+{% load i18n %}
+{% blocktrans %}Nuragic Shamanic Healing Order Confirmation: {{ order.order_number }}{% endblock %}
