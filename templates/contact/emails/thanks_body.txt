@@ -5,5 +5,5 @@
 {% trans 'We have received your message and will get in contact with you as soon as possible' %}.
 
 
-{% trans 'Kind Regards' %},
+{% trans 'Be Well' %},
 Nuragic Shamanic Healing

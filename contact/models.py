@@ -154,7 +154,7 @@ class Email(models.Model):
             {'name': name, 'email': email, 'message': message})
         send_mail(contact_subject,
                   contact_body,
-                  email,
+                  settings.DEFAULT_FROM_EMAIL,
                   [settings.DEFAULT_FROM_EMAIL])
 
         # Sends a thank you email to the person who sent the email
