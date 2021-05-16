@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-
 from products.models import Product
 
 from .models import Order, OrderLineItem
@@ -177,7 +176,11 @@ def handle_payment_intent_succeeded(event):
     # If no order is found, it creates the order.
     order = None
     try:
-        create_order(userprofile, billing_details, shipping_details, cart, pid)
+        order = create_order(userprofile,
+                             billing_details,
+                             shipping_details,
+                             cart,
+                             pid)
     except Exception as error:
         logging.exception(
             'Webhook received: %(type)s | ERROR: %(error)s',
