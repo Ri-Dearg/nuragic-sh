@@ -74,7 +74,9 @@
                 {% endif %}
             </div>
             <fieldset>
-                <legend class="p-font h6 text-primary w-auto">{% trans 'Payment' %}</legend>
+                <legend class="p-font h6 text-primary w-auto"><strong>{% trans 'Payment' %} *</strong>&nbsp;&nbsp; <a
+                        target="_blank" rel="noopener"
+                        href="https://stripe.com/">{% include 'base/includes/icons/stripepayments.svg'%}</a></legend>
                 <!-- A Stripe card element will go here -->
                 <div class="mb-3 form-control p-3" id="card-element"></div>
                 <!-- Used to display form errors -->
@@ -85,6 +87,10 @@
             <button type="submit" id="payment-submit"
                 class="p-font text-white btn btn-info shadow mb-2">{% trans 'Confirm Purchase' %}</button>
         </form>
+        <p class="p-font text-muted small">
+            *
+            {% trans 'All of your payment details are processed by Stripe. We do not process or store your payment information.' %}
+        </p>
     </section>
     <section class="col-12 col-md-6 order-1 order-md-2 p-2 p-md-4">
         <!-- Displays each item in the cart in rows.-->
@@ -124,8 +130,9 @@
 <article class="row">
     <div class="col text-center">
         <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
-        <h2 class="text-primary h-font">{% trans "Let's do some shopping" %}</h2>
-        <a class="btn btn-lg btn-danger mt-4 w-25" href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
+        <h2 class="text-primary h-font">{% trans "Let's explore." %}</h2>
+        <a class="btn btn-tran btn-lg btn-warning mt-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
     </div>
 </article>
 <!--Script includes StripeElements scripts.-->
