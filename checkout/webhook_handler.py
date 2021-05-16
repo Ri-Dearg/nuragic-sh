@@ -121,6 +121,20 @@ def send_confirmation_email(order):
         [cust_email]
     )
 
+    order_subject = render_to_string(
+        'checkout/confirmation_email/confirmation_email_subject.txt',
+        {'order': order})
+    order_body = render_to_string(
+        'checkout/confirmation_email/confirmation_email_body.txt',
+        {'order': order, 'contact_email': cust_email})
+
+    send_mail(
+        order_subject,
+        order_body,
+        settings.DEFAULT_FROM_EMAIL,
+        [settings.DEFAULT_FROM_EMAIL]
+    )
+
 
 def handle_event(event):
     """Handle a generic/unknown/unexpected webhook event."""
