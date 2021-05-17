@@ -251,4 +251,6 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = f'Nuragic Shamanic Healing <{os.environ.get("EMAIL_HOST_USER")}>'
+DEFAULT_ORDER_EMAIL = f'NuragicSH Orders <{os.environ.get("EMAIL_HOST_USER")}>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

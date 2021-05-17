@@ -113,11 +113,10 @@ def send_confirmation_email(order):
     body = render_to_string(
         'checkout/confirmation_email/confirmation_email_body.txt',
         {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-
     send_mail(
         subject,
         body,
-        settings.DEFAULT_FROM_EMAIL,
+        settings.DEFAULT_ORDER_EMAIL,
         [cust_email]
     )
 
@@ -131,8 +130,8 @@ def send_confirmation_email(order):
     send_mail(
         order_subject,
         order_body,
-        settings.DEFAULT_FROM_EMAIL,
-        [settings.DEFAULT_FROM_EMAIL]
+        settings.DEFAULT_ORDER_EMAIL,
+        [settings.DEFAULT_ORDER_EMAIL]
     )
 
 
