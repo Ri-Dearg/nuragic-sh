@@ -18,7 +18,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         # Declares objects for pagination
         object_list = self.object.products.filter(
             stock__gte=1) | self.object.products.filter(
-            can_preorder=True).order_by('-stock', '-popularity')
+            can_preorder=True).order_by('-popularity', '-stock')
         context = super().get_context_data(
             object_list=object_list, **kwargs)
 
@@ -50,8 +50,8 @@ class ProductDetailView(DetailView):
         ) | Product.objects.exclude(
             pk=this_object.id).filter(
             category=product_category, can_preorder=True
-        ).order_by('-stock', '-popularity').order_by(
-            '-stock', '-popularity')[:9]
+        ).order_by('-popularity', '-stock').order_by(
+            '-popularity', '-stock')[:9]
 
         context['related_products'] = products
 
@@ -66,7 +66,7 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     Adds context for highlighting the menu."""
     queryset = Product.objects.filter(
         stock__gte=1) | Product.objects.filter(
-        can_preorder=True).order_by('-stock', '-popularity')
+        can_preorder=True).order_by('-popularity', '-stock')
     paginate_by = 12
 
     def get_context_data(self, **kwargs):
