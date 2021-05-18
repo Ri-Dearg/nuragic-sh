@@ -6,7 +6,7 @@ from .models import Category
 
 def get_categories(request):
     """Provides category info for the navbar on all pages."""
-    if '/shop/' in request.path:
+    if '/shop/' in request.path or '/shop/' in request.GET.get('next', ''):
         shop_categories = ShopCategory.objects.all().filter(display=True)
         return {'categories': shop_categories}
 
