@@ -66,7 +66,7 @@
                 {% if user.is_authenticated %}
                 <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" />
                 <label class="p-font text-primary form-check-label"
-                    for="id-save-info">{% trans 'Save this delivery information to my profile' %}</label>
+                    for="id-save-info">{% trans 'Save these shipping and billing addresses to my profile' %}</label>
                 {% else %}
                 <a class="p-font text-info" href="{% url 'account_signup' %}">{% trans 'Create an account' %}</a>
                 {% trans 'or' %} <a class="p-font text-info" href="{% url 'account_login' %}">{% trans 'login' %}</a>

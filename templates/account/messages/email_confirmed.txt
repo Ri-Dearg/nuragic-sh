@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans %}Thank you! You have confirmed your e-mail, {{email}}.{% endblocktrans %}
+{% blocktrans %}Thank you! You have confirmed your email, {{email}}.{% endblocktrans %}
