@@ -12,35 +12,44 @@
                     {% url 'policies:policy-detail' active_privacy.slug active_privacy.id as privacy_url %}
                     {% url 'policies:policy-detail' active_cookie.slug active_cookie.id as cookie_url %}
                     {% blocktrans %}
-                    <p>This website uses cookies that help the website to function, and for analytic purposes to
-                        track how you interact with our our website.</p>
+                    <p>This website uses cookies that help the website to function, for anonymous analytic purposes to
+                        track how you interact with our our website, and advertising purposes.</p>
                     <ul>
                         <li>Essential, functional and fraud prevention cookies are <strong>required</strong> for site
                             use.</li>
-                        <li>We <strong>respect</strong> Do Not Track requests.</li>
-                        <li>We <strong>do not</strong> gather or track any personally identifiable information.</li>
-                        <li>We <strong>do not</strong> use cookies for advertising or personalization purposes.</li>
+                        <li>We <strong>respect</strong> Do Not Track requests. (Accept Required Cookies)</li>
+                        <li>We use Google Analytics for <strong>anonymous</strong> usage data and analytics.</li>
+                        <li>We may use Facebook Pixel for advertising or personalization purposes.</li>
+                        <li>We may use cookies to connect with social networking sites.</li>
                         <li>For <strong>more information</strong> please read our <a class="text-info"
                                 href="{{ privacy_url }}">Privacy
                                 Policy</a> and <a class="text-info" href="{{ cookie_url }}">Cookie
                                 Policy.</a></li>
                     </ul>
                     <p>For us to provide the best user experience, please enable the cookies by clicking on
-                        Accept All Cookies.</p>
+                        <strong>Accept All Cookies</strong>.
+                    </p>
                     {% endblocktrans %}
                 </section>
                 <form class="cookie-form mb-3" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cookie-consent" value="opt-in">
-                    <input type="hidden" name="script-url" value="{% static 'js/custom/trackers.js' %}">
+                    <input type="hidden" name="script-url" value="{% static 'js/custom/fullConsent.js' %}">
                     <button type="submit"
-                        class="p-font col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept All Cookies' %}</button>
+                        class="p-font fw-bold col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept All' %}</button>
+                </form>
+                <form class="cookie-form mb-3" action="{% url 'cookies:consent' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cookie-consent" value="analytics">
+                    <input type="hidden" name="script-url" value="{% static 'js/custom/gAnalytics.js' %}">
+                    <button type="submit"
+                        class="p-font col-8 btn-tran btn btn-white text-primary border-1 border-warning shadow mx-auto mb-0">{% trans 'Accept Analytics' %}</button>
                 </form>
                 <form class="cookie-form" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cookie-consent" value="decline">
                     <button type="submit"
-                        class="p-font col-8 btn btn-link text-primary shadow mx-auto mb-0">{% trans 'Accept Required Cookies' %}</button>
+                        class="p-font col-8 btn btn-link text-decoration-none text-primary shadow-sm mx-auto mb-0">{% trans 'Accept Required' %}</button>
                 </form>
             </div>
         </div>
