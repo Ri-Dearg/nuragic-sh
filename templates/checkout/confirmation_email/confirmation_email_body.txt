@@ -21,7 +21,7 @@ Your order will be shipped to:
 {{ order.shipping_town_or_city }},{% if order.shipping_county %}
 {{ order.shipping_county }},{% endif %}{% if order.shipping_postcode %}
 {{ order.shipping_postcode }},{% endif %}
-{{ order.shipping_country }}.
+{{ order.shipping_country.name }}.
 {% blocktrans with shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
 We've got your delivery phone number on file as {{ shipping_phone_number }}.
 

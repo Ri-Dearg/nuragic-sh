@@ -143,7 +143,7 @@
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script id="preloaderMessage" type="application/json">
-    '<p class="p-font text-white text-center position-absolute top-50 start-50 translate-middle min-vh-33">{% translate "Please do not refresh the page, press the back button or navigate away while the payment is processing.<br>Thank you for your patience."%}</p>'
+    '<p class="p-font text-white position-absolute start-50 translate-middle text-center min-vw-33">{% translate "Please do not refresh the page, press the back button or navigate away while the payment is processing.<br>Thank you for your patience."%}</p>'
 </script>
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }"></script>
