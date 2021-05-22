@@ -59,8 +59,7 @@ class Product(models.Model):
     title = models.CharField(max_length=254, default='')
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image_4_3 = models.ImageField(default='default.jpg',
-                                  upload_to='shop/products')
+    image_4_3 = models.ImageField(upload_to='shop/products')
     image_4_3_md = models.ImageField(default='', blank=True,
                                      upload_to='shop/products')
     image_4_3_sm = models.ImageField(default='', blank=True,
@@ -123,8 +122,9 @@ class Product(models.Model):
     def _update_popularity(self):
         """Used for item ordering so more popular items are displayed first.
         A combination of total unique likes and number sold."""
-        self.popularity = self.price / 100 * (
-            self.users.count() + self.times_purchased)
+        if self.id:
+            self.popularity = self.price / 100 * (
+                self.users.count() + self.times_purchased)
 
     class Meta:
         ordering = ['-popularity']
