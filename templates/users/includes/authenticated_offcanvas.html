@@ -9,7 +9,7 @@
         <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body text-center">
-        <a href="{% url 'users:user-detail' request.user.username request.user.id %}"
+        <a href="{% url 'users:user-detail' request.user.username request.user.id %}?next={{ request.path }}"
             class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Settings' %}</a>
         <div class="col-12 my-2"></div>
         {% if request.user.userprofile.orders.all %}

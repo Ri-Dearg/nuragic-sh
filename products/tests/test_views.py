@@ -92,7 +92,7 @@ class TestProductsViews(TestCase):
             response.context['active_category'], f'{shopcategory.id}')
         self.assertTrue(
             response.context['page_obj'], shopcategory.products.all().order_by(
-                '-stock', '-popularity'))
+                '-popularity', '-stock'))
 
         response = self.client.get(shopcategory.get_absolute_url())
         self.assertEqual(response.status_code, 200)

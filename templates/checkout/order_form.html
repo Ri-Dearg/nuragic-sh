@@ -66,7 +66,7 @@
                 {% if user.is_authenticated %}
                 <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" />
                 <label class="p-font text-primary form-check-label"
-                    for="id-save-info">{% trans 'Save this delivery information to my profile' %}</label>
+                    for="id-save-info">{% trans 'Save these shipping and billing addresses to my profile' %}</label>
                 {% else %}
                 <a class="p-font text-info" href="{% url 'account_signup' %}">{% trans 'Create an account' %}</a>
                 {% trans 'or' %} <a class="p-font text-info" href="{% url 'account_login' %}">{% trans 'login' %}</a>
@@ -74,7 +74,9 @@
                 {% endif %}
             </div>
             <fieldset>
-                <legend class="p-font h6 text-primary w-auto">{% trans 'Payment' %}</legend>
+                <legend class="p-font h6 text-primary w-auto"><strong>{% trans 'Payment' %} *</strong>&nbsp;&nbsp; <a
+                        target="_blank" rel="noopener"
+                        href="https://stripe.com/">{% include 'base/includes/icons/stripepayments.svg'%}</a></legend>
                 <!-- A Stripe card element will go here -->
                 <div class="mb-3 form-control p-3" id="card-element"></div>
                 <!-- Used to display form errors -->
@@ -85,6 +87,10 @@
             <button type="submit" id="payment-submit"
                 class="p-font text-white btn btn-info shadow mb-2">{% trans 'Confirm Purchase' %}</button>
         </form>
+        <p class="p-font text-muted small">
+            *
+            {% trans 'All of your payment details are processed by Stripe. We do not process or store your payment information.' %}
+        </p>
     </section>
     <section class="col-12 col-md-6 order-1 order-md-2 p-2 p-md-4">
         <!-- Displays each item in the cart in rows.-->
@@ -124,8 +130,9 @@
 <article class="row">
     <div class="col text-center">
         <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
-        <h2 class="text-primary h-font">{% trans "Let's do some shopping" %}</h2>
-        <a class="btn btn-lg btn-danger mt-4 w-25" href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
+        <h2 class="text-primary h-font">{% trans "Let's explore." %}</h2>
+        <a class="btn btn-tran btn-lg btn-warning mt-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
     </div>
 </article>
 <!--Script includes StripeElements scripts.-->
@@ -135,24 +142,9 @@
 {{ block.super }}
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
-<script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
-<script>
-    $(document).ready(function () {
-        // Once the DOM is loaded, it auto hides the billing
-        $("#hidden-form-details").hide();
-        // Removes the required attribute from billing fields.
-        $(".billing-field").prop("required", false);
-        // When the box is checked required is removed from certain field.
-        // Else required is added to the billing fields.
-        $("#billing-same").change(function () {
-            if (this.checked) {
-                $("#hidden-form-details").slideUp("slow");
-                $(".billing-field").prop("required", false);
-            } else {
-                $("#hidden-form-details").slideDown("slow");
-                $(".billing-field").prop("required", true);
-            }
-        });
-    });
+<script id="preloaderMessage" type="application/json">
+    '<p class="p-font text-white text-center position-absolute top-50 start-50 translate-middle min-vh-33">{% translate "Please do not refresh the page, press the back button or navigate away while the payment is processing.<br>Thank you for your patience."%}</p>'
 </script>
+<script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
+<script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }"></script>
 {% endblock %}

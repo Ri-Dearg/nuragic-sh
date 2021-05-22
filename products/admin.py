@@ -10,14 +10,16 @@ class ProductInlineAdmin(TranslationStackedInline):
     model = Product
     fields = ('category', 'title', 'description', 'price',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
-              'stock', 'date_added')
+              'stock', 'date_added', 'times_purchased', 'popularity',)
+    readonly_fields = ('times_purchased', 'popularity',)
 
 
 class ProductAdmin(admin.ModelAdmin):
     """Displays the Products admin fields."""
     fields = ('category', 'title', 'description', 'price',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
-              'stock', 'date_added')
+              'stock', 'date_added', 'times_purchased', 'popularity',)
+    readonly_fields = ('times_purchased', 'popularity',)
 
 
 class ProductTrans(ProductAdmin, TranslationAdmin):

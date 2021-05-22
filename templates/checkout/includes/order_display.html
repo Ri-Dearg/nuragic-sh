@@ -10,7 +10,7 @@ Displays key information, order no., date, no. of items, total. -->
         </a>
         <div class="col-11 col-sm-9 col-lg-7 col-xl-6 p-0 p-sm-3 my-3 my-sm-auto">
             <p class="p-font text-primary mb-1">
-                <span class="p-font text-primary"><strong>{% trans 'Order Number:' %}</strong></span>
+                <span class="p-font text-primary"><strong>{% trans 'Order Number' %}:</strong></span>
                 <span class="float-end">
                     <a class="d-none d-md-inline-block"
                         href="{% url 'checkout:order-detail' order.id %}">{{ order.order_number }}</a>
@@ -21,15 +21,15 @@ Displays key information, order no., date, no. of items, total. -->
                 </span>
             </p>
             <p class="p-font text-primary mb-1">
-                <span class="p-font text-primary"><strong>{% trans 'Date:' %}</strong></span>
+                <span class="p-font text-primary"><strong>{% trans 'Date' %}:</strong></span>
                 <span class="float-end">{{ order.date }}</span>
             </p>
             <p class="p-font text-primary mb-1">
-                <span class="p-font text-primary"><strong>{% trans 'Items:' %}</strong></span>
+                <span class="p-font text-primary"><strong>{% trans 'Items' %}:</strong></span>
                 <span class="float-end">{{ order.lineitems.count }}</span>
             </p>
             <p class="p-font text-primary mb-1">
-                <span class="p-font text-primary"><strong>{% trans 'Total:' %}</strong></span>
+                <span class="p-font text-primary"><strong>{% trans 'Total' %}:</strong></span>
                 <span class="float-end">€{{ order.grand_total }}</span>
             </p>
         </div>

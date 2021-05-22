@@ -2,7 +2,7 @@
 <!-- Loads internationalization, loads crispy forms  -->
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock %}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
@@ -10,19 +10,19 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block form_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block form_title %}{% trans "Verify Your Email Address" %}{% endblock %}
 
 {% url 'account_email' as email_url %}
 {% block form_content %}
 <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This part of the site requires us to verify that
     you are who you claim to be. For this purpose, we require that you
-    verify ownership of your e-mail address. {% endblocktrans %}</p>
+    verify ownership of your email address. {% endblocktrans %}</p>
 
-<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}We have sent an e-mail to you for
-    verification. Please click on the link inside this e-mail. Please
+<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}We have sent an email to you for
+    verification. Please click on the link inside this email. Please
     contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
 <p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}<strong>Note:</strong> you can still <a
-        class="smooth-click form-link text-info" href="{{ email_url }}">change your e-mail
+        class="smooth-click form-link text-info" href="{{ email_url }}">change your email
         address</a>.{% endblocktrans %}</p>
 {% endblock %}

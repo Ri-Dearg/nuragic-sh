@@ -78,7 +78,7 @@
         {% else %}
         {% include 'users/includes/unauthenticated_offcanvas.html' %}
         {% endif %}
-        {% if '/shop/' in request.path %}
+        {% if '/shop/' in request.path or '/shop/' in request.GET.next %}
         <!-- Displays Likes -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLikes" aria-labelledby="offcanvasLikesLabel">
             <div class="like-offcanvas-content overflow-auto">
@@ -129,10 +129,10 @@
             <!-- Main content container -->
             {% block content %}
             {% endblock %}
+            {% if '/article/' not in request.path %}
+            {% include 'base/includes/horizontal_rule.html'%}
+            {% endif %}
         </main>
-        {% if '/article/' not in request.path %}
-        {% include 'base/includes/horizontal_rule.html'%}
-        {% endif %}
         <!-- Footer -->
         {% include 'base/includes/footer.html' %}
         <!-- Jquery and Bootstrap 5 -->
@@ -150,7 +150,7 @@
             showToast();
         </script>
         {% endif %}
-        {% if '/shop/' in request.path %}
+        {% if '/shop/' in request.path or '/shop/' in request.GET.next %}
         <script src="{% static 'js/custom/shop.js' %}?{{ VERSION }}"></script>
         <script>
             buttonToggle('{% include "base/includes/icons/bookmark-heart-fill.svg" %}',
