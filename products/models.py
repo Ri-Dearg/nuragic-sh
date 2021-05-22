@@ -4,6 +4,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from tinymce.models import HTMLField
 
 from info.utils import responsive_images
 
@@ -57,7 +58,7 @@ class Product(models.Model):
                                  related_name='products')
 
     title = models.CharField(max_length=254, default='')
-    description = models.TextField()
+    description = HTMLField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image_4_3 = models.ImageField(upload_to='shop/products')
     image_4_3_md = models.ImageField(default='', blank=True,
