@@ -87,8 +87,9 @@ class TestProductsModels(TestCase):
     def test_product_str(self):
         """Tests the string method on the Product."""
         product = Product.objects.latest('date_added')
-        self.assertEqual(str(product),
-                         (f'{product.title}: €{product.price}'))
+        self.assertEqual(
+            str(product),
+            (f'{product.category}: {product.title}: €{product.price}'))
 
     def test_shopcategory_str(self):
         """Tests the string method on the ShopCategory."""
