@@ -56,7 +56,6 @@ class Product(models.Model):
                                  blank=True,
                                  on_delete=models.SET_NULL,
                                  related_name='products')
-
     title = models.CharField(max_length=254, default='')
     description = HTMLField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -133,4 +132,4 @@ class Product(models.Model):
         ordering = ['-popularity']
 
     def __str__(self):
-        return f'{self.title}: €{self.price}'
+        return f'{self.category}: {self.title}: €{self.price}'

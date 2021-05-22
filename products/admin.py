@@ -16,7 +16,7 @@ class ProductInlineAdmin(TranslationStackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
     """Displays the Products admin fields."""
-    ordering = ['title']
+    ordering = ['category', 'title']
     fields = ('category', 'title', 'description', 'price', 'delivery_cost',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
               'stock', 'date_added', 'times_purchased', 'popularity',)
