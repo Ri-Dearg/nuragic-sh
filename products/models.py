@@ -60,6 +60,8 @@ class Product(models.Model):
     title = models.CharField(max_length=254, default='')
     description = HTMLField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    delivery_cost = models.DecimalField(
+        default=6.99, max_digits=10, decimal_places=2)
     image_4_3 = models.ImageField(upload_to='shop/products')
     image_4_3_md = models.ImageField(default='', blank=True,
                                      upload_to='shop/products')
