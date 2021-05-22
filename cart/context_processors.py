@@ -1,7 +1,4 @@
 """Adds carted items to the context."""
-from decimal import Decimal
-
-from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,6 +15,7 @@ def get_cart(request):
     cart_items = []
     cart_total = 0
     cart_quantity = 0
+    delivery_costs = []
 
     if cart:
         # Creates a copy of the cart dictionary for iteration:
@@ -39,6 +37,7 @@ def get_cart(request):
             # it calculates details for that item:
             if product is not False:
                 if product.stock >= 1 or product.can_preorder:
+                    delivery_costs.append(product.delivery_cost)
                     cart_total += item_data * product.price
                     cart_items.append({
                         'item_id': item_id,
@@ -62,7 +61,7 @@ def get_cart(request):
     # Checks the cart total price and declares delivery price accordingly.
     # The FREE_DELIVERY_THRESHOLD is a set price declared in settings.
     # if cart_total < settings.FREE_DELIVERY_THRESHOLD and cart_total > 0:
-    delivery = Decimal(settings.STANDARD_DELIVERY)
+    delivery = max(delivery_costs, default=0)
     # else:
     # delivery = 0
 
