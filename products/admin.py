@@ -8,7 +8,7 @@ from .models import Product, ShopCategory
 class ProductInlineAdmin(TranslationStackedInline):
     """Inline for viewing all Products in a category in both langauges."""
     model = Product
-    fields = ('category', 'title', 'description', 'price',
+    fields = ('category', 'title', 'description', 'price', 'delivery_cost',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
               'stock', 'date_added', 'times_purchased', 'popularity',)
     readonly_fields = ('times_purchased', 'popularity',)
@@ -16,7 +16,8 @@ class ProductInlineAdmin(TranslationStackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
     """Displays the Products admin fields."""
-    fields = ('category', 'title', 'description', 'price',
+    ordering = ['category', 'title']
+    fields = ('category', 'title', 'description', 'price', 'delivery_cost',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
               'stock', 'date_added', 'times_purchased', 'popularity',)
     readonly_fields = ('times_purchased', 'popularity',)

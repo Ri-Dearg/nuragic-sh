@@ -36,9 +36,9 @@ the product's characteristics, e.g. size, unique item, etc.. -->
                         {{ product.title|upper }}
                     </h5>
                 </a>
-                <p class="product-box-desc p-font col-12 overflow-hidden text-primary fs-6 mb-0 px-2">
-                    {{ product.description }}
-                </p>
+                <div class="product-box-desc p-font col-12 overflow-hidden text-primary fs-6 mb-0 px-2">
+                    {{ product.description|safe }}
+                </div>
                 <h6 class="p-font col-auto text-muted px-2 my-2 ms-auto">€{{ product.price }}</h6>
             </div>
         </article>

@@ -5,8 +5,8 @@
 {% block head_title %}{% trans 'Your Order' %}{% endblock%}
 
 {% block content %}
-<!-- Dissplays an order's specific details.
-Utilises template logic to dispy or omit optional fields such as street_address_2 -->
+<!-- Displays an order's specific details.
+Utilises template logic to display or omit optional fields such as street_address_2 -->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
@@ -173,7 +173,7 @@ Utilises template logic to dispy or omit optional fields such as street_address_
                     <span class="float-start">{% trans 'Item Total' %}</span>
                     <span class="float-end text-muted">€{{ order.order_total|floatformat:2 }}</span>
                 </li>
-                {% if delivery != 0 %}
+                {% if order.delivery_cost != 0 %}
                 <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
                     <span class="float-start">{% trans 'Delivery' %}</span>
                     <span class="float-end text-muted">€{{ order.delivery_cost|floatformat:2 }}</span>
