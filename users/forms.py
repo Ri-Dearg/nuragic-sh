@@ -21,7 +21,7 @@ class StyledLoginForm(LoginForm):
         super().__init__(*args, **kwargs)
 
         login_field = forms.CharField(
-            label=pgettext('label', 'Username or E-mail'))
+            label=pgettext('label', 'Username or Email'))
         self.fields['login'] = login_field
 
         self.helper = FormHelper(self)
@@ -39,7 +39,7 @@ class StyledLoginForm(LoginForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Field('login', placeholder=_('Username or E-mail'),
+                Field('login', placeholder=_('Username or Email'),
                       autocomplete='email', css_class='p-font text-primary'),
 
                 Field('password', placeholder=_('Password'),
@@ -80,7 +80,7 @@ class StyledResetPasswordForm(ResetPasswordForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Field('email', placeholder=_('E-mail'),
+                Field('email', placeholder=_('Email'),
                       autocomplete='email', css_class='p-font text-primary',
                       pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
                 Column(StrictButton(_('Reset Password'), type='submit',
@@ -145,7 +145,7 @@ class StyledSignupForm(SignupForm):
                 value="{{ redirect_field_value }}" />{% endif %}'),
 
             Row(
-                Field('email', placeholder=_('E-mail'),
+                Field('email', placeholder=_('Email'),
                       css_class='p-font text-primary',
                 pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
 

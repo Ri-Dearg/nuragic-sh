@@ -21,7 +21,7 @@ class CartPageView(TemplateView):  # pylint: disable=too-many-ancestors
 
         products = Product.objects.filter(
             stock__gte=1) | Product.objects.filter(
-            can_preorder=True).order_by('-stock', '-popularity')
+            can_preorder=True).order_by('-popularity', '-stock')
 
         context['related_products'] = products
 

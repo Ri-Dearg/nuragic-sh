@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load account %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+{% block head_title %}{% trans "Confirm Email Address" %}{% endblock %}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
@@ -11,7 +11,7 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block form_title %}{% trans "CONFIRM E-MAIL ADDRESS" %}{% endblock %}
+{% block form_title %}{% trans "CONFIRM EMAIL ADDRESS" %}{% endblock %}
 
 {% block form_content %}
 {% if confirmation %}
@@ -19,7 +19,7 @@
 
 <p class="p-font text-primary text-center mt-1 mb-0">
     {% blocktrans with confirmation.email_address.email as email %}I confirm that <a class="form-link text-info"
-        href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user
+        href="mailto:{{ email }}">{{ email }}</a> is an email address for user
     {{ user_display }}.{% endblocktrans %}
 </p>
 
@@ -37,8 +37,8 @@
 
 {% url 'account_email' as email_url %}
 
-<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This e-mail confirmation link expired or is
-    invalid. Please <a class="smooth-click form-link text-info" href="{{ email_url }}">issue a new e-mail confirmation
+<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}This email confirmation link expired or is
+    invalid. Please <a class="smooth-click form-link text-info" href="{{ email_url }}">issue a new email confirmation
         request</a>.{% endblocktrans %}</p>
 {% endif %}
 {% endblock %}

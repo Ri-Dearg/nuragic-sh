@@ -24,7 +24,7 @@ except ModuleNotFoundError:
     pass
 
 # Version Number
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -223,7 +223,7 @@ AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by e-mail
+    # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -251,4 +251,6 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = f'Nuragic Shamanic Healing <{os.environ.get("EMAIL_HOST_USER")}>'
+DEFAULT_ORDER_EMAIL = f'NuragicSH Orders <{os.environ.get("EMAIL_HOST_USER")}>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

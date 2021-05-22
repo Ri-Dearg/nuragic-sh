@@ -59,8 +59,7 @@ class Product(models.Model):
     title = models.CharField(max_length=254, default='')
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image_4_3 = models.ImageField(default='default.jpg',
-                                  upload_to='shop/products')
+    image_4_3 = models.ImageField(upload_to='shop/products')
     image_4_3_md = models.ImageField(default='', blank=True,
                                      upload_to='shop/products')
     image_4_3_sm = models.ImageField(default='', blank=True,
@@ -74,8 +73,13 @@ class Product(models.Model):
     can_preorder = models.BooleanField(default=False)
     times_purchased = models.IntegerField(
         default=0, blank=False, null=False, editable=False)
-    popularity = models.IntegerField(
-        default=0, blank=False, null=False, editable=False)
+    popularity = models.DecimalField(
+        max_digits=20,
+        decimal_places=10,
+        default=0,
+        blank=False,
+        null=False,
+        editable=False)
     slug = models.SlugField(
         default='', editable=False, max_length=254, null=False)
 
@@ -110,15 +114,17 @@ class Product(models.Model):
         if self.is_unique and self.stock > 1:
             self.stock = 1
 
-        # Updates popularity (See below)
-        # self._update_popularity()
+        # Updates popularity(See below)
+        self._update_popularity()
 
         super().save(*args, **kwargs)
 
-    # def _update_popularity(self):
-    #     """Used for item ordering so more popular items are displayed first.
-    #     A combination of total unique likes and number sold."""
-    #     self.popularity = self.users.count() + self.times_purchased
+    def _update_popularity(self):
+        """Used for item ordering so more popular items are displayed first.
+        A combination of total unique likes and number sold."""
+        if self.id:
+            self.popularity = self.price / 100 * (
+                self.users.count() + self.times_purchased)
 
     class Meta:
         ordering = ['-popularity']

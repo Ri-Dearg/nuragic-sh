@@ -2,7 +2,7 @@
 <!-- Loads internationalization, loads crispy forms  -->
 {% load i18n %} {% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "E-mail Addresses" %}{% endblock %}
+{% block head_title %}{% trans "Email Addresses" %}{% endblock %}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
@@ -10,11 +10,11 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block form_title %}{% trans "E-MAIL ADDRESSES" %}{% endblock %}
+{% block form_title %}{% trans "EMAIL ADDRESSES" %}{% endblock %}
 {% block form_content %}
 {% if user.emailaddress_set.all %}
 <p class="p-font text-primary mt-1 mb-0">
-    {% trans 'The following e-mail addresses are associated with your account:' %}</p>
+    {% trans 'The following email addresses are associated with your account:' %}</p>
 
 <form action="{% url 'users:user-email' %}" class="email_list" method="POST">
     {% csrf_token %}
@@ -48,13 +48,13 @@
 
 {% else %}
 <p class="p-font text-primary mt-1 mb-0"><strong>{% trans 'Warning:'%}</strong>
-    {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+    {% trans "You currently do not have any email address set up. You should really add an email address so you can receive notifications, reset your password, etc." %}
 </p>
 
 {% endif %}
 
 {% if can_add_email %}
-<h3 class="p-font col-12 text-primary mt-2 h6">{% trans "Add E-mail Address" %}:</h3>
+<h3 class="p-font col-12 text-primary mt-2 h6">{% trans "Add Email Address" %}:</h3>
 <div class="col-auto">
     <form method="POST" action="{% url 'users:user-email' %}" class="add_email">
         {% csrf_token %}
@@ -62,7 +62,7 @@
         <div class="row">
             <div class="col-auto mt-1">
                 <button name="action_add" class="btn btn-sm p-font btn-tran btn btn-warning text-primary shadow"
-                    type="submit">{% trans 'Add E-mail' %}</button>
+                    type="submit">{% trans 'Add Email' %}</button>
             </div>
         </div>
     </form>
@@ -73,7 +73,7 @@
 {% block postloadjs %}
 <script type="text/javascript">
     (function () {
-        var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+        var message = "{% trans 'Do you really want to remove the selected email address?' %}";
         var actions = document.getElementsByName('action_remove');
         if (actions.length) {
             actions[0].addEventListener("click", function (e) {

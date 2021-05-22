@@ -23,7 +23,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to form."""
         form = super().get_form(form_class)
-        form.fields['email'].label = _('E-mail')
+        form.fields['email'].label = _('Email')
         form.fields['name'].label = _('Name')
         form.fields['subject'].label = _('Subject')
         form.fields['message'].label = _('What are your thoughts?')
@@ -37,7 +37,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
         helper.layout = Layout(
             Row(
-                Field('email',  placeholder=_('E-mail'),
+                Field('email',  placeholder=_('Email'),
                       pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501  # pylint: disable=line-too-long
                       wrapper_class='col-md-6',
                       css_class='p-font text-primary'),

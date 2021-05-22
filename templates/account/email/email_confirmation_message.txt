@@ -3,6 +3,6 @@
 {% load i18n %}
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Welcome, {{ user_display }}, to {{ site_name }}.
-This e-mail address has been given to create an account on {{ site_domain }}.
+This email address has been given to create an account on {{ site_domain }}.
 
 To confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}

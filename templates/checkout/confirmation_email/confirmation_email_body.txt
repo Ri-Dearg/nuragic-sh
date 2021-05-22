@@ -16,12 +16,12 @@ The billing has been charged to {{ billing_full_name }}
 Your order will be shipped to:
 {% endblocktrans %}
 {{ order.shipping_full_name }},
-{{ order.shipping_street_address1 }},{% if order.shipping_street_address_2 %}
+{{ order.shipping_street_address_1 }},{% if order.shipping_street_address_2 %}
 {{ order.shipping_street_address_2 }},{% endif %}
 {{ order.shipping_town_or_city }},{% if order.shipping_county %}
 {{ order.shipping_county }},{% endif %}{% if order.shipping_postcode %}
 {{ order.shipping_postcode }},{% endif %}
-{{ order.country }}.
+{{ order.shipping_country }}.
 {% blocktrans with shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
 We've got your delivery phone number on file as {{ shipping_phone_number }}.
 

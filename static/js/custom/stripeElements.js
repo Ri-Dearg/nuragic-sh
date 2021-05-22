@@ -1,3 +1,4 @@
+var preloaderMessage = $("#preloaderMessage").text();
 var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 var clientSecret = $("#id_client_secret").text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -5,8 +6,7 @@ var elements = stripe.elements({
   fonts: [
     {
       family: "Montserrat",
-      src:
-        "local(Montserrat), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2')",
+      src: "local(Montserrat), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2')",
       display: "swap",
     },
   ],
@@ -51,6 +51,7 @@ form.addEventListener("submit", function (ev) {
   ev.preventDefault();
   card.update({ disabled: true });
   $("#payment-submit").attr("disabled", true);
+  $(".preload-gif").append(preloaderMessage);
   $(".preloader").fadeIn("slow");
 
   var saveInfo = Boolean($("#id-save-info").prop("checked"));

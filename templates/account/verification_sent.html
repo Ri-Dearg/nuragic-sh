@@ -2,7 +2,7 @@
 <!-- Loads internationalization, loads crispy forms  -->
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block head_title %}{% trans "Verify Your Email Address" %}{% endblock %}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
@@ -10,9 +10,9 @@
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
-{% block form_title %}{% trans "VERIFY E-MAIL" %}{% endblock %}
+{% block form_title %}{% trans "VERIFY EMAIL" %}{% endblock %}
 {% block form_content %}
-<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}We have sent an e-mail to you for
+<p class="p-font text-primary text-center mt-1 mb-0">{% blocktrans %}We have sent an email to you for
     verification. Follow the link provided to finalize the signup process. If you do not
     receive it within a few minutes, please{% endblocktrans %} <a class="smooth-click form-link text-info"
         href="{% url 'contact:email-form' %}">{% trans 'contact us' %}.</a></p>

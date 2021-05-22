@@ -20,19 +20,19 @@ Utilises template logic to dispy or omit optional fields such as street_address_
                     <h2 class="p-font text-primary h3">{% trans 'Order Details' %}</h2>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Order Number:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Order Number' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1 text-break">{{ order.order_number }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Date:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Date' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.date }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Email:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Email' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.email }}</p>
@@ -44,54 +44,54 @@ Utilises template logic to dispy or omit optional fields such as street_address_
                     <h2 class="p-font text-primary h3">{% trans 'Shipping Details' %}</h2>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_full_name }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_phone_number }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_street_address_1 }}</p>
                 </div>
                 {% if order.shipping_street_address_2 %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_street_address_2 }}</p>
                 </div>
                 {% endif %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_town_or_city }}</p>
                 </div>
                 {% if order.shipping_county %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'County:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'County' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_county }}</p>
                 </div>
                 {% endif %} {% if order.shipping_postcode %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_postcode }}</p>
                 </div>
                 {% endif %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.shipping_country.name }}</p>
@@ -105,54 +105,54 @@ Utilises template logic to dispy or omit optional fields such as street_address_
                     <h2 class="p-font text-primary h3">{% trans 'Billing Details' %}</h2>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Name' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_full_name }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Phone Number' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_phone_number }}</p>
                 </div>
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 1' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_street_address_1 }}</p>
                 </div>
                 {% if order.billing_street_address_2 %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Street Address 2' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_street_address_2 }}</p>
                 </div>
                 {% endif %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Town or City' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_town_or_city }}</p>
                 </div>
                 {% if order.billing_county %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'County:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'County' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_county }}</p>
                 </div>
                 {% endif %} {% if order.billing_postcode %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Postcode' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_postcode }}</p>
                 </div>
                 {% endif %}
                 <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country:' %}</strong></p>
+                    <p class="p-font text-primary mb-1"><strong>{% trans 'Country' %}:</strong></p>
                 </div>
                 <div class="col-12 col-sm-8 col-md-12 col-lg-8">
                     <p class="p-font text-primary mb-1">{{ order.billing_country.name }}</p>
