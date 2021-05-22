@@ -21,7 +21,7 @@ class TestCookiesModels(TestCase):
             reverse('cookies:consent'
                     ), {'cookie-consent': 'opt-in',
                         'script-url': staticfiles_storage.url(
-                            'js/custom/trackers.js')},
+                            'js/custom/fullConsent.js')},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
     def test_cookie_str(self):
