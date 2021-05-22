@@ -152,13 +152,6 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
         Category, null=True,
         on_delete=models.SET_NULL,
         related_name='page')
-    product = models.ForeignKey(Product,
-                                blank=True,
-                                null=True,
-                                on_delete=models.SET_NULL,
-                                related_name='page')
-    product_button_text = models.CharField(
-        max_length=30, blank=True, default=_('Learn More'))
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     button_text = models.CharField(
@@ -188,6 +181,13 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
                                                  MinValueValidator(0)])
     theme = models.CharField(
         max_length=10, choices=theme_choices, default='info')
+    product = models.ForeignKey(Product,
+                                blank=True,
+                                null=True,
+                                on_delete=models.SET_NULL,
+                                related_name='page')
+    product_button_text = models.CharField(
+        max_length=30, blank=True, default=_('Learn More'))
     date_added = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(
         default='', editable=False, max_length=60, null=False)
