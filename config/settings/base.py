@@ -238,8 +238,6 @@ ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
                  'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
                  }
 
-STANDARD_DELIVERY = 7
-
 # Necessary variables and setting to take Stripe Payments.
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')

@@ -49,7 +49,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 </div>
             </div>
             <div class="row align-items-center">
-                <p class="p-font col-auto">{{ product.description }}</p>
+                <div class="p-font col-auto">{{ product.description|safe }}</div>
                 <div class="col-12"></div>
                 <!-- Section selects columns and characteristics of the product to display. -->
                 {% if product.stock > 0 or product.can_preorder %}

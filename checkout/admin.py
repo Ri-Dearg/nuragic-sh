@@ -1,3 +1,4 @@
+"""Admin Setting doe the Checkout App."""
 from django.contrib import admin
 
 from .models import Order, OrderLineItem
