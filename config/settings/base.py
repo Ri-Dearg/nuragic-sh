@@ -24,7 +24,7 @@ except ModuleNotFoundError:
     pass
 
 # Version Number
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parents[2]
