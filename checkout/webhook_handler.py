@@ -112,7 +112,7 @@ def send_confirmation_email(order):
         {'order': order})
     body = render_to_string(
         'checkout/confirmation_email/confirmation_email_body.txt',
-        {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+        {'order': order, 'contact_email': 'mail@nuragicshamanichealing.com'})
     send_mail(
         subject,
         body,
@@ -121,10 +121,10 @@ def send_confirmation_email(order):
     )
 
     order_subject = render_to_string(
-        'checkout/confirmation_email/confirmation_email_subject.txt',
+        'checkout/confirmation_email/order_email_subject.txt',
         {'order': order})
     order_body = render_to_string(
-        'checkout/confirmation_email/confirmation_email_body.txt',
+        'checkout/confirmation_email/order_email_body.txt',
         {'order': order, 'contact_email': cust_email})
 
     send_mail(
