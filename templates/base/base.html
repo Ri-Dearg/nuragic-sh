@@ -61,9 +61,12 @@
         <title>
             Nuragic Shamanic Healing | {% block head_title %}{% endblock %}
         </title>
-        {% if request.DNT is False or request.session.cookie_consent == True %}
+        {% if request.DNT is False or request.session.cookie_consent == True or request.session.analytics_consent == True %}
         {% if request.session.cookie_consent == True %}
-        {% include 'cookies/includes/trackers.html' %}
+        {% include 'cookies/includes/fullConsent.html' %}
+        {% endif %}
+        {% if request.session.analytics_consent == True %}
+        {% include 'cookies/includes/gAnalytics.html' %}
         {% endif %}
         {% endif %}
     </head>

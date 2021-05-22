@@ -13,8 +13,14 @@ def cookie_consent(request):
         request.session['cookie_consent'] = False
         data['consent'] = 'false'
         consent = request.POST['cookie-consent']
+
         if consent == 'opt-in':
             request.session['cookie_consent'] = True
+
+        if consent == 'analytics':
+            request.session['analytics_consent'] = True
+
+        if consent != 'decline':
             script_url = request.POST['script-url']
             data['script'] = script_url
             data['consent'] = 'true'
