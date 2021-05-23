@@ -19,6 +19,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+# Handlers for custom error pages
+handler404 = 'config.views.custom_page_not_found'
+handler403 = 'config.views.custom_permission_denied'
+handler400 = 'config.views.custom_bad_request'
+handler500 = 'config.views.custom_server_error'
+
 # Patterns for the shop section functions
 shop_patterns = [
     path('', include(('products.urls', 'products'),
