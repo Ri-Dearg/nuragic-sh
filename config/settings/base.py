@@ -258,3 +258,4 @@ DEFAULT_ERROR_EMAIL = os.environ.get("EMAIL_ERROR")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ADMINS = [('Rory', DEFAULT_ERROR_EMAIL)]
+SERVER_EMAIL = DEFAULT_ERROR_EMAIL
