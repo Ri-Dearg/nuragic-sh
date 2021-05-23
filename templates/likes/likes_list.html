@@ -26,14 +26,14 @@ If There is nothing it provides a link back to the page. -->
         {% endfor %}
     </div>
     {% else %}
-    <div class="row bg-white min-vh-75 p-2">
-        <div class="col text-center my-auto">
-            <h4 class="p-font text-primary fs-6">{% trans 'No Favorites...' %}</h4>
-            <h2 class="h-font l-space-2 text-primary">{% trans 'DISCOVER' %}</h2>
-            <a class="p-font smooth-click btn-tran btn-lg btn btn-warning text-primary shadow"
-                href="{% url 'products:product-list' %}">{% trans 'Our Offerings' %}</a>
-        </div>
-    </div>
+    <section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
+        <article class="col text-center mt-4">
+            <h2 class="p-font text-primary h4">{% trans 'No Favorites...' %}</h2>
+            <h2 class="p-font text-primary mb-0">{% trans 'Discover' %}</h2>
+            <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+                href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
+        </article>
+    </section>
     {% endif %}
     {% if page_obj.has_next or page_obj.has_previous %}
     <nav aria-label="{% trans 'Product Page Navigation' %}">

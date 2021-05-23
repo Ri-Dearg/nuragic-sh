@@ -29,10 +29,10 @@
 <!--If there is no item in the cart, it displays a link back to the shop-->
 <section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
     <article class="col text-center mt-4">
-        <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
-        <h2 class="text-primary mb-0">{% trans 'See what we can offer' %}.</h2>
-        <a class="btn-tran btn btn-lg btn-warning my-4 w-25"
-            href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
+        <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
+        <h2 class="p-font text-primary mb-0">{% trans 'See what we can offer' %}:</h2>
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
     </article>
 </section>
 {% if related_products %}

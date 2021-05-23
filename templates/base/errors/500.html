@@ -1,0 +1,10 @@
+{% extends 'base/errors.html' %}
+{% load i18n %}
+{% block head_title %}{% trans 'Server Error' %}{% endblock%}
+{% block error_name %}
+<h2 class="p-font l-space-2 text-white text-center display-4 mb-0">{% trans '500 Server Error' %}</h2>
+{% endblock %}
+{% block error_content%}
+<h2 class="p-font text-primary h4">{% trans "We've had some issue and we'll take a look into it" %}.</h2>
+<h2 class="p-font text-primary mb-0">{% trans 'In the meantime, discover our' %}</h2>
+{% endblock %}

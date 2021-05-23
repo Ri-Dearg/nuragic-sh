@@ -127,14 +127,15 @@
     </section>
 </article>
 {% else %}
-<article class="row">
-    <div class="col text-center">
-        <h4 class="text-primary">{% trans 'Your cart is empty...' %}</h4>
-        <h2 class="text-primary h-font">{% trans "Let's explore." %}</h2>
-        <a class="btn btn-tran btn-lg btn-warning mt-4 w-25"
-            href="{% url 'products:product-list' %}">{% trans 'Shop' %}</a>
-    </div>
-</article>
+<section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
+    <article class="col text-center mt-4">
+        <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
+        <h2 class="p-font text-primary mb-0">{% trans "Let's explore." %}</h2>
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            href="{% url 'products:product-list' %}">
+            {% trans 'Offerings' %}</a>
+    </article>
+</section>
 <!--Script includes StripeElements scripts.-->
 {% endif %}
 {% endblock %}

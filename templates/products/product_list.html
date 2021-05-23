@@ -18,7 +18,6 @@ such as likes_list, category_detail and stockdrop_detail.-->
 <!-- Detects if a search query was made and displays the keyword.-->
 <h2 class="text-center pt-2">check out:</h2>
 <h2 class="h-font display-2 l-space-2 text-primary text-center">{{ request.GET.query }}</h2>
-<hr />
 {% else %}
 {% if page_obj.number == 1 %}
 {% include 'info/includes/home_carousel.html' %}
@@ -43,14 +42,15 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 </section>
 {% else %}
 <!-- Otherwise it shows a link to the home page, and a related products box. -->
-<section class="row flex-grow-1 bg-white">
-    <div class="col text-center">
-        <h4 class="text-dark">Nothing found but good stuff is...</h4>
-        <h2 class="text-primary heading-font">Neverlost</h2>
-        <a class="btn btn-lg btn-danger shadow mt-2" href="{% url 'products:product-list' %}">Shop</a>
-    </div>
+<section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
+    <article class="col text-center mt-4">
+        <h2 class="p-font text-primary h4">{% trans 'Maybe there's something else for you at' %}</h2>
+        <h2 class="p-font text-primary mb-0">{% trans 'Nuragic Shamanic Healing' %}
+        </h2>
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
+    </article>
 </section>
-<hr>
 {% include 'products/includes/related_products.html' %}
 {% endif %}
 {% endif %}
