@@ -152,10 +152,11 @@ class Email(models.Model):
         contact_body = render_to_string(
             'contact/emails/contact_body.txt',
             {'name': name, 'email': email, 'message': message})
-        send_mail(contact_subject,
-                  contact_body,
-                  settings.DEFAULT_FROM_EMAIL,
-                  [settings.DEFAULT_FROM_EMAIL])
+        send_mail(
+            contact_subject,
+            contact_body,
+            f'Contact: {name} <{settings.DEFAULT_CONTACT_EMAIL}>',
+            [settings.DEFAULT_CONTACT_EMAIL])
 
         # Sends a thank you email to the person who sent the email
         thanks_subject = render_to_string(
@@ -164,10 +165,11 @@ class Email(models.Model):
         thanks_body = render_to_string(
             'contact/emails/thanks_body.txt',
             {'name': name})
-        send_mail(thanks_subject,
-                  thanks_body,
-                  settings.DEFAULT_FROM_EMAIL,
-                  [email])
+        send_mail(
+            thanks_subject,
+            thanks_body,
+            f'Nuragic Shamanic Healing <{settings.DEFAULT_CONTACT_EMAIL}>',
+            [email])
 
         history = EmailHistory.objects.get_or_create(email_address=self.email)
         self.email_history = history[0]

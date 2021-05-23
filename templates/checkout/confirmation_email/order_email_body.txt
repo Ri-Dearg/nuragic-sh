@@ -16,7 +16,7 @@ The billing has been charged to {{ billing_full_name }}
 The order will be shipped to:
 {% endblocktrans %}
 {% for item in order.lineitems.all %}
-{{ item.product.name }} x {{ item.quantity }}
+{{ item.product.title }} x {{ item.quantity }}
 {% endfor %}
 
 {{ order.shipping_full_name }},
