@@ -1,8 +1,8 @@
 <!-- Loads internationalization -->
 {% load i18n %}
 <li class="btn-tran nav-item py-1{% if home_active %} active{% endif %}">
-    <a class="smooth-click p-font l-space-2 btn btn-link nav-link text-end text-lg-center mb-0 p-0 pe-3 pe-lg-0"
-        href="{% url 'info:home' %}">{% trans 'HOME' %}</a>
+    <a class="smooth-click p-font l-space-2 text-uppercase btn btn-link nav-link text-end text-lg-center mb-0 p-0 pe-3 pe-lg-0"
+        href="{% url 'info:home' %}">{% trans 'Home' %}</a>
 </li>
 <!-- Adds a menu bar for every category item. The "display" property filters them in the view -->
 {% if categories %}
@@ -44,6 +44,6 @@
 {% endfor %}
 {% endif %}
 <li class="btn-tran nav-item order-last py-1">
-    <a class="smooth-click p-font l-space-2 btn btn-link nav-link text-end text-lg-center mb-0 p-0 pe-3 pe-lg-0"
-        href="{% url 'products:product-list' %}">{% trans 'SHOP' %}<strong>&nearr;</strong></a>
+    <a class="smooth-click p-font l-space-2 btn btn-link nav-link text-end text-uppercase text-lg-center mb-0 p-0 pe-3 pe-lg-0"
+        href="{% url 'products:product-list' %}">{% trans 'Shop' %}<strong>&nearr;</strong></a>
 </li>

@@ -26,7 +26,8 @@ such as likes_list, category_detail and stockdrop_detail.-->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">
+                {% trans 'Our Offerings' %}</h2>
         </div>
     </div>
     <div class="row px-0 px-md-2 bg-white">
@@ -45,7 +46,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 <section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans "Maybe there's something else for you at" %}</h2>
-        <h2 class="p-font text-primary mb-0">{% trans 'Nuragic Shamanic Healing' %}
+        <h2 class="p-font text-primary mb-0">Nuragic Shamanic Healing
         </h2>
         <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
             href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
