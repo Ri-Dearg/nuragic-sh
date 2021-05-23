@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 20:29+0000\n"
+"POT-Creation-Date: 2021-05-23 21:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cart/context_processors.py:36
+#: cart/context_processors.py:34
 msgid "A Product is unavailable."
 msgstr "Un prodotto non è disponibile."
 
-#: cart/context_processors.py:53
+#: cart/context_processors.py:52
 #, python-brace-format
 msgid ""
 "{product} has run out of stock                             and has been "
@@ -41,7 +41,7 @@ msgid ""
 "title} to your cart."
 msgstr "Aggiorna la quantità per aggiungere {product.title} al carello."
 
-#: cart/views.py:72 contact/views.py:91 cookies/views.py:32 likes/views.py:98
+#: cart/views.py:72 contact/views.py:91 cookies/views.py:38 likes/views.py:98
 #: likes/views.py:117
 msgid "Info"
 msgstr "Info"
@@ -71,8 +71,8 @@ msgstr "Errore"
 
 #: checkout/models.py:45 checkout/models.py:59 checkout/views.py:116
 #: checkout/views.py:118 checkout/views.py:148 checkout/views.py:150
-#: templates/checkout/order_detail.html:94
-#: templates/checkout/order_detail.html:155 users/forms.py:203
+#: templates/checkout/order_detail.html:95
+#: templates/checkout/order_detail.html:156 users/forms.py:203
 #: users/forms.py:211 users/forms.py:241 users/forms.py:272
 msgid "Country"
 msgstr "Paese"
@@ -83,7 +83,7 @@ msgstr "Indrizzi Email"
 
 #: checkout/views.py:90 contact/views.py:26 contact/views.py:40
 #: templates/base/includes/footer.html:17
-#: templates/checkout/order_detail.html:35
+#: templates/checkout/order_detail.html:36
 #: templates/users/includes/newsletter_form.html:15 users/forms.py:83
 #: users/forms.py:148
 msgid "Email"
@@ -97,8 +97,8 @@ msgstr "Nome Completo"
 
 #: checkout/views.py:98 checkout/views.py:126 checkout/views.py:130
 #: templates/bootstrap4/phone_field.html:23
-#: templates/checkout/order_detail.html:53
-#: templates/checkout/order_detail.html:114
+#: templates/checkout/order_detail.html:54
+#: templates/checkout/order_detail.html:115
 msgid "Phone Number"
 msgstr "Numero di Telefono"
 
@@ -107,22 +107,22 @@ msgid "123 Main St."
 msgstr "Via Domu 123"
 
 #: checkout/views.py:105 checkout/views.py:136 checkout/views.py:137
-#: templates/checkout/order_detail.html:59
-#: templates/checkout/order_detail.html:120 users/forms.py:199
+#: templates/checkout/order_detail.html:60
+#: templates/checkout/order_detail.html:121 users/forms.py:199
 #: users/forms.py:206 users/forms.py:226 users/forms.py:257
 msgid "Street Address 1"
 msgstr "Indirizzo 1"
 
 #: checkout/views.py:107 checkout/views.py:108 checkout/views.py:139
-#: checkout/views.py:140 templates/checkout/order_detail.html:66
-#: templates/checkout/order_detail.html:127 users/forms.py:200
+#: checkout/views.py:140 templates/checkout/order_detail.html:67
+#: templates/checkout/order_detail.html:128 users/forms.py:200
 #: users/forms.py:207 users/forms.py:229 users/forms.py:260
 msgid "Street Address 2"
 msgstr "Indirizzo 2"
 
 #: checkout/views.py:110 checkout/views.py:111 checkout/views.py:142
-#: checkout/views.py:143 templates/checkout/order_detail.html:73
-#: templates/checkout/order_detail.html:134 users/forms.py:201
+#: checkout/views.py:143 templates/checkout/order_detail.html:74
+#: templates/checkout/order_detail.html:135 users/forms.py:201
 #: users/forms.py:208 users/forms.py:232 users/forms.py:263
 msgid "Town or City"
 msgstr "Città"
@@ -137,8 +137,8 @@ msgid "County, State or Locality"
 msgstr "Regione"
 
 #: checkout/views.py:120 checkout/views.py:121 checkout/views.py:152
-#: checkout/views.py:153 templates/checkout/order_detail.html:87
-#: templates/checkout/order_detail.html:148 users/forms.py:210
+#: checkout/views.py:153 templates/checkout/order_detail.html:88
+#: templates/checkout/order_detail.html:149 users/forms.py:210
 #: users/forms.py:238 users/forms.py:269
 msgid "Postcode"
 msgstr "CAP"
@@ -172,11 +172,16 @@ msgstr ""
 "Scusaci, il tuo pagamento non può essere effetuato ora. Prova di nuovo dopo, "
 "per favore."
 
-#: config/settings/base.py:184 templates/users/includes/newsletter_form.html:24
+#: checkout/webhook_handler.py:122
+#, python-brace-format
+msgid "NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>"
+msgstr "NuragicSH Ordine <{settings.DEFAULT_ORDER_EMAIL}>"
+
+#: config/settings/base.py:185 templates/users/includes/newsletter_form.html:24
 msgid "English"
 msgstr "Inglese"
 
-#: config/settings/base.py:185 templates/users/includes/newsletter_form.html:31
+#: config/settings/base.py:186 templates/users/includes/newsletter_form.html:31
 msgid "Italian"
 msgstr "Italiano"
 
@@ -185,8 +190,8 @@ msgid "Thank you, your message has been sent."
 msgstr "Grazie, il tuo messagio è stato spedito."
 
 #: contact/views.py:27 contact/views.py:45
-#: templates/checkout/order_detail.html:47
-#: templates/checkout/order_detail.html:108
+#: templates/checkout/order_detail.html:48
+#: templates/checkout/order_detail.html:109
 msgid "Name"
 msgstr "Nome"
 
@@ -210,7 +215,7 @@ msgstr "Sei già iscritto alla newsletter."
 msgid "Thank you for signing up!"
 msgstr "Grazie per la tua sottoscrizione!"
 
-#: cookies/views.py:30
+#: cookies/views.py:36
 msgid "Cookie preferences saved."
 msgstr "Le preferenze per i cookie sono state salvate."
 
@@ -230,7 +235,7 @@ msgstr "{product.title} aggiunto/a ai preferiti."
 
 #: likes/views.py:104 likes/views.py:123
 msgid "Favorited!"
-msgstr "Preferiti!"
+msgstr "Preferito/a!"
 
 #: likes/views.py:127
 #, python-format, python-brace-format
@@ -238,24 +243,17 @@ msgid "Error: %r, {error}"
 msgstr "Errore: %r, {error}"
 
 #: templates/account/account_inactive.html:6
+#: templates/account/account_inactive.html:14
 msgid "Account Inactive"
 msgstr "Account Inattivo"
-
-#: templates/account/account_inactive.html:14
-msgid "ACCOUNT INACTIVE"
-msgstr "ACCOUNT INATTIVO"
 
 #: templates/account/account_inactive.html:15
 msgid "This account is inactive."
 msgstr "Questo account è inattivo."
 
-#: templates/account/email.html:5
+#: templates/account/email.html:5 templates/account/email.html:13
 msgid "Email Addresses"
 msgstr "Indrizzi Email"
-
-#: templates/account/email.html:13
-msgid "EMAIL ADDRESSES"
-msgstr "INDIRIZZI EMAIL"
 
 #: templates/account/email.html:17
 msgid "The following email addresses are associated with your account:"
@@ -354,12 +352,9 @@ msgid "Password Reset Email"
 msgstr "Reimpostare Password"
 
 #: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:14
 msgid "Confirm Email Address"
 msgstr "Confermare Email"
-
-#: templates/account/email_confirm.html:14
-msgid "CONFIRM EMAIL ADDRESS"
-msgstr "CONFERMARE EMAIL"
 
 #: templates/account/email_confirm.html:21
 #, python-format
@@ -385,18 +380,14 @@ msgid ""
 "\"%(email_url)s\">issue a new email confirmation\n"
 "        request</a>."
 msgstr ""
-"Questo link non è piu valido\n"
+"Questo link non è più valido\n"
 "            Per favore <a class=\"smooth-click form-link text-info\" href="
 "\"%(email_url)s\">richiedi un link nuovo</a>."
 
-#: templates/account/login.html:6
-#: templates/users/includes/unauthenticated_offcanvas.html:11 users/forms.py:57
+#: templates/account/login.html:6 templates/account/login.html:14
+#: templates/users/includes/unauthenticated_offcanvas.html:12 users/forms.py:57
 msgid "Sign In"
 msgstr "Accedi"
-
-#: templates/account/login.html:14
-msgid "SIGN IN"
-msgstr "ACCEDI"
 
 #: templates/account/login.html:17
 #, python-format
@@ -409,14 +400,11 @@ msgstr ""
 "\">Registri</a>\n"
 "            se non hai già creato un account."
 
-#: templates/account/logout.html:5 templates/account/logout.html:24
-#: templates/users/includes/authenticated_offcanvas.html:29
+#: templates/account/logout.html:5 templates/account/logout.html:13
+#: templates/account/logout.html:24
+#: templates/users/includes/authenticated_offcanvas.html:30
 msgid "Sign Out"
 msgstr "Esci"
-
-#: templates/account/logout.html:13
-msgid "SIGN OUT"
-msgstr "ESCI"
 
 #: templates/account/logout.html:15
 msgid "Are you sure you want to sign out?"
@@ -468,29 +456,23 @@ msgid "Your primary email address must be verified."
 msgstr "Indirizzo email principale deve essere verificato."
 
 #: templates/account/password_change.html:6
+#: templates/account/password_change.html:14
 #: templates/account/password_change.html:22
 #: templates/account/password_reset_from_key.html:5
+#: templates/account/password_reset_from_key.html:13
 #: templates/account/password_reset_from_key_done.html:5
+#: templates/account/password_reset_from_key_done.html:13
+#: templates/users/includes/password_change.html:5
 #: templates/users/includes/password_change.html:17 users/forms.py:121
 msgid "Change Password"
 msgstr "Cambia Password"
 
-#: templates/account/password_change.html:14
-#: templates/account/password_reset_from_key.html:13
-#: templates/account/password_reset_from_key_done.html:13
-#: templates/users/includes/password_change.html:5
-msgid "CHANGE PASSWORD"
-msgstr "CAMBIA PASSWORD"
-
 #: templates/account/password_reset.html:6
+#: templates/account/password_reset.html:14
 #: templates/account/password_reset_done.html:7
+#: templates/account/password_reset_done.html:14
 msgid "Password Reset"
 msgstr "Reimpostare Password"
-
-#: templates/account/password_reset.html:14
-#: templates/account/password_reset_done.html:14
-msgid "PASSWORD RESET"
-msgstr "REIMPOSTARE PASSWORD"
 
 #: templates/account/password_reset.html:20
 msgid ""
@@ -526,8 +508,8 @@ msgid "contact us"
 msgstr "contattaci"
 
 #: templates/account/password_reset_from_key.html:13
-msgid "BAD TOKEN"
-msgstr "TOKEN NON VALIDO"
+msgid "Bad Token"
+msgstr "Token Non Valido"
 
 #: templates/account/password_reset_from_key.html:18
 #, python-format
@@ -549,23 +531,16 @@ msgid "You have updated your password."
 msgstr "Hai aggiornato la tua password."
 
 #: templates/account/password_set.html:11
+#: templates/account/password_set.html:13
 #: templates/account/password_set.html:21
 msgid "Set Password"
 msgstr "Imposta Password"
 
-#: templates/account/password_set.html:13
-msgid "SET PASSWORD"
-msgstr "IMPOSTA PASSWORD"
-
-#: templates/account/signup.html:5
-#: templates/users/includes/unauthenticated_offcanvas.html:14
+#: templates/account/signup.html:5 templates/account/signup.html:13
+#: templates/users/includes/unauthenticated_offcanvas.html:15
 #: users/forms.py:161
 msgid "Register"
 msgstr "Registrati"
-
-#: templates/account/signup.html:13
-msgid "REGISTER"
-msgstr "REGISTRATI"
 
 #: templates/account/signup.html:15
 #, python-format
@@ -581,12 +556,9 @@ msgstr ""
 "            se hai già un account."
 
 #: templates/account/signup_closed.html:11
+#: templates/account/signup_closed.html:13
 msgid "Sign Up Closed"
 msgstr "Iscrizione Chiusa"
-
-#: templates/account/signup_closed.html:13
-msgid "SIGN UP CLOSED"
-msgstr "ISCRIZIONE CHIUSA"
 
 #: templates/account/signup_closed.html:16
 msgid "We are sorry, but the sign up is currently closed."
@@ -612,8 +584,8 @@ msgid "Verify Your Email Address"
 msgstr "Verifica Il Tuo Indirizzo Email"
 
 #: templates/account/verification_sent.html:13
-msgid "VERIFY EMAIL"
-msgstr "VERFICA EMAIL"
+msgid "Verify Email"
+msgstr "Verifica Email"
 
 #: templates/account/verification_sent.html:15
 msgid ""
@@ -663,13 +635,68 @@ msgid ""
 "Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, "
 "online courses, courses, spiritual, spirituality, nuragic,"
 msgstr ""
-
-#: templates/base/base.html:103
-msgid "Loading"
-msgstr ""
-"Alessandro Olianas, Nuragic Shamanic Healing, eventi, eventi spirituali, "
+"Alessandro Olianas, Nuragic Shamanic Healing, eventi, eventi spirituali,"
 "Sardegna, Irlanda, connessioni, condivisione, radici, laboratori, laboratori "
 "online, corsi online, corsi, spirituale, spiritualità, nuragico,"
+
+#: templates/base/base.html:106
+msgid "Loading"
+msgstr "Carica"
+
+#: templates/base/errors.html:21 templates/base/includes/shop_nav.html:5
+#: templates/cart/cart_list.html:35 templates/checkout/order_form.html:136
+#: templates/checkout/order_list.html:29 templates/likes/likes_list.html:34
+#: templates/products/product_list.html:52
+msgid "Offerings"
+msgstr "Offerte"
+
+#: templates/base/errors/400.html:3 templates/base/errors/400.html:5
+msgid "Bad Request"
+msgstr "Richiesta Non Valido"
+
+#: templates/base/errors/400.html:8
+msgid "Looking for something interesting"
+msgstr "Cercando per qualcosa di interesante"
+
+#: templates/base/errors/400.html:9 templates/base/includes/shop_nav.html:18
+msgid "Explore"
+msgstr "Scopri"
+
+#: templates/base/errors/403.html:3 templates/base/errors/403.html:5
+msgid "Forbidden"
+msgstr "Vietato"
+
+#: templates/base/errors/403.html:8
+msgid "Instead of searching out of bounds"
+msgstr "Anzichè cercare altrove"
+
+#: templates/base/errors/403.html:9
+msgid "Explore our garden"
+msgstr "Scopri nostro giardino"
+
+#: templates/base/errors/404.html:3 templates/base/errors/404.html:5
+msgid "Not Found"
+msgstr "Non Trovato"
+
+#: templates/base/errors/404.html:8
+msgid "Seems like we're a little lost"
+msgstr "Sembra che siamo un po' persi'"
+
+#: templates/base/errors/404.html:9
+msgid "Let's search for something new"
+msgstr "Cerchiamo per qualcosa di nuovo"
+
+#: templates/base/errors/500.html:3 templates/base/errors/500.html:5
+msgid "Server Error"
+msgstr "Errore del Server"
+
+#: templates/base/errors/500.html:8
+msgid "We've had some issue and we'll take a look into it"
+msgstr "Abbiamo qualche problema e controlleremo a riguardo"
+
+#: templates/base/errors/500.html:9
+msgid "In the meantime, discover our"
+msgstr "Nel fratempo, scopri nostre"
 
 #: templates/base/includes/footer.html:11
 msgid "Newsletter"
@@ -724,17 +751,9 @@ msgstr "Polizze"
 msgid "All Rights Reserved"
 msgstr "Tutti i Diritti Riservati"
 
-#: templates/base/includes/header.html:29
-msgid "NURAGIC"
-msgstr "NURAGIC"
-
-#: templates/base/includes/header.html:30
-msgid "SHAMANIC HEALING"
-msgstr "SHAMANIC HEALING"
-
 #: templates/base/includes/info_nav.html:5
-msgid "HOME"
-msgstr "HOME"
+msgid "Home"
+msgstr "Home"
 
 #: templates/base/includes/info_nav.html:22
 msgid "All About"
@@ -745,8 +764,10 @@ msgid "All"
 msgstr "Tutti"
 
 #: templates/base/includes/info_nav.html:48
-msgid "SHOP"
-msgstr "SHOP"
+#: templates/products/product_detail.html:25
+#: templates/products/product_list.html:5
+msgid "Shop"
+msgstr "Shop"
 
 #: templates/base/includes/open_graph_basic.html:4 templates/info/index.html:11
 msgid "Ancient Wisdom, Modern Healing"
@@ -774,26 +795,14 @@ msgstr "(attuale)"
 msgid "Last"
 msgstr "Ultima Pagina"
 
-#: templates/base/includes/shop_nav.html:5
-msgid "OFFERINGS"
-msgstr "LE NOSTRE OFFERTE"
-
-#: templates/base/includes/shop_nav.html:18
-msgid "EXPLORE NSH"
-msgstr "SCOPRI NSH"
-
 #: templates/bootstrap4/phone_field.html:15
 msgid "Country Code"
 msgstr "Prefisso Internazionale"
 
-#: templates/cart/cart_list.html:4
+#: templates/cart/cart_list.html:4 templates/cart/cart_list.html:12
+#: templates/cart/includes/cart_offcanvas.html:5
 msgid "Your Cart"
 msgstr "Il tuo Carello"
-
-#: templates/cart/cart_list.html:12
-#: templates/cart/includes/cart_offcanvas.html:5
-msgid "YOUR CART"
-msgstr "IL TUO CARELLO"
 
 #: templates/cart/cart_list.html:32 templates/checkout/order_form.html:132
 msgid "Your cart is empty..."
@@ -803,55 +812,49 @@ msgstr "Il tuo carello è vuoto..."
 msgid "See what we can offer"
 msgstr "Guarda le nostre offerte"
 
-#: templates/cart/cart_list.html:35 templates/checkout/order_form.html:135
-#: templates/products/product_detail.html:25
-#: templates/products/product_list.html:5
-msgid "Shop"
-msgstr "Shop"
-
 #: templates/cart/includes/cart_menu.html:6
 msgid "View Cart"
 msgstr "Carello"
 
-#: templates/cart/includes/cart_offcanvas.html:11
+#: templates/cart/includes/cart_offcanvas.html:12
 msgid "Go to Cart"
 msgstr "Vai al Carello"
 
-#: templates/cart/includes/cart_offcanvas.html:14
+#: templates/cart/includes/cart_offcanvas.html:15
 #: templates/checkout/order_form.html:6 templates/checkout/order_form.html:14
 msgid "Checkout"
 msgstr "Pagamento"
 
-#: templates/cart/includes/cart_offcanvas.html:37
-#: templates/cart/includes/subtotal.html:7
-#: templates/checkout/order_detail.html:178
+#: templates/cart/includes/cart_offcanvas.html:38
+#: templates/cart/includes/subtotal.html:8
+#: templates/checkout/order_detail.html:179
 #: templates/checkout/order_form.html:118
 msgid "Delivery"
 msgstr "Spedizione"
 
-#: templates/cart/includes/cart_offcanvas.html:43
+#: templates/cart/includes/cart_offcanvas.html:44
 #: templates/checkout/includes/order_display.html:32
 msgid "Total"
 msgstr "Totale"
 
-#: templates/cart/includes/cart_offcanvas.html:50
-msgid "EMPTY CART"
-msgstr "CARELLO VUOTO"
+#: templates/cart/includes/cart_offcanvas.html:51
+msgid "Empty Cart"
+msgstr "Carello Vuoto"
 
-#: templates/cart/includes/cart_offcanvas.html:56
+#: templates/cart/includes/cart_offcanvas.html:58
 msgid "What can we offer you"
 msgstr "Cosa potremmo offrirti"
 
-#: templates/cart/includes/cart_product_display.html:38
+#: templates/cart/includes/cart_product_display.html:39
 #: templates/products/product_detail.html:63
 msgid "Quantity"
 msgstr "Quantità"
 
-#: templates/cart/includes/cart_product_display.html:47
+#: templates/cart/includes/cart_product_display.html:48
 msgid "Update"
 msgstr "Aggiorna"
 
-#: templates/cart/includes/cart_product_display.html:51
+#: templates/cart/includes/cart_product_display.html:52
 #: templates/socialaccount/connections.html:35
 msgid "Remove"
 msgstr "Cancella"
@@ -868,15 +871,19 @@ msgstr "Aggiorna Carello"
 msgid "Add to Cart"
 msgstr "Aggiungi al Carello"
 
-#: templates/cart/includes/subtotal.html:12
+#: templates/cart/includes/subtotal.html:14
 msgid "Sub-total"
 msgstr "Sub-totale"
 
-#: templates/cart/includes/subtotal.html:16
-msgid "Grand total will be finalised after delivery address is confirmed."
-msgstr "Somma Totale"
-
 #: templates/cart/includes/subtotal.html:19
+msgid "Delivery will be calculated at the checkout"
+msgstr "Il costo di spedizione sarà calcolata prima del pagamento"
+
+#: templates/cart/includes/subtotal.html:21
+msgid "Thank you so much for supporting a small business"
+msgstr "Grazie per supportare una piccola azienda"
+
+#: templates/cart/includes/subtotal.html:25
 msgid "Proceed with Order"
 msgstr "Procedi con l'Ordine'"
 
@@ -1001,12 +1008,12 @@ msgid "NEW ORDER"
 msgstr "NEW ORDER"
 
 #: templates/checkout/includes/order_display.html:13
-#: templates/checkout/order_detail.html:23
+#: templates/checkout/order_detail.html:24
 msgid "Order Number"
 msgstr "Numero Ordine"
 
 #: templates/checkout/includes/order_display.html:24
-#: templates/checkout/order_detail.html:29
+#: templates/checkout/order_detail.html:30
 msgid "Date"
 msgstr "Data"
 
@@ -1019,33 +1026,33 @@ msgstr "Articoli"
 msgid "Your Order"
 msgstr "Il tuo Ordine"
 
-#: templates/checkout/order_detail.html:13
-msgid "ORDER COMPLETE"
-msgstr "ORDINE COMPLETATO"
+#: templates/checkout/order_detail.html:14
+msgid "Order Complete"
+msgstr "Ordine Effetuato"
 
-#: templates/checkout/order_detail.html:20
+#: templates/checkout/order_detail.html:21
 msgid "Order Details"
 msgstr "Dettagli Ordine"
 
-#: templates/checkout/order_detail.html:44
+#: templates/checkout/order_detail.html:45
 msgid "Shipping Details"
 msgstr "Dettagli Spedizione"
 
-#: templates/checkout/order_detail.html:80
-#: templates/checkout/order_detail.html:141
+#: templates/checkout/order_detail.html:81
+#: templates/checkout/order_detail.html:142
 msgid "County"
 msgstr "Località"
 
-#: templates/checkout/order_detail.html:105
+#: templates/checkout/order_detail.html:106
 msgid "Billing Details"
 msgstr "Dettagli Fatturazione"
 
-#: templates/checkout/order_detail.html:173
+#: templates/checkout/order_detail.html:174
 #: templates/checkout/order_form.html:113
 msgid "Item Total"
 msgstr "Totale Articoli"
 
-#: templates/checkout/order_detail.html:183
+#: templates/checkout/order_detail.html:184
 #: templates/checkout/order_form.html:123
 msgid "Grand Total"
 msgstr "Somma Totale"
@@ -1072,8 +1079,6 @@ msgid "Billing Information"
 msgstr "Informazione di Fatturazione"
 
 #: templates/checkout/order_form.html:69
-#, fuzzy
-#| msgid "Save this delivery information to my profile"
 msgid "Save these shipping and billing addresses to my profile"
 msgstr "Salva gli indirizzi per spedizione e fatturazione al mio profilo"
 
@@ -1082,7 +1087,7 @@ msgid "Create an account"
 msgstr "Creare un account"
 
 #: templates/checkout/order_form.html:72
-#: templates/users/includes/unauthenticated_offcanvas.html:12
+#: templates/users/includes/unauthenticated_offcanvas.html:13
 msgid "or"
 msgstr "o"
 
@@ -1118,7 +1123,7 @@ msgstr "Dettagli"
 msgid "Let's explore."
 msgstr "Esploriamo."
 
-#: templates/checkout/order_form.html:146
+#: templates/checkout/order_form.html:147
 msgid ""
 "Please do not refresh the page, press the back button or navigate away while "
 "the payment is processing.<br>Thank you for your patience."
@@ -1127,17 +1132,21 @@ msgstr ""
 "navigare ad un'altra pagine mentre il pagamento sta eseguendo, per favore."
 "<br>Grazie per la tua pazienza."
 
-#: templates/checkout/order_list.html:5
-#: templates/users/includes/authenticated_offcanvas.html:17
+#: templates/checkout/order_list.html:5 templates/checkout/order_list.html:12
+#: templates/users/includes/authenticated_offcanvas.html:18
 msgid "My Orders"
 msgstr "I miei Ordini"
 
-#: templates/checkout/order_list.html:12
-msgid "MY ORDERS"
-msgstr "I MIEI ORDINI"
+#: templates/checkout/order_list.html:26
+msgid "No Orders have been made"
+msgstr "Non ci sono stati ordini"
 
-#: templates/checkout/order_list.html:32 templates/likes/likes_list.html:39
-#: templates/products/product_list.html:58
+#: templates/checkout/order_list.html:27
+msgid "What do we have for you"
+msgstr "Cosa potremmo offrirti"
+
+#: templates/checkout/order_list.html:34 templates/likes/likes_list.html:39
+#: templates/products/product_list.html:59
 msgid "Product Page Navigation"
 msgstr "Navigazione per le pagine dei prodotti"
 
@@ -1146,8 +1155,8 @@ msgid "Contact Us"
 msgstr "Contattaci"
 
 #: templates/contact/email_form.html:13
-msgid "REACH OUT"
-msgstr "ENTRA IN CONTATTO"
+msgid "Reach Out"
+msgstr "Entra in Contatto"
 
 #: templates/contact/emails/contact_body.txt:1
 msgid "Nuragic Shamanic Healing has received a message from"
@@ -1188,27 +1197,32 @@ msgstr "Abbiamo Ricevuto il tuo messagio e ti contatteremmo al primo possibile"
 msgid "Nuragic Shamanic Healing Contact"
 msgstr "Contatto Nuragic Shamanic Healing"
 
-#: templates/cookies/includes/cookie_dialogue.html:6
-msgid "COOKIE CONSENT"
-msgstr "CONSENSO DEI COOKIE"
+#: templates/cookies/includes/cookie_dialogue.html:7
+msgid "Cookie Consent"
+msgstr "Consenso dei Cookie"
 
-#: templates/cookies/includes/cookie_dialogue.html:14
+#: templates/cookies/includes/cookie_dialogue.html:15
 #, python-format
 msgid ""
 "\n"
 "                    <p>This website uses cookies that help the website to "
-"function, and for analytic purposes to\n"
-"                        track how you interact with our our website.</p>\n"
+"function, for anonymous analytic purposes to\n"
+"                        track how you interact with our our website, and "
+"advertising purposes.</p>\n"
 "                    <ul>\n"
 "                        <li>Essential, functional and fraud prevention "
 "cookies are <strong>required</strong> for site\n"
 "                            use.</li>\n"
 "                        <li>We <strong>respect</strong> Do Not Track "
-"requests.</li>\n"
-"                        <li>We <strong>do not</strong> gather or track any "
-"personally identifiable information.</li>\n"
-"                        <li>We <strong>do not</strong> use cookies for "
-"advertising or personalization purposes.</li>\n"
+"requests. (Accept Required)</li>\n"
+"                        <li>We <strong>do not</strong> show any "
+"advertisements on the website.</li>\n"
+"                        <li>We use Google Analytics for <strong>anonymous</"
+"strong> usage data and analytics.</li>\n"
+"                        <li>We may use Facebook Pixel for advertising or "
+"personalization purposes.</li>\n"
+"                        <li>We may use cookies to connect with social "
+"networking sites.</li>\n"
 "                        <li>For <strong>more information</strong> please "
 "read our <a class=\"text-info\"\n"
 "                                href=\"%(privacy_url)s\">Privacy\n"
@@ -1218,44 +1232,53 @@ msgid ""
 "                    </ul>\n"
 "                    <p>For us to provide the best user experience, please "
 "enable the cookies by clicking on\n"
-"                        Accept All Cookies.</p>\n"
+"                        <strong>Accept All</strong>.\n"
+"                    </p>\n"
 "                    "
 msgstr ""
 "\n"
-"                    <p>Questo sita utilizza i cookie per aiutare le "
-"funzionalità del sito e per motivi analtici per                        "
-"tracciare come tu interagisci con il nostro sito.</p>                    "
-"<ul>                        <li>Cookie essenziali, funzionali e per la "
-"prevenzione delle frodi sono <strong>richiesti</strong> "
+"                    <p>Questo sito utilizza i cookie per aiutare le "
+"funzionalità del sito, per motivi analtici per                        "
+"tracciare come tu interagisci con il nostro sito e per motivi di pubblicità."
+"</p>                    <ul>                        <li>Cookie essenziali, "
+"funzionali e per la prevenzione delle frodi sono <strong>richiesti</strong> "
 "per                            l'uso del sito'.</li>                        "
-"<li><strong>Respettiamo</strong> richiesti Do Not Track.</"
-"li>                        <li>We <strong>do not</strong> gather or track "
-"any personally identifiable information.</li>\n"
-"                        <li>We <strong>do not</strong> use cookies for "
-"advertising or personalization purposes.</li>\n"
-"                        <li>For <strong>more information</strong> please "
-"read our <a class=\"text-info\"\n"
-"                                href=\"%(privacy_url)s\">Privacy\n"
-"                                Policy</a> and <a class=\"text-info\" href="
-"\"%(cookie_url)s\">Cookie\n"
-"                                Policy.</a></li>\n"
+"<li><strong>Respettiamo</strong> richiesti Do Not Track. (Acceto Richiesti)</"
+"li>                        <li><strong>Non mostriamo</strong> pubblicità sul "
+"sito.</li>                 <li>Utilizziamo Google Analytics per dati e "
+"analytici <strong>anonimo</strong></li>\n"
+"<li>Potremmo utilizzare Facebook Pixel per motivi di pubblicità o "
+"personalizzazione.</li>\n"
+"                        <li>Potremmo utilizzare i cookie per connettere con "
+"i siti social.</li>\n"
+"                        <li>Per <strong>più informazione</strong> leggi "
+"nostra <a class=\"text-info\"\n"
+"                                href=\"%(privacy_url)s\">Polizza\n"
+"                                Privacy</a> e <a class=\"text-info\" href="
+"\"%(cookie_url)s\">Polizza\n"
+"                                Cookie.</a></li>\n"
 "                    </ul>\n"
-"                    <p>For us to provide the best user experience, please "
-"enable the cookies by clicking on\n"
-"                        Accept All Cookies.</p>\n"
+"                    <p>Per l'esperienze migliore, per favore abilità i "
+"cookie cliccando su\n"
+"                        <strong>Accetto Tutti</strong>.\n"
+"                    </p>\n"
 "                    "
 
-#: templates/cookies/includes/cookie_dialogue.html:37
-msgid "Accept All Cookies"
-msgstr "Accetto Tutti i Cookie"
+#: templates/cookies/includes/cookie_dialogue.html:41
+msgid "Accept All"
+msgstr "Accetto Tutti"
 
-#: templates/cookies/includes/cookie_dialogue.html:43
-msgid "Accept Required Cookies"
-msgstr "Accetto i Cookie Richiesti"
+#: templates/cookies/includes/cookie_dialogue.html:48
+msgid "Accept Analytics"
+msgstr "Accetto Analitici"
+
+#: templates/cookies/includes/cookie_dialogue.html:54
+msgid "Accept Required"
+msgstr "Accetto Richiesti"
 
 #: templates/info/includes/home_reviews.html:16
-msgid "REVIEWS"
-msgstr "RECENSIONI"
+msgid "Reviews"
+msgstr "Recensioni"
 
 #: templates/info/includes/home_reviews.html:33
 msgid "Previous"
@@ -1291,23 +1314,23 @@ msgstr "Indece"
 msgid "About"
 msgstr "Chi Sono"
 
-#: templates/info/index.html:32 templates/info/index.html:34
-msgid "SPIRITUALITY"
-msgstr "SPIRITUALITÀ"
-
 #: templates/info/index.html:32 templates/info/index.html:35
-msgid "CONNECTIONS"
-msgstr "CONESSIONI"
+msgid "Spirituality"
+msgstr "Spiritualità"
 
-#: templates/info/index.html:32 templates/info/index.html:35
-msgid "SHARING"
-msgstr "CONDIVISIONE"
+#: templates/info/index.html:32 templates/info/index.html:36
+msgid "Connections"
+msgstr "Connesioni"
 
-#: templates/info/index.html:33 templates/info/index.html:35
-msgid "ROOTS"
-msgstr "RADICI"
+#: templates/info/index.html:32 templates/info/index.html:36
+msgid "Sharing"
+msgstr "Condivisione"
 
-#: templates/info/index.html:69
+#: templates/info/index.html:33 templates/info/index.html:36
+msgid "Roots"
+msgstr "Radici"
+
+#: templates/info/index.html:70
 msgid "What we do"
 msgstr "Cosa facciamo"
 
@@ -1315,20 +1338,20 @@ msgstr "Cosa facciamo"
 msgid "Favorite Items"
 msgstr "Articoli Preferiti"
 
-#: templates/likes/includes/likes_offcanvas.html:5
+#: templates/likes/includes/likes_offcanvas.html:6
 #: templates/likes/likes_list.html:18
-msgid "MY FAVORITES"
-msgstr "I MIEI PREFERITI"
+msgid "My Favorites"
+msgstr "I Miei Preferiti"
 
-#: templates/likes/includes/likes_offcanvas.html:11
+#: templates/likes/includes/likes_offcanvas.html:12
 msgid "All Favorites"
 msgstr "Tutti Preferiti"
 
-#: templates/likes/includes/likes_offcanvas.html:35
-msgid "NO FAVORITES"
-msgstr "NIENTE PREFERITI"
+#: templates/likes/includes/likes_offcanvas.html:37
+msgid "No Favorites"
+msgstr "Nessun Preferito"
 
-#: templates/likes/includes/likes_offcanvas.html:41
+#: templates/likes/includes/likes_offcanvas.html:43
 msgid "Explore our Offerings"
 msgstr "Scopri nostre Offerte"
 
@@ -1337,12 +1360,8 @@ msgid "No Favorites..."
 msgstr "Niente Preferiti..."
 
 #: templates/likes/likes_list.html:32
-msgid "DISCOVER"
-msgstr "SCOPRI"
-
-#: templates/likes/likes_list.html:34
-msgid "Our Offerings"
-msgstr "Nostre Offerte"
+msgid "Discover"
+msgstr "Scopri"
 
 #: templates/openid/login.html:9
 msgid "OpenID Sign In"
@@ -1373,8 +1392,12 @@ msgid "Or take a look at these"
 msgstr "O dai un ochhiata a questi"
 
 #: templates/products/product_list.html:30
-msgid "OUR OFFERINGS"
-msgstr "LE NOSTRE OFFERTE"
+msgid "Our Offerings"
+msgstr "Le Nostre Offerte"
+
+#: templates/products/product_list.html:48
+msgid "Maybe there's something else for you at"
+msgstr "Forse trovarai qualcos'altro su"
 
 #: templates/products/shopcategory_detail.html:23
 msgid "Product Page Navigation for"
@@ -1460,21 +1483,21 @@ msgstr ""
 msgid "Settings and Logout"
 msgstr "Impostazioni e Uscito"
 
-#: templates/users/includes/authenticated_offcanvas.html:6
-msgid "WELCOME"
-msgstr "BENVENUTO"
+#: templates/users/includes/authenticated_offcanvas.html:7
+msgid "Welcome"
+msgstr "Benvenuto"
 
-#: templates/users/includes/authenticated_offcanvas.html:13
+#: templates/users/includes/authenticated_offcanvas.html:14
 msgid "Settings"
 msgstr "Impostazioni"
 
 #: templates/users/includes/email.html:7
-msgid "EMAIL SETTINGS"
-msgstr "IMPOSTAZIONI EMAIL"
+msgid "Email Settings"
+msgstr "Impostazioni Email"
 
 #: templates/users/includes/newsletter_form.html:5
-msgid "NEWSLETTER SETTINGS"
-msgstr "IMPOSTAZIONI NEWSLETTER"
+msgid "Newsletter Settings"
+msgstr "Impostazioni Newsletter"
 
 #: templates/users/includes/newsletter_form.html:37
 msgid "Save"
@@ -1488,21 +1511,21 @@ msgstr "Anulla Iscrizione"
 msgid "Login or Register"
 msgstr "Accedere o Registrati"
 
-#: templates/users/includes/unauthenticated_offcanvas.html:6
-msgid "JOIN THE COMMUNITY!"
-msgstr "UNISCITI ALLA COMMUNITÀ"
+#: templates/users/includes/unauthenticated_offcanvas.html:7
+msgid "Join The Community"
+msgstr "Unisciti al Communità"
 
 #: templates/users/user_detail.html:19
 #, python-format
 msgid ""
 "\n"
-"        <h2 class=\"h-font l-space-1 h1 text-white text-center\">%(name)s'S "
-"SETTINGS</h2>\n"
+"        <h2 class=\"h-font l-space-1 h1 text-white text-center text-uppercase"
+"\">%(name)s's Setting's'</h2>\n"
 "        "
 msgstr ""
 "\n"
-"        <h2 class=\"h-font l-space-1 h1 text-white text-center"
-"\">IMPOSTAZIONI DI %(name)s\"</h2>\n"
+"        <h2 class=\"h-font l-space-1 h1 text-white text-center text-uppercase"
+"\">Impostazioni di %(name)s\"</h2>\n"
 "        "
 
 #: users/forms.py:24
@@ -1577,3 +1600,51 @@ msgid "Failed to update your information. Please Check your details."
 msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "
 "favore."
+
+#~ msgid "YOUR CART"
+#~ msgstr "IL TUO CARELLO"
+
+#~ msgid "MY ORDERS"
+#~ msgstr "I MIEI ORDINI"
+
+#~ msgid "ACCOUNT INACTIVE"
+#~ msgstr "ACCOUNT INATTIVO"
+
+#~ msgid "EMAIL ADDRESSES"
+#~ msgstr "INDIRIZZI EMAIL"
+
+#~ msgid "CONFIRM EMAIL ADDRESS"
+#~ msgstr "CONFERMARE EMAIL"
+
+#~ msgid "SIGN IN"
+#~ msgstr "ACCEDI"
+
+#~ msgid "SIGN OUT"
+#~ msgstr "ESCI"
+
+#~ msgid "CHANGE PASSWORD"
+#~ msgstr "CAMBIA PASSWORD"
+
+#~ msgid "PASSWORD RESET"
+#~ msgstr "REIMPOSTARE PASSWORD"
+
+#~ msgid "BAD TOKEN"
+#~ msgstr "TOKEN NON VALIDO"
+
+#~ msgid "SET PASSWORD"
+#~ msgstr "IMPOSTA PASSWORD"
+
+#~ msgid "REGISTER"
+#~ msgstr "REGISTRATI"
+
+#~ msgid "SIGN UP CLOSED"
+#~ msgstr "ISCRIZIONE CHIUSA"
+
+#~ msgid "VERIFY EMAIL"
+#~ msgstr "VERFICA EMAIL"
+
+#~ msgid "Grand total will be finalised after delivery address is confirmed."
+#~ msgstr "Somma Totale"
+
+#~ msgid "DISCOVER"
+#~ msgstr "SCOPRI"
