@@ -90,6 +90,7 @@ COMPRESS_ROOT = 'static'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -255,3 +256,5 @@ DEFAULT_CONTACT_EMAIL = os.environ.get("EMAIL_CONTACT")
 DEFAULT_ERROR_EMAIL = os.environ.get("EMAIL_ERROR")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+ADMINS = [('Rory', DEFAULT_ERROR_EMAIL)]

@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+<!-- Open Graph Tags -->
+{% include 'base/includes/open_graph_basic.html'%}
+{% block content %}
+<!--The basic layout for an error page-->
+<div class="row">
+    <div class="col-12 bg-brown py-2">
+        <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">
+            {% block error_name %}
+            {% endblock %}</h2>
+    </div>
+</div>
+<section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
+    <article class="col text-center mt-4">
+        <!-- The error content-->
+        {% block error_content %}
+        {% endblock %}
+        <!--A link back to the shop-->
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
+    </article>
+    <hr>
+</section>
+<!--A bar of related products to display on the error page.-->
+{% include 'products/includes/related_products.html' %}
+{% endblock %}
