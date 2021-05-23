@@ -8,6 +8,8 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
+
 from products.models import Product
 
 from .models import Order, OrderLineItem
@@ -112,11 +114,12 @@ def send_confirmation_email(order):
         {'order': order})
     body = render_to_string(
         'checkout/confirmation_email/confirmation_email_body.txt',
-        {'order': order, 'contact_email': 'mail@nuragicshamanichealing.com'})
+        {'order': order,
+         'contact_email': 'connect@nuragicshamanichealing.com'})
     send_mail(
         subject,
         body,
-        settings.DEFAULT_ORDER_EMAIL,
+        _(f'NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>'),
         [cust_email]
     )
 
@@ -130,7 +133,7 @@ def send_confirmation_email(order):
     send_mail(
         order_subject,
         order_body,
-        settings.DEFAULT_ORDER_EMAIL,
+        f'NEW ORDER <{settings.DEFAULT_ORDER_EMAIL}>',
         [settings.DEFAULT_ORDER_EMAIL]
     )
 
