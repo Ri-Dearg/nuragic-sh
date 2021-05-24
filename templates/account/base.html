@@ -3,6 +3,7 @@
 
     <head>
         <title>{% block head_title %}{% endblock %}</title>
+        {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
         {% block extra_head %}
         {% endblock %}
     </head>

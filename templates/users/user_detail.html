@@ -5,7 +5,7 @@
 {% block head_title %}{{ user.username }}{% endblock%}
 
 <!-- Critical CSS -->
-{% block critical_css %}{% include 'users/includes/critical_css/user_detail.html' %}{% endblock %}
+{% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
 
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
@@ -17,7 +17,7 @@ Much of the content is taken directly from their templates. -->
 <div class="row py-3 bg-brown">
     <div class="col">
         {% blocktrans with user.username|upper as name %}
-        <h2 class="h-font l-space-1 h1 text-white text-center text-uppercase">{{ name }}'s Setting's'</h2>
+        <h2 class="h-font l-space-1 h1 text-white text-center text-uppercase">{{ name }}'s Setting's</h2>
         {% endblocktrans %}
     </div>
 </div>
