@@ -78,7 +78,7 @@
             <div class="p-font text-primary">{{ object.description2|safe }}</div>
             {% if object.product_button_text and object.product %}
             <p class="text-center"><a href="{% url 'products:product-detail' object.product.slug object.product.id %}"
-                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
+                    class="smooth-click p-font btn-tran btn-lg btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}
         </div>
