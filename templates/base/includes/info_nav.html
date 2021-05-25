@@ -8,7 +8,7 @@
 {% if categories %}
 {% for item in categories %}
 <li
-    class="btn-tran nav-item dropdown py-1{% if item.id|stringformat:'i' in active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5{% endif %}">
+    class="btn-tran nav-item dropdown py-1{% if item.id|stringformat:'i' == active_category %} active{% endif %}{% if 'about' in item.menu_word_en.lower %} order-5{% endif %}">
     <button class="nav-link p-font l-space-2 btn btn-link dropdown-toggle text-end text-lg-center mb-0 p-0 pe-3 pe-lg-0"
         id="{{ item.menu_word }}Dropdown" type="button" data-bs-toggle="dropdown"
         aria-expanded="false">{{ item.menu_word|upper }}
@@ -16,7 +16,7 @@
     <ul class="dropdown-menu dropdown-menu-end text-end text-lg-center bg-secondary"
         aria-labelledby="{{ item.menu_word }}Dropdown">
         <li>
-            <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' in active_all %} active{% endif %}"
+            <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if item.id|stringformat:'i' == active_all %} active{% endif %}"
                 href="{% url 'info:category-detail' item.slug item.id %}">
                 {% if 'about' in item.title_en.lower %}
                 {% trans 'All About' %}
@@ -28,7 +28,7 @@
         <!-- Adds a dropdown item for each page in a category -->
         {% for page in item.page.all %}
         <li>
-            <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' in active_page %} active{% endif %}"
+            <a class="p-font smooth-click l-space-1 dropdown-item text-white{% if page.id|stringformat:'i' == active_page %} active{% endif %} "
                 href="{% url 'info:page-detail' page.slug page.id %}">{{ page.title|title }}</a>
         </li>
         {% endfor %}
