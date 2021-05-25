@@ -3,7 +3,7 @@
 {% load i18n %} {% load static %}
 {% block head_title %}{{ object.title }}{% endblock%}
 <!-- Critical CSS -->
-<!-- {% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %} -->
+{% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %}
 {% block content %}
 
 <!-- Displays category. The name is up top, followed by the product feed.

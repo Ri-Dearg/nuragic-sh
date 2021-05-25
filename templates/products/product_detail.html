@@ -15,6 +15,9 @@
 
 {% block head_title %}{{ product.title }}{% endblock %}
 
+<!-- Critical CSS -->
+{% block critical_css %}{% include 'products/includes/critical_css/product_detail.html' %}{% endblock %}
+
 {% block content %}
 <!-- Displays product details. Information changes depending on product characteristics,
 such as size or quantity, mainly following the same scheme as the product_box.html template.
