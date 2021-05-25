@@ -3,7 +3,7 @@
 {% load i18n %} {% load static %}
 
 <!-- Critical CSS -->
-{% block critical_css %}{% include 'likes/includes/critical_css/likes_list.html' %}{% endblock %}
+{% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %}
 
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
@@ -15,7 +15,8 @@ If There is nothing it provides a link back to the page. -->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">{% trans 'My Favorites' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">{% trans 'My Favorites' %}
+            </h2>
         </div>
     </div>
     {% if likes %}
