@@ -7,6 +7,11 @@
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Your settings' %}.{% endblock %}
+
+{% block meta_keywords %}{{ block.super }} {{user.username}}, {% trans 'profile' %}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 
