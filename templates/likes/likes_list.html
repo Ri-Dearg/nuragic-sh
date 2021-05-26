@@ -5,6 +5,11 @@
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'All your favorite items in one place' %}.{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'favorite, favorite, items, products, shop, shopping' %}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
 

@@ -3,6 +3,13 @@
 {% load i18n %} {% load static %}
 {% block head_title %}{% trans 'Your Cart' %}{% endblock%}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans "Welcome to your cart. Let's see what has caught your eye." %}{% endblock %}
+{% if cart %}
+{% block meta_keywords %}{{ block.super }} {% for item in cart_items %}{{ item.product.title }}, {% endfor %}
+{% endblock %}
+{% endif %}
+
 <!-- Open Graph Tags To redo -->
 {% include 'base/includes/open_graph_basic.html'%}
 

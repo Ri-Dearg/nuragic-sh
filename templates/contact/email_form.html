@@ -7,6 +7,10 @@
 <!-- Title -->
 {% block head_title %}{% trans 'Contact Us' %}{% endblock%}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Contact us, connect, collaborate, communicate and share. We want to hear from you.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'contact us, communicate, message, support' %}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
 {% block og_title %}{% trans 'Get in Touch' %} | Nuragic Shamanic Healing{% endblock %}

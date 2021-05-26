@@ -2,6 +2,12 @@
 
 {% load static %}{% load i18n %}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Thank you for your exchange and your support.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'checkout, payment' %}{% endfor %}
+{% endblock %}
+
+<!--  Open Graph -->
 {% include 'base/includes/open_graph_basic.html'%}
 
 {% load crispy_forms_tags %}
