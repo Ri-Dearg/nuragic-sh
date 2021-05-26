@@ -1,6 +1,7 @@
 core.Microsoft*
 core.mongo*
 core.python*
+critical.js
 env.py
 __pycache__/
 *.py[cod]
@@ -19,5 +20,5 @@ venv
 .vscode
 staticfiles
 .DS_Store
-
 !jasmine.css
+node_modules
