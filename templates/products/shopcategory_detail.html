@@ -1,7 +1,22 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
-{% load i18n %} {% load static %}
+{% load i18n %} {% load static %} {% load app_filters %}
 {% block head_title %}{{ object.title }}{% endblock%}
+
+<!-- Meta details -->
+{% block meta_description %}{{ object.title }}: {% trans 'A collection of our hand-picked items' %}.{% endblock %}
+{% block meta_keywords %}{{ block.super }} {{ object.title }}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{{ object.title|title }} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{% trans 'A collection of our hand-picked items' %}.{% endblock %}
+{% block og_image %}{{ object.products.all.0.image_4_3.url }}{% endblock %}
+{% block og_image_type %}image/{{ object.products.all.0.image_4_3.name|extension }}{% endblock %}
+{% block og_image_width %}{{ object.products.all.0.image_4_3.width }}{% endblock %}
+{% block og_image_height %}{{ object.products.all.0.image_4_3.height }}{% endblock %}
+{% block og_image_alt %}{{ object.products.all.0.title }}{% endblock %}
+
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %}
 {% block content %}

@@ -3,10 +3,16 @@
 <!-- Loads internationalization, loads static and filter to get image extension -->
 {% load i18n %} {% load static %} {% load app_filters %}
 
+<!-- Meta details -->
+{% block meta_description %}{{ product.description|striptags|truncatechars:270 }}{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses' %},
+{{ product.title }}{% endblock %}
+
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
 {% block og_title %}{{ product.title }}{% endblock %}
-{% block og_description %}{{ product.description|title }}{% endblock %}
+{% block og_description %}{{ product.description|striptags|truncatechars:270 }}{% endblock %}
 {% block og_image %}{{ product.image_4_3.url }}{% endblock %}
 {% block og_image_type %}image/{{ product.image_4_3.name|extension }}{% endblock %}
 {% block og_image_width %}{{ product.image_4_3.width }}{% endblock %}

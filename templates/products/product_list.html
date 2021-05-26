@@ -1,14 +1,26 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
-{% load i18n %} {% load static %}
+{% load i18n %} {% load static %} {% load app_filters %}
 
 {% block head_title %}{% trans 'Shop' %}{% endblock%}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
 
-<!-- Open Graph Tags To redo -->
-{% include 'base/includes/open_graph_basic.html'%}
+<!-- Meta details -->
+{% block meta_description %}{% trans 'A shop of our own products with hand picked and hand-made items from a small businesses. Come in and see what we have to offer.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses' %}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Our Shop Offerings'%} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{% trans 'Have a look at our hand-picked goods and services.'%}{% endblock %}
+{% block og_image %}{{ page_obj.0.image_4_3.url }}{% endblock %}
+{% block og_image_type %}image/{{ page_obj.0.image_4_3.name|extension }}{% endblock %}
+{% block og_image_width %}{{ page_obj.0.image_4_3.width }}{% endblock %}
+{% block og_image_height %}{{ page_obj.0.image_4_3.height }}{% endblock %}
+{% block og_image_alt %}{{ page_obj.0.image_4_3.title }}{% endblock %}
 
 {% block content %}
 <!-- Page is utilised as the homepage as well as the search results page.
