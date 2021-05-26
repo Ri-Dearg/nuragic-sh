@@ -9,6 +9,7 @@
 {% block meta_keywords %}{{ block.super }} {{ object.title }}{% endblock %}
 
 <!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
 {% block og_title %}{{ object.title|title }} | Nuragic Shamanic Healing{% endblock %}
 {% block og_description %}{{ object.description }}{% endblock %}
 {% block og_image %}{{ object.image_fb_link.url }}{% endblock %}
@@ -17,7 +18,7 @@
 {% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
 {% block og_image_alt %}{{ object.title }}{% endblock %}
 
-{% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}website{% endblock %}
+{% block head_title %}{{ object.title }}{% endblock %}
 
 {% block content %}
 <!-- Spacer -->
