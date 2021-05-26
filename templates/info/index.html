@@ -1,21 +1,27 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
+
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'info/includes/critical_css/index.html' %}{% endblock %}
+
 <!-- Meta details -->
 {% block meta_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with Tarot, Oracle Cards, Shamanic Drumming and Healing through Ancient Wisdom. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
-{% block meta_keywords %}{{ block.super }}
-{% trans 'tarot, oracle cards, healing, reiki' %}{% endblock %}
+
+{% block meta_keywords %}{{ block.super }}{% trans 'tarot, oracle cards, healing, reiki' %}{% endblock %}
+
 <!-- Open Graph Tags -->
-{% block og_type %}website{% endblock %} {% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
 {% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
 {% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
 {% block og_image_type %}image/png{% endblock %}
 {% block og_image_width %}1200{% endblock %}
 {% block og_image_height %}630{% endblock %}
-{% block og_image_alt %}Nuragic Shamanic Healing Logo{% endblock %}
+{% block og_image_alt %}{% trans 'Nuragic Shamanic Healing Logo' %}{% endblock %}
+
 {% block head_title %}{% trans 'Holistic | Courses | Readings' %}{% endblock %}
+
 {% block content %}
 <!-- SplashImage Carousel -->
 {% include 'info/includes/home_carousel.html' %}

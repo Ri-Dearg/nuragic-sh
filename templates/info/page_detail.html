@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
-<!-- Loads internationalization, loads static and filter to get image extension -->
-{% load i18n %} {% load static %} {% load app_filters %}
+<!-- Loads internationalization and filter to get image extension -->
+{% load i18n %} {% load app_filters %}
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'info/includes/critical_css/page_detail.html' %}{% endblock %}
 
@@ -10,14 +10,22 @@
 
 <!-- Open Graph Tags -->
 {% block og_type %}article{% endblock %}
-{% block og_title %}{{ object.title }}{% endblock %}
-{% block og_description %}{{ object.desc_title1|title }}{% endblock %}
+{% block og_title %}{{ object.title }} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{{ object.summary }}{% endblock %}
 {% block og_image %}{{ object.image_fb_link.url }}{% endblock %}
 {% block og_image_type %}image/{{ object.image_fb_link.name|extension }}{% endblock %}
 {% block og_image_width %}{{ object.image_fb_link.width }}{% endblock %}
 {% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
 {% block og_image_alt %}{{ object.title }}{% endblock %}
+
+{% block article_section %}{% trans 'Spirituality' %}{% endblock %}"
+{% block article_author %}Alessandro Olianas{% endblock %}"
+{% block article_published_time %}{{ object.date_added }}{% endblock %}"
+{% block article_tag %}{{ object.category.title }}, {{ object.title }}, {{ object.desc_title1 }},
+{{ object.desc_title2 }}{% if product.product_button_text %}, {{ object.product_button_text }}{% endif %}{% endblock %}"
+
 {% block head_title %}{{ object.title }}{% endblock %}
+
 {% block content %}
 <!-- Layout for Pages -->
 <article class="flex-grow-1 bg-white">
