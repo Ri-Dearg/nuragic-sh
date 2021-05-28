@@ -4,12 +4,7 @@
 
 <!-- Meta details -->
 {% block meta_description %}{% trans 'Your orders. Thank you for your support.' %}{% endblock %}
-{% block meta_keywords %}{{ block.super }} {% trans 'Orders' %}{% endblock %}
-
-<!-- Meta details -->
-{% block meta_description %}{{ order.order_number }}{% endblock %}
-{% block meta_keywords %}{{ block.super }} {% for item in order.lineitems.all %}{{ item.product.title }}, {% endfor %}
-{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'orders, finalized, paid, order history' %}{% endblock %}
 
 <!--  Open Graph -->
 {% include 'base/includes/open_graph_basic.html'%}
