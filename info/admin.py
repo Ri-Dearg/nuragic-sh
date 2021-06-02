@@ -13,7 +13,7 @@ class PageInlineAdmin(TranslationStackedInline):
               'summary', 'button_text', 'desc_title1', 'description1',
               'desc_title2', 'description2', 'title_image_tw_header',
               'image_fb_link', 'bot_image_tw_header', 'order', 'theme',
-              'date_added')
+              'display', 'date_added')
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -34,7 +34,7 @@ class PageAdmin(admin.ModelAdmin, DynamicArrayMixin):
               'summary', 'button_text', 'desc_title1', 'description1',
               'desc_title2', 'description2', 'title_image_tw_header',
               'image_fb_link', 'bot_image_tw_header', 'order', 'theme',
-              'date_added')
+              'display', 'date_added')
 
 
 class PageTrans(PageAdmin, TranslationAdmin):
