@@ -2,19 +2,19 @@
 <!-- Displays a section for each page -->
 <article>
     <div class="row bg-white">
-        <div class="col-auto col-lg order-1 order-lg-0 bg-white my-auto px-3 px-md-4 pt-3">
+        <div class="col-12 col-md order-1 order-md-0 bg-white my-auto px-3 px-md-4 pt-3">
             <h2 class="h-font l-space-2 h1 text-primary text-center">{{ item.title|upper }}</h2>
             <p class="p-font text-primary text-center">{{ item.summary }}</p>
             <p class="text-center"><a href="{% url 'info:page-detail' item.slug item.id %}"
                     class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ item.button_text|title }}</a>
             </p>
         </div>
-        <div class="col-auto col-lg order-0 order-lg-1 d-flex bg-white">
+        <div class="col-12 col-md order-0 order-md-1 d-flex bg-white">
             <img src="{{ item.image_fb_link.url }}" width="{{ item.image_fb_link.width }}"
                 height="{{ item.image_fb_link.height }}" srcset="{{ item.image_fb_link.url }} {{ item.image_fb_link.width }}w,
             {{ item.image_fb_link_md.url }} {{ item.image_fb_link_md.width }}w,
             {{ item.image_fb_link_sm.url }} {{ item.image_fb_link_sm.width }}w" sizes="(max-width: 767px) 100vw,
-            (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid my-auto">
+            (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid img-cover">
         </div>
         {% if not forloop.last %}
         <div class="order-2">{% include 'base/includes/horizontal_rule.html'%}</div>
