@@ -40,21 +40,23 @@ If there is quantity, it includes quantity selection linked to the form in the d
         <li class="p-font text-secondary breadcrumb-item active" aria-current="page">{{ product.title }}</li>
     </ol>
 </nav>
-<section class="bg-white flex-grow-1 p-md-5 p-sm-0 pb-2">
+<section class="bg-white flex-grow-1 p-sm-4 p-md-5 pb-2 pb-md-2">
     <article class="row justify-content-md-center">
         <div class="col-12 col-sm-5 position-relative p-0">
-            <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
-                height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
+            <div class="position-relative">
+                <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
+                    height="{{ product.image_4_3.height }}" srcset="{{ product.image_4_3.url }} {{ product.image_4_3.width }}w,
                                                 {{ product.image_4_3_md.url }} {{ product.image_4_3_md.width }}w,
                                                 {{ product.image_4_3_sm.url }} {{ product.image_4_3_sm.width }}w,"
-                sizes="(max-width: 575px) 100vw, (min-width: 576px) 40vw" class="
+                    sizes="(max-width: 575px) 100vw, (min-width: 576px) 40vw" class="
                 img-fluid" alt="{{ product.name }}" />
-            <!-- These display little banners that give extra info about the item. -->
-            {% include 'products/includes/product_banners.html' %}
+                <!-- These display little banners that give extra info about the item. -->
+                {% include 'products/includes/product_banners.html' %}
+            </div>
         </div>
-        <div class="col-auto col-sm-7 col-lg-6 col-xl-5 px-2 p-md-4 p-lg-5">
+        <div class="col-12 col-sm-7 col-lg-6 col-xl-5 px-3 px-sm-4 py-sm-3 p-md-4 p-lg-5">
             <div class="row">
-                <div class="col-auto mt-2 mt-md-0">
+                <div class="col-auto mt-2 mt-sm-0">
                     <h2 class="l-space-1 h-font text-primary">{{ product.title|upper }}</h2>
                 </div>
             </div>
@@ -65,7 +67,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 {% if product.stock > 0 or product.can_preorder %}
                 <h4 class="col-auto px-0 text-center text-muted mb-3">€{{ product.price }}</h4>
                 <!-- Displays a quantity selection box linked to the form in the detail_cart_toggle template. -->
-                <div class="col-4 form-floating ms-3 mb-2">
+                <div class="col-4 form-floating ms-3 my-2">
                     <input class="form-control" type="number" id="id_quantity" form="cf-{{ product.id }}"
                         name="quantity" value="1" min="0" {% if product.stock > 0 %} max="{{ product.stock }}"
                         {% endif %} required{% if product.is_unique %} readonly{% endif %} />
@@ -74,7 +76,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
                 </div>
                 {% endif %}
             </div>
-            <div class="row align-items-center ms-1">
+            <div class="row align-items-center ms-1 py-2">
                 <!-- This will only show the add to cart button if the item is in stock.
                         Even if added to cart in another way, the views should remove it alerting the user to 0 stock. -->
                 {% if product.stock > 0 or product.can_preorder %}
