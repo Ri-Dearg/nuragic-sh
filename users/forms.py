@@ -132,6 +132,9 @@ class StyledSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        terms = '{% url "policies:policy-detail" active_terms.slug active_terms.id %}'  # noqa E501 # pylint: disable=line-too-long
+        privacy = '{% url "policies:policy-detail" active_privacy.slug active_privacy.id %}'  # noqa E501 # pylint: disable=line-too-long
+
         self.helper = FormHelper(self)
         helper = self.helper
         helper.form_action = 'account_signup'
@@ -158,9 +161,18 @@ class StyledSignupForm(SignupForm):
                 Field('password2', placeholder=_('Repeat Password'),
                       minlength='8', css_class='p-font text-primary'),
 
+                HTML(
+                    f'<div class="form-check mx-auto mb-2">\
+                        <input type="checkbox" name="tnc" class="checkboxinput form-check-input" id="id_tnc">\
+                            <label for="id_tnc" class="p-font form-check-label text-primary sr-only">{_("I accept the")} <a class="smooth-click form-link text-info" href="{terms}">{_("Terms & Conditions")}</a> {_("and the")} <a class="smooth-click form-link text-info" href="{privacy}">{_("Privacy Policy")}</a>.\
+                                </label>\
+                                    </div>'),
+
                 Column(StrictButton(_('Register'), type='submit',
+                                    css_id='submit_register',
                                     css_class='p-font btn-tran btn btn-warning \
-                                    text-primary shadow fw-bold'),
+                                    text-primary shadow fw-bold',
+                                    disabled=True),
                        css_class='col-auto mx-auto mt-1'),
             )
         )
