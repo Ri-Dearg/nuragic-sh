@@ -3,7 +3,12 @@
 {% load i18n %} {% load static %}
 
 <!-- Critical CSS -->
-{% block critical_css %}{% include 'likes/includes/critical_css/likes_list.html' %}{% endblock %}
+{% block critical_css %}{% include 'products/includes/critical_css/shopcategory_detail.html' %}{% endblock %}
+
+<!-- Meta details -->
+{% block meta_description %}{% trans 'All your favorite items in one place' %}.{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'favorite, favorite, items, products, shop, shopping' %}{% endblock %}
 
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
@@ -15,7 +20,8 @@ If There is nothing it provides a link back to the page. -->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'MY FAVORITES' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">{% trans 'My Favorites' %}
+            </h2>
         </div>
     </div>
     {% if likes %}
@@ -30,7 +36,7 @@ If There is nothing it provides a link back to the page. -->
         <article class="col text-center mt-4">
             <h2 class="p-font text-primary h4">{% trans 'No Favorites...' %}</h2>
             <h2 class="p-font text-primary mb-0">{% trans 'Discover' %}</h2>
-            <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4"
                 href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
         </article>
     </section>

@@ -1,14 +1,26 @@
 {% extends 'base/base.html' %}
 <!-- Loads internationalization, loads static  -->
-{% load i18n %} {% load static %}
+{% load i18n %} {% load static %} {% load app_filters %}
 
 {% block head_title %}{% trans 'Shop' %}{% endblock%}
 
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
 
-<!-- Open Graph Tags To redo -->
-{% include 'base/includes/open_graph_basic.html'%}
+<!-- Meta details -->
+{% block meta_description %}{% trans 'A shop of our own products with hand picked and hand-made items from artisans and small businesses. Come in and see what we have to offer.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }}
+{% trans 'shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses' %}{% endblock %}
+
+<!-- Open Graph Tags -->
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans "Our Shop's Offerings" %} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{% trans 'Have a look at our hand-picked goods and services.'%}{% endblock %}
+{% block og_image %}{{ page_obj.0.image_4_3.url }}{% endblock %}
+{% block og_image_type %}image/{{ page_obj.0.image_4_3.name|extension }}{% endblock %}
+{% block og_image_width %}{{ page_obj.0.image_4_3.width }}{% endblock %}
+{% block og_image_height %}{{ page_obj.0.image_4_3.height }}{% endblock %}
+{% block og_image_alt %}{{ page_obj.0.image_4_3.title }}{% endblock %}
 
 {% block content %}
 <!-- Page is utilised as the homepage as well as the search results page.
@@ -26,7 +38,8 @@ such as likes_list, category_detail and stockdrop_detail.-->
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'OUR OFFERINGS' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">
+                {% trans 'Our Offerings' %}</h2>
         </div>
     </div>
     <div class="row px-0 px-md-2 bg-white">
@@ -45,9 +58,9 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 <section class="row px-0 flex-xl-grow-1 px-md-2 bg-white">
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans "Maybe there's something else for you at" %}</h2>
-        <h2 class="p-font text-primary mb-0">{% trans 'Nuragic Shamanic Healing' %}
+        <h2 class="p-font text-primary mb-0">Nuragic Shamanic Healing
         </h2>
-        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4"
             href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
     </article>
 </section>

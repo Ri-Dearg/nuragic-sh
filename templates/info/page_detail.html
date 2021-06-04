@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
-<!-- Loads internationalization, loads static and filter to get image extension -->
-{% load i18n %} {% load static %} {% load app_filters %}
+<!-- Loads internationalization and filter to get image extension -->
+{% load i18n %} {% load app_filters %}
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'info/includes/critical_css/page_detail.html' %}{% endblock %}
 
@@ -10,14 +10,22 @@
 
 <!-- Open Graph Tags -->
 {% block og_type %}article{% endblock %}
-{% block og_title %}{{ object.title }}{% endblock %}
-{% block og_description %}{{ object.desc_title1|title }}{% endblock %}
+{% block og_title %}{{ object.title }} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{{ object.summary }}{% endblock %}
 {% block og_image %}{{ object.image_fb_link.url }}{% endblock %}
 {% block og_image_type %}image/{{ object.image_fb_link.name|extension }}{% endblock %}
 {% block og_image_width %}{{ object.image_fb_link.width }}{% endblock %}
 {% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
 {% block og_image_alt %}{{ object.title }}{% endblock %}
+
+{% block article_section %}{% trans 'Spirituality' %}{% endblock %}"
+{% block article_author %}Alessandro Olianas{% endblock %}"
+{% block article_published_time %}{{ object.date_added }}{% endblock %}"
+{% block article_tag %}{{ object.category.title }}, {{ object.title }}, {{ object.desc_title1 }},
+{{ object.desc_title2 }}{% if product.product_button_text %}, {{ object.product_button_text }}{% endif %}{% endblock %}"
+
 {% block head_title %}{{ object.title }}{% endblock %}
+
 {% block content %}
 <!-- Layout for Pages -->
 <article class="flex-grow-1 bg-white">
@@ -40,24 +48,24 @@
         </div>
         <!-- Small quote before text content -->
         <aside class="col-12 bg-{{ object.theme}}">
-            <p class="p-font h6 text-center fw-bold text-white my-2"><i>"{{ object.summary }}"</i></p>
+            <p class="p-font h6 text-center fw-bold text-white my-2 px-3 px-md-4"><i>"{{ object.summary }}"</i></p>
         </aside>
     </section>
     <!-- Image positions change depending on screen size -->
     <section class="row bg-white">
-        <div class="col-12 order-2 d-lg-none bg-{{ object.theme}} py-1"></div>
-        <div class="col-auto col-lg d-flex order-3 order-lg-1 d-lg-flex bg-white">
+        <div class="col-12 order-2 d-md-none bg-{{ object.theme}} py-1"></div>
+        <div class="col-auto col-md d-flex order-3 order-md-1 d-md-flex bg-white">
             <img src="{{ object.image_fb_link.url }}" width="{{ object.image_fb_link.width }}" srcset="{{ object.image_fb_link.url }} {{ object.image_fb_link.width }}w,
                 {{ object.image_fb_link_md.url }} {{ object.image_fb_link_md.width }}w,
                 {{ object.image_fb_link_sm.url }} {{ object.image_fb_link_sm.width }}w" sizes="(max-width: 767px) 100vw,
-                (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid my-auto">
+                (min-width: 768px) 50vw" alt="{{ item.title }}" class="img-fluid img-cover">
         </div>
-        <div class="col-auto col-lg order-1 order-xl-2 bg-white my-auto px-3 py-3 py-lg-0">
-            <h3 class="h-font text-primary h2 text-center text-lg-start">
+        <div class="col-12 col-md order-1 order-xl-2 bg-white my-auto px-3 pt-3 py-md-0">
+            <h3 class="h-font text-primary h2 text-center text-sm-start">
                 {{ object.desc_title1|upper }}
             </h3>
             <!-- space that displays rich text -->
-            <div class="p-font text-primary">{{ object.description1|safe }}</div>
+            <div class="p-font text-primary text-center text-sm-start">{{ object.description1|safe }}</div>
             {% if object.product and object.product_button_text and not object.description2  %}
             <p class="text-center"><a href="{% url 'products:product-detail' object.product.slug object.product.id %}"
                     class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
@@ -70,15 +78,15 @@
     {% if object.description2 or object.bot_image_tw_header %}
     <section class="row">
         {% if object.description2 %}
-        <div class="col-12 bg-white py-3 px-2 px-md-4">
-            <h3 class="h-font text-center text-primary h2">
+        <div class="col-12 bg-white pt-3 px-3 px-md-4">
+            <h3 class="h-font text-center text-sm-start text-primary h2">
                 {{ object.desc_title2|upper }}
             </h3>
             <!-- space that displays rich text -->
-            <div class="p-font text-primary">{{ object.description2|safe }}</div>
+            <div class="p-font text-primary text-center text-sm-start">{{ object.description2|safe }}</div>
             {% if object.product_button_text and object.product %}
             <p class="text-center"><a href="{% url 'products:product-detail' object.product.slug object.product.id %}"
-                    class="smooth-click p-font btn-tran btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
+                    class="smooth-click p-font btn-tran btn-md btn btn-warning shadow text-primary">{{ object.product_button_text|title }}</a>
             </p>
             {% endif %}
         </div>

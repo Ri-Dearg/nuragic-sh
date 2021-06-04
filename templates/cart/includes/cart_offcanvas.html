@@ -2,7 +2,8 @@
 {% load i18n %} {% load static %}
 {% if cart %}
 <div class="offcanvas-header pb-0">
-    <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasCartLabel">{% trans 'YOUR CART' %}</h2>
+    <h2 class="h-font h3 l-space-1 text-primary text-uppercase mx-auto" id="offcanvasCartLabel">{% trans 'Your Cart' %}
+    </h2>
     <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">
@@ -47,7 +48,8 @@
 </div>
 {% else %}
 <div class="offcanvas-header pb-0">
-    <h2 class="h-font h3 l-space-1 text-primary mx-auto" id="offcanvasCartLabel">{% trans 'EMPTY CART' %}</h2>
+    <h2 class="h-font h3 l-space-1 text-primary text-uppercase mx-auto" id="offcanvasCartLabel">{% trans 'Empty Cart' %}
+    </h2>
     <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">

@@ -3,12 +3,24 @@
 {% load static %} {% load i18n %} {% load crispy_forms_tags %}
 
 <!-- Critical CSS -->
-{% block critical_css %}{% include 'contact/includes/critical_css/email_form.html' %}{% endblock %}
+{% block critical_css %}{% include 'base/includes/critical_css/base.html' %}{% endblock %}
 <!-- Title -->
 {% block head_title %}{% trans 'Contact Us' %}{% endblock%}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Contact us, connect, collaborate, communicate and share. We want to hear from you.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'contact us, communicate, message, support' %}{% endblock %}
+
 <!-- Open Graph Tags -->
-{% include 'base/includes/open_graph_basic.html'%}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Get in Touch' %} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}{% trans 'Nuragic Shamanic Healing Logo' %}{% endblock %}
+
 <!-- Contact email form -->
-{% block form_title %}{% trans 'REACH OUT' %}{% endblock %}
+{% block form_title %}{% trans 'Reach Out' %}{% endblock %}
 {% block form_content %}{% crispy form %}{% endblock %}

@@ -2,7 +2,7 @@
 {% load i18n %} {% load crispy_forms_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 <article class="row">
-    <h3 class="h-font l-space-1 text-primary mb-3">{% trans 'NEWSLETTER SETTINGS' %}</h3>
+    <h3 class="h-font l-space-1 text-primary text-uppercase mb-3">{% trans 'Newsletter Settings' %}</h3>
     <form action="{% url 'users:newsletter'%}?next={{ request.path }}" method="POST">
         {% csrf_token %}
         <div class="col-md-6 col-12 form-floating my-1 pe-md-4">

@@ -2,6 +2,13 @@
 <!-- Loads internationalization -->
 {% load i18n %}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Your orders. Thank you for your support.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'orders, finalized, paid, order history' %}{% endblock %}
+
+<!--  Open Graph -->
+{% include 'base/includes/open_graph_basic.html'%}
+
 {% block head_title %}{% trans 'My Orders' %}{% endblock%}
 
 {% block content %}
@@ -9,7 +16,8 @@
 <section class="flex-grow-1 bg-white">
     <div class="row">
         <div class="col-12 bg-brown py-2">
-            <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'MY ORDERS' %}</h2>
+            <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">{% trans 'My Orders' %}
+            </h2>
         </div>
     </div>
     <!-- Displays an order row for each item -->
@@ -24,7 +32,7 @@
         <article class="col text-center mt-4">
             <h2 class="p-font text-primary h4">{% trans 'No Orders have been made'%}.</h2>
             <h2 class="p-font text-primary mb-0">{% trans 'What do we have for you' %}?</h2>
-            <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+            <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4"
                 href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
         </article>
     </section>

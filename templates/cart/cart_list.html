@@ -3,13 +3,20 @@
 {% load i18n %} {% load static %}
 {% block head_title %}{% trans 'Your Cart' %}{% endblock%}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans "Welcome to your cart. Let's see what has caught your eye." %}{% endblock %}
+{% if cart %}
+{% block meta_keywords %}{{ block.super }} {% for item in cart_items %}{{ item.product.title }}, {% endfor %}
+{% endblock %}
+{% endif %}
+
 <!-- Open Graph Tags To redo -->
 {% include 'base/includes/open_graph_basic.html'%}
 
 {% block content %}
 <div class="row">
     <div class="col-12 bg-brown py-2">
-        <h2 class="h-font l-space-2 text-white text-center display-4 mb-0">{% trans 'YOUR CART' %}</h2>
+        <h2 class="h-font l-space-2 text-white text-center text-uppercase display-4 mb-0">{% trans 'Your Cart' %}</h2>
     </div>
 </div>
 {% if cart %}
@@ -31,7 +38,7 @@
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
         <h2 class="p-font text-primary mb-0">{% trans 'See what we can offer' %}:</h2>
-        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4"
             href="{% url 'products:product-list' %}">{% trans 'Offerings' %}</a>
     </article>
 </section>

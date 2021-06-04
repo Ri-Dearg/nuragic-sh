@@ -1,15 +1,23 @@
 {% extends 'base/base.html' %}
-<!-- Loads internationalization, loads static, loads crispy forms  -->
-{% load i18n %}
+<!-- Loads internationalization, loads static  -->
+{% load i18n %} {% load static %}
+
 <!-- Critical CSS -->
-{% block critical_css %}{% endblock %}
+{% block critical_css %}{% include 'policies/includes/critical_css/policy_detail.html' %}{% endblock %}
 
 <!-- Meta details -->
 {% block meta_description %}{{ object.name }}{% endblock %}
-{% block meta_keywords %}{{ block.super }}{{ object.name }}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {{ object.name }}{% endblock %}
 
 <!-- Open Graph Tags -->
-{% include 'base/includes/open_graph_basic.html'%}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{{ object.name }} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{% trans 'Learn about our policies.' %}{% endblock %}
+{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}{% trans 'Nuragic Shamanic Healing Logo' %}{% endblock %}
 
 {% block head_title %}{{ object.name }}{% endblock %}
 {% block content %}
