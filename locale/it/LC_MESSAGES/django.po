@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-04 09:15+0000\n"
+"POT-Creation-Date: 2021-06-04 10:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -786,6 +786,12 @@ msgstr ""
 "Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
 "connesioni tra persone e culture."
 
+#: templates/base/includes/open_graph_basic.html:10
+#: templates/contact/email_form.html:22 templates/info/index.html:21
+#: templates/policies/policy_detail.html:20
+msgid "Nuragic Shamanic Healing Logo"
+msgstr "Logo di Nuragic Shamanic Healing"
+
 #: templates/base/includes/paginator.html:5
 msgid "First"
 msgstr "Prima Pagina"
@@ -1192,11 +1198,6 @@ msgstr "contattaci, communicare, messagi, supporto"
 msgid "Get in Touch"
 msgstr "Entra in Contatto"
 
-#: templates/contact/email_form.html:22 templates/info/index.html:21
-#: templates/policies/policy_detail.html:20
-msgid "Nuragic Shamanic Healing Logo"
-msgstr "Logo Nuragic Shamanic Healing"
-
 #: templates/contact/email_form.html:25
 msgid "Reach Out"
 msgstr "Entra in Contatto"
@@ -1464,8 +1465,8 @@ msgstr ""
 "da piccole artigiani e aziende. Vieni a vedere cosa possiamo offrirti."
 
 #: templates/products/product_list.html:17
-msgid "Our Shop"
-msgstr "Il nostro Shop"
+msgid "Our Shop's Offerings"
+msgstr "Le Offerte del nostro Shop"
 
 #: templates/products/product_list.html:18
 msgid "Have a look at our hand-picked goods and services."
@@ -1694,8 +1695,8 @@ msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "
 "favore."
 
-#~ msgid "Our Shop's Offerings"
-#~ msgstr "Le Offerte del nostro Shop"
+#~ msgid "Our Shop"
+#~ msgstr "Il nostro Shop"
 
 #~ msgid "YOUR CART"
 #~ msgstr "IL TUO CARRELLO"
