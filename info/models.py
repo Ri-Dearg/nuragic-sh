@@ -188,6 +188,7 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
                                 related_name='page')
     product_button_text = models.CharField(
         max_length=30, blank=True, default=_('Learn More'))
+    display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(
         default='', editable=False, max_length=60, null=False)

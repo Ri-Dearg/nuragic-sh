@@ -82,6 +82,7 @@ class Product(models.Model):
         blank=False,
         null=False,
         editable=False)
+    display = models.BooleanField(default=True)
     slug = models.SlugField(
         default='', editable=False, max_length=254, null=False)
 

@@ -17,8 +17,10 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         """Adds all necessary information to the context"""
         # Declares objects for pagination
         object_list = self.object.products.filter(
-            stock__gte=1) | self.object.products.filter(
-            can_preorder=True).order_by('-popularity', '-stock')
+            stock__gte=1, display=True
+        ).order_by('-popularity', '-stock') | self.object.products.filter(
+            can_preorder=True, display=True
+        ).order_by('-popularity', '-stock')
         context = super().get_context_data(
             object_list=object_list, **kwargs)
 
@@ -46,11 +48,16 @@ class ProductDetailView(DetailView):
         # while removing the current product.
         products = Product.objects.exclude(
             pk=this_object.id).filter(
-                category=product_category, stock__gte=1
-        ) | Product.objects.exclude(
+                category=product_category,
+                display=True,
+                stock__gte=1,
+        ).order_by(
+            '-popularity', '-stock')[:9] | Product.objects.exclude(
             pk=this_object.id).filter(
-            category=product_category, can_preorder=True
-        ).order_by('-popularity', '-stock').order_by(
+            category=product_category,
+            can_preorder=True,
+            display=True
+        ).order_by(
             '-popularity', '-stock')[:9]
 
         context['related_products'] = products
@@ -65,8 +72,10 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     """Displays all products in a list.
     Adds context for highlighting the menu."""
     queryset = Product.objects.filter(
-        stock__gte=1) | Product.objects.filter(
-        can_preorder=True).order_by('-popularity', '-stock')
+        stock__gte=1, display=True
+    ).order_by('-popularity', '-stock') | Product.objects.filter(
+        can_preorder=True, display=True
+    ).order_by('-popularity', '-stock')
     paginate_by = 12
 
     def get_context_data(self, **kwargs):

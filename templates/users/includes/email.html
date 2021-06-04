@@ -4,7 +4,7 @@
 {% url 'users:user-email' as url_add_email %}
 
 <article class="row">
-    <h3 class="h-font l-space-1 col-12 text-primary">{% trans 'EMAIL SETTINGS' %}</h3>
+    <h3 class="h-font l-space-1 col-12 text-primary text-uppercase">{% trans 'Email Settings' %}</h3>
     <div class="col-12 mb-1">
         <form action="{% url 'users:user-email' %}" class="email_list" method="POST">
             {% csrf_token %}

@@ -2,6 +2,13 @@
 
 {% load static %}{% load i18n %}
 
+<!-- Meta details -->
+{% block meta_description %}{% trans 'Thank you for your exchange and your support.' %}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {% trans 'checkout, payment' %}{% endblock %}
+
+<!--  Open Graph -->
+{% include 'base/includes/open_graph_basic.html'%}
+
 {% load crispy_forms_tags %}
 {% block head_title %}{% trans 'Checkout' %}{% endblock%}
 
@@ -124,6 +131,10 @@
                 <strong><span class="float-end">€{{ grand_total }}</span></strong>
             </li>
         </ul>
+        <p id="preloaderMessage"
+            class="p-font d-none text-white position-absolute start-50 translate-middle text-center min-vw-100 min-vw-md-50 min-vw-lg-33 px-2">
+            {% translate "Please do not refresh the page, press the back button or navigate away while the payment is processing.<br>Thank you for your patience."%}
+        </p>
     </section>
 </article>
 {% else %}
@@ -131,8 +142,7 @@
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
         <h2 class="p-font text-primary mb-0">{% trans "Let's explore." %}</h2>
-        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4 w-25"
-            href="{% url 'products:product-list' %}">
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4" href="{% url 'products:product-list' %}">
             {% trans 'Offerings' %}</a>
     </article>
 </section>
@@ -143,9 +153,6 @@
 {{ block.super }}
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
-<script id="preloaderMessage" type="application/json">
-    '<p class="p-font text-white position-absolute start-50 translate-middle text-center min-vw-100 min-vw-md-50 min-vw-lg-33">{% translate "Please do not refresh the page, press the back button or navigate away while the payment is processing.<br>Thank you for your patience."%}</p>'
-</script>
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }"></script>
 {% endblock %}

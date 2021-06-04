@@ -1,4 +1,3 @@
-var preloaderMessage = $("#preloaderMessage").text();
 var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
 var clientSecret = $("#id_client_secret").text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -51,7 +50,7 @@ form.addEventListener("submit", function (ev) {
   ev.preventDefault();
   card.update({ disabled: true });
   $("#payment-submit").attr("disabled", true);
-  $(".preload-gif").append(preloaderMessage);
+  $("#preloaderMessage").appendTo(".preload-gif").removeClass("d-none");
   $(".preloader").fadeIn("slow");
 
   var saveInfo = Boolean($("#id-save-info").prop("checked"));

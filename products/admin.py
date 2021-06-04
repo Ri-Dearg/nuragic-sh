@@ -10,7 +10,8 @@ class ProductInlineAdmin(TranslationStackedInline):
     model = Product
     fields = ('category', 'title', 'description', 'price', 'delivery_cost',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
-              'stock', 'date_added', 'times_purchased', 'popularity',)
+              'stock', 'date_added', 'times_purchased', 'popularity',
+              'display',)
     readonly_fields = ('times_purchased', 'popularity',)
 
 
@@ -19,7 +20,8 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ['category', 'title']
     fields = ('category', 'title', 'description', 'price', 'delivery_cost',
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
-              'stock', 'date_added', 'times_purchased', 'popularity',)
+              'stock', 'date_added', 'times_purchased', 'popularity',
+              'display',)
     readonly_fields = ('times_purchased', 'popularity',)
 
 

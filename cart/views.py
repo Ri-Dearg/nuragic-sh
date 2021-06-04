@@ -20,8 +20,10 @@ class CartPageView(TemplateView):  # pylint: disable=too-many-ancestors
         context = super().get_context_data(**kwargs)
 
         products = Product.objects.filter(
-            stock__gte=1) | Product.objects.filter(
-            can_preorder=True).order_by('-popularity', '-stock')
+            stock__gte=1, display=True
+        ).order_by('-popularity', '-stock') | Product.objects.filter(
+            can_preorder=True, display=True
+        ).order_by('-popularity', '-stock')
 
         context['related_products'] = products
 

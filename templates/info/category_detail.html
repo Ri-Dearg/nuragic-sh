@@ -1,22 +1,26 @@
 {% extends 'base/base.html' %}
-<!-- Loads internationalization, loads static and filter to get image extension -->
-{% load i18n %} {% load static %} {% load app_filters %}
+<!-- Loads internationalization, filter to get image extension -->
+{% load i18n %} {% load app_filters %}
 <!-- Critical CSS -->
 {% block critical_css %}{% include 'info/includes/critical_css/category_detail.html' %}{% endblock %}
 
 <!-- Meta details -->
 {% block meta_description %}{{ object.description|truncatechars:270 }}{% endblock %}
-{% block meta_keywords %}{{ block.super }}{{ object.title }}{% endblock %}
+{% block meta_keywords %}{{ block.super }} {{ object.title }}{% endblock %}
 
 <!-- Open Graph Tags -->
-{% block head_title %}{{ object.title }}{% endblock %} {% block og_type %}website{% endblock %}
-{% block og_title %}Nuragic Shamanic Healing{% endblock %}
-{% block og_description %}{{ object.title|title }}{% endblock %}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{{ object.title|title }} | Nuragic Shamanic Healing{% endblock %}
+{% block og_description %}{{ object.description }}{% endblock %}
 {% block og_image %}{{ object.image_fb_link.url }}{% endblock %}
 {% block og_image_type %}image/{{ object.image_fb_link.name|extension }}{% endblock %}
 {% block og_image_width %}{{ object.image_fb_link.width }}{% endblock %}
 {% block og_image_height %}{{ object.image_fb_link.height }}{% endblock %}
-{% block og_image_alt %}{{ object.title }}{% endblock %} {% block content %}
+{% block og_image_alt %}{{ object.title }}{% endblock %}
+
+{% block head_title %}{{ object.title }}{% endblock %}
+
+{% block content %}
 <!-- Spacer -->
 <section class="flex-grow-1 bg-white">
     <div class="row">

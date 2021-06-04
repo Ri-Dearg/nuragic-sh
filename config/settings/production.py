@@ -33,8 +33,8 @@ elif DEBUG is False:
 
 ALLOWED_HOSTS = [
     '.nuragicshamanichealing.org',
-    '157.90.231.34',
-    'localhost']
+    '.nuragicshamanichealing.com',
+    '157.90.231.34']
 
 
 # Static files (CSS, JavaScript, Images)
