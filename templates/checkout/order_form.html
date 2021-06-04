@@ -92,7 +92,7 @@
                 <input type="hidden" value="{{ client_secret }}" name="client_secret" />
             </fieldset>
             <button type="submit" id="payment-submit"
-                class="p-font text-white btn btn-info shadow mb-2">{% trans 'Confirm Purchase' %}</button>
+                class="p-font text-white btn btn-info shadow fw-bold mb-2">{% trans 'Confirm Purchase' %}</button>
         </form>
         <p class="p-font text-muted small">
             *
@@ -142,7 +142,8 @@
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
         <h2 class="p-font text-primary mb-0">{% trans "Let's explore." %}</h2>
-        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4" href="{% url 'products:product-list' %}">
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning shadow fw-bold my-4"
+            href="{% url 'products:product-list' %}">
             {% trans 'Offerings' %}</a>
     </article>
 </section>

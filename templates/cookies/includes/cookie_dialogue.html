@@ -38,14 +38,14 @@
                     <input type="hidden" name="cookie-consent" value="opt-in">
                     <input type="hidden" name="script-url" value="{% static 'js/custom/fullConsent.js' %}">
                     <button type="submit"
-                        class="p-font fw-bold col-8 btn-tran btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Accept All' %}</button>
+                        class="p-font fw-bold col-8 btn-tran btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Accept All' %}</button>
                 </form>
                 <form class="cookie-form mb-3" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cookie-consent" value="analytics">
                     <input type="hidden" name="script-url" value="{% static 'js/custom/gAnalytics.js' %}">
                     <button type="submit"
-                        class="p-font col-8 btn-tran btn btn-white text-primary border-1 border-warning shadow mx-auto mb-0">{% trans 'Accept Analytics' %}</button>
+                        class="p-font col-8 btn-tran btn btn-white text-primary border-1 border-warning shadow fw-bold mx-auto mb-0">{% trans 'Accept Analytics' %}</button>
                 </form>
                 <form class="cookie-form" action="{% url 'cookies:consent' %}" method="POST">
                     {% csrf_token %}

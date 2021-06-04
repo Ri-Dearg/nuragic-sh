@@ -9,9 +9,9 @@
     </div>
     <div class="offcanvas-body text-center">
         <a href="{% url 'account_login' %}?next={{ request.path }}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Sign In' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Sign In' %}</a>
         <p class="p-font text-center text-primary col-12 my-2">{% trans 'or' %}</p>
         <a href="{% url 'account_signup' %}?next={{ request.path }}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Register' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Register' %}</a>
     </div>
 </div>

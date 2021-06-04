@@ -57,7 +57,7 @@ class StyledLoginForm(LoginForm):
                         _('Sign In'),
                         type='submit',
                         css_class='p-font btn-tran btn btn-warning text-primary \
-                            shadow primaryAction'),
+                            shadow fw-bold primaryAction'),
                     css_class='col-auto mx-auto'),
             )
         )
@@ -85,7 +85,7 @@ class StyledResetPasswordForm(ResetPasswordForm):
                       pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
                 Column(StrictButton(_('Reset Password'), type='submit',
                                     css_class='p-font btn-tran btn btn-warning \
-                                    text-primary shadow'),
+                                    text-primary shadow fw-bold'),
                        css_class='col-auto mt-1 mx-auto'),
             )
         )
@@ -120,7 +120,7 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
 
                 Column(StrictButton(_('Change Password'), type='submit',
                                     css_class='p-font btn-tran btn btn-warning \
-                           text-primary shadow'),
+                           text-primary shadow fw-bold'),
                        css_class='col-auto mt-1 mx-auto'),
             )
         )
@@ -160,7 +160,7 @@ class StyledSignupForm(SignupForm):
 
                 Column(StrictButton(_('Register'), type='submit',
                                     css_class='p-font btn-tran btn btn-warning \
-                                    text-primary shadow'),
+                                    text-primary shadow fw-bold'),
                        css_class='col-auto mx-auto mt-1'),
             )
         )
@@ -274,10 +274,13 @@ class UserProfileForm(forms.ModelForm):
                     )),
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
 
-                Column(StrictButton(_('Save Details'), type='submit',
-                                    css_class='p-font btn-tran btn btn-sm \
+                Column(
+                    StrictButton(
+                        _(
+                            'Save Details'), type='submit',
+                        css_class='p-font btn-tran btn btn-sm fw-bold \
                                         btn-warning text-primary shadow'),
-                       css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 \
+                    css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 \
                            pb-md-4 mx-md-auto')
             )
         )
