@@ -13,7 +13,7 @@
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="en">
                         <input
-                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_code == 'en'%} fw-bold{% endif %}"
+                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'en'%} fw-bold{% endif %}"
                             type="submit" value="EN">
                         |
                     </form>
@@ -22,7 +22,7 @@
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="it">
                         <input
-                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_code == 'it'%} fw-bold{% endif %}"
+                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'it'%} fw-bold{% endif %}"
                             type="submit" value="IT">
                     </form>
                 </div>
@@ -66,7 +66,6 @@
                 {% if not 'checkout/payment' in request.path %}
                 {% if '/shop/' in request.path or '/shop/' in request.GET.next %}
                 <div class="col-2 col-sm-1 d-md-none cart-offcanvas-container">
-                    <p class="visually-hidden" id="dropdownCartMenu">Likes</p>
                     {% include 'cart/includes/cart_menu.html' %}
                 </div>
                 <div class="col-2 col-sm-1 d-md-none like-offcanvas-container">
@@ -101,7 +100,7 @@
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="en">
                                 <input
-                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_code == 'en'%} fw-bold{% endif %}"
+                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'en'%} fw-bold{% endif %}"
                                     type="submit" value="EN">
                                 |
                             </form>
@@ -110,7 +109,7 @@
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="it">
                                 <input
-                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_code == 'it'%} fw-bold{% endif %}"
+                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'it'%} fw-bold{% endif %}"
                                     type="submit" value="IT">
                             </form>
                         </li>
