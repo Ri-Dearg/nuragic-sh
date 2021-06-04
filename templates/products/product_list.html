@@ -8,13 +8,13 @@
 {% block critical_css %}{% include 'products/includes/critical_css/product_list.html' %}{% endblock %}
 
 <!-- Meta details -->
-{% block meta_description %}{% trans 'A shop of our own products with hand picked and hand-made items from a small businesses. Come in and see what we have to offer.' %}{% endblock %}
+{% block meta_description %}{% trans 'A shop of our own products with hand picked and hand-made items from artisans and small businesses. Come in and see what we have to offer.' %}{% endblock %}
 {% block meta_keywords %}{{ block.super }}
 {% trans 'shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses' %}{% endblock %}
 
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
-{% block og_title %}{% trans 'Our Shop Offerings'%} | Nuragic Shamanic Healing{% endblock %}
+{% block og_title %}{% trans 'Our Shop's Offerings'%} | Nuragic Shamanic Healing{% endblock %}
 {% block og_description %}{% trans 'Have a look at our hand-picked goods and services.'%}{% endblock %}
 {% block og_image %}{{ page_obj.0.image_4_3.url }}{% endblock %}
 {% block og_image_type %}image/{{ page_obj.0.image_4_3.name|extension }}{% endblock %}

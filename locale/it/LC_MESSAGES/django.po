@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 21:25+0000\n"
+"POT-Creation-Date: 2021-06-04 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,52 +27,52 @@ msgstr "Un prodotto non è disponibile."
 msgid ""
 "{product} has run out of stock                             and has been "
 "removed from the cart."
-msgstr "{product} non è più disponibnile ed è stato/a rimosso/a dal carello."
+msgstr "{product} non è più disponibnile ed è stato/a rimosso/a dal carrello."
 
-#: cart/views.py:64
+#: cart/views.py:66
 #, python-brace-format
 msgid "Removed {product.title} from your cart."
-msgstr "{product.title} è stato/a rimosso/a dal carello."
+msgstr "{product.title} è stato/a rimosso/a dal carrello."
 
-#: cart/views.py:67
+#: cart/views.py:69
 #, python-brace-format
 msgid ""
 "Please update the quantity to add                             {product."
 "title} to your cart."
-msgstr "Aggiorna la quantità per aggiungere {product.title} al carello."
+msgstr "Aggiorna la quantità per aggiungere {product.title} al carrello."
 
-#: cart/views.py:72 contact/views.py:91 cookies/views.py:38 likes/views.py:98
+#: cart/views.py:74 contact/views.py:91 cookies/views.py:38 likes/views.py:98
 #: likes/views.py:117
 msgid "Info"
 msgstr "Info"
 
-#: cart/views.py:89
+#: cart/views.py:91
 #, python-brace-format
 msgid "Preordered {quantity} {product.title}."
 msgstr "Preordinato/a {quantity} {product.title}."
 
-#: cart/views.py:92
+#: cart/views.py:94
 #, python-brace-format
 msgid "Added {quantity} {product.title} to your cart."
-msgstr "Aggiunto/a {quantity} {product.title} al carello."
+msgstr "Aggiunto/a {quantity} {product.title} al carrello."
 
-#: cart/views.py:98 contact/views.py:99
+#: cart/views.py:100 contact/views.py:99
 msgid "Success"
 msgstr "Successo"
 
-#: cart/views.py:125
+#: cart/views.py:127
 #, python-brace-format
 msgid "Error adding item to cart: {error}"
-msgstr "Errore nell'aggiunta di un articolo al carello: {error}"
+msgstr "Errore nell'aggiunta di un articolo al carrello: {error}"
 
-#: cart/views.py:128 likes/views.py:130
+#: cart/views.py:130 likes/views.py:130
 msgid "Error"
 msgstr "Errore"
 
 #: checkout/models.py:45 checkout/models.py:59 checkout/views.py:116
 #: checkout/views.py:118 checkout/views.py:148 checkout/views.py:150
-#: templates/checkout/order_detail.html:95
-#: templates/checkout/order_detail.html:156 users/forms.py:203
+#: templates/checkout/order_detail.html:103
+#: templates/checkout/order_detail.html:164 users/forms.py:203
 #: users/forms.py:211 users/forms.py:241 users/forms.py:272
 msgid "Country"
 msgstr "Paese"
@@ -83,7 +83,7 @@ msgstr "Indrizzi Email"
 
 #: checkout/views.py:90 contact/views.py:26 contact/views.py:40
 #: templates/base/includes/footer.html:17
-#: templates/checkout/order_detail.html:36
+#: templates/checkout/order_detail.html:44
 #: templates/users/includes/newsletter_form.html:15 users/forms.py:83
 #: users/forms.py:148
 msgid "Email"
@@ -97,8 +97,8 @@ msgstr "Nome Completo"
 
 #: checkout/views.py:98 checkout/views.py:126 checkout/views.py:130
 #: templates/bootstrap4/phone_field.html:23
-#: templates/checkout/order_detail.html:54
-#: templates/checkout/order_detail.html:115
+#: templates/checkout/order_detail.html:62
+#: templates/checkout/order_detail.html:123
 msgid "Phone Number"
 msgstr "Numero di Telefono"
 
@@ -107,22 +107,22 @@ msgid "123 Main St."
 msgstr "Via Domu 123"
 
 #: checkout/views.py:105 checkout/views.py:136 checkout/views.py:137
-#: templates/checkout/order_detail.html:60
-#: templates/checkout/order_detail.html:121 users/forms.py:199
+#: templates/checkout/order_detail.html:68
+#: templates/checkout/order_detail.html:129 users/forms.py:199
 #: users/forms.py:206 users/forms.py:226 users/forms.py:257
 msgid "Street Address 1"
 msgstr "Indirizzo 1"
 
 #: checkout/views.py:107 checkout/views.py:108 checkout/views.py:139
-#: checkout/views.py:140 templates/checkout/order_detail.html:67
-#: templates/checkout/order_detail.html:128 users/forms.py:200
+#: checkout/views.py:140 templates/checkout/order_detail.html:75
+#: templates/checkout/order_detail.html:136 users/forms.py:200
 #: users/forms.py:207 users/forms.py:229 users/forms.py:260
 msgid "Street Address 2"
 msgstr "Indirizzo 2"
 
 #: checkout/views.py:110 checkout/views.py:111 checkout/views.py:142
-#: checkout/views.py:143 templates/checkout/order_detail.html:74
-#: templates/checkout/order_detail.html:135 users/forms.py:201
+#: checkout/views.py:143 templates/checkout/order_detail.html:82
+#: templates/checkout/order_detail.html:143 users/forms.py:201
 #: users/forms.py:208 users/forms.py:232 users/forms.py:263
 msgid "Town or City"
 msgstr "Città"
@@ -137,22 +137,22 @@ msgid "County, State or Locality"
 msgstr "Regione"
 
 #: checkout/views.py:120 checkout/views.py:121 checkout/views.py:152
-#: checkout/views.py:153 templates/checkout/order_detail.html:88
-#: templates/checkout/order_detail.html:149 users/forms.py:210
+#: checkout/views.py:153 templates/checkout/order_detail.html:96
+#: templates/checkout/order_detail.html:157 users/forms.py:210
 #: users/forms.py:238 users/forms.py:269
 msgid "Postcode"
 msgstr "CAP"
 
 #: checkout/views.py:162
 msgid "The cart is empty."
-msgstr "Il carello è vuoto."
+msgstr "Il carrello è vuoto."
 
 #: checkout/views.py:239
 msgid ""
 "One of the products in your cart wasn't found in our "
 "collection.                     Please call us for assistance!"
 msgstr ""
-"Un prodotto nel tuo carello non è stato trovato nella nostra collezione. "
+"Un prodotto nel tuo carrello non è stato trovato nella nostra collezione. "
 "Conttataci per assistenza, per favore!"
 
 #: checkout/views.py:256
@@ -190,8 +190,8 @@ msgid "Thank you, your message has been sent."
 msgstr "Grazie, il tuo messagio è stato spedito."
 
 #: contact/views.py:27 contact/views.py:45
-#: templates/checkout/order_detail.html:48
-#: templates/checkout/order_detail.html:109
+#: templates/checkout/order_detail.html:56
+#: templates/checkout/order_detail.html:117
 msgid "Name"
 msgstr "Nome"
 
@@ -632,21 +632,23 @@ msgstr ""
 #: templates/base/base.html:19
 msgid ""
 "Alessandro Olianas, Nuragic Shamanic Healing, events, spiritual events, "
-"Sardinia, Ireland, connections, sharing, roots, workshops, online workshops, "
-"online courses, courses, spiritual, spirituality, nuragic,"
+"Sardinia, Ireland, connections, connect, collaborate, sharing, roots, "
+"workshops, online workshops, online courses, courses, spiritual, "
+"spirituality, nuragic,"
 msgstr ""
 "Alessandro Olianas, Nuragic Shamanic Healing, eventi, eventi spirituali,"
-"Sardegna, Irlanda, connessioni, condivisione, radici, laboratori, laboratori "
-"online, corsi online, corsi, spirituale, spiritualità, nuragico,"
+"Sardegna, Irlanda, connessioni,, connetti, collaborare, condivisione, "
+"radici, laboratori, laboratori online, corsi online, corsi, spirituale, "
+"spiritualità, nuragico,"
 
-#: templates/base/base.html:106
+#: templates/base/base.html:114
 msgid "Loading"
 msgstr "Carica"
 
 #: templates/base/errors.html:21 templates/base/includes/shop_nav.html:5
-#: templates/cart/cart_list.html:35 templates/checkout/order_form.html:136
-#: templates/checkout/order_list.html:29 templates/likes/likes_list.html:34
-#: templates/products/product_list.html:52
+#: templates/cart/cart_list.html:42 templates/checkout/order_form.html:146
+#: templates/checkout/order_list.html:36 templates/likes/likes_list.html:40
+#: templates/products/product_list.html:64
 msgid "Offerings"
 msgstr "Offerte"
 
@@ -727,7 +729,7 @@ msgid "Youtube Page"
 msgstr "Pagina Youtube"
 
 #: templates/base/includes/footer.html:58
-#: templates/base/includes/info_nav.html:39
+#: templates/base/includes/info_nav.html:41
 msgid "Contact"
 msgstr "Contatti"
 
@@ -763,17 +765,18 @@ msgstr "Riguardo Tutto"
 msgid "All"
 msgstr "Tutti"
 
-#: templates/base/includes/info_nav.html:48
-#: templates/products/product_detail.html:25
+#: templates/base/includes/info_nav.html:50
+#: templates/products/product_detail.html:34
 #: templates/products/product_list.html:5
 msgid "Shop"
 msgstr "Shop"
 
-#: templates/base/includes/open_graph_basic.html:4 templates/info/index.html:11
+#: templates/base/includes/open_graph_basic.html:4 templates/info/index.html:15
 msgid "Ancient Wisdom, Modern Healing"
 msgstr "Antica Sagezza, Energia Moderna"
 
-#: templates/base/includes/open_graph_basic.html:5 templates/info/index.html:12
+#: templates/base/includes/open_graph_basic.html:5
+#: templates/contact/email_form.html:17 templates/info/index.html:16
 msgid ""
 "Consciousness, spirituality, healing and ancestry. Working with systems such "
 "as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
@@ -799,36 +802,40 @@ msgstr "Ultima Pagina"
 msgid "Country Code"
 msgstr "Prefisso Internazionale"
 
-#: templates/cart/cart_list.html:4 templates/cart/cart_list.html:12
+#: templates/cart/cart_list.html:4 templates/cart/cart_list.html:19
 #: templates/cart/includes/cart_offcanvas.html:5
 msgid "Your Cart"
-msgstr "Il tuo Carello"
+msgstr "Il tuo carrello"
 
-#: templates/cart/cart_list.html:32 templates/checkout/order_form.html:132
+#: templates/cart/cart_list.html:7
+msgid "Welcome to your cart. Let's see what has caught your eye."
+msgstr "Benvenuto nel tuo carrello. Vediamo cosa ha catturato i tuoi occhi."
+
+#: templates/cart/cart_list.html:39 templates/checkout/order_form.html:143
 msgid "Your cart is empty..."
-msgstr "Il tuo carello è vuoto..."
+msgstr "Il tuo carrello è vuoto..."
 
-#: templates/cart/cart_list.html:33
+#: templates/cart/cart_list.html:40
 msgid "See what we can offer"
 msgstr "Guarda le nostre offerte"
 
 #: templates/cart/includes/cart_menu.html:6
 msgid "View Cart"
-msgstr "Carello"
+msgstr "Carrello"
 
 #: templates/cart/includes/cart_offcanvas.html:12
 msgid "Go to Cart"
-msgstr "Vai al Carello"
+msgstr "Vai al Carrello"
 
 #: templates/cart/includes/cart_offcanvas.html:15
-#: templates/checkout/order_form.html:6 templates/checkout/order_form.html:14
+#: templates/checkout/order_form.html:13 templates/checkout/order_form.html:21
 msgid "Checkout"
 msgstr "Pagamento"
 
 #: templates/cart/includes/cart_offcanvas.html:38
 #: templates/cart/includes/subtotal.html:8
-#: templates/checkout/order_detail.html:179
-#: templates/checkout/order_form.html:118
+#: templates/checkout/order_detail.html:187
+#: templates/checkout/order_form.html:125
 msgid "Delivery"
 msgstr "Spedizione"
 
@@ -839,14 +846,14 @@ msgstr "Totale"
 
 #: templates/cart/includes/cart_offcanvas.html:51
 msgid "Empty Cart"
-msgstr "Carello Vuoto"
+msgstr "Carrello Vuoto"
 
 #: templates/cart/includes/cart_offcanvas.html:58
 msgid "What can we offer you"
 msgstr "Cosa potremmo offrirti"
 
 #: templates/cart/includes/cart_product_display.html:39
-#: templates/products/product_detail.html:63
+#: templates/products/product_detail.html:75
 msgid "Quantity"
 msgstr "Quantità"
 
@@ -865,11 +872,11 @@ msgstr "Totale Articoli"
 
 #: templates/cart/includes/detail_cart_toggle.html:15
 msgid "Update Cart"
-msgstr "Aggiorna Carello"
+msgstr "Aggiorna Carrello"
 
 #: templates/cart/includes/detail_cart_toggle.html:18
 msgid "Add to Cart"
-msgstr "Aggiungi al Carello"
+msgstr "Aggiungi al Carrello"
 
 #: templates/cart/includes/subtotal.html:14
 msgid "Sub-total"
@@ -1008,106 +1015,114 @@ msgid "NEW ORDER"
 msgstr "NEW ORDER"
 
 #: templates/checkout/includes/order_display.html:13
-#: templates/checkout/order_detail.html:24
+#: templates/checkout/order_detail.html:32
 msgid "Order Number"
 msgstr "Numero Ordine"
 
 #: templates/checkout/includes/order_display.html:24
-#: templates/checkout/order_detail.html:30
+#: templates/checkout/order_detail.html:38
 msgid "Date"
 msgstr "Data"
 
 #: templates/checkout/includes/order_display.html:28
-#: templates/checkout/order_form.html:97
+#: templates/checkout/order_form.html:104
 msgid "Items"
 msgstr "Articoli"
 
-#: templates/checkout/order_detail.html:5
+#: templates/checkout/order_detail.html:13
 msgid "Your Order"
 msgstr "Il tuo Ordine"
 
-#: templates/checkout/order_detail.html:14
+#: templates/checkout/order_detail.html:22
 msgid "Order Complete"
 msgstr "Ordine Effetuato"
 
-#: templates/checkout/order_detail.html:21
+#: templates/checkout/order_detail.html:29
 msgid "Order Details"
 msgstr "Dettagli Ordine"
 
-#: templates/checkout/order_detail.html:45
+#: templates/checkout/order_detail.html:53
 msgid "Shipping Details"
 msgstr "Dettagli Spedizione"
 
-#: templates/checkout/order_detail.html:81
-#: templates/checkout/order_detail.html:142
+#: templates/checkout/order_detail.html:89
+#: templates/checkout/order_detail.html:150
 msgid "County"
 msgstr "Località"
 
-#: templates/checkout/order_detail.html:106
+#: templates/checkout/order_detail.html:114
 msgid "Billing Details"
 msgstr "Dettagli Fatturazione"
 
-#: templates/checkout/order_detail.html:174
-#: templates/checkout/order_form.html:113
+#: templates/checkout/order_detail.html:182
+#: templates/checkout/order_form.html:120
 msgid "Item Total"
 msgstr "Totale Articoli"
 
-#: templates/checkout/order_detail.html:184
-#: templates/checkout/order_form.html:123
+#: templates/checkout/order_detail.html:192
+#: templates/checkout/order_form.html:130
 msgid "Grand Total"
 msgstr "Somma Totale"
 
-#: templates/checkout/order_form.html:12
-msgid "Cart"
-msgstr "Carello"
+#: templates/checkout/order_form.html:6
+msgid "Thank you for your exchange and your support."
+msgstr "Grazie per lo scambio e il tuo supporto"
 
-#: templates/checkout/order_form.html:26
+#: templates/checkout/order_form.html:7
+msgid "checkout, payment"
+msgstr "cassa, pagamento"
+
+#: templates/checkout/order_form.html:19
+msgid "Cart"
+msgstr "Carrello"
+
+#: templates/checkout/order_form.html:33
 msgid "Personal Details"
 msgstr "Dettagli Personali"
 
-#: templates/checkout/order_form.html:34
+#: templates/checkout/order_form.html:41
 msgid "Delivery Information"
 msgstr "Informazione di Spedizione"
 
-#: templates/checkout/order_form.html:46
+#: templates/checkout/order_form.html:53
 msgid "My billing details are the same as delivery."
 msgstr ""
 "I miei dettagli per il fatturazione sono uguali a quelli di spedizione."
 
-#: templates/checkout/order_form.html:52
+#: templates/checkout/order_form.html:59
 msgid "Billing Information"
 msgstr "Informazione di Fatturazione"
 
-#: templates/checkout/order_form.html:69
+#: templates/checkout/order_form.html:76
 msgid "Save these shipping and billing addresses to my profile"
 msgstr "Salva gli indirizzi per spedizione e fatturazione al mio profilo"
 
-#: templates/checkout/order_form.html:71
+#: templates/checkout/order_form.html:78
 msgid "Create an account"
 msgstr "Creare un account"
 
-#: templates/checkout/order_form.html:72
+#: templates/checkout/order_form.html:79
 #: templates/users/includes/unauthenticated_offcanvas.html:13
 msgid "or"
 msgstr "o"
 
-#: templates/checkout/order_form.html:72
+#: templates/checkout/order_form.html:79
 msgid "login"
 msgstr "accedere"
 
-#: templates/checkout/order_form.html:73
+#: templates/checkout/order_form.html:80
 msgid "to save this information."
 msgstr "per salvare la tua informazione"
 
-#: templates/checkout/order_form.html:77
+#: templates/checkout/order_form.html:84
 msgid "Payment"
 msgstr "Pagamento"
 
-#: templates/checkout/order_form.html:88
+#: templates/checkout/order_form.html:95
 msgid "Confirm Purchase"
 msgstr "Conferma il tuo Acquisto"
 
-#: templates/checkout/order_form.html:92
+#: templates/checkout/order_form.html:99
 msgid ""
 "All of your payment details are processed by Stripe. We do not process or "
 "store your payment information."
@@ -1115,15 +1130,11 @@ msgstr ""
 "Tutti i tuoi dettagli del pagamento sono eseguiti da Stripe. Noi non "
 "effettuiamo il pagamento e non salviamo le tue informazioni del pagamento."
 
-#: templates/checkout/order_form.html:100
+#: templates/checkout/order_form.html:107
 msgid "Details"
 msgstr "Dettagli"
 
-#: templates/checkout/order_form.html:133
-msgid "Let's explore."
-msgstr "Esploriamo."
-
-#: templates/checkout/order_form.html:147
+#: templates/checkout/order_form.html:136
 msgid ""
 "Please do not refresh the page, press the back button or navigate away while "
 "the payment is processing.<br>Thank you for your patience."
@@ -1132,21 +1143,33 @@ msgstr ""
 "navigare ad un'altra pagine mentre il pagamento sta eseguendo, per favore."
 "<br>Grazie per la tua pazienza."
 
-#: templates/checkout/order_list.html:5 templates/checkout/order_list.html:12
+#: templates/checkout/order_form.html:144
+msgid "Let's explore."
+msgstr "Esploriamo."
+
+#: templates/checkout/order_list.html:6
+msgid "Your orders. Thank you for your support."
+msgstr "I tuoi ordini. Grazie per il tuo supporto."
+
+#: templates/checkout/order_list.html:7
+msgid "orders, finalized, paid, order history"
+msgstr "ordine, ordini fatti, pagati, storia dei ordini"
+
+#: templates/checkout/order_list.html:12 templates/checkout/order_list.html:19
 #: templates/users/includes/authenticated_offcanvas.html:18
 msgid "My Orders"
 msgstr "I miei Ordini"
 
-#: templates/checkout/order_list.html:26
+#: templates/checkout/order_list.html:33
 msgid "No Orders have been made"
 msgstr "Non ci sono stati ordini"
 
-#: templates/checkout/order_list.html:27
+#: templates/checkout/order_list.html:34
 msgid "What do we have for you"
 msgstr "Cosa potremmo offrirti"
 
-#: templates/checkout/order_list.html:34 templates/likes/likes_list.html:39
-#: templates/products/product_list.html:59
+#: templates/checkout/order_list.html:41 templates/likes/likes_list.html:45
+#: templates/products/product_list.html:71
 msgid "Product Page Navigation"
 msgstr "Navigazione per le pagine dei prodotti"
 
@@ -1154,7 +1177,27 @@ msgstr "Navigazione per le pagine dei prodotti"
 msgid "Contact Us"
 msgstr "Contattaci"
 
-#: templates/contact/email_form.html:13
+#: templates/contact/email_form.html:11
+msgid ""
+"Contact us, connect, collaborate, communicate and share. We want to hear "
+"from you."
+msgstr ""
+"Contattaci, connetti, collabori, communicare e condivdere. Vogliamo sentirti."
+
+#: templates/contact/email_form.html:12
+msgid "contact us, communicate, message, support"
+msgstr "contattaci, communicare, messagi, supporto"
+
+#: templates/contact/email_form.html:16
+msgid "Get in Touch"
+msgstr "Entra in Contatto"
+
+#: templates/contact/email_form.html:22 templates/info/index.html:21
+#: templates/policies/policy_detail.html:20
+msgid "Nuragic Shamanic Healing Logo"
+msgstr "Logo Nuragic Shamanic Healing"
+
+#: templates/contact/email_form.html:25
 msgid "Reach Out"
 msgstr "Entra in Contatto"
 
@@ -1288,7 +1331,7 @@ msgstr "Precedente"
 msgid "Next"
 msgstr "Successivo"
 
-#: templates/info/index.html:7
+#: templates/info/index.html:9
 msgid ""
 "Consciousness, spirituality, healing and ancestry. Working with Tarot, "
 "Oracle Cards, Shamanic Drumming and Healing through Ancient Wisdom. Creating "
@@ -1298,39 +1341,40 @@ msgstr ""
 "Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
 "connesioni tra persone e culture."
 
-#: templates/info/index.html:9
+#: templates/info/index.html:11
 msgid "tarot, oracle cards, healing, reiki"
 msgstr "tarochhi, oracoli, benessere, reiki"
 
-#: templates/info/index.html:18
+#: templates/info/index.html:23
 msgid "Holistic | Courses | Readings"
 msgstr "Olisitico | Corsi | Consulti"
 
-#: templates/info/index.html:24
+#: templates/info/index.html:30
 msgid "Index"
 msgstr "Indece"
 
-#: templates/info/index.html:26
+#: templates/info/index.html:32
 msgid "About"
 msgstr "Chi Sono"
 
-#: templates/info/index.html:32 templates/info/index.html:35
+#: templates/info/index.html:38 templates/info/index.html:41
+#: templates/info/page_detail.html:21
 msgid "Spirituality"
 msgstr "Spiritualità"
 
-#: templates/info/index.html:32 templates/info/index.html:36
+#: templates/info/index.html:38 templates/info/index.html:42
 msgid "Connections"
 msgstr "Connesioni"
 
-#: templates/info/index.html:32 templates/info/index.html:36
+#: templates/info/index.html:38 templates/info/index.html:42
 msgid "Sharing"
 msgstr "Condivisione"
 
-#: templates/info/index.html:33 templates/info/index.html:36
+#: templates/info/index.html:39 templates/info/index.html:42
 msgid "Roots"
 msgstr "Radici"
 
-#: templates/info/index.html:70
+#: templates/info/index.html:76
 msgid "What we do"
 msgstr "Cosa facciamo"
 
@@ -1339,7 +1383,7 @@ msgid "Favorite Items"
 msgstr "Articoli Preferiti"
 
 #: templates/likes/includes/likes_offcanvas.html:6
-#: templates/likes/likes_list.html:18
+#: templates/likes/likes_list.html:23
 msgid "My Favorites"
 msgstr "I Miei Preferiti"
 
@@ -1355,17 +1399,29 @@ msgstr "Nessun Preferito"
 msgid "Explore our Offerings"
 msgstr "Scopri nostre Offerte"
 
-#: templates/likes/likes_list.html:31
+#: templates/likes/likes_list.html:9
+msgid "All your favorite items in one place"
+msgstr ""
+
+#: templates/likes/likes_list.html:11
+msgid "favorite, favorite, items, products, shop, shopping"
+msgstr ""
+
+#: templates/likes/likes_list.html:37
 msgid "No Favorites..."
 msgstr "Niente Preferiti..."
 
-#: templates/likes/likes_list.html:32
+#: templates/likes/likes_list.html:38
 msgid "Discover"
 msgstr "Scopri"
 
 #: templates/openid/login.html:9
 msgid "OpenID Sign In"
 msgstr "Accedi con OpenID"
+
+#: templates/policies/policy_detail.html:15
+msgid "Learn about our policies."
+msgstr "Leggi le nostre poizze."
 
 #: templates/products/includes/product_banners.html:4
 msgid "Unique"
@@ -1391,15 +1447,44 @@ msgstr "Pochi Pezzi"
 msgid "Or take a look at these"
 msgstr "O dai un ochhiata a questi"
 
-#: templates/products/product_list.html:30
+#: templates/products/product_detail.html:9
+#: templates/products/product_list.html:13
+msgid ""
+"shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses"
+msgstr ""
+"shop, oracolo, mazzo, smudge, artiginale, fatto a mano, produtto, servizi, "
+"corsi"
+
+#: templates/products/product_list.html:11
+msgid ""
+"A shop of our own products with hand picked and hand-made items from "
+"artisans and small businesses. Come in and see what we have to offer."
+msgstr ""
+"Un shop di nostri prodotti con articoli scelti a mano da noi e fatti a mano "
+"da piccole artigiani e aziende. Vieni a vedere cosa possiamo offrirti."
+
+#: templates/products/product_list.html:17
+msgid "Our Shop"
+msgstr "Il nostro Shop"
+
+#: templates/products/product_list.html:18
+msgid "Have a look at our hand-picked goods and services."
+msgstr "Dai un occhiata ai nostri articoli scelti a mano e servizi."
+
+#: templates/products/product_list.html:42
 msgid "Our Offerings"
 msgstr "Le Nostre Offerte"
 
-#: templates/products/product_list.html:48
+#: templates/products/product_list.html:60
 msgid "Maybe there's something else for you at"
 msgstr "Forse trovarai qualcos'altro su"
 
-#: templates/products/shopcategory_detail.html:23
+#: templates/products/shopcategory_detail.html:7
+#: templates/products/shopcategory_detail.html:13
+msgid "A collection of our hand-picked items"
+msgstr "Un collezione di nostri articoli scelti a mano."
+
+#: templates/products/shopcategory_detail.html:38
 msgid "Product Page Navigation for"
 msgstr "Navigazione per le pagine dela categoria"
 
@@ -1515,12 +1600,20 @@ msgstr "Accedere o Registrati"
 msgid "Join The Community"
 msgstr "Unisciti al Communità"
 
-#: templates/users/user_detail.html:19
+#: templates/users/user_detail.html:11
+msgid "Your settings"
+msgstr "I tuoi Impostazioni"
+
+#: templates/users/user_detail.html:13
+msgid "profile"
+msgstr "profilo"
+
+#: templates/users/user_detail.html:24
 #, python-format
 msgid ""
 "\n"
 "        <h2 class=\"h-font l-space-1 h1 text-white text-center text-uppercase"
-"\">%(name)s's Setting's'</h2>\n"
+"\">%(name)s's Settings</h2>\n"
 "        "
 msgstr ""
 "\n"
@@ -1601,8 +1694,11 @@ msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "
 "favore."
 
+#~ msgid "Our Shop's Offerings"
+#~ msgstr "Le Offerte del nostro Shop"
+
 #~ msgid "YOUR CART"
-#~ msgstr "IL TUO CARELLO"
+#~ msgstr "IL TUO CARRELLO"
 
 #~ msgid "MY ORDERS"
 #~ msgstr "I MIEI ORDINI"
