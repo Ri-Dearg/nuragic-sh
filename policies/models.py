@@ -13,6 +13,7 @@ class Policy(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     active_cookie = models.BooleanField(default=False)
     active_privacy = models.BooleanField(default=False)
+    active_returns = models.BooleanField(default=False)
     active_terms = models.BooleanField(default=False)
     display = models.BooleanField(default=True)
     slug = models.SlugField(
@@ -48,6 +49,13 @@ class Policy(models.Model):
                 active_terms=True).exclude(pk=self.id)
             for item in terms_policy:
                 item.active_terms = False
+                item.save()
+
+        if self.active_returns is True:
+            returns_policy = Policy.objects.filter(
+                active_returns=True).exclude(pk=self.id)
+            for item in returns_policy:
+                item.active_returns = False
                 item.save()
 
         slug_value_en = self.name_en
