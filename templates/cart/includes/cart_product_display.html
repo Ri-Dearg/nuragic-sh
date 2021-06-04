@@ -13,8 +13,8 @@
         <div class="col-6 col-md-7 col-lg-8 position-relative ps-2">
             <div class="row">
                 <!--Displays the item name, truncating longer text on smaller devices.-->
-                <a href="{% url 'products:product-detail' item.product.slug item.product.id %}">
-                    <h3 class="h-font smooth-click l-space-1 text-primary text-truncate fs-6 fs-sm-5 fs-md-3">
+                <a class="smooth-click" href="{% url 'products:product-detail' item.product.slug item.product.id %}">
+                    <h3 class="h-font l-space-1 text-primary text-truncate fs-6 fs-sm-5 fs-md-3">
                         {{ item.product.title|upper }}
                     </h3>
                 </a>
