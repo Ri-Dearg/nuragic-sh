@@ -5,7 +5,8 @@ from django.test import TestCase
 from contact.models import Newsletter
 from info.tests.test_models import about_category, valid_category
 from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy)
+                                        valid_privacy_policy, valid_returns,
+                                        valid_terms)
 
 
 class TestContactViews(TestCase):
@@ -17,6 +18,8 @@ class TestContactViews(TestCase):
         about_category.save()
         valid_cookie_policy.save()
         valid_privacy_policy.save()
+        valid_returns.save()
+        valid_terms.save()
 
     def test_contact_template(self):
         """Tests templates for Contact page."""
