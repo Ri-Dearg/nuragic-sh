@@ -4,9 +4,10 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
-from users.tests.test_adapter import generate_string
 from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy)
+                                        valid_privacy_policy, valid_returns,
+                                        valid_terms)
+from users.tests.test_adapter import generate_string
 
 user_model = get_user_model()
 user_model.objects.get_or_create(
@@ -23,6 +24,8 @@ class TestUserViews(TestCase):
     def setUp(self):
         valid_cookie_policy.save()
         valid_privacy_policy.save()
+        valid_returns.save()
+        valid_terms.save()
 
     def test_custom_forms_rendering(self):
         """Tests the correct use of custom forms."""

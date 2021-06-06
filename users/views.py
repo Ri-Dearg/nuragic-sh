@@ -70,13 +70,13 @@ class CustomEmailView(LoginRequiredMixin, EmailView):
     def dispatch(self, request, *args, **kwargs):
 
         # Retrieves user's emails
-        user_model = get_user_model()
         sync_user_email_addresses(request.user)
-        user_id = user_model.objects.get(pk=self.request.user.id).id
 
         # Returns the user to the profile page on success
         self.success_url = reverse_lazy('users:user-detail',
-                                        kwargs={'pk': user_id})
+                                        kwargs={
+                                            'username': request.user.username,
+                                            'pk': request.user.id})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(
@@ -116,11 +116,10 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
     @sensitive_post_parameters_m
     def dispatch(self, request, *args, **kwargs):
-        user_model = get_user_model()
-        user_id = user_model.objects.get(pk=self.request.user.id).id
-
         self.success_url = reverse_lazy('users:user-detail',
-                                        kwargs={'pk': user_id})
+                                        kwargs={
+                                            'username': request.user.username,
+                                            'pk': request.user.id})
 
         return super().dispatch(
             request, *args, **kwargs)

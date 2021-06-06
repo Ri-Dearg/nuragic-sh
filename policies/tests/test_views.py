@@ -5,7 +5,7 @@ from django.test import TestCase
 from policies.models import Policy
 
 from .test_models import (valid_cookie_policy, valid_general_policy,
-                          valid_privacy_policy)
+                          valid_privacy_policy, valid_returns, valid_terms)
 
 
 class TestPoliciesModels(TestCase):
@@ -15,6 +15,8 @@ class TestPoliciesModels(TestCase):
         valid_general_policy.save()
         valid_cookie_policy.save()
         valid_privacy_policy.save()
+        valid_returns.save()
+        valid_terms.save()
 
     def test_policy_detail_view(self):
         """Checks that the url produces the correct template."""

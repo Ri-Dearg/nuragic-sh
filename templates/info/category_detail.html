@@ -30,7 +30,9 @@
     </div>
     <!-- Runs through each Page in a Category -->
     {% for item in object.page.all %}
+    {% if item.display %}
     {% include 'info/includes/category_info.html' %}
+    {% endif %}
     {% endfor %}
 </section>
 {% endblock %}

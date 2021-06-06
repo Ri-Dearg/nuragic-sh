@@ -16,6 +16,7 @@ from django.views.generic import CreateView, DetailView, ListView
 from phonenumber_field import widgets
 
 from cart.context_processors import get_cart
+from policies.models import Policy
 from products.models import Product
 
 from .models import Order, OrderLineItem
@@ -284,12 +285,15 @@ class OrderCreateView(CreateView):
             currency=settings.STRIPE_CURRENCY,
         )
 
+        active_returns = Policy.objects.get(active_returns=True)
+
         # Passes the custom order form to the page.
         order_form = context['form']
 
         context['stripe_public_key'] = stripe_public_key
         context['client_secret'] = intent.client_secret
         context['order_form'] = order_form
+        context['active_returns'] = active_returns
         return context
 
 

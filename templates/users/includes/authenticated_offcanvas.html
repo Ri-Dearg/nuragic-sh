@@ -3,7 +3,7 @@
 <!-- Displays settings button -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser" aria-labelledby="offcanvasUserLabel">
     <div class="offcanvas-header pb-0">
-        <h2 class="h-font l-space-1  text-primary text-uppercase h3 mx-auto" id="offcanvasUserLabel">
+        <h2 class="h-font l-space-1 text-primary text-uppercase h3 mx-auto" id="offcanvasUserLabel">
             {% trans 'Welcome' %},
             {{ request.user.username|upper }}
         </h2>
@@ -11,11 +11,11 @@
     </div>
     <div class="offcanvas-body text-center">
         <a href="{% url 'users:user-detail' request.user.username request.user.id %}?next={{ request.path }}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Settings' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Settings' %}</a>
         <div class="col-12 my-2"></div>
         {% if request.user.userprofile.orders.all %}
         <a href="{% url 'checkout:order-list' %}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'My Orders' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'My Orders' %}</a>
         <div class="col-12 my-2"></div>
         {% endif %}
         <!--Displays logout button. -->
