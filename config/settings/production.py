@@ -32,10 +32,9 @@ elif DEBUG is False:
     print('Debug mode is off.')
 
 ALLOWED_HOSTS = [
-    '.nuragicshamanichealing.org',
-    '.nuragicshamanichealing.com',
-    'localhost',
-    '157.90.231.34']
+    'www.nuragicshamanichealing.org',
+    'www.nuragicshamanichealing.com',
+    'localhost']
 
 
 # Static files (CSS, JavaScript, Images)
