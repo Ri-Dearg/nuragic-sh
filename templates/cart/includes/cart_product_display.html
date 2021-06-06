@@ -13,8 +13,8 @@
         <div class="col-6 col-md-7 col-lg-8 position-relative ps-2">
             <div class="row">
                 <!--Displays the item name, truncating longer text on smaller devices.-->
-                <a href="{% url 'products:product-detail' item.product.slug item.product.id %}">
-                    <h3 class="h-font smooth-click l-space-1 text-primary text-truncate fs-6 fs-sm-5 fs-md-3">
+                <a class="smooth-click" href="{% url 'products:product-detail' item.product.slug item.product.id %}">
+                    <h3 class="h-font l-space-1 text-primary text-truncate fs-6 fs-sm-5 fs-md-3">
                         {{ item.product.title|upper }}
                     </h3>
                 </a>
@@ -45,7 +45,7 @@
                     Allows for quantity to be updated if there is numerous stock.-->
                 <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center mt-2 mt-md-0 ps-md-2">
                     <button id="up-{{ item.product.id }}" type="submit"
-                        class="update-button p-font btn btn-sm btn-success shadow">{% trans 'Update' %}</button>
+                        class="update-button p-font btn btn-sm btn-success fw-bold shadow">{% trans 'Update' %}</button>
                 </div>
                 <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center">
                     <button id="re-{{ item.product.id }}" type="submit"

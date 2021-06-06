@@ -3,15 +3,15 @@
 <!-- Displays Register and Sign In buttons. -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser" aria-labelledby="offcanvasUserLabel">
     <div class="offcanvas-header pb-0">
-        <h2 class="h-font l-space-1 h3 text-primary text-uppercase mx-0" id="offcanvasUserLabel">
+        <h2 class="h-font l-space-1 h3 text-primary text-uppercase mx-auto" id="offcanvasUserLabel">
             {% trans 'Join The Community' %}!</h2>
         <button type="button" class="btn-close text-reset ms-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body text-center">
         <a href="{% url 'account_login' %}?next={{ request.path }}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Sign In' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Sign In' %}</a>
         <p class="p-font text-center text-primary col-12 my-2">{% trans 'or' %}</p>
         <a href="{% url 'account_signup' %}?next={{ request.path }}"
-            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow mx-auto mb-0">{% trans 'Register' %}</a>
+            class="p-font col-8 btn-tran smooth-click btn btn-warning text-primary shadow fw-bold mx-auto mb-0">{% trans 'Register' %}</a>
     </div>
 </div>

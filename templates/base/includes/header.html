@@ -1,5 +1,6 @@
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
+{% get_current_language as LANGUAGE_CODE %}
 <!-- Header -->
 <header class="sticky-top container-xxl shadow p-0">
     <!-- First row just contains the logo -->
@@ -11,14 +12,18 @@
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="en">
-                        <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="EN">
+                        <input
+                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'en'%} fw-bold{% endif %}"
+                            type="submit" value="EN">
                         |
                     </form>
                     <form class="d-inline-block" action="{% url 'set_language' %}" method="POST">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
                         <input name="language" type="hidden" value="it">
-                        <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit" value="IT">
+                        <input
+                            class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'it'%} fw-bold{% endif %}"
+                            type="submit" value="IT">
                     </form>
                 </div>
                 <div class="col-auto mx-auto">
@@ -61,7 +66,6 @@
                 {% if not 'checkout/payment' in request.path %}
                 {% if '/shop/' in request.path or '/shop/' in request.GET.next %}
                 <div class="col-2 col-sm-1 d-md-none cart-offcanvas-container">
-                    <p class="visually-hidden" id="dropdownCartMenu">Likes</p>
                     {% include 'cart/includes/cart_menu.html' %}
                 </div>
                 <div class="col-2 col-sm-1 d-md-none like-offcanvas-container">
@@ -95,16 +99,18 @@
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="en">
-                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit"
-                                    value="EN">
+                                <input
+                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'en'%} fw-bold{% endif %}"
+                                    type="submit" value="EN">
                                 |
                             </form>
                             <form class="d-inline-block" action="{% url 'set_language' %}" method="POST">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 <input name="language" type="hidden" value="it">
-                                <input class="p-font btn btn-link d-inline-block text-white p-0 pb-1" type="submit"
-                                    value="IT">
+                                <input
+                                    class="p-font btn btn-link d-inline-block text-white p-0 pb-1{% if LANGUAGE_CODE == 'it'%} fw-bold{% endif %}"
+                                    type="submit" value="IT">
                             </form>
                         </li>
                     </ul>

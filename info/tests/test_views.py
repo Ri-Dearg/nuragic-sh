@@ -5,7 +5,8 @@ from django.test import TestCase
 
 from info.models import Category, Page
 from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy)
+                                        valid_privacy_policy, valid_returns,
+                                        valid_terms)
 
 from .test_models import valid_category, valid_page
 
@@ -17,6 +18,8 @@ class TestInfoViews(TestCase):
         """Sets up a model instances for tests."""
         valid_cookie_policy.save()
         valid_privacy_policy.save()
+        valid_returns.save()
+        valid_terms.save()
         valid_category.save()
         valid_page.save()
 

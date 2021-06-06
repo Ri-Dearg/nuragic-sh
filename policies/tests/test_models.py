@@ -15,6 +15,12 @@ valid_privacy_policy = Policy(name='Privacy Policy',
 valid_privacy_policy2 = Policy(name='Privacy Policy 2',
                                content='Privacy Policy Content 2',
                                active_privacy=True)
+valid_terms = Policy(name='Terms & Conditions',
+                     content='Conditional Content',
+                     active_terms=True)
+valid_returns = Policy(name='Retruns and Refunds',
+                       content='Returns',
+                       active_returns=True)
 valid_general_policy = Policy(name='General Policy',
                               content='General Content')
 
@@ -28,6 +34,8 @@ class TestPoliciesModels(TestCase):
         valid_privacy_policy.save()
         valid_privacy_policy2.save()
         valid_general_policy.save()
+        valid_returns.save()
+        valid_terms.save()
 
     def test_policy_str(self):
         """Tests the string method on the Policy."""
