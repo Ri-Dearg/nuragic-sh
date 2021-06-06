@@ -81,7 +81,7 @@
                 {% endif %}
             </div>
             <fieldset>
-                <legend class="p-font h6 text-primary w-auto"><strong>{% trans 'Payment' %} *</strong>&nbsp;&nbsp; <a
+                <legend class="p-font h6 text-primary w-auto"><strong>{% trans 'Payment' %}*</strong>&nbsp;&nbsp; <a
                         target="_blank" rel="noopener"
                         href="https://stripe.com/">{% include 'base/includes/icons/stripepayments.svg'%}</a></legend>
                 <!-- A Stripe card element will go here -->
@@ -92,11 +92,16 @@
                 <input type="hidden" value="{{ client_secret }}" name="client_secret" />
             </fieldset>
             <button type="submit" id="payment-submit"
-                class="p-font text-white btn btn-info shadow mb-2">{% trans 'Confirm Purchase' %}</button>
+                class="p-font text-white btn btn-info shadow fw-bold mb-2">{% trans 'Confirm Purchase' %}</button>
         </form>
-        <p class="p-font text-muted small">
-            *
-            {% trans 'All of your payment details are processed by Stripe. We do not process or store your payment information.' %}
+        <p class="p-font text-muted small mb-1">
+            *{% trans 'All of your payment details are processed by Stripe. We do not process or store your payment information.' %}
+        </p>
+        <p class="p-font text-muted small mb-0">{% trans 'By clicking "Confirm Purchase" you agree to our' %} <a
+                class="text-info text-decoration-underline"
+                href="{% url 'policies:policy-detail' active_returns.slug active_returns.id %}">{{active_returns.name }}</a>
+            {% trans 'and' %} <a class="text-info text-decoration-underline"
+                href="{% url 'policies:policy-detail' active_terms.slug active_terms.id %}">{{ active_terms.name }}</a>.
         </p>
     </section>
     <section class="col-12 col-md-6 order-1 order-md-2 p-2 p-md-4">
@@ -142,7 +147,8 @@
     <article class="col text-center mt-4">
         <h2 class="p-font text-primary h4">{% trans 'Your cart is empty...' %}</h2>
         <h2 class="p-font text-primary mb-0">{% trans "Let's explore." %}</h2>
-        <a class="p-font text-primary btn-tran btn btn-lg btn-warning my-4" href="{% url 'products:product-list' %}">
+        <a class="p-font text-primary btn-tran btn btn-lg btn-warning shadow fw-bold my-4"
+            href="{% url 'products:product-list' %}">
             {% trans 'Offerings' %}</a>
     </article>
 </section>

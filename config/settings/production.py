@@ -34,6 +34,7 @@ elif DEBUG is False:
 ALLOWED_HOSTS = [
     '.nuragicshamanichealing.org',
     '.nuragicshamanichealing.com',
+    'localhost',
     '157.90.231.34']
 
 

@@ -312,8 +312,10 @@ Positioning
   min-height: 100vh;
 }
 
-.subtotal-card {
-  top: 154px;
+@media only screen and (min-width: 768px) {
+  .subtotal-card {
+    top: 154px;
+  }
 }
 
 #preloaderMessage {

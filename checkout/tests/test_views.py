@@ -6,7 +6,8 @@ from django.test import TestCase
 
 from checkout.models import Order
 from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy)
+                                        valid_privacy_policy, valid_returns,
+                                        valid_terms)
 from products.models import Product
 from products.tests.test_models import preorder_product, valid_product_1
 
@@ -68,6 +69,8 @@ class TestCheckoutViews(TestCase):
         preorder_product.save()
         valid_cookie_policy.save()
         valid_privacy_policy.save()
+        valid_returns.save()
+        valid_terms.save()
 
     def test_order_creation_and_detail_view(self):
         """Checks all the basic functions of the checkout app,
