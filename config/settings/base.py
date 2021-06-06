@@ -146,18 +146,16 @@ DATABASES = {
     }
 }
 
-# # Database config
-# env_db = dj_database_url.config(conn_max_age=500)
 
-# # Declare variable  to check if django is in testing mode
-# # Uses a test database if True
-# TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-# if TESTING:
-#     env_db = dj_database_url.parse(os.environ.get(
-#         'HEROKU_POSTGRESQL_CRIMSON_URL'))
-
-# # Production Database
-# DATABASES['default'].update(env_db)
+# Declare variable  to check if django is in testing mode
+# Uses a test database if True
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+if TESTING:
+    # Database config
+    env_db = dj_database_url.config(conn_max_age=500)
+    env_db = dj_database_url.parse(os.environ.get(
+        'HEROKU_POSTGRESQL_CRIMSON_URL'))
+    DATABASES['default'].update(env_db)
 
 
 # Password validation
