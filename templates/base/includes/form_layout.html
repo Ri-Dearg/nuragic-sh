@@ -3,10 +3,11 @@
 {{ block.super }}
 {% include 'base/includes/horizontal_rule.html'%}
 <section class="flex-grow-1">
+    <h2 class="visually-hidden">{% block form_header %}{% endblock %}</h2>
     <article class="row min-vh-75 align-content-center my-3 px-1 py-2">
-        <h2
+        <h3
             class="h-font l-space-2 form-box col-12 text-center text-uppercase text-white bg-brown rounded-top h1 py-3 mb-0 mx-auto">
-            {% block form_title %}{% endblock %}</h2>
+            {% block form_title %}{% endblock %}</h3>
         <div class="col-12"></div>
         <div class="form-box col col-md-8 rounded-bottom mx-auto p-2">
             {% block form_content %}{% endblock %}

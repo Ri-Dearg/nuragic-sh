@@ -250,7 +250,6 @@ class UserProfileForm(forms.ModelForm):
                               placeholder=_('Postcode'),
                               css_class='p-font text-primary'),
                         Field('shipping_country',
-                              placeholder=_('Country'),
                               css_class='form-select p-font text-primary')
                     )),
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
@@ -281,7 +280,6 @@ class UserProfileForm(forms.ModelForm):
                               placeholder=_('Postcode'),
                               css_class='p-font text-primary'),
                         Field('billing_country',
-                              placeholder=_('Country'),
                               css_class='form-select p-font text-primary')
                     )),
                     css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),

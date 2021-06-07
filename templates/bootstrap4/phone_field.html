@@ -1,7 +1,6 @@
 {% load i18n %}
 <div class="col-12 col-md-6 form-floating my-1">
-    <select placeholder="Country Code" name="{{ field.name }}_0" class="p-font text-primary form-select"
-        id="id_{{ field.name }}_0">
+    <select name="{{ field.name }}_0" class="p-font text-primary form-select" id="id_{{ field.name }}_0">
         {% with field.value.country_code|stringformat:'i' as country_string %}
         {% with "+"|add:country_string as country_value %}
         {% for choice in field.field.widget.widgets.0.choices %}
