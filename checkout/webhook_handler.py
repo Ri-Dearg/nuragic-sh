@@ -51,6 +51,29 @@ def create_order(userprofile, billing_details, shipping_details, cart, pid):
         except Product.DoesNotExist:
             pass
     order.save()
+    complete_order = Order.objects.get(
+        user_profile=userprofile,
+        email=billing_details.email,
+        shipping_full_name=shipping_details.name,
+        shipping_phone_number=shipping_details.phone,
+        shipping_country=shipping_details.address.country,
+        shipping_postcode=shipping_details.address.postal_code,
+        shipping_town_or_city=shipping_details.address.city,
+        shipping_street_address_1=shipping_details.address.line1,
+        shipping_street_address_2=shipping_details.address.line2,
+        shipping_county=shipping_details.address.state,
+        billing_full_name=billing_details.name,
+        billing_phone_number=billing_details.phone,
+        billing_country=billing_details.address.country,
+        billing_postcode=billing_details.address.postal_code,
+        billing_town_or_city=billing_details.address.city,
+        billing_street_address_1=billing_details.address.line1,
+        billing_street_address_2=billing_details.address.line2,
+        billing_county=billing_details.address.state,
+        original_cart=cart,
+        stripe_pid=pid,
+    )
+    return complete_order
 
 
 def check_order_in_db(
@@ -59,7 +82,7 @@ def check_order_in_db(
     If it was, sends and email, if not, returns False."""
     order_exists = False
     attempt = 1
-    while attempt <= 5:
+    while attempt <= 10:
         try:
             order = Order.objects.get(
                 email__iexact=billing_details.email,
@@ -77,7 +100,7 @@ def check_order_in_db(
             order_exists = True
             break
         except Order.DoesNotExist:
-            attempt += 1
+            attempt += 10
             time.sleep(1)
     # send an email if the order is found.
     if order_exists:
@@ -190,21 +213,20 @@ def handle_payment_intent_succeeded(event):
                     SUCCESS: Verified order already in database',
             status=200)
     # If no order is found, it creates the order.
-    order = None
     try:
         order = create_order(userprofile,
                              billing_details,
                              shipping_details,
                              cart,
                              pid)
+        # Sends a confirmation email after creation
+        send_confirmation_email(order)
+        return HttpResponse(
+            content=f'Webhook received: {event["type"]} | \
+                    SUCCESS: Created order in webhook',
+            status=200)
     except Exception as error:
         logging.exception(
             'Webhook received: %(type)s | ERROR: %(error)s',
             {'type': event['type'], 'error': error})
         return HttpResponse(status=500)
-    # Sends a confirmation email after creation
-    send_confirmation_email(order)
-    return HttpResponse(
-        content=f'Webhook received: {event["type"]} | \
-                SUCCESS: Created order in webhook',
-        status=200)
