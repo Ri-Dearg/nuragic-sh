@@ -24,7 +24,9 @@
 {% if cart %}
 <!--Displays content if there are items in the cart, else it shows a link to the home page.-->
 <article class="row bg-white">
+    <h2 class="visually-hidden">{% trans 'Checkout'%}</h2>
     <section class="col-12 col-md-6 order-2 order-md-1 p-2 p-md-4">
+        <h3 class="visually-hidden">{% trans 'Payment Form'%}</h3>
         <form id="payment-form" action="{% url 'checkout:order-create' %}" method="POST">
             {% csrf_token %}
             <!--Displays the details for shipping. Give the option to mark billing details as the same.
@@ -108,19 +110,25 @@
         <!-- Displays each item in the cart in rows.-->
         <h2 class="p-font text-primary fs-4">{% trans 'Items' %}</h2>
         <ul class="list-group list-group-flush">
-            <button class="p-font d-md-none col-12 btn btn-link text-start text-info p-0" data-bs-toggle="collapse"
-                data-bs-target="#itemSummary" aria-controls="itemSummary" aria-expanded="false">{% trans 'Details' %}
-                &#8595;</button>
-            <div id="itemSummary" class="collapse d-md-none list-group-flush">
-                {% for item in cart_items %}
-                {% include 'checkout/includes/checkout_product_display.html' %}
-                {% endfor %}
-            </div>
-            <div class="d-none d-md-block list-group-flush">
-                {% for item in cart_items %}
-                {% include 'checkout/includes/checkout_product_display.html' %}
-                {% endfor %}
-            </div>
+            <li class="d-md-none list-group-flush" data-bs-toggle="collapse" data-bs-target="#itemSummary"
+                aria-controls="itemSummary" aria-expanded="false">
+                <button class="p-font d-md-none btn btn-link text-start text-info p-0">{% trans 'Details' %}
+                    &#8595;</button>
+            </li>
+            <li id="itemSummary" class="list-group-flush collapse d-md-none ">
+                <ul class="list-group-flush ps-0">
+                    {% for item in cart_items %}
+                    {% include 'checkout/includes/checkout_product_display.html' %}
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="list-group-flush d-none d-md-block ">
+                <ul class="list-group-flush ps-0">
+                    {% for item in cart_items %}
+                    {% include 'checkout/includes/checkout_product_display.html' %}
+                    {% endfor %}
+                </ul>
+            </li>
             <li class="p-font list-group-item text-primary fs-6 mx-0 mb-0 ps-0">
                 <span class="float-start">{% trans 'Item Total' %}</span>
                 <span class="float-end text-muted">€{{ cart_total }}</span>
@@ -160,5 +168,5 @@
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
-<script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }"></script>
+<script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }}"></script>
 {% endblock %}

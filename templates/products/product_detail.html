@@ -43,6 +43,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
 <section class="bg-white flex-grow-1 p-sm-4 p-md-5 pb-2 pb-md-2">
     <h2 class="visually-hidden">{{ product.title }}</h2>
     <article class="row justify-content-md-center">
+        <h3 class="visually-hidden">{% trans 'Product Details'%}</h3>
         <div class="col-12 col-sm-5 position-relative p-0">
             <div class="position-relative">
                 <img src="{{ product.image_4_3.url }}" width="{{ product.image_4_3.width }}"
@@ -58,7 +59,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
         <div class="col-12 col-sm-7 col-lg-6 col-xl-5 px-3 px-sm-4 py-sm-3 p-md-4 p-lg-5">
             <div class="row">
                 <div class="col-auto mt-4 mb-1 mt-sm-0">
-                    <h3 class="l-space-1 h-font text-primary h2">{{ product.title|upper }}</h3>
+                    <h4 class="l-space-1 h-font text-primary h2">{{ product.title|upper }}</h4>
                 </div>
             </div>
             <div class="row align-items-center">

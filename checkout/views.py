@@ -100,7 +100,7 @@ class OrderCreateView(CreateView):
                     'class': 'form-control',
                     'pattern': '[0-9]+',
                 }),
-            initial='+353')
+            initial='+39')
         form.fields['shipping_street_address_1'].widget.attrs = {
             'placeholder': _('123 Main St.')}
         form.fields['shipping_street_address_1'].label = _('Street Address 1')
@@ -114,7 +114,6 @@ class OrderCreateView(CreateView):
             'placeholder': _('Locality')}
         form.fields['shipping_county'].label = _('County, State or Locality')
         form.fields['shipping_country'].widget.attrs = {
-            'placeholder': _('Country'),
             'class': 'form-control'}
         form.fields['shipping_country'].label = _('Country')
         form.fields['shipping_postcode'].widget.attrs = {
@@ -132,7 +131,7 @@ class OrderCreateView(CreateView):
                     'class': 'form-control billing-field',
                     'pattern': '[0-9]+',
                 }),
-            initial='+353')
+            initial='+39')
         form.fields['billing_street_address_1'].widget.attrs = {
             'Placeholder': _('Street Address 1'), 'class': 'billing-field'}
         form.fields['billing_street_address_1'].label = _('Street Address 1')
@@ -146,7 +145,6 @@ class OrderCreateView(CreateView):
             'placeholder': _('Locality')}
         form.fields['billing_county'].label = _('County, State or Locality')
         form.fields['billing_country'].widget.attrs = {
-            'placeholder': _('Country'),
             'class': 'form-control billing-field'}
         form.fields['billing_country'].label = _('Country')
         form.fields['billing_postcode'].widget.attrs = {
