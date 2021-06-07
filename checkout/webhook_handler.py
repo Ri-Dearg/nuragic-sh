@@ -1,6 +1,7 @@
 """Functions that act on receipt of the webhook."""
 import json
 import logging
+import threading
 import time
 
 from django.conf import settings
@@ -206,6 +207,10 @@ def handle_payment_intent_succeeded(event):
     # If the order is found, it breaks the loop.
     order = check_order_in_db(
         billing_details, shipping_details, grand_total, cart, pid)
+    thread = threading.Thread(target=check_order_in_db)
+    thread.start()
+    thread.join()
+
     if order is not False:
         send_confirmation_email(order)
         return HttpResponse(
