@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-04 10:04+0000\n"
+"POT-Creation-Date: 2021-06-06 21:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,85 +69,85 @@ msgstr "Errore nell'aggiunta di un articolo al carrello: {error}"
 msgid "Error"
 msgstr "Errore"
 
-#: checkout/models.py:45 checkout/models.py:59 checkout/views.py:116
-#: checkout/views.py:118 checkout/views.py:148 checkout/views.py:150
+#: checkout/models.py:45 checkout/models.py:59 checkout/views.py:117
+#: checkout/views.py:119 checkout/views.py:149 checkout/views.py:151
 #: templates/checkout/order_detail.html:103
-#: templates/checkout/order_detail.html:164 users/forms.py:203
-#: users/forms.py:211 users/forms.py:241 users/forms.py:272
+#: templates/checkout/order_detail.html:164 users/forms.py:215
+#: users/forms.py:223
 msgid "Country"
 msgstr "Paese"
 
-#: checkout/views.py:89
+#: checkout/views.py:90
 msgid "Email Address"
 msgstr "Indrizzi Email"
 
-#: checkout/views.py:90 contact/views.py:26 contact/views.py:40
+#: checkout/views.py:91 contact/views.py:26 contact/views.py:40
 #: templates/base/includes/footer.html:17
 #: templates/checkout/order_detail.html:44
 #: templates/users/includes/newsletter_form.html:15 users/forms.py:83
-#: users/forms.py:148
+#: users/forms.py:151
 msgid "Email"
 msgstr "Email"
 
-#: checkout/views.py:92 checkout/views.py:93 checkout/views.py:123
-#: checkout/views.py:124 users/forms.py:198 users/forms.py:205
-#: users/forms.py:219 users/forms.py:250
+#: checkout/views.py:93 checkout/views.py:94 checkout/views.py:124
+#: checkout/views.py:125 users/forms.py:210 users/forms.py:217
+#: users/forms.py:231 users/forms.py:261
 msgid "Full Name"
 msgstr "Nome Completo"
 
-#: checkout/views.py:98 checkout/views.py:126 checkout/views.py:130
+#: checkout/views.py:99 checkout/views.py:127 checkout/views.py:131
 #: templates/bootstrap4/phone_field.html:23
 #: templates/checkout/order_detail.html:62
 #: templates/checkout/order_detail.html:123
 msgid "Phone Number"
 msgstr "Numero di Telefono"
 
-#: checkout/views.py:104
+#: checkout/views.py:105
 msgid "123 Main St."
 msgstr "Via Domu 123"
 
-#: checkout/views.py:105 checkout/views.py:136 checkout/views.py:137
+#: checkout/views.py:106 checkout/views.py:137 checkout/views.py:138
 #: templates/checkout/order_detail.html:68
-#: templates/checkout/order_detail.html:129 users/forms.py:199
-#: users/forms.py:206 users/forms.py:226 users/forms.py:257
+#: templates/checkout/order_detail.html:129 users/forms.py:211
+#: users/forms.py:218 users/forms.py:238 users/forms.py:268
 msgid "Street Address 1"
 msgstr "Indirizzo 1"
 
-#: checkout/views.py:107 checkout/views.py:108 checkout/views.py:139
-#: checkout/views.py:140 templates/checkout/order_detail.html:75
-#: templates/checkout/order_detail.html:136 users/forms.py:200
-#: users/forms.py:207 users/forms.py:229 users/forms.py:260
+#: checkout/views.py:108 checkout/views.py:109 checkout/views.py:140
+#: checkout/views.py:141 templates/checkout/order_detail.html:75
+#: templates/checkout/order_detail.html:136 users/forms.py:212
+#: users/forms.py:219 users/forms.py:241 users/forms.py:271
 msgid "Street Address 2"
 msgstr "Indirizzo 2"
 
-#: checkout/views.py:110 checkout/views.py:111 checkout/views.py:142
-#: checkout/views.py:143 templates/checkout/order_detail.html:82
-#: templates/checkout/order_detail.html:143 users/forms.py:201
-#: users/forms.py:208 users/forms.py:232 users/forms.py:263
+#: checkout/views.py:111 checkout/views.py:112 checkout/views.py:143
+#: checkout/views.py:144 templates/checkout/order_detail.html:82
+#: templates/checkout/order_detail.html:143 users/forms.py:213
+#: users/forms.py:220 users/forms.py:244 users/forms.py:274
 msgid "Town or City"
 msgstr "Città"
 
-#: checkout/views.py:113 checkout/views.py:145
+#: checkout/views.py:114 checkout/views.py:146
 msgid "Locality"
 msgstr "Località"
 
-#: checkout/views.py:114 checkout/views.py:146 users/forms.py:202
-#: users/forms.py:209 users/forms.py:235 users/forms.py:266
+#: checkout/views.py:115 checkout/views.py:147 users/forms.py:214
+#: users/forms.py:221 users/forms.py:247 users/forms.py:277
 msgid "County, State or Locality"
 msgstr "Regione"
 
-#: checkout/views.py:120 checkout/views.py:121 checkout/views.py:152
-#: checkout/views.py:153 templates/checkout/order_detail.html:96
-#: templates/checkout/order_detail.html:157 users/forms.py:210
-#: users/forms.py:238 users/forms.py:269
+#: checkout/views.py:121 checkout/views.py:122 checkout/views.py:153
+#: checkout/views.py:154 templates/checkout/order_detail.html:96
+#: templates/checkout/order_detail.html:157 users/forms.py:222
+#: users/forms.py:250 users/forms.py:280
 msgid "Postcode"
 msgstr "CAP"
 
-#: checkout/views.py:162
+#: checkout/views.py:163
 msgid "The cart is empty."
 msgstr "Il carrello è vuoto."
 
-#: checkout/views.py:239
+#: checkout/views.py:240
 msgid ""
 "One of the products in your cart wasn't found in our "
 "collection.                     Please call us for assistance!"
@@ -155,7 +155,7 @@ msgstr ""
 "Un prodotto nel tuo carrello non è stato trovato nella nostra collezione. "
 "Conttataci per assistenza, per favore!"
 
-#: checkout/views.py:256
+#: checkout/views.py:257
 #, python-brace-format
 msgid ""
 "Order successfully processed!              A confirmation email will be sent "
@@ -164,7 +164,7 @@ msgstr ""
 "L'ordine è stato effetuato con successo! Una conferma sarà inviata via email "
 "a {order.email}."
 
-#: checkout/views.py:310
+#: checkout/views.py:314
 msgid ""
 "Sorry, your payment cannot be             processed right now. Please try "
 "again later."
@@ -177,11 +177,11 @@ msgstr ""
 msgid "NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>"
 msgstr "NuragicSH Ordine <{settings.DEFAULT_ORDER_EMAIL}>"
 
-#: config/settings/base.py:185 templates/users/includes/newsletter_form.html:24
+#: config/settings/base.py:187 templates/users/includes/newsletter_form.html:24
 msgid "English"
 msgstr "Inglese"
 
-#: config/settings/base.py:186 templates/users/includes/newsletter_form.html:31
+#: config/settings/base.py:188 templates/users/includes/newsletter_form.html:31
 msgid "Italian"
 msgstr "Italiano"
 
@@ -244,46 +244,48 @@ msgstr "Errore: %r, {error}"
 
 #: templates/account/account_inactive.html:6
 #: templates/account/account_inactive.html:14
+#: templates/account/account_inactive.html:15
 msgid "Account Inactive"
 msgstr "Account Inattivo"
 
-#: templates/account/account_inactive.html:15
+#: templates/account/account_inactive.html:16
 msgid "This account is inactive."
 msgstr "Questo account è inattivo."
 
 #: templates/account/email.html:5 templates/account/email.html:13
+#: templates/account/email.html:14
 msgid "Email Addresses"
 msgstr "Indrizzi Email"
 
-#: templates/account/email.html:17
+#: templates/account/email.html:18
 msgid "The following email addresses are associated with your account:"
 msgstr "Questi indrizzi email sono associati con il tuo account:"
 
-#: templates/account/email.html:30 templates/users/includes/email.html:21
+#: templates/account/email.html:31 templates/users/includes/email.html:21
 msgid "Unverified"
 msgstr "Non Verificato"
 
-#: templates/account/email.html:33 templates/users/includes/email.html:24
+#: templates/account/email.html:34 templates/users/includes/email.html:24
 msgid "Primary"
 msgstr "Principale"
 
-#: templates/account/email.html:40 templates/users/includes/email.html:31
+#: templates/account/email.html:41 templates/users/includes/email.html:31
 msgid "Make Primary"
 msgstr "Imposta come Principale"
 
-#: templates/account/email.html:42 templates/users/includes/email.html:33
+#: templates/account/email.html:43 templates/users/includes/email.html:33
 msgid "Re-send Verification"
 msgstr "Rinviare Verifacazione"
 
-#: templates/account/email.html:44 templates/users/includes/email.html:35
+#: templates/account/email.html:45 templates/users/includes/email.html:35
 msgid "Delete"
 msgstr "Cancella"
 
-#: templates/account/email.html:50
+#: templates/account/email.html:51
 msgid "Warning:"
 msgstr "Attenzione:"
 
-#: templates/account/email.html:51
+#: templates/account/email.html:52
 msgid ""
 "You currently do not have any email address set up. You should really add an "
 "email address so you can receive notifications, reset your password, etc."
@@ -291,15 +293,15 @@ msgstr ""
 "Attualmente non hai un indirizzo email per il tuo account. Aggiungi un email "
 "per ricevere notificazioni, ricreare una password, etc."
 
-#: templates/account/email.html:57 templates/users/includes/email.html:41
+#: templates/account/email.html:58 templates/users/includes/email.html:41
 msgid "Add Email Address"
 msgstr "Aggiungi Indirizzo Email"
 
-#: templates/account/email.html:65 templates/users/includes/email.html:53
+#: templates/account/email.html:66 templates/users/includes/email.html:54
 msgid "Add Email"
 msgstr "Aggiungi Email"
 
-#: templates/account/email.html:76
+#: templates/account/email.html:77
 msgid "Do you really want to remove the selected email address?"
 msgstr "Vorresti cancellare questo indirizzo email?"
 
@@ -353,10 +355,11 @@ msgstr "Reimpostare Password"
 
 #: templates/account/email_confirm.html:6
 #: templates/account/email_confirm.html:14
+#: templates/account/email_confirm.html:15
 msgid "Confirm Email Address"
 msgstr "Confermare Email"
 
-#: templates/account/email_confirm.html:21
+#: templates/account/email_confirm.html:22
 #, python-format
 msgid ""
 "I confirm that <a class=\"form-link text-info\"\n"
@@ -368,11 +371,11 @@ msgstr ""
 "                href=\"mailto:%(email)s\">%(email)s</a> è un email per \n"
 "            %(user_display)s."
 
-#: templates/account/email_confirm.html:31
+#: templates/account/email_confirm.html:32
 msgid "Confirm"
 msgstr "Confermo"
 
-#: templates/account/email_confirm.html:40
+#: templates/account/email_confirm.html:41
 #, python-format
 msgid ""
 "This email confirmation link expired or is\n"
@@ -385,11 +388,12 @@ msgstr ""
 "\"%(email_url)s\">richiedi un link nuovo</a>."
 
 #: templates/account/login.html:6 templates/account/login.html:14
+#: templates/account/login.html:15
 #: templates/users/includes/unauthenticated_offcanvas.html:12 users/forms.py:57
 msgid "Sign In"
 msgstr "Accedi"
 
-#: templates/account/login.html:17
+#: templates/account/login.html:18
 #, python-format
 msgid ""
 "<a class=\"smooth-click form-link text-info\" href=\"%(signup_url)s\">Sign "
@@ -401,12 +405,12 @@ msgstr ""
 "            se non hai già creato un account."
 
 #: templates/account/logout.html:5 templates/account/logout.html:13
-#: templates/account/logout.html:24
+#: templates/account/logout.html:14 templates/account/logout.html:25
 #: templates/users/includes/authenticated_offcanvas.html:30
 msgid "Sign Out"
 msgstr "Esci"
 
-#: templates/account/logout.html:15
+#: templates/account/logout.html:16
 msgid "Are you sure you want to sign out?"
 msgstr "Sei sicuro/a di voler uscire?"
 
@@ -457,10 +461,13 @@ msgstr "Indirizzo email principale deve essere verificato."
 
 #: templates/account/password_change.html:6
 #: templates/account/password_change.html:14
-#: templates/account/password_change.html:22
+#: templates/account/password_change.html:15
+#: templates/account/password_change.html:23
 #: templates/account/password_reset_from_key.html:5
+#: templates/account/password_reset_from_key.html:12
 #: templates/account/password_reset_from_key.html:13
 #: templates/account/password_reset_from_key_done.html:5
+#: templates/account/password_reset_from_key_done.html:12
 #: templates/account/password_reset_from_key_done.html:13
 #: templates/users/includes/password_change.html:5
 #: templates/users/includes/password_change.html:17 users/forms.py:121
@@ -468,9 +475,11 @@ msgid "Change Password"
 msgstr "Cambia Password"
 
 #: templates/account/password_reset.html:6
+#: templates/account/password_reset.html:13
 #: templates/account/password_reset.html:14
 #: templates/account/password_reset_done.html:7
 #: templates/account/password_reset_done.html:14
+#: templates/account/password_reset_done.html:15
 msgid "Password Reset"
 msgstr "Reimpostare Password"
 
@@ -494,7 +503,7 @@ msgstr ""
 "se hai qualsiasi\n"
 "            problema di reimpostare la tua password."
 
-#: templates/account/password_reset_done.html:19
+#: templates/account/password_reset_done.html:20
 msgid ""
 "We have sent you an email. If you do not\n"
 "    receive it within a few minutes, please"
@@ -502,11 +511,12 @@ msgstr ""
 "Ti abbiamo inviato una email. Se non la ricevi\n"
 "            in pochi minuti, per favore"
 
-#: templates/account/password_reset_done.html:21
+#: templates/account/password_reset_done.html:22
 #: templates/account/verification_sent.html:18
 msgid "contact us"
 msgstr "contattaci"
 
+#: templates/account/password_reset_from_key.html:12
 #: templates/account/password_reset_from_key.html:13
 msgid "Bad Token"
 msgstr "Token Non Valido"
@@ -531,14 +541,16 @@ msgid "You have updated your password."
 msgstr "Hai aggiornato la tua password."
 
 #: templates/account/password_set.html:11
+#: templates/account/password_set.html:12
 #: templates/account/password_set.html:13
 #: templates/account/password_set.html:21
 msgid "Set Password"
 msgstr "Imposta Password"
 
-#: templates/account/signup.html:5 templates/account/signup.html:13
+#: templates/account/signup.html:5 templates/account/signup.html:12
+#: templates/account/signup.html:13
 #: templates/users/includes/unauthenticated_offcanvas.html:15
-#: users/forms.py:161
+#: users/forms.py:171
 msgid "Register"
 msgstr "Registrati"
 
@@ -556,6 +568,7 @@ msgstr ""
 "            se hai già un account."
 
 #: templates/account/signup_closed.html:11
+#: templates/account/signup_closed.html:12
 #: templates/account/signup_closed.html:13
 msgid "Sign Up Closed"
 msgstr "Iscrizione Chiusa"
@@ -579,10 +592,12 @@ msgstr ""
 
 #: templates/account/verification_sent.html:5
 #: templates/account/verified_email_required.html:5
+#: templates/account/verified_email_required.html:12
 #: templates/account/verified_email_required.html:13
 msgid "Verify Your Email Address"
 msgstr "Verifica Il Tuo Indirizzo Email"
 
+#: templates/account/verification_sent.html:12
 #: templates/account/verification_sent.html:13
 msgid "Verify Email"
 msgstr "Verifica Email"
@@ -646,7 +661,7 @@ msgid "Loading"
 msgstr "Carica"
 
 #: templates/base/errors.html:21 templates/base/includes/shop_nav.html:5
-#: templates/cart/cart_list.html:42 templates/checkout/order_form.html:146
+#: templates/cart/cart_list.html:42 templates/checkout/order_form.html:152
 #: templates/checkout/order_list.html:36 templates/likes/likes_list.html:40
 #: templates/products/product_list.html:64
 msgid "Offerings"
@@ -749,7 +764,7 @@ msgstr "Contatto Email"
 msgid "Policies"
 msgstr "Polizze"
 
-#: templates/base/includes/footer.html:90
+#: templates/base/includes/footer.html:92
 msgid "All Rights Reserved"
 msgstr "Tutti i Diritti Riservati"
 
@@ -817,7 +832,7 @@ msgstr "Il tuo carrello"
 msgid "Welcome to your cart. Let's see what has caught your eye."
 msgstr "Benvenuto nel tuo carrello. Vediamo cosa ha catturato i tuoi occhi."
 
-#: templates/cart/cart_list.html:39 templates/checkout/order_form.html:143
+#: templates/cart/cart_list.html:39 templates/checkout/order_form.html:148
 msgid "Your cart is empty..."
 msgstr "Il tuo carrello è vuoto..."
 
@@ -841,7 +856,7 @@ msgstr "Pagamento"
 #: templates/cart/includes/cart_offcanvas.html:38
 #: templates/cart/includes/subtotal.html:8
 #: templates/checkout/order_detail.html:187
-#: templates/checkout/order_form.html:125
+#: templates/checkout/order_form.html:130
 msgid "Delivery"
 msgstr "Spedizione"
 
@@ -1031,7 +1046,7 @@ msgid "Date"
 msgstr "Data"
 
 #: templates/checkout/includes/order_display.html:28
-#: templates/checkout/order_form.html:104
+#: templates/checkout/order_form.html:109
 msgid "Items"
 msgstr "Articoli"
 
@@ -1061,12 +1076,12 @@ msgid "Billing Details"
 msgstr "Dettagli Fatturazione"
 
 #: templates/checkout/order_detail.html:182
-#: templates/checkout/order_form.html:120
+#: templates/checkout/order_form.html:125
 msgid "Item Total"
 msgstr "Totale Articoli"
 
 #: templates/checkout/order_detail.html:192
-#: templates/checkout/order_form.html:130
+#: templates/checkout/order_form.html:135
 msgid "Grand Total"
 msgstr "Somma Totale"
 
@@ -1126,9 +1141,9 @@ msgstr "Pagamento"
 
 #: templates/checkout/order_form.html:95
 msgid "Confirm Purchase"
-msgstr "Conferma il tuo Acquisto"
+msgstr "Conferma Acquisto"
 
-#: templates/checkout/order_form.html:99
+#: templates/checkout/order_form.html:98
 msgid ""
 "All of your payment details are processed by Stripe. We do not process or "
 "store your payment information."
@@ -1136,11 +1151,19 @@ msgstr ""
 "Tutti i tuoi dettagli del pagamento sono eseguiti da Stripe. Noi non "
 "effettuiamo il pagamento e non salviamo le tue informazioni del pagamento."
 
-#: templates/checkout/order_form.html:107
+#: templates/checkout/order_form.html:100
+msgid "By clicking \"Confirm Purchase\" you agree to our"
+msgstr "Quando fai un clic su Conferma \"Acquisto\" accetti il nostro"
+
+#: templates/checkout/order_form.html:103
+msgid "and"
+msgstr "e"
+
+#: templates/checkout/order_form.html:112
 msgid "Details"
 msgstr "Dettagli"
 
-#: templates/checkout/order_form.html:136
+#: templates/checkout/order_form.html:141
 msgid ""
 "Please do not refresh the page, press the back button or navigate away while "
 "the payment is processing.<br>Thank you for your patience."
@@ -1149,7 +1172,7 @@ msgstr ""
 "navigare ad un'altra pagine mentre il pagamento sta eseguendo, per favore."
 "<br>Grazie per la tua pazienza."
 
-#: templates/checkout/order_form.html:144
+#: templates/checkout/order_form.html:149
 msgid "Let's explore."
 msgstr "Esploriamo."
 
@@ -1179,7 +1202,7 @@ msgstr "Cosa potremmo offrirti"
 msgid "Product Page Navigation"
 msgstr "Navigazione per le pagine dei prodotti"
 
-#: templates/contact/email_form.html:8
+#: templates/contact/email_form.html:8 templates/contact/email_form.html:25
 msgid "Contact Us"
 msgstr "Contattaci"
 
@@ -1198,7 +1221,7 @@ msgstr "contattaci, communicare, messagi, supporto"
 msgid "Get in Touch"
 msgstr "Entra in Contatto"
 
-#: templates/contact/email_form.html:25
+#: templates/contact/email_form.html:26
 msgid "Reach Out"
 msgstr "Entra in Contatto"
 
@@ -1635,7 +1658,7 @@ msgstr "Password dimenticata?"
 msgid "Username or Email"
 msgstr "Username o Email"
 
-#: users/forms.py:45 users/forms.py:155
+#: users/forms.py:45 users/forms.py:158
 msgid "Password"
 msgstr "Password"
 
@@ -1647,49 +1670,49 @@ msgstr "Reimposta Password"
 msgid "New Password"
 msgstr "Password Nuova"
 
-#: users/forms.py:117 users/forms.py:158
+#: users/forms.py:117 users/forms.py:161
 msgid "Repeat Password"
 msgstr "Ripeti Password"
 
-#: users/forms.py:152
+#: users/forms.py:155
 msgid "Username"
 msgstr "Username"
 
-#: users/forms.py:216
+#: users/forms.py:228
 msgid "SHIPPING DETAILS"
 msgstr "DETTAGLI SPEDIZIONE"
 
-#: users/forms.py:247
+#: users/forms.py:258
 msgid "BILLING DETAILS"
 msgstr "DETTAGLI FATTURAZIONE"
 
-#: users/forms.py:277
+#: users/forms.py:290
 msgid "Save Details"
 msgstr "Salva Dettagli"
 
-#: users/views.py:169
+#: users/views.py:168
 msgid "Your information has been updated."
 msgstr "I tuoi dati sono stati aggiornati."
 
-#: users/views.py:173
+#: users/views.py:172
 msgid "Failed to update your information.         Please Check your details."
 msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "
 "favore."
 
-#: users/views.py:209
+#: users/views.py:208
 #, python-brace-format
 msgid "Your newsletter preferences have been updated for {email}."
 msgstr ""
 "Le tue preferenze per l'inscrizione del newlsetter sono state aggiornate per "
 "{email}."
 
-#: users/views.py:219
+#: users/views.py:218
 #, python-brace-format
 msgid "You have unsubscribed {email} from the newsletter."
 msgstr "Hai anullato l'inscrizione alla newsletter per {email}."
 
-#: users/views.py:223
+#: users/views.py:222
 msgid "Failed to update your information. Please Check your details."
 msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "

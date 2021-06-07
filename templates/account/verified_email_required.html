@@ -9,7 +9,7 @@
 
 <!-- Open Graph Tags -->
 {% include 'base/includes/open_graph_basic.html'%}
-
+{% block form_header %}{% trans 'Verify Your Email Address' %}{% endblock %}
 {% block form_title %}{% trans "Verify Your Email Address" %}{% endblock %}
 
 {% url 'account_email' as email_url %}

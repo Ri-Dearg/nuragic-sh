@@ -2,8 +2,9 @@
 {% load i18n %}
 <!-- Used to display an order on the order_display.html template.
 Displays key information, order no., date, no. of items, total. -->
-<article class="p-font list-group-item fs-6 mb-0 mt-3 mt-md-0 p-0 p-sm-2 pb-sm-3 p-md-3 p-lg-5">
-    <div class="row justify-content-center">
+<li class="p-font list-group-item fs-6 mb-0 mt-3 mt-md-0 p-0 p-sm-2 pb-sm-3 p-md-3 p-lg-5">
+    <article class="row justify-content-center">
+        <h2 class="visually-hidden">{{ order.order_number }}</h2>
         <a class="col-11 col-sm-2 text-center" href="{% url 'checkout:order-detail' order.id %}">
             <img class="img-fluid" src="{{ order.lineitems.first.product.image_4_3_sm.url }}"
                 alt="{{ item.product.title }}" />
@@ -33,5 +34,5 @@ Displays key information, order no., date, no. of items, total. -->
                 <span class="float-end">€{{ order.grand_total }}</span>
             </p>
         </div>
-    </div>
-</article>
+    </article>
+</li>

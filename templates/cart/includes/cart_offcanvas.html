@@ -16,34 +16,37 @@
     </div>
     <ul class="list-group list-group-flush">
         {% for item in cart_items %}
-        <a href="{% url 'products:product-detail' item.product.slug item.product.id %}"
-            class="p-font list-group-item list-group-item-action fs-6 mb-0">
-            <img class="product-thumb col-2 d-inline-block float-start" src="{{ item.product.image_4_3_xs.url }}"
-                alt="{{ item.product.title }}">
-            <div class="col-10 ms-auto">
-                <div class="row">
-                    <span
-                        class="col-9 text-decoration-underline text-truncate align-self-start ps-2">{{ item.product.title }}</span>
+        <li class="list-group-item list-group-item-action">
+            <a href="{% url 'products:product-detail' item.product.slug item.product.id %}" class="p-font fs-6 mb-0">
+                <img class="product-thumb col-2 d-inline-block float-start" src="{{ item.product.image_4_3_xs.url }}"
+                    alt="{{ item.product.title }}">
+                <div class="col-10 ms-auto">
+                    <div class="row">
+                        <span
+                            class="col-9 text-decoration-underline text-truncate align-self-start ps-2">{{ item.product.title }}</span>
+                    </div>
+                    <div class="row mt-3">
+                        <span class="col-auto text-muted align-self-end ms-auto">{{ item.quantity }} x
+                            €{{ item.product.price }}</span>
+                    </div>
                 </div>
-                <div class="row mt-3">
-                    <span class="col-auto text-muted align-self-end ms-auto">{{ item.quantity }} x
-                        €{{ item.product.price }}</span>
-                </div>
-            </div>
-        </a>
+            </a>
+        </li>
         {% endfor %}
         {% if delivery != 0 %}
-        <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
-            href="{% url 'cart:cart-list' %}">
-            <span class="float-start">{% trans 'Delivery' %}</span>
-            <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
-        </a>
+        <li class="list-group-item list-group-item-action">
+            <a class="p-font text-primary fs-6 mx-0 mb-0" href="{% url 'cart:cart-list' %}">
+                <span class="float-start">{% trans 'Delivery' %}</span>
+                <span class="float-end text-muted">€{{ delivery|floatformat:2 }}</span>
+            </a>
+        </li>
         {% endif %}
-        <a class="p-font list-group-item list-group-item-action text-primary fs-6 mx-0 mb-0"
-            href="{% url 'cart:cart-list' %}">
-            <strong><span class="float-start p-font">{% trans 'Total' %}</span></strong>
-            <span class="float-end">€{{ grand_total }}</span>
-        </a>
+        <li class="list-group-item list-group-item-action">
+            <a class="p-font text-primary fs-6 mx-0 mb-0" href="{% url 'cart:cart-list' %}">
+                <strong><span class="float-start p-font">{% trans 'Total' %}</span></strong>
+                <span class="float-end">€{{ grand_total }}</span>
+            </a>
+        </li>
     </ul>
 </div>
 {% else %}

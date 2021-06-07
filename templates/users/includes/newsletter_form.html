@@ -6,9 +6,9 @@
     <form action="{% url 'users:newsletter'%}?next={{ request.path }}" method="POST">
         {% csrf_token %}
         <div class="col-md-6 col-12 form-floating my-1 pe-md-4">
-            <select placeholder="Email" name="email" class="p-font text-primary form-select" id="newsletter_email">
+            <select name="email" class="p-font text-primary form-select" id="newsletter_email">
                 {% for email in user.emailaddress_set.all %}
-                <option value="{{ email }}">{{ email }}</option>
+                <option value="{{ email }}" {% if forloop.first %}selected{% endif %}>{{ email }}</option>
                 {% endfor %}
             </select>
             <label for="newsletter_email" class="p-font text-primary sr-only">

@@ -1,7 +1,7 @@
 <!-- Loads internationalization, loads static  -->
 {% load i18n %} {% load static %}
 <!--Template used to display cart items in the cart_list.html template.-->
-<div id="cart-item-{{ item.product.id }}" class="list-group-item p-3">
+<li id="cart-item-{{ item.product.id }}" class="list-group-item p-3">
     <section class="row">
         <!--Provides an image with a link to the product.
         the cart-thumb class controls the size.-->
@@ -58,4 +58,4 @@
             <p class="p-font text-muted h5">€{{ item.product.price }}</p>
         </div>
     </section>
-</div>
+</li>
