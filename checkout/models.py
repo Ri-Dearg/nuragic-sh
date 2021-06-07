@@ -36,10 +36,10 @@ class Order(models.Model):
     shipping_street_address_1 = models.CharField(
         max_length=80, null=False, blank=False)
     shipping_street_address_2 = models.CharField(
-        max_length=80, default='', blank=True)
+        max_length=80, default='', blank=True, null=True)
     shipping_town_or_city = models.CharField(
         max_length=40, null=False, blank=False)
-    shipping_county = models.CharField(max_length=80, blank=True)
+    shipping_county = models.CharField(max_length=80, blank=True, null=True)
     shipping_postcode = models.CharField(
         max_length=20, default='', blank=True, null=True)
     shipping_country = CountryField(
@@ -51,10 +51,11 @@ class Order(models.Model):
     billing_street_address_1 = models.CharField(
         max_length=80, null=False, blank=False)
     billing_street_address_2 = models.CharField(
-        max_length=80, default='', blank=True)
+        max_length=80, default='', blank=True, null=True)
     billing_town_or_city = models.CharField(
         max_length=40, null=False, blank=False)
-    billing_county = models.CharField(max_length=80, default='', blank=True)
+    billing_county = models.CharField(
+        max_length=80, default='', blank=True, null=True)
     billing_postcode = models.CharField(
         max_length=20, default='', blank=True, null=True)
     billing_country = CountryField(
