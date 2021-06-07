@@ -71,8 +71,9 @@ form.addEventListener("submit", function (ev) {
     form.billing_street_address_1.value = form.shipping_street_address_1.value;
     form.billing_street_address_2.value = form.shipping_street_address_2.value;
     form.billing_town_or_city.value = form.shipping_town_or_city.value;
-    form.billing_country.value = form.shipping_country.value;
     form.billing_county.value = form.shipping_county.value;
+    form.billing_postcode.value = form.shipping_postcode.value;
+    form.billing_country.value = form.shipping_country.value;
   }
 
   var url = "/shop/checkout/cache_data/";
@@ -84,35 +85,36 @@ form.addEventListener("submit", function (ev) {
           payment_method: {
             card: card,
             billing_details: {
+              address: {
+                city: $.trim(form.billing_town_or_city.value),
+                country: $.trim(form.billing_country.value),
+                line1: $.trim(form.billing_street_address_1.value),
+                line2: $.trim(form.billing_street_address_2.value),
+                postal_code: $.trim(form.billing_postcode.value),
+                state: $.trim(form.billing_county.value),
+              },
+              email: $.trim(form.email.value),
               name: $.trim(form.billing_full_name.value),
               phone: $.trim(
                 form.billing_phone_number_0.value +
                   form.billing_phone_number_1.value
               ),
-              email: $.trim(form.email.value),
-              address: {
-                line1: $.trim(form.billing_street_address_1.value),
-                line2: $.trim(form.billing_street_address_2.value),
-                city: $.trim(form.billing_town_or_city.value),
-                country: $.trim(form.billing_country.value),
-                state: $.trim(form.billing_county.value),
-              },
             },
           },
           shipping: {
+            address: {
+              city: $.trim(form.shipping_town_or_city.value),
+              country: $.trim(form.shipping_country.value),
+              line1: $.trim(form.shipping_street_address_1.value),
+              line2: $.trim(form.shipping_street_address_2.value),
+              postal_code: $.trim(form.shipping_postcode.value),
+              state: $.trim(form.shipping_county.value),
+            },
             name: $.trim(form.shipping_full_name.value),
             phone: $.trim(
               form.shipping_phone_number_0.value +
                 form.shipping_phone_number_1.value
             ),
-            address: {
-              line1: $.trim(form.shipping_street_address_1.value),
-              line2: $.trim(form.shipping_street_address_2.value),
-              city: $.trim(form.shipping_town_or_city.value),
-              country: $.trim(form.shipping_country.value),
-              postal_code: $.trim(form.shipping_postcode.value),
-              state: $.trim(form.shipping_county.value),
-            },
           },
         })
         .then(function (result) {
