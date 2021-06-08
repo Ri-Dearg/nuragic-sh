@@ -22,9 +22,7 @@ class TestCookiesModels(TestCase):
         self.client.force_login(test_user)
         self.client.post(
             reverse('cookies:consent'
-                    ), {'cookie-consent': 'opt-in',
-                        'script-url': staticfiles_storage.url(
-                            'js/custom/fullConsent.js')},
+                    ), {'cookie-consent': 'opt-in'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
     def test_cookie_str(self):

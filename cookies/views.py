@@ -1,5 +1,6 @@
 """Saves cookie consent details in the session and creates cookie records."""
 from django.http import HttpResponseForbidden, JsonResponse
+from django.shortcuts import reverse, render
 from django.utils.translation import ugettext_lazy as _
 
 from .models import CookieRecord
@@ -12,6 +13,7 @@ def cookie_consent(request):
     if request.method == 'POST':
         request.session['cookie_consent'] = False
         data['consent'] = 'false'
+        data['url'] = f'{reverse("cookies:update")}'
         consent = request.POST['cookie-consent']
 
         if consent == 'opt-in':
@@ -21,8 +23,6 @@ def cookie_consent(request):
             request.session['analytics_consent'] = True
 
         if consent != 'decline':
-            script_url = request.POST['script-url']
-            data['script'] = script_url
             data['consent'] = 'true'
 
         if request.user.is_authenticated:
@@ -38,3 +38,10 @@ def cookie_consent(request):
         data['tagMessage'] = _('Info')
         return JsonResponse(data)
     return HttpResponseForbidden()
+
+
+def update_cookies(request):
+    """Implements cookie template on cookie consent."""
+
+    # Pushes the new context to the page before re-rendering the template.
+    return render(request, 'base/includes/trackers.html')
