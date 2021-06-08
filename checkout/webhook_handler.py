@@ -1,7 +1,6 @@
 """Functions that act on receipt of the webhook."""
 import json
 import logging
-import threading
 import time
 
 from django.conf import settings
@@ -81,32 +80,23 @@ def check_order_in_db(
         billing_details, shipping_details, grand_total, cart, pid):
     """Runs a loop to check if the order was created in the DB.
     If it was, sends and email, if not, returns False."""
-    order_exists = False
-    attempt = 1
-    while attempt <= 10:
-        try:
-            order = Order.objects.get(
-                email__iexact=billing_details.email,
-                shipping_full_name__iexact=shipping_details.name,
-                shipping_country__iexact=shipping_details.address.country,
-                shipping_postcode__iexact=shipping_details.address.postal_code,  # noqa E501
-                shipping_town_or_city__iexact=shipping_details.address.city,  # noqa E501
-                shipping_street_address_1__iexact=shipping_details.address.line1,  # noqa E501
-                shipping_street_address_2__iexact=shipping_details.address.line2,  # noqa E501
-                shipping_county__iexact=shipping_details.address.state,
-                grand_total=grand_total,
-                original_cart=cart,
-                stripe_pid=pid,
-            )
-            order_exists = True
-            break
-        except Order.DoesNotExist:
-            attempt += 10
-            time.sleep(1)
-    # send an email if the order is found.
-    if order_exists:
-        return order
-    return False
+    try:
+        order = Order.objects.get(
+            email__iexact=billing_details.email,
+            shipping_full_name__iexact=shipping_details.name,
+            shipping_country__iexact=shipping_details.address.country,
+            shipping_postcode__iexact=shipping_details.address.postal_code,  # noqa E501
+            shipping_town_or_city__iexact=shipping_details.address.city,  # noqa E501
+            shipping_street_address_1__iexact=shipping_details.address.line1,  # noqa E501
+            shipping_street_address_2__iexact=shipping_details.address.line2,  # noqa E501
+            shipping_county__iexact=shipping_details.address.state,
+            grand_total=grand_total,
+            original_cart=cart,
+            stripe_pid=pid,
+        )
+    except Order.DoesNotExist:
+        order = False
+    return order
 
 
 def save_user_info(userprofile, billing_details, shipping_details):
@@ -205,11 +195,15 @@ def handle_payment_intent_succeeded(event):
     # This checks for the order in the Database
     # and runs a loop to see if it is created in the meantime.
     # If the order is found, it breaks the loop.
-    order = check_order_in_db(
-        billing_details, shipping_details, grand_total, cart, pid)
-    thread = threading.Thread(target=check_order_in_db)
-    thread.start()
-    thread.join()
+    attempt = 1
+    while attempt <= 6:
+        order = check_order_in_db(billing_details, shipping_details,
+                                  grand_total, cart, pid)
+        if order is False:
+            attempt += 1
+            time.sleep(1)
+        else:
+            break
 
     if order is not False:
         send_confirmation_email(order)
