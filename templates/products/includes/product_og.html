@@ -1,0 +1,16 @@
+<meta property="product:brand" content="Nuragic Shamanic Healing" />
+<meta property="product:condition" content="new" />
+<meta property="og:price:currency" content="EUR" />
+<meta property="product:price:currency" content="EUR" />
+<meta property="og:price:amount" content="{{ product.price }}" />
+<meta property="product:price:amount" content="{{ product.price }}" />
+{% if product.stock > 0 %}
+<meta property="product:availability" content="in stock" />
+{% elif product.can_preorder %}
+<meta property="product:availability" content="available for order" />
+{% else %}
+<meta property="product:availability" content="out of stock" />
+{% endif %}
+<meta property="product:catalog_id" content="{{ product.id }}" />
+<meta property="product:retailer_item_id" content="{{ product.id }}" />
+<meta property="product:condition" content="new" />

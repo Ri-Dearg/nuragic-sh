@@ -12,12 +12,13 @@
 <!-- Open Graph Tags -->
 {% block og_type %}website{% endblock %}
 {% block og_title %}{{ product.title }}{% endblock %}
-{% block og_description %}{{ product.description|striptags|truncatechars:270 }}{% endblock %}
+{% block og_description %}{{ product.description|striptags|truncatechars:500 }}{% endblock %}
 {% block og_image %}{{ product.image_4_3.url }}{% endblock %}
 {% block og_image_type %}image/{{ product.image_4_3.name|extension }}{% endblock %}
 {% block og_image_width %}{{ product.image_4_3.width }}{% endblock %}
 {% block og_image_height %}{{ product.image_4_3.height }}{% endblock %}
 {% block og_image_alt %}{{ product.title }}{% endblock %}
+{% block product_og %}{% include 'products/includes/product_og.html' %}{% endblock %}
 
 {% block head_title %}{{ product.title }}{% endblock %}
 
