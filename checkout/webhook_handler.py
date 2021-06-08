@@ -85,11 +85,8 @@ def check_order_in_db(
             email__iexact=billing_details.email,
             shipping_full_name__iexact=shipping_details.name,
             shipping_country__iexact=shipping_details.address.country,
-            shipping_postcode__iexact=shipping_details.address.postal_code,  # noqa E501
             shipping_town_or_city__iexact=shipping_details.address.city,  # noqa E501
             shipping_street_address_1__iexact=shipping_details.address.line1,  # noqa E501
-            shipping_street_address_2__iexact=shipping_details.address.line2,  # noqa E501
-            shipping_county__iexact=shipping_details.address.state,
             grand_total=grand_total,
             original_cart=cart,
             stripe_pid=pid,
