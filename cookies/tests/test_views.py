@@ -22,9 +22,7 @@ class TestCookiesViews(TestCase):
         """Tests Cookie consent view."""
         response = self.client.get(
             reverse('cookies:consent'
-                    ), {'cookie-consent': 'opt-in',
-                        'script-url': staticfiles_storage.url(
-                            'js/custom/fullConsent.js')},
+                    ), {'cookie-consent': 'opt-in'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
 
@@ -38,18 +36,14 @@ class TestCookiesViews(TestCase):
 
         response = self.client.post(
             reverse('cookies:consent'
-                    ), {'cookie-consent': 'opt-in',
-                        'script-url': staticfiles_storage.url(
-                            'js/custom/fullConsent.js')},
+                    ), {'cookie-consent': 'opt-in'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(self.client.session['cookie_consent'], True)
 
         response = self.client.post(
             reverse('cookies:consent'
-                    ), {'cookie-consent': 'analytics',
-                        'script-url': staticfiles_storage.url(
-                            'js/custom/gAnalytics.js')},
+                    ), {'cookie-consent': 'analytics'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(self.client.session['analytics_consent'], True)
