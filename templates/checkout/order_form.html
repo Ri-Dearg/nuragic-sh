@@ -170,6 +170,10 @@
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }}"></script>
 <script type="module">
-    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total|floatformat:2 }})
+    {% if request.session.cookie_consent == True %}
+    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, true)
+    {% else %}
+    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, false)
+    {% endif %}
 </script>
 {% endblock %}
