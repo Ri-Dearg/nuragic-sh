@@ -12,6 +12,17 @@ function pixelAddToCart(id, title, quantity, price) {
   $(`#cb-${id}`).on("click", cartClick);
 }
 
+function pixelViewContent(id, title, category, price) {
+  fbq("track", "ViewContent", {
+    content_category: category,
+    content_ids: [id],
+    content_name: `${title}`,
+    content_type: "product",
+    currency: "EUR",
+    value: price,
+  });
+}
+
 /**
  * Receives the like or cart button press, prevents the page reload and runs the function that
  * passes the info to a Python view.
