@@ -1,7 +1,6 @@
 function pixelAddToCart(id, title, quantity_field, price) {
   function cartClick() {
     quantity = Number($(`#${quantity_field}`).val());
-    console.log(quantity);
     fbq("track", "AddToCart", {
       content_name: `${title}`,
       content_type: "product",
@@ -12,6 +11,21 @@ function pixelAddToCart(id, title, quantity_field, price) {
     $(`#cb-${id}`).off("click", cartClick);
   }
   $(`#cb-${id}`).on("click", cartClick);
+}
+
+function pixelAddToWishlist(id, title, category, price) {
+  function wishClick() {
+    fbq("track", "AddToWishlist", {
+      content_category: category,
+      content_ids: [id],
+      content_name: `${title}`,
+      content_type: "product",
+      currency: "EUR",
+      value: price,
+    });
+    $(`#lb-${id}`).off("click", wishClick);
+  }
+  $(`#lb-${id}`).on("click", wishClick);
 }
 
 function pixelViewContent(id, title, category, price) {

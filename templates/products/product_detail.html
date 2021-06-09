@@ -101,6 +101,7 @@ If there is quantity, it includes quantity selection linked to the form in the d
 {{ block.super }}
 <script>
     pixelViewContent("{{ product.id }}", "{{ product.title }}", "{{ product.category }}", {{ product.price }})
+    pixelAddToWishlist("{{ product.id }}", "{{ product.title }}", "{{ product.category }}", {{ product.price }})
     pixelAddToCart("{{ product.id }}", "{{ product.title }}", "id_quantity", {{ product.price }})
 </script>
 {% endblock %}
