@@ -1,3 +1,17 @@
+function pixelAddToCart(id, title, quantity, price) {
+  function cartClick() {
+    fbq("track", "AddToCart", {
+      content_name: `${title}`,
+      content_type: "product",
+      contents: [{ id: `${id}`, quantity: quantity }],
+      currency: "EUR",
+      value: price,
+    });
+    $(`#cb-${id}`).off("click", cartClick);
+  }
+  $(`#cb-${id}`).on("click", cartClick);
+}
+
 /**
  * Receives the like or cart button press, prevents the page reload and runs the function that
  * passes the info to a Python view.
