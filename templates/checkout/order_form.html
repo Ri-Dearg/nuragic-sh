@@ -169,4 +169,7 @@
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }}"></script>
+<script type="module">
+    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total|floatformat:2 }})
+</script>
 {% endblock %}
