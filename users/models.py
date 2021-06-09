@@ -28,13 +28,16 @@ class UserProfile(models.Model):
                                                  blank=True)
     shipping_street_address_2 = models.CharField(max_length=80,
                                                  default='',
-                                                 blank=True)
+                                                 blank=True,
+                                                 null=True)
     shipping_town_or_city = models.CharField(max_length=40,
                                              default='', blank=True)
     shipping_county = models.CharField(max_length=80,
-                                       default='', blank=True)
+                                       default='', blank=True,
+                                       null=True)
     shipping_postcode = models.CharField(max_length=20,
-                                         default='', blank=True)
+                                         default='', blank=True,
+                                         null=True)
     shipping_country = CountryField(blank_label='Country',
                                     default='', blank=True)
     billing_full_name = models.CharField(max_length=50,
@@ -43,13 +46,16 @@ class UserProfile(models.Model):
     billing_street_address_1 = models.CharField(max_length=80,
                                                 default='', blank=True)
     billing_street_address_2 = models.CharField(max_length=80,
-                                                default='', blank=True)
+                                                default='', blank=True,
+                                                null=True)
     billing_town_or_city = models.CharField(max_length=40,
                                             default='', blank=True)
     billing_county = models.CharField(max_length=80,
-                                      default='', blank=True)
+                                      default='', blank=True,
+                                      null=True)
     billing_postcode = models.CharField(max_length=20,
-                                        default='', blank=True)
+                                        default='', blank=True,
+                                        null=True)
     billing_country = CountryField(blank_label='Country',
                                    default='', blank=True)
 
