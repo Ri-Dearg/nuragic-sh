@@ -1,5 +1,7 @@
-function pixelAddToCart(id, title, quantity, price) {
+function pixelAddToCart(id, title, quantity_field, price) {
   function cartClick() {
+    quantity = Number($(`#${quantity_field}`).val());
+    console.log(quantity);
     fbq("track", "AddToCart", {
       content_name: `${title}`,
       content_type: "product",

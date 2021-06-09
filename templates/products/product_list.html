@@ -79,7 +79,7 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 <script>
     {% for product in page_obj %}
     {% if product.stock > 0 or product.can_preorder %}
-    pixelAddToCart("{{ product.id }}", "{{ product.title }}", 1, {{ product.price }})
+    pixelAddToCart("{{ product.id }}", "{{ product.title }}", "cq-{{ product.id }}", {{ product.price }})
     {% endif %}
     {% endfor %}
 </script>
