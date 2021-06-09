@@ -49,7 +49,6 @@
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="it_IT" />
         <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-        <meta property="fb:app_id" content="324150155353018" />
         <meta property="og:type" content="{% block og_type %}{% endblock %}" />
         <meta property="og:title" content="{% block og_title %}{% endblock %}" />
         <meta property="og:description" content="{% block og_description %}{% endblock %}" />
@@ -68,13 +67,10 @@
         {% if '/shop/product/' in request.path %}
         {% block product_og %}{% endblock %}
         {% endif %}
-
-        {% include 'base/includes/trackers.html' %}
-
         <title>
             Nuragic Shamanic Healing | {% block head_title %}{% endblock %}
         </title>
-
+        {% include 'base/includes/trackers.html' %}
     </head>
     {% endblock %}
 
