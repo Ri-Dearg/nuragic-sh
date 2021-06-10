@@ -1,3 +1,10 @@
+function pixelContact() {
+  function contactClick() {
+    fbq("track", "Contact");
+    $(".pixel-contact").off("click", contactClick);
+  }
+  $(".pixel-contact").on("click", contactClick);
+}
 /**
  * Fades the preloader once content is loaded.
  */

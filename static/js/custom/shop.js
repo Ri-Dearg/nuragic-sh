@@ -1,3 +1,58 @@
+function initiateCheckout(cart, num_items, item_total) {
+  content_list = [];
+  const cart_items = Object.keys(cart);
+  cart_items.forEach((key, index) => {
+    content_list.push({ id: key, quantity: cart[key] });
+  });
+  fbq("track", "InitiateCheckout", {
+    contents: content_list,
+    currency: "EUR",
+    num_items: num_items,
+    value: item_total,
+  });
+}
+
+function pixelAddToCart(id, title, quantity_field, price) {
+  function cartClick() {
+    quantity = Number($(`#${quantity_field}`).val());
+    fbq("track", "AddToCart", {
+      content_name: `${title}`,
+      content_type: "product",
+      contents: [{ id: `${id}`, quantity: quantity }],
+      currency: "EUR",
+      value: price,
+    });
+    $(`#cb-${id}`).off("click", cartClick);
+  }
+  $(`#cb-${id}`).on("click", cartClick);
+}
+
+function pixelAddToWishlist(id, title, category, price) {
+  function wishClick() {
+    fbq("track", "AddToWishlist", {
+      content_category: category,
+      content_ids: [id],
+      content_name: `${title}`,
+      content_type: "product",
+      currency: "EUR",
+      value: price,
+    });
+    $(`#lb-${id}`).off("click", wishClick);
+  }
+  $(`#lb-${id}`).on("click", wishClick);
+}
+
+function pixelViewContent(id, title, category, price) {
+  fbq("track", "ViewContent", {
+    content_category: category,
+    content_ids: [id],
+    content_name: `${title}`,
+    content_type: "product",
+    currency: "EUR",
+    value: price,
+  });
+}
+
 /**
  * Receives the like or cart button press, prevents the page reload and runs the function that
  * passes the info to a Python view.

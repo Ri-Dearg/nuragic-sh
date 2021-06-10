@@ -31,12 +31,12 @@
                 {% csrf_token %}
                 <div class="col-9 col-sm-6 col-md-4">
                     <div class="form-floating">
-                        <input class="form-control d-inline-block" type="number"
-                            id="cart-quantity-{{ item.product.id }}" name=" quantity" value="{{ item.quantity }}"
-                            min="1" {% if item.product.stock > 0 %} max="{{ item.product.stock }}" {% endif %}
-                            required{% if item.product.is_unique %} readonly{% endif %} />
+                        <input class="form-control d-inline-block" type="number" id="cq-{{ item.product.id }}"
+                            name=" quantity" value="{{ item.quantity }}" min="1" {% if item.product.stock > 0 %}
+                            max="{{ item.product.stock }}" {% endif %} required{% if item.product.is_unique %}
+                            readonly{% endif %} />
                         <label class="p-font text-primary sr-only requiredField"
-                            for="cart-quantity-{{ item.product.id }}">{% trans 'Quantity' %}</label>
+                            for="cq-{{ item.product.id }}">{% trans 'Quantity' %}</label>
                     </div>
                 </div>
                 <div class="col-12 d-md-none"></div>
@@ -44,7 +44,7 @@
                     Items can be removed from the cart.
                     Allows for quantity to be updated if there is numerous stock.-->
                 <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center mt-2 mt-md-0 ps-md-2">
-                    <button id="up-{{ item.product.id }}" type="submit"
+                    <button id="cb-{{ item.product.id }}" type="submit"
                         class="update-button p-font btn btn-sm btn-success fw-bold shadow">{% trans 'Update' %}</button>
                 </div>
                 <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center">

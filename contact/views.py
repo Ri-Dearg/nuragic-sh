@@ -54,7 +54,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
                       css_class='p-font text-primary'),
 
                 Column(StrictButton(_('Send'), type='submit',
-                       css_class='p-font btn-tran btn-warning text-primary shadow fw-bold'),  # noqa E501
+                       css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold'),  # noqa E501
                        css_class='col-12 my-1 text-center'),
                 )
         )

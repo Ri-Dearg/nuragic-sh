@@ -73,3 +73,16 @@ It utilises the paginator so it can use the infinite scroll feature. -->
 </nav>
 {% endif %}
 {% endblock %}
+{% if request.session.cookie_consent == True and page_obj %}
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    {% for product in page_obj %}
+    {% if product.stock > 0 or product.can_preorder %}
+    pixelAddToCart("{{ product.id }}", "{{ product.title }}", "cq-{{ product.id }}", {{ product.price }})
+    pixelAddToWishlist("{{ product.id }}", "{{ product.title }}", "{{ product.category }}", {{ product.price }})
+    {% endif %}
+    {% endfor %}
+</script>
+{% endblock %}
+{% endif %}

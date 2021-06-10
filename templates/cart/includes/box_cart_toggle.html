@@ -14,6 +14,6 @@ The toggle-form class makes it a target for the ajax functions..-->
     </button>
     {% csrf_token %}
     <!--It only sends the product ID and always a quantity of 1.-->
-    <input type="hidden" name="quantity" value="1" />
+    <input id="cq-{{ product.id }}" type="hidden" name="quantity" value="1" />
     <input type="hidden" name="item-id" value="{{ product.id }}" />
 </form>
