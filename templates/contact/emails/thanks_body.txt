@@ -1,9 +1,17 @@
-{% load i18n %}{% trans 'Hello' %}, {{ name }},
+{% load i18n %}
+{% trans 'Thank You' %}, {{ name }}
 
-{% trans 'Thank you for getting in contact with Nuragic Shamanic Healing' %}.
+{% trans 'We appreciate all the communication we receive at' %} Nuragic Shamanic Healing: https://www.nuragicshamanichealing.com.
+{% trans 'You can also connect with us on WhatsApp: https://wa.me/353834646130 or Facebook Messenger: https://m.me/NuragicShamanicHealing' %}.
 
-{% trans 'We have received your message and will get in contact with you as soon as possible' %}.
+{% trans 'We will get in contact with you as soon as possible' %}.
 
-
-{% trans 'Be Well' %},
+{% trans 'Be Well' %}
 Nuragic Shamanic Healing
+
+Facebook:   https://www.facebook.com/NuragicShamanicHealing/
+Instagram:  https://www.instagram.com/nuragic.shamanic.healing/
+Youtube:    https://www.youtube.com/channel/UCyl4isKUXtr6YmAJWunqGtg
+
+© Nuragic Shamanic Healing
+All Rights Reserved
