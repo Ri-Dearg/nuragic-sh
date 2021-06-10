@@ -13,7 +13,14 @@
 {% block meta_keywords %}{{ block.super }} {{user.username}}, {% trans 'profile' %}{% endblock %}
 
 <!-- Open Graph Tags -->
-{% include 'base/includes/open_graph_basic.html'%}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block og_image %}{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}{% trans 'Nuragic Shamanic Healing Logo' %}{% endblock %}
 
 {% block content %}
 <!-- This page displays option such as changing password, email address and shipping/billing info.

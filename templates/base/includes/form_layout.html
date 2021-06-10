@@ -1,4 +1,15 @@
 {% extends 'base/base.html' %}
+<!-- Loads internationalization -->
+{% load i18n %} {% load static %}
+{% block og_type %}website{% endblock %}
+{% block og_title %}{% trans 'Ancient Wisdom, Modern Healing' %}{% endblock %}
+{% block og_description %}{% trans 'Consciousness, spirituality, healing and ancestry. Working with systems such as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for sharing and connections between individuals and cultures.' %}{% endblock %}
+{% block og_image %}{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image_type %}image/png{% endblock %}
+{% block og_image_width %}1200{% endblock %}
+{% block og_image_height %}630{% endblock %}
+{% block og_image_alt %}{% trans 'Nuragic Shamanic Healing Logo' %}{% endblock %}
+
 {% block content %}
 {{ block.super }}
 {% include 'base/includes/horizontal_rule.html'%}
