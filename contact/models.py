@@ -152,11 +152,16 @@ class Email(models.Model):
         contact_body = render_to_string(
             'contact/emails/contact_body.txt',
             {'name': name, 'email': email, 'message': message})
+        contact_body_html = render_to_string(
+            'contact/emails/contact_body_html.html',
+            {'name': name, 'email': email, 'message': message})
+
         send_mail(
             contact_subject,
             contact_body,
             f'CUSTOMER CONTACT <{settings.DEFAULT_CONTACT_EMAIL}>',
-            [settings.DEFAULT_CONTACT_EMAIL])
+            [settings.DEFAULT_CONTACT_EMAIL],
+            html_message=contact_body_html)
 
         # Sends a thank you email to the person who sent the email
         thanks_subject = render_to_string(
