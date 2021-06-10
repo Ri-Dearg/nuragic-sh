@@ -172,6 +172,7 @@
 <script type="module">
     {% if request.session.cookie_consent == True %}
     checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, true)
+    initiateCheckout({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }})
     {% else %}
     checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, false)
     {% endif %}
