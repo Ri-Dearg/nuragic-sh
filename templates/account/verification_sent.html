@@ -17,3 +17,13 @@
     receive it within a few minutes, please{% endblocktrans %} <a class="smooth-click form-link text-info"
         href="{% url 'contact:email-form' %}">{% trans 'contact us' %}.</a></p>
 {% endblock %}
+{% if request.session.cookie_consent == True %}
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    fbq('track', 'CompleteRegistration', {
+        content_name: `verify email`,
+    });
+</script>
+{% endblock %}
+{% endif %}

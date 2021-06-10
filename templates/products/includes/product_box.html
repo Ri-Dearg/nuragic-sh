@@ -5,7 +5,7 @@ It is used in many templates, stockdrop and category detail, the product_list ho
 related items box, and likes_list.
 It displays two ajax buttons for liking and adding to cart among other details that vary depending on
 the product's characteristics, e.g. size, unique item, etc.. -->
-{% if 'shop/product' in request.path %}
+{% if 'shop/product/' in request.path %}
 <div class="col-8 col-sm-4 col-md-3 m-2">
     {% else %}
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-0 p-sm-1 p-lg-2 p-xl-3">

@@ -67,4 +67,11 @@
     });
 </script>
 {{ block.super }}
+{% if request.session.cookie_consent == True %}
+<script>
+    {% for item in cart_items %}
+    pixelAddToCart("{{ item.product.id }}", "{{ item.product.title }}", "cq-{{ item.product.id }}", {{ item.product.price }})
+    {% endfor %}
+</script>
+{% endif %}
 {% endblock %}

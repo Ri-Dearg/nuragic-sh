@@ -169,4 +169,12 @@
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }}"></script>
+<script type="module">
+    {% if request.session.cookie_consent == True %}
+    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, true)
+    initiateCheckout({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }})
+    {% else %}
+    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, false)
+    {% endif %}
+</script>
 {% endblock %}
