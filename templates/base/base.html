@@ -155,6 +155,11 @@
             showToast();
         </script>
         {% endif %}
+        {% if request.session.cookie_consent == True %}
+        <script>
+            pixelContact()
+        </script>
+        {% endif %}
         {% if '/shop/' in request.path or '/shop/' in request.GET.next %}
         <script src="{% static 'js/custom/shop.js' %}?{{ VERSION }}"></script>
         <script>
