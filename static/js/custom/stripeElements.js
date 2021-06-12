@@ -16,6 +16,8 @@ function checkoutPage(cart, num_items, item_total, consent) {
     });
   }
 
+  $("#payment-submit").attr("disabled", false);
+
   var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
   var clientSecret = $("#id_client_secret").text().slice(1, -1);
   var stripe = Stripe(stripePublicKey);
