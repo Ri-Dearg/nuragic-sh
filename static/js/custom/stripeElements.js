@@ -1,5 +1,5 @@
 function checkoutPage(cart, num_items, item_total, consent) {
-  content_list = [];
+  var content_list = [];
   const cart_items = Object.keys(cart);
   cart_items.forEach((key, index) => {
     content_list.push({ id: key, quantity: cart[key] });
