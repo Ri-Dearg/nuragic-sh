@@ -1,5 +1,5 @@
 function checkoutPage(cart, num_items, item_total, consent) {
-  content_list = [];
+  var content_list = [];
   const cart_items = Object.keys(cart);
   cart_items.forEach((key, index) => {
     content_list.push({ id: key, quantity: cart[key] });
@@ -15,6 +15,8 @@ function checkoutPage(cart, num_items, item_total, consent) {
       value: item_total,
     });
   }
+
+  $("#payment-submit").attr("disabled", false);
 
   var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
   var clientSecret = $("#id_client_secret").text().slice(1, -1);

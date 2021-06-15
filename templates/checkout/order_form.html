@@ -100,7 +100,7 @@
                 <input type="hidden" value="{{ client_secret }}" name="client_secret" />
             </fieldset>
             <button type="submit" id="payment-submit"
-                class="p-font text-white btn btn-info shadow fw-bold mb-2">{% trans 'Confirm Purchase' %}</button>
+                class="p-font text-white btn btn-info shadow fw-bold mb-2" disabled>{% trans 'Confirm Purchase' %}</button>
         </form>
         <p class="p-font text-muted small mb-1">
             *{% trans 'All of your payment details are processed by Stripe. We do not process or store your payment information.' %}
@@ -175,12 +175,14 @@
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'js/custom/stripeElements.js' %}?{{ VERSION }}" defer></script>
 <script src="{% static 'js/custom/checkoutForm.js' %}?{{ VERSION }}"></script>
+{% language 'en' %}
 <script type="module">
     {% if request.session.cookie_consent == True %}
-    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, true)
-    initiateCheckout({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }})
+    checkoutPage({{ cart|safe }}, {{ cart_quantity }}, {{ cart_total|floatformat:2 }}, true)
+    initiateCheckout({{ cart|safe }}, {{ cart_quantity }}, {{ cart_total|floatformat:2 }})
     {% else %}
-    checkoutPage({{ cart| safe }}, {{ cart_quantity }}, {{ cart_total| floatformat:2 }}, false)
+    checkoutPage({{ cart|safe }}, {{ cart_quantity }}, {{ cart_total|floatformat:2 }}, false)
     {% endif %}
 </script>
+{% endlanguage %}
 {% endblock %}
