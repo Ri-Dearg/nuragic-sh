@@ -1,0 +1,8 @@
+{% load i18n %}
+{% blocktrans with invoice_id=invoice_id  %}
+Invoice Paid on Stripe.
+
+Please check info onthe Stripe Dash:
+Stripe invoice ID: {{ invoice_id }}
+Amount (in cents):
+{% endblocktrans %}
