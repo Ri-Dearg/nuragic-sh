@@ -151,7 +151,7 @@ def send_confirmation_email(order):
 
 def invoice_email(intent, grand_total):
     """Sends an email to confirm an invoice is paid."""
-    invoice_id = intent.charges.data.invoice
+    invoice_id = intent.invoice
     order_subject = render_to_string(
         'checkout/confirmation_email/invoice_email_subject.txt',
         {'invoice_id': invoice_id})
@@ -189,6 +189,17 @@ def handle_payment_intent_succeeded(event):
 
     # Declares variables for use in the view
     intent = event.data.object
+
+    # Calculates the correct value for Stripe
+    grand_total = round(intent.charges.data[0].amount / 100, 2)
+
+    if 'Payment for Invoice' in intent.description:
+        invoice_email(intent, grand_total)
+        return HttpResponse(
+            content=f'Webhook received: {event["type"]} | \
+                    SUCCESS: Email sent for Invoice.',
+            status=200)
+
     pid = intent.id
     cart = intent.metadata.cart
     save_info = intent.metadata.save_info
@@ -196,15 +207,6 @@ def handle_payment_intent_succeeded(event):
     userprofile = None
     billing_details = intent.charges.data[0].billing_details
     shipping_details = intent.shipping
-    # Calculates the correct value for Stripe
-    grand_total = round(intent.charges.data[0].amount / 100, 2)
-
-    if 'Payment for Invoice' in intent.charges.data.description:
-        invoice_email(intent, grand_total)
-        return HttpResponse(
-            content=f'Webhook received: {event["type"]} | \
-                    SUCCESS: Email sent for Invoice.',
-            status=200)
 
     # If the user is logged in it re-declares the user variable.
     if user != 'AnonymousUser':
