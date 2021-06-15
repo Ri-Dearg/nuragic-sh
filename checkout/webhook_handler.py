@@ -149,6 +149,24 @@ def send_confirmation_email(order):
     )
 
 
+def invoice_email(intent, grand_total):
+    """Sends an email to confirm an invoice is paid."""
+    invoice_id = intent.charges.data.invoice
+    order_subject = render_to_string(
+        'checkout/confirmation_email/invoice_email_subject.txt',
+        {'invoice_id': invoice_id})
+    order_body = render_to_string(
+        'checkout/confirmation_email/invoice_email_body.txt',
+        {'invoice_id': invoice_id, 'amount': grand_total})
+
+    send_mail(
+        order_subject,
+        order_body,
+        f'INVOICE PAID <{settings.DEFAULT_ORDER_EMAIL}>',
+        [settings.DEFAULT_ORDER_EMAIL]
+    )
+
+
 def handle_event(event):
     """Handle a generic/unknown/unexpected webhook event."""
     return HttpResponse(
@@ -181,23 +199,8 @@ def handle_payment_intent_succeeded(event):
     # Calculates the correct value for Stripe
     grand_total = round(intent.charges.data[0].amount / 100, 2)
 
-    if 'Payment for Invoice' in intent.charges.data[0].description:
-        invoice_id = intent.charges.data[0].invoice
-        amount = intent.charges.data[0].amount
-        order_subject = render_to_string(
-            'checkout/confirmation_email/invoice_email_subject.txt',
-            {'invoice_id': invoice_id})
-        order_body = render_to_string(
-            'checkout/confirmation_email/invoice_email_body.txt',
-            {'invoice_id': invoice_id, 'amount': amount})
-
-        send_mail(
-            order_subject,
-            order_body,
-            f'INVOICE PAID <{settings.DEFAULT_ORDER_EMAIL}>',
-            [settings.DEFAULT_ORDER_EMAIL]
-        )
-
+    if 'Payment for Invoice' in intent.charges.data.description:
+        invoice_email(intent, grand_total)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Email sent for Invoice.',
