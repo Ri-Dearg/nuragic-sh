@@ -193,7 +193,7 @@ def handle_payment_intent_succeeded(event):
     # Calculates the correct value for Stripe
     grand_total = round(intent.charges.data[0].amount / 100, 2)
 
-    if 'Payment for Invoice' in intent.description:
+    if (intent.description) and ('Payment for Invoice' in intent.description):
         invoice_email(intent, grand_total)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
