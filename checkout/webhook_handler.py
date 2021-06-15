@@ -181,6 +181,28 @@ def handle_payment_intent_succeeded(event):
     # Calculates the correct value for Stripe
     grand_total = round(intent.charges.data[0].amount / 100, 2)
 
+    if 'Payment for Invoice' in intent.charges.data[0].description:
+        invoice_id = intent.charges.data[0].invoice
+        amount = intent.charges.data[0].amount
+        order_subject = render_to_string(
+            'checkout/confirmation_email/invoice_email_subject.txt',
+            {'invoice_id': invoice_id})
+        order_body = render_to_string(
+            'checkout/confirmation_email/invoice_email_body.txt',
+            {'invoice_id': invoice_id, 'amount': amount})
+
+        send_mail(
+            order_subject,
+            order_body,
+            f'INVOICE PAID <{settings.DEFAULT_ORDER_EMAIL}>',
+            [settings.DEFAULT_ORDER_EMAIL]
+        )
+
+        return HttpResponse(
+            content=f'Webhook received: {event["type"]} | \
+                    SUCCESS: Email sent for Invoice.',
+            status=200)
+
     # If the user is logged in it re-declares the user variable.
     if user != 'AnonymousUser':
         user = get_user_model().objects.get(username=intent.metadata.user)
