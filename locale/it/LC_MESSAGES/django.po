@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-06 21:40+0000\n"
+"POT-Creation-Date: 2021-06-15 19:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,9 +69,8 @@ msgstr "Errore nell'aggiunta di un articolo al carrello: {error}"
 msgid "Error"
 msgstr "Errore"
 
-#: checkout/models.py:45 checkout/models.py:59 checkout/views.py:117
-#: checkout/views.py:119 checkout/views.py:149 checkout/views.py:151
-#: templates/checkout/order_detail.html:103
+#: checkout/models.py:46 checkout/models.py:62 checkout/views.py:118
+#: checkout/views.py:149 templates/checkout/order_detail.html:103
 #: templates/checkout/order_detail.html:164 users/forms.py:215
 #: users/forms.py:223
 msgid "Country"
@@ -89,14 +88,14 @@ msgstr "Indrizzi Email"
 msgid "Email"
 msgstr "Email"
 
-#: checkout/views.py:93 checkout/views.py:94 checkout/views.py:124
-#: checkout/views.py:125 users/forms.py:210 users/forms.py:217
+#: checkout/views.py:93 checkout/views.py:94 checkout/views.py:123
+#: checkout/views.py:124 users/forms.py:210 users/forms.py:217
 #: users/forms.py:231 users/forms.py:261
 msgid "Full Name"
 msgstr "Nome Completo"
 
-#: checkout/views.py:99 checkout/views.py:127 checkout/views.py:131
-#: templates/bootstrap4/phone_field.html:23
+#: checkout/views.py:99 checkout/views.py:126 checkout/views.py:130
+#: templates/bootstrap4/phone_field.html:22
 #: templates/checkout/order_detail.html:62
 #: templates/checkout/order_detail.html:123
 msgid "Phone Number"
@@ -106,48 +105,48 @@ msgstr "Numero di Telefono"
 msgid "123 Main St."
 msgstr "Via Domu 123"
 
-#: checkout/views.py:106 checkout/views.py:137 checkout/views.py:138
+#: checkout/views.py:106 checkout/views.py:136 checkout/views.py:137
 #: templates/checkout/order_detail.html:68
 #: templates/checkout/order_detail.html:129 users/forms.py:211
 #: users/forms.py:218 users/forms.py:238 users/forms.py:268
 msgid "Street Address 1"
 msgstr "Indirizzo 1"
 
-#: checkout/views.py:108 checkout/views.py:109 checkout/views.py:140
-#: checkout/views.py:141 templates/checkout/order_detail.html:75
+#: checkout/views.py:108 checkout/views.py:109 checkout/views.py:139
+#: checkout/views.py:140 templates/checkout/order_detail.html:75
 #: templates/checkout/order_detail.html:136 users/forms.py:212
 #: users/forms.py:219 users/forms.py:241 users/forms.py:271
 msgid "Street Address 2"
 msgstr "Indirizzo 2"
 
-#: checkout/views.py:111 checkout/views.py:112 checkout/views.py:143
-#: checkout/views.py:144 templates/checkout/order_detail.html:82
+#: checkout/views.py:111 checkout/views.py:112 checkout/views.py:142
+#: checkout/views.py:143 templates/checkout/order_detail.html:82
 #: templates/checkout/order_detail.html:143 users/forms.py:213
 #: users/forms.py:220 users/forms.py:244 users/forms.py:274
 msgid "Town or City"
 msgstr "Città"
 
-#: checkout/views.py:114 checkout/views.py:146
+#: checkout/views.py:114 checkout/views.py:145
 msgid "Locality"
 msgstr "Località"
 
-#: checkout/views.py:115 checkout/views.py:147 users/forms.py:214
+#: checkout/views.py:115 checkout/views.py:146 users/forms.py:214
 #: users/forms.py:221 users/forms.py:247 users/forms.py:277
 msgid "County, State or Locality"
 msgstr "Regione"
 
-#: checkout/views.py:121 checkout/views.py:122 checkout/views.py:153
-#: checkout/views.py:154 templates/checkout/order_detail.html:96
+#: checkout/views.py:120 checkout/views.py:121 checkout/views.py:151
+#: checkout/views.py:152 templates/checkout/order_detail.html:96
 #: templates/checkout/order_detail.html:157 users/forms.py:222
 #: users/forms.py:250 users/forms.py:280
 msgid "Postcode"
 msgstr "CAP"
 
-#: checkout/views.py:163
+#: checkout/views.py:161
 msgid "The cart is empty."
 msgstr "Il carrello è vuoto."
 
-#: checkout/views.py:240
+#: checkout/views.py:238
 msgid ""
 "One of the products in your cart wasn't found in our "
 "collection.                     Please call us for assistance!"
@@ -155,7 +154,7 @@ msgstr ""
 "Un prodotto nel tuo carrello non è stato trovato nella nostra collezione. "
 "Conttataci per assistenza, per favore!"
 
-#: checkout/views.py:257
+#: checkout/views.py:255
 #, python-brace-format
 msgid ""
 "Order successfully processed!              A confirmation email will be sent "
@@ -164,7 +163,7 @@ msgstr ""
 "L'ordine è stato effetuato con successo! Una conferma sarà inviata via email "
 "a {order.email}."
 
-#: checkout/views.py:314
+#: checkout/views.py:312
 msgid ""
 "Sorry, your payment cannot be             processed right now. Please try "
 "again later."
@@ -172,7 +171,7 @@ msgstr ""
 "Scusaci, il tuo pagamento non può essere effetuato ora. Prova di nuovo dopo, "
 "per favore."
 
-#: checkout/webhook_handler.py:122
+#: checkout/webhook_handler.py:133
 #, python-brace-format
 msgid "NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>"
 msgstr "NuragicSH Ordine <{settings.DEFAULT_ORDER_EMAIL}>"
@@ -656,12 +655,12 @@ msgstr ""
 "radici, laboratori, laboratori online, corsi online, corsi, spirituale, "
 "spiritualità, nuragico,"
 
-#: templates/base/base.html:114
+#: templates/base/base.html:108
 msgid "Loading"
 msgstr "Carica"
 
 #: templates/base/errors.html:21 templates/base/includes/shop_nav.html:5
-#: templates/cart/cart_list.html:42 templates/checkout/order_form.html:152
+#: templates/cart/cart_list.html:44 templates/checkout/order_form.html:160
 #: templates/checkout/order_list.html:36 templates/likes/likes_list.html:40
 #: templates/products/product_list.html:64
 msgid "Offerings"
@@ -748,23 +747,23 @@ msgstr "Pagina Youtube"
 msgid "Contact"
 msgstr "Contatti"
 
-#: templates/base/includes/footer.html:62
+#: templates/base/includes/footer.html:63
 msgid "Whatsapp Messaging"
 msgstr "Messagi Whatsapp"
 
-#: templates/base/includes/footer.html:68
+#: templates/base/includes/footer.html:70
 msgid "Facebook Messenger"
 msgstr "Messenger Facebook"
 
-#: templates/base/includes/footer.html:74
+#: templates/base/includes/footer.html:76
 msgid "Email Contact"
 msgstr "Contatto Email"
 
-#: templates/base/includes/footer.html:81
+#: templates/base/includes/footer.html:83
 msgid "Policies"
 msgstr "Polizze"
 
-#: templates/base/includes/footer.html:92
+#: templates/base/includes/footer.html:94
 msgid "All Rights Reserved"
 msgstr "Tutti i Diritti Riservati"
 
@@ -781,7 +780,7 @@ msgid "All"
 msgstr "Tutti"
 
 #: templates/base/includes/info_nav.html:50
-#: templates/products/product_detail.html:34
+#: templates/products/product_detail.html:35
 #: templates/products/product_list.html:5
 msgid "Shop"
 msgstr "Shop"
@@ -819,7 +818,7 @@ msgstr "(attuale)"
 msgid "Last"
 msgstr "Ultima Pagina"
 
-#: templates/bootstrap4/phone_field.html:15
+#: templates/bootstrap4/phone_field.html:14
 msgid "Country Code"
 msgstr "Prefisso Internazionale"
 
@@ -832,11 +831,19 @@ msgstr "Il tuo carrello"
 msgid "Welcome to your cart. Let's see what has caught your eye."
 msgstr "Benvenuto nel tuo carrello. Vediamo cosa ha catturato i tuoi occhi."
 
-#: templates/cart/cart_list.html:39 templates/checkout/order_form.html:148
+#: templates/cart/cart_list.html:24
+msgid "Cart Totals"
+msgstr "Totale Carrello"
+
+#: templates/cart/cart_list.html:26
+msgid "Cart Items"
+msgstr "Articoli nel Carrello"
+
+#: templates/cart/cart_list.html:41 templates/checkout/order_form.html:156
 msgid "Your cart is empty..."
 msgstr "Il tuo carrello è vuoto..."
 
-#: templates/cart/cart_list.html:40
+#: templates/cart/cart_list.html:42
 msgid "See what we can offer"
 msgstr "Guarda le nostre offerte"
 
@@ -850,31 +857,32 @@ msgstr "Vai al Carrello"
 
 #: templates/cart/includes/cart_offcanvas.html:15
 #: templates/checkout/order_form.html:13 templates/checkout/order_form.html:21
+#: templates/checkout/order_form.html:27
 msgid "Checkout"
 msgstr "Pagamento"
 
-#: templates/cart/includes/cart_offcanvas.html:38
+#: templates/cart/includes/cart_offcanvas.html:39
 #: templates/cart/includes/subtotal.html:8
 #: templates/checkout/order_detail.html:187
-#: templates/checkout/order_form.html:130
+#: templates/checkout/order_form.html:138
 msgid "Delivery"
 msgstr "Spedizione"
 
-#: templates/cart/includes/cart_offcanvas.html:44
-#: templates/checkout/includes/order_display.html:32
+#: templates/cart/includes/cart_offcanvas.html:46
+#: templates/checkout/includes/order_display.html:33
 msgid "Total"
 msgstr "Totale"
 
-#: templates/cart/includes/cart_offcanvas.html:51
+#: templates/cart/includes/cart_offcanvas.html:54
 msgid "Empty Cart"
 msgstr "Carrello Vuoto"
 
-#: templates/cart/includes/cart_offcanvas.html:58
+#: templates/cart/includes/cart_offcanvas.html:61
 msgid "What can we offer you"
 msgstr "Cosa potremmo offrirti"
 
 #: templates/cart/includes/cart_product_display.html:39
-#: templates/products/product_detail.html:75
+#: templates/products/product_detail.html:78
 msgid "Quantity"
 msgstr "Quantità"
 
@@ -983,6 +991,27 @@ msgstr ""
 msgid "Order Confirmation"
 msgstr "Conferma Ordine"
 
+#: templates/checkout/confirmation_email/invoice_email_body.txt:2
+#, python-format
+msgid ""
+"\n"
+"Invoice Paid on Stripe.\n"
+"\n"
+"Please check info onthe Stripe Dash:\n"
+"Stripe invoice ID: %(invoice_id)s\n"
+"Amount (in cents): %(amount)s\n"
+msgstr ""
+"\n"
+"Fattura Pagato su Stripe.\n"
+"\n"
+"Per favore controllare i dettagli sul panello di controllo di Stripe:\n"
+"Stripe Fattura ID: %(invoice_id)s\n"
+"Importo (in centessimi): %(amount)s\n"
+
+#: templates/checkout/confirmation_email/invoice_email_subject.txt:1
+msgid "INVOICE PAID"
+msgstr "FATTURA PAGATO"
+
 #: templates/checkout/confirmation_email/order_email_body.txt:2
 #, python-format
 msgid ""
@@ -1035,18 +1064,18 @@ msgstr ""
 msgid "NEW ORDER"
 msgstr "NEW ORDER"
 
-#: templates/checkout/includes/order_display.html:13
+#: templates/checkout/includes/order_display.html:14
 #: templates/checkout/order_detail.html:32
 msgid "Order Number"
 msgstr "Numero Ordine"
 
-#: templates/checkout/includes/order_display.html:24
+#: templates/checkout/includes/order_display.html:25
 #: templates/checkout/order_detail.html:38
 msgid "Date"
 msgstr "Data"
 
-#: templates/checkout/includes/order_display.html:28
-#: templates/checkout/order_form.html:109
+#: templates/checkout/includes/order_display.html:29
+#: templates/checkout/order_form.html:111
 msgid "Items"
 msgstr "Articoli"
 
@@ -1076,12 +1105,12 @@ msgid "Billing Details"
 msgstr "Dettagli Fatturazione"
 
 #: templates/checkout/order_detail.html:182
-#: templates/checkout/order_form.html:125
+#: templates/checkout/order_form.html:133
 msgid "Item Total"
 msgstr "Totale Articoli"
 
 #: templates/checkout/order_detail.html:192
-#: templates/checkout/order_form.html:135
+#: templates/checkout/order_form.html:143
 msgid "Grand Total"
 msgstr "Somma Totale"
 
@@ -1097,53 +1126,57 @@ msgstr "cassa, pagamento"
 msgid "Cart"
 msgstr "Carrello"
 
-#: templates/checkout/order_form.html:33
+#: templates/checkout/order_form.html:29
+msgid "Payment Form"
+msgstr "Modulo del Pagamento"
+
+#: templates/checkout/order_form.html:35
 msgid "Personal Details"
 msgstr "Dettagli Personali"
 
-#: templates/checkout/order_form.html:41
+#: templates/checkout/order_form.html:43
 msgid "Delivery Information"
 msgstr "Informazione di Spedizione"
 
-#: templates/checkout/order_form.html:53
+#: templates/checkout/order_form.html:55
 msgid "My billing details are the same as delivery."
 msgstr ""
 "I miei dettagli per il fatturazione sono uguali a quelli di spedizione."
 
-#: templates/checkout/order_form.html:59
+#: templates/checkout/order_form.html:61
 msgid "Billing Information"
 msgstr "Informazione di Fatturazione"
 
-#: templates/checkout/order_form.html:76
+#: templates/checkout/order_form.html:78
 msgid "Save these shipping and billing addresses to my profile"
 msgstr "Salva gli indirizzi per spedizione e fatturazione al mio profilo"
 
-#: templates/checkout/order_form.html:78
+#: templates/checkout/order_form.html:80
 msgid "Create an account"
 msgstr "Creare un account"
 
-#: templates/checkout/order_form.html:79
+#: templates/checkout/order_form.html:81
 #: templates/users/includes/unauthenticated_offcanvas.html:13
 msgid "or"
 msgstr "o"
 
-#: templates/checkout/order_form.html:79
+#: templates/checkout/order_form.html:81
 msgid "login"
 msgstr "accedere"
 
-#: templates/checkout/order_form.html:80
+#: templates/checkout/order_form.html:82
 msgid "to save this information."
 msgstr "per salvare la tua informazione"
 
-#: templates/checkout/order_form.html:84
+#: templates/checkout/order_form.html:86
 msgid "Payment"
 msgstr "Pagamento"
 
-#: templates/checkout/order_form.html:95
+#: templates/checkout/order_form.html:97
 msgid "Confirm Purchase"
 msgstr "Conferma Acquisto"
 
-#: templates/checkout/order_form.html:98
+#: templates/checkout/order_form.html:100
 msgid ""
 "All of your payment details are processed by Stripe. We do not process or "
 "store your payment information."
@@ -1151,19 +1184,19 @@ msgstr ""
 "Tutti i tuoi dettagli del pagamento sono eseguiti da Stripe. Noi non "
 "effettuiamo il pagamento e non salviamo le tue informazioni del pagamento."
 
-#: templates/checkout/order_form.html:100
+#: templates/checkout/order_form.html:102
 msgid "By clicking \"Confirm Purchase\" you agree to our"
 msgstr "Quando fai un clic su Conferma \"Acquisto\" accetti il nostro"
 
-#: templates/checkout/order_form.html:103
+#: templates/checkout/order_form.html:105
 msgid "and"
 msgstr "e"
 
-#: templates/checkout/order_form.html:112
+#: templates/checkout/order_form.html:115
 msgid "Details"
 msgstr "Dettagli"
 
-#: templates/checkout/order_form.html:141
+#: templates/checkout/order_form.html:149
 msgid ""
 "Please do not refresh the page, press the back button or navigate away while "
 "the payment is processing.<br>Thank you for your patience."
@@ -1172,7 +1205,7 @@ msgstr ""
 "navigare ad un'altra pagine mentre il pagamento sta eseguendo, per favore."
 "<br>Grazie per la tua pazienza."
 
-#: templates/checkout/order_form.html:149
+#: templates/checkout/order_form.html:157
 msgid "Let's explore."
 msgstr "Esploriamo."
 
@@ -1331,15 +1364,15 @@ msgstr ""
 "                    </p>\n"
 "                    "
 
-#: templates/cookies/includes/cookie_dialogue.html:41
+#: templates/cookies/includes/cookie_dialogue.html:40
 msgid "Accept All"
 msgstr "Accetto Tutti"
 
-#: templates/cookies/includes/cookie_dialogue.html:48
+#: templates/cookies/includes/cookie_dialogue.html:46
 msgid "Accept Analytics"
 msgstr "Accetto Analitici"
 
-#: templates/cookies/includes/cookie_dialogue.html:54
+#: templates/cookies/includes/cookie_dialogue.html:52
 msgid "Accept Required"
 msgstr "Accetto Richiesti"
 
@@ -1478,6 +1511,10 @@ msgid ""
 msgstr ""
 "shop, oracolo, mazzo, smudge, artiginale, fatto a mano, produtto, servizi, "
 "corsi"
+
+#: templates/products/product_detail.html:47
+msgid "Product Details"
+msgstr "Dettagli del Articolo"
 
 #: templates/products/product_list.html:11
 msgid ""
