@@ -1,7 +1,14 @@
-{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from {{ site_name }}!{% endblocktrans %}
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Greetings from {{ site_name }}!{% endblocktrans %}
 
 {% block content %}{% endblock %}
 
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Greetings and thanks from {{ site_name }}!
-{{ site_domain }}{% endblocktrans %}!
-{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Be Well,
+{{ site_name }}
+{% endblocktrans %}{% endautoescape %}
+
+Facebook:   https://www.facebook.com/NuragicShamanicHealing/
+Instagram:  https://www.instagram.com/nuragic.shamanic.healing/
+Youtube:    https://www.youtube.com/channel/UCyl4isKUXtr6YmAJWunqGtg
+
+© Nuragic Shamanic Healing
+All Rights Reserved
