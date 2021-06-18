@@ -261,3 +261,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ADMINS = [('Rory', DEFAULT_ERROR_EMAIL)]
 SERVER_EMAIL = DEFAULT_ERROR_EMAIL
+
+RECAPTCHA_SECRET = os.environ.get('RECAPTCHA_SECRET')
