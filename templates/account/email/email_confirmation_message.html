@@ -3,14 +3,13 @@
 {% load i18n %}
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Welcome,
-{{ user_display }}, to <a href="https://www.nuragicshamanichealing.com/" rel="noopener"
-    style="text-decoration: none; color: #f5c936;" target="_blank">{{ site_name }}</a>.
+{{ user_display }}, to {{ site_name }}.<br><br>
 
-This email address has been given to create an account on <a href="https://www.nuragicshamanichealing.com/"
-    rel="noopener" style="text-decoration: none; color: #f5c936;" target="_blank">{{ site_domain }}</a>.
+This email address has been given to create an account on {{ site_domain }}.<br><br>
 
 To confirm this is correct, please <a href="{{ activate_url }}" rel="noopener"
-    style="text-decoration: none; color: #f5c936;" target="_blank">Click Here</a>.
+    style="text-decoration: none; color: #f5c936;" target="_blank">Click Here</a>.<br><br>
 
-Or you can copy and paste this URL into your browser's address bar:
+Or you can copy and paste this URL into your browser's address bar:<br><br>
+
 {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
