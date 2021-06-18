@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
-from django.utils import timezone
+from django.utils import timezone, translation
 from django_better_admin_arrayfield.models.fields import ArrayField
 
 
@@ -144,6 +144,9 @@ class Email(models.Model):
         name = self.name
         subject = self.subject
         message = self.message
+
+        cur_language = translation.get_language()
+        translation.activate(cur_language)
 
         # Fills in the email templates and then send the email.
         contact_subject = render_to_string(
