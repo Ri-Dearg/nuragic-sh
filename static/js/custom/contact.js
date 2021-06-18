@@ -20,7 +20,7 @@ function captchaCallback(token) {
       if (data.result === "error") {
         throw Error(data.message);
       } else if (data.result === "success") {
-        $("#contact-submit").prop("disabled", false);
+        $("#contact-submit").attr("type", "submit").prop("disabled", false);
       }
     })
     .catch((error) => toastMessage("danger", "Error", error));
