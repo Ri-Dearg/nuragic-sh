@@ -1,11 +1,17 @@
 """Views for the Contact app."""
+import json
+import urllib
+
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Field, Layout, Row
+from crispy_forms.layout import HTML, Column, Field, Hidden, Layout, Row
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
+from django.shortcuts import reverse
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
 from info.models import Category
@@ -32,6 +38,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         helper = form.helper
         helper.form_action = 'contact:email-form'
         helper.form_class = 'rounded p-2'
+        helper.form_id = 'contact-form'
         helper.floating_labels = True
         helper.use_custom_control = False
 
@@ -53,8 +60,20 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
                       placeholder=_('What are your thoughts?'),
                       css_class='p-font text-primary'),
 
-                Column(StrictButton(_('Send'), type='submit',
-                       css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold'),  # noqa E501
+                HTML(
+                    '<div class="g-recaptcha" data-callback="captchaCallback" \
+                        data-size="compact" \
+                        data-sitekey="6Lc1BT0bAAAAAM3StPLPHk9zrg1_rO-7TMU62STK">\
+                            </div>'),
+
+                Hidden('recaptcha',
+                       f'{reverse("contact:recaptcha")}', id="recap-url"),
+
+                Column(StrictButton(_('Send'),
+                       disabled='disabled',
+                       type='submit',
+                       css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold',  # noqa E501
+                       css_id='contact-submit'),
                        css_class='col-12 my-1 text-center'),
                 )
         )
@@ -70,6 +89,29 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         context['active_category'] = f'{this_object.id}'
 
         return context
+
+
+@csrf_exempt
+def recaptcha_verify(request):
+    if request.method == 'POST':
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        values = {
+            'secret': settings.RECAPTCHA_SECRET,
+            'response': request.POST.get('g-recaptcha-response'),
+            'remoteip': request.META['REMOTE_ADDR']
+        }
+        data = urllib.parse.urlencode(values).encode()
+        req = urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        result = json.loads(response.read().decode())
+
+        data = {}
+        data['result'] = 'error'
+        data['message'] = _('Captcha verification failed, please try again.')
+        if result['success']:
+            data['result'] = 'success'
+        return JsonResponse(data)
+    return HttpResponseForbidden()
 
 
 def newsletter_singup(request):
