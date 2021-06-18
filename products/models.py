@@ -74,7 +74,7 @@ class Product(models.Model):
     is_artisanal = models.BooleanField(default=False)
     can_preorder = models.BooleanField(default=False)
     times_purchased = models.IntegerField(
-        default=0, blank=False, null=False, editable=False)
+        default=0, blank=False, null=False)
     popularity = models.DecimalField(
         max_digits=20,
         decimal_places=10,

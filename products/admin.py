@@ -12,7 +12,7 @@ class ProductInlineAdmin(TranslationStackedInline):
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
               'stock', 'date_added', 'times_purchased', 'popularity',
               'display',)
-    readonly_fields = ('times_purchased', 'popularity',)
+    readonly_fields = ('popularity',)
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -22,7 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
               'image_4_3', 'is_unique', 'is_artisanal', 'can_preorder',
               'stock', 'date_added', 'times_purchased', 'popularity',
               'display',)
-    readonly_fields = ('times_purchased', 'popularity',)
+    readonly_fields = ('popularity',)
 
 
 class ProductTrans(ProductAdmin, TranslationAdmin):
