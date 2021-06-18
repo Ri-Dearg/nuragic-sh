@@ -71,7 +71,6 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
                 Column(StrictButton(_('Send'),
                        disabled='disabled',
-                       type='submit',
                        css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold',  # noqa E501
                        css_id='contact-submit'),
                        css_class='col-12 my-1 text-center'),
