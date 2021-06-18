@@ -25,3 +25,9 @@
 {% block form_header %}{% trans 'Contact Us' %}{% endblock %}
 {% block form_title %}{% trans 'Reach Out' %}{% endblock %}
 {% block form_content %}{% crispy form %}{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/custom/contact.js' %}"></script>
+<script src="https://www.google.com/recaptcha/api.js?hl={{ LANGUAGE_CODE }}" async defer></script>
+{% endblock %}

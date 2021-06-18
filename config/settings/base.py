@@ -24,7 +24,7 @@ except ModuleNotFoundError:
     pass
 
 # Version Number
-VERSION = '0.7.2'
+VERSION = '0.7.3'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -261,3 +261,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ADMINS = [('Rory', DEFAULT_ERROR_EMAIL)]
 SERVER_EMAIL = DEFAULT_ERROR_EMAIL
+
+RECAPTCHA_SECRET = os.environ.get('RECAPTCHA_SECRET')
