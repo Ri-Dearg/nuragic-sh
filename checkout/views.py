@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import CharField, model_to_dict
 from django.shortcuts import HttpResponse, redirect, reverse
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DetailView, ListView
@@ -303,6 +304,7 @@ def cache_data(request):  # pragma: no cover
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'cart': json.dumps(request.session.get('cart', {})),
+            'lang': translation.get_language(),
             'save_info': request.POST.get('save_info'),
             'user': request.user,
         })

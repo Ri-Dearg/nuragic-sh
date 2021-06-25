@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from products.models import Product
@@ -117,8 +118,10 @@ def save_user_info(userprofile, billing_details, shipping_details):
     userprofile.save()
 
 
-def send_confirmation_email(order):
+def send_confirmation_email(order, lang):
     """Send the user a confirmation email on a successful order."""
+    translation.activate(lang)
+
     cust_email = order.email
     subject = render_to_string(
         'checkout/confirmation_email/confirmation_email_subject.txt',
@@ -127,25 +130,36 @@ def send_confirmation_email(order):
         'checkout/confirmation_email/confirmation_email_body.txt',
         {'order': order,
          'contact_email': 'connect@nuragicshamanichealing.com'})
+    body_html = render_to_string(
+        'checkout/confirmation_email/confirmation_email_body.html',
+        {'order': order,
+         'contact_email': 'connect@nuragicshamanichealing.com'})
+
     send_mail(
         subject,
         body,
         _(f'NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>'),
-        [cust_email]
+        [cust_email],
+        html_message=body_html
     )
 
+    translation.activate('en')
     order_subject = render_to_string(
         'checkout/confirmation_email/order_email_subject.txt',
         {'order': order})
     order_body = render_to_string(
         'checkout/confirmation_email/order_email_body.txt',
         {'order': order, 'contact_email': cust_email})
+    order_body_html = render_to_string(
+        'checkout/confirmation_email/order_email_body.html',
+        {'order': order, 'contact_email': cust_email})
 
     send_mail(
         order_subject,
         order_body,
         f'NEW ORDER <{settings.DEFAULT_ORDER_EMAIL}>',
-        [settings.DEFAULT_ORDER_EMAIL]
+        [settings.DEFAULT_ORDER_EMAIL],
+        html_message=order_body_html
     )
 
 
@@ -202,6 +216,7 @@ def handle_payment_intent_succeeded(event):
 
     pid = intent.id
     cart = intent.metadata.cart
+    lang = intent.metadata.lang
     save_info = intent.metadata.save_info
     user = intent.metadata.user
     userprofile = None
@@ -230,7 +245,7 @@ def handle_payment_intent_succeeded(event):
             break
 
     if order is not False:
-        send_confirmation_email(order)
+        send_confirmation_email(order, lang)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Verified order already in database',
@@ -243,7 +258,7 @@ def handle_payment_intent_succeeded(event):
                              cart,
                              pid)
         # Sends a confirmation email after creation
-        send_confirmation_email(order)
+        send_confirmation_email(order, lang)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Created order in webhook',

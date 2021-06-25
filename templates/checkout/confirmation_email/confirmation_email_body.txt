@@ -1,8 +1,12 @@
 {% load i18n %}
-{% blocktrans with number=order.order_number date=order.date total=order.order_total delivery=order.delivery_cost grand_total=order.grand_total billing_full_name=order.billing_full_name shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
-Thank you!
+{% blocktrans with number=order.order_number date=order.date total=order.order_total delivery=order.delivery_cost grand_total=order.grand_total billing_full_name=order.billing_full_name shipping_phone_number=order.shipping_phone_number %}
+Thank you for your order!
+It means a lot to us that you are supporting a small business.
 
-This is a confirmation of your order at Nuragic Shamanic Healing. Your order information is below:
+This is a confirmation of your order at Nuragic Shamanic Healing.
+Your order information is below:
+
+The billing has been charged to {{ billing_full_name }}.
 
 Order Number: {{ _number }}
 Order Date: {{ date }}
@@ -11,26 +15,30 @@ Order Total: €{{ total }}
 Delivery: €{{ delivery }}
 Grand Total: €{{ grand_total }}
 
-The billing has been charged to {{ billing_full_name }}
+Items:{% endblocktrans %}{% for item in order.lineitems.all %}
+{{ item.product.title|safe }} x {{ item.quantity }}{% endfor %}
 
-Your order will be shipped to:
-{% endblocktrans %}
+{% trans 'The order will be shipped to' %}:
+
 {{ order.shipping_full_name }},
 {{ order.shipping_street_address_1 }},{% if order.shipping_street_address_2 %}
 {{ order.shipping_street_address_2 }},{% endif %}
 {{ order.shipping_town_or_city }},{% if order.shipping_county %}
 {{ order.shipping_county }},{% endif %}{% if order.shipping_postcode %}
 {{ order.shipping_postcode }},{% endif %}
-{{ order.shipping_country.name }}.
-{% blocktrans with shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
-We've got your delivery phone number on file as {{ shipping_phone_number }}.
+{{ order.shipping_country.name }}
+{{ order.shipping_phone_number }}
 
-We hope you found what you were looking for.
+{% trans 'If you have any questions, feel free to contact us at' %} {{ contact_email }}.
+{% trans 'You can also connect with us on WhatsApp: https://wa.me/353834646130 or Facebook Messenger: https://m.me/NuragicShamanicHealing' %}.
 
-If you have any questions, feel free to contact us at {{ our_email }}.
-
-Thank you for your order!
-
-Sincerely,
+{% trans 'We hope you found what you were looking for' %}.
+{% trans 'Be Well' %},
 Nuragic Shamanic Healing
-{% endblocktrans %}
+
+Facebook:   https://www.facebook.com/NuragicShamanicHealing/
+Instagram:  https://www.instagram.com/nuragic.shamanic.healing/
+Youtube:    https://www.youtube.com/channel/UCyl4isKUXtr6YmAJWunqGtg
+
+© Nuragic Shamanic Healing
+All Rights Reserved

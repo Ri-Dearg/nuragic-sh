@@ -10,7 +10,7 @@ from policies.models import Policy
 class CookieRecord(models.Model):
     """Records data about cookie consent with related documents."""
     user = models.ForeignKey(get_user_model(),
-                             on_delete=models.CASCADE,
+                             on_delete=models.SET_NULL,
                              related_name='cookierecord',
                              blank=True,
                              null=True,

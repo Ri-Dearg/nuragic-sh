@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
-from django.utils import timezone
+from django.utils import timezone, translation
 from django_better_admin_arrayfield.models.fields import ArrayField
 
 
@@ -145,6 +145,9 @@ class Email(models.Model):
         subject = self.subject
         message = self.message
 
+        cur_language = translation.get_language()
+        translation.activate(cur_language)
+
         # Fills in the email templates and then send the email.
         contact_subject = render_to_string(
             'contact/emails/contact_subject.txt',
@@ -152,11 +155,16 @@ class Email(models.Model):
         contact_body = render_to_string(
             'contact/emails/contact_body.txt',
             {'name': name, 'email': email, 'message': message})
+        contact_body_html = render_to_string(
+            'contact/emails/contact_body_html.html',
+            {'name': name, 'email': email, 'message': message})
+
         send_mail(
             contact_subject,
             contact_body,
             f'CUSTOMER CONTACT <{settings.DEFAULT_CONTACT_EMAIL}>',
-            [settings.DEFAULT_CONTACT_EMAIL])
+            [settings.DEFAULT_CONTACT_EMAIL],
+            html_message=contact_body_html)
 
         # Sends a thank you email to the person who sent the email
         thanks_subject = render_to_string(
@@ -165,11 +173,16 @@ class Email(models.Model):
         thanks_body = render_to_string(
             'contact/emails/thanks_body.txt',
             {'name': name})
+        thanks_body_html = render_to_string(
+            'contact/emails/thanks_body_html.html',
+            {'name': name})
+
         send_mail(
             thanks_subject,
             thanks_body,
             f'Nuragic Shamanic Healing <{settings.DEFAULT_CONTACT_EMAIL}>',
-            [email])
+            [email],
+            html_message=thanks_body_html)
 
         history = EmailHistory.objects.get_or_create(email_address=self.email)
         self.email_history = history[0]
