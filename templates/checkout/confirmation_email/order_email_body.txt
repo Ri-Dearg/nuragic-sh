@@ -1,23 +1,24 @@
 {% load i18n %}
-{% blocktrans with number=order.order_number date=order.date total=order.order_total delivery=order.delivery_cost grand_total=order.grand_total billing_full_name=order.billing_full_name shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
-NEW ORDER AT nuragicshamanichealing,org
+{% blocktrans with number=order.order_number date=order.date total=order.order_total delivery=order.delivery_cost grand_total=order.grand_total billing_full_name=order.billing_full_name shipping_phone_number=order.shipping_phone_number %}
+NEW ORDER AT nuragicshamanichealing.com
 
+A new order has been placed at Nuragic Shamanic Healing.
 Order information is below:
 
-Order Number: {{ _number }}
+The billing has been charged to {{ billing_full_name }}.
+
+Order Number: {{ number }}
 Order Date: {{ date }}
 
 Order Total: €{{ total }}
 Delivery: €{{ delivery }}
 Grand Total: €{{ grand_total }}
 
-The billing has been charged to {{ billing_full_name }}
+Items:
+{% endblocktrans %}{% for item in order.lineitems.all %}
+{{ item.product.title|safe }} x {{ item.quantity }}{% endfor %}
 
-The order will be shipped to:
-{% endblocktrans %}
-{% for item in order.lineitems.all %}
-{{ item.product.title }} x {{ item.quantity }}
-{% endfor %}
+{% trans 'The order will be shipped to' %}:
 
 {{ order.shipping_full_name }},
 {{ order.shipping_street_address_1 }},{% if order.shipping_street_address_2 %}
@@ -25,9 +26,9 @@ The order will be shipped to:
 {{ order.shipping_town_or_city }},{% if order.shipping_county %}
 {{ order.shipping_county }},{% endif %}{% if order.shipping_postcode %}
 {{ order.shipping_postcode }},{% endif %}
-{{ order.shipping_country.name }}.
-{% blocktrans with shipping_phone_number=order.shipping_phone_number our_email=contact_email %}
-Delivery Number: {{ shipping_phone_number }}.
+{{ order.shipping_country.name }},
+{{ order.shipping_phone_number }}
+{% blocktrans with contact_email=contact_email %}
 
-Customer email: {{ our_email }}.
+Customer email: {{ contact_email }}
 {% endblocktrans %}

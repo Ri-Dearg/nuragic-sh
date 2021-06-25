@@ -13,7 +13,7 @@
 {% block og_type %}website{% endblock %}
 {% block og_title %}{{ object.name }} | Nuragic Shamanic Healing{% endblock %}
 {% block og_description %}{% trans 'Learn about our policies.' %}{% endblock %}
-{% block og_image %}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
+{% block og_image %}{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'open_graph/logo1200x630.png' %}{% endblock %}
 {% block og_image_type %}image/png{% endblock %}
 {% block og_image_width %}1200{% endblock %}
 {% block og_image_height %}630{% endblock %}

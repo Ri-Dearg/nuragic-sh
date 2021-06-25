@@ -4,5 +4,5 @@ Invoice Paid on Stripe.
 
 Please check info on the Stripe Dash:
 Stripe invoice ID: {{ invoice_id }}
-Amount (in cents): {{ amount }}
+Amount: {{ amount }}
 {% endblocktrans %}
