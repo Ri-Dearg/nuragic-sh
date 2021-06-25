@@ -30,5 +30,5 @@ Items:
 {{ order.shipping_phone_number }}
 {% blocktrans with contact_email=contact_email %}
 
-Customer email: {{ contact_email }}.
+Customer email: {{ contact_email }}
 {% endblocktrans %}
