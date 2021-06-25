@@ -3,13 +3,11 @@
 {% load i18n %}
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Welcome,
-{{ user_display }}, to {{ site_name }}.<br><br>
-
+{{ user_display }}, to {{ site_name }}.<br>
 This email address has been given to create an account on {{ site_domain }}.<br><br>
 
 To confirm this is correct, please <a href="{{ activate_url }}" rel="noopener"
-    style="text-decoration: none; color: #f5c936;" target="_blank">Click Here</a>.<br><br>
-
-Or you can copy and paste this URL into your browser's address bar:<br><br>
+    style="text-decoration: none; color: #f5c936;" target="_blank">Click Here</a>.<br>
+Or you can copy and paste this URL into your browser's address bar:<br>
 
 {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
