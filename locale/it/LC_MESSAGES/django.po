@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 19:40+0000\n"
+"POT-Creation-Date: 2021-06-25 20:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgid ""
 "title} to your cart."
 msgstr "Aggiorna la quantità per aggiungere {product.title} al carrello."
 
-#: cart/views.py:74 contact/views.py:91 cookies/views.py:38 likes/views.py:98
+#: cart/views.py:74 contact/views.py:132 cookies/views.py:38 likes/views.py:98
 #: likes/views.py:117
 msgid "Info"
 msgstr "Info"
@@ -56,7 +56,7 @@ msgstr "Preordinato/a {quantity} {product.title}."
 msgid "Added {quantity} {product.title} to your cart."
 msgstr "Aggiunto/a {quantity} {product.title} al carrello."
 
-#: cart/views.py:100 contact/views.py:99
+#: cart/views.py:100 contact/views.py:140
 msgid "Success"
 msgstr "Successo"
 
@@ -69,84 +69,84 @@ msgstr "Errore nell'aggiunta di un articolo al carrello: {error}"
 msgid "Error"
 msgstr "Errore"
 
-#: checkout/models.py:46 checkout/models.py:62 checkout/views.py:118
-#: checkout/views.py:149 templates/checkout/order_detail.html:103
-#: templates/checkout/order_detail.html:164 users/forms.py:215
+#: checkout/models.py:46 checkout/models.py:62 checkout/views.py:119
+#: checkout/views.py:150 templates/checkout/order_detail.html:109
+#: templates/checkout/order_detail.html:170 users/forms.py:215
 #: users/forms.py:223
 msgid "Country"
 msgstr "Paese"
 
-#: checkout/views.py:90
+#: checkout/views.py:91
 msgid "Email Address"
 msgstr "Indrizzi Email"
 
-#: checkout/views.py:91 contact/views.py:26 contact/views.py:40
+#: checkout/views.py:92 contact/views.py:32 contact/views.py:47
 #: templates/base/includes/footer.html:17
-#: templates/checkout/order_detail.html:44
+#: templates/checkout/order_detail.html:50
 #: templates/users/includes/newsletter_form.html:15 users/forms.py:83
 #: users/forms.py:151
 msgid "Email"
 msgstr "Email"
 
-#: checkout/views.py:93 checkout/views.py:94 checkout/views.py:123
-#: checkout/views.py:124 users/forms.py:210 users/forms.py:217
+#: checkout/views.py:94 checkout/views.py:95 checkout/views.py:124
+#: checkout/views.py:125 users/forms.py:210 users/forms.py:217
 #: users/forms.py:231 users/forms.py:261
 msgid "Full Name"
 msgstr "Nome Completo"
 
-#: checkout/views.py:99 checkout/views.py:126 checkout/views.py:130
+#: checkout/views.py:100 checkout/views.py:127 checkout/views.py:131
 #: templates/bootstrap4/phone_field.html:22
-#: templates/checkout/order_detail.html:62
-#: templates/checkout/order_detail.html:123
+#: templates/checkout/order_detail.html:68
+#: templates/checkout/order_detail.html:129
 msgid "Phone Number"
 msgstr "Numero di Telefono"
 
-#: checkout/views.py:105
+#: checkout/views.py:106
 msgid "123 Main St."
 msgstr "Via Domu 123"
 
-#: checkout/views.py:106 checkout/views.py:136 checkout/views.py:137
-#: templates/checkout/order_detail.html:68
-#: templates/checkout/order_detail.html:129 users/forms.py:211
+#: checkout/views.py:107 checkout/views.py:137 checkout/views.py:138
+#: templates/checkout/order_detail.html:74
+#: templates/checkout/order_detail.html:135 users/forms.py:211
 #: users/forms.py:218 users/forms.py:238 users/forms.py:268
 msgid "Street Address 1"
 msgstr "Indirizzo 1"
 
-#: checkout/views.py:108 checkout/views.py:109 checkout/views.py:139
-#: checkout/views.py:140 templates/checkout/order_detail.html:75
-#: templates/checkout/order_detail.html:136 users/forms.py:212
+#: checkout/views.py:109 checkout/views.py:110 checkout/views.py:140
+#: checkout/views.py:141 templates/checkout/order_detail.html:81
+#: templates/checkout/order_detail.html:142 users/forms.py:212
 #: users/forms.py:219 users/forms.py:241 users/forms.py:271
 msgid "Street Address 2"
 msgstr "Indirizzo 2"
 
-#: checkout/views.py:111 checkout/views.py:112 checkout/views.py:142
-#: checkout/views.py:143 templates/checkout/order_detail.html:82
-#: templates/checkout/order_detail.html:143 users/forms.py:213
+#: checkout/views.py:112 checkout/views.py:113 checkout/views.py:143
+#: checkout/views.py:144 templates/checkout/order_detail.html:88
+#: templates/checkout/order_detail.html:149 users/forms.py:213
 #: users/forms.py:220 users/forms.py:244 users/forms.py:274
 msgid "Town or City"
 msgstr "Città"
 
-#: checkout/views.py:114 checkout/views.py:145
+#: checkout/views.py:115 checkout/views.py:146
 msgid "Locality"
 msgstr "Località"
 
-#: checkout/views.py:115 checkout/views.py:146 users/forms.py:214
+#: checkout/views.py:116 checkout/views.py:147 users/forms.py:214
 #: users/forms.py:221 users/forms.py:247 users/forms.py:277
 msgid "County, State or Locality"
 msgstr "Regione"
 
-#: checkout/views.py:120 checkout/views.py:121 checkout/views.py:151
-#: checkout/views.py:152 templates/checkout/order_detail.html:96
-#: templates/checkout/order_detail.html:157 users/forms.py:222
+#: checkout/views.py:121 checkout/views.py:122 checkout/views.py:152
+#: checkout/views.py:153 templates/checkout/order_detail.html:102
+#: templates/checkout/order_detail.html:163 users/forms.py:222
 #: users/forms.py:250 users/forms.py:280
 msgid "Postcode"
 msgstr "CAP"
 
-#: checkout/views.py:161
+#: checkout/views.py:162
 msgid "The cart is empty."
 msgstr "Il carrello è vuoto."
 
-#: checkout/views.py:238
+#: checkout/views.py:239
 msgid ""
 "One of the products in your cart wasn't found in our "
 "collection.                     Please call us for assistance!"
@@ -154,16 +154,16 @@ msgstr ""
 "Un prodotto nel tuo carrello non è stato trovato nella nostra collezione. "
 "Conttataci per assistenza, per favore!"
 
-#: checkout/views.py:255
+#: checkout/views.py:256
 #, python-brace-format
 msgid ""
 "Order successfully processed!              A confirmation email will be sent "
 "to {order.email}."
 msgstr ""
-"L'ordine è stato effetuato con successo! Una conferma sarà inviata via email "
+"L'ordine è stato effetuato con successo! La conferma sarà inviata via email "
 "a {order.email}."
 
-#: checkout/views.py:312
+#: checkout/views.py:314
 msgid ""
 "Sorry, your payment cannot be             processed right now. Please try "
 "again later."
@@ -171,7 +171,7 @@ msgstr ""
 "Scusaci, il tuo pagamento non può essere effetuato ora. Prova di nuovo dopo, "
 "per favore."
 
-#: checkout/webhook_handler.py:133
+#: checkout/webhook_handler.py:141
 #, python-brace-format
 msgid "NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>"
 msgstr "NuragicSH Ordine <{settings.DEFAULT_ORDER_EMAIL}>"
@@ -184,33 +184,37 @@ msgstr "Inglese"
 msgid "Italian"
 msgstr "Italiano"
 
-#: contact/views.py:21
+#: contact/views.py:27
 msgid "Thank you, your message has been sent."
 msgstr "Grazie, il tuo messagio è stato spedito."
 
-#: contact/views.py:27 contact/views.py:45
-#: templates/checkout/order_detail.html:56
-#: templates/checkout/order_detail.html:117
+#: contact/views.py:33 contact/views.py:52
+#: templates/checkout/order_detail.html:62
+#: templates/checkout/order_detail.html:123
 msgid "Name"
 msgstr "Nome"
 
-#: contact/views.py:28 contact/views.py:49
+#: contact/views.py:34 contact/views.py:56
 msgid "Subject"
 msgstr "Soggetto"
 
-#: contact/views.py:29 contact/views.py:53
+#: contact/views.py:35 contact/views.py:60
 msgid "What are your thoughts?"
 msgstr "Cosa pensi?"
 
-#: contact/views.py:56
+#: contact/views.py:72
 msgid "Send"
 msgstr "Invia"
 
-#: contact/views.py:89
+#: contact/views.py:109
+msgid "Captcha verification failed, please try again."
+msgstr "Verificazione del Captcha Fallita, ripovi per favore."
+
+#: contact/views.py:130
 msgid "You have already signed up for the newsletter."
 msgstr "Sei già iscritto alla newsletter."
 
-#: contact/views.py:97
+#: contact/views.py:138
 msgid "Thank you for signing up!"
 msgstr "Grazie per la tua sottoscrizione!"
 
@@ -242,49 +246,49 @@ msgid "Error: %r, {error}"
 msgstr "Errore: %r, {error}"
 
 #: templates/account/account_inactive.html:6
-#: templates/account/account_inactive.html:14
-#: templates/account/account_inactive.html:15
+#: templates/account/account_inactive.html:11
+#: templates/account/account_inactive.html:12
 msgid "Account Inactive"
 msgstr "Account Inattivo"
 
-#: templates/account/account_inactive.html:16
+#: templates/account/account_inactive.html:13
 msgid "This account is inactive."
 msgstr "Questo account è inattivo."
 
-#: templates/account/email.html:5 templates/account/email.html:13
-#: templates/account/email.html:14
+#: templates/account/email.html:5 templates/account/email.html:10
+#: templates/account/email.html:11
 msgid "Email Addresses"
 msgstr "Indrizzi Email"
 
-#: templates/account/email.html:18
+#: templates/account/email.html:15
 msgid "The following email addresses are associated with your account:"
 msgstr "Questi indrizzi email sono associati con il tuo account:"
 
-#: templates/account/email.html:31 templates/users/includes/email.html:21
+#: templates/account/email.html:28 templates/users/includes/email.html:21
 msgid "Unverified"
 msgstr "Non Verificato"
 
-#: templates/account/email.html:34 templates/users/includes/email.html:24
+#: templates/account/email.html:31 templates/users/includes/email.html:24
 msgid "Primary"
 msgstr "Principale"
 
-#: templates/account/email.html:41 templates/users/includes/email.html:31
+#: templates/account/email.html:38 templates/users/includes/email.html:31
 msgid "Make Primary"
 msgstr "Imposta come Principale"
 
-#: templates/account/email.html:43 templates/users/includes/email.html:33
+#: templates/account/email.html:40 templates/users/includes/email.html:33
 msgid "Re-send Verification"
 msgstr "Rinviare Verifacazione"
 
-#: templates/account/email.html:45 templates/users/includes/email.html:35
+#: templates/account/email.html:42 templates/users/includes/email.html:35
 msgid "Delete"
 msgstr "Cancella"
 
-#: templates/account/email.html:51
+#: templates/account/email.html:48
 msgid "Warning:"
 msgstr "Attenzione:"
 
-#: templates/account/email.html:52
+#: templates/account/email.html:49
 msgid ""
 "You currently do not have any email address set up. You should really add an "
 "email address so you can receive notifications, reset your password, etc."
@@ -292,31 +296,92 @@ msgstr ""
 "Attualmente non hai un indirizzo email per il tuo account. Aggiungi un email "
 "per ricevere notificazioni, ricreare una password, etc."
 
-#: templates/account/email.html:58 templates/users/includes/email.html:41
+#: templates/account/email.html:55 templates/users/includes/email.html:41
 msgid "Add Email Address"
 msgstr "Aggiungi Indirizzo Email"
 
-#: templates/account/email.html:66 templates/users/includes/email.html:54
+#: templates/account/email.html:63 templates/users/includes/email.html:54
 msgid "Add Email"
 msgstr "Aggiungi Email"
 
-#: templates/account/email.html:77
+#: templates/account/email.html:74
 msgid "Do you really want to remove the selected email address?"
 msgstr "Vorresti cancellare questo indirizzo email?"
 
+#: templates/account/email/base_message.html:235
+#, python-format
+msgid ""
+"Greetings\n"
+"                                                            from <a href="
+"\"https://www.nuragicshamanichealing.com/\"\n"
+"                                                                rel="
+"\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">%(site_name)s</a>."
+msgstr ""
+"Saluti da <a href=\"https://www.nuragicshamanichealing.com/\"\n"
+"                                                                rel="
+"\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">%(site_name)s</a>."
+
+#: templates/account/email/base_message.html:312
+#: templates/checkout/confirmation_email/confirmation_email_body.html:753
+#: templates/checkout/confirmation_email/confirmation_email_body.txt:36
+#: templates/checkout/confirmation_email/order_email_body.html:726
+#: templates/contact/emails/contact_body.txt:7
+#: templates/contact/emails/contact_body_html.html:288
+#: templates/contact/emails/thanks_body.txt:9
+#: templates/contact/emails/thanks_body_html.html:361
+msgid "Be Well"
+msgstr "Cordiali Saluti"
+
 #: templates/account/email/base_message.txt:1
 #, python-format
-msgid "Hello from %(site_name)s!"
-msgstr "Ciao, da %(site_name)s!"
+msgid "Greetings from %(site_name)s!"
+msgstr "Saluti da %(site_name)s!"
 
 #: templates/account/email/base_message.txt:5
 #, python-format
 msgid ""
-"Greetings and thanks from %(site_name)s!\n"
-"%(site_domain)s"
+"Be Well,\n"
+"%(site_name)s\n"
 msgstr ""
-"Buongiorno e grazie da %(site_name)s!\n"
-"%(site_domain)s"
+"Cordiali Saluti,\n"
+"%(site_name)s\n"
+
+#: templates/account/email/email_confirmation_message.html:5
+#, python-format
+msgid ""
+"Welcome,\n"
+"%(user_display)s, to %(site_name)s.<br>\n"
+"This email address has been given to create an account on %(site_domain)s."
+"<br><br>\n"
+"\n"
+"To confirm this is correct, please <a href=\"%(activate_url)s\" rel="
+"\"noopener\"\n"
+"    style=\"text-decoration: none; color: #f5c936;\" target=\"_blank\">Click "
+"Here</a>.<br>\n"
+"Or you can copy and paste this URL into your browser's address bar:<br>\n"
+"\n"
+"%(activate_url)s"
+msgstr ""
+"Benvenuto/a,\n"
+"%(user_display)s, a %(site_name)s.<br>\n"
+"Questa email è stata usata per creare un account per %(site_domain)s."
+"<br><br>\n"
+"\n"
+"Per confermare, per favore, <a href=\"%(activate_url)s\" rel=\"noopener\"\n"
+"    style=\"text-decoration: none; color: #f5c936;\" target=\"_blank"
+"\">Clicca Qua</a>.<br>\n"
+"O puoi copiare e incollare questo URL nella barra del indirizzo del tuo "
+"browser:<br>\n"
+"\n"
+"%(activate_url)s"
 
 #: templates/account/email/email_confirmation_message.txt:5
 #, python-format
@@ -326,14 +391,33 @@ msgid ""
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Benvenuto/a, %(user_display)s, to %(site_name)s.\n"
+"Benvenuto/a, %(user_display)s, a %(site_name)s.\n"
 "Questa email è stata usata per creare un account per %(site_domain)s.\n"
 "\n"
 "Per confermare, vai a %(activate_url)s"
 
-#: templates/account/email/email_confirmation_subject.txt:3
+#: templates/account/email/email_confirmation_subject.txt:1
 msgid "Please Confirm Your Email Address"
-msgstr "Per Favore Confermare Il Tuo Email"
+msgstr "Per Favore Confermare La Tua Email"
+
+#: templates/account/email/password_reset_key_message.html:4
+#, python-format
+msgid ""
+"You're receiving this email because a password reset was\n"
+"requested for your user account with username %(username)s.<br><br>\n"
+"It can be safely ignored if you did not request a password reset.<br><br><a "
+"href=\"%(password_reset_url)s\"\n"
+"    rel=\"noopener\" style=\"text-decoration: none; color: #f5c936;\" target="
+"\"_blank\">Click Here</a> to reset your\n"
+"password. Or you can copy and paste this URL into your browser's address bar:"
+msgstr ""
+"Questa email è una richiesta di rimpostare la password per account "
+"%(username)s.<br><br>\n"
+"Potresti ignorare questa email se non hai fatto la richiesta.<br><br><a href="
+"\"%(password_reset_url)s\"\n"
+"    rel=\"noopener\" style=\"text-decoration: none; color: #f5c936;\" target="
+"\"_blank\">Clicca Qua</a> per reimpostare la password. O puoi copiare e "
+"incollare questo URL nella barra del indirizzo del tuo browser:"
 
 #: templates/account/email/password_reset_key_message.txt:4
 #, python-format
@@ -348,17 +432,17 @@ msgstr ""
 "Potresti ignorare questa email se non hai fatto la richiesta. Fai un click "
 "al link qui giù per reimpostare la password."
 
-#: templates/account/email/password_reset_key_subject.txt:3
+#: templates/account/email/password_reset_key_subject.txt:1
 msgid "Password Reset Email"
 msgstr "Reimpostare Password"
 
 #: templates/account/email_confirm.html:6
-#: templates/account/email_confirm.html:14
-#: templates/account/email_confirm.html:15
+#: templates/account/email_confirm.html:11
+#: templates/account/email_confirm.html:12
 msgid "Confirm Email Address"
 msgstr "Confermare Email"
 
-#: templates/account/email_confirm.html:22
+#: templates/account/email_confirm.html:19
 #, python-format
 msgid ""
 "I confirm that <a class=\"form-link text-info\"\n"
@@ -370,11 +454,11 @@ msgstr ""
 "                href=\"mailto:%(email)s\">%(email)s</a> è un email per \n"
 "            %(user_display)s."
 
-#: templates/account/email_confirm.html:32
+#: templates/account/email_confirm.html:29
 msgid "Confirm"
 msgstr "Confermo"
 
-#: templates/account/email_confirm.html:41
+#: templates/account/email_confirm.html:38
 #, python-format
 msgid ""
 "This email confirmation link expired or is\n"
@@ -386,13 +470,13 @@ msgstr ""
 "            Per favore <a class=\"smooth-click form-link text-info\" href="
 "\"%(email_url)s\">richiedi un link nuovo</a>."
 
-#: templates/account/login.html:6 templates/account/login.html:14
-#: templates/account/login.html:15
+#: templates/account/login.html:6 templates/account/login.html:11
+#: templates/account/login.html:12
 #: templates/users/includes/unauthenticated_offcanvas.html:12 users/forms.py:57
 msgid "Sign In"
 msgstr "Accedi"
 
-#: templates/account/login.html:18
+#: templates/account/login.html:15
 #, python-format
 msgid ""
 "<a class=\"smooth-click form-link text-info\" href=\"%(signup_url)s\">Sign "
@@ -403,13 +487,13 @@ msgstr ""
 "\">Registri</a>\n"
 "            se non hai già creato un account."
 
-#: templates/account/logout.html:5 templates/account/logout.html:13
-#: templates/account/logout.html:14 templates/account/logout.html:25
+#: templates/account/logout.html:5 templates/account/logout.html:10
+#: templates/account/logout.html:11 templates/account/logout.html:22
 #: templates/users/includes/authenticated_offcanvas.html:30
 msgid "Sign Out"
 msgstr "Esci"
 
-#: templates/account/logout.html:16
+#: templates/account/logout.html:13
 msgid "Are you sure you want to sign out?"
 msgstr "Sei sicuro/a di voler uscire?"
 
@@ -420,8 +504,12 @@ msgstr "Non puoi cancellare il tuo indirizzo email primcipale (%(email)s)."
 
 #: templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
-msgid "We have sent a confirmation email to %(email)s."
-msgstr "Ti abbiamo inviato un email di conferma a %(email)s."
+msgid ""
+"We have sent a confirmation email to %(email)s.\n"
+"Please make sure to look in the spam folder."
+msgstr ""
+"Ti abbiamo inviato un email di conferma a %(email)s.\n"
+"Per favore controllare nello spam."
 
 #: templates/account/messages/email_confirmed.txt:2
 #, python-format
@@ -431,7 +519,7 @@ msgstr "Grazie! Hai confermato il tuo indirizzo email, %(email)s."
 #: templates/account/messages/email_deleted.txt:2
 #, python-format
 msgid "Removed email address %(email)s."
-msgstr "Indirizzo email %(email)s è stato cancellato. "
+msgstr "Indirizzo email %(email)s è stato cancellato."
 
 #: templates/account/messages/logged_in.txt:4
 #, python-format
@@ -439,50 +527,50 @@ msgid "Welcome Back, %(name)s!"
 msgstr "Bentornato/a, %(name)s!"
 
 #: templates/account/messages/logged_out.txt:2
-msgid "You have signed out."
-msgstr "Sei uscito/a."
+msgid "You have signed out"
+msgstr "Sei uscito/a"
 
 #: templates/account/messages/password_changed.txt:2
-msgid "Password successfully changed."
-msgstr "La password è stata cambiata con successo."
+msgid "Password successfully changed"
+msgstr "La password è stata cambiata con successo"
 
 #: templates/account/messages/password_set.txt:2
-msgid "Password successfully set."
-msgstr "La password è stata impostata."
+msgid "Password successfully set"
+msgstr "La password è stata impostata"
 
 #: templates/account/messages/primary_email_set.txt:2
-msgid "Primary email address set."
-msgstr "Indirizzo email principale è stato impostato."
+msgid "Primary email address set"
+msgstr "Indirizzo email principale è stato impostato"
 
 #: templates/account/messages/unverified_primary_email.txt:2
-msgid "Your primary email address must be verified."
-msgstr "Indirizzo email principale deve essere verificato."
+msgid "Your primary email address must be verified"
+msgstr "Indirizzo email principale deve essere verificato"
 
 #: templates/account/password_change.html:6
-#: templates/account/password_change.html:14
-#: templates/account/password_change.html:15
-#: templates/account/password_change.html:23
+#: templates/account/password_change.html:11
+#: templates/account/password_change.html:12
+#: templates/account/password_change.html:20
 #: templates/account/password_reset_from_key.html:5
-#: templates/account/password_reset_from_key.html:12
-#: templates/account/password_reset_from_key.html:13
+#: templates/account/password_reset_from_key.html:10
+#: templates/account/password_reset_from_key.html:11
 #: templates/account/password_reset_from_key_done.html:5
-#: templates/account/password_reset_from_key_done.html:12
-#: templates/account/password_reset_from_key_done.html:13
+#: templates/account/password_reset_from_key_done.html:10
+#: templates/account/password_reset_from_key_done.html:11
 #: templates/users/includes/password_change.html:5
 #: templates/users/includes/password_change.html:17 users/forms.py:121
 msgid "Change Password"
 msgstr "Cambia Password"
 
 #: templates/account/password_reset.html:6
-#: templates/account/password_reset.html:13
-#: templates/account/password_reset.html:14
+#: templates/account/password_reset.html:11
+#: templates/account/password_reset.html:12
 #: templates/account/password_reset_done.html:7
-#: templates/account/password_reset_done.html:14
-#: templates/account/password_reset_done.html:15
+#: templates/account/password_reset_done.html:12
+#: templates/account/password_reset_done.html:13
 msgid "Password Reset"
 msgstr "Reimpostare Password"
 
-#: templates/account/password_reset.html:20
+#: templates/account/password_reset.html:18
 msgid ""
 "Enter your email address and we will send a link that will allow you to "
 "reset your password."
@@ -490,11 +578,11 @@ msgstr ""
 "Inserisci il tuo indirizzo email e ti invieremo un link che ti permetterà di "
 "reimpostare la tua password."
 
-#: templates/account/password_reset.html:24
+#: templates/account/password_reset.html:22
 msgid "Contact us"
 msgstr "Contattaci"
 
-#: templates/account/password_reset.html:24
+#: templates/account/password_reset.html:22
 msgid ""
 "if you have any\n"
 "    trouble resetting your password."
@@ -502,7 +590,7 @@ msgstr ""
 "se hai qualsiasi\n"
 "            problema di reimpostare la tua password."
 
-#: templates/account/password_reset_done.html:20
+#: templates/account/password_reset_done.html:18
 msgid ""
 "We have sent you an email. If you do not\n"
 "    receive it within a few minutes, please"
@@ -510,17 +598,17 @@ msgstr ""
 "Ti abbiamo inviato una email. Se non la ricevi\n"
 "            in pochi minuti, per favore"
 
-#: templates/account/password_reset_done.html:22
-#: templates/account/verification_sent.html:18
+#: templates/account/password_reset_done.html:20
+#: templates/account/verification_sent.html:16
 msgid "contact us"
 msgstr "contattaci"
 
-#: templates/account/password_reset_from_key.html:12
-#: templates/account/password_reset_from_key.html:13
+#: templates/account/password_reset_from_key.html:10
+#: templates/account/password_reset_from_key.html:11
 msgid "Bad Token"
 msgstr "Token Non Valido"
 
-#: templates/account/password_reset_from_key.html:18
+#: templates/account/password_reset_from_key.html:16
 #, python-format
 msgid ""
 "The password reset link was invalid,\n"
@@ -534,26 +622,25 @@ msgstr ""
 "            <a class=\"smooth-click form-link text-info\" href="
 "\"%(passwd_reset_url)s\">un email nuova per reimpostare la password</a>."
 
-#: templates/account/password_reset_from_key.html:29
-#: templates/account/password_reset_from_key_done.html:15
+#: templates/account/password_reset_from_key.html:27
+#: templates/account/password_reset_from_key_done.html:13
 msgid "You have updated your password."
 msgstr "Hai aggiornato la tua password."
 
-#: templates/account/password_set.html:11
-#: templates/account/password_set.html:12
-#: templates/account/password_set.html:13
-#: templates/account/password_set.html:21
+#: templates/account/password_set.html:8 templates/account/password_set.html:9
+#: templates/account/password_set.html:10
+#: templates/account/password_set.html:18
 msgid "Set Password"
 msgstr "Imposta Password"
 
-#: templates/account/signup.html:5 templates/account/signup.html:12
-#: templates/account/signup.html:13
+#: templates/account/signup.html:5 templates/account/signup.html:10
+#: templates/account/signup.html:11
 #: templates/users/includes/unauthenticated_offcanvas.html:15
 #: users/forms.py:171
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/account/signup.html:15
+#: templates/account/signup.html:13
 #, python-format
 msgid ""
 "\n"
@@ -566,13 +653,13 @@ msgstr ""
 "\"%(login_url)s\">Accedi</a>\n"
 "            se hai già un account."
 
-#: templates/account/signup_closed.html:11
-#: templates/account/signup_closed.html:12
-#: templates/account/signup_closed.html:13
+#: templates/account/signup_closed.html:8
+#: templates/account/signup_closed.html:9
+#: templates/account/signup_closed.html:10
 msgid "Sign Up Closed"
 msgstr "Iscrizione Chiusa"
 
-#: templates/account/signup_closed.html:16
+#: templates/account/signup_closed.html:13
 msgid "We are sorry, but the sign up is currently closed."
 msgstr "Siamo spiacenti, ma l'iscrizione è chiusa."
 
@@ -591,17 +678,17 @@ msgstr ""
 
 #: templates/account/verification_sent.html:5
 #: templates/account/verified_email_required.html:5
-#: templates/account/verified_email_required.html:12
-#: templates/account/verified_email_required.html:13
+#: templates/account/verified_email_required.html:10
+#: templates/account/verified_email_required.html:11
 msgid "Verify Your Email Address"
 msgstr "Verifica Il Tuo Indirizzo Email"
 
-#: templates/account/verification_sent.html:12
-#: templates/account/verification_sent.html:13
+#: templates/account/verification_sent.html:10
+#: templates/account/verification_sent.html:11
 msgid "Verify Email"
 msgstr "Verifica Email"
 
-#: templates/account/verification_sent.html:15
+#: templates/account/verification_sent.html:13
 msgid ""
 "We have sent an email to you for\n"
 "    verification. Follow the link provided to finalize the signup process. "
@@ -613,7 +700,7 @@ msgstr ""
 "Se non la ricevi\n"
 "            in pochi miunti, per favore"
 
-#: templates/account/verified_email_required.html:17
+#: templates/account/verified_email_required.html:15
 msgid ""
 "This part of the site requires us to verify that\n"
 "    you are who you claim to be. For this purpose, we require that you\n"
@@ -622,7 +709,7 @@ msgstr ""
 "Questa parte del sito richiede che tu verifichi\n"
 "il tuo indirizzo email. "
 
-#: templates/account/verified_email_required.html:21
+#: templates/account/verified_email_required.html:19
 msgid ""
 "We have sent an email to you for\n"
 "    verification. Please click on the link inside this email. Please\n"
@@ -632,7 +719,7 @@ msgstr ""
 "verifica. Clicca il link per finalizzare la tua registrazione.\n"
 "Se non la ricevi in pochi miunti, per favore contattaci."
 
-#: templates/account/verified_email_required.html:25
+#: templates/account/verified_email_required.html:23
 #, python-format
 msgid ""
 "<strong>Note:</strong> you can still <a\n"
@@ -655,13 +742,47 @@ msgstr ""
 "radici, laboratori, laboratori online, corsi online, corsi, spirituale, "
 "spiritualità, nuragico,"
 
-#: templates/base/base.html:108
+#: templates/base/base.html:109
 msgid "Loading"
 msgstr "Carica"
 
-#: templates/base/errors.html:21 templates/base/includes/shop_nav.html:5
-#: templates/cart/cart_list.html:44 templates/checkout/order_form.html:160
-#: templates/checkout/order_list.html:36 templates/likes/likes_list.html:40
+#: templates/base/errors.html:5 templates/base/includes/form_layout.html:5
+#: templates/base/includes/open_graph_basic.html:4
+#: templates/cart/cart_list.html:14 templates/checkout/order_detail.html:11
+#: templates/checkout/order_form.html:11 templates/checkout/order_list.html:11
+#: templates/info/index.html:15 templates/likes/likes_list.html:15
+#: templates/users/user_detail.html:17
+msgid "Ancient Wisdom, Modern Healing"
+msgstr "Antica Sagezza, Energia Moderna"
+
+#: templates/base/errors.html:6 templates/base/includes/form_layout.html:6
+#: templates/base/includes/open_graph_basic.html:5
+#: templates/cart/cart_list.html:15 templates/checkout/order_detail.html:12
+#: templates/checkout/order_form.html:12 templates/checkout/order_list.html:12
+#: templates/contact/email_form.html:17 templates/info/index.html:16
+#: templates/likes/likes_list.html:16 templates/users/user_detail.html:18
+msgid ""
+"Consciousness, spirituality, healing and ancestry. Working with systems such "
+"as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
+"sharing and connections between individuals and cultures."
+msgstr ""
+"Consapevolezza, spirtualità, energia e antenati. Lavoriamo con i sistemi dei "
+"Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
+"connesioni tra persone e culture."
+
+#: templates/base/errors.html:11 templates/base/includes/form_layout.html:11
+#: templates/base/includes/open_graph_basic.html:10
+#: templates/cart/cart_list.html:20 templates/checkout/order_detail.html:17
+#: templates/checkout/order_form.html:17 templates/checkout/order_list.html:17
+#: templates/contact/email_form.html:22 templates/info/index.html:21
+#: templates/likes/likes_list.html:21 templates/policies/policy_detail.html:20
+#: templates/users/user_detail.html:23
+msgid "Nuragic Shamanic Healing Logo"
+msgstr "Logo di Nuragic Shamanic Healing"
+
+#: templates/base/errors.html:29 templates/base/includes/shop_nav.html:5
+#: templates/cart/cart_list.html:50 templates/checkout/order_form.html:166
+#: templates/checkout/order_list.html:42 templates/likes/likes_list.html:46
 #: templates/products/product_list.html:64
 msgid "Offerings"
 msgstr "Offerte"
@@ -785,27 +906,6 @@ msgstr "Tutti"
 msgid "Shop"
 msgstr "Shop"
 
-#: templates/base/includes/open_graph_basic.html:4 templates/info/index.html:15
-msgid "Ancient Wisdom, Modern Healing"
-msgstr "Antica Sagezza, Energia Moderna"
-
-#: templates/base/includes/open_graph_basic.html:5
-#: templates/contact/email_form.html:17 templates/info/index.html:16
-msgid ""
-"Consciousness, spirituality, healing and ancestry. Working with systems such "
-"as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
-"sharing and connections between individuals and cultures."
-msgstr ""
-"Consapevolezza, spirtualità, energia e antenati. Lavoriamo con i sistemi dei "
-"Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
-"connesioni tra persone e culture."
-
-#: templates/base/includes/open_graph_basic.html:10
-#: templates/contact/email_form.html:22 templates/info/index.html:21
-#: templates/policies/policy_detail.html:20
-msgid "Nuragic Shamanic Healing Logo"
-msgstr "Logo di Nuragic Shamanic Healing"
-
 #: templates/base/includes/paginator.html:5
 msgid "First"
 msgstr "Prima Pagina"
@@ -822,7 +922,7 @@ msgstr "Ultima Pagina"
 msgid "Country Code"
 msgstr "Prefisso Internazionale"
 
-#: templates/cart/cart_list.html:4 templates/cart/cart_list.html:19
+#: templates/cart/cart_list.html:4 templates/cart/cart_list.html:25
 #: templates/cart/includes/cart_offcanvas.html:5
 msgid "Your Cart"
 msgstr "Il tuo carrello"
@@ -831,19 +931,19 @@ msgstr "Il tuo carrello"
 msgid "Welcome to your cart. Let's see what has caught your eye."
 msgstr "Benvenuto nel tuo carrello. Vediamo cosa ha catturato i tuoi occhi."
 
-#: templates/cart/cart_list.html:24
+#: templates/cart/cart_list.html:30
 msgid "Cart Totals"
 msgstr "Totale Carrello"
 
-#: templates/cart/cart_list.html:26
+#: templates/cart/cart_list.html:32
 msgid "Cart Items"
 msgstr "Articoli nel Carrello"
 
-#: templates/cart/cart_list.html:41 templates/checkout/order_form.html:156
+#: templates/cart/cart_list.html:47 templates/checkout/order_form.html:162
 msgid "Your cart is empty..."
 msgstr "Il tuo carrello è vuoto..."
 
-#: templates/cart/cart_list.html:42
+#: templates/cart/cart_list.html:48
 msgid "See what we can offer"
 msgstr "Guarda le nostre offerte"
 
@@ -856,15 +956,15 @@ msgid "Go to Cart"
 msgstr "Vai al Carrello"
 
 #: templates/cart/includes/cart_offcanvas.html:15
-#: templates/checkout/order_form.html:13 templates/checkout/order_form.html:21
-#: templates/checkout/order_form.html:27
+#: templates/checkout/order_form.html:19 templates/checkout/order_form.html:27
+#: templates/checkout/order_form.html:33
 msgid "Checkout"
 msgstr "Pagamento"
 
 #: templates/cart/includes/cart_offcanvas.html:39
 #: templates/cart/includes/subtotal.html:8
-#: templates/checkout/order_detail.html:187
-#: templates/checkout/order_form.html:138
+#: templates/checkout/order_detail.html:193
+#: templates/checkout/order_form.html:144
 msgid "Delivery"
 msgstr "Spedizione"
 
@@ -923,14 +1023,205 @@ msgstr "Grazie per supportare una piccola azienda"
 msgid "Proceed with Order"
 msgstr "Procedi con l'Ordine'"
 
+#: templates/checkout/confirmation_email/confirmation_email_body.html:261
+msgid "Thank you for your order"
+msgstr "Grazie per il tuo ordine"
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:295
+msgid ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            It means a lot "
+"to us that you are supporting a small\n"
+"                                                            business.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            This is a "
+"confirmation of your order at Nuragic Shamanic\n"
+"                                                            Healing.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Your order "
+"information is below:</p>\n"
+"                                                        "
+msgstr ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Significa tanto "
+"per noi il tuo supporto per una piccola azienda come la nostra.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Questo è la "
+"conferma del tuo ordine a Nuragic Shamanic\n"
+"                                                            Healing.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: center; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            I dettagli del "
+"tuo ordine:</p>\n"
+"                                                        "
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:392
+#: templates/checkout/confirmation_email/order_email_body.html:384
+#, python-format
+msgid ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            The billing has "
+"been charged to %(billing_full_name)s.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Order Number: "
+"%(number)s<br />Order Date: %(date)s</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Item Total: €"
+"%(total)s<br />Delivery:\n"
+"                                                            €"
+"%(delivery)s<br />Grand Total: €%(grand_total)s</p>\n"
+"                                                        "
+msgstr ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Il pagamento è "
+"stato effetuato al nome di %(billing_full_name)s.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Numero Ordine: "
+"%(number)s<br />Data Ordine: %(date)s</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                             </p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
+"margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Totale Articoli: "
+"€%(total)s<br />Spedizione:\n"
+"                                                            €"
+"%(delivery)s<br />Somma Totale: €%(grand_total)s</p>\n"
+"                                                        "
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:604
+#: templates/checkout/confirmation_email/confirmation_email_body.txt:21
+#: templates/checkout/confirmation_email/order_email_body.html:596
+#: templates/checkout/confirmation_email/order_email_body.txt:21
+msgid "The order will be shipped to"
+msgstr "L'ordine sarà spedito a"
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:695
+#: templates/checkout/confirmation_email/confirmation_email_body.txt:32
+msgid "If you have any questions, feel free to contact us at"
+msgstr "Se hai qualsiasi domanda o richiesta, per favore contattaci a"
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:700
+msgid ""
+"\n"
+"                                                            You can also "
+"connect with us on <a\n"
+"                                                                href="
+"\"https://wa.me/353834646130\" rel=\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">WhatsApp</a> or <a\n"
+"                                                                href="
+"\"https://m.me/NuragicShamanicHealing\"\n"
+"                                                                rel="
+"\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">Facebook Messenger</a>.\n"
+"                                                            "
+msgstr ""
+"\n"
+"                                                            Puoi connetere "
+"con noi anche tramite <a\n"
+"                                                                href="
+"\"https://wa.me/353834646130\" rel=\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">WhatsApp</a> o <a\n"
+"                                                                href="
+"\"https://m.me/NuragicShamanicHealing\"\n"
+"                                                                rel="
+"\"noopener\"\n"
+"                                                                style=\"text-"
+"decoration: none; color: #f5c936;\"\n"
+"                                                                target="
+"\"_blank\">Facebook Messenger</a>.\n"
+"                                                            "
+
+#: templates/checkout/confirmation_email/confirmation_email_body.html:715
+#: templates/checkout/confirmation_email/confirmation_email_body.txt:35
+msgid "We hope you found what you were looking for"
+msgstr "Speriamo che tu abbia trovato quello che stavi cercando"
+
 #: templates/checkout/confirmation_email/confirmation_email_body.txt:2
 #, python-format
 msgid ""
 "\n"
-"Thank you!\n"
+"Thank you for your order!\n"
+"It means a lot to us that you are supporting a small business.\n"
 "\n"
-"This is a confirmation of your order at Nuragic Shamanic Healing. Your order "
-"information is below:\n"
+"This is a confirmation of your order at Nuragic Shamanic Healing.\n"
+"Your order information is below:\n"
+"\n"
+"The billing has been charged to %(billing_full_name)s.\n"
 "\n"
 "Order Number: %(_number)s\n"
 "Order Date: %(date)s\n"
@@ -939,53 +1230,35 @@ msgid ""
 "Delivery: €%(delivery)s\n"
 "Grand Total: €%(grand_total)s\n"
 "\n"
-"The billing has been charged to %(billing_full_name)s\n"
-"\n"
-"Your order will be shipped to:\n"
+"Items:"
 msgstr ""
 "\n"
-"Grazie mille!\n"
+"Grazie per il tuo ordine!\n"
+"Significa tanto per noi il tuo supporto per una piccola azienda come la "
+"nostra.\n"
 "\n"
-"Questa è una conferma del tuo ordine da Nuragic Shamanic Healing. "
-"L'informazione del tuo ordine è qui:\n"
+"Questa è la conferma del tuo ordine da Nuragic Shamanic Healing.\n"
+"I dettagli del tuo ordine:\n"
+"\n"
+"Il pagamento è stato effetuato al nome di %(billing_full_name)s.\n"
 "\n"
 "Numero Ordine: %(_number)s\n"
-"Data: %(date)s\n"
+"Data Ordine: %(date)s\n"
 "\n"
 "Totale Articoli: €%(total)s\n"
 "Spedizione: €%(delivery)s\n"
 "Somma Totale: €%(grand_total)s\n"
 "\n"
-"La fattura è stato emesso nel nome di %(billing_full_name)s\n"
-"\n"
-"Il tuo ordine sarà speidto a:\n"
+"Articoli:"
 
-#: templates/checkout/confirmation_email/confirmation_email_body.txt:25
-#, python-format
+#: templates/checkout/confirmation_email/confirmation_email_body.txt:33
+#: templates/contact/emails/thanks_body.txt:5
 msgid ""
-"\n"
-"We've got your delivery phone number on file as %(shipping_phone_number)s.\n"
-"\n"
-"We hope you found what you were looking for.\n"
-"\n"
-"If you have any questions, feel free to contact us at %(our_email)s.\n"
-"\n"
-"Thank you for your order!\n"
-"\n"
-"Sincerely,\n"
-"Nuragic Shamanic Healing\n"
+"You can also connect with us on WhatsApp: https://wa.me/353834646130 or "
+"Facebook Messenger: https://m.me/NuragicShamanicHealing"
 msgstr ""
-"\n"
-"Il numero del telefono per la spedizione è %(shipping_phone_number)s.\n"
-"\n"
-"Speriamo che tu abbia trovato quello che stavi cercando.\n"
-"\n"
-"Se hai qualsiasi domanda, contattaci a %(our_email)s.\n"
-"\n"
-"Grazie per il tuo ordine!\n"
-"\n"
-"Cordiali Saluti,\n"
-"Nuragic Shamanic Healing\n"
+"Puoi anche connettere con noi tramite WhatsApp: https://wa.me/353834646130 o "
+"Facebook Messenger: https://m.me/NuragicShamanicHealing"
 
 #: templates/checkout/confirmation_email/confirmation_email_subject.txt:1
 msgid "Order Confirmation"
@@ -997,120 +1270,160 @@ msgid ""
 "\n"
 "Invoice Paid on Stripe.\n"
 "\n"
-"Please check info onthe Stripe Dash:\n"
+"Please check info on the Stripe Dash:\n"
 "Stripe invoice ID: %(invoice_id)s\n"
-"Amount (in cents): %(amount)s\n"
+"Amount: %(amount)s\n"
 msgstr ""
 "\n"
 "Fattura Pagato su Stripe.\n"
 "\n"
 "Per favore controllare i dettagli sul panello di controllo di Stripe:\n"
 "Stripe Fattura ID: %(invoice_id)s\n"
-"Importo (in centessimi): %(amount)s\n"
+"Importo: %(amount)s\n"
 
 #: templates/checkout/confirmation_email/invoice_email_subject.txt:1
 msgid "INVOICE PAID"
 msgstr "FATTURA PAGATO"
 
+#: templates/checkout/confirmation_email/order_email_body.html:261
+msgid "NEW ORDER AT nuragicshamanichealing.com"
+msgstr "NEW ORDER AT nuragicshamanichealing.com"
+
+#: templates/checkout/confirmation_email/order_email_body.html:295
+msgid ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: left; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            A new order has "
+"been placed at Nuragic Shamanic Healing.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: left; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Order "
+"information is below:</p>\n"
+"                                                        "
+msgstr ""
+"\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: left; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            A new order has "
+"been placed at Nuragic Shamanic Healing.</p>\n"
+"                                                        <p\n"
+"                                                            style=\"margin: "
+"0; text-align: left; line-height: 1.2; word-break: break-word; mso-line-"
+"height-alt: 17px; margin-top: 0; margin-bottom: 0;\">\n"
+"                                                            Order "
+"information is below:</p>\n"
+"                                                        "
+
+#: templates/checkout/confirmation_email/order_email_body.html:687
+msgid "Customer Email"
+msgstr "Customer Email"
+
 #: templates/checkout/confirmation_email/order_email_body.txt:2
 #, python-format
 msgid ""
 "\n"
-"NEW ORDER AT nuragicshamanichealing,org\n"
+"NEW ORDER AT nuragicshamanichealing.com\n"
 "\n"
+"A new order has been placed at Nuragic Shamanic Healing.\n"
 "Order information is below:\n"
 "\n"
-"Order Number: %(_number)s\n"
+"The billing has been charged to %(billing_full_name)s.\n"
+"\n"
+"Order Number: %(number)s\n"
 "Order Date: %(date)s\n"
 "\n"
 "Order Total: €%(total)s\n"
 "Delivery: €%(delivery)s\n"
 "Grand Total: €%(grand_total)s\n"
 "\n"
-"The billing has been charged to %(billing_full_name)s\n"
-"\n"
-"The order will be shipped to:\n"
+"Items:\n"
 msgstr ""
 "\n"
-"NEW ORDER AT nuragicshamanichealing,org\n"
+"NEW ORDER AT nuragicshamanichealing.com\n"
 "\n"
+"A new order has been placed at Nuragic Shamanic Healing.\n"
 "Order information is below:\n"
 "\n"
-"Order Number: %(_number)s\n"
+"The billing has been charged to %(billing_full_name)s.\n"
+"\n"
+"Order Number: %(number)s\n"
 "Order Date: %(date)s\n"
 "\n"
 "Order Total: €%(total)s\n"
 "Delivery: €%(delivery)s\n"
 "Grand Total: €%(grand_total)s\n"
 "\n"
-"The billing has been charged to %(billing_full_name)s\n"
-"\n"
-"The order will be shipped to:\n"
+"Items:\n"
 
-#: templates/checkout/confirmation_email/order_email_body.txt:29
+#: templates/checkout/confirmation_email/order_email_body.txt:31
 #, python-format
 msgid ""
 "\n"
-"Delivery Number: %(shipping_phone_number)s.\n"
 "\n"
-"Customer email: %(our_email)s.\n"
+"Customer email: %(contact_email)s.\n"
 msgstr ""
 "\n"
-"Delivery Number: %(shipping_phone_number)s.\n"
 "\n"
-"Customer email: %(our_email)s.\n"
+"Customer email: %(contact_email)s.\n"
 
 #: templates/checkout/confirmation_email/order_email_subject.txt:1
 msgid "NEW ORDER"
 msgstr "NEW ORDER"
 
 #: templates/checkout/includes/order_display.html:14
-#: templates/checkout/order_detail.html:32
+#: templates/checkout/order_detail.html:38
 msgid "Order Number"
 msgstr "Numero Ordine"
 
 #: templates/checkout/includes/order_display.html:25
-#: templates/checkout/order_detail.html:38
+#: templates/checkout/order_detail.html:44
 msgid "Date"
 msgstr "Data"
 
 #: templates/checkout/includes/order_display.html:29
-#: templates/checkout/order_form.html:111
+#: templates/checkout/order_form.html:117
 msgid "Items"
 msgstr "Articoli"
 
-#: templates/checkout/order_detail.html:13
+#: templates/checkout/order_detail.html:19
 msgid "Your Order"
 msgstr "Il tuo Ordine"
 
-#: templates/checkout/order_detail.html:22
+#: templates/checkout/order_detail.html:28
 msgid "Order Complete"
 msgstr "Ordine Effetuato"
 
-#: templates/checkout/order_detail.html:29
+#: templates/checkout/order_detail.html:35
 msgid "Order Details"
 msgstr "Dettagli Ordine"
 
-#: templates/checkout/order_detail.html:53
+#: templates/checkout/order_detail.html:59
 msgid "Shipping Details"
 msgstr "Dettagli Spedizione"
 
-#: templates/checkout/order_detail.html:89
-#: templates/checkout/order_detail.html:150
+#: templates/checkout/order_detail.html:95
+#: templates/checkout/order_detail.html:156
 msgid "County"
 msgstr "Località"
 
-#: templates/checkout/order_detail.html:114
+#: templates/checkout/order_detail.html:120
 msgid "Billing Details"
 msgstr "Dettagli Fatturazione"
 
-#: templates/checkout/order_detail.html:182
-#: templates/checkout/order_form.html:133
+#: templates/checkout/order_detail.html:188
+#: templates/checkout/order_form.html:139
 msgid "Item Total"
 msgstr "Totale Articoli"
 
-#: templates/checkout/order_detail.html:192
-#: templates/checkout/order_form.html:143
+#: templates/checkout/order_detail.html:198
+#: templates/checkout/order_form.html:149
 msgid "Grand Total"
 msgstr "Somma Totale"
 
@@ -1122,61 +1435,61 @@ msgstr "Grazie per lo scambio e il tuo supporto"
 msgid "checkout, payment"
 msgstr "cassa, pagamento"
 
-#: templates/checkout/order_form.html:19
+#: templates/checkout/order_form.html:25
 msgid "Cart"
 msgstr "Carrello"
 
-#: templates/checkout/order_form.html:29
+#: templates/checkout/order_form.html:35
 msgid "Payment Form"
 msgstr "Modulo del Pagamento"
 
-#: templates/checkout/order_form.html:35
+#: templates/checkout/order_form.html:41
 msgid "Personal Details"
 msgstr "Dettagli Personali"
 
-#: templates/checkout/order_form.html:43
+#: templates/checkout/order_form.html:49
 msgid "Delivery Information"
 msgstr "Informazione di Spedizione"
 
-#: templates/checkout/order_form.html:55
+#: templates/checkout/order_form.html:61
 msgid "My billing details are the same as delivery."
 msgstr ""
 "I miei dettagli per il fatturazione sono uguali a quelli di spedizione."
 
-#: templates/checkout/order_form.html:61
+#: templates/checkout/order_form.html:67
 msgid "Billing Information"
 msgstr "Informazione di Fatturazione"
 
-#: templates/checkout/order_form.html:78
+#: templates/checkout/order_form.html:84
 msgid "Save these shipping and billing addresses to my profile"
 msgstr "Salva gli indirizzi per spedizione e fatturazione al mio profilo"
 
-#: templates/checkout/order_form.html:80
+#: templates/checkout/order_form.html:86
 msgid "Create an account"
 msgstr "Creare un account"
 
-#: templates/checkout/order_form.html:81
+#: templates/checkout/order_form.html:87
 #: templates/users/includes/unauthenticated_offcanvas.html:13
 msgid "or"
 msgstr "o"
 
-#: templates/checkout/order_form.html:81
+#: templates/checkout/order_form.html:87
 msgid "login"
 msgstr "accedere"
 
-#: templates/checkout/order_form.html:82
+#: templates/checkout/order_form.html:88
 msgid "to save this information."
 msgstr "per salvare la tua informazione"
 
-#: templates/checkout/order_form.html:86
+#: templates/checkout/order_form.html:92
 msgid "Payment"
 msgstr "Pagamento"
 
-#: templates/checkout/order_form.html:97
+#: templates/checkout/order_form.html:103
 msgid "Confirm Purchase"
 msgstr "Conferma Acquisto"
 
-#: templates/checkout/order_form.html:100
+#: templates/checkout/order_form.html:106
 msgid ""
 "All of your payment details are processed by Stripe. We do not process or "
 "store your payment information."
@@ -1184,19 +1497,19 @@ msgstr ""
 "Tutti i tuoi dettagli del pagamento sono eseguiti da Stripe. Noi non "
 "effettuiamo il pagamento e non salviamo le tue informazioni del pagamento."
 
-#: templates/checkout/order_form.html:102
+#: templates/checkout/order_form.html:108
 msgid "By clicking \"Confirm Purchase\" you agree to our"
 msgstr "Quando fai un clic su Conferma \"Acquisto\" accetti il nostro"
 
-#: templates/checkout/order_form.html:105
+#: templates/checkout/order_form.html:111
 msgid "and"
 msgstr "e"
 
-#: templates/checkout/order_form.html:115
+#: templates/checkout/order_form.html:121
 msgid "Details"
 msgstr "Dettagli"
 
-#: templates/checkout/order_form.html:149
+#: templates/checkout/order_form.html:155
 msgid ""
 "Please do not refresh the page, press the back button or navigate away while "
 "the payment is processing.<br>Thank you for your patience."
@@ -1205,7 +1518,7 @@ msgstr ""
 "navigare ad un'altra pagine mentre il pagamento sta eseguendo, per favore."
 "<br>Grazie per la tua pazienza."
 
-#: templates/checkout/order_form.html:157
+#: templates/checkout/order_form.html:163
 msgid "Let's explore."
 msgstr "Esploriamo."
 
@@ -1217,20 +1530,20 @@ msgstr "I tuoi ordini. Grazie per il tuo supporto."
 msgid "orders, finalized, paid, order history"
 msgstr "ordine, ordini fatti, pagati, storia dei ordini"
 
-#: templates/checkout/order_list.html:12 templates/checkout/order_list.html:19
+#: templates/checkout/order_list.html:18 templates/checkout/order_list.html:25
 #: templates/users/includes/authenticated_offcanvas.html:18
 msgid "My Orders"
 msgstr "I miei Ordini"
 
-#: templates/checkout/order_list.html:33
+#: templates/checkout/order_list.html:39
 msgid "No Orders have been made"
 msgstr "Non ci sono stati ordini"
 
-#: templates/checkout/order_list.html:34
+#: templates/checkout/order_list.html:40
 msgid "What do we have for you"
 msgstr "Cosa potremmo offrirti"
 
-#: templates/checkout/order_list.html:41 templates/likes/likes_list.html:45
+#: templates/checkout/order_list.html:47 templates/likes/likes_list.html:51
 #: templates/products/product_list.html:71
 msgid "Product Page Navigation"
 msgstr "Navigazione per le pagine dei prodotti"
@@ -1259,39 +1572,52 @@ msgid "Reach Out"
 msgstr "Entra in Contatto"
 
 #: templates/contact/emails/contact_body.txt:1
+#: templates/contact/emails/contact_body_html.html:212
 msgid "Nuragic Shamanic Healing has received a message from"
 msgstr "Nuragic Shamanic Healing ha ricevuto un messagio da"
 
 #: templates/contact/emails/contact_body.txt:1
+#: templates/contact/emails/contact_body_html.html:213
 msgid "at"
 msgstr "a"
 
 #: templates/contact/emails/contact_body.txt:3
+#: templates/contact/emails/contact_body_html.html:249
 msgid "They have written the following"
 msgstr "Ha scritto"
-
-#: templates/contact/emails/contact_body.txt:7
-#: templates/contact/emails/thanks_body.txt:8
-msgid "Be Well"
-msgstr "Cordiali Saluti"
 
 #: templates/contact/emails/contact_subject.txt:1
 msgid "Nuragic Shamanic Healing Message Received"
 msgstr "Nuragic Shamanic Healing Messagio Ricevuto"
 
-#: templates/contact/emails/thanks_body.txt:1
-msgid "Hello"
-msgstr "Ciao"
+#: templates/contact/emails/thanks_body.txt:2
+#: templates/contact/emails/thanks_body_html.html:212
+msgid "Thank You"
+msgstr "Grazie Mille"
 
-#: templates/contact/emails/thanks_body.txt:3
-msgid "Thank you for getting in contact with Nuragic Shamanic Healing"
-msgstr "Grazie per contattare Nuragic Shamanic Healing"
+#: templates/contact/emails/thanks_body.txt:4
+#: templates/contact/emails/thanks_body_html.html:247
+msgid "We appreciate all the communication we receive at"
+msgstr "Appreziamo tutta la communicazione che riceviamo a"
 
-#: templates/contact/emails/thanks_body.txt:5
+#: templates/contact/emails/thanks_body.txt:7
+#: templates/contact/emails/thanks_body_html.html:323
+msgid "We will get in contact with you as soon as possible"
+msgstr "Ti contatteremmo al primo possibile"
+
+#: templates/contact/emails/thanks_body_html.html:287
 msgid ""
-"We have received your message and will get in contact with you as soon as "
-"possible"
-msgstr "Abbiamo Ricevuto il tuo messagio e ti contatteremmo al primo possibile"
+"You can also connect with us on <a href=\"https://wa.me/353834646130\" rel="
+"\"noopener\" style=\"text-decoration: none; color: #f5c936;\" target=\"_blank"
+"\">WhatsApp</a> or <a href=\"https://m.me/NuragicShamanicHealing\" rel="
+"\"noopener\" style=\"text-decoration: none; color: #f5c936;\" target=\"_blank"
+"\">Facebook Messenger</a>"
+msgstr ""
+"Alternativamente, potresti conneter con noi tramite <a href=\"https://wa."
+"me/353834646130\" rel=\"noopener\" style=\"text-decoration: none; color: "
+"#f5c936;\" target=\"_blank\">WhatsApp</a> o <a href=\"https://m.me/"
+"NuragicShamanicHealing\" rel=\"noopener\" style=\"text-decoration: none; "
+"color: #f5c936;\" target=\"_blank\">Facebook Messenger</a>"
 
 #: templates/contact/emails/thanks_subject.txt:1
 msgid "Nuragic Shamanic Healing Contact"
@@ -1402,36 +1728,36 @@ msgstr ""
 msgid "tarot, oracle cards, healing, reiki"
 msgstr "tarochhi, oracoli, benessere, reiki"
 
-#: templates/info/index.html:23
+#: templates/info/index.html:22
 msgid "Holistic | Courses | Readings"
 msgstr "Olisitico | Corsi | Consulti"
 
-#: templates/info/index.html:30
+#: templates/info/index.html:29
 msgid "Index"
 msgstr "Indece"
 
-#: templates/info/index.html:32
+#: templates/info/index.html:31
 msgid "About"
 msgstr "Chi Sono"
 
-#: templates/info/index.html:38 templates/info/index.html:41
+#: templates/info/index.html:37 templates/info/index.html:40
 #: templates/info/page_detail.html:21
 msgid "Spirituality"
 msgstr "Spiritualità"
 
-#: templates/info/index.html:38 templates/info/index.html:42
+#: templates/info/index.html:37 templates/info/index.html:41
 msgid "Connections"
 msgstr "Connesioni"
 
-#: templates/info/index.html:38 templates/info/index.html:42
+#: templates/info/index.html:37 templates/info/index.html:41
 msgid "Sharing"
 msgstr "Condivisione"
 
-#: templates/info/index.html:39 templates/info/index.html:42
+#: templates/info/index.html:38 templates/info/index.html:41
 msgid "Roots"
 msgstr "Radici"
 
-#: templates/info/index.html:76
+#: templates/info/index.html:75
 msgid "What we do"
 msgstr "Cosa facciamo"
 
@@ -1440,7 +1766,7 @@ msgid "Favorite Items"
 msgstr "Articoli Preferiti"
 
 #: templates/likes/includes/likes_offcanvas.html:6
-#: templates/likes/likes_list.html:23
+#: templates/likes/likes_list.html:29
 msgid "My Favorites"
 msgstr "I Miei Preferiti"
 
@@ -1464,11 +1790,11 @@ msgstr ""
 msgid "favorite, favorite, items, products, shop, shopping"
 msgstr ""
 
-#: templates/likes/likes_list.html:37
+#: templates/likes/likes_list.html:43
 msgid "No Favorites..."
 msgstr "Niente Preferiti..."
 
-#: templates/likes/likes_list.html:38
+#: templates/likes/likes_list.html:44
 msgid "Discover"
 msgstr "Scopri"
 
@@ -1669,7 +1995,7 @@ msgstr "I tuoi Impostazioni"
 msgid "profile"
 msgstr "profilo"
 
-#: templates/users/user_detail.html:24
+#: templates/users/user_detail.html:31
 #, python-format
 msgid ""
 "\n"
@@ -1754,6 +2080,42 @@ msgid "Failed to update your information. Please Check your details."
 msgstr ""
 "Non è stato possibile aggiornare i tuoi dati. Controlla i tuoi dati per "
 "favore."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "We've got your delivery phone number on file as "
+#~ "%(shipping_phone_number)s.\n"
+#~ "\n"
+#~ "If you have any questions, feel free to contact us at %(our_email)s.\n"
+#~ "\n"
+#~ "We hope you found what you were looking for.\n"
+#~ "Be Well,\n"
+#~ "Nuragic Shamanic Healing\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Il numero del telefono per la spedizione è %(shipping_phone_number)s.\n"
+#~ "\n"
+#~ "Se hai qualsiasi domanda o richiesta, per favore contattaci a "
+#~ "%(our_email)s.\n"
+#~ "\n"
+#~ "Speriamo che tu abbia trovato quello che stavi cercando.\n"
+#~ "Cordiali Saluti,\n"
+#~ "Nuragic Shamanic Healing\n"
+
+#, python-format
+#~ msgid ""
+#~ "Greetings and thanks from %(site_name)s!\n"
+#~ "%(site_domain)s"
+#~ msgstr ""
+#~ "Buongiorno e grazie da %(site_name)s!\n"
+#~ "%(site_domain)s"
+
+#~ msgid "Hello"
+#~ msgstr "Ciao"
+
+#~ msgid "Thank you for getting in contact with Nuragic Shamanic Healing"
+#~ msgstr "Grazie per contattare Nuragic Shamanic Healing"
 
 #~ msgid "Our Shop"
 #~ msgstr "Il nostro Shop"
