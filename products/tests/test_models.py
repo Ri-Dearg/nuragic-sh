@@ -3,7 +3,6 @@ import re
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-
 from products.models import Product, ShopCategory
 
 image = SimpleUploadedFile(
@@ -13,76 +12,54 @@ image = SimpleUploadedFile(
          'rb').read(),
     content_type='image/jpeg')
 
-valid_shopcategory = ShopCategory(title_en='SC1',
-                                  title_it='SC1')
-valid_shopcategory.save()
+valid_shopcategory = {'title_en': 'SC1',
+                      'title_it': 'SC1'}
 
-valid_product_1 = Product(
-    category=ShopCategory.objects.filter(
-        title_en='SC1').order_by('id').first(),
-    title_en='P1',
-    title_it='P1',
-    description_en='description',
-    description_it='description',
-    price=0.5,
-    image_4_3=image,
-    image_4_3_md=image,
-    image_4_3_sm=image,
-    image_4_3_xs=image,
-    stock=10)
+base_product = {
+    'description_en': 'description',
+    'description_it': 'description',
+    'price': 0.5,
+    'image_4_3': image,
+    'image_4_3_md': image,
+    'image_4_3_sm': image,
+    'image_4_3_xs': image,
+}
 
-valid_product_2 = Product(
-    category=ShopCategory.objects.filter(
-        title_en='SC1').order_by('id').first(),
-    title_en='P1',
-    title_it='P1',
-    description_en='description',
-    description_it='description',
-    price=0.5,
-    image_4_3=image,
-    image_4_3_md=image,
-    image_4_3_sm=image,
-    image_4_3_xs=image,
-    stock=10)
+valid_product_1 = {
+    'title_en': 'P1',
+    'title_it': 'P1',
+    'stock': 10} | base_product
 
-unique_product = Product(
-    category=ShopCategory.objects.filter(
-        title_en='SC1').order_by('id').first(),
-    title_en='unique',
-    title_it='unique',
-    description_en='description',
-    description_it='description',
-    price=0.5,
-    is_unique=True,
-    image_4_3=image,
-    image_4_3_md=image,
-    image_4_3_sm=image,
-    image_4_3_xs=image,
-    stock=10)
+valid_product_2 = {
+    'title_en': 'P1',
+    'title_it': 'P1',
+    'stock': 10} | base_product
 
+unique_product = {
+    'title_en': 'unique',
+    'title_it': 'unique',
+    'is_unique': True,
+    'stock': 10} | base_product
 
-preorder_product = Product(
-    category=ShopCategory.objects.filter(
-        title_en='SC1').order_by('id').first(),
-    title_en='preorder',
-    title_it='preorder',
-    description_en='description',
-    description_it='description',
-    price=0.5,
-    stock=0,
-    can_preorder=True,
-    image_4_3=image,
-    image_4_3_md=image,
-    image_4_3_sm=image,
-    image_4_3_xs=image)
+preorder_product = {
+    'title_en': 'preorder',
+    'title_it': 'preorder',
+    'stock': 0,
+    'can_preorder': True} | base_product
 
 
 class TestProductsModels(TestCase):
     """Tests for Products models."""
 
     def setUp(self):
-        unique_product.save()
-        valid_product_1.save()
+
+        ShopCategory.objects.create(**valid_shopcategory)
+        Product.objects.create(
+            **unique_product,
+            category=ShopCategory.objects.get(title_en='SC1'))
+        Product.objects.create(
+            **valid_product_1,
+            category=ShopCategory.objects.get(title_en='SC1'))
 
     def test_product_str(self):
         """Tests the string method on the Product."""
@@ -93,8 +70,7 @@ class TestProductsModels(TestCase):
 
     def test_shopcategory_str(self):
         """Tests the string method on the ShopCategory."""
-        shopcategory = ShopCategory.objects.filter(
-            title='SC1').order_by('id').first()
+        shopcategory = ShopCategory.objects.get(title_en='SC1')
         self.assertEqual(str(shopcategory),
                          (shopcategory.title))
 
