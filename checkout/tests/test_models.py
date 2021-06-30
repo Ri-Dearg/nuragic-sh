@@ -1,10 +1,9 @@
 """Tests the models of the checkout app."""
+from checkout.models import Order
 from django.shortcuts import reverse
 from django.test import TestCase
-
-from checkout.models import Order
 from products.models import Product
-from products.tests.test_models import valid_product_1, valid_product_2
+from products.tests.test_models import make_products
 
 from .test_views import valid_order_dict
 
@@ -13,8 +12,7 @@ class TestCheckoutModels(TestCase):
     """Tests the models for the checkout app."""
 
     def setUp(self):
-        valid_product_1.save()
-        valid_product_2.save()
+        make_products()
 
     def test_order_and_lineitem_string(self):
         """Tests the string method for the models."""
