@@ -6,8 +6,7 @@ from policies.tests.test_models import (valid_cookie_policy,
                                         valid_privacy_policy, valid_returns,
                                         valid_terms)
 from products.models import Product, ShopCategory
-from products.tests.test_models import (valid_product_1, valid_product_2,
-                                        valid_shopcategory)
+from products.tests.test_models import make_products
 
 
 class TestProductsViews(TestCase):
@@ -15,13 +14,7 @@ class TestProductsViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-        ShopCategory.objects.create(**valid_shopcategory)
-        Product.objects.create(
-            **valid_product_1,
-            category=ShopCategory.objects.get(title_en='SC1'))
-        Product.objects.create(
-            **valid_product_2,
-            category=ShopCategory.objects.get(title_en='SC1'))
+        make_products()
         valid_cookie_policy.save()
         valid_privacy_policy.save()
         valid_returns.save()

@@ -12,54 +12,65 @@ image = SimpleUploadedFile(
          'rb').read(),
     content_type='image/jpeg')
 
-valid_shopcategory = {'title_en': 'SC1',
-                      'title_it': 'SC1'}
 
-base_product = {
-    'description_en': 'description',
-    'description_it': 'description',
-    'price': 0.5,
-    'image_4_3': image,
-    'image_4_3_md': image,
-    'image_4_3_sm': image,
-    'image_4_3_xs': image,
-}
+def make_products():
 
-valid_product_1 = {
-    'title_en': 'P1',
-    'title_it': 'P1',
-    'stock': 10} | base_product
+    valid_shopcategory = {'title_en': 'SC1',
+                          'title_it': 'SC1'}
 
-valid_product_2 = {
-    'title_en': 'P1',
-    'title_it': 'P1',
-    'stock': 10} | base_product
+    base_product = {
+        'description_en': 'description',
+        'description_it': 'description',
+        'price': 0.5,
+        'image_4_3': image,
+        'image_4_3_md': image,
+        'image_4_3_sm': image,
+        'image_4_3_xs': image,
+    }
 
-unique_product = {
-    'title_en': 'unique',
-    'title_it': 'unique',
-    'is_unique': True,
-    'stock': 10} | base_product
+    valid_product_1 = {
+        'title_en': 'P1',
+        'title_it': 'P1',
+        'stock': 10} | base_product
 
-preorder_product = {
-    'title_en': 'preorder',
-    'title_it': 'preorder',
-    'stock': 0,
-    'can_preorder': True} | base_product
+    valid_product_2 = {
+        'title_en': 'P1',
+        'title_it': 'P1',
+        'stock': 10} | base_product
+
+    unique_product = {
+        'title_en': 'unique',
+        'title_it': 'unique',
+        'is_unique': True,
+        'stock': 10} | base_product
+
+    preorder_product = {
+        'title_en': 'preorder',
+        'title_it': 'preorder',
+        'stock': 0,
+        'can_preorder': True} | base_product
+
+    ShopCategory.objects.create(**valid_shopcategory)
+    shopcategory = ShopCategory.objects.get(title_en='SC1')
+    Product.objects.create(
+        **valid_product_1,
+        category=shopcategory)
+    Product.objects.create(
+        **valid_product_2,
+        category=shopcategory)
+    Product.objects.create(
+        **preorder_product,
+        category=shopcategory)
+    Product.objects.create(
+        **unique_product,
+        category=shopcategory)
 
 
 class TestProductsModels(TestCase):
     """Tests for Products models."""
 
     def setUp(self):
-
-        ShopCategory.objects.create(**valid_shopcategory)
-        Product.objects.create(
-            **unique_product,
-            category=ShopCategory.objects.get(title_en='SC1'))
-        Product.objects.create(
-            **valid_product_1,
-            category=ShopCategory.objects.get(title_en='SC1'))
+        make_products()
 
     def test_product_str(self):
         """Tests the string method on the Product."""
