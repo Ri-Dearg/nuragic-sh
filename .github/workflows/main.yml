@@ -26,6 +26,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        # Activates a postgres database for tests
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: "13"
+
       # Setup for python
       - name: Setup Python
         uses: actions/setup-python@v2
