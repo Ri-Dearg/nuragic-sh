@@ -3,7 +3,7 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
-from info.tests.test_models import about_category, valid_category
+from info.tests.test_models import make_info_models
 from policies.tests.test_models import make_policies
 
 
@@ -12,10 +12,9 @@ class TestContactViews(TestCase):
 
     def setUp(self):
         """Created instances for use in tests"""
-        Newsletter.objects.create(name='basic')
-        valid_category.save()
-        about_category.save()
         make_policies()
+        Newsletter.objects.create(name='basic')
+        make_info_models()
 
     def test_contact_template(self):
         """Tests templates for Contact page."""

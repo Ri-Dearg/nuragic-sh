@@ -1,7 +1,8 @@
 """Tests for the Contact app Models."""
-from contact.models import Email, EmailHistory, Newsletter
 from django.shortcuts import reverse
 from django.test import TestCase
+
+from contact.models import Email, EmailHistory, Newsletter
 
 
 class TestContactModels(TestCase):

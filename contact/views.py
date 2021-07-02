@@ -92,6 +92,7 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
 @csrf_exempt
 def recaptcha_verify(request):
+    """Verifies the recaptcha."""
     if request.method == 'POST':
         url = 'https://www.google.com/recaptcha/api/siteverify'
         values = {
