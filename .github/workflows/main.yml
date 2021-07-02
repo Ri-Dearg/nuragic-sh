@@ -30,7 +30,9 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -77,6 +79,9 @@ jobs:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
           python3 manage.py compilescss --traceback
           python3 manage.py collectstatic --noinput --traceback
