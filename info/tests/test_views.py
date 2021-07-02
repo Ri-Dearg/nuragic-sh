@@ -8,7 +8,7 @@ from policies.tests.test_models import (valid_cookie_policy,
                                         valid_privacy_policy, valid_returns,
                                         valid_terms)
 
-from .test_models import valid_category, valid_page
+from .test_models import make_info_models
 
 
 class TestInfoViews(TestCase):
@@ -20,8 +20,7 @@ class TestInfoViews(TestCase):
         valid_privacy_policy.save()
         valid_returns.save()
         valid_terms.save()
-        valid_category.save()
-        valid_page.save()
+        make_info_models()
 
     def test_render_home(self):
         """Tests templates for index page."""
