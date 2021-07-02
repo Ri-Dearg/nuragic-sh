@@ -4,7 +4,7 @@ name: Development CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request eventsfor all branches
+  # Triggers the workflow on push or pull request events for all branches
   push:
     branches:
       - "**"
@@ -26,7 +26,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        # Activates a postgres database for tests
+        # Activates a postgresql database for tests
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql version: "13"
@@ -65,5 +65,5 @@ jobs:
         run: |
           python3 manage.py compilescss --traceback
           python3 manage.py collectstatic --noinput --traceback
-          coverage run --source=. --omit=checkout/webhook*,venv/*,config/*,manage.py,users/adapter.py manage.py test --keepdb
+          coverage run --source=. --omit=checkout/webhook*,venv/*,config/*,manage.py,users/adapter.py manage.py test
           coveralls --service=github
