@@ -6,10 +6,21 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from products.models import Product
-from products.tests.test_models import valid_product_1, valid_shopcategory
+from products.tests.test_models import make_products
 from users.models import Liked
 
-user_model = get_user_model()
+
+def generate_string():
+    """Creates a random string for use as a user"""
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+
+
+def create_user():
+    """Create a user for testing."""
+    get_user_model().objects.get_or_create(
+        username=generate_string(),
+        email=f'{generate_string()}@{generate_string()}.com',
+        password=generate_string())
 
 
 class TestUserProfile(TestCase):
@@ -17,21 +28,10 @@ class TestUserProfile(TestCase):
 
     def setUp(self):
         """Creates a newly signed up user and declares some profile details."""
-        def generate_string():
-            """Creates a random string for use as a user"""
-            return ''.join(random.choices(string.ascii_uppercase +
-                                          string.digits,
-                                          k=8))
+        make_products()
 
-        valid_shopcategory.save()
-        valid_product_1.save()
-
-        username = generate_string()
-        email = generate_string() + '@' + generate_string() + '.com'
-        password = generate_string()
-        user1 = user_model.objects.create(username=username,
-                                          email=email,
-                                          password=password)
+        create_user()
+        user1 = get_user_model().objects.latest('date_joined')
         user1.userprofile.shipping_name = 'Fake name'
         user1.userprofile.liked_products.set([Product.objects.latest(
             'date_added').id])
@@ -40,7 +40,7 @@ class TestUserProfile(TestCase):
     def test_str(self):
         """Tests the string method on the UserProfile."""
         # Retrieves the most recently created user and gets their string
-        user1 = user_model.objects.latest('date_joined')
+        user1 = get_user_model().objects.latest('date_joined')
         user_string = str(user1.userprofile)
 
         # Retrieves the user's liked products and gets its string

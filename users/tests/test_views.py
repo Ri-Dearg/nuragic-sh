@@ -7,21 +7,16 @@ from contact.models import Newsletter
 from policies.tests.test_models import (valid_cookie_policy,
                                         valid_privacy_policy, valid_returns,
                                         valid_terms)
-from users.tests.test_adapter import generate_string
-
-user_model = get_user_model()
-user_model.objects.get_or_create(
-    username=generate_string(),
-    email=f'{generate_string()}@{generate_string()}.com',
-    password=generate_string())
-
-test_user = user_model.objects.latest('date_joined')
+from users.tests.test_models import create_user
 
 
 class TestUserViews(TestCase):
     """Tests views for the Users app."""
 
     def setUp(self):
+        """Sets up the test environment."""
+        Newsletter.objects.create(name='basic')
+        create_user()
         valid_cookie_policy.save()
         valid_privacy_policy.save()
         valid_returns.save()
@@ -65,6 +60,7 @@ class TestUserViews(TestCase):
 
         # Retrieves the most recently created user, logs them in
         # and goes to their profile.
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         response = self.client.get('/accounts/profile/')
@@ -84,7 +80,9 @@ class TestUserViews(TestCase):
 
     def test_custom_email_view(self):
         """Confirms a custom view is used for changing email."""
+
         # Retrieves the most recently created user and logs them in
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
@@ -94,6 +92,7 @@ class TestUserViews(TestCase):
     def test_custom_password_view(self):
         """Confirms a custom view is used for changing password."""
         # Retrieves the most recently created user and logs them in
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Confirms a custom template is used
@@ -102,7 +101,9 @@ class TestUserViews(TestCase):
 
     def test_custom_update_shipping(self):
         """Confirms a custom view is used for changing email."""
+
         # Retrieves the most recently created user and logs them in
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Posts a valid form to update the info
@@ -125,7 +126,7 @@ class TestUserViews(TestCase):
                           'billing_county': '',
                           'billing_postcode': '',
                           'billing_country': 'IE'})
-        updated_user = user_model.objects.latest('date_joined')
+        updated_user = get_user_model().objects.latest('date_joined')
 
         # Confirms the name has been updated
         self.assertEqual(updated_user.userprofile.shipping_full_name,
@@ -141,6 +142,7 @@ class TestUserViews(TestCase):
     def test_update_newsletter(self):
         """Tests different methods of updating the email lists."""
         # Retrieves the most recently created user and logs them in
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
         response = self.client.post('/accounts/newsletter/?next=/',
                                     {'save': '',

@@ -1,17 +1,11 @@
 """Tests redirection for the custom allauth adapter."""
-import random
-import string
-
 from django.test import TestCase
 
 from policies.tests.test_models import (valid_cookie_policy,
                                         valid_privacy_policy, valid_returns,
                                         valid_terms)
 
-
-def generate_string():
-    """Creates a random string for use as a user"""
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+from .test_models import generate_string
 
 
 class TestAdapter(TestCase):
