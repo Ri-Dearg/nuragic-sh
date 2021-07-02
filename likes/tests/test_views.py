@@ -3,9 +3,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
 
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from products.models import Product
 from products.tests.test_models import make_products
 from users.tests.test_views import create_user
@@ -17,10 +15,7 @@ class TestLikesViews(TestCase):
     def setUp(self):
         create_user()
         make_products()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_correct_template_used_and_context(self):
         """Checks that the correct template is used after adding likes."""

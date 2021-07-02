@@ -1,9 +1,8 @@
 """Tests for Cart app."""
 from django.shortcuts import reverse
 from django.test import TestCase
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+
+from policies.tests.test_models import make_policies
 from products.models import Product
 from products.tests.test_models import make_products
 
@@ -13,10 +12,7 @@ class TestViews(TestCase):
 
     def setUp(self):
         make_products()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_error_on_incorrect_item_removed(self):
         """Checks that an error occurs in the toggle when an

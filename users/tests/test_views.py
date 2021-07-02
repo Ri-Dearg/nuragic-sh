@@ -4,9 +4,7 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from users.tests.test_models import create_user
 
 
@@ -17,10 +15,7 @@ class TestUserViews(TestCase):
         """Sets up the test environment."""
         Newsletter.objects.create(name='basic')
         create_user()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_custom_forms_rendering(self):
         """Tests the correct use of custom forms."""

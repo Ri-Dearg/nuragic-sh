@@ -1,11 +1,10 @@
 """Tests views for the Contact app."""
-from contact.models import Newsletter
 from django.shortcuts import reverse
 from django.test import TestCase
+
+from contact.models import Newsletter
 from info.tests.test_models import about_category, valid_category
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 
 
 class TestContactViews(TestCase):
@@ -16,10 +15,7 @@ class TestContactViews(TestCase):
         Newsletter.objects.create(name='basic')
         valid_category.save()
         about_category.save()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_contact_template(self):
         """Tests templates for Contact page."""

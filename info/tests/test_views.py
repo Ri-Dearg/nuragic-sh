@@ -4,9 +4,7 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from info.models import Category, Page
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 
 from .test_models import make_info_models
 
@@ -16,10 +14,7 @@ class TestInfoViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
         make_info_models()
 
     def test_render_home(self):

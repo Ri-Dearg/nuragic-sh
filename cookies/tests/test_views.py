@@ -3,9 +3,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
 
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from users.tests.test_views import create_user
 
 
@@ -14,10 +12,7 @@ class TestCookiesViews(TestCase):
 
     def setUp(self):
         create_user()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_cookie_acceptance(self):
         """Tests Cookie consent view."""

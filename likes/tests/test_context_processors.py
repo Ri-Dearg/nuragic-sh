@@ -3,9 +3,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
 
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from products.models import Product
 from products.tests.test_models import make_products
 from users.tests.test_views import create_user
@@ -20,10 +18,7 @@ class TestContext(TestCase):
         create_user()
         product_1 = Product.objects.earliest('date_added')
         product_2 = Product.objects.latest('date_added')
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
         test_user = get_user_model().objects.latest('date_joined')
         test_user.userprofile.liked_products.add(*[product_1.id, product_2.id])

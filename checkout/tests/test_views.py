@@ -1,12 +1,11 @@
 """Tests for checkout"""
-from checkout.models import Order
 from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 from django.shortcuts import reverse
 from django.test import TestCase
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+
+from checkout.models import Order
+from policies.tests.test_models import make_policies
 from products.models import Product
 from products.tests.test_models import make_products
 
@@ -65,10 +64,7 @@ class TestCheckoutViews(TestCase):
                                                password=password)
 
         make_products()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_order_creation_and_detail_view(self):
         """Checks all the basic functions of the checkout app,
