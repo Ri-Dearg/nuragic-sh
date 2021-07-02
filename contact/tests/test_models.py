@@ -1,16 +1,14 @@
 """Tests for the Contact app Models."""
-from django.test import TestCase
-from django.shortcuts import reverse
-
 from contact.models import Email, EmailHistory, Newsletter
-
-Newsletter.objects.create(name='basic')
-newsletter = Newsletter.objects.filter(
-    name='basic').order_by('id').first()
+from django.shortcuts import reverse
+from django.test import TestCase
 
 
 class TestContactModels(TestCase):
     """Tests the models for the Contact app."""
+
+    def setUp(self):
+        Newsletter.objects.create(name='basic')
 
     def test_email_creation_and_string(self):
         """Tests the emails are correctly created for the model."""
@@ -34,6 +32,8 @@ class TestContactModels(TestCase):
 
     def test_newsletter_string(self):
         """Tests the string method on the Newsletter."""
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
         self.assertEqual(str(newsletter), "basic")
 
     def test_emailhistory_and_newsletter_setting(self):
@@ -51,6 +51,9 @@ class TestContactModels(TestCase):
         # Posts the English email, creating an email for use in the tests
         self.client.post(reverse('contact:email-form'), email1)
         new_email1 = Email.objects.latest('date')
+
+        newsletter = Newsletter.objects.filter(
+            name='basic').order_by('id').first()
 
         # Adds the email address to the English newsletter
         newsletter.email_list_en.append(new_email1.email)
