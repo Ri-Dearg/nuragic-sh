@@ -7,6 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Field, Hidden, Layout, Row
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core import exceptions
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.shortcuts import reverse
 from django.utils.translation import get_language
@@ -15,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
 from info.models import Category
+from info.utils import random_str
 
 from .models import Email, Newsletter
 
@@ -89,8 +91,15 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
         return context
 
+    def form_valid(self, form):
+        if ('success' not in self.request.POST or
+                self.request.POST['success'] !=
+                self.request.session['success_code']):
+            raise exceptions.PermissionDenied
+        return super().form_valid(form)
 
-@csrf_exempt
+
+@ csrf_exempt
 def recaptcha_verify(request):
     """Verifies the recaptcha."""
     if request.method == 'POST':
@@ -109,7 +118,10 @@ def recaptcha_verify(request):
         data['result'] = 'error'
         data['message'] = _('Captcha verification failed, please try again.')
         if result['success']:
+            success_code = random_str(10)
+            request.session['success_code'] = success_code
             data['result'] = 'success'
+            data['recaptcha'] = success_code
         return JsonResponse(data)
     return HttpResponseForbidden()
 
