@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
 from info.models import Category
+from info.utils import random_str
 
 from .models import Email, Newsletter
 
@@ -92,7 +93,8 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         if ('success' not in self.request.POST or
-                self.request.POST['success'] != '&00&13R3c4%tch4'):
+                self.request.POST['success'] !=
+                self.request.session['success_code']):
             raise exceptions.PermissionDenied
         return super().form_valid(form)
 
@@ -115,8 +117,10 @@ def recaptcha_verify(request):
         data['result'] = 'error'
         data['message'] = _('Captcha verification failed, please try again.')
         if result['success']:
+            success_code = random_str(10)
+            request.session['success_code'] = success_code
             data['result'] = 'success'
-            data['recaptcha'] = '&00&13R3c4%tch4'
+            data['recaptcha'] = success_code
         return JsonResponse(data)
     return HttpResponseForbidden()
 
