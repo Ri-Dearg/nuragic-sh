@@ -21,6 +21,9 @@ function captchaCallback(token) {
         throw Error(data.message);
       } else if (data.result === "success") {
         $("#contact-submit").attr("type", "submit").prop("disabled", false);
+        $("#contact-form").append(
+          `<input type="hidden" name="success" value="${data.recaptcha}">`
+        );
       }
     })
     .catch((error) => toastMessage("danger", "Error", error));
