@@ -33,21 +33,22 @@ class TestCookiesViews(TestCase):
 
         response = self.client.post(
             reverse('cookies:consent'
-                    ), {'cookie-consent': 'opt-in'},
-            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-
-        self.assertEqual(self.client.session['cookie_consent'], True)
-
-        response = self.client.post(
-            reverse('cookies:consent'
                     ), {'cookie-consent': 'analytics'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(self.client.session['analytics_consent'], True)
 
-        def test_cookie_template_update(self):
-            """Tests Cookie template update view."""
-            self.client.get(
-                reverse('cookies:consent'
-                        ), {'cookie-consent': 'opt-in'},
-                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+    def test_cookie_template_update(self):
+        """Tests Cookie template update view."""
+        self.client.post(
+            reverse('cookies:consent'
+                    ), {'cookie-consent': 'opt-in'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        self.assertEqual(self.client.session['cookie_consent'], True)
+
+        response = self.client.get(
+            reverse('cookies:update'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'base/includes/trackers.html')
