@@ -52,3 +52,14 @@ class TestContactViews(TestCase):
                                    {'email_en': 'test@test.com'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
+
+    def test_email_permission_denied(self):
+        """Tests that email permission is denied."""
+        email = {'email': 'test@test.com',
+                 'name': 'fname lname',
+                 'subject': 'interesting',
+                 'message': 'this is a message'}
+
+        response = self.client.post(reverse('contact:email-form'), email)
+        self.assertEqual(response.status_code, 403)
+        self.assertTemplateUsed(response, 'base/errors/403.html')
