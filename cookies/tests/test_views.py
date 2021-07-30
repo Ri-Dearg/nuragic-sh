@@ -44,3 +44,10 @@ class TestCookiesViews(TestCase):
             HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         self.assertEqual(self.client.session['analytics_consent'], True)
+
+        def test_cookie_template_update(self):
+            """Tests Cookie template update view."""
+            self.client.get(
+                reverse('cookies:consent'
+                        ), {'cookie-consent': 'opt-in'},
+                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
