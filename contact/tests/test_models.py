@@ -3,21 +3,30 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Email, EmailHistory, Newsletter
+from info.utils import random_str
+from policies.tests.test_models import make_policies
 
 
 class TestContactModels(TestCase):
     """Tests the models for the Contact app."""
 
     def setUp(self):
+        make_policies()
         Newsletter.objects.create(name='basic')
 
     def test_email_creation_and_string(self):
         """Tests the emails are correctly created for the model."""
         # A valid email dictionary
+        success_code = random_str(10)
+        session = self.client.session
+        session['success_code'] = success_code
+        session.save()
+
         email = {'email': 'test@test.com',
                  'name': 'fname lname',
                  'subject': 'interesting',
-                 'message': 'this is a message'}
+                 'message': 'this is a message',
+                 'success': success_code}
 
         # Posts the email, retrieves the email object and confirms the string
         self.client.post(reverse('contact:email-form'), email)
@@ -39,15 +48,22 @@ class TestContactModels(TestCase):
 
     def test_emailhistory_and_newsletter_setting(self):
         """Tests contact models creation and saving, str method"""
+        success_code = random_str(10)
+        session = self.client.session
+        session['success_code'] = success_code
+        session.save()
+
         email1 = {'email': 'test@test.com',
                   'name': 'fname lname',
                   'subject': 'interesting',
-                  'message': 'this is a message'}
+                  'message': 'this is a message',
+                  'success': success_code}
 
         email2 = {'email': 'test2@test.com',
                   'name': 'fname lname',
                   'subject': 'interesting',
-                  'message': 'this is a message'}
+                  'message': 'this is a message',
+                  'success': success_code}
 
         # Posts the English email, creating an email for use in the tests
         self.client.post(reverse('contact:email-form'), email1)
