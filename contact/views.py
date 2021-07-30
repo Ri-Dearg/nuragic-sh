@@ -99,8 +99,8 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-@ csrf_exempt
-def recaptcha_verify(request):
+@csrf_exempt
+def recaptcha_verify(request):  # pragma: no cover
     """Verifies the recaptcha."""
     if request.method == 'POST':
         url = 'https://www.google.com/recaptcha/api/siteverify'
