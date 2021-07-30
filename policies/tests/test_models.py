@@ -26,6 +26,14 @@ def make_policies():
                           name_it='Terms & Conditions',
                           content='Conditional Content',
                           active_terms=True)
+    Policy.objects.create(name_en='Terms & Conditions 2',
+                          name_it='Terms & Conditions 2',
+                          content='Conditional Content',
+                          active_terms=True)
+    Policy.objects.create(name_en='Returns and Refunds 2',
+                          name_it='Retruns and Refunds 2',
+                          content='Returns',
+                          active_returns=True)
     Policy.objects.create(name_en='Returns and Refunds',
                           name_it='Retruns and Refunds',
                           content='Returns',
