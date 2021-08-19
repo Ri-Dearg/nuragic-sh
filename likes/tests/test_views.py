@@ -1,25 +1,21 @@
 """Tests views for the like module."""
+from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
 
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from products.models import Product
-from products.tests.test_models import valid_product_1, valid_product_2
-from users.tests.test_views import test_user
+from products.tests.test_models import make_products
+from users.tests.test_views import create_user
 
 
 class TestLikesViews(TestCase):
     """Tests views for the Likes app."""
 
     def setUp(self):
-        valid_product_1.save()
-        valid_product_2.save()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        create_user()
+        make_products()
+        make_policies()
 
     def test_correct_template_used_and_context(self):
         """Checks that the correct template is used after adding likes."""
@@ -43,6 +39,7 @@ class TestLikesViews(TestCase):
         self.assertTemplateUsed(response, 'likes/likes_list.html')
 
         # Logs in the user
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Confirms that the session likes have been transferred to the user
@@ -69,6 +66,7 @@ class TestLikesViews(TestCase):
         self.assertEqual(session['likes'], [f'{product_1.id}'])
 
         # Logs in the user
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Adds likes while logged in and confirms that two liked
@@ -123,6 +121,7 @@ class TestLikesViews(TestCase):
         self.assertEqual(session['likes'], [])
 
         # Logs in a user
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Adds a liked product
@@ -173,6 +172,7 @@ class TestLikesViews(TestCase):
         self.assertTemplateUsed('likes/includes/likes_offcanvas.html')
 
         # Logs a user in and updates the context
+        test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
         self.client.get(reverse('likes:likes-offcanvas'))
 

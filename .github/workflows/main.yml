@@ -4,7 +4,7 @@ name: Development CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request eventsfor all branches
+  # Triggers the workflow on push or pull request events for all branches
   push:
     branches:
       - "**"
@@ -20,12 +20,34 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.9.5]
+
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
       # Setup for python
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -57,8 +79,11 @@ jobs:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
           python3 manage.py compilescss --traceback
           python3 manage.py collectstatic --noinput --traceback
-          coverage run --source=. --omit=checkout/webhook*,venv/*,config/*,manage.py,users/adapter.py manage.py test --keepdb
+          coverage run --source=. --omit=checkout/webhook*,venv/*,config/*,manage.py,users/adapter.py manage.py test
           coveralls --service=github

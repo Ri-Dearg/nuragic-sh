@@ -6,75 +6,75 @@ from django.test import TestCase
 
 from info.models import Category, Page, Review, SplashImage
 from products.models import Product
-from products.tests.test_models import valid_product_1
+from products.tests.test_models import make_products
 
 image = SimpleUploadedFile(
     name='default.jpg',
     content=open(
         'media/default.jpg',
-        'rb').read(),
+         'rb').read(),
     content_type='image/jpeg',)
 
-valid_category = Category(title_en='HI1',
-                          title_it='HI1',
-                          menu_word_en='HCMW1',
-                          menu_word_it='HCMW1',
-                          description_en='description',
-                          description_it='description',
-                          image_fb_link=image,
-                          image_fb_link_md=image,
-                          image_fb_link_sm=image,
-                          button_text="text here",
-                          display=False,
-                          order=12)
-valid_category.save()
 
-about_category = Category(title_en='about',
-                          title_it='HI1',
-                          menu_word_en='HCMW1',
-                          menu_word_it='HCMW1',
-                          description_en='description',
-                          description_it='description',
-                          image_fb_link=image,
-                          image_fb_link_md=image,
-                          image_fb_link_sm=image,
-                          button_text="text here",
-                          order=2)
+def make_info_models():
+    """Makes a category and a pages for testing."""
+    Category.objects.create(title_en='HI1',
+                            title_it='HI1',
+                            menu_word_en='HCMW1',
+                            menu_word_it='HCMW1',
+                            description_en='description',
+                            description_it='description',
+                            image_fb_link=image,
+                            image_fb_link_md=image,
+                            image_fb_link_sm=image,
+                            button_text="text here",
+                            display=False,
+                            order=12)
 
-valid_page = Page(category=Category.objects.latest('date_added'),
-                  title_en='HI1',
-                  title_it='HI1',
-                  summary_en='HCMW1',
-                  summary_it='HCMW1',
-                  desc_title1_en='heading',
-                  desc_title1_it='heading',
-                  description1_en='description',
-                  description1_it='description',
-                  title_image_tw_header=image,
-                  title_image_tw_header_md=image,
-                  title_image_tw_header_sm=image,
-                  image_fb_link=image,
-                  image_fb_link_md=image,
-                  image_fb_link_sm=image,
-                  theme='brown',
-                  order=1)
-valid_page.save()
+    Category.objects.create(title_en='about',
+                            title_it='HI1',
+                            menu_word_en='HCMW1',
+                            menu_word_it='HCMW1',
+                            description_en='description',
+                            description_it='description',
+                            image_fb_link=image,
+                            image_fb_link_md=image,
+                            image_fb_link_sm=image,
+                            button_text="text here",
+                            order=2)
 
-valid_splash = SplashImage(page=Page.objects.latest('date_added'),
-                           title_en='splash1',
-                           title_it='splash1',
-                           description_en='description',
-                           description_it='description',
-                           image_tw_header=image,
-                           image_tw_header_md=image,
-                           image_tw_header_sm=image,
-                           image_fb_link=image,
-                           image_fb_link_md=image,
-                           image_fb_link_sm=image)
+    Page.objects.create(category=Category.objects.latest('date_added'),
+                        title_en='HI1',
+                        title_it='HI1',
+                        summary_en='HCMW1',
+                        summary_it='HCMW1',
+                        desc_title1_en='heading',
+                        desc_title1_it='heading',
+                        description1_en='description',
+                        description1_it='description',
+                        title_image_tw_header=image,
+                        title_image_tw_header_md=image,
+                        title_image_tw_header_sm=image,
+                        image_fb_link=image,
+                        image_fb_link_md=image,
+                        image_fb_link_sm=image,
+                        theme='brown',
+                        order=1)
 
+    SplashImage.objects.create(page=Page.objects.latest('date_added'),
+                               title_en='splash1',
+                               title_it='splash1',
+                               description_en='description',
+                               description_it='description',
+                               image_tw_header=image,
+                               image_tw_header_md=image,
+                               image_tw_header_sm=image,
+                               image_fb_link=image,
+                               image_fb_link_md=image,
+                               image_fb_link_sm=image)
 
-valid_review = Review(reviewer_name='abacus',
-                      text='this is a review')
+    Review.objects.create(reviewer_name='abacus',
+                          text='this is a review')
 
 
 class TestInfoModels(TestCase):
@@ -82,14 +82,7 @@ class TestInfoModels(TestCase):
 
     def setUp(self):
         """Created instances for use in tests"""
-
-        valid_category.save()
-
-        valid_page.save()
-
-        valid_splash.save()
-
-        valid_review.save()
+        make_info_models()
 
     def test_carousel_image_file_is_processed_correctly(self):
         """Tests that an uploaded SplashImage image is resized and
@@ -121,8 +114,7 @@ class TestInfoModels(TestCase):
 
     def test_carousel_str(self):
         """Tests the string method on the SplashImage."""
-        valid_product_1.save()
-
+        make_products()
         valid_splash_2 = SplashImage(
             product=Product.objects.latest('date_added'),
             title_en='splash1',

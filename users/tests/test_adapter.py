@@ -1,17 +1,9 @@
 """Tests redirection for the custom allauth adapter."""
-import random
-import string
-
 from django.test import TestCase
 
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 
-
-def generate_string():
-    """Creates a random string for use as a user"""
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+from .test_models import generate_string
 
 
 class TestAdapter(TestCase):
@@ -19,10 +11,7 @@ class TestAdapter(TestCase):
     redirect. This tests the correct redirect."""
 
     def setUp(self):
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
 
     def test_redirect(self):
         """Tests that the adapter redirects correctly."""

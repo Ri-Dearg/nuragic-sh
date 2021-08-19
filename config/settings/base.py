@@ -14,7 +14,6 @@ import os
 import sys
 from pathlib import Path
 
-import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
 try:
@@ -24,7 +23,7 @@ except ModuleNotFoundError:
     pass
 
 # Version Number
-VERSION = '0.8.1'
+VERSION = '0.8.2'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -140,22 +139,10 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
         'TEST': {
-            # Runs tests on a secondary database
-            'NAME': 'd8bgrsa150rjjt',
+            'NAME': 'default',
         },
     }
 }
-
-
-# Declare variable  to check if django is in testing mode
-# Uses a test database if True
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-if TESTING:
-    # Database config
-    env_db = dj_database_url.config(conn_max_age=500)
-    env_db = dj_database_url.parse(os.environ.get(
-        'HEROKU_POSTGRESQL_CRIMSON_URL'))
-    DATABASES['default'].update(env_db)
 
 
 # Password validation

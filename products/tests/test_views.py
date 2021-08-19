@@ -2,13 +2,9 @@
 
 from django.shortcuts import reverse
 from django.test import TestCase
-
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from products.models import Product, ShopCategory
-from products.tests.test_models import (valid_product_1, valid_product_2,
-                                        valid_shopcategory)
+from products.tests.test_models import make_products
 
 
 class TestProductsViews(TestCase):
@@ -16,13 +12,8 @@ class TestProductsViews(TestCase):
 
     def setUp(self):
         """Sets up a model instances for tests."""
-        valid_shopcategory.save()
-        valid_product_1.save()
-        valid_product_2.save()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_products()
+        make_policies()
 
     def test_render_shop(self):
         """Tests templates for shop page."""

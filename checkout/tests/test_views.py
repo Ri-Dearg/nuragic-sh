@@ -5,11 +5,9 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from checkout.models import Order
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from policies.tests.test_models import make_policies
 from products.models import Product
-from products.tests.test_models import preorder_product, valid_product_1
+from products.tests.test_models import make_products
 
 # Declares a dictionary to send in forms with valid data for an Order
 valid_order_dict = {
@@ -65,12 +63,8 @@ class TestCheckoutViews(TestCase):
                                                email=email,
                                                password=password)
 
-        valid_product_1.save()
-        preorder_product.save()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_products()
+        make_policies()
 
     def test_order_creation_and_detail_view(self):
         """Checks all the basic functions of the checkout app,
