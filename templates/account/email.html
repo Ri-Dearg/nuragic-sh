@@ -1,6 +1,6 @@
 {% extends 'base/includes/form_layout.html' %}
 <!-- Loads internationalization, loads crispy forms  -->
-{% load i18n %} {% load crispy_forms_tags %}
+{% load i18n %} {% load static %} {% load crispy_forms_tags %}
 
 {% block head_title %}{% trans "Email Addresses" %}{% endblock %}
 
@@ -69,17 +69,6 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script type="text/javascript">
-    (function () {
-        var message = "{% trans 'Do you really want to remove the selected email address?' %}";
-        var actions = document.getElementsByName('action_remove');
-        if (actions.length) {
-            actions[0].addEventListener("click", function (e) {
-                if (!confirm(message)) {
-                    e.preventDefault();
-                }
-            });
-        }
-    })();
-</script>
+{{ block.super }}
+<script src="{% static 'js/custom/email.js' %}"></script>
 {% endblock %}
