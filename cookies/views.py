@@ -42,6 +42,5 @@ def cookie_consent(request):
 
 def update_cookies(request):
     """Implements cookie template on cookie consent."""
-
     # Pushes the new context to the page before re-rendering the template.
     return render(request, 'base/includes/trackers.html')

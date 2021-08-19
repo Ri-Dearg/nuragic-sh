@@ -3,10 +3,8 @@ from django.shortcuts import reverse
 from django.test import TestCase
 
 from contact.models import Newsletter
-from info.tests.test_models import about_category, valid_category
-from policies.tests.test_models import (valid_cookie_policy,
-                                        valid_privacy_policy, valid_returns,
-                                        valid_terms)
+from info.tests.test_models import make_info_models
+from policies.tests.test_models import make_policies
 
 
 class TestContactViews(TestCase):
@@ -14,12 +12,9 @@ class TestContactViews(TestCase):
 
     def setUp(self):
         """Created instances for use in tests"""
-        valid_category.save()
-        about_category.save()
-        valid_cookie_policy.save()
-        valid_privacy_policy.save()
-        valid_returns.save()
-        valid_terms.save()
+        make_policies()
+        Newsletter.objects.create(name='basic')
+        make_info_models()
 
     def test_contact_template(self):
         """Tests templates for Contact page."""
@@ -57,3 +52,14 @@ class TestContactViews(TestCase):
                                    {'email_en': 'test@test.com'},
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
+
+    def test_email_permission_denied(self):
+        """Tests that email permission is denied."""
+        email = {'email': 'test@test.com',
+                 'name': 'fname lname',
+                 'subject': 'interesting',
+                 'message': 'this is a message'}
+
+        response = self.client.post(reverse('contact:email-form'), email)
+        self.assertEqual(response.status_code, 403)
+        self.assertTemplateUsed(response, 'base/errors/403.html')
