@@ -1,5 +1,5 @@
 function initiateCheckout(cart, num_items, item_total) {
-  content_list = [];
+  var content_list = [];
   const cart_items = Object.keys(cart);
   cart_items.forEach((key, index) => {
     content_list.push({ id: key, quantity: cart[key] });
@@ -14,7 +14,7 @@ function initiateCheckout(cart, num_items, item_total) {
 
 function pixelAddToCart(id, title, quantity_field, price) {
   function cartClick() {
-    quantity = Number($(`#${quantity_field}`).val());
+    var quantity = Number($(`#${quantity_field}`).val());
     fbq("track", "AddToCart", {
       content_name: `${title}`,
       content_type: "product",
