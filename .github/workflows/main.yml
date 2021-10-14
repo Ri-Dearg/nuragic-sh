@@ -79,9 +79,9 @@ jobs:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           COVERALLS_REPO: ${{ secrets.COVERALLS_REPO }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME: postgres
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
         run: |
           python3 manage.py compilescss --traceback
           python3 manage.py collectstatic --noinput --traceback
