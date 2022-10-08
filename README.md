@@ -1,3 +1,9 @@
+site deployed here:
+https://www.nuragicshamanichealing.com/
+
+shop pages here:
+https://www.nuragicshamanichealing.com/shop/
+
 My Django Website Starter Template
 
 Includes:
