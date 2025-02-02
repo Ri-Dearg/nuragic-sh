@@ -95,7 +95,7 @@ class Order(models.Model):
         """Redirects users to their order once it has been created."""
         return reverse('checkout:order-detail', args=[str(self.id)])
 
-    def _update_total(self):
+    def update_total(self):
         """Updates the grand total figure in an order."""
         self.order_total = (
             self.lineitems.aggregate(Sum('lineitem_total'))[
@@ -107,7 +107,7 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         """Saves the order number and updates the total."""
-        self._update_total()
+
         if not self.order_number:
             self.order_number = generate_order_number()
         super().save(*args, **kwargs)
