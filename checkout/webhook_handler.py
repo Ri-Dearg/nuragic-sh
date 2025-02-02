@@ -1,4 +1,5 @@
 """Functions that act on receipt of the webhook."""
+
 import json
 import logging
 import time
@@ -9,7 +10,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils import translation
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from products.models import Product
 
@@ -78,7 +79,8 @@ def create_order(userprofile, billing_details, shipping_details, cart, pid):
 
 
 def check_order_in_db(
-        billing_details, shipping_details, grand_total, cart, pid):
+    billing_details, shipping_details, grand_total, cart, pid
+):
     """Runs a loop to check if the order was created in the DB.
     If it was, sends and email, if not, returns False."""
     try:
@@ -125,41 +127,50 @@ def send_confirmation_email(order, lang):
     cust_email = order.email
     subject = render_to_string(
         'checkout/confirmation_email/confirmation_email_subject.txt',
-        {'order': order})
+        {'order': order},
+    )
     body = render_to_string(
         'checkout/confirmation_email/confirmation_email_body.txt',
-        {'order': order,
-         'contact_email': 'connect@nuragicshamanichealing.com'})
+        {
+            'order': order,
+            'contact_email': 'connect@nuragicshamanichealing.com',
+        },
+    )
     body_html = render_to_string(
         'checkout/confirmation_email/confirmation_email_body.html',
-        {'order': order,
-         'contact_email': 'connect@nuragicshamanichealing.com'})
+        {
+            'order': order,
+            'contact_email': 'connect@nuragicshamanichealing.com',
+        },
+    )
 
     send_mail(
         subject,
         body,
         _(f'NuragicSH Order <{settings.DEFAULT_ORDER_EMAIL}>'),
         [cust_email],
-        html_message=body_html
+        html_message=body_html,
     )
 
     translation.activate('en')
     order_subject = render_to_string(
-        'checkout/confirmation_email/order_email_subject.txt',
-        {'order': order})
+        'checkout/confirmation_email/order_email_subject.txt', {'order': order}
+    )
     order_body = render_to_string(
         'checkout/confirmation_email/order_email_body.txt',
-        {'order': order, 'contact_email': cust_email})
+        {'order': order, 'contact_email': cust_email},
+    )
     order_body_html = render_to_string(
         'checkout/confirmation_email/order_email_body.html',
-        {'order': order, 'contact_email': cust_email})
+        {'order': order, 'contact_email': cust_email},
+    )
 
     send_mail(
         order_subject,
         order_body,
         f'NEW ORDER <{settings.DEFAULT_ORDER_EMAIL}>',
         [settings.DEFAULT_ORDER_EMAIL],
-        html_message=order_body_html
+        html_message=order_body_html,
     )
 
 
@@ -168,31 +179,33 @@ def invoice_email(intent, grand_total):
     invoice_id = intent.invoice
     order_subject = render_to_string(
         'checkout/confirmation_email/invoice_email_subject.txt',
-        {'invoice_id': invoice_id})
+        {'invoice_id': invoice_id},
+    )
     order_body = render_to_string(
         'checkout/confirmation_email/invoice_email_body.txt',
-        {'invoice_id': invoice_id, 'amount': grand_total})
+        {'invoice_id': invoice_id, 'amount': grand_total},
+    )
 
     send_mail(
         order_subject,
         order_body,
         f'INVOICE PAID <{settings.DEFAULT_ORDER_EMAIL}>',
-        [settings.DEFAULT_ORDER_EMAIL]
+        [settings.DEFAULT_ORDER_EMAIL],
     )
 
 
 def handle_event(event):
     """Handle a generic/unknown/unexpected webhook event."""
     return HttpResponse(
-        content=f'Unhandled Webhook received: {event["type"]}',
-        status=200)
+        content=f'Unhandled Webhook received: {event["type"]}', status=200
+    )
 
 
 def handle_payment_intent_payment_failed(event):
     """Handle the payment_intent.payment_failed webhook from Stripe."""
     return HttpResponse(
-        content=f'Webhook received: {event["type"]}',
-        status=200)
+        content=f'Webhook received: {event["type"]}', status=200
+    )
 
 
 def handle_payment_intent_succeeded(event):
@@ -212,7 +225,8 @@ def handle_payment_intent_succeeded(event):
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Email sent for Invoice.',
-            status=200)
+            status=200,
+        )
 
     pid = intent.id
     cart = intent.metadata.cart
@@ -236,8 +250,9 @@ def handle_payment_intent_succeeded(event):
     # If the order is found, it breaks the loop.
     attempt = 1
     while attempt <= 6:
-        order = check_order_in_db(billing_details, shipping_details,
-                                  grand_total, cart, pid)
+        order = check_order_in_db(
+            billing_details, shipping_details, grand_total, cart, pid
+        )
         if order is False:
             attempt += 1
             time.sleep(1)
@@ -249,22 +264,23 @@ def handle_payment_intent_succeeded(event):
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Verified order already in database',
-            status=200)
+            status=200,
+        )
     # If no order is found, it creates the order.
     try:
-        order = create_order(userprofile,
-                             billing_details,
-                             shipping_details,
-                             cart,
-                             pid)
+        order = create_order(
+            userprofile, billing_details, shipping_details, cart, pid
+        )
         # Sends a confirmation email after creation
         send_confirmation_email(order, lang)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | \
                     SUCCESS: Created order in webhook',
-            status=200)
+            status=200,
+        )
     except Exception as error:
         logging.exception(
             'Webhook received: %(type)s | ERROR: %(error)s',
-            {'type': event['type'], 'error': error})
+            {'type': event['type'], 'error': error},
+        )
         return HttpResponse(status=500)

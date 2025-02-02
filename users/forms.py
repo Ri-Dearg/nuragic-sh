@@ -1,14 +1,26 @@
 """Custom allauth forms for custom redirection.
 Also includes forms for shipping and billing details."""
-from allauth.account.forms import (LoginForm, ResetPasswordForm,
-                                   ResetPasswordKeyForm, SignupForm)
+
+from allauth.account.forms import (
+    LoginForm,
+    ResetPasswordForm,
+    ResetPasswordKeyForm,
+    SignupForm,
+)
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (HTML, Column, Field, Fieldset, Layout,
-                                 MultiWidgetField, Row)
+from crispy_forms.layout import (
+    HTML,
+    Column,
+    Field,
+    Fieldset,
+    Layout,
+    MultiWidgetField,
+    Row,
+)
 from django import forms
 from django.utils.translation import pgettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from phonenumber_field import widgets
 
 from .models import UserProfile
@@ -21,7 +33,8 @@ class StyledLoginForm(LoginForm):
         super().__init__(*args, **kwargs)
 
         login_field = forms.CharField(
-            label=pgettext('label', 'Username or Email'))
+            label=pgettext('label', 'Username or Email')
+        )
         self.fields['login'] = login_field
 
         self.helper = FormHelper(self)
@@ -34,32 +47,40 @@ class StyledLoginForm(LoginForm):
         forgot_password = _('Forgot Password?')
 
         helper.layout = Layout(
-            HTML('{% if redirect_field_value %}<input type="hidden" \
+            HTML(
+                '{% if redirect_field_value %}<input type="hidden" \
                 name="{{ redirect_field_name }}" \
-                value="{{ redirect_field_value }}" />{% endif %}'),
-
+                value="{{ redirect_field_value }}" />{% endif %}'
+            ),
             Row(
-                Field('login', placeholder=_('Username or Email'),
-                      autocomplete='email', css_class='p-font text-primary'),
-
-                Field('password', placeholder=_('Password'),
-                      css_class='p-font text-primary'),
-
-                HTML(f'<a class="p-font smooth-click form-link text-info \
+                Field(
+                    'login',
+                    placeholder=_('Username or Email'),
+                    autocomplete='email',
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'password',
+                    placeholder=_('Password'),
+                    css_class='p-font text-primary',
+                ),
+                HTML(
+                    f'<a class="p-font smooth-click form-link text-info \
                      text-center mt-1 mb-2 secondaryAction" \
                      href="{account_reset}">\
-                {forgot_password}</a>'),
-
+                {forgot_password}</a>'
+                ),
                 Field('remember'),
-
                 Column(
                     StrictButton(
                         _('Sign In'),
                         type='submit',
                         css_class='p-font btn-tran btn btn-warning text-primary \
-                            shadow fw-bold primaryAction'),
-                    css_class='col-auto mx-auto'),
-            )
+                            shadow fw-bold primaryAction',
+                    ),
+                    css_class='col-auto mx-auto',
+                ),
+            ),
         )
 
 
@@ -75,19 +96,29 @@ class StyledResetPasswordForm(ResetPasswordForm):
         helper.form_class = 'password_reset rounded p-2'
 
         helper.layout = Layout(
-            HTML('{% if redirect_field_value %}<input type="hidden" \
+            HTML(
+                '{% if redirect_field_value %}<input type="hidden" \
                 name="{{ redirect_field_name }}" \
-                value="{{ redirect_field_value }}" />{% endif %}'),
-
+                value="{{ redirect_field_value }}" />{% endif %}'
+            ),
             Row(
-                Field('email', placeholder=_('Email'),
-                      autocomplete='email', css_class='p-font text-primary',
-                      pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
-                Column(StrictButton(_('Reset Password'), type='submit',
-                                    css_class='p-font btn-tran btn btn-warning \
-                                    text-primary shadow fw-bold'),
-                       css_class='col-auto mt-1 mx-auto'),
-            )
+                Field(
+                    'email',
+                    placeholder=_('Email'),
+                    autocomplete='email',
+                    css_class='p-font text-primary',
+                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
+                ),  # noqa E501 # pylint: disable=line-too-long
+                Column(
+                    StrictButton(
+                        _('Reset Password'),
+                        type='submit',
+                        css_class='p-font btn-tran btn btn-warning \
+                                    text-primary shadow fw-bold',
+                    ),
+                    css_class='col-auto mt-1 mx-auto',
+                ),
+            ),
         )
 
 
@@ -103,26 +134,36 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
         helper.form_tag = False
 
         helper.layout = Layout(
-            HTML('{% if redirect_field_value %}<input type="hidden" \
+            HTML(
+                '{% if redirect_field_value %}<input type="hidden" \
                 name="{{ redirect_field_name }}" \
-                value="{{ redirect_field_value }}" />{% endif %}'),
-
+                value="{{ redirect_field_value }}" />{% endif %}'
+            ),
             Row(
-                Field('password1',
-                      placeholder=_('New Password'),
-                      autocomplete='off', minlength='8',
-                      css_class='p-font text-primary'),
-
-                Field('password2',
-                      placeholder=_('Repeat Password'),
-                      autocomplete='off', minlength='8',
-                      css_class='p-font text-primary'),
-
-                Column(StrictButton(_('Change Password'), type='submit',
-                                    css_class='p-font btn-tran btn btn-warning \
-                           text-primary shadow fw-bold'),
-                       css_class='col-auto mt-1 mx-auto'),
-            )
+                Field(
+                    'password1',
+                    placeholder=_('New Password'),
+                    autocomplete='off',
+                    minlength='8',
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'password2',
+                    placeholder=_('Repeat Password'),
+                    autocomplete='off',
+                    minlength='8',
+                    css_class='p-font text-primary',
+                ),
+                Column(
+                    StrictButton(
+                        _('Change Password'),
+                        type='submit',
+                        css_class='p-font btn-tran btn btn-warning \
+                           text-primary shadow fw-bold',
+                    ),
+                    css_class='col-auto mt-1 mx-auto',
+                ),
+            ),
         )
 
 
@@ -143,52 +184,80 @@ class StyledSignupForm(SignupForm):
         helper.field_class = 'col-md-6'
 
         helper.layout = Layout(
-            HTML('{% if redirect_field_value %}<input type="hidden" \
+            HTML(
+                '{% if redirect_field_value %}<input type="hidden" \
                 name="{{ redirect_field_name }}" \
-                value="{{ redirect_field_value }}" />{% endif %}'),
-
+                value="{{ redirect_field_value }}" />{% endif %}'
+            ),
             Row(
-                Field('email', placeholder=_('Email'),
-                      css_class='p-font text-primary',
-                pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$'),  # noqa E501 # pylint: disable=line-too-long
-
-                Field('username',  placeholder=_('Username'),
-                      css_class='p-font text-primary'),
-
-                Field('password1', placeholder=_('Password'),
-                      minlength='8', css_class='p-font text-primary'),
-
-                Field('password2', placeholder=_('Repeat Password'),
-                      minlength='8', css_class='p-font text-primary'),
-
+                Field(
+                    'email',
+                    placeholder=_('Email'),
+                    css_class='p-font text-primary',
+                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
+                ),  # noqa E501 # pylint: disable=line-too-long
+                Field(
+                    'username',
+                    placeholder=_('Username'),
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'password1',
+                    placeholder=_('Password'),
+                    minlength='8',
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'password2',
+                    placeholder=_('Repeat Password'),
+                    minlength='8',
+                    css_class='p-font text-primary',
+                ),
                 HTML(
                     f'<div class="form-check mx-auto mb-2">\
                         <input type="checkbox" name="tnc" class="checkboxinput form-check-input" id="id_tnc">\
                             <label for="id_tnc" class="p-font form-check-label text-primary sr-only">{_("I accept the")} <a class="smooth-click form-link text-info" href="{terms}">{_("Terms & Conditions")}</a> {_("and the")} <a class="smooth-click form-link text-info" href="{privacy}">{_("Privacy Policy")}</a>.\
                                 </label>\
-                                    </div>'),
-
-                Column(StrictButton(_('Register'), type='submit',
-                                    css_id='submit_register',
-                                    css_class='p-font btn-tran btn btn-warning \
+                                    </div>'
+                ),
+                Column(
+                    StrictButton(
+                        _('Register'),
+                        type='submit',
+                        css_id='submit_register',
+                        css_class='p-font btn-tran btn btn-warning \
                                     text-primary shadow fw-bold',
-                                    disabled=True),
-                       css_class='col-auto mx-auto mt-1'),
-            )
+                        disabled=True,
+                    ),
+                    css_class='col-auto mx-auto mt-1',
+                ),
+            ),
         )
 
 
 class UserProfileForm(forms.ModelForm):
     """Allows for the updating of the user's billing/shipping info."""
+
     class Meta:
         model = UserProfile
-        fields = ['billing_full_name', 'billing_phone_number',
-                  'billing_street_address_1', 'billing_street_address_2',
-                  'billing_town_or_city', 'billing_county',
-                  'billing_country', 'billing_postcode', 'shipping_full_name',
-                  'shipping_phone_number', 'shipping_street_address_1',
-                  'shipping_street_address_2', 'shipping_town_or_city',
-                  'shipping_county', 'shipping_country', 'shipping_postcode']
+        fields = [
+            'billing_full_name',
+            'billing_phone_number',
+            'billing_street_address_1',
+            'billing_street_address_2',
+            'billing_town_or_city',
+            'billing_county',
+            'billing_country',
+            'billing_postcode',
+            'shipping_full_name',
+            'shipping_phone_number',
+            'shipping_street_address_1',
+            'shipping_street_address_2',
+            'shipping_town_or_city',
+            'shipping_county',
+            'shipping_country',
+            'shipping_postcode',
+        ]
 
     def __init__(self, *args, **kwargs):
         """Selects custom layout and placeholders for the form."""
@@ -200,12 +269,12 @@ class UserProfileForm(forms.ModelForm):
         helper.form_tag = False
 
         self.fields['shipping_phone_number'] = forms.CharField(
-            widget=widgets.PhoneNumberPrefixWidget(),
-            required=False)
+            widget=widgets.PhoneNumberPrefixWidget(), required=False
+        )
 
         self.fields['billing_phone_number'] = forms.CharField(
-            widget=widgets.PhoneNumberPrefixWidget(),
-            required=False)
+            widget=widgets.PhoneNumberPrefixWidget(), required=False
+        )
 
         self.fields['shipping_full_name'].label = _('Full Name')
         self.fields['shipping_street_address_1'].label = _('Street Address 1')
@@ -225,72 +294,106 @@ class UserProfileForm(forms.ModelForm):
         helper.layout = Layout(
             Row(
                 Column(
-                    Fieldset(_('SHIPPING DETAILS'),
-                             Row(
-                        Field('shipping_full_name',
-                              placeholder=_('Full Name'),
-                              css_class='p-font text-primary'),
-                        MultiWidgetField(
-                            'shipping_phone_number',
-                            template='bootstrap4/phone_field.html'
+                    Fieldset(
+                        _('SHIPPING DETAILS'),
+                        Row(
+                            Field(
+                                'shipping_full_name',
+                                placeholder=_('Full Name'),
+                                css_class='p-font text-primary',
+                            ),
+                            MultiWidgetField(
+                                'shipping_phone_number',
+                                template='bootstrap4/phone_field.html',
+                            ),
+                            Field(
+                                'shipping_street_address_1',
+                                placeholder=_('Street Address 1'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'shipping_street_address_2',
+                                placeholder=_('Street Address 2'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'shipping_town_or_city',
+                                placeholder=_('Town or City'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'shipping_county',
+                                placeholder=_('County, State or Locality'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'shipping_postcode',
+                                placeholder=_('Postcode'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'shipping_country',
+                                css_class='form-select p-font text-primary',
+                            ),
                         ),
-                        Field('shipping_street_address_1',
-                              placeholder=_('Street Address 1'),
-                              css_class='p-font text-primary'),
-                        Field('shipping_street_address_2',
-                              placeholder=_('Street Address 2'),
-                              css_class='p-font text-primary'),
-                        Field('shipping_town_or_city',
-                              placeholder=_('Town or City'),
-                              css_class='p-font text-primary'),
-                        Field('shipping_county',
-                              placeholder=_('County, State or Locality'),
-                              css_class='p-font text-primary'),
-                        Field('shipping_postcode',
-                              placeholder=_('Postcode'),
-                              css_class='p-font text-primary'),
-                        Field('shipping_country',
-                              css_class='form-select p-font text-primary')
-                    )),
-                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
-
+                    ),
+                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2',
+                ),
                 Column(
-                    Fieldset(_('BILLING DETAILS'),
-                             Row(
-                        Field('billing_full_name',
-                              placeholder=_('Full Name'),
-                              css_class='p-font text-primary'),
-                        MultiWidgetField(
-                            'billing_phone_number',
-                            template='bootstrap4/phone_field.html'
+                    Fieldset(
+                        _('BILLING DETAILS'),
+                        Row(
+                            Field(
+                                'billing_full_name',
+                                placeholder=_('Full Name'),
+                                css_class='p-font text-primary',
+                            ),
+                            MultiWidgetField(
+                                'billing_phone_number',
+                                template='bootstrap4/phone_field.html',
+                            ),
+                            Field(
+                                'billing_street_address_1',
+                                placeholder=_('Street Address 1'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'billing_street_address_2',
+                                placeholder=_('Street Address 2'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'billing_town_or_city',
+                                placeholder=_('Town or City'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'billing_county',
+                                placeholder=_('County, State or Locality'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'billing_postcode',
+                                placeholder=_('Postcode'),
+                                css_class='p-font text-primary',
+                            ),
+                            Field(
+                                'billing_country',
+                                css_class='form-select p-font text-primary',
+                            ),
                         ),
-                        Field('billing_street_address_1',
-                              placeholder=_('Street Address 1'),
-                              css_class='p-font text-primary'),
-                        Field('billing_street_address_2',
-                              placeholder=_('Street Address 2'),
-                              css_class='p-font text-primary'),
-                        Field('billing_town_or_city',
-                              placeholder=_('Town or City'),
-                              css_class='p-font text-primary'),
-                        Field('billing_county',
-                              placeholder=_('County, State or Locality'),
-                              css_class='p-font text-primary'),
-                        Field('billing_postcode',
-                              placeholder=_('Postcode'),
-                              css_class='p-font text-primary'),
-                        Field('billing_country',
-                              css_class='form-select p-font text-primary')
-                    )),
-                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2'),
-
+                    ),
+                    css_class='col-12 col-md-6 p-2 px-md-4 pt-md-4 pb-md-2',
+                ),
                 Column(
                     StrictButton(
-                        _(
-                            'Save Details'), type='submit',
+                        _('Save Details'),
+                        type='submit',
                         css_class='p-font btn-tran btn btn-sm fw-bold \
-                                        btn-warning text-primary shadow'),
+                                        btn-warning text-primary shadow',
+                    ),
                     css_class='col-12 col-md-auto ps-2 pb-2 px-md-4 \
-                           pb-md-4 mx-md-auto')
+                           pb-md-4 mx-md-auto',
+                ),
             )
         )

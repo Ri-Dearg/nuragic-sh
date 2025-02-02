@@ -1,6 +1,7 @@
 """Adds carted items to the context."""
+
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from products.models import Product
 
@@ -30,8 +31,7 @@ def get_cart(request):
                 # Declares product as false and removes it:
                 product = False
                 cart.pop(item_id)
-                messages.error(request,
-                               _('A Product is unavailable.'))
+                messages.error(request, _('A Product is unavailable.'))
 
             # If the product is valid and in stock,
             # it calculates details for that item:
@@ -39,18 +39,24 @@ def get_cart(request):
                 if product.stock >= 1 or product.can_preorder:
                     delivery_costs.append(product.delivery_cost)
                     cart_total += item_data * product.price
-                    cart_items.append({
-                        'item_id': item_id,
-                        'quantity': item_data,
-                        'product': product})
+                    cart_items.append(
+                        {
+                            'item_id': item_id,
+                            'quantity': item_data,
+                            'product': product,
+                        }
+                    )
 
                 # Or else the item is removed from the cart with feedback:
                 else:
                     cart.pop(item_id)
                     messages.warning(
                         request,
-                        _(f'{product} has run out of stock \
-                            and has been removed from the cart.'))
+                        _(
+                            f'{product} has run out of stock \
+                            and has been removed from the cart.'
+                        ),
+                    )
 
             # Skips the product if it is False:
             else:
@@ -70,12 +76,14 @@ def get_cart(request):
     request.session['cart_quantity'] = cart_quantity
     request.session['cart_total'] = str(cart_total)
     request.session['grand_total'] = str(grand_total)
-    request.session['delivery'] = "{:.2f}".format(delivery)
+    request.session['delivery'] = '{:.2f}'.format(delivery)
 
     request.session.save()
-    return {'cart': cart,
-            'cart_quantity': cart_quantity,
-            'cart_items': cart_items,
-            'cart_total': cart_total,
-            'delivery': delivery,
-            'grand_total': grand_total}
+    return {
+        'cart': cart,
+        'cart_quantity': cart_quantity,
+        'cart_items': cart_items,
+        'cart_total': cart_total,
+        'delivery': delivery,
+        'grand_total': grand_total,
+    }
