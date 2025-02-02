@@ -34,14 +34,21 @@ elif DEBUG is False:
 ALLOWED_HOSTS = [
     'www.nuragicshamanichealing.org',
     'www.nuragicshamanichealing.com',
-    'localhost']
+    'localhost',
+]
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR.parent, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')
+
+SASS_PROCESSOR_STORAGE = 'django.contrib.staticfiles.storage.FileSystemStorage'
+SASS_PROCESSOR_STORAGE_OPTIONS = {
+    'location': STATIC_ROOT,
+    'base_url': STATIC_URL,
+}
