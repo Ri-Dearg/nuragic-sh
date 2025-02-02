@@ -6,7 +6,7 @@ chardet==4.0.0
 cryptography==3.3.2
 defusedxml==0.6.0
 Django==4.1.13
-django-allauth==0.51.0
+django-allauth==0.55.0
 django-appconf==1.0.4
 django-better-admin-arrayfield==1.4.0
 django-cleanup==5.1.0
