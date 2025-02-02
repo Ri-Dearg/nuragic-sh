@@ -14,8 +14,9 @@ from PIL import Image
 def random_str(length):
     """Creates random string for unique image names."""
     # With combination of lower and upper case
-    result_str = ''.join(random.choice(string.ascii_letters)
-                         for i in range(length))
+    result_str = ''.join(
+        random.choice(string.ascii_letters) for i in range(length)
+    )
     # print random string
     return result_str.lower()
 
@@ -32,35 +33,40 @@ def image_resize(self, image_title, width, height):
     except self.__class__.DoesNotExist:
         pass
     try:
-        img = Image.open(image_field)
-        i_format = img.format.lower()
+        with Image.open(image_field) as img:
+            i_format = img.format.lower()
 
-        # Prevents images from being copied on every save
-        # will save a new copy on an upload
-        if (this_object and f'{image_field.name}'
-            .replace(' ', '_').replace('(', '').replace(')', '')
-                not in object_image.name) or (not this_object):
-            # Image is resized
-            output_size = (width, height)
-            img = img.resize(size=(output_size))
+            # Prevents images from being copied on every save
+            # will save a new copy on an upload
+            if (
+                this_object
+                and f'{image_field.name}'.replace(' ', '_')
+                .replace('(', '')
+                .replace(')', '')
+                not in object_image.name
+            ) or (not this_object):
+                # Image is resized
+                output_size = (width, height)
+                img = img.resize(size=(output_size))
 
-            # Converts format while in memory
-            output = BytesIO()
-            img.save(output, format=i_format)
-            output.seek(0)
+                # Converts format while in memory
+                output = BytesIO()
+                img.save(output, format=i_format)
+                output.seek(0)
 
-            # Replaces the Imagefield value with the newly converted image
-            image_field = InMemoryUploadedFile(
-                output,
-                'ImageField',
-                f'{image_field.name.split(".")[0]}_{random_str(8)}.{i_format}',
-                'image/jpeg',
-                sys.getsizeof(output),
-                None)
-            return image_field
-        # if the image doesn't need to be changed, returns false
-        return False
-    # If uploading multiple images on a new file there can this error.
+                # Replaces the Imagefield value with the newly converted image
+                image_field = InMemoryUploadedFile(
+                    output,
+                    'ImageField',
+                    f'{image_field.name.split(".")[0]}_{random_str(8)}.{i_format}',
+                    'image/jpeg',
+                    sys.getsizeof(output),
+                    None,
+                )
+                return image_field
+            # if the image doesn't need to be changed, returns false
+            return False
+        # If uploading multiple images on a new file there can this error.
     except ValueError:
         return False
 
@@ -69,8 +75,8 @@ def responsive_images(self, image_title, width, height, thumb=False):
     """Uses the resize_image function to create three different sized images
     Returned from largest to smallest."""
     lg_image = image_resize(self, image_title, width, height)
-    md_image = image_resize(self, image_title, width//3*2, height//3*2)
-    sm_image = image_resize(self, image_title, width//3, height//3)
+    md_image = image_resize(self, image_title, width // 3 * 2, height // 3 * 2)
+    sm_image = image_resize(self, image_title, width // 3, height // 3)
 
     if thumb is True:
         xs_image = image_resize(self, image_title, 48, 64)
