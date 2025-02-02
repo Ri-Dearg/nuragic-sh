@@ -6,16 +6,19 @@ from django.db import models
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
 from django.utils import timezone, translation
-from django_better_admin_arrayfield.models.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Newsletter(models.Model):
     """Model for the creation of different newsletter lists."""
+
     name = models.CharField(max_length=60, blank=False, null=False)
-    email_list_en = ArrayField(models.EmailField(
-        null=False, blank=False), default=list)
-    email_list_it = ArrayField(models.EmailField(
-        null=False, blank=False), default=list)
+    email_list_en = ArrayField(
+        models.EmailField(null=False, blank=False), default=list
+    )
+    email_list_it = ArrayField(
+        models.EmailField(null=False, blank=False), default=list
+    )
 
     def save(self, *args, **kwargs):
         """Sorts the newsletter lists.
@@ -40,25 +43,34 @@ class Newsletter(models.Model):
             if len(history_obj) > 0:
                 EmailHistory.objects.bulk_create(history_obj)
 
-        def checkbox_highlight(newsletter_list_en, newsletter_list_it,
-                               email_history):
+        def checkbox_highlight(
+            newsletter_list_en, newsletter_list_it, email_history
+        ):
             """Highlights subscription checkboxes for EmailHistory models."""
             for item in email_history:
-                if (str(item) in newsletter_list_en
-                        and item.newsletter_en is False):
+                if (
+                    str(item) in newsletter_list_en
+                    and item.newsletter_en is False
+                ):
                     item.newsletter_en = True
                     item.save()
-                elif (str(item) not in newsletter_list_en
-                        and item.newsletter_en is True):
+                elif (
+                    str(item) not in newsletter_list_en
+                    and item.newsletter_en is True
+                ):
                     item.newsletter_en = False
                     item.save()
 
-                if (str(item) in newsletter_list_it
-                        and item.newsletter_it is False):
+                if (
+                    str(item) in newsletter_list_it
+                    and item.newsletter_it is False
+                ):
                     item.newsletter_it = True
                     item.save()
-                elif (str(item) not in newsletter_list_it
-                        and item.newsletter_it is True):
+                elif (
+                    str(item) not in newsletter_list_it
+                    and item.newsletter_it is True
+                ):
                     item.newsletter_it = False
                     item.save()
 
@@ -83,6 +95,7 @@ class Newsletter(models.Model):
 
     class Meta:
         """Orders by alphabetical order."""
+
         ordering = ['name']
 
     def __str__(self):
@@ -91,14 +104,16 @@ class Newsletter(models.Model):
 
 class EmailHistory(models.Model):
     """Created a contact history detail for every email address."""
+
     email_address = models.EmailField(blank=False, null=False)
     newsletter_en = models.BooleanField(default=False)
     newsletter_it = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         """Fills newletter subscription boxes accordingly."""
-        newsletter = Newsletter.objects.filter(
-            name='basic').order_by('id').first()
+        newsletter = (
+            Newsletter.objects.filter(name='basic').order_by('id').first()
+        )
         newsletter_list_en = newsletter.email_list_en
         newsletter_list_it = newsletter.email_list_it
 
@@ -116,6 +131,7 @@ class EmailHistory(models.Model):
 
     class Meta:
         """Orders by alphabetical order."""
+
         ordering = ['email_address']
         verbose_name_plural = 'Email Histories'
 
@@ -125,14 +141,15 @@ class EmailHistory(models.Model):
 
 class Email(models.Model):
     """The model used to save emails in the DB."""
+
     email = models.EmailField(blank=False, null=False)
     name = models.CharField(max_length=60, blank=False, null=False)
     subject = models.CharField(max_length=254, blank=False, null=False)
     message = models.TextField()
     date = models.DateTimeField(default=timezone.now)
-    email_history = models.ForeignKey(EmailHistory,
-                                      null=True,
-                                      on_delete=models.SET_NULL)
+    email_history = models.ForeignKey(
+        EmailHistory, null=True, on_delete=models.SET_NULL
+    )
 
     def get_absolute_url(self):  # pylint: disable=no-self-use
         """Returns users to the contact page on successful creation."""
@@ -150,39 +167,43 @@ class Email(models.Model):
 
         # Fills in the email templates and then send the email.
         contact_subject = render_to_string(
-            'contact/emails/contact_subject.txt',
-            {'subject': subject})
+            'contact/emails/contact_subject.txt', {'subject': subject}
+        )
         contact_body = render_to_string(
             'contact/emails/contact_body.txt',
-            {'name': name, 'email': email, 'message': message})
+            {'name': name, 'email': email, 'message': message},
+        )
         contact_body_html = render_to_string(
             'contact/emails/contact_body_html.html',
-            {'name': name, 'email': email, 'message': message})
+            {'name': name, 'email': email, 'message': message},
+        )
 
         send_mail(
             contact_subject,
             contact_body,
             f'CUSTOMER CONTACT <{settings.DEFAULT_CONTACT_EMAIL}>',
             [settings.DEFAULT_CONTACT_EMAIL],
-            html_message=contact_body_html)
+            html_message=contact_body_html,
+        )
 
         # Sends a thank you email to the person who sent the email
         thanks_subject = render_to_string(
-            'contact/emails/thanks_subject.txt',
-            {'subject': subject})
+            'contact/emails/thanks_subject.txt', {'subject': subject}
+        )
         thanks_body = render_to_string(
-            'contact/emails/thanks_body.txt',
-            {'name': name})
+            'contact/emails/thanks_body.txt', {'name': name}
+        )
         thanks_body_html = render_to_string(
-            'contact/emails/thanks_body_html.html',
-            {'name': name})
+            'contact/emails/thanks_body_html.html', {'name': name}
+        )
 
         send_mail(
             thanks_subject,
             thanks_body,
             f'Nuragic Shamanic Healing <{settings.DEFAULT_CONTACT_EMAIL}>',
             [email],
-            html_message=thanks_body_html)
+            html_message=thanks_body_html,
+        )
 
         history = EmailHistory.objects.get_or_create(email_address=self.email)
         self.email_history = history[0]
@@ -191,6 +212,7 @@ class Email(models.Model):
 
     class Meta:
         """Orders by the most recent created by default."""
+
         ordering = ['-date']
 
     def __str__(self):
