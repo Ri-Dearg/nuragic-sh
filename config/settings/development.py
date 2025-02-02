@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
 import os
 
 from .base import *
@@ -38,7 +39,14 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # noqa E501
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Settings for Sass compiler
+SASS_PROCESSOR_STORAGE = 'django.contrib.staticfiles.storage.FileSystemStorage'
+SASS_PROCESSOR_STORAGE_OPTIONS = {
+    'location': STATIC_ROOT,
+    'base_url': STATIC_URL,
+}
