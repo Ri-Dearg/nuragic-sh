@@ -51,8 +51,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # Better Array Fields
-    'django_better_admin_arrayfield',
     # Apps for compiling SASS
     'sass_processor',
     # Int phone number fields
