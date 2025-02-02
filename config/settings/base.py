@@ -184,7 +184,12 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 SESSION_COOKIE_AGE = 4838400
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # NOQA: E501
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 # Settings for Rich Text Editor in admin
 TINYMCE_DEFAULT_CONFIG = {
