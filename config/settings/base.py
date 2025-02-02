@@ -14,7 +14,7 @@ import os
 import sys
 from pathlib import Path
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 try:
     import env  # noqa: F401 # pylint: disable=unused-import
@@ -80,11 +80,10 @@ SITE_ID = 1
 
 # Settings for SASS compiling
 SASS_PRECISION = 8
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
+COMPRESS_PRECOMPILERS = (('text/x-scss', 'django_libsass.SassCompiler'),)
 SASS_PROCESSOR_ROOT = 'static/'
 COMPRESS_ROOT = 'static'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,20 +149,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa E501
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa E501
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa E501
     },
     {
-        'NAME':
-        'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa E501
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa E501
     },
 ]
 
@@ -186,9 +181,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
-)
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 SESSION_COOKIE_AGE = 4838400
 
@@ -196,13 +189,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 # Settings for Rich Text Editor in admin
 TINYMCE_DEFAULT_CONFIG = {
-    "height": "280px",
-    "width": "960px",
-    "plugins": "autosave emoticons link lists preview",
-    "toolbar": "undo redo | formatselect fontsizeselect | "
-    "bold italic underline | "
-    "alignleft aligncenter alignright alignjustify | "
-    "numlist bullist | link emoticons | preview restoredraft"
+    'height': '280px',
+    'width': '960px',
+    'plugins': 'autosave emoticons link lists preview',
+    'toolbar': 'undo redo | formatselect fontsizeselect | '
+    'bold italic underline | '
+    'alignleft aligncenter alignright alignjustify | '
+    'numlist bullist | link emoticons | preview restoredraft',
 }
 
 # Template pack for crispy_forms.
@@ -212,7 +205,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
@@ -222,11 +214,12 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
-ACCOUNT_FORMS = {'login': 'users.forms.StyledLoginForm',
-                 'signup': 'users.forms.StyledSignupForm',
-                 'reset_password': 'users.forms.StyledResetPasswordForm',
-                 'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
-                 }
+ACCOUNT_FORMS = {
+    'login': 'users.forms.StyledLoginForm',
+    'signup': 'users.forms.StyledSignupForm',
+    'reset_password': 'users.forms.StyledResetPasswordForm',
+    'reset_password_from_key': 'users.forms.StyledResetPasswordKeyForm',  # noqa E501
+}
 
 # Necessary variables and setting to take Stripe Payments.
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
@@ -239,10 +232,10 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
-DEFAULT_ORDER_EMAIL = os.environ.get("EMAIL_ORDER")
-DEFAULT_CONTACT_EMAIL = os.environ.get("EMAIL_CONTACT")
-DEFAULT_ERROR_EMAIL = os.environ.get("EMAIL_ERROR")
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_ORDER_EMAIL = os.environ.get('EMAIL_ORDER')
+DEFAULT_CONTACT_EMAIL = os.environ.get('EMAIL_CONTACT')
+DEFAULT_ERROR_EMAIL = os.environ.get('EMAIL_ERROR')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

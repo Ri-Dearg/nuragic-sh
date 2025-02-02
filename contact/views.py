@@ -1,4 +1,5 @@
 """Views for the Contact app."""
+
 import json
 import urllib
 
@@ -11,7 +12,7 @@ from django.core import exceptions
 from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.shortcuts import reverse
 from django.utils.translation import get_language
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
@@ -23,6 +24,7 @@ from .models import Email, Newsletter
 
 class CreateEmailView(SuccessMessageMixin, CreateView):
     """The page used for contact to send an email."""
+
     model = Email
     context_object_name = 'email'
     fields = ['email', 'name', 'subject', 'message']
@@ -46,37 +48,50 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
 
         helper.layout = Layout(
             Row(
-                Field('email',  placeholder=_('Email'),
-                      pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501  # pylint: disable=line-too-long
-                      wrapper_class='col-md-6',
-                      css_class='p-font text-primary'),
-
-                Field('name', placeholder=_('Name'),
-                      wrapper_class='col-md-6',
-                      css_class='p-font text-primary'),
-
-                Field('subject', placeholder=_('Subject'),
-                      css_class='p-font text-primary'),
-
-                Field('message',
-                      placeholder=_('What are your thoughts?'),
-                      css_class='p-font text-primary'),
-
+                Field(
+                    'email',
+                    placeholder=_('Email'),
+                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501  # pylint: disable=line-too-long
+                    wrapper_class='col-md-6',
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'name',
+                    placeholder=_('Name'),
+                    wrapper_class='col-md-6',
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'subject',
+                    placeholder=_('Subject'),
+                    css_class='p-font text-primary',
+                ),
+                Field(
+                    'message',
+                    placeholder=_('What are your thoughts?'),
+                    css_class='p-font text-primary',
+                ),
                 HTML(
                     '<div class="g-recaptcha" data-callback="captchaCallback" \
                         data-size="compact" \
                         data-sitekey="6Lc1BT0bAAAAAM3StPLPHk9zrg1_rO-7TMU62STK">\
-                            </div>'),
-
-                Hidden('recaptcha',
-                       f'{reverse("contact:recaptcha")}', id="recap-url"),
-
-                Column(StrictButton(_('Send'),
-                       disabled='disabled',
-                       css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold',  # noqa E501
-                       css_id='contact-submit'),
-                       css_class='col-12 my-1 text-center'),
-                )
+                            </div>'
+                ),
+                Hidden(
+                    'recaptcha',
+                    f'{reverse("contact:recaptcha")}',
+                    id='recap-url',
+                ),
+                Column(
+                    StrictButton(
+                        _('Send'),
+                        disabled='disabled',
+                        css_class='pixel-contact p-font btn-tran btn-warning text-primary shadow fw-bold',  # noqa E501
+                        css_id='contact-submit',
+                    ),
+                    css_class='col-12 my-1 text-center',
+                ),
+            )
         )
 
         return form
@@ -92,9 +107,11 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        if ('success' not in self.request.POST or
-                self.request.POST['success'] !=
-                self.request.session['success_code']):
+        if (
+            'success' not in self.request.POST
+            or self.request.POST['success']
+            != self.request.session['success_code']
+        ):
             raise exceptions.PermissionDenied
         return super().form_valid(form)
 
@@ -107,7 +124,7 @@ def recaptcha_verify(request):  # pragma: no cover
         values = {
             'secret': settings.RECAPTCHA_SECRET,
             'response': request.POST.get('g-recaptcha-response'),
-            'remoteip': request.META['REMOTE_ADDR']
+            'remoteip': request.META['REMOTE_ADDR'],
         }
         data = urllib.parse.urlencode(values).encode()
         req = urllib.request.Request(url, data=data)
@@ -132,15 +149,17 @@ def newsletter_singup(request):
     to the appropriate mailing list. Is an ajax view."""
     if request.method == 'POST':
         data = {}
-        newsletter = Newsletter.objects.filter(
-            name='basic').order_by('id').first()
+        newsletter = (
+            Newsletter.objects.filter(name='basic').order_by('id').first()
+        )
         if get_language() == 'it':
             email_list = newsletter.email_list_it
         if get_language() == 'en':
             email_list = newsletter.email_list_en
         if request.POST[f'email_{get_language()}'] in email_list:
             data['message'] = _(
-                'You have already signed up for the newsletter.')
+                'You have already signed up for the newsletter.'
+            )
             data['tag'] = 'info'
             data['tagMessage'] = _('Info')
 

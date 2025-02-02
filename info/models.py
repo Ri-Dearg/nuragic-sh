@@ -5,7 +5,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from tinymce.models import HTMLField
 
 from products.models import Product
@@ -18,29 +18,31 @@ class SplashImage(models.Model):
     You can add a splash image which will be resized and a blurb.
     Images are different sizes depending on the screen size.
     I would recommend cropping your images first."""
+
     # pylint: disable=too-many-instance-attributes
 
-    page = models.OneToOneField('Page',
-                                blank=True,
-                                null=True,
-                                on_delete=models.SET_NULL)
-    product = models.OneToOneField(Product,
-                                   blank=True,
-                                   null=True,
-                                   on_delete=models.SET_NULL)
+    page = models.OneToOneField(
+        'Page', blank=True, null=True, on_delete=models.SET_NULL
+    )
+    product = models.OneToOneField(
+        Product, blank=True, null=True, on_delete=models.SET_NULL
+    )
     title = models.CharField(max_length=30, null=False)
     description = models.CharField(max_length=200, default='')
     image_tw_header = models.ImageField(upload_to='info/carousel')
     image_tw_header_md = models.ImageField(
-        upload_to='info/carousel', default='', blank=True)
+        upload_to='info/carousel', default='', blank=True
+    )
     image_tw_header_sm = models.ImageField(
-        upload_to='info/carousel', default='', blank=True)
-    image_fb_link = models.ImageField(
-        upload_to='info/carousel')
+        upload_to='info/carousel', default='', blank=True
+    )
+    image_fb_link = models.ImageField(upload_to='info/carousel')
     image_fb_link_md = models.ImageField(
-        upload_to='info/carousel', default='', blank=True)
+        upload_to='info/carousel', default='', blank=True
+    )
     image_fb_link_sm = models.ImageField(
-        upload_to='info/carousel', default='', blank=True)
+        upload_to='info/carousel', default='', blank=True
+    )
     info_display = models.BooleanField(default=True)
     shop_display = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now)
@@ -55,10 +57,12 @@ class SplashImage(models.Model):
             self.page = None
 
         image1, image1_md, image1_sm = responsive_images(
-            self, 'image_tw_header', 1260, 420)
+            self, 'image_tw_header', 1260, 420
+        )
 
         image2, image2_md, image2_sm = responsive_images(
-            self, 'image_fb_link', 1200, 630)
+            self, 'image_fb_link', 1200, 630
+        )
 
         if image1:
             self.image_tw_header = image1
@@ -73,6 +77,7 @@ class SplashImage(models.Model):
 
     class Meta:
         """Orders by the most recent created by default."""
+
         ordering = ['-date_added']
 
     def __str__(self):
@@ -89,26 +94,30 @@ class Category(models.Model):
     You can add a splash image which will be resized and a blurb.
     Images will be resized on upload to 1200x630px shape.
     I would recommend cropping your images first."""
+
     title = models.CharField(max_length=30, null=False)
     menu_word = models.CharField(max_length=10, null=False)
     description = HTMLField()
     button_text = models.CharField(max_length=30, null=False)
     image_fb_link = models.ImageField(upload_to='info/category')
     image_fb_link_md = models.ImageField(
-        upload_to='info/category', default='', blank=True)
+        upload_to='info/category', default='', blank=True
+    )
     image_fb_link_sm = models.ImageField(
-        upload_to='info/category', default='', blank=True)
+        upload_to='info/category', default='', blank=True
+    )
     display = models.BooleanField(default=True)
-    order = models.SmallIntegerField(validators=[MaxValueValidator(12),
-                                                 MinValueValidator(0)])
+    order = models.SmallIntegerField(
+        validators=[MaxValueValidator(12), MinValueValidator(0)]
+    )
     date_added = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(
-        default='', editable=False, max_length=30, null=False)
+        default='', editable=False, max_length=30, null=False
+    )
 
     def get_absolute_url(self):
         """Adds slug to url for page redirection."""
-        kwargs = {'slug': self.slug,
-                  'pk': self.id}
+        kwargs = {'slug': self.slug, 'pk': self.id}
         return reverse('info:category-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
@@ -121,7 +130,8 @@ class Category(models.Model):
         self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         image1, image1_md, image1_sm = responsive_images(
-            self, 'image_fb_link', 1200, 630)
+            self, 'image_fb_link', 1200, 630
+        )
         if image1:
             self.image_fb_link = image1
             self.image_fb_link_md = image1_md
@@ -130,6 +140,7 @@ class Category(models.Model):
 
     class Meta:
         """Orders by the most recent created by default."""
+
         ordering = ['order']
         verbose_name_plural = 'categories'
 
@@ -139,65 +150,78 @@ class Category(models.Model):
 
 class Page(models.Model):  # pylint: disable=too-many-instance-attributes
     """Detailed pages for Categories"""
-    theme_choices = [('secondary', 'beige'),
-                     ('info', 'blue'),
-                     ('brown', 'brown'),
-                     ('success', 'green'),
-                     ('primary', 'navy'),
-                     ('purple', 'purple'),
-                     ('danger', 'red'),
-                     ('warning', 'yellow'), ]
+
+    theme_choices = [
+        ('secondary', 'beige'),
+        ('info', 'blue'),
+        ('brown', 'brown'),
+        ('success', 'green'),
+        ('primary', 'navy'),
+        ('purple', 'purple'),
+        ('danger', 'red'),
+        ('warning', 'yellow'),
+    ]
 
     category = models.ForeignKey(
-        Category, null=True,
-        on_delete=models.SET_NULL,
-        related_name='page')
+        Category, null=True, on_delete=models.SET_NULL, related_name='page'
+    )
     title = models.CharField(max_length=60, null=False)
     summary = models.CharField(max_length=400, null=False)
     button_text = models.CharField(
-        max_length=30, null=False, default=_('Learn More'))
+        max_length=30, null=False, default=_('Learn More')
+    )
     desc_title1 = models.CharField(max_length=60, null=False)
     description1 = HTMLField()
     desc_title2 = models.CharField(max_length=60, blank=True, default='')
     description2 = HTMLField(blank=True, default='')
     title_image_tw_header = models.ImageField(upload_to='info/page/title')
     title_image_tw_header_md = models.ImageField(
-        upload_to='info/page/title', default='', blank=True)
+        upload_to='info/page/title', default='', blank=True
+    )
     title_image_tw_header_sm = models.ImageField(
-        upload_to='info/page/title', default='', blank=True)
-    image_fb_link = models.ImageField(
-        upload_to='info/page/desc')
+        upload_to='info/page/title', default='', blank=True
+    )
+    image_fb_link = models.ImageField(upload_to='info/page/desc')
     image_fb_link_md = models.ImageField(
-        upload_to='info/page/desc', default='', blank=True)
+        upload_to='info/page/desc', default='', blank=True
+    )
     image_fb_link_sm = models.ImageField(
-        upload_to='info/page/desc', default='', blank=True)
+        upload_to='info/page/desc', default='', blank=True
+    )
     bot_image_tw_header = models.ImageField(
-        upload_to='info/page/bot', blank=True, default='')
+        upload_to='info/page/bot', blank=True, default=''
+    )
     bot_image_tw_header_md = models.ImageField(
-        upload_to='info/page/bot', blank=True, default='')
+        upload_to='info/page/bot', blank=True, default=''
+    )
     bot_image_tw_header_sm = models.ImageField(
-        upload_to='info/page/bot', blank=True, default='')
-    order = models.SmallIntegerField(validators=[MaxValueValidator(12),
-                                                 MinValueValidator(0)])
+        upload_to='info/page/bot', blank=True, default=''
+    )
+    order = models.SmallIntegerField(
+        validators=[MaxValueValidator(12), MinValueValidator(0)]
+    )
     theme = models.CharField(
-        max_length=10, choices=theme_choices, default='info')
-    product = models.ForeignKey(Product,
-                                blank=True,
-                                null=True,
-                                on_delete=models.SET_NULL,
-                                related_name='page')
+        max_length=10, choices=theme_choices, default='info'
+    )
+    product = models.ForeignKey(
+        Product,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='page',
+    )
     product_button_text = models.CharField(
-        max_length=30, blank=True, default=_('Learn More'))
+        max_length=30, blank=True, default=_('Learn More')
+    )
     display = models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(
-        default='', editable=False, max_length=60, null=False)
+        default='', editable=False, max_length=60, null=False
+    )
 
     def get_absolute_url(self):
         """Adds slug to url for page redirection."""
-        kwargs = {'slug': self.slug,
-                  'pk': self.id
-                  }
+        kwargs = {'slug': self.slug, 'pk': self.id}
         return reverse('info:page-detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
@@ -210,11 +234,14 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
         self.slug_it = slugify(slug_value_it, allow_unicode=True)
 
         image1, image1_md, image1_sm = responsive_images(
-            self, 'title_image_tw_header', 1260, 420)
+            self, 'title_image_tw_header', 1260, 420
+        )
         image2, image2_md, image2_sm = responsive_images(
-            self, 'image_fb_link', 1200, 630)
+            self, 'image_fb_link', 1200, 630
+        )
         image3, image3_md, image3_sm = responsive_images(
-            self, 'bot_image_tw_header', 1260, 420)
+            self, 'bot_image_tw_header', 1260, 420
+        )
 
         if image1:
             self.title_image_tw_header = image1
@@ -235,6 +262,7 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
 
     class Meta:
         """Orders by the most recent created by default."""
+
         ordering = ['order']
 
     def __str__(self):
@@ -243,6 +271,7 @@ class Page(models.Model):  # pylint: disable=too-many-instance-attributes
 
 class Review(models.Model):
     """Allows for the creation of reviews."""
+
     reviewer_name = models.CharField(max_length=50, null=False)
     text = models.TextField()
     display = models.BooleanField(default=True)
