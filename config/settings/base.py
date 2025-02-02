@@ -81,8 +81,6 @@ SITE_ID = 1
 # Settings for SASS compiling
 SASS_PRECISION = 8
 COMPRESS_PRECOMPILERS = (('text/x-scss', 'django_libsass.SassCompiler'),)
-SASS_PROCESSOR_ROOT = 'static/'
-COMPRESS_ROOT = 'static'
 
 
 MIDDLEWARE = [
