@@ -67,17 +67,20 @@ class StyledLoginForm(LoginForm):
                     css_class='p-font text-primary',
                 ),
                 HTML(
-                    '<div id="div_id_remember" class="form-check"> <input type="checkbox"'
-                    'name="remember" class="checkboxinput form-check-input" id="id_remember">'
-                    '<label for="id_remember" class="p-font text-primary form-check-label">'
-                    'Remember Me'
-                    '</label> </div>'
-                ),
-                HTML(
                     f'<a class="p-font smooth-click form-link text-info \
                      text-center mt-1 mb-2 secondaryAction" \
                      href="{account_reset}">\
                 {forgot_password}</a>'
+                ),
+                Column(
+                    HTML(
+                        '<div id="div_id_remember" class="form-check mx-auto"> <input type="checkbox"'
+                        'name="remember" class="checkboxinput form-check-input" id="id_remember">'
+                        '<label for="id_remember" class="p-font text-primary form-check-label">'
+                        'Remember Me'
+                        '</label> </div>'
+                    ),
+                    css_class='col-12 d-flex mb-2',
                 ),
                 Column(
                     StrictButton(
