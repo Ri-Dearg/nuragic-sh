@@ -1,11 +1,13 @@
 """Views for the Contact app."""
 
 import json
+import re
 import urllib
 
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Field, Hidden, Layout, Row
+from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import exceptions
@@ -43,30 +45,28 @@ class CreateEmailView(SuccessMessageMixin, CreateView):
         helper.form_action = 'contact:email-form'
         helper.form_class = 'rounded p-2'
         helper.form_id = 'contact-form'
-        helper.floating_labels = True
-        helper.use_custom_control = False
+        helper.label_class = 'p-font text-primary'
 
         helper.layout = Layout(
             Row(
-                Field(
+                FloatingField(
                     'email',
                     placeholder=_('Email'),
-                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',  # noqa E501  # pylint: disable=line-too-long
                     wrapper_class='col-md-6',
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'name',
                     placeholder=_('Name'),
                     wrapper_class='col-md-6',
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'subject',
                     placeholder=_('Subject'),
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'message',
                     placeholder=_('What are your thoughts?'),
                     css_class='p-font text-primary',
