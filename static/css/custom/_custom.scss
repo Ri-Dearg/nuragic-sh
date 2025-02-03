@@ -197,6 +197,11 @@ Fonts
 Forms
 --------------------------------------------------------------------------*/
 
+/* Remove asterix in crispy-forms */
+.asteriskField {
+  display: none;
+}
+ 
 /*Spaces the textarea*/
 .form-floating > textarea {
   min-height: 200px;
