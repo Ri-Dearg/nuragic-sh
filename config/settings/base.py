@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     # Renders form fields
     'crispy_forms',
+    'crispy_bootstrap5',
     # My apps
     'cart',
     'checkout',
@@ -204,7 +205,8 @@ TINYMCE_DEFAULT_CONFIG = {
 
 # Template pack for crispy_forms.
 # Check templates for edits made to bring it in line with bootstrap 5
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
