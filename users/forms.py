@@ -107,8 +107,7 @@ class StyledResetPasswordForm(ResetPasswordForm):
                     placeholder=_('Email'),
                     autocomplete='email',
                     css_class='p-font text-primary',
-                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
-                ),  # noqa E501 # pylint: disable=line-too-long
+                ),
                 Column(
                     StrictButton(
                         _('Reset Password'),
@@ -194,8 +193,7 @@ class StyledSignupForm(SignupForm):
                     'email',
                     placeholder=_('Email'),
                     css_class='p-font text-primary',
-                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
-                ),  # noqa E501 # pylint: disable=line-too-long
+                ),
                 Field(
                     'username',
                     placeholder=_('Username'),
