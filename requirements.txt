@@ -4,6 +4,7 @@ Brotli==1.1.0
 certifi==2020.12.5
 cffi==1.14.4
 chardet==4.0.0
+crispy-bootstrap5==2024.10
 cryptography==3.3.2
 defusedxml==0.6.0
 Django==4.2.18
@@ -12,7 +13,7 @@ django-appconf==1.0.4
 django-cleanup==8.0.0
 django-compressor==4.1
 django-countries==7.6.1
-django-crispy-forms==1.10.0
+django-crispy-forms==2.3
 django-modeltranslation==0.16.1
 django-phonenumber-field==6.1.0
 django-sass-processor==1.2.2
