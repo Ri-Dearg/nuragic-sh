@@ -6,7 +6,7 @@ import urllib
 
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Field, Hidden, Layout, Row
+from crispy_forms.layout import HTML, Column, Hidden, Layout, Row
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
