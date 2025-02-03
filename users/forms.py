@@ -304,7 +304,7 @@ class UserProfileForm(forms.ModelForm):
                             ),
                             MultiWidgetField(
                                 'shipping_phone_number',
-                                template='bootstrap4/phone_field.html',
+                                template='bootstrap5/phone_field.html',
                             ),
                             Field(
                                 'shipping_street_address_1',
@@ -350,7 +350,7 @@ class UserProfileForm(forms.ModelForm):
                             ),
                             MultiWidgetField(
                                 'billing_phone_number',
-                                template='bootstrap4/phone_field.html',
+                                template='bootstrap5/phone_field.html',
                             ),
                             Field(
                                 'billing_street_address_1',
