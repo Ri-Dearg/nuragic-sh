@@ -16,6 +16,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DetailView, ListView
 from phonenumber_field import widgets
+from crispy_forms.helper import FormHelper
+
 
 from cart.context_processors import get_cart
 from policies.models import Policy
@@ -101,8 +103,13 @@ class OrderCreateView(CreateView):
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to the form"""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
         form.fields['email'].label = _('Email')
+        form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
+        form.helper = FormHelper(form)
+        helper = form.helper
+        helper.label_class = 'p-font text-primary'
+        helper.field_template = 'bootstrap5/layout/floating_field.html'
+
         form.fields['shipping_full_name'].widget.attrs = {
             'placeholder': _('Full Name')
         }
