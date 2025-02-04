@@ -8,6 +8,9 @@ from allauth.account.views import (
     PasswordChangeView,
     sensitive_post_parameters_m,
 )
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
+from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -20,7 +23,6 @@ from django.utils.translation import gettext as _
 from django.views.generic import DetailView
 
 from contact.models import Newsletter
-
 from .forms import UserProfileForm
 
 
@@ -51,7 +53,19 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
         # Adds the forms to the page,
         # setting shipping and billing to saved info.
         add_email_form = AddEmailForm()
-        change_password_form = ChangePasswordForm
+        add_email_form.helper = FormHelper(add_email_form)
+        add_email_form.helper.label_class = 'p-font text-primary'
+        add_email_form.helper.layout = Layout(
+            FloatingField('email', css_class='p-font text-primary'),
+        )
+
+        change_password_form = ChangePasswordForm()
+        change_password_form.helper = FormHelper(change_password_form)
+        change_password_form.helper.label_class = 'p-font text-primary'
+        change_password_form.helper[0:].wrap(
+            FloatingField, css_class='p-font text-primary'
+        )
+
         user_profile_detail = UserProfileForm(initial=userprofile_dict)
 
         context['user_profile_detail'] = user_profile_detail
