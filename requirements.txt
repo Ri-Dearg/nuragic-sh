@@ -24,7 +24,7 @@ libsass==0.23.0
 oauthlib==3.1.0
 packaging==24.2
 phonenumberslite==8.13.54
-Pillow==8.3.2
+Pillow==10.3.0
 psycopg==3.2.4
 pycparser==2.20
 PyJWT==2.0.1
