@@ -22,3 +22,5 @@ staticfiles
 .DS_Store
 !jasmine.css
 node_modules
+*.old
+media/*/*

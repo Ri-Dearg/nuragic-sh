@@ -2,6 +2,7 @@
 Also includes forms for shipping and billing details."""
 
 from allauth.account.forms import (
+    ChangePasswordForm,
     LoginForm,
     ResetPasswordForm,
     ResetPasswordKeyForm,
@@ -12,18 +13,30 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
     HTML,
     Column,
-    Field,
     Fieldset,
     Layout,
     MultiWidgetField,
     Row,
 )
+from crispy_bootstrap5.bootstrap5 import FloatingField
 from django import forms
 from django.utils.translation import pgettext
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field import widgets
 
 from .models import UserProfile
+
+
+class StyledChangePasswordForm(ChangePasswordForm):
+    """Custom styled change password form for allauth."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_tag = False
+        helper.label_class = 'p-font text-primary'
+        helper[0:].wrap(FloatingField, css_class='p-font text-primary')
 
 
 class StyledLoginForm(LoginForm):
@@ -42,6 +55,7 @@ class StyledLoginForm(LoginForm):
         helper.form_action = 'account_login'
         helper.form_class = 'login rounded p-2'
         helper.field_class = 'col-md-6'
+        helper.label_class = 'p-font text-primary'
 
         account_reset = '{% url "account_reset_password" %}'
         forgot_password = _('Forgot Password?')
@@ -53,13 +67,13 @@ class StyledLoginForm(LoginForm):
                 value="{{ redirect_field_value }}" />{% endif %}'
             ),
             Row(
-                Field(
+                FloatingField(
                     'login',
                     placeholder=_('Username or Email'),
                     autocomplete='email',
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'password',
                     placeholder=_('Password'),
                     css_class='p-font text-primary',
@@ -70,7 +84,16 @@ class StyledLoginForm(LoginForm):
                      href="{account_reset}">\
                 {forgot_password}</a>'
                 ),
-                Field('remember'),
+                Column(
+                    HTML(
+                        '<div id="div_id_remember" class="form-check mx-auto"> <input type="checkbox"'
+                        'name="remember" class="checkboxinput form-check-input" id="id_remember">'
+                        '<label for="id_remember" class="p-font text-primary form-check-label">'
+                        'Remember Me'
+                        '</label> </div>'
+                    ),
+                    css_class='col-12 d-flex mb-2',
+                ),
                 Column(
                     StrictButton(
                         _('Sign In'),
@@ -94,6 +117,7 @@ class StyledResetPasswordForm(ResetPasswordForm):
         helper = self.helper
         helper.form_action = 'account_reset_password'
         helper.form_class = 'password_reset rounded p-2'
+        helper.label_class = 'p-font text-primary'
 
         helper.layout = Layout(
             HTML(
@@ -102,13 +126,12 @@ class StyledResetPasswordForm(ResetPasswordForm):
                 value="{{ redirect_field_value }}" />{% endif %}'
             ),
             Row(
-                Field(
+                FloatingField(
                     'email',
                     placeholder=_('Email'),
                     autocomplete='email',
                     css_class='p-font text-primary',
-                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
-                ),  # noqa E501 # pylint: disable=line-too-long
+                ),
                 Column(
                     StrictButton(
                         _('Reset Password'),
@@ -132,6 +155,7 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
         helper = self.helper
         helper.field_class = 'col-md-6'
         helper.form_tag = False
+        helper.label_class = 'p-font text-primary'
 
         helper.layout = Layout(
             HTML(
@@ -140,14 +164,14 @@ class StyledResetPasswordKeyForm(ResetPasswordKeyForm):
                 value="{{ redirect_field_value }}" />{% endif %}'
             ),
             Row(
-                Field(
+                FloatingField(
                     'password1',
                     placeholder=_('New Password'),
                     autocomplete='off',
                     minlength='8',
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'password2',
                     placeholder=_('Repeat Password'),
                     autocomplete='off',
@@ -182,6 +206,7 @@ class StyledSignupForm(SignupForm):
         helper.form_id = 'signup_form'
         helper.form_class = 'singup rounded p-2'
         helper.field_class = 'col-md-6'
+        helper.label_class = 'p-font text-primary'
 
         helper.layout = Layout(
             HTML(
@@ -190,24 +215,23 @@ class StyledSignupForm(SignupForm):
                 value="{{ redirect_field_value }}" />{% endif %}'
             ),
             Row(
-                Field(
+                FloatingField(
                     'email',
                     placeholder=_('Email'),
                     css_class='p-font text-primary',
-                    pattern=r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$',
-                ),  # noqa E501 # pylint: disable=line-too-long
-                Field(
+                ),
+                FloatingField(
                     'username',
                     placeholder=_('Username'),
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'password1',
                     placeholder=_('Password'),
                     minlength='8',
                     css_class='p-font text-primary',
                 ),
-                Field(
+                FloatingField(
                     'password2',
                     placeholder=_('Repeat Password'),
                     minlength='8',
@@ -267,6 +291,7 @@ class UserProfileForm(forms.ModelForm):
         helper.form_action = 'users:shipping-billing'
         helper.form_id = 'shipping_billing_form'
         helper.form_tag = False
+        helper.label_class = 'p-font text-primary'
 
         self.fields['shipping_phone_number'] = forms.CharField(
             widget=widgets.PhoneNumberPrefixWidget(), required=False
@@ -297,41 +322,41 @@ class UserProfileForm(forms.ModelForm):
                     Fieldset(
                         _('SHIPPING DETAILS'),
                         Row(
-                            Field(
+                            FloatingField(
                                 'shipping_full_name',
                                 placeholder=_('Full Name'),
                                 css_class='p-font text-primary',
                             ),
                             MultiWidgetField(
                                 'shipping_phone_number',
-                                template='bootstrap4/phone_field.html',
+                                template='bootstrap5/phone_field.html',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_street_address_1',
                                 placeholder=_('Street Address 1'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_street_address_2',
                                 placeholder=_('Street Address 2'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_town_or_city',
                                 placeholder=_('Town or City'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_county',
                                 placeholder=_('County, State or Locality'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_postcode',
                                 placeholder=_('Postcode'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'shipping_country',
                                 css_class='form-select p-font text-primary',
                             ),
@@ -343,41 +368,41 @@ class UserProfileForm(forms.ModelForm):
                     Fieldset(
                         _('BILLING DETAILS'),
                         Row(
-                            Field(
+                            FloatingField(
                                 'billing_full_name',
                                 placeholder=_('Full Name'),
                                 css_class='p-font text-primary',
                             ),
                             MultiWidgetField(
                                 'billing_phone_number',
-                                template='bootstrap4/phone_field.html',
+                                template='bootstrap5/phone_field.html',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_street_address_1',
                                 placeholder=_('Street Address 1'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_street_address_2',
                                 placeholder=_('Street Address 2'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_town_or_city',
                                 placeholder=_('Town or City'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_county',
                                 placeholder=_('County, State or Locality'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_postcode',
                                 placeholder=_('Postcode'),
                                 css_class='p-font text-primary',
                             ),
-                            Field(
+                            FloatingField(
                                 'billing_country',
                                 css_class='form-select p-font text-primary',
                             ),
