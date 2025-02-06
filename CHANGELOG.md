@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.0] - 2025-02-06
+### :boom: BREAKING CHANGES
+- due to [`58bfd0f`](https://github.com/Ri-Dearg/nuragic-sh/commit/58bfd0f519959fc1cdc0e06df611f0c347305f65) - upgrade psycopg to 3 *(PR [#127](https://github.com/Ri-Dearg/nuragic-sh/pull/127) by [@Ri-Dearg](https://github.com/Ri-Dearg))*:
+
+  upgrade psycopg to 3 (#127)
+
+
+
 ## [v2.0.0] - 2025-02-06
 ### :boom: BREAKING CHANGES
 - due to [`70884c7`](https://github.com/Ri-Dearg/nuragic-sh/commit/70884c72ce700e0706b890edd4ec27dcaf625dfb) - upgrade psycopg to 3 *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*:
@@ -31,3 +39,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v1.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.0...v1.0.1
 [v1.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.1...v1.0.2
 [v2.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.2...v2.0.0
+[v3.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v2.0.0...v3.0.0
