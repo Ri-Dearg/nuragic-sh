@@ -46,6 +46,7 @@ jobs:
         uses: ietf-tools/semver-action@v1.9.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref || github.ref_name }}
 
       # Create draft release from version
       - name: Create Draft Release
