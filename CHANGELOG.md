@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.2] - 2025-02-06
+### :bug: Bug Fixes
+- [`86195b3`](https://github.com/Ri-Dearg/nuragic-sh/commit/86195b3ef253dfcbff6e231378da58d340eedda1) - compare against own branch *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v1.0.1] - 2025-02-06
 ### :bug: Bug Fixes
 - [`49f3d86`](https://github.com/Ri-Dearg/nuragic-sh/commit/49f3d866f889ebe2eae8047b30648d0efded4c22) - template typo and email server update. *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -16,3 +21,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`fa70aff`](https://github.com/Ri-Dearg/nuragic-sh/commit/fa70aff16eac22f4286fcf37b978cdee9d9d8927) - add media folder to gitignore *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
 
 [v1.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.0...v1.0.1
+[v1.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.1...v1.0.2
