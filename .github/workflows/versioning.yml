@@ -6,9 +6,11 @@ name: Versioning
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: ["main"]
+    branches: 
+      - "**"
   pull_request:
-    branches: ["main"]
+    branches: 
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -41,9 +43,10 @@ jobs:
       # Generate version from conventional commits
       - name: Semver Conventional Commits
         id: semver
-        uses: ietf-tools/semver-action@v1.8.0
+        uses: ietf-tools/semver-action@v1.9.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref || github.ref_name }}
 
       # Create draft release from version
       - name: Create Draft Release
