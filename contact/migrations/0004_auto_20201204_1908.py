@@ -2,11 +2,10 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import django_better_admin_arrayfield.models.fields
+import django.contrib.postgres.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('contact', '0003_newsletter'),
     ]
@@ -15,7 +14,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EmailHistory',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('email_address', models.EmailField(max_length=254)),
                 ('newsletter', models.BooleanField(default=False)),
             ],
@@ -23,11 +30,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='newsletter',
             name='email_list',
-            field=django_better_admin_arrayfield.models.fields.ArrayField(base_field=models.EmailField(max_length=254), default=list, size=None),
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.EmailField(max_length=254),
+                default=list,
+                size=None,
+            ),
         ),
         migrations.AddField(
             model_name='email',
             name='email_history',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='contact.emailhistory'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to='contact.emailhistory',
+            ),
         ),
     ]

@@ -1,10 +1,11 @@
 """Views for like app: a page for viewing likes
 and fetch views to update likes and update the template."""
+
 from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 
 from products.models import Product
@@ -14,6 +15,7 @@ from .context_processors import get_likes
 
 class LikesListView(ListView):  # pylint: disable=too-many-ancestors
     """View that displays all the liked products for the user."""
+
     model = Product
     template_name = 'likes/likes_list.html'
 
@@ -33,7 +35,8 @@ class LikesListView(ListView):  # pylint: disable=too-many-ancestors
         # Adds liked products from the account if logged in.
         if user.is_authenticated:
             liked_products = user.userprofile.liked_products.order_by(
-                '-liked__datetime_added')
+                '-liked__datetime_added'
+            )
             for product in liked_products:
                 context['products'].append(product)
 
@@ -93,7 +96,8 @@ def likes_toggle(request):
                     user.userprofile.liked_products.remove(product)
                     product.save()
                     data['message'] = _(
-                        f'{product.title} removed from favorites.')
+                        f'{product.title} removed from favorites.'
+                    )
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:
@@ -112,7 +116,8 @@ def likes_toggle(request):
                     likes.remove(item_id)
                     request.session['likes'] = likes
                     data['message'] = _(
-                        f'{product.title} removed from favorites.')
+                        f'{product.title} removed from favorites.'
+                    )
                     data['tag'] = 'info'
                     data['tagMessage'] = _('Info')
                 else:

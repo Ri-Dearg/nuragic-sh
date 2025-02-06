@@ -4,7 +4,7 @@ and fetch views to update cart and update the template."""
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
 from products.models import Product
@@ -14,16 +14,17 @@ from .context_processors import get_cart
 
 class CartPageView(TemplateView):  # pylint: disable=too-many-ancestors
     """View that displays all the products in the cart as a list."""
+
     template_name = 'cart/cart_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        products = Product.objects.filter(
-            stock__gte=1, display=True
-        ).order_by('-popularity', '-stock') | Product.objects.filter(
-            can_preorder=True, display=True
-        ).order_by('-popularity', '-stock')
+        products = Product.objects.filter(stock__gte=1, display=True).order_by(
+            '-popularity', '-stock'
+        ) | Product.objects.filter(can_preorder=True, display=True).order_by(
+            '-popularity', '-stock'
+        )
 
         context['related_products'] = products
 
@@ -41,7 +42,7 @@ def cart_toggle(request):
     'result' and 'special' are used to define the logic on the JS side."""
 
     data = {}
-    if request.method == "POST":
+    if request.method == 'POST':
         # Runs through a number of variables to process the ajax call.
         # If it fails, it throws an exception with a message.
         try:
@@ -56,18 +57,24 @@ def cart_toggle(request):
 
             # Removes items from the cart if it is a once-off unique item or
             # if the remove button is clicked on the cart list page.
-            if (item_id in list(cart.keys()) and request.POST.get(
-                'special') != 'update') or (
-                    request.POST.get('special') == 'remove') or (
-                    quantity <= 0):
+            if (
+                (
+                    item_id in list(cart.keys())
+                    and request.POST.get('special') != 'update'
+                )
+                or (request.POST.get('special') == 'remove')
+                or (quantity <= 0)
+            ):
                 if item_id in cart:
                     cart.pop(str(item_id))
                     data['message'] = _(
-                        f'Removed {product.title} from your cart.')
+                        f'Removed {product.title} from your cart.'
+                    )
                 else:
                     data['message'] = _(
                         f'Please update the quantity to add \
-                            {product.title} to your cart.')
+                            {product.title} to your cart.'
+                    )
 
                 request.session['cart'] = cart
                 data['tag'] = 'info'
@@ -77,21 +84,23 @@ def cart_toggle(request):
             else:
                 if product.is_unique:
                     quantity = 1
-                elif (quantity > product.stock
-                      and not product.can_preorder):
+                elif quantity > product.stock and not product.can_preorder:
                     quantity = product.stock
 
                 if (request.POST.get('special') == 'update') and (
-                        item_id in cart):
+                    item_id in cart
+                ):
                     # 'update' is sent when product quantity is being changed.
                     data['message'] = f'Updated {product.title} \
                         quantity to {quantity}.'
                 elif product.can_preorder and product.stock <= 0:
                     data['message'] = _(
-                        f'Preordered {quantity} {product.title}.')
+                        f'Preordered {quantity} {product.title}.'
+                    )
                 else:
                     data['message'] = _(
-                        f'Added {quantity} {product.title} to your cart.')
+                        f'Added {quantity} {product.title} to your cart.'
+                    )
 
                 cart[item_id] = quantity
                 request.session['cart'] = cart
@@ -113,11 +122,13 @@ def cart_toggle(request):
             request.session['delivery'] = delivery
             request.session['grand_total'] = grand_total
 
-            data['result'] = ['cart',
-                              cart_quantity,
-                              cart_total,
-                              delivery,
-                              grand_total]
+            data['result'] = [
+                'cart',
+                cart_quantity,
+                cart_total,
+                delivery,
+                grand_total,
+            ]
 
         # If none of the conditions are true, it throws an error.
         except Exception as error:  # pylint: disable=broad-except

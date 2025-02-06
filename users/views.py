@@ -1,8 +1,16 @@
 """Views for the Users app."""
+
 from allauth.account.utils import sync_user_email_addresses
-from allauth.account.views import (AddEmailForm, ChangePasswordForm, EmailView,
-                                   PasswordChangeView,
-                                   sensitive_post_parameters_m)
+from allauth.account.views import (
+    AddEmailForm,
+    ChangePasswordForm,
+    EmailView,
+    PasswordChangeView,
+    sensitive_post_parameters_m,
+)
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
+from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -11,30 +19,29 @@ from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView
 
 from contact.models import Newsletter
-
 from .forms import UserProfileForm
 
 
 def profile_redirect(request):
     """Redirects to user profile with pk."""
-    return redirect('users:user-detail',
-                    pk=request.user.id,
-                    username=request.user.username)
+    return redirect(
+        'users:user-detail', pk=request.user.id, username=request.user.username
+    )
 
 
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     """Renders the user profile only if logged in."""
+
     user_model = get_user_model()
     model = user_model
     context_object_name = 'user'
     template_name = 'users/user_detail.html'
 
-    def get_context_data(
-            self, *args, **kwargs):  # pylint: disable=unused-argument
+    def get_context_data(self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
         user_model = get_user_model()
@@ -46,7 +53,21 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
         # Adds the forms to the page,
         # setting shipping and billing to saved info.
         add_email_form = AddEmailForm()
-        change_password_form = ChangePasswordForm
+        add_email_form.helper = FormHelper(add_email_form)
+        add_email_form.helper.label_class = 'p-font text-primary'
+        add_email_form.helper.form_tag = False
+        add_email_form.helper.layout = Layout(
+            FloatingField('email', css_class='p-font text-primary'),
+        )
+
+        change_password_form = ChangePasswordForm()
+        change_password_form.helper = FormHelper(change_password_form)
+        change_password_form.helper.label_class = 'p-font text-primary'
+        change_password_form.helper.form_tag = False
+        change_password_form.helper[0:].wrap(
+            FloatingField, css_class='p-font text-primary'
+        )
+
         user_profile_detail = UserProfileForm(initial=userprofile_dict)
 
         context['user_profile_detail'] = user_profile_detail
@@ -65,22 +86,21 @@ class CustomEmailView(LoginRequiredMixin, EmailView):
     for some functions it was easier to utilise alternative views with
     the same template and context as the basic UserProfile Detailview.
     Apart from the url difference it should be unnoticeable to the user."""
+
     template_name = 'users/user_detail.html'
 
     def dispatch(self, request, *args, **kwargs):
-
         # Retrieves user's emails
         sync_user_email_addresses(request.user)
 
         # Returns the user to the profile page on success
-        self.success_url = reverse_lazy('users:user-detail',
-                                        kwargs={
-                                            'username': request.user.username,
-                                            'pk': request.user.id})
+        self.success_url = reverse_lazy(
+            'users:user-detail',
+            kwargs={'username': request.user.username, 'pk': request.user.id},
+        )
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(
-            self, *args, **kwargs):  # pylint: disable=unused-argument
+    def get_context_data(self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context."""
         context = super().get_context_data(**kwargs)
         user_model = get_user_model()
@@ -116,16 +136,14 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
     @sensitive_post_parameters_m
     def dispatch(self, request, *args, **kwargs):
-        self.success_url = reverse_lazy('users:user-detail',
-                                        kwargs={
-                                            'username': request.user.username,
-                                            'pk': request.user.id})
+        self.success_url = reverse_lazy(
+            'users:user-detail',
+            kwargs={'username': request.user.username, 'pk': request.user.id},
+        )
 
-        return super().dispatch(
-            request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(
-            self, *args, **kwargs):  # pylint: disable=unused-argument
+    def get_context_data(self, *args, **kwargs):  # pylint: disable=unused-argument
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
         user_model = get_user_model()
@@ -169,8 +187,13 @@ def update_shipping_billing(request):
             return HttpResponseRedirect(redirect_url)
 
     form = UserProfileForm()
-    messages.warning(request, _('Failed to update your information. \
-        Please Check your details.'))
+    messages.warning(
+        request,
+        _(
+            'Failed to update your information. \
+        Please Check your details.'
+        ),
+    )
     return HttpResponseRedirect(redirect_url)
 
 
@@ -191,8 +214,9 @@ def update_newsletter(request):
 
     if request.method == 'POST':
         email = request.POST['email']
-        newsletter = Newsletter.objects.filter(
-            name='basic').order_by('id').first()
+        newsletter = (
+            Newsletter.objects.filter(name='basic').order_by('id').first()
+        )
         it_list = newsletter.email_list_it
         en_list = newsletter.email_list_en
 
@@ -204,8 +228,12 @@ def update_newsletter(request):
                 update_email(email, en_list, it_list)
             newsletter.save()
 
-            messages.success(request, _(
-                f'Your newsletter preferences have been updated for {email}.'))
+            messages.success(
+                request,
+                _(
+                    f'Your newsletter preferences have been updated for {email}.'
+                ),
+            )
             return HttpResponseRedirect(redirect_url)
 
         if email in it_list:
@@ -214,10 +242,13 @@ def update_newsletter(request):
             en_list.remove(email)
         newsletter.save()
 
-        messages.info(request, _(
-            f'You have unsubscribed {email} from the newsletter.'))
+        messages.info(
+            request, _(f'You have unsubscribed {email} from the newsletter.')
+        )
         return HttpResponseRedirect(redirect_url)
 
-    messages.warning(request, _(
-        'Failed to update your information. Please Check your details.'))
+    messages.warning(
+        request,
+        _('Failed to update your information. Please Check your details.'),
+    )
     return HttpResponse(redirect_url)

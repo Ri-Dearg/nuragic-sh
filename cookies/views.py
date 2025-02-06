@@ -1,7 +1,8 @@
 """Saves cookie consent details in the session and creates cookie records."""
+
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import reverse, render
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import CookieRecord
 
@@ -28,10 +29,11 @@ def cookie_consent(request):
         if request.user.is_authenticated:
             user = request.user
 
-        CookieRecord(user=user,
-                     ip_address=request.META['REMOTE_ADDR'],
-                     consent=request.session['cookie_consent']
-                     ).save()
+        CookieRecord(
+            user=user,
+            ip_address=request.META['REMOTE_ADDR'],
+            consent=request.session['cookie_consent'],
+        ).save()
 
         data['message'] = _('Cookie preferences saved.')
         data['tag'] = 'info'

@@ -1,5 +1,6 @@
 """Views for the checkout.
 Creating, listing and showing order details. Also caches info."""
+
 import itertools
 import json
 import logging
@@ -11,10 +12,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import CharField, model_to_dict
 from django.shortcuts import HttpResponse, redirect, reverse
 from django.utils import translation
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, DetailView, ListView
 from phonenumber_field import widgets
+from crispy_forms.helper import FormHelper
+
 
 from cart.context_processors import get_cart
 from policies.models import Policy
@@ -77,21 +80,39 @@ class OrderCreateView(CreateView):
     Uses custom form widgets and layouts."""
 
     model = Order
-    fields = ['email', 'billing_full_name', 'billing_phone_number',
-              'billing_street_address_1', 'billing_street_address_2',
-              'billing_town_or_city', 'billing_county',
-              'billing_country', 'billing_postcode', 'shipping_full_name',
-              'shipping_phone_number', 'shipping_street_address_1',
-              'shipping_street_address_2', 'shipping_town_or_city',
-              'shipping_county', 'shipping_country', 'shipping_postcode']
+    fields = [
+        'email',
+        'billing_full_name',
+        'billing_phone_number',
+        'billing_street_address_1',
+        'billing_street_address_2',
+        'billing_town_or_city',
+        'billing_county',
+        'billing_country',
+        'billing_postcode',
+        'shipping_full_name',
+        'shipping_phone_number',
+        'shipping_street_address_1',
+        'shipping_street_address_2',
+        'shipping_town_or_city',
+        'shipping_county',
+        'shipping_country',
+        'shipping_postcode',
+    ]
 
     def get_form(self, form_class=None):
         """Adds custom placeholders and widgets to the form"""
         form = super().get_form(form_class)
-        form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
         form.fields['email'].label = _('Email')
+        form.fields['email'].widget.attrs = {'placeholder': _('Email Address')}
+        form.helper = FormHelper(form)
+        helper = form.helper
+        helper.label_class = 'p-font text-primary'
+        helper.field_template = 'bootstrap5/layout/floating_field.html'
+
         form.fields['shipping_full_name'].widget.attrs = {
-            'placeholder': _('Full Name')}
+            'placeholder': _('Full Name')
+        }
         form.fields['shipping_full_name'].label = _('Full Name')
         form.fields['shipping_phone_number'] = CharField(
             widget=widgets.PhoneNumberPrefixWidget(
@@ -100,28 +121,38 @@ class OrderCreateView(CreateView):
                     'placeholder': _('Phone Number'),
                     'class': 'form-control',
                     'pattern': '[0-9]+',
-                }),
-            initial='+39')
+                }
+            ),
+            initial='+39',
+        )
         form.fields['shipping_street_address_1'].widget.attrs = {
-            'placeholder': _('123 Main St.')}
+            'placeholder': _('123 Main St.')
+        }
         form.fields['shipping_street_address_1'].label = _('Street Address 1')
         form.fields['shipping_street_address_2'].widget.attrs = {
-            'placeholder': _('Street Address 2')}
+            'placeholder': _('Street Address 2')
+        }
         form.fields['shipping_street_address_2'].label = _('Street Address 2')
         form.fields['shipping_town_or_city'].widget.attrs = {
-            'placeholder': _('Town or City')}
+            'placeholder': _('Town or City')
+        }
         form.fields['shipping_town_or_city'].label = _('Town or City')
         form.fields['shipping_county'].widget.attrs = {
-            'placeholder': _('Locality')}
+            'placeholder': _('Locality')
+        }
         form.fields['shipping_county'].label = _('County, State or Locality')
         form.fields['shipping_country'].widget.attrs = {
-            'class': 'form-control'}
+            'class': 'form-control'
+        }
         form.fields['shipping_country'].label = _('Country')
         form.fields['shipping_postcode'].widget.attrs = {
-            'placeholder': _('Postcode')}
+            'placeholder': _('Postcode')
+        }
         form.fields['shipping_postcode'].label = _('Postcode')
         form.fields['billing_full_name'].widget.attrs = {
-            'placeholder': _('Full Name'), 'class': 'billing-field'}
+            'placeholder': _('Full Name'),
+            'class': 'billing-field',
+        }
         form.fields['billing_full_name'].label = _('Full Name')
         form.fields['billing_phone_number'] = CharField(
             label=_('Phone Number'),
@@ -131,25 +162,35 @@ class OrderCreateView(CreateView):
                     'placeholder': _('Phone Number'),
                     'class': 'form-control billing-field',
                     'pattern': '[0-9]+',
-                }),
-            initial='+39')
+                }
+            ),
+            initial='+39',
+        )
         form.fields['billing_street_address_1'].widget.attrs = {
-            'Placeholder': _('Street Address 1'), 'class': 'billing-field'}
+            'Placeholder': _('Street Address 1'),
+            'class': 'billing-field',
+        }
         form.fields['billing_street_address_1'].label = _('Street Address 1')
         form.fields['billing_street_address_2'].widget.attrs = {
-            'placeholder': _('Street Address 2')}
+            'placeholder': _('Street Address 2')
+        }
         form.fields['billing_street_address_2'].label = _('Street Address 2')
         form.fields['billing_town_or_city'].widget.attrs = {
-            'placeholder': _('Town or City'), 'class': 'billing-field'}
+            'placeholder': _('Town or City'),
+            'class': 'billing-field',
+        }
         form.fields['billing_town_or_city'].label = _('Town or City')
         form.fields['billing_county'].widget.attrs = {
-            'placeholder': _('Locality')}
+            'placeholder': _('Locality')
+        }
         form.fields['billing_county'].label = _('County, State or Locality')
         form.fields['billing_country'].widget.attrs = {
-            'class': 'form-control billing-field'}
+            'class': 'form-control billing-field'
+        }
         form.fields['billing_country'].label = _('Country')
         form.fields['billing_postcode'].widget.attrs = {
-            'placeholder': _('Postcode')}
+            'placeholder': _('Postcode')
+        }
         form.fields['billing_postcode'].label = _('Postcode')
         return form
 
@@ -206,21 +247,27 @@ class OrderCreateView(CreateView):
         # the billing with the POST data. Clauses are used for optional info.
         if 'billing-same' in self.request.POST:
             order.billing_full_name = self.request.POST['shipping_full_name']
-            order.billing_phone_number = self.request.POST[
-                'shipping_phone_number_0'] + self.request.POST[
-                    'shipping_phone_number_1']
+            order.billing_phone_number = (
+                self.request.POST['shipping_phone_number_0']
+                + self.request.POST['shipping_phone_number_1']
+            )
             order.billing_street_address_1 = self.request.POST[
-                'shipping_street_address_1']
+                'shipping_street_address_1'
+            ]
             if 'shipping_street_address_2' in self.request.POST:
                 order.billing_street_address_2 = self.request.POST[
-                    'shipping_street_address_2']
+                    'shipping_street_address_2'
+                ]
             order.billing_town_or_city = self.request.POST[
-                'shipping_town_or_city']
+                'shipping_town_or_city'
+            ]
             if 'shipping_county' in self.request.POST:
                 order.billing_county = self.request.POST['shipping_county']
             order.billing_country = self.request.POST['shipping_country']
             if 'shipping_postcode' in self.request.POST:
                 order.billing_postcode = self.request.POST['shipping_postcode']
+        order.save()
+        order.update_total()
         order.save()
 
         # Iterates the items to create OrderLine Item objects.
@@ -235,9 +282,14 @@ class OrderCreateView(CreateView):
                 )
                 order_line_item.save()
             except Product.DoesNotExist:
-                messages.warning(self.request, (
-                    _("One of the products in your cart wasn't found in our collection. \
-                    Please call us for assistance!"))
+                messages.warning(
+                    self.request,
+                    (
+                        _(
+                            "One of the products in your cart wasn't found in our collection. \
+                    Please call us for assistance!"
+                        )
+                    ),
                 )
                 order.delete()
 
@@ -250,18 +302,27 @@ class OrderCreateView(CreateView):
             if self.request.user.is_authenticated:
                 order.user_profile = self.request.user.userprofile
                 order.save()
+                order.update_total()
+                order.save()
             else:
                 self.request.session['my_order'] = order.id
 
-        messages.success(self.request, _(f'Order successfully processed! \
-             A confirmation email will be sent to {order.email}.'))
+        messages.success(
+            self.request,
+            _(
+                f'Order successfully processed! \
+             A confirmation email will be sent to {order.email}.'
+            ),
+        )
         return super().form_valid(form)
 
     def form_invalid(self, form):
         """An invalid form returns the user to the order page with a mesage."""
-        messages.warning(self.request,
-                         'There was a problem processing the order.\
-             Please double check your information.')
+        messages.warning(
+            self.request,
+            'There was a problem processing the order.\
+             Please double check your information.',
+        )
         return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
@@ -302,15 +363,23 @@ def cache_data(request):  # pragma: no cover
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
-            'cart': json.dumps(request.session.get('cart', {})),
-            'lang': translation.get_language(),
-            'save_info': request.POST.get('save_info'),
-            'user': request.user,
-        })
+        stripe.PaymentIntent.modify(
+            pid,
+            metadata={
+                'cart': json.dumps(request.session.get('cart', {})),
+                'lang': translation.get_language(),
+                'save_info': request.POST.get('save_info'),
+                'user': request.user,
+            },
+        )
         return HttpResponse(status=200)
     except Exception as error:
         logging.exception(error)
-        messages.warning(request, _('Sorry, your payment cannot be \
-            processed right now. Please try again later.'))
+        messages.warning(
+            request,
+            _(
+                'Sorry, your payment cannot be \
+            processed right now. Please try again later.'
+            ),
+        )
         return HttpResponse(status=400)
