@@ -221,6 +221,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_FORMS = {
+    'change_password': 'users.forms.StyledChangePasswordForm',
     'login': 'users.forms.StyledLoginForm',
     'signup': 'users.forms.StyledSignupForm',
     'reset_password': 'users.forms.StyledResetPasswordForm',

@@ -2,6 +2,7 @@
 Also includes forms for shipping and billing details."""
 
 from allauth.account.forms import (
+    ChangePasswordForm,
     LoginForm,
     ResetPasswordForm,
     ResetPasswordKeyForm,
@@ -12,7 +13,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
     HTML,
     Column,
-    Field,
     Fieldset,
     Layout,
     MultiWidgetField,
@@ -25,6 +25,18 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field import widgets
 
 from .models import UserProfile
+
+
+class StyledChangePasswordForm(ChangePasswordForm):
+    """Custom styled change password form for allauth."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        helper = self.helper
+        helper.form_tag = False
+        helper.label_class = 'p-font text-primary'
+        helper[0:].wrap(FloatingField, css_class='p-font text-primary')
 
 
 class StyledLoginForm(LoginForm):
