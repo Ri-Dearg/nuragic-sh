@@ -55,6 +55,7 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
         add_email_form = AddEmailForm()
         add_email_form.helper = FormHelper(add_email_form)
         add_email_form.helper.label_class = 'p-font text-primary'
+        add_email_form.helper.form_tag = False
         add_email_form.helper.layout = Layout(
             FloatingField('email', css_class='p-font text-primary'),
         )
@@ -62,6 +63,7 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
         change_password_form = ChangePasswordForm()
         change_password_form.helper = FormHelper(change_password_form)
         change_password_form.helper.label_class = 'p-font text-primary'
+        change_password_form.helper.form_tag = False
         change_password_form.helper[0:].wrap(
             FloatingField, css_class='p-font text-primary'
         )
