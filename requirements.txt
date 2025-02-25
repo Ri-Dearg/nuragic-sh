@@ -15,7 +15,7 @@ django-cleanup==8.0.0
 django-compressor==4.5.1
 django-countries==7.6.1
 django-crispy-forms==2.3
-django-modeltranslation==0.16.1
+django-modeltranslation==0.18.13
 django-phonenumber-field==6.1.0
 django-sass-processor==1.4.1
 django-tinymce==4.1.0
