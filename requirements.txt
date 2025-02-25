@@ -1,5 +1,5 @@
 asgiref==3.8.1
-Babel==2.9.0
+Babel==2.9.1
 Brotli==1.1.0
 certifi==2024.7.4
 cffi==1.14.4
