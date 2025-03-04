@@ -268,7 +268,6 @@ class OrderCreateView(CreateView):
                 order.billing_postcode = self.request.POST['shipping_postcode']
         order.save()
         order.update_total()
-        order.save()
 
         # Iterates the items to create OrderLine Item objects.
         # If the product doesn't exist it deletes the order.
@@ -303,7 +302,6 @@ class OrderCreateView(CreateView):
                 order.user_profile = self.request.user.userprofile
                 order.save()
                 order.update_total()
-                order.save()
             else:
                 self.request.session['my_order'] = order.id
 

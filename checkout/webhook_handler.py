@@ -52,7 +52,7 @@ def create_order(userprofile, billing_details, shipping_details, cart, pid):
             order_line_item.save()
         except Product.DoesNotExist:
             pass
-    order.save()
+    order.update_total()
     complete_order = Order.objects.get(
         user_profile=userprofile,
         email=billing_details.email,
@@ -269,7 +269,11 @@ def handle_payment_intent_succeeded(event):
     # If no order is found, it creates the order.
     try:
         order = create_order(
-            userprofile, billing_details, shipping_details, cart, pid
+            userprofile,
+            billing_details,
+            shipping_details,
+            cart,
+            pid,
         )
         # Sends a confirmation email after creation
         send_confirmation_email(order, lang)
