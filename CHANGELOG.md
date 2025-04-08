@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.2] - 2025-04-08
+### :bug: Bug Fixes
+- [`d009162`](https://github.com/Ri-Dearg/nuragic-sh/commit/d009162fb900e523d30636c53610b63cb288351f) - **orders**: updating total now runs save function *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`dfaa6cf`](https://github.com/Ri-Dearg/nuragic-sh/commit/dfaa6cfe83b69005979dfee430814e496e8266f0) - **orders**: pass delivery correctly to webhook *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :recycle: Refactors
+- [`da781ef`](https://github.com/Ri-Dearg/nuragic-sh/commit/da781ef4a4481e9096b17e0d1e08d420560bf90a) - remove unused code *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v3.0.1] - 2025-02-07
 ### :bug: Bug Fixes
 - [`0e24356`](https://github.com/Ri-Dearg/nuragic-sh/commit/0e243565a7c1f6eeaa08a67212c019cb84695461) - update versioning to use branches correctly *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -46,3 +55,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v2.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v1.0.2...v2.0.0
 [v3.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v2.0.0...v3.0.0
 [v3.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.0...v3.0.1
+[v3.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.1...v3.0.2
