@@ -267,8 +267,6 @@ class OrderCreateView(CreateView):
             if 'shipping_postcode' in self.request.POST:
                 order.billing_postcode = self.request.POST['shipping_postcode']
         order.save()
-        order.update_total()
-        order.save()
 
         # Iterates the items to create OrderLine Item objects.
         # If the product doesn't exist it deletes the order.
@@ -292,7 +290,7 @@ class OrderCreateView(CreateView):
                     ),
                 )
                 order.delete()
-
+        order.update_total()
         # Deletes the cart as it isn't needed.
         if 'cart' in self.request.session:
             del self.request.session['cart']
@@ -303,7 +301,6 @@ class OrderCreateView(CreateView):
                 order.user_profile = self.request.user.userprofile
                 order.save()
                 order.update_total()
-                order.save()
             else:
                 self.request.session['my_order'] = order.id
 
@@ -367,6 +364,7 @@ def cache_data(request):  # pragma: no cover
             pid,
             metadata={
                 'cart': json.dumps(request.session.get('cart', {})),
+                'delivery': request.session.get('delivery', 0),
                 'lang': translation.get_language(),
                 'save_info': request.POST.get('save_info'),
                 'user': request.user,

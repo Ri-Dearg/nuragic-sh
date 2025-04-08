@@ -3,6 +3,7 @@
 import json
 import logging
 import time
+from decimal import Decimal
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -17,7 +18,9 @@ from products.models import Product
 from .models import Order, OrderLineItem
 
 
-def create_order(userprofile, billing_details, shipping_details, cart, pid):
+def create_order(
+    userprofile, billing_details, shipping_details, cart, delivery, pid
+):
     """Creates the order if it isn't in the DB."""
     order = Order.objects.create(
         user_profile=userprofile,
@@ -39,6 +42,7 @@ def create_order(userprofile, billing_details, shipping_details, cart, pid):
         billing_street_address_2=billing_details.address.line2,
         billing_county=billing_details.address.state,
         original_cart=cart,
+        delivery_cost=delivery,
         stripe_pid=pid,
     )
     for item_id, item_data in json.loads(cart).items():
@@ -52,7 +56,7 @@ def create_order(userprofile, billing_details, shipping_details, cart, pid):
             order_line_item.save()
         except Product.DoesNotExist:
             pass
-    order.save()
+    order.update_total()
     complete_order = Order.objects.get(
         user_profile=userprofile,
         email=billing_details.email,
@@ -230,6 +234,7 @@ def handle_payment_intent_succeeded(event):
 
     pid = intent.id
     cart = intent.metadata.cart
+    delivery = Decimal(intent.metadata.delivery)
     lang = intent.metadata.lang
     save_info = intent.metadata.save_info
     user = intent.metadata.user
@@ -269,7 +274,12 @@ def handle_payment_intent_succeeded(event):
     # If no order is found, it creates the order.
     try:
         order = create_order(
-            userprofile, billing_details, shipping_details, cart, pid
+            userprofile,
+            billing_details,
+            shipping_details,
+            cart,
+            delivery,
+            pid,
         )
         # Sends a confirmation email after creation
         send_confirmation_email(order, lang)

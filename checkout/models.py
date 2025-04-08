@@ -104,10 +104,10 @@ class Order(models.Model):
             or 0
         )
         self.grand_total = self.order_total + self.delivery_cost
+        self.save()
 
     def save(self, *args, **kwargs):
         """Saves the order number and updates the total."""
-
         if not self.order_number:
             self.order_number = generate_order_number()
         super().save(*args, **kwargs)
