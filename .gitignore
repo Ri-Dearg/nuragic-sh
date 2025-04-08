@@ -17,6 +17,7 @@ htmlcov/
 .c9
 venv
 .venv
+.venv-test
 .vscode
 staticfiles
 .DS_Store
