@@ -64,3 +64,29 @@ class TestWebhook(TestCase):
             HTTP_STRIPE_SIGNATURE=stripe_sig,
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_invalid_payload(self) -> None:
+        """Test for bad request response on pyalod."""
+        api_response = 'invalid'
+
+        stripe_sig = self._stripe_sig(api_response)
+        response = self.client.post(
+            reverse('checkout:webhook'),
+            api_response,
+            content_type='application/json',
+            HTTP_STRIPE_SIGNATURE=stripe_sig,
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_invalid_signature(self) -> None:
+        """Test for bad request response on pyalod."""
+        api_response = PAYMENT_INTENT_FAILED
+
+        stripe_sig = self._stripe_sig('invalid')
+        response = self.client.post(
+            reverse('checkout:webhook'),
+            api_response,
+            content_type='application/json',
+            HTTP_STRIPE_SIGNATURE=stripe_sig,
+        )
+        self.assertEqual(response.status_code, 400)
