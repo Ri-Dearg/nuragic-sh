@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: [3.9.5]
+        python-version: [3.13.1]
 
     # Service containers to run with `runner-job`
     services:
