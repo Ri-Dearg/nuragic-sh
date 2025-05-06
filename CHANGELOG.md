@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.0.0] - 2025-05-06
+### :boom: BREAKING CHANGES
+- due to [`683ab64`](https://github.com/Ri-Dearg/nuragic-sh/commit/683ab642bd71d43cf4f71662dbc39fc4f9c48b80) - upgrade django to 5.2 *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*:
+
+  upgrade django to 5.2
+
+
+### :recycle: Refactors
+- [`7cd87cd`](https://github.com/Ri-Dearg/nuragic-sh/commit/7cd87cd546c5841786793c6fe31ef001bf7fc52c) - **req**: remove depracted setting *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v3.0.3] - 2025-05-06
 ### :white_check_mark: Tests
 - [`889a3e5`](https://github.com/Ri-Dearg/nuragic-sh/commit/889a3e5e8b198383084163f5e8294f7cbe0cbf15) - **orders**: add foundation for webhook testing. *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -69,3 +80,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v3.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.0...v3.0.1
 [v3.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.1...v3.0.2
 [v3.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.2...v3.0.3
+[v4.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.3...v4.0.0
