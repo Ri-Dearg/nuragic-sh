@@ -5,10 +5,11 @@ import hmac
 from time import time
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase
 
-from .stripe_spoof import PAYMENT_INTENT_FAILED
+from .stripe_spoof import PAYMENT_INTENT_FAILED, PAYMENT_INTENT_SUCCEEDED
 
 
 class TestWebhook(TestCase):
@@ -18,6 +19,14 @@ class TestWebhook(TestCase):
         TestCase (class): django TestCase.
 
     """
+
+    def setUp(self) -> None:
+        """Set up the test environment."""
+        get_user_model().objects.get_or_create(
+            username='rory',
+            email='email@email.com',
+            password='testpassword123',
+        )
 
     def _stripe_sig(self, payload: str) -> str:
         """Spoof stripe API signature.
@@ -55,6 +64,19 @@ class TestWebhook(TestCase):
     def test_payment_intent_failed(self) -> None:
         """Test a failed payment webhook response."""
         api_response = PAYMENT_INTENT_FAILED
+
+        stripe_sig = self._stripe_sig(api_response)
+        response = self.client.post(
+            reverse('checkout:webhook'),
+            api_response,
+            content_type='application/json',
+            HTTP_STRIPE_SIGNATURE=stripe_sig,
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_payment_intent_succeeded_order_creation(self) -> None:
+        """Test a failed payment webhook response."""
+        api_response = PAYMENT_INTENT_SUCCEEDED
 
         stripe_sig = self._stripe_sig(api_response)
         response = self.client.post(
