@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.3] - 2025-05-06
+### :white_check_mark: Tests
+- [`889a3e5`](https://github.com/Ri-Dearg/nuragic-sh/commit/889a3e5e8b198383084163f5e8294f7cbe0cbf15) - **orders**: add foundation for webhook testing. *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`7c9c418`](https://github.com/Ri-Dearg/nuragic-sh/commit/7c9c41837112eb8c0fda6cd0ff9390cd10e81702) - **orders**: test invalid data in webhook *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`8e86efa`](https://github.com/Ri-Dearg/nuragic-sh/commit/8e86efad86ff5e1240e7cf919a99aca943a40132) - **tests**: add payment_intent.succeeded json *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`7b1d53d`](https://github.com/Ri-Dearg/nuragic-sh/commit/7b1d53d480e5b8f2dbc44356fc21016f5d8744da) - **tests**: add test for payment success order *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`b67e3d3`](https://github.com/Ri-Dearg/nuragic-sh/commit/b67e3d3896fdb153ded314c680dcdce690a6e29e) - **tests**: add test for unhandled event *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :wrench: Chores
+- [`fbda908`](https://github.com/Ri-Dearg/nuragic-sh/commit/fbda9089aa4f69c8f90619ca4d04b88a56e9e7fa) - update gitignore to ignore test venv *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v3.0.2] - 2025-04-08
 ### :bug: Bug Fixes
 - [`d009162`](https://github.com/Ri-Dearg/nuragic-sh/commit/d009162fb900e523d30636c53610b63cb288351f) - **orders**: updating total now runs save function *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -56,3 +68,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v3.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v2.0.0...v3.0.0
 [v3.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.0...v3.0.1
 [v3.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.1...v3.0.2
+[v3.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.2...v3.0.3
