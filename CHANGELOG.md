@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.0.1] - 2025-05-08
+### :bug: Bug Fixes
+- [`dccc952`](https://github.com/Ri-Dearg/nuragic-sh/commit/dccc95208f8d73031398d7069c55e67d4c5d9f67) - **content**: fix spelling errors *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v4.0.0] - 2025-05-06
 ### :boom: BREAKING CHANGES
 - due to [`683ab64`](https://github.com/Ri-Dearg/nuragic-sh/commit/683ab642bd71d43cf4f71662dbc39fc4f9c48b80) - upgrade django to 5.2 *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*:
@@ -81,3 +86,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v3.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.1...v3.0.2
 [v3.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.2...v3.0.3
 [v4.0.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v3.0.3...v4.0.0
+[v4.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.0...v4.0.1
