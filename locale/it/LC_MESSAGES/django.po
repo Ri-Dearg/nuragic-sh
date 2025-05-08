@@ -27,7 +27,7 @@ msgstr "Un prodotto non è disponibile."
 msgid ""
 "{product} has run out of stock                             and has been "
 "removed from the cart."
-msgstr "{product} non è più disponibnile ed è stato/a rimosso/a dal carrello."
+msgstr "{product} non è più disponibile ed è stato/a rimosso/a dal carrello."
 
 #: cart/views.py:66
 #, python-brace-format
@@ -48,7 +48,7 @@ msgstr "Info"
 
 #: cart/views.py:91
 #, python-brace-format
-msgid "Preordered {quantity} {product.title}."
+msgid "Pre-ordered {quantity} {product.title}."
 msgstr "Preordinato/a {quantity} {product.title}."
 
 #: cart/views.py:94
@@ -78,7 +78,7 @@ msgstr "Paese"
 
 #: checkout/views.py:91
 msgid "Email Address"
-msgstr "Indrizzi Email"
+msgstr "Indirizzi Email"
 
 #: checkout/views.py:92 contact/views.py:32 contact/views.py:47
 #: templates/base/includes/footer.html:17
@@ -152,7 +152,7 @@ msgid ""
 "collection.                     Please call us for assistance!"
 msgstr ""
 "Un prodotto nel tuo carrello non è stato trovato nella nostra collezione. "
-"Conttataci per assistenza, per favore!"
+"Contattaci per assistenza, per favore!"
 
 #: checkout/views.py:256
 #, python-brace-format
@@ -160,7 +160,7 @@ msgid ""
 "Order successfully processed!              A confirmation email will be sent "
 "to {order.email}."
 msgstr ""
-"L'ordine è stato effetuato con successo! La conferma sarà inviata via email "
+"L'ordine è stato effettuato con successo! La conferma sarà inviata via email "
 "a {order.email}."
 
 #: checkout/views.py:314
@@ -168,7 +168,7 @@ msgid ""
 "Sorry, your payment cannot be             processed right now. Please try "
 "again later."
 msgstr ""
-"Scusaci, il tuo pagamento non può essere effetuato ora. Prova di nuovo dopo, "
+"Scusaci, il tuo pagamento non può essere effettuato ora. Prova di nuovo dopo, "
 "per favore."
 
 #: checkout/webhook_handler.py:141
@@ -186,7 +186,7 @@ msgstr "Italiano"
 
 #: contact/views.py:27
 msgid "Thank you, your message has been sent."
-msgstr "Grazie, il tuo messagio è stato spedito."
+msgstr "Grazie, il tuo messaggio è stato spedito."
 
 #: contact/views.py:33 contact/views.py:52
 #: templates/checkout/order_detail.html:62
@@ -208,7 +208,7 @@ msgstr "Invia"
 
 #: contact/views.py:109
 msgid "Captcha verification failed, please try again."
-msgstr "Verificazione del Captcha Fallita, ripovi per favore."
+msgstr "Verificazione del Captcha Fallita, riprovi per favore."
 
 #: contact/views.py:130
 msgid "You have already signed up for the newsletter."
@@ -258,11 +258,11 @@ msgstr "Questo account è inattivo."
 #: templates/account/email.html:5 templates/account/email.html:10
 #: templates/account/email.html:11
 msgid "Email Addresses"
-msgstr "Indrizzi Email"
+msgstr "Indirizzi Email"
 
 #: templates/account/email.html:15
 msgid "The following email addresses are associated with your account:"
-msgstr "Questi indrizzi email sono associati con il tuo account:"
+msgstr "Questi indirizzi email sono associati con il tuo account:"
 
 #: templates/account/email.html:28 templates/users/includes/email.html:21
 msgid "Unverified"
@@ -278,7 +278,7 @@ msgstr "Imposta come Principale"
 
 #: templates/account/email.html:40 templates/users/includes/email.html:33
 msgid "Re-send Verification"
-msgstr "Rinviare Verifacazione"
+msgstr "Rinviare Verificazione"
 
 #: templates/account/email.html:42 templates/users/includes/email.html:35
 msgid "Delete"
@@ -411,7 +411,7 @@ msgid ""
 "\"_blank\">Click Here</a> to reset your\n"
 "password. Or you can copy and paste this URL into your browser's address bar:"
 msgstr ""
-"Questa email è una richiesta di rimpostare la password per account "
+"Questa email è una richiesta di reimpostare la password per account "
 "%(username)s.<br><br>\n"
 "Potresti ignorare questa email se non hai fatto la richiesta.<br><br><a href="
 "\"%(password_reset_url)s\"\n"
@@ -427,7 +427,7 @@ msgid ""
 "It can be safely ignored if you did not request a password reset. Click the "
 "link below to reset your password."
 msgstr ""
-"Questa email è una richiesta di rimpostare la password per account "
+"Questa email è una richiesta di reimpostare la password per account "
 "%(username)s.\n"
 "Potresti ignorare questa email se non hai fatto la richiesta. Fai un click "
 "al link qui giù per reimpostare la password."
@@ -500,7 +500,7 @@ msgstr "Sei sicuro/a di voler uscire?"
 #: templates/account/messages/cannot_delete_primary_email.txt:2
 #, python-format
 msgid "You cannot remove your primary email address (%(email)s)."
-msgstr "Non puoi cancellare il tuo indirizzo email primcipale (%(email)s)."
+msgstr "Non puoi cancellare il tuo indirizzo email principale (%(email)s)."
 
 #: templates/account/messages/email_confirmation_sent.txt:2
 #, python-format
@@ -618,7 +618,7 @@ msgid ""
 "        email</a>."
 msgstr ""
 "Il link per reimpostare la password non era valido,\n"
-"            è possibile che è già stato uttilizato. Per favore richiedi a\n"
+"            è possibile che è già stato utilizzato. Per favore richiedi a\n"
 "            <a class=\"smooth-click form-link text-info\" href="
 "\"%(passwd_reset_url)s\">un email nuova per reimpostare la password</a>."
 
@@ -673,7 +673,7 @@ msgid ""
 "you are already logged in as <strong class=\"fw-bold\">%(user_display)s</"
 "strong>."
 msgstr ""
-"hai già effetuato l'accesso come <strong class=\"fw-bold\">%(user_display)s</"
+"hai già effettuato l'accesso come <strong class=\"fw-bold\">%(user_display)s</"
 "strong>."
 
 #: templates/account/verification_sent.html:5
@@ -698,7 +698,7 @@ msgstr ""
 "Ti abbiamo inviato un email di\n"
 "            verifica. Clicca il link per finalizzare la tua registrazione. "
 "Se non la ricevi\n"
-"            in pochi miunti, per favore"
+"            in pochi minuti, per favore"
 
 #: templates/account/verified_email_required.html:15
 msgid ""
@@ -717,7 +717,7 @@ msgid ""
 msgstr ""
 "Ti abbiamo inviato un email di\n"
 "verifica. Clicca il link per finalizzare la tua registrazione.\n"
-"Se non la ricevi in pochi miunti, per favore contattaci."
+"Se non la ricevi in pochi minuti, per favore contattaci."
 
 #: templates/account/verified_email_required.html:23
 #, python-format
@@ -753,7 +753,7 @@ msgstr "Carica"
 #: templates/info/index.html:15 templates/likes/likes_list.html:15
 #: templates/users/user_detail.html:17
 msgid "Ancient Wisdom, Modern Healing"
-msgstr "Antica Sagezza, Energia Moderna"
+msgstr "Antica Saggezza, Energia Moderna"
 
 #: templates/base/errors.html:6 templates/base/includes/form_layout.html:6
 #: templates/base/includes/open_graph_basic.html:5
@@ -766,9 +766,9 @@ msgid ""
 "as Tarot, Oracle Cards, Shamanic Drumming and Healing. Creating events for "
 "sharing and connections between individuals and cultures."
 msgstr ""
-"Consapevolezza, spirtualità, energia e antenati. Lavoriamo con i sistemi dei "
+"Consapevolezza, spiritualità, energia e antenati. Lavoriamo con i sistemi dei "
 "Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
-"connesioni tra persone e culture."
+"connessioni tra persone e culture."
 
 #: templates/base/errors.html:11 templates/base/includes/form_layout.html:11
 #: templates/base/includes/open_graph_basic.html:10
@@ -793,7 +793,7 @@ msgstr "Richiesta Non Valido"
 
 #: templates/base/errors/400.html:8
 msgid "Looking for something interesting"
-msgstr "Cercando per qualcosa di interesante"
+msgstr "Cercando per qualcosa di interessante"
 
 #: templates/base/errors/400.html:9 templates/base/includes/shop_nav.html:18
 msgid "Explore"
@@ -805,7 +805,7 @@ msgstr "Vietato"
 
 #: templates/base/errors/403.html:8
 msgid "Instead of searching out of bounds"
-msgstr "Anzichè cercare altrove"
+msgstr "Anziche cercare altrove"
 
 #: templates/base/errors/403.html:9
 msgid "Explore our garden"
@@ -833,7 +833,7 @@ msgstr "Abbiamo qualche problema e controlleremo a riguardo"
 
 #: templates/base/errors/500.html:9
 msgid "In the meantime, discover our"
-msgstr "Nel fratempo, scopri nostre"
+msgstr "Nel frattempo, scopri nostre"
 
 #: templates/base/includes/footer.html:11
 msgid "Newsletter"
@@ -870,7 +870,7 @@ msgstr "Contatti"
 
 #: templates/base/includes/footer.html:63
 msgid "Whatsapp Messaging"
-msgstr "Messagi Whatsapp"
+msgstr "Messaggi Whatsapp"
 
 #: templates/base/includes/footer.html:70
 msgid "Facebook Messenger"
@@ -1127,7 +1127,7 @@ msgstr ""
 "0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
 "margin-top: 0; margin-bottom: 0;\">\n"
 "                                                            Il pagamento è "
-"stato effetuato al nome di %(billing_full_name)s.</p>\n"
+"stato effettuato al nome di %(billing_full_name)s.</p>\n"
 "                                                        <p\n"
 "                                                            style=\"margin: "
 "0; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; "
@@ -1188,7 +1188,7 @@ msgid ""
 "                                                            "
 msgstr ""
 "\n"
-"                                                            Puoi connetere "
+"                                                            Puoi connettere "
 "con noi anche tramite <a\n"
 "                                                                href="
 "\"https://wa.me/353834646130\" rel=\"noopener\"\n"
@@ -1240,7 +1240,7 @@ msgstr ""
 "Questa è la conferma del tuo ordine da Nuragic Shamanic Healing.\n"
 "I dettagli del tuo ordine:\n"
 "\n"
-"Il pagamento è stato effetuato al nome di %(billing_full_name)s.\n"
+"Il pagamento è stato effettuato al nome di %(billing_full_name)s.\n"
 "\n"
 "Numero Ordine: %(_number)s\n"
 "Data Ordine: %(date)s\n"
@@ -1398,7 +1398,7 @@ msgstr "Il tuo Ordine"
 
 #: templates/checkout/order_detail.html:28
 msgid "Order Complete"
-msgstr "Ordine Effetuato"
+msgstr "Ordine Effettuato"
 
 #: templates/checkout/order_detail.html:35
 msgid "Order Details"
@@ -1557,11 +1557,11 @@ msgid ""
 "Contact us, connect, collaborate, communicate and share. We want to hear "
 "from you."
 msgstr ""
-"Contattaci, connetti, collabori, communicare e condivdere. Vogliamo sentirti."
+"Contattaci, connetti, collabori, comunicare e condividere. Vogliamo sentirti."
 
 #: templates/contact/email_form.html:12
 msgid "contact us, communicate, message, support"
-msgstr "contattaci, communicare, messagi, supporto"
+msgstr "contattaci, comunicare, messaggi, supporto"
 
 #: templates/contact/email_form.html:16
 msgid "Get in Touch"
@@ -1574,7 +1574,7 @@ msgstr "Entra in Contatto"
 #: templates/contact/emails/contact_body.txt:1
 #: templates/contact/emails/contact_body_html.html:212
 msgid "Nuragic Shamanic Healing has received a message from"
-msgstr "Nuragic Shamanic Healing ha ricevuto un messagio da"
+msgstr "Nuragic Shamanic Healing ha ricevuto un messaggio da"
 
 #: templates/contact/emails/contact_body.txt:1
 #: templates/contact/emails/contact_body_html.html:213
@@ -1588,7 +1588,7 @@ msgstr "Ha scritto"
 
 #: templates/contact/emails/contact_subject.txt:1
 msgid "Nuragic Shamanic Healing Message Received"
-msgstr "Nuragic Shamanic Healing Messagio Ricevuto"
+msgstr "Nuragic Shamanic Healing Messaggio Ricevuto"
 
 #: templates/contact/emails/thanks_body.txt:2
 #: templates/contact/emails/thanks_body_html.html:212
@@ -1598,7 +1598,7 @@ msgstr "Grazie Mille"
 #: templates/contact/emails/thanks_body.txt:4
 #: templates/contact/emails/thanks_body_html.html:247
 msgid "We appreciate all the communication we receive at"
-msgstr "Appreziamo tutta la communicazione che riceviamo a"
+msgstr "Apprezziamo tutta la comunicazione che riceviamo a"
 
 #: templates/contact/emails/thanks_body.txt:7
 #: templates/contact/emails/thanks_body_html.html:323
@@ -1613,7 +1613,7 @@ msgid ""
 "\"noopener\" style=\"text-decoration: none; color: #f5c936;\" target=\"_blank"
 "\">Facebook Messenger</a>"
 msgstr ""
-"Alternativamente, potresti conneter con noi tramite <a href=\"https://wa."
+"Alternativamente, potresti connetter con noi tramite <a href=\"https://wa."
 "me/353834646130\" rel=\"noopener\" style=\"text-decoration: none; color: "
 "#f5c936;\" target=\"_blank\">WhatsApp</a> o <a href=\"https://m.me/"
 "NuragicShamanicHealing\" rel=\"noopener\" style=\"text-decoration: none; "
@@ -1664,15 +1664,15 @@ msgid ""
 msgstr ""
 "\n"
 "                    <p>Questo sito utilizza i cookie per aiutare le "
-"funzionalità del sito, per motivi analtici per                        "
+"funzionalità del sito, per motivi analitici per                        "
 "tracciare come tu interagisci con il nostro sito e per motivi di pubblicità."
 "</p>                    <ul>                        <li>Cookie essenziali, "
 "funzionali e per la prevenzione delle frodi sono <strong>richiesti</strong> "
 "per                            l'uso del sito'.</li>                        "
-"<li><strong>Respettiamo</strong> richiesti Do Not Track. (Acceto Richiesti)</"
+"<li><strong>Rispettiamo</strong> richiesti Do Not Track. (Accetto Richiesti)</"
 "li>                        <li><strong>Non mostriamo</strong> pubblicità sul "
 "sito.</li>                 <li>Utilizziamo Google Analytics per dati e "
-"analytici <strong>anonimo</strong></li>\n"
+"analitici <strong>anonimo</strong></li>\n"
 "<li>Potremmo utilizzare Facebook Pixel per motivi di pubblicità o "
 "personalizzazione.</li>\n"
 "                        <li>Potremmo utilizzare i cookie per connettere con "
@@ -1720,21 +1720,21 @@ msgid ""
 "Oracle Cards, Shamanic Drumming and Healing through Ancient Wisdom. Creating "
 "events for sharing and connections between individuals and cultures."
 msgstr ""
-"Consapevolezza, spirtualità, energia e antenati. Lavoriamo con i sistemi dei "
+"Consapevolezza, spiritualità, energia e antenati. Lavoriamo con i sistemi dei "
 "Tarocchi, Oracoli, Tamburi e Reiki. Creiamo eventi per condivisione e "
-"connesioni tra persone e culture."
+"connessioni tra persone e culture."
 
 #: templates/info/index.html:11
 msgid "tarot, oracle cards, healing, reiki"
-msgstr "tarochhi, oracoli, benessere, reiki"
+msgstr "tarocchi, oracoli, benessere, reiki"
 
 #: templates/info/index.html:22
 msgid "Holistic | Courses | Readings"
-msgstr "Olisitico | Corsi | Consulti"
+msgstr "Olistico | Corsi | Consulti"
 
 #: templates/info/index.html:29
 msgid "Index"
-msgstr "Indece"
+msgstr "Indice"
 
 #: templates/info/index.html:31
 msgid "About"
@@ -1747,7 +1747,7 @@ msgstr "Spiritualità"
 
 #: templates/info/index.html:37 templates/info/index.html:41
 msgid "Connections"
-msgstr "Connesioni"
+msgstr "Connessioni"
 
 #: templates/info/index.html:37 templates/info/index.html:41
 msgid "Sharing"
@@ -1804,7 +1804,7 @@ msgstr "Accedi con OpenID"
 
 #: templates/policies/policy_detail.html:15
 msgid "Learn about our policies."
-msgstr "Leggi le nostre poizze."
+msgstr "Leggi le nostre polizze."
 
 #: templates/products/includes/product_banners.html:4
 msgid "Unique"
@@ -1812,7 +1812,7 @@ msgstr "Unico"
 
 #: templates/products/includes/product_banners.html:7
 msgid "Artisan"
-msgstr "Artiginale"
+msgstr "Artigianale"
 
 #: templates/products/includes/product_banners.html:10
 msgid "Out of Stock"
@@ -1828,14 +1828,14 @@ msgstr "Pochi Pezzi"
 
 #: templates/products/includes/related_products.html:9
 msgid "Or take a look at these"
-msgstr "O dai un ochhiata a questi"
+msgstr "O dai un occhiata a questi"
 
 #: templates/products/product_detail.html:9
 #: templates/products/product_list.html:13
 msgid ""
 "shop, oracle, deck, smudge, artisanal, hand-made, product, services, courses"
 msgstr ""
-"shop, oracolo, mazzo, smudge, artiginale, fatto a mano, produtto, servizi, "
+"shop, oracolo, mazzo, smudge, artigianale, fatto a mano, prodotto, servizi, "
 "corsi"
 
 #: templates/products/product_detail.html:47
@@ -1864,7 +1864,7 @@ msgstr "Le Nostre Offerte"
 
 #: templates/products/product_list.html:60
 msgid "Maybe there's something else for you at"
-msgstr "Forse trovarai qualcos'altro su"
+msgstr "Forse troverai qualcos'altro su"
 
 #: templates/products/shopcategory_detail.html:7
 #: templates/products/shopcategory_detail.html:13
@@ -1873,7 +1873,7 @@ msgstr "Un collezione di nostri articoli scelti a mano."
 
 #: templates/products/shopcategory_detail.html:38
 msgid "Product Page Navigation for"
-msgstr "Navigazione per le pagine dela categoria"
+msgstr "Navigazione per le pagine della categoria"
 
 #: templates/socialaccount/authentication_error.html:5
 #: templates/socialaccount/authentication_error.html:8
@@ -1884,12 +1884,12 @@ msgstr "Accesso con Social Fallito"
 msgid ""
 "An error occurred while attempting to login via your social network account."
 msgstr ""
-"Si è verifacato un errore con l'acces utiliazzando il tuo account social."
+"Si è verificato un errore con l'acceso utilizzando il tuo account social."
 
 #: templates/socialaccount/connections.html:5
 #: templates/socialaccount/connections.html:8
 msgid "Account Connections"
-msgstr "Connsessioni del Account"
+msgstr "Connessioni del Account"
 
 #: templates/socialaccount/connections.html:11
 msgid ""
@@ -1909,7 +1909,7 @@ msgstr "Aggiungi un Account del Social"
 #: templates/socialaccount/login_cancelled.html:5
 #: templates/socialaccount/login_cancelled.html:9
 msgid "Login Cancelled"
-msgstr "Accesso Anullato"
+msgstr "Accesso Annullato"
 
 #: templates/socialaccount/login_cancelled.html:13
 #, python-format
@@ -1918,8 +1918,8 @@ msgid ""
 "accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
 "\">sign in</a>."
 msgstr ""
-"Hai deciso di anullare l'acesso al sito utlizzando un account già registrato."
-"Se questo è stato un errore, procedere <a href=\"%(login_url)s\">acesso</a>, "
+"Hai deciso di annullare l'accesso al sito utilizzando un account già registrato."
+"Se questo è stato un errore, procedere <a href=\"%(login_url)s\">accesso</a>, "
 "per favore."
 
 #: templates/socialaccount/messages/account_connected.txt:2
@@ -1948,7 +1948,7 @@ msgid ""
 "You are about to use your %(provider_name)s account to login to\n"
 "%(site_name)s. As a final step, please complete the following form:"
 msgstr ""
-"Stai ultilizzando il tuo account di %(provider_name)s per accedere\n"
+"Stai utilizzando il tuo account di %(provider_name)s per accedere\n"
 "%(site_name)s. Per favore, compile questo modulo per l'ultima passo."
 
 #: templates/users/includes/authenticated_menu.html:6
@@ -1977,7 +1977,7 @@ msgstr "Salva"
 
 #: templates/users/includes/newsletter_form.html:39
 msgid "Unsubscribe"
-msgstr "Anulla Iscrizione"
+msgstr "Annulla Iscrizione"
 
 #: templates/users/includes/unauthenticated_menu.html:6
 msgid "Login or Register"
@@ -1985,7 +1985,7 @@ msgstr "Accedere o Registrati"
 
 #: templates/users/includes/unauthenticated_offcanvas.html:7
 msgid "Join The Community"
-msgstr "Unisciti al Communità"
+msgstr "Unisciti al Comunità"
 
 #: templates/users/user_detail.html:11
 msgid "Your settings"
@@ -2067,13 +2067,13 @@ msgstr ""
 #, python-brace-format
 msgid "Your newsletter preferences have been updated for {email}."
 msgstr ""
-"Le tue preferenze per l'inscrizione del newlsetter sono state aggiornate per "
+"Le tue preferenze per l'inscrizione del newsletter sono state aggiornate per "
 "{email}."
 
 #: users/views.py:218
 #, python-brace-format
 msgid "You have unsubscribed {email} from the newsletter."
-msgstr "Hai anullato l'inscrizione alla newsletter per {email}."
+msgstr "Hai annullato l'inscrizione alla newsletter per {email}."
 
 #: users/views.py:222
 msgid "Failed to update your information. Please Check your details."
@@ -2160,7 +2160,7 @@ msgstr ""
 #~ msgstr "ISCRIZIONE CHIUSA"
 
 #~ msgid "VERIFY EMAIL"
-#~ msgstr "VERFICA EMAIL"
+#~ msgstr "VERIFICA EMAIL"
 
 #~ msgid "Grand total will be finalised after delivery address is confirmed."
 #~ msgstr "Somma Totale"
