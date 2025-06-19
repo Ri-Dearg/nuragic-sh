@@ -86,7 +86,9 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
         # Selects the active tab
-        if 'query' not in self.request.GET and self.request.path == '/shop/':
+        if 'query' not in self.request.GET and self.request.path.rstrip(
+            '/',
+        ).endswith('/shop'):
             # Adds Carousel info
             carousel = SplashImage.objects.filter(
                 shop_display=True
