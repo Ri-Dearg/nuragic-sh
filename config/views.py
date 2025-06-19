@@ -208,7 +208,7 @@ class StaticSitemap(Sitemap):
     alternates = True
 
     def items(self):
-        return ['contact:email-form', 'contact:newsletter']
+        return ['contact:email-form', 'contact:newsletter', 'info:home']
 
     def location(self, item):
         return reverse(item)
