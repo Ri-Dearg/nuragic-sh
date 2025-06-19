@@ -1,4 +1,5 @@
 """Tests for checkout"""
+
 from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 from django.shortcuts import reverse
@@ -24,7 +25,7 @@ valid_order_dict = {
     'billing_country': 'IE',
     'billing_town_or_city': 'Location',
     'billing_street_address_1': 'location at place',
-    'client_secret': '_secret_test'
+    'client_secret': '_secret_test',
 }
 
 # Used to check billing and shipping info connect by sending the checkbox.
@@ -47,7 +48,7 @@ valid_billing_order = {
     'billing_town_or_city': '1',
     'billing_street_address_1': '1',
     'client_secret': '_secret_test',
-    'billing-same': 'on'
+    'billing-same': 'on',
 }
 
 
@@ -59,9 +60,9 @@ class TestCheckoutViews(TestCase):
         username = 'user1'
         email = 'test@test.com'
         password = 'password'
-        get_user_model().objects.get_or_create(username=username,
-                                               email=email,
-                                               password=password)
+        get_user_model().objects.get_or_create(
+            username=username, email=email, password=password
+        )
 
         make_products()
         make_policies()
@@ -69,21 +70,23 @@ class TestCheckoutViews(TestCase):
     def test_order_creation_and_detail_view(self):
         """Checks all the basic functions of the checkout app,
         order creation, templates used and correct information"""
-        product2 = Product.objects.filter(
-            title='P1').first()
+        product2 = Product.objects.filter(title='P1').first()
         p_id2 = product2.id
 
-        product1 = Product.objects.filter(
-            title='preorder').last()
+        product1 = Product.objects.filter(title='preorder').last()
         p_id1 = product1.id
 
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id2, 'quantity': '2'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id2, 'quantity': '2'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Checks the correct template is used
         self.client.get(reverse('checkout:order-create'))
@@ -100,26 +103,29 @@ class TestCheckoutViews(TestCase):
         # This checks without a login, using session storage
         my_order = self.client.session['my_order']
         self.assertTrue(my_order)
-        self.client.get(reverse('checkout:order-detail',
-                                kwargs={'pk': new_order.id}))
+        self.client.get(
+            reverse('checkout:order-detail', kwargs={'pk': new_order.id})
+        )
         self.assertTemplateUsed('order_detail.html')
 
     def test_order_detail_view_redirects(self):
         """Runs tests to see if the page redirects when
         the incorrect user tries to access another user's order."""
-        product1 = Product.objects.filter(
-            title='preorder').last()
+        product1 = Product.objects.filter(title='preorder').last()
         p_id1 = product1.id
 
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
         self.client.post(reverse('checkout:order-create'), valid_order_dict)
 
         new_order1 = Order.objects.latest('date')
-        response = self.client.get(reverse('checkout:order-detail',
-                                           kwargs={'pk': new_order1.id}))
+        response = self.client.get(
+            reverse('checkout:order-detail', kwargs={'pk': new_order1.id})
+        )
         session = self.client.session
 
         self.assertEqual(session['my_order'], new_order1.id)
@@ -129,51 +135,57 @@ class TestCheckoutViews(TestCase):
         session.save()
 
         response = self.client.get(
-            reverse('checkout:order-detail', kwargs={'pk': new_order1.id}))
+            reverse('checkout:order-detail', kwargs={'pk': new_order1.id})
+        )
         self.assertEqual(response.status_code, 302)
 
         test_user = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user)
 
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
         self.client.post(reverse('checkout:order-create'), valid_order_dict)
 
         username2 = 'user2'
         email2 = 'test2@test.com'
         password2 = 'password2'
-        get_user_model().objects.get_or_create(username=username2,
-                                               email=email2,
-                                               password=password2)
+        get_user_model().objects.get_or_create(
+            username=username2, email=email2, password=password2
+        )
 
         test_user2 = get_user_model().objects.latest('date_joined')
         self.client.force_login(test_user2)
 
         new_order2 = Order.objects.latest('date')
         response = self.client.get(
-            reverse('checkout:order-detail', kwargs={'pk': new_order2.id}))
+            reverse('checkout:order-detail', kwargs={'pk': new_order2.id})
+        )
 
         self.assertEqual(response.status_code, 302)
 
     def test_order_detail_view_after_login(self):
         """Runs the same test as the preceding view but logs in a user."""
 
-        product2 = Product.objects.filter(
-            title='P1').first()
+        product2 = Product.objects.filter(title='P1').first()
         p_id2 = product2.id
 
-        product1 = Product.objects.filter(
-            title='preorder').last()
+        product1 = Product.objects.filter(title='preorder').last()
         p_id1 = product1.id
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id2, 'quantity': '2'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id2, 'quantity': '2'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Retrives the user created in the setup view, logs them in
         # and creates an order
@@ -183,21 +195,23 @@ class TestCheckoutViews(TestCase):
 
         # Confirms the user can still view the order detail page
         new_order = Order.objects.latest('date')
-        self.client.get(reverse('checkout:order-detail',
-                                kwargs={'pk': new_order.id}))
+        self.client.get(
+            reverse('checkout:order-detail', kwargs={'pk': new_order.id})
+        )
         self.assertTemplateUsed('order_detail.html')
 
     def test_shipping_and_billing_connect(self):
         """Tests that the shipping info overrides the billing info if the box
         is ticked that they are the same."""
 
-        product2 = Product.objects.filter(
-            title='P1').first()
+        product2 = Product.objects.filter(title='P1').first()
         p_id2 = product2.id
 
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id2, 'quantity': '2'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id2, 'quantity': '2'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Send the order info with the billing-same checkbox
         self.client.get(reverse('checkout:order-create'))
@@ -211,12 +225,16 @@ class TestCheckoutViews(TestCase):
     def test_order_list_view_after_login(self):
         """Tests that a logged in user can view their order history."""
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': 1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': 2, 'quantity': '2'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': 1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': 2, 'quantity': '2'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Retrives the user created in the setup view, logs them in
         # and creates an order
@@ -230,24 +248,29 @@ class TestCheckoutViews(TestCase):
 
     def test_invalid_form_message(self):
         """Tests a message is sent if invalid form information is posted."""
-        product1 = Product.objects.filter(
-            title='P1').last()
+        product1 = Product.objects.filter(title='P1').last()
         p_id1 = product1.id
 
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Posts incomplete form info
         response = self.client.post(
-            reverse('checkout:order-create'), {'full_name': 'whatever'})
+            reverse('checkout:order-create'), {'full_name': 'whatever'}
+        )
 
         # Confirms a suitable response message is sent.
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'There was a problem processing the order.\
-             Please double check your information.')
+        self.assertEqual(
+            str(messages[0]),
+            'There was a problem processing the order.\
+             Please double check your information.',
+        )
 
     def test_empty_cart_returns_redirect(self):
         """Tests that going to the checkout with an empty cart
@@ -260,24 +283,24 @@ class TestCheckoutViews(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'The cart is empty.')
-        self.assertRedirects(response, '/shop/')
+        self.assertRedirects(response, reverse('products:product-list'))
 
     def test_order_removes_invalid_item(self):
         """Tests that if an order contains an invalid item,
         the item is removed from the order."""
 
-        product1 = Product.objects.filter(
-            title='P1').last()
+        product1 = Product.objects.filter(title='P1').last()
         p_id1 = product1.id
 
-        product2 = Product.objects.filter(
-            title='preorder').first()
+        product2 = Product.objects.filter(title='preorder').first()
         p_id2 = product2.id
 
         # Adds items to the cart
-        self.client.post(reverse('cart:cart-toggle'),
-                         {'item-id': p_id1, 'quantity': '1'},
-                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.client.post(
+            reverse('cart:cart-toggle'),
+            {'item-id': p_id1, 'quantity': '1'},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
 
         # Declares an invalid item in the cart
         session = self.client.session
@@ -288,5 +311,6 @@ class TestCheckoutViews(TestCase):
 
         # Retrieves the order, confirming the invalid item has not been added
         new_order = Order.objects.latest('date')
-        self.assertEqual(new_order.original_cart,
-                         f'{{"{p_id1}": 1, "{p_id2}": 3}}')
+        self.assertEqual(
+            new_order.original_cart, f'{{"{p_id1}": 1, "{p_id2}": 3}}'
+        )
