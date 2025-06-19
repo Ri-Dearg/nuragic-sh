@@ -6,13 +6,19 @@ I have altered the views only to add context to display products in the
 "related product box". This way my custom pages can display products.
 """
 
+from pathlib import Path
 from urllib.parse import quote
 
-from django.http import (HttpResponseBadRequest, HttpResponseForbidden,
-                         HttpResponseNotFound, HttpResponseServerError)
+from django.conf import settings
+from django.http import (
+    FileResponse,
+    HttpResponseBadRequest,
+    HttpResponseForbidden,
+    HttpResponseNotFound,
+    HttpResponseServerError,
+)
 from django.template import Context, Engine, TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
-
 from products.models import Product
 
 ERROR_404_TEMPLATE_NAME = 'base/errors/404.html'
@@ -37,7 +43,8 @@ ERROR_PAGE_TEMPLATE = """
 # {% csrf_token %}.
 @requires_csrf_token
 def custom_page_not_found(
-        request, exception, template_name=ERROR_404_TEMPLATE_NAME):
+    request, exception, template_name=ERROR_404_TEMPLATE_NAME
+):
     """
     Default 404 handler.
     Templates: :template:`404.html`
@@ -61,26 +68,27 @@ def custom_page_not_found(
             exception_repr = message
 
     # Adds products to the context for the related item box
-    related_products = Product.objects.all().order_by(
-        '-stock', '-popularity')[:9]
+    related_products = Product.objects.all().order_by('-stock', '-popularity')[
+        :9
+    ]
     context = {
         'request_path': quote(request.path),
         'exception': exception_repr,
-        'related_products': related_products
+        'related_products': related_products,
     }
     try:
         template = loader.get_template(template_name)
         body = template.render(context, request)
-        content_type = None             # Django will use 'text/html'.
+        content_type = None  # Django will use 'text/html'.
     except TemplateDoesNotExist:
         if template_name != ERROR_404_TEMPLATE_NAME:
             # Reraise if it's a missing custom template.
             raise
         # Render template (even though there are no substitutions) to allow
         # inspecting the context in tests.
-        template = Engine(
-        ).from_string(
-            ERROR_PAGE_TEMPLATE % {
+        template = Engine().from_string(
+            ERROR_PAGE_TEMPLATE
+            % {
                 'title': 'Not Found',
                 'details': 'The requested resource was not found on this server.',
             },
@@ -95,7 +103,8 @@ def custom_page_not_found(
 # {% csrf_token %}.
 @requires_csrf_token
 def custom_permission_denied(
-        request, exception, template_name=ERROR_403_TEMPLATE_NAME):
+    request, exception, template_name=ERROR_403_TEMPLATE_NAME
+):
     """
     Permission denied (403) handler.
     Templates: :template:`403.html`
@@ -114,10 +123,13 @@ def custom_permission_denied(
             content_type='text/html',
         )
     # Adds products to the context for the related item box
-    related_products = Product.objects.all().order_by(
-        '-stock', '-popularity')[:9]
-    context = {'exception': str(
-        exception), 'related_products': related_products}
+    related_products = Product.objects.all().order_by('-stock', '-popularity')[
+        :9
+    ]
+    context = {
+        'exception': str(exception),
+        'related_products': related_products,
+    }
     return HttpResponseForbidden(
         template.render(request=request, context=context)
     )
@@ -125,7 +137,8 @@ def custom_permission_denied(
 
 @requires_csrf_token
 def custom_bad_request(
-        request, exception, template_name=ERROR_400_TEMPLATE_NAME):
+    request, exception, template_name=ERROR_400_TEMPLATE_NAME
+):
     """
     400 error handler.
     Templates: :template:`400.html`
@@ -138,13 +151,14 @@ def custom_bad_request(
             # Reraise if it's a missing custom template.
             raise
         return HttpResponseBadRequest(
-            ERROR_PAGE_TEMPLATE % {
-                'title': 'Bad Request (400)', 'details': ''},
+            ERROR_PAGE_TEMPLATE
+            % {'title': 'Bad Request (400)', 'details': ''},
             content_type='text/html',
         )
     # Adds products to the context for the related item box
-    related_products = Product.objects.all().order_by(
-        '-stock', '-popularity')[:9]
+    related_products = Product.objects.all().order_by('-stock', '-popularity')[
+        :9
+    ]
     context = {'related_products': related_products}
     # No exception content is passed to the template,
     # to not disclose any sensitive information.
@@ -165,12 +179,21 @@ def custom_server_error(request, template_name=ERROR_500_TEMPLATE_NAME):
             # Reraise if it's a missing custom template.
             raise
         return HttpResponseServerError(
-            ERROR_PAGE_TEMPLATE % {
-                'title': 'Server Error (500)', 'details': ''},
+            ERROR_PAGE_TEMPLATE
+            % {'title': 'Server Error (500)', 'details': ''},
             content_type='text/html',
         )
     # Adds products to the context for the related item box
-    related_products = Product.objects.all().order_by(
-        '-stock', '-popularity')[:9]
+    related_products = Product.objects.all().order_by('-stock', '-popularity')[
+        :9
+    ]
     context = {'related_products': related_products}
     return HttpResponseServerError(template.render(context=context))
+
+
+def serve_robots_txt(request):
+    robots_path = Path(settings.STATIC_ROOT) / 'robots.txt'
+    return FileResponse(
+        Path(robots_path).open('rb'),
+        content_type='text/plain',
+    )

@@ -13,11 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from . import views as config_views
 
 # Handlers for custom error pages
 handler404 = 'config.views.custom_page_not_found'
@@ -27,21 +29,19 @@ handler500 = 'config.views.custom_server_error'
 
 # Patterns for the shop section functions
 shop_patterns = [
-    path('', include(('products.urls', 'products'),
-                     namespace='products')),
-    path('cart/', include(('cart.urls', 'cart'),
-                          namespace='cart')),
-    path('checkout/', include(('checkout.urls', 'checkout'),
-                              namespace='checkout')),
-    path('likes/', include(('likes.urls', 'likes'),
-                           namespace='likes'))
+    path('', include(('products.urls', 'products'), namespace='products')),
+    path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
+    path(
+        'checkout/',
+        include(('checkout.urls', 'checkout'), namespace='checkout'),
+    ),
+    path('likes/', include(('likes.urls', 'likes'), namespace='likes')),
 ]
 
 account_patterns = [
     # Allauth functions
     path('', include('allauth.urls')),
-    path('', include(('users.urls', 'users'),
-                     namespace='users')),
+    path('', include(('users.urls', 'users'), namespace='users')),
 ]
 
 urlpatterns = [
@@ -50,19 +50,26 @@ urlpatterns = [
     # Rich Text Editor functions
     path('tinymce/', include('tinymce.urls')),
     # Jasmine testing functions
-    path('jasmine/', include(('jasmine_testing.urls', 'jasmine_testing'),
-                             namespace='jasmine')),
+    path(
+        'jasmine/',
+        include(
+            ('jasmine_testing.urls', 'jasmine_testing'), namespace='jasmine'
+        ),
+    ),
     # My apps
     path('accounts/', include(account_patterns)),
-    path('contact-us/', include(('contact.urls', 'contact'),
-                                namespace='contact')),
-    path('cookies/', include(('cookies.urls', 'cookie'),
-                             namespace='cookies')),
-    path('', include(('info.urls', 'info'),
-                     namespace='info')),
-    path('policies/', include(('policies.urls', 'policies'),
-                              namespace='policies')),
+    path(
+        'contact-us/',
+        include(('contact.urls', 'contact'), namespace='contact'),
+    ),
+    path('cookies/', include(('cookies.urls', 'cookie'), namespace='cookies')),
+    path('', include(('info.urls', 'info'), namespace='info')),
+    path(
+        'policies/',
+        include(('policies.urls', 'policies'), namespace='policies'),
+    ),
     path('shop/', include(shop_patterns)),
+    path('robots.txt', config_views.serve_robots_txt, name='robots'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
