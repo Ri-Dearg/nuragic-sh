@@ -2,11 +2,11 @@
 
 from django.shortcuts import reverse
 from django.test import TestCase
-
-from contact.models import Newsletter
+from django.utils import translation
 from info.tests.test_models import make_info_models
 from policies.tests.test_models import make_policies
-from django.utils import translation
+
+from contact.models import Newsletter
 
 
 class TestContactViews(TestCase):
