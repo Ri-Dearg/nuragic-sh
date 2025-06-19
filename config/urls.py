@@ -22,11 +22,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from . import views as config_views
-
-# Sitemap generator classes.
-sitemaps = {
-    'static': config_views.StaticSitemap,
-}
+from .sitemaps import sitemaps
 
 # Handlers for custom error pages
 handler404 = 'config.views.custom_page_not_found'
