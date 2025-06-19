@@ -1,3 +1,5 @@
+"""Import sitemap views and create dictionary."""
+
 from info.views import InfoSitemap
 from policies.views import PolicySitemap
 from products.views import ShopSitemap

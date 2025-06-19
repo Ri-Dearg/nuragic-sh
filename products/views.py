@@ -1,11 +1,12 @@
 """Views for the Products app."""
 
 from django.contrib.sitemaps import Sitemap
+from django.db.models import Model
 from django.urls import reverse
+from django.utils import timezone
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 from info.models import SplashImage
-from django.utils import timezone
 
 from .models import Product, ShopCategory
 
@@ -101,22 +102,53 @@ class ProductListView(ListView):  # pylint: disable=too-many-ancestors
 
 
 class ShopSitemap(Sitemap):
+    """Generate info sitemap URLS.
+
+    Args:
+        Sitemap (object): Django Sitemap class.
+
+    """
+
     changefreq = 'weekly'
     priority = 0.9
 
-    def items(self):
+    def items(self) -> list:
+        """List of view names to include.
+
+        Returns:
+            list: List of view names to include.
+
+        """
         categories = ShopCategory.objects.filter(display=True)
         products = Product.objects.filter(display=True)
         return list(categories) + list(products)
 
-    def lastmod(self, obj):
+    def lastmod(self, obj: Product | ShopCategory) -> object:
+        """Return most recent modification date.
+
+        Args:
+            obj (object): The database item.
+
+        Returns:
+            object: datetime object.
+
+        """
         if isinstance(obj, Product):
             return obj.date_added
         if isinstance(obj, ShopCategory):
             return timezone.now()
         return timezone.now()
 
-    def location(self, obj):
+    def location(self, obj: Model) -> str:
+        """Return urls for the items.
+
+        Args:
+            obj (list): The list of view names.
+
+        Returns:
+            str: URL for the names.
+
+        """
         if isinstance(obj, ShopCategory):
             return reverse(
                 'products:shop-category-detail',

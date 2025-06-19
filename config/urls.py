@@ -22,6 +22,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from . import views as config_views
+
+# Import sitemap dictionary.
 from .sitemaps import sitemaps
 
 # Handlers for custom error pages
@@ -59,13 +61,13 @@ urlpatterns = [
             ('jasmine_testing.urls', 'jasmine_testing'), namespace='jasmine'
         ),
     ),
-    # My apps
+    # Robots and sitemap.
     path('robots.txt', config_views.serve_robots_txt, name='robots'),
     path(
         'sitemap.xml',
         sitemap,
         {'sitemaps': sitemaps, 'content_type': 'application/xml'},
-        name='django.contrib.sitemaps.views.sitemap',
+        name='sitemap',
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

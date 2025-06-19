@@ -193,7 +193,16 @@ def custom_server_error(request, template_name=ERROR_500_TEMPLATE_NAME):
     return HttpResponseServerError(template.render(context=context))
 
 
-def serve_robots_txt(request):
+def serve_robots_txt(request: object) -> FileResponse:
+    """Serve Robots.txt file.
+
+    Args:
+        request (object): Django request.
+
+    Returns:
+        FileResponse: The robots.txt file.
+
+    """
     robots_path = Path(settings.STATIC_ROOT) / 'robots.txt'
     return FileResponse(
         Path(robots_path).open('rb'),
@@ -202,12 +211,25 @@ def serve_robots_txt(request):
 
 
 class StaticSitemap(Sitemap):
+    """Generate static sitemap URLS.
+
+    Args:
+        Sitemap (object): Django Sitemap class.
+
+    """
+
     changefreq = 'monthly'
     priority = 0.8
     i18n = True
     alternates = True
 
-    def items(self):
+    def items(self) -> list:
+        """List of view names to include.
+
+        Returns:
+            list: List of view names to include.
+
+        """
         return [
             'account_signup',
             'account_login',
@@ -219,5 +241,14 @@ class StaticSitemap(Sitemap):
             'products:product-list',
         ]
 
-    def location(self, item):
-        return reverse(item)
+    def location(self, obj: object) -> str:
+        """Return urls for the items.
+
+        Args:
+            obj (list): The list of view names.
+
+        Returns:
+            str: URL for the names.
+
+        """
+        return reverse(obj)

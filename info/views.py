@@ -1,6 +1,7 @@
 """Views for the info app."""
 
 from django.contrib.sitemaps import Sitemap
+from django.db.models import Model
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView
@@ -57,18 +58,50 @@ class PageDetailView(DetailView):
 
 
 class InfoSitemap(Sitemap):
+    """Generate info sitemap URLS.
+
+    Args:
+        Sitemap (object): Django Sitemap class.
+
+    """
+
     changefreq = 'weekly'
     priority = 0.9
 
-    def items(self):
+    def items(self) -> list:
+        """List of view names to include.
+
+        Returns:
+            list: List of view names to include.
+
+        """
         categories = Category.objects.filter(display=True)
         pages = Page.objects.filter(display=True)
         return list(categories) + list(pages)
 
-    def lastmod(self, obj):
+    def lastmod(self, obj: Category | Page) -> object:
+        """Return most recent modifcation date.
+
+        Args:
+            obj (object): The database item.
+
+        Returns:
+            object: datetime object.
+
+        """
         return obj.date_added
 
-    def location(self, obj):
+    def location(self, obj: Model) -> str:
+        """Return urls for the items.
+
+        Args:
+            obj (list): The list of view names.
+
+        Returns:
+            str: URL for the names.
+
+        """
+        # Check if it a Category or Page Object.
         if isinstance(obj, Category):
             return reverse(
                 'info:category-detail', kwargs={'slug': obj.slug, 'pk': obj.pk}
