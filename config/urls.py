@@ -18,8 +18,15 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
+
 from . import views as config_views
+
+# Sitemap generator classes.
+sitemaps = {
+    'static': config_views.StaticSitemap,
+}
 
 # Handlers for custom error pages
 handler404 = 'config.views.custom_page_not_found'
@@ -70,6 +77,12 @@ urlpatterns = [
     ),
     path('shop/', include(shop_patterns)),
     path('robots.txt', config_views.serve_robots_txt, name='robots'),
+    path(
+        'sitemap.xml',
+        sitemap,
+        {'sitemaps': sitemaps, 'content_type': 'application/xml'},
+        name='django.contrib.sitemaps.views.sitemap',
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
