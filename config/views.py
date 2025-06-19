@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from django.conf import settings
+from django.contrib.sitemaps import Sitemap
 from django.http import (
     FileResponse,
     HttpResponseBadRequest,
@@ -18,6 +19,7 @@ from django.http import (
     HttpResponseServerError,
 )
 from django.template import Context, Engine, TemplateDoesNotExist, loader
+from django.urls import reverse
 from django.views.decorators.csrf import requires_csrf_token
 from products.models import Product
 
@@ -197,3 +199,16 @@ def serve_robots_txt(request):
         Path(robots_path).open('rb'),
         content_type='text/plain',
     )
+
+
+class StaticSitemap(Sitemap):
+    changefreq = 'monthly'
+    priority = 0.8
+    i18n = True
+    alternates = True
+
+    def items(self):
+        return ['contact:email-form', 'contact:newsletter', 'robots']
+
+    def location(self, item):
+        return reverse(item)
