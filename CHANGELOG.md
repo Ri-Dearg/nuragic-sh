@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.1.0] - 2025-06-19
+### :sparkles: New Features
+- [`9d28c53`](https://github.com/Ri-Dearg/nuragic-sh/commit/9d28c53d6b0d91982ed403f1058835f056a9e368) - **seo**: add robot view *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`084ad16`](https://github.com/Ri-Dearg/nuragic-sh/commit/084ad166a4cbfc4b254750212555198692249504) - **seo**: add robot.txt *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`92cd66d`](https://github.com/Ri-Dearg/nuragic-sh/commit/92cd66d456a759e96b06d3af0844fccc020b24d7) - **seo**: add sitemap class for static pages *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`97aa46e`](https://github.com/Ri-Dearg/nuragic-sh/commit/97aa46ecf553524fdae11798ddccc735288d7b76) - **seo**: add basic sitemap *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`f402008`](https://github.com/Ri-Dearg/nuragic-sh/commit/f40200833cac2c4dc21bc439198ce1ac8695c06c) - **seo**: add sitemap for info *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`1345c50`](https://github.com/Ri-Dearg/nuragic-sh/commit/1345c503325ec500d4fcdf189149db115c3867a5) - **seo**: create sitemap py *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`17f4bc9`](https://github.com/Ri-Dearg/nuragic-sh/commit/17f4bc91af7b136a6e79074952dd330c90962b8c) - **seo**: add policy sitemap view *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`8199537`](https://github.com/Ri-Dearg/nuragic-sh/commit/81995373396caf6d71d86b4f11fc5a264d184ae0) - **seo**: add shop sitemap *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`a7ba7f3`](https://github.com/Ri-Dearg/nuragic-sh/commit/a7ba7f30217668550678bf018f661f93cf12b15c) - **seo**: add allauth urls *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :bug: Bug Fixes
+- [`b6d57e1`](https://github.com/Ri-Dearg/nuragic-sh/commit/b6d57e15115ad4f95000854de95fcaaf3f738c05) - **seo**: add absolute url for sitemap *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`454fece`](https://github.com/Ri-Dearg/nuragic-sh/commit/454fecea6bbabad238b8ac1e13bf5e9656239186) - **tests**: fix newsletter test *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`674ef9d`](https://github.com/Ri-Dearg/nuragic-sh/commit/674ef9df89ce2a1fd08ed90996e3c100c9f7e445) - **shop**: fix products  context for new urls *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`1a7a614`](https://github.com/Ri-Dearg/nuragic-sh/commit/1a7a614b34375d9e049c34cddb555cfccbe66389) - **tests**: use reverse url for test *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`0103a2a`](https://github.com/Ri-Dearg/nuragic-sh/commit/0103a2ad2bfe28ca07016d3ba8fd0d8aceb860c0) - **tests**: use reverse for checkout tests *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :recycle: Refactors
+- [`53a926c`](https://github.com/Ri-Dearg/nuragic-sh/commit/53a926c5ed4237cd974f20068dfebb26a8572c6f) - **seo**: include more urls in il8n *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`8c3c24b`](https://github.com/Ri-Dearg/nuragic-sh/commit/8c3c24b5f25f0c38189ef3b131d264e8c70deb04) - **seo**: remove robots from sitemap *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`ff1aa2e`](https://github.com/Ri-Dearg/nuragic-sh/commit/ff1aa2eeaa818eebe72555f834315c111aab9695) - **tests**: reorder imports *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :white_check_mark: Tests
+- [`636a7ad`](https://github.com/Ri-Dearg/nuragic-sh/commit/636a7ad9c3167c00086165ed2dd3c805ab1a1a1a) - **tests**: fix adapter redirection *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`20c3fab`](https://github.com/Ri-Dearg/nuragic-sh/commit/20c3fabbf96db09173c8fab88cb6a94e9b34dc76) - **tests**: fix assertTrue test *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+- [`d10135e`](https://github.com/Ri-Dearg/nuragic-sh/commit/d10135ed845d39c62c608665b3913f060096bb9b) - **tests**: update tests to use reverse *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :wrench: Chores
+- [`29105e3`](https://github.com/Ri-Dearg/nuragic-sh/commit/29105e3dce0b1334a511635cdadf7002b04d2ad5) - **req**: remove unused files *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v4.0.3] - 2025-06-19
 ### :bug: Bug Fixes
 - [`d23430c`](https://github.com/Ri-Dearg/nuragic-sh/commit/d23430c712c0f25e6b408997cb2b3688c833d26b) - **tests**: update spoof file to include charge *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -100,3 +133,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v4.0.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.0...v4.0.1
 [v4.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.1...v4.0.2
 [v4.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.2...v4.0.3
+[v4.1.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.3...v4.1.0
