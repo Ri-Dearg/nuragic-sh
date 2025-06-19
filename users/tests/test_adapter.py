@@ -1,6 +1,7 @@
 """Tests redirection for the custom allauth adapter."""
-from django.test import TestCase
 
+from django.shortcuts import reverse
+from django.test import TestCase
 from policies.tests.test_models import make_policies
 
 from .test_models import generate_string
@@ -20,20 +21,24 @@ class TestAdapter(TestCase):
         password = generate_string()
 
         # Creates a fake user
-        new_user = {'username': generate_string(),
-                    'email1': email,
-                    'email2': email,
-                    'password1': password,
-                    'password2': password
-                    }
+        new_user = {
+            'username': generate_string(),
+            'email1': email,
+            'email2': email,
+            'password1': password,
+            'password2': password,
+        }
 
         # Signs the user up with a redirect in the URL
-        response = self.client.post('/accounts/signup/?next=/products/1/',
-                                    new_user, follow=True)
+        response = self.client.post(
+            reverse('account_signup') + '?next=/en/products/1/',
+            new_user,
+            follow=True,
+        )
 
         # Declares next as the query string
         next_page = response.request['QUERY_STRING']
 
         # Confirms the redirect is correct
-        self.assertEqual('next=/products/1/', next_page)
+        self.assertEqual('next=/en/products/1/', next_page)
         self.assertEqual(response.status_code, 200)

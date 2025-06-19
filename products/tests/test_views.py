@@ -25,55 +25,60 @@ class TestProductsViews(TestCase):
         self.assertTemplateUsed(response, 'base/includes/header.html')
         self.assertTemplateUsed(response, 'base/includes/shop_nav.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
-        self.assertTrue(
-            response.context['all_products_active'], True)
+        self.assertTrue(response.context['all_products_active'])
 
     def test_render_product_detail(self):
         """Tests templates for shop page."""
         product = Product.objects.latest('date_added')
         response = self.client.get(
-            reverse('products:product-detail',
-                    kwargs={'slug': product.slug, 'pk': product.id}))
+            reverse(
+                'products:product-detail',
+                kwargs={'slug': product.slug, 'pk': product.id},
+            )
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/product_detail.html')
         self.assertTemplateUsed(response, 'products/includes/product_box.html')
         self.assertTemplateUsed(
-            response, 'products/includes/related_products.html')
+            response, 'products/includes/related_products.html'
+        )
         self.assertTemplateUsed(
-            response, 'likes/includes/likes_offcanvas.html')
+            response, 'likes/includes/likes_offcanvas.html'
+        )
+        self.assertTemplateUsed(response, 'likes/includes/likes_menu.html')
+        self.assertTemplateUsed(response, 'cart/includes/cart_offcanvas.html')
+        self.assertTemplateUsed(response, 'cart/includes/cart_menu.html')
         self.assertTemplateUsed(
-            response, 'likes/includes/likes_menu.html')
+            response, 'likes/includes/detail_like_toggle.html'
+        )
         self.assertTemplateUsed(
-            response, 'cart/includes/cart_offcanvas.html')
+            response, 'cart/includes/detail_cart_toggle.html'
+        )
         self.assertTemplateUsed(
-            response, 'cart/includes/cart_menu.html')
-        self.assertTemplateUsed(
-            response, 'likes/includes/detail_like_toggle.html')
-        self.assertTemplateUsed(
-            response, 'cart/includes/detail_cart_toggle.html')
-        self.assertTemplateUsed(
-            response, 'likes/includes/box_like_toggle.html')
-        self.assertTemplateUsed(
-            response, 'cart/includes/box_cart_toggle.html')
+            response, 'likes/includes/box_like_toggle.html'
+        )
+        self.assertTemplateUsed(response, 'cart/includes/box_cart_toggle.html')
         self.assertTemplateUsed(response, 'base/base.html')
         self.assertTemplateUsed(response, 'base/includes/header.html')
         self.assertTemplateUsed(response, 'base/includes/shop_nav.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
-        self.assertTrue(
-            response.context['active_category'], True)
-        self.assertTrue(
-            response.context['related_products'], True)
+        self.assertTrue(response.context['active_category'], True)
+        self.assertTrue(response.context['related_products'], True)
         response = self.client.get(product.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/product_detail.html')
 
     def test_render_shopcategory_detail(self):
         """Tests templates for Category detail page."""
-        shopcategory = ShopCategory.objects.filter(
-            title_en='SC1').order_by('id').first()
+        shopcategory = (
+            ShopCategory.objects.filter(title_en='SC1').order_by('id').first()
+        )
         response = self.client.get(
-            reverse('products:shop-category-detail',
-                    kwargs={'slug': shopcategory.slug, 'pk': shopcategory.id}))
+            reverse(
+                'products:shop-category-detail',
+                kwargs={'slug': shopcategory.slug, 'pk': shopcategory.id},
+            )
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'products/shopcategory_detail.html')
@@ -83,10 +88,12 @@ class TestProductsViews(TestCase):
         self.assertTemplateUsed(response, 'base/includes/shop_nav.html')
         self.assertTemplateUsed(response, 'base/includes/footer.html')
         self.assertTrue(
-            response.context['active_category'], f'{shopcategory.id}')
+            response.context['active_category'], f'{shopcategory.id}'
+        )
         self.assertTrue(
-            response.context['page_obj'], shopcategory.products.all().order_by(
-                '-popularity', '-stock'))
+            response.context['page_obj'],
+            shopcategory.products.all().order_by('-popularity', '-stock'),
+        )
 
         response = self.client.get(shopcategory.get_absolute_url())
         self.assertEqual(response.status_code, 200)

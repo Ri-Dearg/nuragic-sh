@@ -1,7 +1,11 @@
 """Views for the Products app."""
+
+from django.contrib.sitemaps import Sitemap
+from django.db.models import Model
+from django.urls import reverse
+from django.utils import timezone
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
-
 from info.models import SplashImage
 
 from .models import Product, ShopCategory
@@ -10,6 +14,7 @@ from .models import Product, ShopCategory
 class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
     """Displays a list of products in the Category.
     The MultipleObjectMixin allows for easy pagination."""
+
     model = ShopCategory
     paginate_by = 12
 
@@ -21,8 +26,7 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
         ).order_by('-popularity', '-stock') | self.object.products.filter(
             can_preorder=True, display=True
         ).order_by('-popularity', '-stock')
-        context = super().get_context_data(
-            object_list=object_list, **kwargs)
+        context = super().get_context_data(object_list=object_list, **kwargs)
 
         this_object = context['object']
         # Selects the active tab
@@ -34,11 +38,11 @@ class ShopCategoryDetailView(DetailView, MultipleObjectMixin):
 
 class ProductDetailView(DetailView):
     """Displays details for a product."""
+
     model = Product
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
         this_object = context['product']
 
@@ -46,19 +50,18 @@ class ProductDetailView(DetailView):
 
         # Renders related products from the same category
         # while removing the current product.
-        products = Product.objects.exclude(
-            pk=this_object.id).filter(
+        products = (
+            Product.objects.exclude(pk=this_object.id)
+            .filter(
                 category=product_category,
                 display=True,
                 stock__gte=1,
-        ).order_by(
-            '-popularity', '-stock')[:9] | Product.objects.exclude(
-            pk=this_object.id).filter(
-            category=product_category,
-            can_preorder=True,
-            display=True
-        ).order_by(
-            '-popularity', '-stock')[:9]
+            )
+            .order_by('-popularity', '-stock')[:9]
+            | Product.objects.exclude(pk=this_object.id)
+            .filter(category=product_category, can_preorder=True, display=True)
+            .order_by('-popularity', '-stock')[:9]
+        )
 
         context['related_products'] = products
 
@@ -71,25 +74,91 @@ class ProductDetailView(DetailView):
 class ProductListView(ListView):  # pylint: disable=too-many-ancestors
     """Displays all products in a list.
     Adds context for highlighting the menu."""
-    queryset = Product.objects.filter(
-        stock__gte=1, display=True
-    ).order_by('-popularity', '-stock') | Product.objects.filter(
-        can_preorder=True, display=True
-    ).order_by('-popularity', '-stock')
+
+    queryset = Product.objects.filter(stock__gte=1, display=True).order_by(
+        '-popularity', '-stock'
+    ) | Product.objects.filter(can_preorder=True, display=True).order_by(
+        '-popularity', '-stock'
+    )
     paginate_by = 12
 
     def get_context_data(self, **kwargs):
         """Adds all necessary information to the context"""
         context = super().get_context_data(**kwargs)
         # Selects the active tab
-        if 'query' not in self.request.GET and self.request.path == '/shop/':
+        if 'query' not in self.request.GET and self.request.path.rstrip(
+            '/',
+        ).endswith('/shop'):
             # Adds Carousel info
             carousel = SplashImage.objects.filter(
-                shop_display=True) & SplashImage.objects.exclude(
-                page__isnull=True, product__isnull=True)
+                shop_display=True
+            ) & SplashImage.objects.exclude(
+                page__isnull=True, product__isnull=True
+            )
             context['carousel'] = carousel
 
             all_products_active = True
             context['all_products_active'] = all_products_active
 
         return context
+
+
+class ShopSitemap(Sitemap):
+    """Generate info sitemap URLS.
+
+    Args:
+        Sitemap (object): Django Sitemap class.
+
+    """
+
+    changefreq = 'weekly'
+    priority = 0.9
+
+    def items(self) -> list:
+        """List of view names to include.
+
+        Returns:
+            list: List of view names to include.
+
+        """
+        categories = ShopCategory.objects.filter(display=True)
+        products = Product.objects.filter(display=True)
+        return list(categories) + list(products)
+
+    def lastmod(self, obj: Product | ShopCategory) -> object:
+        """Return most recent modification date.
+
+        Args:
+            obj (object): The database item.
+
+        Returns:
+            object: datetime object.
+
+        """
+        if isinstance(obj, Product):
+            return obj.date_added
+        if isinstance(obj, ShopCategory):
+            return timezone.now()
+        return timezone.now()
+
+    def location(self, obj: Model) -> str:
+        """Return urls for the items.
+
+        Args:
+            obj (list): The list of view names.
+
+        Returns:
+            str: URL for the names.
+
+        """
+        if isinstance(obj, ShopCategory):
+            return reverse(
+                'products:shop-category-detail',
+                kwargs={'slug': obj.slug, 'pk': obj.pk},
+            )
+        if isinstance(obj, Product):
+            return reverse(
+                'products:product-detail',
+                kwargs={'slug': obj.slug, 'pk': obj.pk},
+            )
+        return reverse(obj)
