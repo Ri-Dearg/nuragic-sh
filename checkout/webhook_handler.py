@@ -12,8 +12,8 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
-
 from products.models import Product
+from stripe import PaymentIntent
 
 from .models import Order, OrderLineItem
 
@@ -220,9 +220,11 @@ def handle_payment_intent_succeeded(event):
 
     # Declares variables for use in the view
     intent = event.data.object
-
+    intent_with_charge = PaymentIntent.retrieve(
+        event.data.object.id, expand=['latest_charge']
+    )
     # Calculates the correct value for Stripe
-    grand_total = round(intent.charges.data[0].amount / 100, 2)
+    grand_total = round(intent_with_charge.latest_charge.amount / 100, 2)
 
     if (intent.description) and ('Payment for Invoice' in intent.description):
         invoice_email(intent, grand_total)
@@ -239,7 +241,7 @@ def handle_payment_intent_succeeded(event):
     save_info = intent.metadata.save_info
     user = intent.metadata.user
     userprofile = None
-    billing_details = intent.charges.data[0].billing_details
+    billing_details = intent_with_charge.latest_charge.billing_details
     shipping_details = intent.shipping
 
     # If the user is logged in it re-declares the user variable.
