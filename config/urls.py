@@ -64,6 +64,17 @@ urlpatterns = [
         ),
     ),
     # My apps
+    path('robots.txt', config_views.serve_robots_txt, name='robots'),
+    path(
+        'sitemap.xml',
+        sitemap,
+        {'sitemaps': sitemaps, 'content_type': 'application/xml'},
+        name='django.contrib.sitemaps.views.sitemap',
+    ),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),
     path('accounts/', include(account_patterns)),
     path(
         'contact-us/',
@@ -76,15 +87,4 @@ urlpatterns = [
         include(('policies.urls', 'policies'), namespace='policies'),
     ),
     path('shop/', include(shop_patterns)),
-    path('robots.txt', config_views.serve_robots_txt, name='robots'),
-    path(
-        'sitemap.xml',
-        sitemap,
-        {'sitemaps': sitemaps, 'content_type': 'application/xml'},
-        name='django.contrib.sitemaps.views.sitemap',
-    ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
 )
