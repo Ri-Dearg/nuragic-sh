@@ -34,7 +34,7 @@ Disallow: /accounts/email/
 Disallow: /accounts/social/
 Disallow: /accounts/connections/
 
-Sitemap: /sitemap.xml
+Sitemap: https://www.nuragicshamanichealing.com/sitemap.xml
 
 User-agent: AI2Bot
 Disallow: /media/
