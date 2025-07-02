@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.1.1] - 2025-07-02
+### :bug: Bug Fixes
+- [`b4a8242`](https://github.com/Ri-Dearg/nuragic-sh/commit/b4a824235c0d2fc66d73f060b414d0c406742129) - **orders**: remove lang prefix webhook *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :white_check_mark: Tests
+- [`4961ce3`](https://github.com/Ri-Dearg/nuragic-sh/commit/4961ce33424e96176689f56dd1b91fac0574d85c) - **tests**: correct namespace for webhook *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v4.1.0] - 2025-06-19
 ### :sparkles: New Features
 - [`9d28c53`](https://github.com/Ri-Dearg/nuragic-sh/commit/9d28c53d6b0d91982ed403f1058835f056a9e368) - **seo**: add robot view *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -134,3 +142,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v4.0.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.1...v4.0.2
 [v4.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.2...v4.0.3
 [v4.1.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.3...v4.1.0
+[v4.1.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.0...v4.1.1
