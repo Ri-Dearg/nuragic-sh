@@ -71,7 +71,7 @@ class TestWebhook(TestCase):
 
         stripe_sig = self._stripe_sig(api_response)
         response = self.client.post(
-            reverse('checkout:webhook'),
+            reverse('webhook:webhook'),
             api_response,
             content_type='application/json',
             HTTP_STRIPE_SIGNATURE=stripe_sig,
@@ -84,7 +84,7 @@ class TestWebhook(TestCase):
 
         stripe_sig = self._stripe_sig(api_response)
         response = self.client.post(
-            reverse('checkout:webhook'),
+            reverse('webhook:webhook'),
             api_response,
             content_type='application/json',
             HTTP_STRIPE_SIGNATURE=stripe_sig,
@@ -97,7 +97,7 @@ class TestWebhook(TestCase):
 
         stripe_sig = self._stripe_sig(api_response)
         response = self.client.post(
-            reverse('checkout:webhook'),
+            reverse('webhook:webhook'),
             api_response,
             content_type='application/json',
             HTTP_STRIPE_SIGNATURE=stripe_sig,
@@ -110,7 +110,7 @@ class TestWebhook(TestCase):
 
         stripe_sig = self._stripe_sig(api_response)
         response = self.client.post(
-            reverse('checkout:webhook'),
+            reverse('webhook:webhook'),
             api_response,
             content_type='application/json',
             HTTP_STRIPE_SIGNATURE=stripe_sig,
@@ -123,7 +123,7 @@ class TestWebhook(TestCase):
 
         stripe_sig = self._stripe_sig('invalid')
         response = self.client.post(
-            reverse('checkout:webhook'),
+            reverse('webhook:webhook'),
             api_response,
             content_type='application/json',
             HTTP_STRIPE_SIGNATURE=stripe_sig,
