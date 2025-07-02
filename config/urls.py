@@ -22,6 +22,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from . import views as config_views
+from checkout.urls import checkout_urlpatterns, webhook_urlpatterns
 
 # Import sitemap dictionary.
 from .sitemaps import sitemaps
@@ -38,7 +39,7 @@ shop_patterns = [
     path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
     path(
         'checkout/',
-        include(('checkout.urls', 'checkout'), namespace='checkout'),
+        include((checkout_urlpatterns, 'checkout'), namespace='checkout'),
     ),
     path('likes/', include(('likes.urls', 'likes'), namespace='likes')),
 ]
@@ -68,6 +69,11 @@ urlpatterns = [
         sitemap,
         {'sitemaps': sitemaps, 'content_type': 'application/xml'},
         name='sitemap',
+    ),
+    # Webhook
+    path(
+        'shop/checkout/',
+        include((webhook_urlpatterns, 'checkout'), namespace='webhook'),
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
