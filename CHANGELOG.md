@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.1.2] - 2025-07-18
+### :bug: Bug Fixes
+- [`2ea415b`](https://github.com/Ri-Dearg/nuragic-sh/commit/2ea415b977a276959513e8c8e2952809c0078e43) - **shop**: remove cache from i18n *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :recycle: Refactors
+- [`67f3a8a`](https://github.com/Ri-Dearg/nuragic-sh/commit/67f3a8a2f7ed9cf64944b9a0abff106c42b6cc40) - **db**: add bigautofield migration *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v4.1.1] - 2025-07-02
 ### :bug: Bug Fixes
 - [`b4a8242`](https://github.com/Ri-Dearg/nuragic-sh/commit/b4a824235c0d2fc66d73f060b414d0c406742129) - **orders**: remove lang prefix webhook *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -143,3 +151,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v4.0.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.2...v4.0.3
 [v4.1.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.3...v4.1.0
 [v4.1.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.0...v4.1.1
+[v4.1.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.1...v4.1.2
