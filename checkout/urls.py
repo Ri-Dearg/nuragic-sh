@@ -11,9 +11,10 @@ checkout_urlpatterns = [
         'your-order/<int:pk>/', OrderDetailView.as_view(), name='order-detail'
     ),
     path('your-orders/', OrderListView.as_view(), name='order-list'),
-    path('cache_data/', cache_data, name='cache-data'),
 ]
 
 webhook_urlpatterns = [
     path('webhook/', webhook, name='webhook'),
+    path('cache_data/', cache_data, name='cache-data'),
+
 ]
