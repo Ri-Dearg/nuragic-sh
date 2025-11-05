@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v4.1.3] - 2025-11-05
+### :bug: Bug Fixes
+- [`a46fc87`](https://github.com/Ri-Dearg/nuragic-sh/commit/a46fc875ddd230b713e21b2121c17a6042e57311) - **template**: remove prod desc on cart page *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+### :wrench: Chores
+- [`9bc6ac0`](https://github.com/Ri-Dearg/nuragic-sh/commit/9bc6ac09ded77d38851291870f450260555541b2) - **db**: add bigautofield *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
+
+
 ## [v4.1.2] - 2025-07-18
 ### :bug: Bug Fixes
 - [`2ea415b`](https://github.com/Ri-Dearg/nuragic-sh/commit/2ea415b977a276959513e8c8e2952809c0078e43) - **shop**: remove cache from i18n *(commit by [@Ri-Dearg](https://github.com/Ri-Dearg))*
@@ -152,3 +160,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v4.1.0]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.0.3...v4.1.0
 [v4.1.1]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.0...v4.1.1
 [v4.1.2]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.1...v4.1.2
+[v4.1.3]: https://github.com/Ri-Dearg/nuragic-sh/compare/v4.1.2...v4.1.3
