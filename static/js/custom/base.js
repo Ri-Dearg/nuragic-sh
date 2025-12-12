@@ -1,15 +1,15 @@
 function pixelContact() {
   function contactClick() {
-    fbq("track", "Contact");
-    $(".pixel-contact").off("click", contactClick);
+    fbq('track', 'Contact');
+    $('.pixel-contact').off('click', contactClick);
   }
-  $(".pixel-contact").on("click", contactClick);
+  $('.pixel-contact').on('click', contactClick);
 }
 /**
  * Fades the preloader once content is loaded.
  */
 function fadePreload() {
-  $(".preloader").fadeOut(1000);
+  $('.preloader').fadeOut(1000);
 }
 
 /**
@@ -17,12 +17,12 @@ function fadePreload() {
  * Then you are sent to the link address.
  */
 function smoothFade() {
-  $(".smooth-click")
-    .unbind("click")
-    .on("click", function (ev) {
+  $('.smooth-click')
+    .unbind('click')
+    .on('click', function (ev) {
       ev.preventDefault();
-      var goTo = this.getAttribute("href");
-      $(".preloader").fadeIn(1000);
+      var goTo = this.getAttribute('href');
+      $('.preloader').fadeIn(1000);
       setTimeout(function () {
         window.location = goTo;
       }, 800);
@@ -33,7 +33,7 @@ function smoothFade() {
  * Fires any toasts on the page
  */
 function showToast() {
-  var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'));
   var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl);
   });
@@ -43,7 +43,7 @@ function showToast() {
     if (toastList.hasOwnProperty(toast)) {
       toastList[toast].show();
     }
-    $(".toast").on("hidden.bs.toast", function () {
+    $('.toast').on('hidden.bs.toast', function () {
       $(this).remove();
     });
   }
@@ -58,7 +58,7 @@ function showToast() {
  */
 function toastMessage(tag, tagMessage, message) {
   // Sets the toast HTML.
-  $(".toast-container").prepend(
+  $('.toast-container').prepend(
     `<div class="toast my-2" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-${tag}">
                 <strong class="me-auto text-white">${tagMessage}</strong>
@@ -66,7 +66,7 @@ function toastMessage(tag, tagMessage, message) {
                     </button>
                         </div>
             <div class="toast-body">${message}</div>
-        </div>`
+        </div>`,
   );
   // Shows the toast
   showToast();
@@ -82,22 +82,22 @@ function toastMessage(tag, tagMessage, message) {
 function newsletterSignup(formData, formUrl) {
   // Sends form to Django view
   fetch(formUrl, {
-    method: "POST",
+    method: 'POST',
     body: formData,
-    credentials: "same-origin",
+    credentials: 'same-origin',
   })
     .then((response) => {
       // if the response is okay, changes the icon and returns the data
       if (response.ok) {
-        const defHeight = $("#news-col").height();
+        const defHeight = $('#news-col').height();
         const defWidth = defHeight * 1.5;
-        $("#news-submit")
-          .css("max-height", defHeight)
-          .css("max-width", defWidth)
+        $('#news-submit')
+          .css('max-height', defHeight)
+          .css('max-width', defWidth)
           .fadeTo(300, 0, function () {
             $(this)
               .html(
-                `<svg class="bi" width="32"height="32" fill="currentColor"><use xlink:href="/static/icons/bootstrap-icons.svg#check-circle"></svg>`
+                `<svg class="bi" width="32"height="32" fill="currentColor"><use xlink:href="/static/icons/bootstrap-icons.svg#check-circle"></svg>`,
               )
               .fadeTo(300, 0.65);
           });
@@ -106,21 +106,21 @@ function newsletterSignup(formData, formUrl) {
       } else {
         // if there is an error, it fires a message and removes the disabled class
         // from the submission button
-        $("#news-submit").prop("disabled", false).removeClass("disabled");
-        throw Error(response.status + " " + response.statusText);
+        $('#news-submit').prop('disabled', false).removeClass('disabled');
+        throw Error(response.status + ' ' + response.statusText);
       }
     })
     // Fires off a toast notification
     .then((data) => toastMessage(data.tag, data.tagMessage, data.message))
     // Catches any errors and displays their text message
-    .catch((error) => toastMessage("warning", "Error", error));
+    .catch((error) => toastMessage('warning', 'Error', error));
 }
 
 // Watches the form for submission, then fires the Fetch function
-$("#news-form").on("submit", function (ev) {
+$('#news-form').on('submit', function (ev) {
   // stops form from sending
   ev.preventDefault();
-  $("#news-submit").prop("disabled", true).addClass("disabled");
+  $('#news-submit').prop('disabled', true).addClass('disabled');
   // The data sent in the form POST request.
   const formData = new FormData(this);
 
@@ -132,6 +132,9 @@ $("#news-form").on("submit", function (ev) {
 });
 
 // Runs the fade for the preloader once content has loaded.
+setTimeout(function () {
+  document.getElementsByClassName('preloader')[0].style.display = 'none';
+}, 3000);
 window.onload = function () {
   window.document.body.onload = fadePreload();
   smoothFade();
